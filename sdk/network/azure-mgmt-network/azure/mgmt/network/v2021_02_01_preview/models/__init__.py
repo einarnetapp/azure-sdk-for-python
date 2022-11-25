@@ -76,6 +76,7 @@ from ._models_py3 import SubResource
 from ._models_py3 import SubscriptionId
 from ._models_py3 import SystemData
 from ._models_py3 import TagsObject
+from ._models_py3 import UpdateTagsRequest
 from ._models_py3 import UserRule
 from ._models_py3 import UserRuleListResult
 
@@ -104,7 +105,7 @@ from ._network_management_client_enums import SecurityType
 from ._network_management_client_enums import UseHubGateway
 from ._network_management_client_enums import UserRuleKind
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -178,6 +179,7 @@ __all__ = [
     "SubscriptionId",
     "SystemData",
     "TagsObject",
+    "UpdateTagsRequest",
     "UserRule",
     "UserRuleListResult",
     "AccessRuleDirection",

@@ -68,6 +68,7 @@ from ...operations._operations import (
     build_network_security_perimeters_get_request,
     build_network_security_perimeters_list_by_subscription_request,
     build_network_security_perimeters_list_request,
+    build_network_security_perimeters_patch_request,
     build_nsp_access_rules_create_or_update_request,
     build_nsp_access_rules_delete_request,
     build_nsp_access_rules_get_request,
@@ -110,12 +111,16 @@ from ...operations._operations import (
     build_user_rules_list_request,
 )
 
-T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
+T = TypeVar("T")
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
@@ -162,8 +167,10 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManager]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkManager] = kwargs.pop("cls", None)
 
         request = build_network_managers_get_request(
             resource_group_name=resource_group_name,
@@ -175,9 +182,9 @@ class NetworkManagersOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -194,7 +201,9 @@ class NetworkManagersOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"
+    }
 
     @overload
     async def create_or_update(
@@ -286,9 +295,11 @@ class NetworkManagersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManager]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkManager] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -311,9 +322,9 @@ class NetworkManagersOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -330,11 +341,13 @@ class NetworkManagersOperations:
             deserialized = self._deserialize("NetworkManager", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -362,8 +375,10 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_network_managers_delete_request(
             resource_group_name=resource_group_name,
@@ -375,9 +390,9 @@ class NetworkManagersOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -390,7 +405,9 @@ class NetworkManagersOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"
+    }
 
     @overload
     async def patch_tags(
@@ -482,9 +499,11 @@ class NetworkManagersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManager]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkManager] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -507,9 +526,9 @@ class NetworkManagersOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -526,7 +545,9 @@ class NetworkManagersOperations:
 
         return deserialized
 
-    patch_tags.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"}  # type: ignore
+    patch_tags.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}"
+    }
 
     @distributed_trace
     def list_by_subscription(
@@ -551,8 +572,10 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkManagerListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -575,7 +598,7 @@ class NetworkManagersOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -591,7 +614,7 @@ class NetworkManagersOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -599,13 +622,13 @@ class NetworkManagersOperations:
             deserialized = self._deserialize("NetworkManagerListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -618,7 +641,9 @@ class NetworkManagersOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagers"}  # type: ignore
+    list_by_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagers"
+    }
 
     @distributed_trace
     def list(
@@ -645,8 +670,10 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkManagerListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -670,7 +697,7 @@ class NetworkManagersOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -686,7 +713,7 @@ class NetworkManagersOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -694,13 +721,13 @@ class NetworkManagersOperations:
             deserialized = self._deserialize("NetworkManagerListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -713,7 +740,9 @@ class NetworkManagersOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers"
+    }
 
 
 class NetworkManagerCommitsOperations:
@@ -825,9 +854,11 @@ class NetworkManagerCommitsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerCommit]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkManagerCommit] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -850,9 +881,9 @@ class NetworkManagerCommitsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -869,7 +900,9 @@ class NetworkManagerCommitsOperations:
 
         return deserialized
 
-    post.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commit"}  # type: ignore
+    post.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commit"
+    }
 
 
 class NetworkManagerDeploymentStatusOperations:
@@ -985,9 +1018,11 @@ class NetworkManagerDeploymentStatusOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerDeploymentStatusListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkManagerDeploymentStatusListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1010,9 +1045,9 @@ class NetworkManagerDeploymentStatusOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1029,7 +1064,9 @@ class NetworkManagerDeploymentStatusOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus"
+    }
 
 
 class EffectiveVirtualNetworksOperations:
@@ -1173,9 +1210,11 @@ class EffectiveVirtualNetworksOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.EffectiveVirtualNetworksListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.EffectiveVirtualNetworksListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1200,9 +1239,9 @@ class EffectiveVirtualNetworksOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1219,7 +1258,9 @@ class EffectiveVirtualNetworksOperations:
 
         return deserialized
 
-    list_by_network_manager.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listEffectiveVirtualNetworks"}  # type: ignore
+    list_by_network_manager.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listEffectiveVirtualNetworks"
+    }
 
     @overload
     async def list_by_network_group(
@@ -1320,9 +1361,11 @@ class EffectiveVirtualNetworksOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.EffectiveVirtualNetworksListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.EffectiveVirtualNetworksListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1346,9 +1389,9 @@ class EffectiveVirtualNetworksOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1365,7 +1408,9 @@ class EffectiveVirtualNetworksOperations:
 
         return deserialized
 
-    list_by_network_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/listEffectiveVirtualNetworks"}  # type: ignore
+    list_by_network_group.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/listEffectiveVirtualNetworks"
+    }
 
 
 class ActiveConnectivityConfigurationsOperations:
@@ -1481,9 +1526,11 @@ class ActiveConnectivityConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveConnectivityConfigurationsListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ActiveConnectivityConfigurationsListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1506,9 +1553,9 @@ class ActiveConnectivityConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1525,7 +1572,9 @@ class ActiveConnectivityConfigurationsOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations"
+    }
 
 
 class ActiveSecurityAdminRulesOperations:
@@ -1638,9 +1687,11 @@ class ActiveSecurityAdminRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveSecurityAdminRulesListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ActiveSecurityAdminRulesListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1663,9 +1714,9 @@ class ActiveSecurityAdminRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1682,7 +1733,9 @@ class ActiveSecurityAdminRulesOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules"
+    }
 
 
 class ActiveSecurityUserRulesOperations:
@@ -1795,9 +1848,11 @@ class ActiveSecurityUserRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveSecurityUserRulesListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ActiveSecurityUserRulesListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1820,9 +1875,9 @@ class ActiveSecurityUserRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1839,7 +1894,9 @@ class ActiveSecurityUserRulesOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityUserRules"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityUserRules"
+    }
 
 
 class ConnectivityConfigurationsOperations:
@@ -1891,8 +1948,10 @@ class ConnectivityConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectivityConfiguration]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.ConnectivityConfiguration] = kwargs.pop("cls", None)
 
         request = build_connectivity_configurations_get_request(
             resource_group_name=resource_group_name,
@@ -1905,9 +1964,9 @@ class ConnectivityConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1924,7 +1983,9 @@ class ConnectivityConfigurationsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}"
+    }
 
     @overload
     async def create_or_update(
@@ -2032,9 +2093,11 @@ class ConnectivityConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectivityConfiguration]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ConnectivityConfiguration] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -2058,9 +2121,9 @@ class ConnectivityConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -2077,11 +2140,13 @@ class ConnectivityConfigurationsOperations:
             deserialized = self._deserialize("ConnectivityConfiguration", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -2113,8 +2178,10 @@ class ConnectivityConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_connectivity_configurations_delete_request(
             resource_group_name=resource_group_name,
@@ -2127,9 +2194,9 @@ class ConnectivityConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -2142,7 +2209,9 @@ class ConnectivityConfigurationsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}"
+    }
 
     @distributed_trace
     def list(
@@ -2177,8 +2246,10 @@ class ConnectivityConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectivityConfigurationListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.ConnectivityConfigurationListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -2203,7 +2274,7 @@ class ConnectivityConfigurationsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -2219,7 +2290,7 @@ class ConnectivityConfigurationsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -2227,13 +2298,13 @@ class ConnectivityConfigurationsOperations:
             deserialized = self._deserialize("ConnectivityConfigurationListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -2246,7 +2317,9 @@ class ConnectivityConfigurationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations"
+    }
 
 
 class EffectiveConnectivityConfigurationsOperations:
@@ -2364,11 +2437,11 @@ class EffectiveConnectivityConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop(
-            "cls", None
-        )  # type: ClsType[_models.NetworkManagerEffectiveConnectivityConfigurationListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkManagerEffectiveConnectivityConfigurationListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -2391,9 +2464,9 @@ class EffectiveConnectivityConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -2412,7 +2485,9 @@ class EffectiveConnectivityConfigurationsOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations"
+    }
 
 
 class NetworkManagerEffectiveSecurityAdminRulesOperations:
@@ -2527,9 +2602,11 @@ class NetworkManagerEffectiveSecurityAdminRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerEffectiveSecurityAdminRulesListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkManagerEffectiveSecurityAdminRulesListResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -2552,9 +2629,9 @@ class NetworkManagerEffectiveSecurityAdminRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -2571,7 +2648,9 @@ class NetworkManagerEffectiveSecurityAdminRulesOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules"
+    }
 
 
 class NetworkGroupsOperations:
@@ -2621,8 +2700,10 @@ class NetworkGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkGroup]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkGroup] = kwargs.pop("cls", None)
 
         request = build_network_groups_get_request(
             resource_group_name=resource_group_name,
@@ -2635,9 +2716,9 @@ class NetworkGroupsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -2654,7 +2735,9 @@ class NetworkGroupsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}"
+    }
 
     @overload
     async def create_or_update(
@@ -2772,9 +2855,11 @@ class NetworkGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkGroup]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkGroup] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -2799,9 +2884,9 @@ class NetworkGroupsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -2823,11 +2908,13 @@ class NetworkGroupsOperations:
             deserialized = self._deserialize("NetworkGroup", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -2857,8 +2944,10 @@ class NetworkGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_network_groups_delete_request(
             resource_group_name=resource_group_name,
@@ -2871,9 +2960,9 @@ class NetworkGroupsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -2886,7 +2975,9 @@ class NetworkGroupsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}"
+    }
 
     @distributed_trace
     def list(
@@ -2920,8 +3011,10 @@ class NetworkGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkGroupListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkGroupListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -2946,7 +3039,7 @@ class NetworkGroupsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -2962,7 +3055,7 @@ class NetworkGroupsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -2970,13 +3063,13 @@ class NetworkGroupsOperations:
             deserialized = self._deserialize("NetworkGroupListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -2989,7 +3082,9 @@ class NetworkGroupsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups"
+    }
 
 
 class SecurityUserConfigurationsOperations:
@@ -3045,8 +3140,10 @@ class SecurityUserConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfigurationListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.SecurityConfigurationListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -3071,7 +3168,7 @@ class SecurityUserConfigurationsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -3087,7 +3184,7 @@ class SecurityUserConfigurationsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -3095,13 +3192,13 @@ class SecurityUserConfigurationsOperations:
             deserialized = self._deserialize("SecurityConfigurationListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -3114,7 +3211,9 @@ class SecurityUserConfigurationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations"
+    }
 
     @distributed_trace_async
     async def get(
@@ -3144,8 +3243,10 @@ class SecurityUserConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.SecurityConfiguration] = kwargs.pop("cls", None)
 
         request = build_security_user_configurations_get_request(
             resource_group_name=resource_group_name,
@@ -3158,9 +3259,9 @@ class SecurityUserConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -3177,7 +3278,9 @@ class SecurityUserConfigurationsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}"
+    }
 
     @overload
     async def create_or_update(
@@ -3282,9 +3385,11 @@ class SecurityUserConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.SecurityConfiguration] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -3308,9 +3413,9 @@ class SecurityUserConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -3327,11 +3432,13 @@ class SecurityUserConfigurationsOperations:
             deserialized = self._deserialize("SecurityConfiguration", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -3361,8 +3468,10 @@ class SecurityUserConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_security_user_configurations_delete_request(
             resource_group_name=resource_group_name,
@@ -3375,9 +3484,9 @@ class SecurityUserConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -3390,7 +3499,9 @@ class SecurityUserConfigurationsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}"
+    }
 
 
 class UserRuleCollectionsOperations:
@@ -3447,8 +3558,10 @@ class UserRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollectionListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.RuleCollectionListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -3474,7 +3587,7 @@ class UserRuleCollectionsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -3490,7 +3603,7 @@ class UserRuleCollectionsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -3498,13 +3611,13 @@ class UserRuleCollectionsOperations:
             deserialized = self._deserialize("RuleCollectionListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -3517,7 +3630,9 @@ class UserRuleCollectionsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections"
+    }
 
     @distributed_trace_async
     async def get(
@@ -3555,8 +3670,10 @@ class UserRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.RuleCollection] = kwargs.pop("cls", None)
 
         request = build_user_rule_collections_get_request(
             resource_group_name=resource_group_name,
@@ -3570,9 +3687,9 @@ class UserRuleCollectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -3589,7 +3706,9 @@ class UserRuleCollectionsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"
+    }
 
     @overload
     async def create_or_update(
@@ -3702,9 +3821,11 @@ class UserRuleCollectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.RuleCollection] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -3729,9 +3850,9 @@ class UserRuleCollectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -3748,11 +3869,13 @@ class UserRuleCollectionsOperations:
             deserialized = self._deserialize("RuleCollection", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -3790,8 +3913,10 @@ class UserRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_user_rule_collections_delete_request(
             resource_group_name=resource_group_name,
@@ -3805,9 +3930,9 @@ class UserRuleCollectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -3820,7 +3945,9 @@ class UserRuleCollectionsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"
+    }
 
 
 class UserRulesOperations:
@@ -3881,8 +4008,10 @@ class UserRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.UserRuleListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.UserRuleListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -3909,7 +4038,7 @@ class UserRulesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -3925,7 +4054,7 @@ class UserRulesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -3933,13 +4062,13 @@ class UserRulesOperations:
             deserialized = self._deserialize("UserRuleListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -3952,7 +4081,9 @@ class UserRulesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules"
+    }
 
     @distributed_trace_async
     async def get(
@@ -3993,8 +4124,10 @@ class UserRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseUserRule]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.BaseUserRule] = kwargs.pop("cls", None)
 
         request = build_user_rules_get_request(
             resource_group_name=resource_group_name,
@@ -4009,9 +4142,9 @@ class UserRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -4028,7 +4161,9 @@ class UserRulesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"
+    }
 
     @overload
     async def create_or_update(
@@ -4150,9 +4285,11 @@ class UserRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseUserRule]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.BaseUserRule] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -4178,9 +4315,9 @@ class UserRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -4197,11 +4334,13 @@ class UserRulesOperations:
             deserialized = self._deserialize("BaseUserRule", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -4242,8 +4381,10 @@ class UserRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_user_rules_delete_request(
             resource_group_name=resource_group_name,
@@ -4258,9 +4399,9 @@ class UserRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -4273,7 +4414,9 @@ class UserRulesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"
+    }
 
 
 class SecurityAdminConfigurationsOperations:
@@ -4329,8 +4472,10 @@ class SecurityAdminConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfigurationListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.SecurityConfigurationListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -4355,7 +4500,7 @@ class SecurityAdminConfigurationsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -4371,7 +4516,7 @@ class SecurityAdminConfigurationsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -4379,13 +4524,13 @@ class SecurityAdminConfigurationsOperations:
             deserialized = self._deserialize("SecurityConfigurationListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -4398,7 +4543,9 @@ class SecurityAdminConfigurationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations"
+    }
 
     @distributed_trace_async
     async def get(
@@ -4428,8 +4575,10 @@ class SecurityAdminConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.SecurityConfiguration] = kwargs.pop("cls", None)
 
         request = build_security_admin_configurations_get_request(
             resource_group_name=resource_group_name,
@@ -4442,9 +4591,9 @@ class SecurityAdminConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -4461,7 +4610,9 @@ class SecurityAdminConfigurationsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}"
+    }
 
     @overload
     async def create_or_update(
@@ -4566,9 +4717,11 @@ class SecurityAdminConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.SecurityConfiguration] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -4592,9 +4745,9 @@ class SecurityAdminConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -4611,11 +4764,13 @@ class SecurityAdminConfigurationsOperations:
             deserialized = self._deserialize("SecurityConfiguration", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -4645,8 +4800,10 @@ class SecurityAdminConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_security_admin_configurations_delete_request(
             resource_group_name=resource_group_name,
@@ -4659,9 +4816,9 @@ class SecurityAdminConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -4674,7 +4831,9 @@ class SecurityAdminConfigurationsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}"
+    }
 
 
 class AdminRuleCollectionsOperations:
@@ -4731,8 +4890,10 @@ class AdminRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollectionListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.RuleCollectionListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -4758,7 +4919,7 @@ class AdminRuleCollectionsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -4774,7 +4935,7 @@ class AdminRuleCollectionsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -4782,13 +4943,13 @@ class AdminRuleCollectionsOperations:
             deserialized = self._deserialize("RuleCollectionListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -4801,7 +4962,9 @@ class AdminRuleCollectionsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections"
+    }
 
     @distributed_trace_async
     async def get(
@@ -4839,8 +5002,10 @@ class AdminRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.RuleCollection] = kwargs.pop("cls", None)
 
         request = build_admin_rule_collections_get_request(
             resource_group_name=resource_group_name,
@@ -4854,9 +5019,9 @@ class AdminRuleCollectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -4873,7 +5038,9 @@ class AdminRuleCollectionsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"
+    }
 
     @overload
     async def create_or_update(
@@ -4986,9 +5153,11 @@ class AdminRuleCollectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.RuleCollection] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -5013,9 +5182,9 @@ class AdminRuleCollectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5032,11 +5201,13 @@ class AdminRuleCollectionsOperations:
             deserialized = self._deserialize("RuleCollection", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -5074,8 +5245,10 @@ class AdminRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_admin_rule_collections_delete_request(
             resource_group_name=resource_group_name,
@@ -5089,9 +5262,9 @@ class AdminRuleCollectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5104,7 +5277,9 @@ class AdminRuleCollectionsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}"
+    }
 
 
 class AdminRulesOperations:
@@ -5165,8 +5340,10 @@ class AdminRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AdminRuleListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.AdminRuleListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -5193,7 +5370,7 @@ class AdminRulesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -5209,7 +5386,7 @@ class AdminRulesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -5217,13 +5394,13 @@ class AdminRulesOperations:
             deserialized = self._deserialize("AdminRuleListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -5236,7 +5413,9 @@ class AdminRulesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules"
+    }
 
     @distributed_trace_async
     async def get(
@@ -5277,8 +5456,10 @@ class AdminRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseAdminRule]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.BaseAdminRule] = kwargs.pop("cls", None)
 
         request = build_admin_rules_get_request(
             resource_group_name=resource_group_name,
@@ -5293,9 +5474,9 @@ class AdminRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5312,7 +5493,9 @@ class AdminRulesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"
+    }
 
     @overload
     async def create_or_update(
@@ -5434,9 +5617,11 @@ class AdminRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseAdminRule]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.BaseAdminRule] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -5462,9 +5647,9 @@ class AdminRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5481,11 +5666,13 @@ class AdminRulesOperations:
             deserialized = self._deserialize("BaseAdminRule", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -5526,8 +5713,10 @@ class AdminRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_admin_rules_delete_request(
             resource_group_name=resource_group_name,
@@ -5542,9 +5731,9 @@ class AdminRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5557,7 +5746,9 @@ class AdminRulesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}"
+    }
 
 
 class NetworkSecurityPerimetersOperations:
@@ -5605,8 +5796,10 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeter]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkSecurityPerimeter] = kwargs.pop("cls", None)
 
         request = build_network_security_perimeters_get_request(
             resource_group_name=resource_group_name,
@@ -5618,9 +5811,9 @@ class NetworkSecurityPerimetersOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5637,7 +5830,9 @@ class NetworkSecurityPerimetersOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"
+    }
 
     @overload
     async def create_or_update(
@@ -5731,9 +5926,11 @@ class NetworkSecurityPerimetersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeter]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkSecurityPerimeter] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -5756,9 +5953,9 @@ class NetworkSecurityPerimetersOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5775,11 +5972,13 @@ class NetworkSecurityPerimetersOperations:
             deserialized = self._deserialize("NetworkSecurityPerimeter", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -5807,8 +6006,10 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_network_security_perimeters_delete_request(
             resource_group_name=resource_group_name,
@@ -5820,9 +6021,9 @@ class NetworkSecurityPerimetersOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -5835,7 +6036,149 @@ class NetworkSecurityPerimetersOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"
+    }
+
+    @overload
+    async def patch(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        parameters: _models.UpdateTagsRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.NetworkSecurityPerimeter:
+        """Patch Tags for a Network Security Perimeter.
+
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter. Required.
+        :type network_security_perimeter_name: str
+        :param parameters: Parameter supplied to the network security perimeter. Required.
+        :type parameters: ~azure.mgmt.network.v2021_02_01_preview.models.UpdateTagsRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: NetworkSecurityPerimeter or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_02_01_preview.models.NetworkSecurityPerimeter
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def patch(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.NetworkSecurityPerimeter:
+        """Patch Tags for a Network Security Perimeter.
+
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter. Required.
+        :type network_security_perimeter_name: str
+        :param parameters: Parameter supplied to the network security perimeter. Required.
+        :type parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: NetworkSecurityPerimeter or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_02_01_preview.models.NetworkSecurityPerimeter
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def patch(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        parameters: Union[_models.UpdateTagsRequest, IO],
+        **kwargs: Any
+    ) -> _models.NetworkSecurityPerimeter:
+        """Patch Tags for a Network Security Perimeter.
+
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter. Required.
+        :type network_security_perimeter_name: str
+        :param parameters: Parameter supplied to the network security perimeter. Is either a model type
+         or a IO type. Required.
+        :type parameters: ~azure.mgmt.network.v2021_02_01_preview.models.UpdateTagsRequest or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: NetworkSecurityPerimeter or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_02_01_preview.models.NetworkSecurityPerimeter
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NetworkSecurityPerimeter] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
+        else:
+            _json = self._serialize.body(parameters, "UpdateTagsRequest")
+
+        request = build_network_security_perimeters_patch_request(
+            resource_group_name=resource_group_name,
+            network_security_perimeter_name=network_security_perimeter_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.patch.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("NetworkSecurityPerimeter", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    patch.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"
+    }
 
     @distributed_trace
     def list_by_subscription(
@@ -5861,8 +6204,10 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeterListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkSecurityPerimeterListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -5885,7 +6230,7 @@ class NetworkSecurityPerimetersOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -5901,7 +6246,7 @@ class NetworkSecurityPerimetersOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -5909,13 +6254,13 @@ class NetworkSecurityPerimetersOperations:
             deserialized = self._deserialize("NetworkSecurityPerimeterListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -5928,7 +6273,9 @@ class NetworkSecurityPerimetersOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkSecurityPerimeters"}  # type: ignore
+    list_by_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkSecurityPerimeters"
+    }
 
     @distributed_trace
     def list(
@@ -5956,8 +6303,10 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeterListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NetworkSecurityPerimeterListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -5981,7 +6330,7 @@ class NetworkSecurityPerimetersOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -5997,7 +6346,7 @@ class NetworkSecurityPerimetersOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -6005,13 +6354,13 @@ class NetworkSecurityPerimetersOperations:
             deserialized = self._deserialize("NetworkSecurityPerimeterListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -6024,7 +6373,9 @@ class NetworkSecurityPerimetersOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters"
+    }
 
 
 class NspProfilesOperations:
@@ -6074,8 +6425,10 @@ class NspProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspProfile]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspProfile] = kwargs.pop("cls", None)
 
         request = build_nsp_profiles_get_request(
             resource_group_name=resource_group_name,
@@ -6088,9 +6441,9 @@ class NspProfilesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -6107,7 +6460,9 @@ class NspProfilesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}"
+    }
 
     @overload
     async def create_or_update(
@@ -6210,9 +6565,11 @@ class NspProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspProfile]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NspProfile] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -6236,9 +6593,9 @@ class NspProfilesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -6255,11 +6612,13 @@ class NspProfilesOperations:
             deserialized = self._deserialize("NspProfile", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -6289,8 +6648,10 @@ class NspProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_nsp_profiles_delete_request(
             resource_group_name=resource_group_name,
@@ -6303,9 +6664,9 @@ class NspProfilesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -6318,7 +6679,9 @@ class NspProfilesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}"
+    }
 
     @distributed_trace
     def list(
@@ -6352,8 +6715,10 @@ class NspProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspProfileListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspProfileListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -6378,7 +6743,7 @@ class NspProfilesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -6394,7 +6759,7 @@ class NspProfilesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -6402,13 +6767,13 @@ class NspProfilesOperations:
             deserialized = self._deserialize("NspProfileListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -6421,7 +6786,9 @@ class NspProfilesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles"
+    }
 
 
 class NspAccessRulesOperations:
@@ -6478,8 +6845,10 @@ class NspAccessRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAccessRule]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspAccessRule] = kwargs.pop("cls", None)
 
         request = build_nsp_access_rules_get_request(
             resource_group_name=resource_group_name,
@@ -6493,9 +6862,9 @@ class NspAccessRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -6512,7 +6881,9 @@ class NspAccessRulesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}"
+    }
 
     @overload
     async def create_or_update(
@@ -6624,9 +6995,11 @@ class NspAccessRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAccessRule]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NspAccessRule] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -6651,9 +7024,9 @@ class NspAccessRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -6670,11 +7043,13 @@ class NspAccessRulesOperations:
             deserialized = self._deserialize("NspAccessRule", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}"
+    }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
@@ -6711,8 +7086,10 @@ class NspAccessRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_nsp_access_rules_delete_request(
             resource_group_name=resource_group_name,
@@ -6726,9 +7103,9 @@ class NspAccessRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -6741,7 +7118,9 @@ class NspAccessRulesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}"
+    }
 
     @distributed_trace
     def list(
@@ -6778,8 +7157,10 @@ class NspAccessRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAccessRuleListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspAccessRuleListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -6805,7 +7186,7 @@ class NspAccessRulesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -6821,7 +7202,7 @@ class NspAccessRulesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -6829,13 +7210,13 @@ class NspAccessRulesOperations:
             deserialized = self._deserialize("NspAccessRuleListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -6848,7 +7229,9 @@ class NspAccessRulesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules"
+    }
 
 
 class NspAssociationsOperations:
@@ -6898,8 +7281,10 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAssociation]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspAssociation] = kwargs.pop("cls", None)
 
         request = build_nsp_associations_get_request(
             resource_group_name=resource_group_name,
@@ -6912,9 +7297,9 @@ class NspAssociationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -6931,7 +7316,9 @@ class NspAssociationsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"
+    }
 
     @overload
     async def create_or_update(
@@ -7034,9 +7421,11 @@ class NspAssociationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAssociation]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NspAssociation] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -7060,9 +7449,9 @@ class NspAssociationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -7079,11 +7468,13 @@ class NspAssociationsOperations:
             deserialized = self._deserialize("NspAssociation", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"
+    }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, network_security_perimeter_name: str, association_name: str, **kwargs: Any
@@ -7099,8 +7490,10 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_nsp_associations_delete_request(
             resource_group_name=resource_group_name,
@@ -7113,9 +7506,9 @@ class NspAssociationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -7132,7 +7525,9 @@ class NspAssociationsOperations:
         if cls:
             return cls(pipeline_response, None, response_headers)
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"}  # type: ignore
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"
+    }
 
     @distributed_trace_async
     async def begin_delete(
@@ -7161,11 +7556,13 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
@@ -7184,7 +7581,7 @@ class NspAssociationsOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -7196,9 +7593,11 @@ class NspAssociationsOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"}  # type: ignore
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"
+    }
 
     @distributed_trace
     def list(
@@ -7232,8 +7631,10 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAssociationsListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspAssociationsListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -7258,7 +7659,7 @@ class NspAssociationsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -7274,7 +7675,7 @@ class NspAssociationsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -7282,13 +7683,13 @@ class NspAssociationsOperations:
             deserialized = self._deserialize("NspAssociationsListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -7301,7 +7702,9 @@ class NspAssociationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations"
+    }
 
 
 class NspAssociationReconcileOperations:
@@ -7358,9 +7761,11 @@ class NspAssociationReconcileOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _json = self._serialize.body(parameters, "object")
 
@@ -7377,9 +7782,9 @@ class NspAssociationReconcileOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -7396,7 +7801,9 @@ class NspAssociationReconcileOperations:
 
         return deserialized
 
-    post.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile"}  # type: ignore
+    post.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile"
+    }
 
 
 class PerimeterAssociableResourceTypesOperations:
@@ -7435,8 +7842,10 @@ class PerimeterAssociableResourceTypesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PerimeterAssociableResourcesListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.PerimeterAssociableResourcesListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -7458,7 +7867,7 @@ class PerimeterAssociableResourceTypesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -7474,7 +7883,7 @@ class PerimeterAssociableResourceTypesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -7482,13 +7891,13 @@ class PerimeterAssociableResourceTypesOperations:
             deserialized = self._deserialize("PerimeterAssociableResourcesListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -7501,7 +7910,9 @@ class PerimeterAssociableResourceTypesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes"
+    }
 
 
 class NspAccessRulesReconcileOperations:
@@ -7561,9 +7972,11 @@ class NspAccessRulesReconcileOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
+        cls: ClsType[JSON] = kwargs.pop("cls", None)
 
         _json = self._serialize.body(parameters, "object")
 
@@ -7581,9 +7994,9 @@ class NspAccessRulesReconcileOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -7600,7 +8013,9 @@ class NspAccessRulesReconcileOperations:
 
         return deserialized
 
-    post.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile"}  # type: ignore
+    post.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile"
+    }
 
 
 class NspLinksOperations:
@@ -7650,8 +8065,10 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLink]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspLink] = kwargs.pop("cls", None)
 
         request = build_nsp_links_get_request(
             resource_group_name=resource_group_name,
@@ -7664,9 +8081,9 @@ class NspLinksOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -7683,7 +8100,9 @@ class NspLinksOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"
+    }
 
     @overload
     async def create_or_update(
@@ -7784,9 +8203,11 @@ class NspLinksOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLink]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NspLink] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -7810,9 +8231,9 @@ class NspLinksOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -7829,11 +8250,13 @@ class NspLinksOperations:
             deserialized = self._deserialize("NspLink", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"
+    }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, network_security_perimeter_name: str, link_name: str, **kwargs: Any
@@ -7849,8 +8272,10 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_nsp_links_delete_request(
             resource_group_name=resource_group_name,
@@ -7863,9 +8288,9 @@ class NspLinksOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -7882,7 +8307,9 @@ class NspLinksOperations:
         if cls:
             return cls(pipeline_response, None, response_headers)
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"}  # type: ignore
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"
+    }
 
     @distributed_trace_async
     async def begin_delete(
@@ -7911,11 +8338,13 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
@@ -7934,9 +8363,9 @@ class NspLinksOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -7948,9 +8377,11 @@ class NspLinksOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"}  # type: ignore
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"
+    }
 
     @distributed_trace
     def list(
@@ -7984,8 +8415,10 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLinkListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspLinkListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -8010,7 +8443,7 @@ class NspLinksOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -8026,7 +8459,7 @@ class NspLinksOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -8034,13 +8467,13 @@ class NspLinksOperations:
             deserialized = self._deserialize("NspLinkListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -8053,7 +8486,9 @@ class NspLinksOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links"
+    }
 
 
 class NspLinkReconcileOperations:
@@ -8103,8 +8538,10 @@ class NspLinkReconcileOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_nsp_link_reconcile_post_request(
             resource_group_name=resource_group_name,
@@ -8117,9 +8554,9 @@ class NspLinkReconcileOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -8132,7 +8569,9 @@ class NspLinkReconcileOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    post.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}/reconcile"}  # type: ignore
+    post.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}/reconcile"
+    }
 
 
 class NspLinkReferencesOperations:
@@ -8182,8 +8621,10 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLinkReference]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspLinkReference] = kwargs.pop("cls", None)
 
         request = build_nsp_link_references_get_request(
             resource_group_name=resource_group_name,
@@ -8196,9 +8637,9 @@ class NspLinkReferencesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -8215,7 +8656,9 @@ class NspLinkReferencesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"
+    }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, network_security_perimeter_name: str, link_reference_name: str, **kwargs: Any
@@ -8231,8 +8674,10 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_nsp_link_references_delete_request(
             resource_group_name=resource_group_name,
@@ -8245,9 +8690,9 @@ class NspLinkReferencesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -8264,7 +8709,9 @@ class NspLinkReferencesOperations:
         if cls:
             return cls(pipeline_response, None, response_headers)
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"}  # type: ignore
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"
+    }
 
     @distributed_trace_async
     async def begin_delete(
@@ -8293,11 +8740,13 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
@@ -8316,9 +8765,9 @@ class NspLinkReferencesOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -8330,9 +8779,11 @@ class NspLinkReferencesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"}  # type: ignore
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"
+    }
 
     @distributed_trace
     def list(
@@ -8366,8 +8817,10 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLinkReferenceListResult]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[_models.NspLinkReferenceListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -8392,7 +8845,7 @@ class NspLinkReferencesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -8408,7 +8861,7 @@ class NspLinkReferencesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -8416,13 +8869,13 @@ class NspLinkReferencesOperations:
             deserialized = self._deserialize("NspLinkReferenceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -8435,7 +8888,9 @@ class NspLinkReferencesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences"
+    }
 
 
 class NspLinkReferenceReconcileOperations:
@@ -8485,8 +8940,10 @@ class NspLinkReferenceReconcileOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        api_version: Literal["2021-02-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_nsp_link_reference_reconcile_post_request(
             resource_group_name=resource_group_name,
@@ -8499,9 +8956,9 @@ class NspLinkReferenceReconcileOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -8514,4 +8971,6 @@ class NspLinkReferenceReconcileOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    post.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}/reconcile"}  # type: ignore
+    post.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}/reconcile"
+    }

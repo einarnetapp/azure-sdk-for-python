@@ -116,7 +116,7 @@ class ActiveBaseSecurityAdminRule(_serialization.Model):
         self.rule_collection_description = rule_collection_description
         self.rule_collection_applies_to_groups = rule_collection_applies_to_groups
         self.rule_groups = rule_groups
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ActiveBaseSecurityUserRule(_serialization.Model):
@@ -218,7 +218,7 @@ class ActiveBaseSecurityUserRule(_serialization.Model):
         self.rule_collection_description = rule_collection_description
         self.rule_collection_applies_to_groups = rule_collection_applies_to_groups
         self.rule_groups = rule_groups
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ActiveConfigurationParameter(_serialization.Model):
@@ -670,7 +670,7 @@ class ActiveDefaultSecurityAdminRule(ActiveBaseSecurityAdminRule):  # pylint: di
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -831,7 +831,7 @@ class ActiveDefaultSecurityUserRule(ActiveBaseSecurityUserRule):  # pylint: disa
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -1025,7 +1025,7 @@ class ActiveSecurityAdminRule(ActiveBaseSecurityAdminRule):  # pylint: disable=t
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -1235,7 +1235,7 @@ class ActiveSecurityUserRule(ActiveBaseSecurityUserRule):  # pylint: disable=too
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -1403,7 +1403,7 @@ class BaseAdminRule(ProxyResource):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
         self.system_data = None
 
 
@@ -1538,7 +1538,7 @@ class AdminRule(BaseAdminRule):  # pylint: disable=too-many-instance-attributes
          ~azure.mgmt.network.v2021_02_01_preview.models.SecurityConfigurationRuleDirection
         """
         super().__init__(**kwargs)
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -1628,7 +1628,7 @@ class BaseUserRule(ProxyResource):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
         self.system_data = None
 
 
@@ -2053,7 +2053,7 @@ class DefaultAdminRule(BaseAdminRule):  # pylint: disable=too-many-instance-attr
         :paramtype flag: str
         """
         super().__init__(**kwargs)
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -2159,7 +2159,7 @@ class DefaultUserRule(BaseUserRule):  # pylint: disable=too-many-instance-attrib
         :paramtype flag: str
         """
         super().__init__(**kwargs)
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -2257,7 +2257,7 @@ class EffectiveBaseSecurityAdminRule(_serialization.Model):
         self.rule_collection_description = rule_collection_description
         self.rule_collection_applies_to_groups = rule_collection_applies_to_groups
         self.rule_groups = rule_groups
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class EffectiveDefaultSecurityAdminRule(EffectiveBaseSecurityAdminRule):  # pylint: disable=too-many-instance-attributes
@@ -2404,7 +2404,7 @@ class EffectiveDefaultSecurityAdminRule(EffectiveBaseSecurityAdminRule):  # pyli
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -2586,7 +2586,7 @@ class EffectiveSecurityAdminRule(EffectiveBaseSecurityAdminRule):  # pylint: dis
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -4559,6 +4559,36 @@ class TagsObject(_serialization.Model):
         self.tags = tags
 
 
+class UpdateTagsRequest(_serialization.Model):
+    """Request object for NSP patch request.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Network security perimeter identifier.
+    :vartype id: str
+    :ivar tags: Network security perimeter tags.
+    :vartype tags: dict[str, str]
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+    }
+
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+        """
+        :keyword tags: Network security perimeter tags.
+        :paramtype tags: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.id = None
+        self.tags = tags
+
+
 class UserRule(BaseUserRule):  # pylint: disable=too-many-instance-attributes
     """Network security user rule.
 
@@ -4669,7 +4699,7 @@ class UserRule(BaseUserRule):  # pylint: disable=too-many-instance-attributes
          ~azure.mgmt.network.v2021_02_01_preview.models.SecurityConfigurationRuleDirection
         """
         super().__init__(**kwargs)
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
