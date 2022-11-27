@@ -39,26 +39,29 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_get_request(
+def build_integration_runtime_start_operation_status_request(
     resource_group_name: str,
     workspace_name: str,
-    sql_pool_name: str,
-    schema_name: str,
-    table_name: str,
-    column_name: str,
+    integration_runtime_name: str,
+    integration_runtime_action: str,
+    integration_runtime_operation_id: str,
     subscription_id: str,
+    *,
+    if_none_match: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))
+    api_version: Literal["2021-06-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-06-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/{integrationRuntimeAction}/operationstatuses/{integrationRuntimeOperationId}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -66,10 +69,11 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
-        "sqlPoolName": _SERIALIZER.url("sql_pool_name", sql_pool_name, "str"),
-        "schemaName": _SERIALIZER.url("schema_name", schema_name, "str"),
-        "tableName": _SERIALIZER.url("table_name", table_name, "str"),
-        "columnName": _SERIALIZER.url("column_name", column_name, "str"),
+        "integrationRuntimeName": _SERIALIZER.url("integration_runtime_name", integration_runtime_name, "str"),
+        "integrationRuntimeAction": _SERIALIZER.url("integration_runtime_action", integration_runtime_action, "str"),
+        "integrationRuntimeOperationId": _SERIALIZER.url(
+            "integration_runtime_operation_id", integration_runtime_operation_id, "str"
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -78,59 +82,48 @@ def build_get_request(
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
+    if if_none_match is not None:
+        _headers["If-None-Match"] = _SERIALIZER.header("if_none_match", if_none_match, "str")
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class SqlPoolColumnsOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.synapse.SynapseManagementClient`'s
-        :attr:`sql_pool_columns` attribute.
-    """
-
-    models = _models
-
-    def __init__(self, *args, **kwargs):
-        input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
+class SynapseManagementClientOperationsMixin(SynapseManagementClientMixinABC):
     @distributed_trace
-    def get(
+    def integration_runtime_start_operation_status(
         self,
         resource_group_name: str,
         workspace_name: str,
-        sql_pool_name: str,
-        schema_name: str,
-        table_name: str,
-        column_name: str,
+        integration_runtime_name: str,
+        integration_runtime_action: str,
+        integration_runtime_operation_id: str,
+        if_none_match: Optional[str] = None,
         **kwargs: Any
-    ) -> _models.SqlPoolColumn:
-        """Get Sql pool column.
+    ) -> _models.IntegrationRuntimeOperationStatus:
+        """Get integration runtime start operation status.
+
+        Get an integration runtime start operation status.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param sql_pool_name: SQL pool name. Required.
-        :type sql_pool_name: str
-        :param schema_name: The name of the schema. Required.
-        :type schema_name: str
-        :param table_name: The name of the table. Required.
-        :type table_name: str
-        :param column_name: The name of the column. Required.
-        :type column_name: str
+        :param integration_runtime_name: Integration runtime name. Required.
+        :type integration_runtime_name: str
+        :param integration_runtime_action: Integration runtime operation id parameter name. Required.
+        :type integration_runtime_action: str
+        :param integration_runtime_operation_id: Integration runtime operation id parameter name.
+         Required.
+        :type integration_runtime_operation_id: str
+        :param if_none_match: ETag of the integration runtime entity. Should only be specified for get.
+         If the ETag matches the existing entity tag, or if * was provided, then no content will be
+         returned. Default value is None.
+        :type if_none_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlPoolColumn or the result of cls(response)
-        :rtype: ~azure.mgmt.synapse.models.SqlPoolColumn
+        :return: IntegrationRuntimeOperationStatus or the result of cls(response)
+        :rtype: ~azure.mgmt.synapse.models.IntegrationRuntimeOperationStatus
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -144,19 +137,21 @@ class SqlPoolColumnsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))
-        cls: ClsType[_models.SqlPoolColumn] = kwargs.pop("cls", None)
+        api_version: Literal["2021-06-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-06-01-preview")
+        )
+        cls: ClsType[_models.IntegrationRuntimeOperationStatus] = kwargs.pop("cls", None)
 
-        request = build_get_request(
+        request = build_integration_runtime_start_operation_status_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            sql_pool_name=sql_pool_name,
-            schema_name=schema_name,
-            table_name=table_name,
-            column_name=column_name,
+            integration_runtime_name=integration_runtime_name,
+            integration_runtime_action=integration_runtime_action,
+            integration_runtime_operation_id=integration_runtime_operation_id,
             subscription_id=self._config.subscription_id,
+            if_none_match=if_none_match,
             api_version=api_version,
-            template_url=self.get.metadata["url"],
+            template_url=self.integration_runtime_start_operation_status.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -171,15 +166,16 @@ class SqlPoolColumnsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("SqlPoolColumn", pipeline_response)
+        deserialized = self._deserialize("IntegrationRuntimeOperationStatus", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"
+    integration_runtime_start_operation_status.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/{integrationRuntimeAction}/operationstatuses/{integrationRuntimeOperationId}"
     }

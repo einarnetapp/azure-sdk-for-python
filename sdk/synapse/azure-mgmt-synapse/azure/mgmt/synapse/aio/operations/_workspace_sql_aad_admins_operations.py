@@ -33,6 +33,7 @@ from ...operations._workspace_sql_aad_admins_operations import (
     build_delete_request,
     build_get_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

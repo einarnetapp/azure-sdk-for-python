@@ -40,6 +40,7 @@ from ...operations._sql_pools_operations import (
     build_resume_request,
     build_update_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

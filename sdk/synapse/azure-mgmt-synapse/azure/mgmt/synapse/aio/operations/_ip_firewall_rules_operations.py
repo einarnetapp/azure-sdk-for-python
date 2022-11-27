@@ -37,6 +37,7 @@ from ...operations._ip_firewall_rules_operations import (
     build_list_by_workspace_request,
     build_replace_all_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

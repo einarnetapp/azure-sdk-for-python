@@ -78,6 +78,7 @@ from .operations import (
     SqlPoolWorkloadClassifierOperations,
     SqlPoolWorkloadGroupOperations,
     SqlPoolsOperations,
+    SynapseManagementClientOperationsMixin,
     WorkspaceAadAdminsOperations,
     WorkspaceManagedIdentitySqlControlSettingsOperations,
     WorkspaceManagedSqlServerBlobAuditingPoliciesOperations,
@@ -97,7 +98,9 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class SynapseManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class SynapseManagementClient(
+    SynapseManagementClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """Azure Synapse Analytics Management Client.
 
     :ivar azure_ad_only_authentications: AzureADOnlyAuthenticationsOperations operations

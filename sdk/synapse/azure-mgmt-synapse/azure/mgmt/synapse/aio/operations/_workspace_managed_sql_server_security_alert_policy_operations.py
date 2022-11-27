@@ -35,6 +35,7 @@ from ...operations._workspace_managed_sql_server_security_alert_policy_operation
     build_get_request,
     build_list_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

@@ -86,6 +86,7 @@ from ._models_py3 import IntegrationRuntimeListResponse
 from ._models_py3 import IntegrationRuntimeMonitoringData
 from ._models_py3 import IntegrationRuntimeNodeIpAddress
 from ._models_py3 import IntegrationRuntimeNodeMonitoringData
+from ._models_py3 import IntegrationRuntimeOperationStatus
 from ._models_py3 import IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint
 from ._models_py3 import IntegrationRuntimeOutboundNetworkDependenciesEndpoint
 from ._models_py3 import IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails
@@ -97,6 +98,7 @@ from ._models_py3 import IntegrationRuntimeSsisProperties
 from ._models_py3 import IntegrationRuntimeStatus
 from ._models_py3 import IntegrationRuntimeStatusResponse
 from ._models_py3 import IntegrationRuntimeVNetProperties
+from ._models_py3 import IntegrationRuntimesOperationStatus
 from ._models_py3 import IotHubDataConnection
 from ._models_py3 import IpFirewallRuleInfo
 from ._models_py3 import IpFirewallRuleInfoListResult
@@ -431,6 +433,7 @@ __all__ = [
     "IntegrationRuntimeMonitoringData",
     "IntegrationRuntimeNodeIpAddress",
     "IntegrationRuntimeNodeMonitoringData",
+    "IntegrationRuntimeOperationStatus",
     "IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint",
     "IntegrationRuntimeOutboundNetworkDependenciesEndpoint",
     "IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails",
@@ -442,6 +445,7 @@ __all__ = [
     "IntegrationRuntimeStatus",
     "IntegrationRuntimeStatusResponse",
     "IntegrationRuntimeVNetProperties",
+    "IntegrationRuntimesOperationStatus",
     "IotHubDataConnection",
     "IpFirewallRuleInfo",
     "IpFirewallRuleInfoListResult",

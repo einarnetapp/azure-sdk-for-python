@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, Optional, TypeVar, Union
+from typing import Any, Callable, Dict, Optional, TypeVar
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -26,7 +26,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._sql_pool_data_warehouse_user_activities_operations import build_get_request
+from ...operations._synapse_management_client_operations import build_integration_runtime_start_operation_status_request
 from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
@@ -37,52 +37,41 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class SqlPoolDataWarehouseUserActivitiesOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.synapse.aio.SynapseManagementClient`'s
-        :attr:`sql_pool_data_warehouse_user_activities` attribute.
-    """
-
-    models = _models
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
+class SynapseManagementClientOperationsMixin(SynapseManagementClientMixinABC):
     @distributed_trace_async
-    async def get(
+    async def integration_runtime_start_operation_status(
         self,
         resource_group_name: str,
         workspace_name: str,
-        sql_pool_name: str,
-        data_warehouse_user_activity_name: Union[str, _models.DataWarehouseUserActivityName],
+        integration_runtime_name: str,
+        integration_runtime_action: str,
+        integration_runtime_operation_id: str,
+        if_none_match: Optional[str] = None,
         **kwargs: Any
-    ) -> _models.DataWarehouseUserActivities:
-        """Get SQL pool user activities.
+    ) -> _models.IntegrationRuntimeOperationStatus:
+        """Get integration runtime start operation status.
 
-        Gets the user activities of a SQL pool which includes running and suspended queries.
+        Get an integration runtime start operation status.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param sql_pool_name: SQL pool name. Required.
-        :type sql_pool_name: str
-        :param data_warehouse_user_activity_name: The activity name of the Sql pool. "current"
+        :param integration_runtime_name: Integration runtime name. Required.
+        :type integration_runtime_name: str
+        :param integration_runtime_action: Integration runtime operation id parameter name. Required.
+        :type integration_runtime_action: str
+        :param integration_runtime_operation_id: Integration runtime operation id parameter name.
          Required.
-        :type data_warehouse_user_activity_name: str or
-         ~azure.mgmt.synapse.models.DataWarehouseUserActivityName
+        :type integration_runtime_operation_id: str
+        :param if_none_match: ETag of the integration runtime entity. Should only be specified for get.
+         If the ETag matches the existing entity tag, or if * was provided, then no content will be
+         returned. Default value is None.
+        :type if_none_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DataWarehouseUserActivities or the result of cls(response)
-        :rtype: ~azure.mgmt.synapse.models.DataWarehouseUserActivities
+        :return: IntegrationRuntimeOperationStatus or the result of cls(response)
+        :rtype: ~azure.mgmt.synapse.models.IntegrationRuntimeOperationStatus
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -96,24 +85,28 @@ class SqlPoolDataWarehouseUserActivitiesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))
-        cls: ClsType[_models.DataWarehouseUserActivities] = kwargs.pop("cls", None)
+        api_version: Literal["2021-06-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-06-01-preview")
+        )
+        cls: ClsType[_models.IntegrationRuntimeOperationStatus] = kwargs.pop("cls", None)
 
-        request = build_get_request(
+        request = build_integration_runtime_start_operation_status_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            sql_pool_name=sql_pool_name,
-            data_warehouse_user_activity_name=data_warehouse_user_activity_name,
+            integration_runtime_name=integration_runtime_name,
+            integration_runtime_action=integration_runtime_action,
+            integration_runtime_operation_id=integration_runtime_operation_id,
             subscription_id=self._config.subscription_id,
+            if_none_match=if_none_match,
             api_version=api_version,
-            template_url=self.get.metadata["url"],
+            template_url=self.integration_runtime_start_operation_status.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -121,15 +114,16 @@ class SqlPoolDataWarehouseUserActivitiesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("DataWarehouseUserActivities", pipeline_response)
+        deserialized = self._deserialize("IntegrationRuntimeOperationStatus", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataWarehouseUserActivities/{dataWarehouseUserActivityName}"
+    integration_runtime_start_operation_status.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/{integrationRuntimeAction}/operationstatuses/{integrationRuntimeOperationId}"
     }

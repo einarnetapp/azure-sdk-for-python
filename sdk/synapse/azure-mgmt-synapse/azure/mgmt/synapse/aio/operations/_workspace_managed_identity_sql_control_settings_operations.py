@@ -32,6 +32,7 @@ from ...operations._workspace_managed_identity_sql_control_settings_operations i
     build_create_or_update_request,
     build_get_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

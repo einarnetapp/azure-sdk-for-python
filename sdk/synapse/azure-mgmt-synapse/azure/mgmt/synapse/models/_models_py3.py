@@ -4331,6 +4331,52 @@ class IntegrationRuntimeNodeMonitoringData(_serialization.Model):
         self.received_bytes = None
 
 
+class IntegrationRuntimeOperationStatus(_serialization.Model):
+    """IntegrationRuntimeOperationStatus.
+
+    :ivar status: The status of the operation.
+    :vartype status: str
+    :ivar name: The operation name.
+    :vartype name: str
+    :ivar properties: The operation properties.
+    :vartype properties: JSON
+    :ivar error: The operation error message.
+    :vartype error: str
+    """
+
+    _attribute_map = {
+        "status": {"key": "status", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
+        "error": {"key": "error", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        status: Optional[str] = None,
+        name: Optional[str] = None,
+        properties: Optional[JSON] = None,
+        error: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword status: The status of the operation.
+        :paramtype status: str
+        :keyword name: The operation name.
+        :paramtype name: str
+        :keyword properties: The operation properties.
+        :paramtype properties: JSON
+        :keyword error: The operation error message.
+        :paramtype error: str
+        """
+        super().__init__(**kwargs)
+        self.status = status
+        self.name = name
+        self.properties = properties
+        self.error = error
+
+
 class IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint(_serialization.Model):
     """Azure-SSIS integration runtime outbound network dependency endpoints for one category.
 
@@ -4556,6 +4602,43 @@ class IntegrationRuntimeResource(SubResource):
         super().__init__(**kwargs)
         self.type_properties_type: Optional[str] = None
         self.description = description
+
+
+class IntegrationRuntimesOperationStatus(_serialization.Model):
+    """integration runtime operation results request.
+
+    :ivar auto_update: Enables or disables the auto-update feature of the self-hosted integration
+     runtime. See https://go.microsoft.com/fwlink/?linkid=854189. Known values are: "On" and "Off".
+    :vartype auto_update: str or ~azure.mgmt.synapse.models.IntegrationRuntimeAutoUpdate
+    :ivar update_delay_offset: The time offset (in hours) in the day, e.g., PT03H is 3 hours. The
+     integration runtime auto update will happen on that time.
+    :vartype update_delay_offset: str
+    """
+
+    _attribute_map = {
+        "auto_update": {"key": "autoUpdate", "type": "str"},
+        "update_delay_offset": {"key": "updateDelayOffset", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        auto_update: Optional[Union[str, "_models.IntegrationRuntimeAutoUpdate"]] = None,
+        update_delay_offset: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword auto_update: Enables or disables the auto-update feature of the self-hosted
+         integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189. Known values are: "On"
+         and "Off".
+        :paramtype auto_update: str or ~azure.mgmt.synapse.models.IntegrationRuntimeAutoUpdate
+        :keyword update_delay_offset: The time offset (in hours) in the day, e.g., PT03H is 3 hours.
+         The integration runtime auto update will happen on that time.
+        :paramtype update_delay_offset: str
+        """
+        super().__init__(**kwargs)
+        self.auto_update = auto_update
+        self.update_delay_offset = update_delay_offset
 
 
 class IntegrationRuntimeSsisCatalogInfo(_serialization.Model):

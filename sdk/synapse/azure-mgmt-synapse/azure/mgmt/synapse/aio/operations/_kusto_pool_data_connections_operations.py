@@ -39,6 +39,7 @@ from ...operations._kusto_pool_data_connections_operations import (
     build_list_by_database_request,
     build_update_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

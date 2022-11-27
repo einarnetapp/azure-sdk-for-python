@@ -32,6 +32,7 @@ from ...operations._private_endpoint_connections_private_link_hub_operations imp
     build_get_request,
     build_list_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

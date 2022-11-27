@@ -43,6 +43,7 @@ from ...operations._integration_runtimes_operations import (
     build_update_request,
     build_upgrade_request,
 )
+from .._vendor import SynapseManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
