@@ -168,22 +168,19 @@ from ._managed_instance_advanced_threat_protection_settings_operations import (
     ManagedInstanceAdvancedThreatProtectionSettingsOperations,
 )
 from ._replication_links_operations import ReplicationLinksOperations
-from ._sql_vulnerability_assessment_baseline_operations import SqlVulnerabilityAssessmentBaselineOperations
 from ._sql_vulnerability_assessment_baselines_operations import SqlVulnerabilityAssessmentBaselinesOperations
 from ._sql_vulnerability_assessment_execute_scan_operations import SqlVulnerabilityAssessmentExecuteScanOperations
-from ._sql_vulnerability_assessment_rule_baseline_operations import SqlVulnerabilityAssessmentRuleBaselineOperations
 from ._sql_vulnerability_assessment_rule_baselines_operations import SqlVulnerabilityAssessmentRuleBaselinesOperations
 from ._sql_vulnerability_assessment_scan_result_operations import SqlVulnerabilityAssessmentScanResultOperations
 from ._sql_vulnerability_assessment_scans_operations import SqlVulnerabilityAssessmentScansOperations
 from ._sql_vulnerability_assessments_settings_operations import SqlVulnerabilityAssessmentsSettingsOperations
-from ._sql_vulnerability_assessments_operations import SqlVulnerabilityAssessmentsOperations
 from ._managed_database_move_operations_operations import ManagedDatabaseMoveOperationsOperations
 from ._managed_instance_dtcs_operations import ManagedInstanceDtcsOperations
 from ._synapse_link_workspaces_operations import SynapseLinkWorkspacesOperations
 from ._virtual_clusters_operations import VirtualClustersOperations
 
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -319,15 +316,12 @@ __all__ = [
     "ManagedDatabasesOperations",
     "ManagedInstanceAdvancedThreatProtectionSettingsOperations",
     "ReplicationLinksOperations",
-    "SqlVulnerabilityAssessmentBaselineOperations",
     "SqlVulnerabilityAssessmentBaselinesOperations",
     "SqlVulnerabilityAssessmentExecuteScanOperations",
-    "SqlVulnerabilityAssessmentRuleBaselineOperations",
     "SqlVulnerabilityAssessmentRuleBaselinesOperations",
     "SqlVulnerabilityAssessmentScanResultOperations",
     "SqlVulnerabilityAssessmentScansOperations",
     "SqlVulnerabilityAssessmentsSettingsOperations",
-    "SqlVulnerabilityAssessmentsOperations",
     "ManagedDatabaseMoveOperationsOperations",
     "ManagedInstanceDtcsOperations",
     "SynapseLinkWorkspacesOperations",

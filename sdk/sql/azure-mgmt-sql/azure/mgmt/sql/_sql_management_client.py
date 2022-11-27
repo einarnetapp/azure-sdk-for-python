@@ -12,7 +12,7 @@ from typing import Any, TYPE_CHECKING
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
-from . import models
+from . import models as _models
 from ._configuration import SqlManagementClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
@@ -139,14 +139,11 @@ from .operations import (
     ServersOperations,
     ServiceObjectivesOperations,
     SqlAgentOperations,
-    SqlVulnerabilityAssessmentBaselineOperations,
     SqlVulnerabilityAssessmentBaselinesOperations,
     SqlVulnerabilityAssessmentExecuteScanOperations,
-    SqlVulnerabilityAssessmentRuleBaselineOperations,
     SqlVulnerabilityAssessmentRuleBaselinesOperations,
     SqlVulnerabilityAssessmentScanResultOperations,
     SqlVulnerabilityAssessmentScansOperations,
-    SqlVulnerabilityAssessmentsOperations,
     SqlVulnerabilityAssessmentsSettingsOperations,
     SubscriptionUsagesOperations,
     SynapseLinkWorkspacesOperations,
@@ -533,10 +530,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      azure.mgmt.sql.operations.ManagedInstanceAdvancedThreatProtectionSettingsOperations
     :ivar replication_links: ReplicationLinksOperations operations
     :vartype replication_links: azure.mgmt.sql.operations.ReplicationLinksOperations
-    :ivar sql_vulnerability_assessment_baseline: SqlVulnerabilityAssessmentBaselineOperations
-     operations
-    :vartype sql_vulnerability_assessment_baseline:
-     azure.mgmt.sql.operations.SqlVulnerabilityAssessmentBaselineOperations
     :ivar sql_vulnerability_assessment_baselines: SqlVulnerabilityAssessmentBaselinesOperations
      operations
     :vartype sql_vulnerability_assessment_baselines:
@@ -545,10 +538,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      SqlVulnerabilityAssessmentExecuteScanOperations operations
     :vartype sql_vulnerability_assessment_execute_scan:
      azure.mgmt.sql.operations.SqlVulnerabilityAssessmentExecuteScanOperations
-    :ivar sql_vulnerability_assessment_rule_baseline:
-     SqlVulnerabilityAssessmentRuleBaselineOperations operations
-    :vartype sql_vulnerability_assessment_rule_baseline:
-     azure.mgmt.sql.operations.SqlVulnerabilityAssessmentRuleBaselineOperations
     :ivar sql_vulnerability_assessment_rule_baselines:
      SqlVulnerabilityAssessmentRuleBaselinesOperations operations
     :vartype sql_vulnerability_assessment_rule_baselines:
@@ -564,9 +553,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      operations
     :vartype sql_vulnerability_assessments_settings:
      azure.mgmt.sql.operations.SqlVulnerabilityAssessmentsSettingsOperations
-    :ivar sql_vulnerability_assessments: SqlVulnerabilityAssessmentsOperations operations
-    :vartype sql_vulnerability_assessments:
-     azure.mgmt.sql.operations.SqlVulnerabilityAssessmentsOperations
     :ivar managed_database_move_operations: ManagedDatabaseMoveOperationsOperations operations
     :vartype managed_database_move_operations:
      azure.mgmt.sql.operations.ManagedDatabaseMoveOperationsOperations
@@ -598,7 +584,7 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -954,16 +940,10 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self.replication_links = ReplicationLinksOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.sql_vulnerability_assessment_baseline = SqlVulnerabilityAssessmentBaselineOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.sql_vulnerability_assessment_baselines = SqlVulnerabilityAssessmentBaselinesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.sql_vulnerability_assessment_execute_scan = SqlVulnerabilityAssessmentExecuteScanOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sql_vulnerability_assessment_rule_baseline = SqlVulnerabilityAssessmentRuleBaselineOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.sql_vulnerability_assessment_rule_baselines = SqlVulnerabilityAssessmentRuleBaselinesOperations(
@@ -976,9 +956,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
             self._client, self._config, self._serialize, self._deserialize
         )
         self.sql_vulnerability_assessments_settings = SqlVulnerabilityAssessmentsSettingsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sql_vulnerability_assessments = SqlVulnerabilityAssessmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.managed_database_move_operations = ManagedDatabaseMoveOperationsOperations(
@@ -1016,15 +993,12 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         request_copy.url = self._client.format_url(request_copy.url)
         return self._client.send_request(request_copy, **kwargs)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self._client.close()
 
-    def __enter__(self):
-        # type: () -> SqlManagementClient
+    def __enter__(self) -> "SqlManagementClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details):
-        # type: (Any) -> None
+    def __exit__(self, *exc_details) -> None:
         self._client.__exit__(*exc_details)
