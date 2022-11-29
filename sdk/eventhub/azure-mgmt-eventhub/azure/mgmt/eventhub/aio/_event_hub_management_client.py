@@ -11,17 +11,15 @@
 
 from typing import Any, Optional, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
-
 from azure.mgmt.core import AsyncARMPipelineClient
 from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
 
+from .._serialization import Deserializer, Serializer
 from ._configuration import EventHubManagementClientConfiguration
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from azure.core.credentials import TokenCredential
     from azure.core.credentials_async import AsyncTokenCredential
 
 class _SDKClient(object):
@@ -42,9 +40,9 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
     The api-version parameter sets the default API version if the operation
     group is not described in the profile.
 
-    :param credential: Credential needed for the client to connect to Azure.
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    :param subscription_id: Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. Required.
     :type subscription_id: str
     :param api_version: API version to use if no profile is provided, or if missing in profile.
     :type api_version: str
@@ -72,7 +70,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
         api_version: Optional[str] = None,
         base_url: str = "https://management.azure.com",
         profile: KnownProfiles = KnownProfiles.default,
-        **kwargs  # type: Any
+        **kwargs: Any
     ) -> None:
         self._config = EventHubManagementClientConfiguration(credential, subscription_id, **kwargs)
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
@@ -131,6 +129,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import ApplicationGroupOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'application_group'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -153,6 +152,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import ClustersOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'clusters'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -175,6 +175,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import ConfigurationOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'configuration'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -206,6 +207,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import ConsumerGroupsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'consumer_groups'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -234,6 +236,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import DisasterRecoveryConfigsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'disaster_recovery_configs'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -265,6 +268,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import EventHubsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'event_hubs'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -296,6 +300,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import NamespacesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'namespaces'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -309,6 +314,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import NetworkSecurityPerimeterConfigurationOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'network_security_perimeter_configuration'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -322,6 +328,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import NetworkSecurityPerimeterConfigurationsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'network_security_perimeter_configurations'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -353,6 +360,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -378,6 +386,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import PrivateEndpointConnectionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_endpoint_connections'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -403,6 +412,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import PrivateLinkResourcesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_link_resources'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -419,6 +429,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2018_01_01_preview.aio.operations import RegionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'regions'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -435,6 +446,7 @@ class EventHubManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_01_preview.aio.operations import SchemaRegistryOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'schema_registry'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     async def close(self):
