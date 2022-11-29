@@ -1320,7 +1320,8 @@ class SqlVirtualMachine(TrackedResource):  # pylint: disable=too-many-instance-a
     :ivar sql_management: SQL Server Management type. Known values are: "Full", "LightWeight", and
      "NoAgent".
     :vartype sql_management: str or ~azure.mgmt.sqlvirtualmachine.models.SqlManagementMode
-    :ivar least_privilege_mode: SQL IaaS Agent least privilege mode. "Enabled"
+    :ivar least_privilege_mode: SQL IaaS Agent least privilege mode. Known values are: "Enabled"
+     and "NotSet".
     :vartype least_privilege_mode: str or ~azure.mgmt.sqlvirtualmachine.models.LeastPrivilegeMode
     :ivar sql_image_sku: SQL Server edition type. Known values are: "Developer", "Express",
      "Standard", "Enterprise", and "Web".
@@ -1409,7 +1410,7 @@ class SqlVirtualMachine(TrackedResource):  # pylint: disable=too-many-instance-a
         sql_image_offer: Optional[str] = None,
         sql_server_license_type: Optional[Union[str, "_models.SqlServerLicenseType"]] = None,
         sql_management: Optional[Union[str, "_models.SqlManagementMode"]] = None,
-        least_privilege_mode: Optional[Union[str, "_models.LeastPrivilegeMode"]] = None,
+        least_privilege_mode: Union[str, "_models.LeastPrivilegeMode"] = "NotSet",
         sql_image_sku: Optional[Union[str, "_models.SqlImageSku"]] = None,
         sql_virtual_machine_group_resource_id: Optional[str] = None,
         wsfc_domain_credentials: Optional["_models.WsfcDomainCredentials"] = None,
@@ -1420,7 +1421,7 @@ class SqlVirtualMachine(TrackedResource):  # pylint: disable=too-many-instance-a
         server_configurations_management_settings: Optional["_models.ServerConfigurationsManagementSettings"] = None,
         storage_configuration_settings: Optional["_models.StorageConfigurationSettings"] = None,
         assessment_settings: Optional["_models.AssessmentSettings"] = None,
-        enable_automatic_upgrade: Optional[bool] = None,
+        enable_automatic_upgrade: bool = False,
         **kwargs
     ):
         """
@@ -1442,7 +1443,8 @@ class SqlVirtualMachine(TrackedResource):  # pylint: disable=too-many-instance-a
         :keyword sql_management: SQL Server Management type. Known values are: "Full", "LightWeight",
          and "NoAgent".
         :paramtype sql_management: str or ~azure.mgmt.sqlvirtualmachine.models.SqlManagementMode
-        :keyword least_privilege_mode: SQL IaaS Agent least privilege mode. "Enabled"
+        :keyword least_privilege_mode: SQL IaaS Agent least privilege mode. Known values are: "Enabled"
+         and "NotSet".
         :paramtype least_privilege_mode: str or ~azure.mgmt.sqlvirtualmachine.models.LeastPrivilegeMode
         :keyword sql_image_sku: SQL Server edition type. Known values are: "Developer", "Express",
          "Standard", "Enterprise", and "Web".

@@ -136,6 +136,7 @@ class LeastPrivilegeMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """SQL IaaS Agent least privilege mode."""
 
     ENABLED = "Enabled"
+    NOT_SET = "NotSet"
 
 
 class OperationOrigin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
