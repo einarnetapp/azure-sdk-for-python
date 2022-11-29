@@ -12,7 +12,7 @@ from typing import Any, TYPE_CHECKING
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
-from . import models
+from . import models as _models
 from ._configuration import ApiManagementClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
@@ -36,6 +36,11 @@ from .operations import (
     ApiSchemaOperations,
     ApiTagDescriptionOperations,
     ApiVersionSetOperations,
+    ApiWikiOperations,
+    AuthorizationAccessPolicyOperations,
+    AuthorizationLoginLinksOperations,
+    AuthorizationOperations,
+    AuthorizationProviderOperations,
     AuthorizationServerOperations,
     BackendOperations,
     CacheOperations,
@@ -45,6 +50,7 @@ from .operations import (
     DelegationSettingsOperations,
     DeletedServicesOperations,
     DiagnosticOperations,
+    DocumentationOperations,
     EmailTemplateOperations,
     GatewayApiOperations,
     GatewayCertificateAuthorityOperations,
@@ -65,7 +71,9 @@ from .operations import (
     OperationOperations,
     OutboundNetworkDependenciesEndpointsOperations,
     PolicyDescriptionOperations,
+    PolicyFragmentOperations,
     PolicyOperations,
+    PortalConfigOperations,
     PortalRevisionOperations,
     PortalSettingsOperations,
     PrivateEndpointConnectionOperations,
@@ -74,6 +82,7 @@ from .operations import (
     ProductOperations,
     ProductPolicyOperations,
     ProductSubscriptionsOperations,
+    ProductWikiOperations,
     QuotaByCounterKeysOperations,
     QuotaByPeriodKeysOperations,
     RegionOperations,
@@ -134,6 +143,8 @@ class ApiManagementClient(
     :vartype api_tag_description: azure.mgmt.apimanagement.operations.ApiTagDescriptionOperations
     :ivar operation: OperationOperations operations
     :vartype operation: azure.mgmt.apimanagement.operations.OperationOperations
+    :ivar api_wiki: ApiWikiOperations operations
+    :vartype api_wiki: azure.mgmt.apimanagement.operations.ApiWikiOperations
     :ivar api_export: ApiExportOperations operations
     :vartype api_export: azure.mgmt.apimanagement.operations.ApiExportOperations
     :ivar api_version_set: ApiVersionSetOperations operations
@@ -141,6 +152,17 @@ class ApiManagementClient(
     :ivar authorization_server: AuthorizationServerOperations operations
     :vartype authorization_server:
      azure.mgmt.apimanagement.operations.AuthorizationServerOperations
+    :ivar authorization_provider: AuthorizationProviderOperations operations
+    :vartype authorization_provider:
+     azure.mgmt.apimanagement.operations.AuthorizationProviderOperations
+    :ivar authorization: AuthorizationOperations operations
+    :vartype authorization: azure.mgmt.apimanagement.operations.AuthorizationOperations
+    :ivar authorization_login_links: AuthorizationLoginLinksOperations operations
+    :vartype authorization_login_links:
+     azure.mgmt.apimanagement.operations.AuthorizationLoginLinksOperations
+    :ivar authorization_access_policy: AuthorizationAccessPolicyOperations operations
+    :vartype authorization_access_policy:
+     azure.mgmt.apimanagement.operations.AuthorizationAccessPolicyOperations
     :ivar backend: BackendOperations operations
     :vartype backend: azure.mgmt.apimanagement.operations.BackendOperations
     :ivar cache: CacheOperations operations
@@ -209,6 +231,10 @@ class ApiManagementClient(
     :vartype policy: azure.mgmt.apimanagement.operations.PolicyOperations
     :ivar policy_description: PolicyDescriptionOperations operations
     :vartype policy_description: azure.mgmt.apimanagement.operations.PolicyDescriptionOperations
+    :ivar policy_fragment: PolicyFragmentOperations operations
+    :vartype policy_fragment: azure.mgmt.apimanagement.operations.PolicyFragmentOperations
+    :ivar portal_config: PortalConfigOperations operations
+    :vartype portal_config: azure.mgmt.apimanagement.operations.PortalConfigOperations
     :ivar portal_revision: PortalRevisionOperations operations
     :vartype portal_revision: azure.mgmt.apimanagement.operations.PortalRevisionOperations
     :ivar portal_settings: PortalSettingsOperations operations
@@ -233,6 +259,8 @@ class ApiManagementClient(
      azure.mgmt.apimanagement.operations.ProductSubscriptionsOperations
     :ivar product_policy: ProductPolicyOperations operations
     :vartype product_policy: azure.mgmt.apimanagement.operations.ProductPolicyOperations
+    :ivar product_wiki: ProductWikiOperations operations
+    :vartype product_wiki: azure.mgmt.apimanagement.operations.ProductWikiOperations
     :ivar quota_by_counter_keys: QuotaByCounterKeysOperations operations
     :vartype quota_by_counter_keys:
      azure.mgmt.apimanagement.operations.QuotaByCounterKeysOperations
@@ -270,14 +298,15 @@ class ApiManagementClient(
     :ivar user_confirmation_password: UserConfirmationPasswordOperations operations
     :vartype user_confirmation_password:
      azure.mgmt.apimanagement.operations.UserConfirmationPasswordOperations
+    :ivar documentation: DocumentationOperations operations
+    :vartype documentation: azure.mgmt.apimanagement.operations.DocumentationOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: Subscription credentials which uniquely identify Microsoft Azure
-     subscription. The subscription ID forms part of the URI for every service call. Required.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -296,7 +325,7 @@ class ApiManagementClient(
         )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -323,9 +352,20 @@ class ApiManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.operation = OperationOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.api_wiki = ApiWikiOperations(self._client, self._config, self._serialize, self._deserialize)
         self.api_export = ApiExportOperations(self._client, self._config, self._serialize, self._deserialize)
         self.api_version_set = ApiVersionSetOperations(self._client, self._config, self._serialize, self._deserialize)
         self.authorization_server = AuthorizationServerOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.authorization_provider = AuthorizationProviderOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.authorization = AuthorizationOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.authorization_login_links = AuthorizationLoginLinksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.authorization_access_policy = AuthorizationAccessPolicyOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.backend = BackendOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -381,6 +421,8 @@ class ApiManagementClient(
         self.policy_description = PolicyDescriptionOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.policy_fragment = PolicyFragmentOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.portal_config = PortalConfigOperations(self._client, self._config, self._serialize, self._deserialize)
         self.portal_revision = PortalRevisionOperations(self._client, self._config, self._serialize, self._deserialize)
         self.portal_settings = PortalSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.sign_in_settings = SignInSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -398,6 +440,7 @@ class ApiManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.product_policy = ProductPolicyOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.product_wiki = ProductWikiOperations(self._client, self._config, self._serialize, self._deserialize)
         self.quota_by_counter_keys = QuotaByCounterKeysOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -429,6 +472,7 @@ class ApiManagementClient(
         self.user_confirmation_password = UserConfirmationPasswordOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.documentation = DocumentationOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
@@ -452,15 +496,12 @@ class ApiManagementClient(
         request_copy.url = self._client.format_url(request_copy.url)
         return self._client.send_request(request_copy, **kwargs)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self._client.close()
 
-    def __enter__(self):
-        # type: () -> ApiManagementClient
+    def __enter__(self) -> "ApiManagementClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details):
-        # type: (Any) -> None
+    def __exit__(self, *exc_details) -> None:
         self._client.__exit__(*exc_details)

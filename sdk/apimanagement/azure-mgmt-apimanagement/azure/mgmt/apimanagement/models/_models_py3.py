@@ -98,7 +98,39 @@ class Resource(_serialization.Model):
         self.type = None
 
 
-class AccessInformationContract(Resource):
+class ProxyResource(Resource):
+    """The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+
+
+class AccessInformationContract(ProxyResource):
     """Tenant Settings.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -283,7 +315,7 @@ class AccessInformationUpdateParameters(_serialization.Model):
         self.enabled = enabled
 
 
-class AdditionalLocation(_serialization.Model):
+class AdditionalLocation(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """Description of an additional API Management resource location.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -314,6 +346,12 @@ class AdditionalLocation(_serialization.Model):
      ~azure.mgmt.apimanagement.models.VirtualNetworkConfiguration
     :ivar gateway_regional_url: Gateway URL of the API Management service in the Region.
     :vartype gateway_regional_url: str
+    :ivar nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+     service. Known values are: "Enabled" and "Disabled".
+    :vartype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
+    :ivar outbound_public_ip_addresses: Outbound public IPV4 address prefixes associated with NAT
+     Gateway deployed service. Available only for Premium SKU on stv2 platform.
+    :vartype outbound_public_ip_addresses: list[str]
     :ivar disable_gateway: Property only valid for an Api Management service deployed in multiple
      locations. This can be used to disable the gateway in this additional location.
     :vartype disable_gateway: bool
@@ -328,6 +366,7 @@ class AdditionalLocation(_serialization.Model):
         "public_ip_addresses": {"readonly": True},
         "private_ip_addresses": {"readonly": True},
         "gateway_regional_url": {"readonly": True},
+        "outbound_public_ip_addresses": {"readonly": True},
         "platform_version": {"readonly": True},
     }
 
@@ -340,6 +379,8 @@ class AdditionalLocation(_serialization.Model):
         "public_ip_address_id": {"key": "publicIpAddressId", "type": "str"},
         "virtual_network_configuration": {"key": "virtualNetworkConfiguration", "type": "VirtualNetworkConfiguration"},
         "gateway_regional_url": {"key": "gatewayRegionalUrl", "type": "str"},
+        "nat_gateway_state": {"key": "natGatewayState", "type": "str"},
+        "outbound_public_ip_addresses": {"key": "outboundPublicIPAddresses", "type": "[str]"},
         "disable_gateway": {"key": "disableGateway", "type": "bool"},
         "platform_version": {"key": "platformVersion", "type": "str"},
     }
@@ -352,6 +393,7 @@ class AdditionalLocation(_serialization.Model):
         zones: Optional[List[str]] = None,
         public_ip_address_id: Optional[str] = None,
         virtual_network_configuration: Optional["_models.VirtualNetworkConfiguration"] = None,
+        nat_gateway_state: Optional[Union[str, "_models.NatGatewayState"]] = None,
         disable_gateway: bool = False,
         **kwargs
     ):
@@ -370,6 +412,9 @@ class AdditionalLocation(_serialization.Model):
         :keyword virtual_network_configuration: Virtual network configuration for the location.
         :paramtype virtual_network_configuration:
          ~azure.mgmt.apimanagement.models.VirtualNetworkConfiguration
+        :keyword nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+         service. Known values are: "Enabled" and "Disabled".
+        :paramtype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
         :keyword disable_gateway: Property only valid for an Api Management service deployed in
          multiple locations. This can be used to disable the gateway in this additional location.
         :paramtype disable_gateway: bool
@@ -383,6 +428,8 @@ class AdditionalLocation(_serialization.Model):
         self.public_ip_address_id = public_ip_address_id
         self.virtual_network_configuration = virtual_network_configuration
         self.gateway_regional_url = None
+        self.nat_gateway_state = nat_gateway_state
+        self.outbound_public_ip_addresses = None
         self.disable_gateway = disable_gateway
         self.platform_version = None
 
@@ -456,7 +503,7 @@ class ApiContactInformation(_serialization.Model):
         self.email = email
 
 
-class ApiContract(Resource):  # pylint: disable=too-many-instance-attributes
+class ApiContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """API details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1259,6 +1306,11 @@ class ApiCreateOrUpdateParameter(_serialization.Model):  # pylint: disable=too-m
      * ``graphql`` creates GraphQL API. Known values are: "http", "soap", "websocket", and
      "graphql".
     :vartype soap_api_type: str or ~azure.mgmt.apimanagement.models.SoapApiType
+    :ivar translate_required_query_parameters_conduct: Strategy of translating required query
+     parameters to template ones. By default has value 'template'. Possible values: 'template',
+     'query'. Known values are: "template" and "query".
+    :vartype translate_required_query_parameters_conduct: str or
+     ~azure.mgmt.apimanagement.models.TranslateRequiredQueryParametersConduct
     """
 
     _validation = {
@@ -1304,6 +1356,10 @@ class ApiCreateOrUpdateParameter(_serialization.Model):  # pylint: disable=too-m
         "format": {"key": "properties.format", "type": "str"},
         "wsdl_selector": {"key": "properties.wsdlSelector", "type": "ApiCreateOrUpdatePropertiesWsdlSelector"},
         "soap_api_type": {"key": "properties.apiType", "type": "str"},
+        "translate_required_query_parameters_conduct": {
+            "key": "properties.translateRequiredQueryParameters",
+            "type": "str",
+        },
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -1333,6 +1389,9 @@ class ApiCreateOrUpdateParameter(_serialization.Model):  # pylint: disable=too-m
         format: Optional[Union[str, "_models.ContentFormat"]] = None,
         wsdl_selector: Optional["_models.ApiCreateOrUpdatePropertiesWsdlSelector"] = None,
         soap_api_type: Optional[Union[str, "_models.SoapApiType"]] = None,
+        translate_required_query_parameters_conduct: Optional[
+            Union[str, "_models.TranslateRequiredQueryParametersConduct"]
+        ] = None,
         **kwargs
     ):
         """
@@ -1402,6 +1461,11 @@ class ApiCreateOrUpdateParameter(_serialization.Model):  # pylint: disable=too-m
          * ``graphql`` creates GraphQL API. Known values are: "http", "soap", "websocket", and
          "graphql".
         :paramtype soap_api_type: str or ~azure.mgmt.apimanagement.models.SoapApiType
+        :keyword translate_required_query_parameters_conduct: Strategy of translating required query
+         parameters to template ones. By default has value 'template'. Possible values: 'template',
+         'query'. Known values are: "template" and "query".
+        :paramtype translate_required_query_parameters_conduct: str or
+         ~azure.mgmt.apimanagement.models.TranslateRequiredQueryParametersConduct
         """
         super().__init__(**kwargs)
         self.description = description
@@ -1429,6 +1493,7 @@ class ApiCreateOrUpdateParameter(_serialization.Model):  # pylint: disable=too-m
         self.format = format
         self.wsdl_selector = wsdl_selector
         self.soap_api_type = soap_api_type
+        self.translate_required_query_parameters_conduct = translate_required_query_parameters_conduct
 
 
 class ApiCreateOrUpdateProperties(ApiContractProperties):  # pylint: disable=too-many-instance-attributes
@@ -1506,6 +1571,11 @@ class ApiCreateOrUpdateProperties(ApiContractProperties):  # pylint: disable=too
      * ``graphql`` creates GraphQL API. Known values are: "http", "soap", "websocket", and
      "graphql".
     :vartype soap_api_type: str or ~azure.mgmt.apimanagement.models.SoapApiType
+    :ivar translate_required_query_parameters_conduct: Strategy of translating required query
+     parameters to template ones. By default has value 'template'. Possible values: 'template',
+     'query'. Known values are: "template" and "query".
+    :vartype translate_required_query_parameters_conduct: str or
+     ~azure.mgmt.apimanagement.models.TranslateRequiredQueryParametersConduct
     """
 
     _validation = {
@@ -1548,6 +1618,7 @@ class ApiCreateOrUpdateProperties(ApiContractProperties):  # pylint: disable=too
         "format": {"key": "format", "type": "str"},
         "wsdl_selector": {"key": "wsdlSelector", "type": "ApiCreateOrUpdatePropertiesWsdlSelector"},
         "soap_api_type": {"key": "apiType", "type": "str"},
+        "translate_required_query_parameters_conduct": {"key": "translateRequiredQueryParameters", "type": "str"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -1577,6 +1648,9 @@ class ApiCreateOrUpdateProperties(ApiContractProperties):  # pylint: disable=too
         format: Optional[Union[str, "_models.ContentFormat"]] = None,
         wsdl_selector: Optional["_models.ApiCreateOrUpdatePropertiesWsdlSelector"] = None,
         soap_api_type: Optional[Union[str, "_models.SoapApiType"]] = None,
+        translate_required_query_parameters_conduct: Optional[
+            Union[str, "_models.TranslateRequiredQueryParametersConduct"]
+        ] = None,
         **kwargs
     ):
         """
@@ -1646,6 +1720,11 @@ class ApiCreateOrUpdateProperties(ApiContractProperties):  # pylint: disable=too
          * ``graphql`` creates GraphQL API. Known values are: "http", "soap", "websocket", and
          "graphql".
         :paramtype soap_api_type: str or ~azure.mgmt.apimanagement.models.SoapApiType
+        :keyword translate_required_query_parameters_conduct: Strategy of translating required query
+         parameters to template ones. By default has value 'template'. Possible values: 'template',
+         'query'. Known values are: "template" and "query".
+        :paramtype translate_required_query_parameters_conduct: str or
+         ~azure.mgmt.apimanagement.models.TranslateRequiredQueryParametersConduct
         """
         super().__init__(
             description=description,
@@ -1674,6 +1753,7 @@ class ApiCreateOrUpdateProperties(ApiContractProperties):  # pylint: disable=too
         self.format = format
         self.wsdl_selector = wsdl_selector
         self.soap_api_type = soap_api_type
+        self.translate_required_query_parameters_conduct = translate_required_query_parameters_conduct
 
 
 class ApiCreateOrUpdatePropertiesWsdlSelector(_serialization.Model):
@@ -1981,6 +2061,12 @@ class ApiManagementServiceBaseProperties(_serialization.Model):  # pylint: disab
      This enforces a client certificate to be presented on each request to the gateway. This also
      enables the ability to authenticate the certificate in the policy on the gateway.
     :vartype enable_client_certificate: bool
+    :ivar nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+     service. Known values are: "Enabled" and "Disabled".
+    :vartype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
+    :ivar outbound_public_ip_addresses: Outbound public IPV4 address prefixes associated with NAT
+     Gateway deployed service. Available only for Premium SKU on stv2 platform.
+    :vartype outbound_public_ip_addresses: list[str]
     :ivar disable_gateway: Property only valid for an Api Management service deployed in multiple
      locations. This can be used to disable the gateway in master region.
     :vartype disable_gateway: bool
@@ -2018,6 +2104,7 @@ class ApiManagementServiceBaseProperties(_serialization.Model):  # pylint: disab
         "developer_portal_url": {"readonly": True},
         "public_ip_addresses": {"readonly": True},
         "private_ip_addresses": {"readonly": True},
+        "outbound_public_ip_addresses": {"readonly": True},
         "platform_version": {"readonly": True},
     }
 
@@ -2042,6 +2129,8 @@ class ApiManagementServiceBaseProperties(_serialization.Model):  # pylint: disab
         "custom_properties": {"key": "customProperties", "type": "{str}"},
         "certificates": {"key": "certificates", "type": "[CertificateConfiguration]"},
         "enable_client_certificate": {"key": "enableClientCertificate", "type": "bool"},
+        "nat_gateway_state": {"key": "natGatewayState", "type": "str"},
+        "outbound_public_ip_addresses": {"key": "outboundPublicIPAddresses", "type": "[str]"},
         "disable_gateway": {"key": "disableGateway", "type": "bool"},
         "virtual_network_type": {"key": "virtualNetworkType", "type": "str"},
         "api_version_constraint": {"key": "apiVersionConstraint", "type": "ApiVersionConstraint"},
@@ -2065,6 +2154,7 @@ class ApiManagementServiceBaseProperties(_serialization.Model):  # pylint: disab
         custom_properties: Optional[Dict[str, str]] = None,
         certificates: Optional[List["_models.CertificateConfiguration"]] = None,
         enable_client_certificate: bool = False,
+        nat_gateway_state: Optional[Union[str, "_models.NatGatewayState"]] = None,
         disable_gateway: bool = False,
         virtual_network_type: Union[str, "_models.VirtualNetworkType"] = "None",
         api_version_constraint: Optional["_models.ApiVersionConstraint"] = None,
@@ -2128,6 +2218,9 @@ class ApiManagementServiceBaseProperties(_serialization.Model):  # pylint: disab
          This enforces a client certificate to be presented on each request to the gateway. This also
          enables the ability to authenticate the certificate in the policy on the gateway.
         :paramtype enable_client_certificate: bool
+        :keyword nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+         service. Known values are: "Enabled" and "Disabled".
+        :paramtype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
         :keyword disable_gateway: Property only valid for an Api Management service deployed in
          multiple locations. This can be used to disable the gateway in master region.
         :paramtype disable_gateway: bool
@@ -2169,6 +2262,8 @@ class ApiManagementServiceBaseProperties(_serialization.Model):  # pylint: disab
         self.custom_properties = custom_properties
         self.certificates = certificates
         self.enable_client_certificate = enable_client_certificate
+        self.nat_gateway_state = nat_gateway_state
+        self.outbound_public_ip_addresses = None
         self.disable_gateway = disable_gateway
         self.virtual_network_type = virtual_network_type
         self.api_version_constraint = api_version_constraint
@@ -2485,6 +2580,12 @@ class ApiManagementServiceProperties(
      This enforces a client certificate to be presented on each request to the gateway. This also
      enables the ability to authenticate the certificate in the policy on the gateway.
     :vartype enable_client_certificate: bool
+    :ivar nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+     service. Known values are: "Enabled" and "Disabled".
+    :vartype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
+    :ivar outbound_public_ip_addresses: Outbound public IPV4 address prefixes associated with NAT
+     Gateway deployed service. Available only for Premium SKU on stv2 platform.
+    :vartype outbound_public_ip_addresses: list[str]
     :ivar disable_gateway: Property only valid for an Api Management service deployed in multiple
      locations. This can be used to disable the gateway in master region.
     :vartype disable_gateway: bool
@@ -2526,6 +2627,7 @@ class ApiManagementServiceProperties(
         "developer_portal_url": {"readonly": True},
         "public_ip_addresses": {"readonly": True},
         "private_ip_addresses": {"readonly": True},
+        "outbound_public_ip_addresses": {"readonly": True},
         "platform_version": {"readonly": True},
         "publisher_email": {"required": True, "max_length": 100},
         "publisher_name": {"required": True, "max_length": 100},
@@ -2552,6 +2654,8 @@ class ApiManagementServiceProperties(
         "custom_properties": {"key": "customProperties", "type": "{str}"},
         "certificates": {"key": "certificates", "type": "[CertificateConfiguration]"},
         "enable_client_certificate": {"key": "enableClientCertificate", "type": "bool"},
+        "nat_gateway_state": {"key": "natGatewayState", "type": "str"},
+        "outbound_public_ip_addresses": {"key": "outboundPublicIPAddresses", "type": "[str]"},
         "disable_gateway": {"key": "disableGateway", "type": "bool"},
         "virtual_network_type": {"key": "virtualNetworkType", "type": "str"},
         "api_version_constraint": {"key": "apiVersionConstraint", "type": "ApiVersionConstraint"},
@@ -2579,6 +2683,7 @@ class ApiManagementServiceProperties(
         custom_properties: Optional[Dict[str, str]] = None,
         certificates: Optional[List["_models.CertificateConfiguration"]] = None,
         enable_client_certificate: bool = False,
+        nat_gateway_state: Optional[Union[str, "_models.NatGatewayState"]] = None,
         disable_gateway: bool = False,
         virtual_network_type: Union[str, "_models.VirtualNetworkType"] = "None",
         api_version_constraint: Optional["_models.ApiVersionConstraint"] = None,
@@ -2642,6 +2747,9 @@ class ApiManagementServiceProperties(
          This enforces a client certificate to be presented on each request to the gateway. This also
          enables the ability to authenticate the certificate in the policy on the gateway.
         :paramtype enable_client_certificate: bool
+        :keyword nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+         service. Known values are: "Enabled" and "Disabled".
+        :paramtype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
         :keyword disable_gateway: Property only valid for an Api Management service deployed in
          multiple locations. This can be used to disable the gateway in master region.
         :paramtype disable_gateway: bool
@@ -2676,6 +2784,7 @@ class ApiManagementServiceProperties(
             custom_properties=custom_properties,
             certificates=certificates,
             enable_client_certificate=enable_client_certificate,
+            nat_gateway_state=nat_gateway_state,
             disable_gateway=disable_gateway,
             virtual_network_type=virtual_network_type,
             api_version_constraint=api_version_constraint,
@@ -2837,6 +2946,12 @@ class ApiManagementServiceResource(ApimResource):  # pylint: disable=too-many-in
      This enforces a client certificate to be presented on each request to the gateway. This also
      enables the ability to authenticate the certificate in the policy on the gateway.
     :vartype enable_client_certificate: bool
+    :ivar nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+     service. Known values are: "Enabled" and "Disabled".
+    :vartype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
+    :ivar outbound_public_ip_addresses: Outbound public IPV4 address prefixes associated with NAT
+     Gateway deployed service. Available only for Premium SKU on stv2 platform.
+    :vartype outbound_public_ip_addresses: list[str]
     :ivar disable_gateway: Property only valid for an Api Management service deployed in multiple
      locations. This can be used to disable the gateway in master region.
     :vartype disable_gateway: bool
@@ -2885,6 +3000,7 @@ class ApiManagementServiceResource(ApimResource):  # pylint: disable=too-many-in
         "developer_portal_url": {"readonly": True},
         "public_ip_addresses": {"readonly": True},
         "private_ip_addresses": {"readonly": True},
+        "outbound_public_ip_addresses": {"readonly": True},
         "platform_version": {"readonly": True},
         "publisher_email": {"required": True, "max_length": 100},
         "publisher_name": {"required": True, "max_length": 100},
@@ -2924,6 +3040,8 @@ class ApiManagementServiceResource(ApimResource):  # pylint: disable=too-many-in
         "custom_properties": {"key": "properties.customProperties", "type": "{str}"},
         "certificates": {"key": "properties.certificates", "type": "[CertificateConfiguration]"},
         "enable_client_certificate": {"key": "properties.enableClientCertificate", "type": "bool"},
+        "nat_gateway_state": {"key": "properties.natGatewayState", "type": "str"},
+        "outbound_public_ip_addresses": {"key": "properties.outboundPublicIPAddresses", "type": "[str]"},
         "disable_gateway": {"key": "properties.disableGateway", "type": "bool"},
         "virtual_network_type": {"key": "properties.virtualNetworkType", "type": "str"},
         "api_version_constraint": {"key": "properties.apiVersionConstraint", "type": "ApiVersionConstraint"},
@@ -2956,6 +3074,7 @@ class ApiManagementServiceResource(ApimResource):  # pylint: disable=too-many-in
         custom_properties: Optional[Dict[str, str]] = None,
         certificates: Optional[List["_models.CertificateConfiguration"]] = None,
         enable_client_certificate: bool = False,
+        nat_gateway_state: Optional[Union[str, "_models.NatGatewayState"]] = None,
         disable_gateway: bool = False,
         virtual_network_type: Union[str, "_models.VirtualNetworkType"] = "None",
         api_version_constraint: Optional["_models.ApiVersionConstraint"] = None,
@@ -3029,6 +3148,9 @@ class ApiManagementServiceResource(ApimResource):  # pylint: disable=too-many-in
          This enforces a client certificate to be presented on each request to the gateway. This also
          enables the ability to authenticate the certificate in the policy on the gateway.
         :paramtype enable_client_certificate: bool
+        :keyword nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+         service. Known values are: "Enabled" and "Disabled".
+        :paramtype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
         :keyword disable_gateway: Property only valid for an Api Management service deployed in
          multiple locations. This can be used to disable the gateway in master region.
         :paramtype disable_gateway: bool
@@ -3080,6 +3202,8 @@ class ApiManagementServiceResource(ApimResource):  # pylint: disable=too-many-in
         self.custom_properties = custom_properties
         self.certificates = certificates
         self.enable_client_certificate = enable_client_certificate
+        self.nat_gateway_state = nat_gateway_state
+        self.outbound_public_ip_addresses = None
         self.disable_gateway = disable_gateway
         self.virtual_network_type = virtual_network_type
         self.api_version_constraint = api_version_constraint
@@ -3231,6 +3355,12 @@ class ApiManagementServiceUpdateParameters(ApimResource):  # pylint: disable=too
      This enforces a client certificate to be presented on each request to the gateway. This also
      enables the ability to authenticate the certificate in the policy on the gateway.
     :vartype enable_client_certificate: bool
+    :ivar nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+     service. Known values are: "Enabled" and "Disabled".
+    :vartype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
+    :ivar outbound_public_ip_addresses: Outbound public IPV4 address prefixes associated with NAT
+     Gateway deployed service. Available only for Premium SKU on stv2 platform.
+    :vartype outbound_public_ip_addresses: list[str]
     :ivar disable_gateway: Property only valid for an Api Management service deployed in multiple
      locations. This can be used to disable the gateway in master region.
     :vartype disable_gateway: bool
@@ -3276,6 +3406,7 @@ class ApiManagementServiceUpdateParameters(ApimResource):  # pylint: disable=too
         "developer_portal_url": {"readonly": True},
         "public_ip_addresses": {"readonly": True},
         "private_ip_addresses": {"readonly": True},
+        "outbound_public_ip_addresses": {"readonly": True},
         "platform_version": {"readonly": True},
         "publisher_email": {"max_length": 100},
         "publisher_name": {"max_length": 100},
@@ -3313,6 +3444,8 @@ class ApiManagementServiceUpdateParameters(ApimResource):  # pylint: disable=too
         "custom_properties": {"key": "properties.customProperties", "type": "{str}"},
         "certificates": {"key": "properties.certificates", "type": "[CertificateConfiguration]"},
         "enable_client_certificate": {"key": "properties.enableClientCertificate", "type": "bool"},
+        "nat_gateway_state": {"key": "properties.natGatewayState", "type": "str"},
+        "outbound_public_ip_addresses": {"key": "properties.outboundPublicIPAddresses", "type": "[str]"},
         "disable_gateway": {"key": "properties.disableGateway", "type": "bool"},
         "virtual_network_type": {"key": "properties.virtualNetworkType", "type": "str"},
         "api_version_constraint": {"key": "properties.apiVersionConstraint", "type": "ApiVersionConstraint"},
@@ -3342,6 +3475,7 @@ class ApiManagementServiceUpdateParameters(ApimResource):  # pylint: disable=too
         custom_properties: Optional[Dict[str, str]] = None,
         certificates: Optional[List["_models.CertificateConfiguration"]] = None,
         enable_client_certificate: bool = False,
+        nat_gateway_state: Optional[Union[str, "_models.NatGatewayState"]] = None,
         disable_gateway: bool = False,
         virtual_network_type: Union[str, "_models.VirtualNetworkType"] = "None",
         api_version_constraint: Optional["_models.ApiVersionConstraint"] = None,
@@ -3415,6 +3549,9 @@ class ApiManagementServiceUpdateParameters(ApimResource):  # pylint: disable=too
          This enforces a client certificate to be presented on each request to the gateway. This also
          enables the ability to authenticate the certificate in the policy on the gateway.
         :paramtype enable_client_certificate: bool
+        :keyword nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+         service. Known values are: "Enabled" and "Disabled".
+        :paramtype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
         :keyword disable_gateway: Property only valid for an Api Management service deployed in
          multiple locations. This can be used to disable the gateway in master region.
         :paramtype disable_gateway: bool
@@ -3464,6 +3601,8 @@ class ApiManagementServiceUpdateParameters(ApimResource):  # pylint: disable=too
         self.custom_properties = custom_properties
         self.certificates = certificates
         self.enable_client_certificate = enable_client_certificate
+        self.nat_gateway_state = nat_gateway_state
+        self.outbound_public_ip_addresses = None
         self.disable_gateway = disable_gateway
         self.virtual_network_type = virtual_network_type
         self.api_version_constraint = api_version_constraint
@@ -3564,6 +3703,12 @@ class ApiManagementServiceUpdateProperties(
      This enforces a client certificate to be presented on each request to the gateway. This also
      enables the ability to authenticate the certificate in the policy on the gateway.
     :vartype enable_client_certificate: bool
+    :ivar nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+     service. Known values are: "Enabled" and "Disabled".
+    :vartype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
+    :ivar outbound_public_ip_addresses: Outbound public IPV4 address prefixes associated with NAT
+     Gateway deployed service. Available only for Premium SKU on stv2 platform.
+    :vartype outbound_public_ip_addresses: list[str]
     :ivar disable_gateway: Property only valid for an Api Management service deployed in multiple
      locations. This can be used to disable the gateway in master region.
     :vartype disable_gateway: bool
@@ -3605,6 +3750,7 @@ class ApiManagementServiceUpdateProperties(
         "developer_portal_url": {"readonly": True},
         "public_ip_addresses": {"readonly": True},
         "private_ip_addresses": {"readonly": True},
+        "outbound_public_ip_addresses": {"readonly": True},
         "platform_version": {"readonly": True},
         "publisher_email": {"max_length": 100},
         "publisher_name": {"max_length": 100},
@@ -3631,6 +3777,8 @@ class ApiManagementServiceUpdateProperties(
         "custom_properties": {"key": "customProperties", "type": "{str}"},
         "certificates": {"key": "certificates", "type": "[CertificateConfiguration]"},
         "enable_client_certificate": {"key": "enableClientCertificate", "type": "bool"},
+        "nat_gateway_state": {"key": "natGatewayState", "type": "str"},
+        "outbound_public_ip_addresses": {"key": "outboundPublicIPAddresses", "type": "[str]"},
         "disable_gateway": {"key": "disableGateway", "type": "bool"},
         "virtual_network_type": {"key": "virtualNetworkType", "type": "str"},
         "api_version_constraint": {"key": "apiVersionConstraint", "type": "ApiVersionConstraint"},
@@ -3656,6 +3804,7 @@ class ApiManagementServiceUpdateProperties(
         custom_properties: Optional[Dict[str, str]] = None,
         certificates: Optional[List["_models.CertificateConfiguration"]] = None,
         enable_client_certificate: bool = False,
+        nat_gateway_state: Optional[Union[str, "_models.NatGatewayState"]] = None,
         disable_gateway: bool = False,
         virtual_network_type: Union[str, "_models.VirtualNetworkType"] = "None",
         api_version_constraint: Optional["_models.ApiVersionConstraint"] = None,
@@ -3721,6 +3870,9 @@ class ApiManagementServiceUpdateProperties(
          This enforces a client certificate to be presented on each request to the gateway. This also
          enables the ability to authenticate the certificate in the policy on the gateway.
         :paramtype enable_client_certificate: bool
+        :keyword nat_gateway_state: Property can be used to enable NAT Gateway for this API Management
+         service. Known values are: "Enabled" and "Disabled".
+        :paramtype nat_gateway_state: str or ~azure.mgmt.apimanagement.models.NatGatewayState
         :keyword disable_gateway: Property only valid for an Api Management service deployed in
          multiple locations. This can be used to disable the gateway in master region.
         :paramtype disable_gateway: bool
@@ -3755,6 +3907,7 @@ class ApiManagementServiceUpdateProperties(
             custom_properties=custom_properties,
             certificates=certificates,
             enable_client_certificate=enable_client_certificate,
+            nat_gateway_state=nat_gateway_state,
             disable_gateway=disable_gateway,
             virtual_network_type=virtual_network_type,
             api_version_constraint=api_version_constraint,
@@ -4153,7 +4306,7 @@ class ApiReleaseCollection(_serialization.Model):
         self.next_link = None
 
 
-class ApiReleaseContract(Resource):
+class ApiReleaseContract(ProxyResource):
     """ApiRelease details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -4783,7 +4936,7 @@ class ApiVersionSetCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class ApiVersionSetContract(Resource):
+class ApiVersionSetContract(ProxyResource):
     """API Version Set Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -4875,8 +5028,7 @@ class ApiVersionSetContractDetails(_serialization.Model):
     :vartype description: str
     :ivar versioning_scheme: An value that determines where the API Version identifier will be
      located in a HTTP request. Known values are: "Segment", "Query", and "Header".
-    :vartype versioning_scheme: str or
-     ~azure.mgmt.apimanagement.models.ApiVersionSetContractDetailsVersioningScheme
+    :vartype versioning_scheme: str or ~azure.mgmt.apimanagement.models.VersioningScheme
     :ivar version_query_name: Name of query parameter that indicates the API Version if
      versioningScheme is set to ``query``.
     :vartype version_query_name: str
@@ -4900,7 +5052,7 @@ class ApiVersionSetContractDetails(_serialization.Model):
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         name: Optional[str] = None,
         description: Optional[str] = None,
-        versioning_scheme: Optional[Union[str, "_models.ApiVersionSetContractDetailsVersioningScheme"]] = None,
+        versioning_scheme: Optional[Union[str, "_models.VersioningScheme"]] = None,
         version_query_name: Optional[str] = None,
         version_header_name: Optional[str] = None,
         **kwargs
@@ -4915,8 +5067,7 @@ class ApiVersionSetContractDetails(_serialization.Model):
         :paramtype description: str
         :keyword versioning_scheme: An value that determines where the API Version identifier will be
          located in a HTTP request. Known values are: "Segment", "Query", and "Header".
-        :paramtype versioning_scheme: str or
-         ~azure.mgmt.apimanagement.models.ApiVersionSetContractDetailsVersioningScheme
+        :paramtype versioning_scheme: str or ~azure.mgmt.apimanagement.models.VersioningScheme
         :keyword version_query_name: Name of query parameter that indicates the API Version if
          versioningScheme is set to ``query``.
         :paramtype version_query_name: str
@@ -5206,7 +5357,7 @@ class ArmIdWrapper(_serialization.Model):
         self.id = None
 
 
-class AssociationContract(Resource):
+class AssociationContract(ProxyResource):
     """Association entity details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -5252,11 +5403,27 @@ class AuthenticationSettingsContract(_serialization.Model):
     :vartype o_auth2: ~azure.mgmt.apimanagement.models.OAuth2AuthenticationSettingsContract
     :ivar openid: OpenID Connect Authentication Settings.
     :vartype openid: ~azure.mgmt.apimanagement.models.OpenIdAuthenticationSettingsContract
+    :ivar o_auth2_authentication_settings: Collection of OAuth2 authentication settings included
+     into this API.
+    :vartype o_auth2_authentication_settings:
+     list[~azure.mgmt.apimanagement.models.OAuth2AuthenticationSettingsContract]
+    :ivar openid_authentication_settings: Collection of Open ID Connect authentication settings
+     included into this API.
+    :vartype openid_authentication_settings:
+     list[~azure.mgmt.apimanagement.models.OpenIdAuthenticationSettingsContract]
     """
 
     _attribute_map = {
         "o_auth2": {"key": "oAuth2", "type": "OAuth2AuthenticationSettingsContract"},
         "openid": {"key": "openid", "type": "OpenIdAuthenticationSettingsContract"},
+        "o_auth2_authentication_settings": {
+            "key": "oAuth2AuthenticationSettings",
+            "type": "[OAuth2AuthenticationSettingsContract]",
+        },
+        "openid_authentication_settings": {
+            "key": "openidAuthenticationSettings",
+            "type": "[OpenIdAuthenticationSettingsContract]",
+        },
     }
 
     def __init__(
@@ -5264,6 +5431,8 @@ class AuthenticationSettingsContract(_serialization.Model):
         *,
         o_auth2: Optional["_models.OAuth2AuthenticationSettingsContract"] = None,
         openid: Optional["_models.OpenIdAuthenticationSettingsContract"] = None,
+        o_auth2_authentication_settings: Optional[List["_models.OAuth2AuthenticationSettingsContract"]] = None,
+        openid_authentication_settings: Optional[List["_models.OpenIdAuthenticationSettingsContract"]] = None,
         **kwargs
     ):
         """
@@ -5271,10 +5440,445 @@ class AuthenticationSettingsContract(_serialization.Model):
         :paramtype o_auth2: ~azure.mgmt.apimanagement.models.OAuth2AuthenticationSettingsContract
         :keyword openid: OpenID Connect Authentication Settings.
         :paramtype openid: ~azure.mgmt.apimanagement.models.OpenIdAuthenticationSettingsContract
+        :keyword o_auth2_authentication_settings: Collection of OAuth2 authentication settings included
+         into this API.
+        :paramtype o_auth2_authentication_settings:
+         list[~azure.mgmt.apimanagement.models.OAuth2AuthenticationSettingsContract]
+        :keyword openid_authentication_settings: Collection of Open ID Connect authentication settings
+         included into this API.
+        :paramtype openid_authentication_settings:
+         list[~azure.mgmt.apimanagement.models.OpenIdAuthenticationSettingsContract]
         """
         super().__init__(**kwargs)
         self.o_auth2 = o_auth2
         self.openid = openid
+        self.o_auth2_authentication_settings = o_auth2_authentication_settings
+        self.openid_authentication_settings = openid_authentication_settings
+
+
+class AuthorizationAccessPolicyCollection(_serialization.Model):
+    """Paged Authorization Access Policy list representation.
+
+    :ivar value: Page values.
+    :vartype value: list[~azure.mgmt.apimanagement.models.AuthorizationAccessPolicyContract]
+    :ivar count: Total record count number across all pages.
+    :vartype count: int
+    :ivar next_link: Next page link if any.
+    :vartype next_link: str
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[AuthorizationAccessPolicyContract]"},
+        "count": {"key": "count", "type": "int"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.AuthorizationAccessPolicyContract"]] = None,
+        count: Optional[int] = None,
+        next_link: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Page values.
+        :paramtype value: list[~azure.mgmt.apimanagement.models.AuthorizationAccessPolicyContract]
+        :keyword count: Total record count number across all pages.
+        :paramtype count: int
+        :keyword next_link: Next page link if any.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.count = count
+        self.next_link = next_link
+
+
+class AuthorizationAccessPolicyContract(ProxyResource):
+    """Authorization access policy contract.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar tenant_id: The Tenant Id.
+    :vartype tenant_id: str
+    :ivar object_id: The Object Id.
+    :vartype object_id: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tenant_id": {"key": "properties.tenantId", "type": "str"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+    }
+
+    def __init__(self, *, tenant_id: Optional[str] = None, object_id: Optional[str] = None, **kwargs):
+        """
+        :keyword tenant_id: The Tenant Id.
+        :paramtype tenant_id: str
+        :keyword object_id: The Object Id.
+        :paramtype object_id: str
+        """
+        super().__init__(**kwargs)
+        self.tenant_id = tenant_id
+        self.object_id = object_id
+
+
+class AuthorizationCollection(_serialization.Model):
+    """Paged Authorization list representation.
+
+    :ivar value: Page values.
+    :vartype value: list[~azure.mgmt.apimanagement.models.AuthorizationContract]
+    :ivar count: Total record count number across all pages.
+    :vartype count: int
+    :ivar next_link: Next page link if any.
+    :vartype next_link: str
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[AuthorizationContract]"},
+        "count": {"key": "count", "type": "int"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.AuthorizationContract"]] = None,
+        count: Optional[int] = None,
+        next_link: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Page values.
+        :paramtype value: list[~azure.mgmt.apimanagement.models.AuthorizationContract]
+        :keyword count: Total record count number across all pages.
+        :paramtype count: int
+        :keyword next_link: Next page link if any.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.count = count
+        self.next_link = next_link
+
+
+class AuthorizationContract(ProxyResource):
+    """Authorization contract.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar authorization_type: Authorization type options. "OAuth2"
+    :vartype authorization_type: str or ~azure.mgmt.apimanagement.models.AuthorizationType
+    :ivar o_auth2_grant_type: OAuth2 grant type options. Known values are: "AuthorizationCode" and
+     "ClientCredentials".
+    :vartype o_auth2_grant_type: str or ~azure.mgmt.apimanagement.models.OAuth2GrantType
+    :ivar parameters: Authorization parameters.
+    :vartype parameters: dict[str, str]
+    :ivar error: Authorization error details.
+    :vartype error: ~azure.mgmt.apimanagement.models.AuthorizationError
+    :ivar status: Status of the Authorization.
+    :vartype status: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "authorization_type": {"key": "properties.authorizationType", "type": "str"},
+        "o_auth2_grant_type": {"key": "properties.oauth2grantType", "type": "str"},
+        "parameters": {"key": "properties.parameters", "type": "{str}"},
+        "error": {"key": "properties.error", "type": "AuthorizationError"},
+        "status": {"key": "properties.status", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        authorization_type: Optional[Union[str, "_models.AuthorizationType"]] = None,
+        o_auth2_grant_type: Optional[Union[str, "_models.OAuth2GrantType"]] = None,
+        parameters: Optional[Dict[str, str]] = None,
+        error: Optional["_models.AuthorizationError"] = None,
+        status: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword authorization_type: Authorization type options. "OAuth2"
+        :paramtype authorization_type: str or ~azure.mgmt.apimanagement.models.AuthorizationType
+        :keyword o_auth2_grant_type: OAuth2 grant type options. Known values are: "AuthorizationCode"
+         and "ClientCredentials".
+        :paramtype o_auth2_grant_type: str or ~azure.mgmt.apimanagement.models.OAuth2GrantType
+        :keyword parameters: Authorization parameters.
+        :paramtype parameters: dict[str, str]
+        :keyword error: Authorization error details.
+        :paramtype error: ~azure.mgmt.apimanagement.models.AuthorizationError
+        :keyword status: Status of the Authorization.
+        :paramtype status: str
+        """
+        super().__init__(**kwargs)
+        self.authorization_type = authorization_type
+        self.o_auth2_grant_type = o_auth2_grant_type
+        self.parameters = parameters
+        self.error = error
+        self.status = status
+
+
+class AuthorizationError(_serialization.Model):
+    """Authorization error details.
+
+    :ivar code: Error code.
+    :vartype code: str
+    :ivar message: Error message.
+    :vartype message: str
+    """
+
+    _attribute_map = {
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+    }
+
+    def __init__(self, *, code: Optional[str] = None, message: Optional[str] = None, **kwargs):
+        """
+        :keyword code: Error code.
+        :paramtype code: str
+        :keyword message: Error message.
+        :paramtype message: str
+        """
+        super().__init__(**kwargs)
+        self.code = code
+        self.message = message
+
+
+class AuthorizationLoginRequestContract(_serialization.Model):
+    """Authorization login request contract.
+
+    :ivar post_login_redirect_url: The redirect URL after login has completed.
+    :vartype post_login_redirect_url: str
+    """
+
+    _attribute_map = {
+        "post_login_redirect_url": {"key": "postLoginRedirectUrl", "type": "str"},
+    }
+
+    def __init__(self, *, post_login_redirect_url: Optional[str] = None, **kwargs):
+        """
+        :keyword post_login_redirect_url: The redirect URL after login has completed.
+        :paramtype post_login_redirect_url: str
+        """
+        super().__init__(**kwargs)
+        self.post_login_redirect_url = post_login_redirect_url
+
+
+class AuthorizationLoginResponseContract(_serialization.Model):
+    """Authorization login response contract.
+
+    :ivar login_link: The login link.
+    :vartype login_link: str
+    """
+
+    _attribute_map = {
+        "login_link": {"key": "loginLink", "type": "str"},
+    }
+
+    def __init__(self, *, login_link: Optional[str] = None, **kwargs):
+        """
+        :keyword login_link: The login link.
+        :paramtype login_link: str
+        """
+        super().__init__(**kwargs)
+        self.login_link = login_link
+
+
+class AuthorizationProviderCollection(_serialization.Model):
+    """Paged Authorization Provider list representation.
+
+    :ivar value: Page values.
+    :vartype value: list[~azure.mgmt.apimanagement.models.AuthorizationProviderContract]
+    :ivar count: Total record count number across all pages.
+    :vartype count: int
+    :ivar next_link: Next page link if any.
+    :vartype next_link: str
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[AuthorizationProviderContract]"},
+        "count": {"key": "count", "type": "int"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.AuthorizationProviderContract"]] = None,
+        count: Optional[int] = None,
+        next_link: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Page values.
+        :paramtype value: list[~azure.mgmt.apimanagement.models.AuthorizationProviderContract]
+        :keyword count: Total record count number across all pages.
+        :paramtype count: int
+        :keyword next_link: Next page link if any.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.count = count
+        self.next_link = next_link
+
+
+class AuthorizationProviderContract(ProxyResource):
+    """Authorization Provider contract.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar display_name: Authorization Provider name. Must be 1 to 300 characters long.
+    :vartype display_name: str
+    :ivar identity_provider: Identity provider name. Must be 1 to 300 characters long.
+    :vartype identity_provider: str
+    :ivar oauth2: OAuth2 settings.
+    :vartype oauth2: ~azure.mgmt.apimanagement.models.AuthorizationProviderOAuth2Settings
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "display_name": {"max_length": 300, "min_length": 1},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "identity_provider": {"key": "properties.identityProvider", "type": "str"},
+        "oauth2": {"key": "properties.oauth2", "type": "AuthorizationProviderOAuth2Settings"},
+    }
+
+    def __init__(
+        self,
+        *,
+        display_name: Optional[str] = None,
+        identity_provider: Optional[str] = None,
+        oauth2: Optional["_models.AuthorizationProviderOAuth2Settings"] = None,
+        **kwargs
+    ):
+        """
+        :keyword display_name: Authorization Provider name. Must be 1 to 300 characters long.
+        :paramtype display_name: str
+        :keyword identity_provider: Identity provider name. Must be 1 to 300 characters long.
+        :paramtype identity_provider: str
+        :keyword oauth2: OAuth2 settings.
+        :paramtype oauth2: ~azure.mgmt.apimanagement.models.AuthorizationProviderOAuth2Settings
+        """
+        super().__init__(**kwargs)
+        self.display_name = display_name
+        self.identity_provider = identity_provider
+        self.oauth2 = oauth2
+
+
+class AuthorizationProviderOAuth2GrantTypes(_serialization.Model):
+    """Authorization Provider oauth2 grant types settings.
+
+    :ivar authorization_code: OAuth2 authorization code grant parameters.
+    :vartype authorization_code: dict[str, str]
+    :ivar client_credentials: OAuth2 client credential grant parameters.
+    :vartype client_credentials: dict[str, str]
+    """
+
+    _attribute_map = {
+        "authorization_code": {"key": "authorizationCode", "type": "{str}"},
+        "client_credentials": {"key": "clientCredentials", "type": "{str}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        authorization_code: Optional[Dict[str, str]] = None,
+        client_credentials: Optional[Dict[str, str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword authorization_code: OAuth2 authorization code grant parameters.
+        :paramtype authorization_code: dict[str, str]
+        :keyword client_credentials: OAuth2 client credential grant parameters.
+        :paramtype client_credentials: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.authorization_code = authorization_code
+        self.client_credentials = client_credentials
+
+
+class AuthorizationProviderOAuth2Settings(_serialization.Model):
+    """OAuth2 settings details.
+
+    :ivar redirect_url: Redirect URL to be set in the OAuth application.
+    :vartype redirect_url: str
+    :ivar grant_types: OAuth2 settings.
+    :vartype grant_types: ~azure.mgmt.apimanagement.models.AuthorizationProviderOAuth2GrantTypes
+    """
+
+    _attribute_map = {
+        "redirect_url": {"key": "redirectUrl", "type": "str"},
+        "grant_types": {"key": "grantTypes", "type": "AuthorizationProviderOAuth2GrantTypes"},
+    }
+
+    def __init__(
+        self,
+        *,
+        redirect_url: Optional[str] = None,
+        grant_types: Optional["_models.AuthorizationProviderOAuth2GrantTypes"] = None,
+        **kwargs
+    ):
+        """
+        :keyword redirect_url: Redirect URL to be set in the OAuth application.
+        :paramtype redirect_url: str
+        :keyword grant_types: OAuth2 settings.
+        :paramtype grant_types: ~azure.mgmt.apimanagement.models.AuthorizationProviderOAuth2GrantTypes
+        """
+        super().__init__(**kwargs)
+        self.redirect_url = redirect_url
+        self.grant_types = grant_types
 
 
 class AuthorizationServerCollection(_serialization.Model):
@@ -5316,7 +5920,7 @@ class AuthorizationServerCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class AuthorizationServerContract(Resource):  # pylint: disable=too-many-instance-attributes
+class AuthorizationServerContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """External OAuth authorization server settings.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -5368,6 +5972,12 @@ class AuthorizationServerContract(Resource):  # pylint: disable=too-many-instanc
     :vartype resource_owner_password: str
     :ivar display_name: User-friendly authorization server name.
     :vartype display_name: str
+    :ivar use_in_test_console: If true, the authorization server may be used in the developer
+     portal test console. True by default if no value is provided.
+    :vartype use_in_test_console: bool
+    :ivar use_in_api_documentation: If true, the authorization server will be used in the API
+     documentation in the developer portal. False by default if no value is provided.
+    :vartype use_in_api_documentation: bool
     :ivar client_registration_endpoint: Optional reference to a page where client or app
      registration for this authorization server is performed. Contains absolute URL to entity being
      referenced.
@@ -5408,6 +6018,8 @@ class AuthorizationServerContract(Resource):  # pylint: disable=too-many-instanc
         "resource_owner_username": {"key": "properties.resourceOwnerUsername", "type": "str"},
         "resource_owner_password": {"key": "properties.resourceOwnerPassword", "type": "str"},
         "display_name": {"key": "properties.displayName", "type": "str"},
+        "use_in_test_console": {"key": "properties.useInTestConsole", "type": "bool"},
+        "use_in_api_documentation": {"key": "properties.useInApiDocumentation", "type": "bool"},
         "client_registration_endpoint": {"key": "properties.clientRegistrationEndpoint", "type": "str"},
         "authorization_endpoint": {"key": "properties.authorizationEndpoint", "type": "str"},
         "grant_types": {"key": "properties.grantTypes", "type": "[str]"},
@@ -5429,6 +6041,8 @@ class AuthorizationServerContract(Resource):  # pylint: disable=too-many-instanc
         resource_owner_username: Optional[str] = None,
         resource_owner_password: Optional[str] = None,
         display_name: Optional[str] = None,
+        use_in_test_console: Optional[bool] = None,
+        use_in_api_documentation: Optional[bool] = None,
         client_registration_endpoint: Optional[str] = None,
         authorization_endpoint: Optional[str] = None,
         grant_types: Optional[List[Union[str, "_models.GrantType"]]] = None,
@@ -5478,6 +6092,12 @@ class AuthorizationServerContract(Resource):  # pylint: disable=too-many-instanc
         :paramtype resource_owner_password: str
         :keyword display_name: User-friendly authorization server name.
         :paramtype display_name: str
+        :keyword use_in_test_console: If true, the authorization server may be used in the developer
+         portal test console. True by default if no value is provided.
+        :paramtype use_in_test_console: bool
+        :keyword use_in_api_documentation: If true, the authorization server will be used in the API
+         documentation in the developer portal. False by default if no value is provided.
+        :paramtype use_in_api_documentation: bool
         :keyword client_registration_endpoint: Optional reference to a page where client or app
          registration for this authorization server is performed. Contains absolute URL to entity being
          referenced.
@@ -5507,6 +6127,8 @@ class AuthorizationServerContract(Resource):  # pylint: disable=too-many-instanc
         self.resource_owner_username = resource_owner_username
         self.resource_owner_password = resource_owner_password
         self.display_name = display_name
+        self.use_in_test_console = use_in_test_console
+        self.use_in_api_documentation = use_in_api_documentation
         self.client_registration_endpoint = client_registration_endpoint
         self.authorization_endpoint = authorization_endpoint
         self.grant_types = grant_types
@@ -5684,6 +6306,12 @@ class AuthorizationServerContractProperties(
     :vartype resource_owner_password: str
     :ivar display_name: User-friendly authorization server name. Required.
     :vartype display_name: str
+    :ivar use_in_test_console: If true, the authorization server may be used in the developer
+     portal test console. True by default if no value is provided.
+    :vartype use_in_test_console: bool
+    :ivar use_in_api_documentation: If true, the authorization server will be used in the API
+     documentation in the developer portal. False by default if no value is provided.
+    :vartype use_in_api_documentation: bool
     :ivar client_registration_endpoint: Optional reference to a page where client or app
      registration for this authorization server is performed. Contains absolute URL to entity being
      referenced. Required.
@@ -5722,6 +6350,8 @@ class AuthorizationServerContractProperties(
         "resource_owner_username": {"key": "resourceOwnerUsername", "type": "str"},
         "resource_owner_password": {"key": "resourceOwnerPassword", "type": "str"},
         "display_name": {"key": "displayName", "type": "str"},
+        "use_in_test_console": {"key": "useInTestConsole", "type": "bool"},
+        "use_in_api_documentation": {"key": "useInApiDocumentation", "type": "bool"},
         "client_registration_endpoint": {"key": "clientRegistrationEndpoint", "type": "str"},
         "authorization_endpoint": {"key": "authorizationEndpoint", "type": "str"},
         "grant_types": {"key": "grantTypes", "type": "[str]"},
@@ -5747,6 +6377,8 @@ class AuthorizationServerContractProperties(
         bearer_token_sending_methods: Optional[List[Union[str, "_models.BearerTokenSendingMethod"]]] = None,
         resource_owner_username: Optional[str] = None,
         resource_owner_password: Optional[str] = None,
+        use_in_test_console: Optional[bool] = None,
+        use_in_api_documentation: Optional[bool] = None,
         client_secret: Optional[str] = None,
         **kwargs
     ):
@@ -5792,6 +6424,12 @@ class AuthorizationServerContractProperties(
         :paramtype resource_owner_password: str
         :keyword display_name: User-friendly authorization server name. Required.
         :paramtype display_name: str
+        :keyword use_in_test_console: If true, the authorization server may be used in the developer
+         portal test console. True by default if no value is provided.
+        :paramtype use_in_test_console: bool
+        :keyword use_in_api_documentation: If true, the authorization server will be used in the API
+         documentation in the developer portal. False by default if no value is provided.
+        :paramtype use_in_api_documentation: bool
         :keyword client_registration_endpoint: Optional reference to a page where client or app
          registration for this authorization server is performed. Contains absolute URL to entity being
          referenced. Required.
@@ -5823,6 +6461,8 @@ class AuthorizationServerContractProperties(
             **kwargs
         )
         self.display_name = display_name
+        self.use_in_test_console = use_in_test_console
+        self.use_in_api_documentation = use_in_api_documentation
         self.client_registration_endpoint = client_registration_endpoint
         self.authorization_endpoint = authorization_endpoint
         self.grant_types = grant_types
@@ -5873,7 +6513,7 @@ class AuthorizationServerSecretsContract(_serialization.Model):
         self.resource_owner_password = resource_owner_password
 
 
-class AuthorizationServerUpdateContract(Resource):  # pylint: disable=too-many-instance-attributes
+class AuthorizationServerUpdateContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """External OAuth authorization server settings.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -5925,6 +6565,12 @@ class AuthorizationServerUpdateContract(Resource):  # pylint: disable=too-many-i
     :vartype resource_owner_password: str
     :ivar display_name: User-friendly authorization server name.
     :vartype display_name: str
+    :ivar use_in_test_console: If true, the authorization server may be used in the developer
+     portal test console. True by default if no value is provided.
+    :vartype use_in_test_console: bool
+    :ivar use_in_api_documentation: If true, the authorization server will be used in the API
+     documentation in the developer portal. False by default if no value is provided.
+    :vartype use_in_api_documentation: bool
     :ivar client_registration_endpoint: Optional reference to a page where client or app
      registration for this authorization server is performed. Contains absolute URL to entity being
      referenced.
@@ -5965,6 +6611,8 @@ class AuthorizationServerUpdateContract(Resource):  # pylint: disable=too-many-i
         "resource_owner_username": {"key": "properties.resourceOwnerUsername", "type": "str"},
         "resource_owner_password": {"key": "properties.resourceOwnerPassword", "type": "str"},
         "display_name": {"key": "properties.displayName", "type": "str"},
+        "use_in_test_console": {"key": "properties.useInTestConsole", "type": "bool"},
+        "use_in_api_documentation": {"key": "properties.useInApiDocumentation", "type": "bool"},
         "client_registration_endpoint": {"key": "properties.clientRegistrationEndpoint", "type": "str"},
         "authorization_endpoint": {"key": "properties.authorizationEndpoint", "type": "str"},
         "grant_types": {"key": "properties.grantTypes", "type": "[str]"},
@@ -5986,6 +6634,8 @@ class AuthorizationServerUpdateContract(Resource):  # pylint: disable=too-many-i
         resource_owner_username: Optional[str] = None,
         resource_owner_password: Optional[str] = None,
         display_name: Optional[str] = None,
+        use_in_test_console: Optional[bool] = None,
+        use_in_api_documentation: Optional[bool] = None,
         client_registration_endpoint: Optional[str] = None,
         authorization_endpoint: Optional[str] = None,
         grant_types: Optional[List[Union[str, "_models.GrantType"]]] = None,
@@ -6035,6 +6685,12 @@ class AuthorizationServerUpdateContract(Resource):  # pylint: disable=too-many-i
         :paramtype resource_owner_password: str
         :keyword display_name: User-friendly authorization server name.
         :paramtype display_name: str
+        :keyword use_in_test_console: If true, the authorization server may be used in the developer
+         portal test console. True by default if no value is provided.
+        :paramtype use_in_test_console: bool
+        :keyword use_in_api_documentation: If true, the authorization server will be used in the API
+         documentation in the developer portal. False by default if no value is provided.
+        :paramtype use_in_api_documentation: bool
         :keyword client_registration_endpoint: Optional reference to a page where client or app
          registration for this authorization server is performed. Contains absolute URL to entity being
          referenced.
@@ -6064,6 +6720,8 @@ class AuthorizationServerUpdateContract(Resource):  # pylint: disable=too-many-i
         self.resource_owner_username = resource_owner_username
         self.resource_owner_password = resource_owner_password
         self.display_name = display_name
+        self.use_in_test_console = use_in_test_console
+        self.use_in_api_documentation = use_in_api_documentation
         self.client_registration_endpoint = client_registration_endpoint
         self.authorization_endpoint = authorization_endpoint
         self.grant_types = grant_types
@@ -6115,6 +6773,12 @@ class AuthorizationServerUpdateContractProperties(
     :vartype resource_owner_password: str
     :ivar display_name: User-friendly authorization server name.
     :vartype display_name: str
+    :ivar use_in_test_console: If true, the authorization server may be used in the developer
+     portal test console. True by default if no value is provided.
+    :vartype use_in_test_console: bool
+    :ivar use_in_api_documentation: If true, the authorization server will be used in the API
+     documentation in the developer portal. False by default if no value is provided.
+    :vartype use_in_api_documentation: bool
     :ivar client_registration_endpoint: Optional reference to a page where client or app
      registration for this authorization server is performed. Contains absolute URL to entity being
      referenced.
@@ -6149,6 +6813,8 @@ class AuthorizationServerUpdateContractProperties(
         "resource_owner_username": {"key": "resourceOwnerUsername", "type": "str"},
         "resource_owner_password": {"key": "resourceOwnerPassword", "type": "str"},
         "display_name": {"key": "displayName", "type": "str"},
+        "use_in_test_console": {"key": "useInTestConsole", "type": "bool"},
+        "use_in_api_documentation": {"key": "useInApiDocumentation", "type": "bool"},
         "client_registration_endpoint": {"key": "clientRegistrationEndpoint", "type": "str"},
         "authorization_endpoint": {"key": "authorizationEndpoint", "type": "str"},
         "grant_types": {"key": "grantTypes", "type": "[str]"},
@@ -6170,6 +6836,8 @@ class AuthorizationServerUpdateContractProperties(
         resource_owner_username: Optional[str] = None,
         resource_owner_password: Optional[str] = None,
         display_name: Optional[str] = None,
+        use_in_test_console: Optional[bool] = None,
+        use_in_api_documentation: Optional[bool] = None,
         client_registration_endpoint: Optional[str] = None,
         authorization_endpoint: Optional[str] = None,
         grant_types: Optional[List[Union[str, "_models.GrantType"]]] = None,
@@ -6219,6 +6887,12 @@ class AuthorizationServerUpdateContractProperties(
         :paramtype resource_owner_password: str
         :keyword display_name: User-friendly authorization server name.
         :paramtype display_name: str
+        :keyword use_in_test_console: If true, the authorization server may be used in the developer
+         portal test console. True by default if no value is provided.
+        :paramtype use_in_test_console: bool
+        :keyword use_in_api_documentation: If true, the authorization server will be used in the API
+         documentation in the developer portal. False by default if no value is provided.
+        :paramtype use_in_api_documentation: bool
         :keyword client_registration_endpoint: Optional reference to a page where client or app
          registration for this authorization server is performed. Contains absolute URL to entity being
          referenced.
@@ -6250,6 +6924,8 @@ class AuthorizationServerUpdateContractProperties(
             **kwargs
         )
         self.display_name = display_name
+        self.use_in_test_console = use_in_test_console
+        self.use_in_api_documentation = use_in_api_documentation
         self.client_registration_endpoint = client_registration_endpoint
         self.authorization_endpoint = authorization_endpoint
         self.grant_types = grant_types
@@ -6297,14 +6973,14 @@ class BackendBaseParameters(_serialization.Model):
     :vartype title: str
     :ivar description: Backend Description.
     :vartype description: str
-    :ivar resource_id: Management Uri of the Resource in External System. This url can be the Arm
+    :ivar resource_id: Management Uri of the Resource in External System. This URL can be the Arm
      Resource Id of Logic Apps, Function Apps or API Apps.
     :vartype resource_id: str
     :ivar properties: Backend Properties contract.
     :vartype properties: ~azure.mgmt.apimanagement.models.BackendProperties
     :ivar credentials: Backend Credentials Contract Properties.
     :vartype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-    :ivar proxy: Backend Proxy Contract Properties.
+    :ivar proxy: Backend gateway Contract Properties.
     :vartype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
     :ivar tls: Backend TLS Properties.
     :vartype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6343,14 +7019,14 @@ class BackendBaseParameters(_serialization.Model):
         :paramtype title: str
         :keyword description: Backend Description.
         :paramtype description: str
-        :keyword resource_id: Management Uri of the Resource in External System. This url can be the
+        :keyword resource_id: Management Uri of the Resource in External System. This URL can be the
          Arm Resource Id of Logic Apps, Function Apps or API Apps.
         :paramtype resource_id: str
         :keyword properties: Backend Properties contract.
         :paramtype properties: ~azure.mgmt.apimanagement.models.BackendProperties
         :keyword credentials: Backend Credentials Contract Properties.
         :paramtype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-        :keyword proxy: Backend Proxy Contract Properties.
+        :keyword proxy: Backend gateway Contract Properties.
         :paramtype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
         :keyword tls: Backend TLS Properties.
         :paramtype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6404,7 +7080,7 @@ class BackendCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class BackendContract(Resource):  # pylint: disable=too-many-instance-attributes
+class BackendContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """Backend details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -6421,14 +7097,14 @@ class BackendContract(Resource):  # pylint: disable=too-many-instance-attributes
     :vartype title: str
     :ivar description: Backend Description.
     :vartype description: str
-    :ivar resource_id: Management Uri of the Resource in External System. This url can be the Arm
+    :ivar resource_id: Management Uri of the Resource in External System. This URL can be the Arm
      Resource Id of Logic Apps, Function Apps or API Apps.
     :vartype resource_id: str
     :ivar properties: Backend Properties contract.
     :vartype properties: ~azure.mgmt.apimanagement.models.BackendProperties
     :ivar credentials: Backend Credentials Contract Properties.
     :vartype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-    :ivar proxy: Backend Proxy Contract Properties.
+    :ivar proxy: Backend gateway Contract Properties.
     :vartype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
     :ivar tls: Backend TLS Properties.
     :vartype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6482,14 +7158,14 @@ class BackendContract(Resource):  # pylint: disable=too-many-instance-attributes
         :paramtype title: str
         :keyword description: Backend Description.
         :paramtype description: str
-        :keyword resource_id: Management Uri of the Resource in External System. This url can be the
+        :keyword resource_id: Management Uri of the Resource in External System. This URL can be the
          Arm Resource Id of Logic Apps, Function Apps or API Apps.
         :paramtype resource_id: str
         :keyword properties: Backend Properties contract.
         :paramtype properties: ~azure.mgmt.apimanagement.models.BackendProperties
         :keyword credentials: Backend Credentials Contract Properties.
         :paramtype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-        :keyword proxy: Backend Proxy Contract Properties.
+        :keyword proxy: Backend gateway Contract Properties.
         :paramtype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
         :keyword tls: Backend TLS Properties.
         :paramtype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6519,14 +7195,14 @@ class BackendContractProperties(BackendBaseParameters):
     :vartype title: str
     :ivar description: Backend Description.
     :vartype description: str
-    :ivar resource_id: Management Uri of the Resource in External System. This url can be the Arm
+    :ivar resource_id: Management Uri of the Resource in External System. This URL can be the Arm
      Resource Id of Logic Apps, Function Apps or API Apps.
     :vartype resource_id: str
     :ivar properties: Backend Properties contract.
     :vartype properties: ~azure.mgmt.apimanagement.models.BackendProperties
     :ivar credentials: Backend Credentials Contract Properties.
     :vartype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-    :ivar proxy: Backend Proxy Contract Properties.
+    :ivar proxy: Backend gateway Contract Properties.
     :vartype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
     :ivar tls: Backend TLS Properties.
     :vartype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6575,14 +7251,14 @@ class BackendContractProperties(BackendBaseParameters):
         :paramtype title: str
         :keyword description: Backend Description.
         :paramtype description: str
-        :keyword resource_id: Management Uri of the Resource in External System. This url can be the
+        :keyword resource_id: Management Uri of the Resource in External System. This URL can be the
          Arm Resource Id of Logic Apps, Function Apps or API Apps.
         :paramtype resource_id: str
         :keyword properties: Backend Properties contract.
         :paramtype properties: ~azure.mgmt.apimanagement.models.BackendProperties
         :keyword credentials: Backend Credentials Contract Properties.
         :paramtype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-        :keyword proxy: Backend Proxy Contract Properties.
+        :keyword proxy: Backend gateway Contract Properties.
         :paramtype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
         :keyword tls: Backend TLS Properties.
         :paramtype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6731,7 +7407,7 @@ class BackendProxyContract(_serialization.Model):
         self.password = password
 
 
-class BackendReconnectContract(Resource):
+class BackendReconnectContract(ProxyResource):
     """Reconnect request parameters.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -6881,14 +7557,14 @@ class BackendUpdateParameterProperties(BackendBaseParameters):
     :vartype title: str
     :ivar description: Backend Description.
     :vartype description: str
-    :ivar resource_id: Management Uri of the Resource in External System. This url can be the Arm
+    :ivar resource_id: Management Uri of the Resource in External System. This URL can be the Arm
      Resource Id of Logic Apps, Function Apps or API Apps.
     :vartype resource_id: str
     :ivar properties: Backend Properties contract.
     :vartype properties: ~azure.mgmt.apimanagement.models.BackendProperties
     :ivar credentials: Backend Credentials Contract Properties.
     :vartype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-    :ivar proxy: Backend Proxy Contract Properties.
+    :ivar proxy: Backend gateway Contract Properties.
     :vartype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
     :ivar tls: Backend TLS Properties.
     :vartype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6936,14 +7612,14 @@ class BackendUpdateParameterProperties(BackendBaseParameters):
         :paramtype title: str
         :keyword description: Backend Description.
         :paramtype description: str
-        :keyword resource_id: Management Uri of the Resource in External System. This url can be the
+        :keyword resource_id: Management Uri of the Resource in External System. This URL can be the
          Arm Resource Id of Logic Apps, Function Apps or API Apps.
         :paramtype resource_id: str
         :keyword properties: Backend Properties contract.
         :paramtype properties: ~azure.mgmt.apimanagement.models.BackendProperties
         :keyword credentials: Backend Credentials Contract Properties.
         :paramtype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-        :keyword proxy: Backend Proxy Contract Properties.
+        :keyword proxy: Backend gateway Contract Properties.
         :paramtype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
         :keyword tls: Backend TLS Properties.
         :paramtype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -6973,14 +7649,14 @@ class BackendUpdateParameters(_serialization.Model):
     :vartype title: str
     :ivar description: Backend Description.
     :vartype description: str
-    :ivar resource_id: Management Uri of the Resource in External System. This url can be the Arm
+    :ivar resource_id: Management Uri of the Resource in External System. This URL can be the Arm
      Resource Id of Logic Apps, Function Apps or API Apps.
     :vartype resource_id: str
     :ivar properties: Backend Properties contract.
     :vartype properties: ~azure.mgmt.apimanagement.models.BackendProperties
     :ivar credentials: Backend Credentials Contract Properties.
     :vartype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-    :ivar proxy: Backend Proxy Contract Properties.
+    :ivar proxy: Backend gateway Contract Properties.
     :vartype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
     :ivar tls: Backend TLS Properties.
     :vartype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -7028,14 +7704,14 @@ class BackendUpdateParameters(_serialization.Model):
         :paramtype title: str
         :keyword description: Backend Description.
         :paramtype description: str
-        :keyword resource_id: Management Uri of the Resource in External System. This url can be the
+        :keyword resource_id: Management Uri of the Resource in External System. This URL can be the
          Arm Resource Id of Logic Apps, Function Apps or API Apps.
         :paramtype resource_id: str
         :keyword properties: Backend Properties contract.
         :paramtype properties: ~azure.mgmt.apimanagement.models.BackendProperties
         :keyword credentials: Backend Credentials Contract Properties.
         :paramtype credentials: ~azure.mgmt.apimanagement.models.BackendCredentialsContract
-        :keyword proxy: Backend Proxy Contract Properties.
+        :keyword proxy: Backend gateway Contract Properties.
         :paramtype proxy: ~azure.mgmt.apimanagement.models.BackendProxyContract
         :keyword tls: Backend TLS Properties.
         :paramtype tls: ~azure.mgmt.apimanagement.models.BackendTlsProperties
@@ -7119,7 +7795,7 @@ class CacheCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class CacheContract(Resource):
+class CacheContract(ProxyResource):
     """Cache details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -7341,7 +8017,7 @@ class CertificateConfiguration(_serialization.Model):
         self.certificate = certificate
 
 
-class CertificateContract(Resource):
+class CertificateContract(ProxyResource):
     """Certificate details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -7980,7 +8656,7 @@ class ContentItemCollection(_serialization.Model):
         self.next_link = None
 
 
-class ContentItemContract(Resource):
+class ContentItemContract(ProxyResource):
     """Content type contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -8047,7 +8723,7 @@ class ContentTypeCollection(_serialization.Model):
         self.next_link = None
 
 
-class ContentTypeContract(Resource):
+class ContentTypeContract(ProxyResource):
     """Content type contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -8179,7 +8855,7 @@ class DataMaskingEntity(_serialization.Model):
         self.mode = mode
 
 
-class DeletedServiceContract(Resource):
+class DeletedServiceContract(ProxyResource):
     """Deleted API Management Service information.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -8345,7 +9021,7 @@ class DiagnosticCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class DiagnosticContract(Resource):  # pylint: disable=too-many-instance-attributes
+class DiagnosticContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """Diagnostic details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -8464,6 +9140,106 @@ class DiagnosticContract(Resource):  # pylint: disable=too-many-instance-attribu
         self.metrics = metrics
 
 
+class DocumentationCollection(_serialization.Model):
+    """Paged Documentation list representation.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Page values.
+    :vartype value: list[~azure.mgmt.apimanagement.models.DocumentationContract]
+    :ivar count: Total record count number across all pages.
+    :vartype count: int
+    :ivar next_link: Next page link if any.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[DocumentationContract]"},
+        "count": {"key": "count", "type": "int"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, *, count: Optional[int] = None, **kwargs):
+        """
+        :keyword count: Total record count number across all pages.
+        :paramtype count: int
+        """
+        super().__init__(**kwargs)
+        self.value = None
+        self.count = count
+        self.next_link = None
+
+
+class DocumentationContract(ProxyResource):
+    """Markdown documentation details.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar properties:
+    :vartype properties: ~azure.mgmt.apimanagement.models.DocumentationContractProperties
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "properties": {"key": "properties", "type": "DocumentationContractProperties"},
+    }
+
+    def __init__(self, *, properties: Optional["_models.DocumentationContractProperties"] = None, **kwargs):
+        """
+        :keyword properties:
+        :paramtype properties: ~azure.mgmt.apimanagement.models.DocumentationContractProperties
+        """
+        super().__init__(**kwargs)
+        self.properties = properties
+
+
+class DocumentationContractProperties(_serialization.Model):
+    """DocumentationContractProperties.
+
+    :ivar title: documentation title.
+    :vartype title: str
+    :ivar content: Markdown documentation content.
+    :vartype content: str
+    """
+
+    _attribute_map = {
+        "title": {"key": "title", "type": "str"},
+        "content": {"key": "content", "type": "str"},
+    }
+
+    def __init__(self, *, title: Optional[str] = None, content: Optional[str] = None, **kwargs):
+        """
+        :keyword title: documentation title.
+        :paramtype title: str
+        :keyword content: Markdown documentation content.
+        :paramtype content: str
+        """
+        super().__init__(**kwargs)
+        self.title = title
+        self.content = content
+
+
 class EmailTemplateCollection(_serialization.Model):
     """Paged email template list representation.
 
@@ -8503,7 +9279,7 @@ class EmailTemplateCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class EmailTemplateContract(Resource):
+class EmailTemplateContract(ProxyResource):
     """Email Template details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -8887,7 +9663,7 @@ class GatewayCertificateAuthorityCollection(_serialization.Model):
         self.next_link = None
 
 
-class GatewayCertificateAuthorityContract(Resource):
+class GatewayCertificateAuthorityContract(ProxyResource):
     """Gateway certificate authority details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -8961,7 +9737,7 @@ class GatewayCollection(_serialization.Model):
         self.next_link = None
 
 
-class GatewayContract(Resource):
+class GatewayContract(ProxyResource):
     """Gateway details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -9041,7 +9817,7 @@ class GatewayHostnameConfigurationCollection(_serialization.Model):
         self.next_link = None
 
 
-class GatewayHostnameConfigurationContract(Resource):
+class GatewayHostnameConfigurationContract(ProxyResource):
     """Gateway hostname configuration details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -9290,7 +10066,7 @@ class GlobalSchemaCollection(_serialization.Model):
         self.next_link = None
 
 
-class GlobalSchemaContract(Resource):
+class GlobalSchemaContract(ProxyResource):
     """Global Schema Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -9395,7 +10171,7 @@ class GroupCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class GroupContract(Resource):
+class GroupContract(ProxyResource):
     """Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -9672,7 +10448,7 @@ class HostnameConfiguration(_serialization.Model):  # pylint: disable=too-many-i
      as the Default SSL Certificate. If a client does not send the SNI header, then this will be the
      certificate that will be challenged. The property is useful if a service has multiple custom
      hostname enabled and it needs to decide on the default ssl certificate. The setting only
-     applied to Proxy Hostname Type.
+     applied to gateway Hostname Type.
     :vartype default_ssl_binding: bool
     :ivar negotiate_client_certificate: Specify true to always negotiate client certificate on the
      hostname. Default Value is false.
@@ -9744,7 +10520,7 @@ class HostnameConfiguration(_serialization.Model):  # pylint: disable=too-many-i
          Hostname as the Default SSL Certificate. If a client does not send the SNI header, then this
          will be the certificate that will be challenged. The property is useful if a service has
          multiple custom hostname enabled and it needs to decide on the default ssl certificate. The
-         setting only applied to Proxy Hostname Type.
+         setting only applied to gateway Hostname Type.
         :paramtype default_ssl_binding: bool
         :keyword negotiate_client_certificate: Specify true to always negotiate client certificate on
          the hostname. Default Value is false.
@@ -9866,6 +10642,9 @@ class IdentityProviderBaseParameters(_serialization.Model):
     :ivar password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C Identity
      Provider.
     :vartype password_reset_policy_name: str
+    :ivar client_library: The client library to be used in the developer portal. Only applies to
+     AAD and AAD B2C Identity Provider.
+    :vartype client_library: str
     """
 
     _validation = {
@@ -9874,6 +10653,7 @@ class IdentityProviderBaseParameters(_serialization.Model):
         "signin_policy_name": {"min_length": 1},
         "profile_editing_policy_name": {"min_length": 1},
         "password_reset_policy_name": {"min_length": 1},
+        "client_library": {"max_length": 16},
     }
 
     _attribute_map = {
@@ -9885,6 +10665,7 @@ class IdentityProviderBaseParameters(_serialization.Model):
         "signin_policy_name": {"key": "signinPolicyName", "type": "str"},
         "profile_editing_policy_name": {"key": "profileEditingPolicyName", "type": "str"},
         "password_reset_policy_name": {"key": "passwordResetPolicyName", "type": "str"},
+        "client_library": {"key": "clientLibrary", "type": "str"},
     }
 
     def __init__(
@@ -9898,6 +10679,7 @@ class IdentityProviderBaseParameters(_serialization.Model):
         signin_policy_name: Optional[str] = None,
         profile_editing_policy_name: Optional[str] = None,
         password_reset_policy_name: Optional[str] = None,
+        client_library: Optional[str] = None,
         **kwargs
     ):
         """
@@ -9922,6 +10704,9 @@ class IdentityProviderBaseParameters(_serialization.Model):
         :keyword password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C
          Identity Provider.
         :paramtype password_reset_policy_name: str
+        :keyword client_library: The client library to be used in the developer portal. Only applies to
+         AAD and AAD B2C Identity Provider.
+        :paramtype client_library: str
         """
         super().__init__(**kwargs)
         self.type = type
@@ -9932,9 +10717,10 @@ class IdentityProviderBaseParameters(_serialization.Model):
         self.signin_policy_name = signin_policy_name
         self.profile_editing_policy_name = profile_editing_policy_name
         self.password_reset_policy_name = password_reset_policy_name
+        self.client_library = client_library
 
 
-class IdentityProviderContract(Resource):  # pylint: disable=too-many-instance-attributes
+class IdentityProviderContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """Identity Provider details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -9966,6 +10752,9 @@ class IdentityProviderContract(Resource):  # pylint: disable=too-many-instance-a
     :ivar password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C Identity
      Provider.
     :vartype password_reset_policy_name: str
+    :ivar client_library: The client library to be used in the developer portal. Only applies to
+     AAD and AAD B2C Identity Provider.
+    :vartype client_library: str
     :ivar client_id: Client Id of the Application in the external Identity Provider. It is App ID
      for Facebook login, Client ID for Google login, App ID for Microsoft.
     :vartype client_id: str
@@ -9985,6 +10774,7 @@ class IdentityProviderContract(Resource):  # pylint: disable=too-many-instance-a
         "signin_policy_name": {"min_length": 1},
         "profile_editing_policy_name": {"min_length": 1},
         "password_reset_policy_name": {"min_length": 1},
+        "client_library": {"max_length": 16},
         "client_id": {"min_length": 1},
         "client_secret": {"min_length": 1},
     }
@@ -10001,6 +10791,7 @@ class IdentityProviderContract(Resource):  # pylint: disable=too-many-instance-a
         "signin_policy_name": {"key": "properties.signinPolicyName", "type": "str"},
         "profile_editing_policy_name": {"key": "properties.profileEditingPolicyName", "type": "str"},
         "password_reset_policy_name": {"key": "properties.passwordResetPolicyName", "type": "str"},
+        "client_library": {"key": "properties.clientLibrary", "type": "str"},
         "client_id": {"key": "properties.clientId", "type": "str"},
         "client_secret": {"key": "properties.clientSecret", "type": "str"},
     }
@@ -10016,6 +10807,7 @@ class IdentityProviderContract(Resource):  # pylint: disable=too-many-instance-a
         signin_policy_name: Optional[str] = None,
         profile_editing_policy_name: Optional[str] = None,
         password_reset_policy_name: Optional[str] = None,
+        client_library: Optional[str] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
         **kwargs
@@ -10042,6 +10834,9 @@ class IdentityProviderContract(Resource):  # pylint: disable=too-many-instance-a
         :keyword password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C
          Identity Provider.
         :paramtype password_reset_policy_name: str
+        :keyword client_library: The client library to be used in the developer portal. Only applies to
+         AAD and AAD B2C Identity Provider.
+        :paramtype client_library: str
         :keyword client_id: Client Id of the Application in the external Identity Provider. It is App
          ID for Facebook login, Client ID for Google login, App ID for Microsoft.
         :paramtype client_id: str
@@ -10060,11 +10855,14 @@ class IdentityProviderContract(Resource):  # pylint: disable=too-many-instance-a
         self.signin_policy_name = signin_policy_name
         self.profile_editing_policy_name = profile_editing_policy_name
         self.password_reset_policy_name = password_reset_policy_name
+        self.client_library = client_library
         self.client_id = client_id
         self.client_secret = client_secret
 
 
-class IdentityProviderContractProperties(IdentityProviderBaseParameters):
+class IdentityProviderContractProperties(
+    IdentityProviderBaseParameters
+):  # pylint: disable=too-many-instance-attributes
     """The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.
 
     All required parameters must be populated in order to send to Azure.
@@ -10088,6 +10886,9 @@ class IdentityProviderContractProperties(IdentityProviderBaseParameters):
     :ivar password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C Identity
      Provider.
     :vartype password_reset_policy_name: str
+    :ivar client_library: The client library to be used in the developer portal. Only applies to
+     AAD and AAD B2C Identity Provider.
+    :vartype client_library: str
     :ivar client_id: Client Id of the Application in the external Identity Provider. It is App ID
      for Facebook login, Client ID for Google login, App ID for Microsoft. Required.
     :vartype client_id: str
@@ -10104,6 +10905,7 @@ class IdentityProviderContractProperties(IdentityProviderBaseParameters):
         "signin_policy_name": {"min_length": 1},
         "profile_editing_policy_name": {"min_length": 1},
         "password_reset_policy_name": {"min_length": 1},
+        "client_library": {"max_length": 16},
         "client_id": {"required": True, "min_length": 1},
         "client_secret": {"min_length": 1},
     }
@@ -10117,6 +10919,7 @@ class IdentityProviderContractProperties(IdentityProviderBaseParameters):
         "signin_policy_name": {"key": "signinPolicyName", "type": "str"},
         "profile_editing_policy_name": {"key": "profileEditingPolicyName", "type": "str"},
         "password_reset_policy_name": {"key": "passwordResetPolicyName", "type": "str"},
+        "client_library": {"key": "clientLibrary", "type": "str"},
         "client_id": {"key": "clientId", "type": "str"},
         "client_secret": {"key": "clientSecret", "type": "str"},
     }
@@ -10133,6 +10936,7 @@ class IdentityProviderContractProperties(IdentityProviderBaseParameters):
         signin_policy_name: Optional[str] = None,
         profile_editing_policy_name: Optional[str] = None,
         password_reset_policy_name: Optional[str] = None,
+        client_library: Optional[str] = None,
         client_secret: Optional[str] = None,
         **kwargs
     ):
@@ -10158,6 +10962,9 @@ class IdentityProviderContractProperties(IdentityProviderBaseParameters):
         :keyword password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C
          Identity Provider.
         :paramtype password_reset_policy_name: str
+        :keyword client_library: The client library to be used in the developer portal. Only applies to
+         AAD and AAD B2C Identity Provider.
+        :paramtype client_library: str
         :keyword client_id: Client Id of the Application in the external Identity Provider. It is App
          ID for Facebook login, Client ID for Google login, App ID for Microsoft. Required.
         :paramtype client_id: str
@@ -10176,13 +10983,14 @@ class IdentityProviderContractProperties(IdentityProviderBaseParameters):
             signin_policy_name=signin_policy_name,
             profile_editing_policy_name=profile_editing_policy_name,
             password_reset_policy_name=password_reset_policy_name,
+            client_library=client_library,
             **kwargs
         )
         self.client_id = client_id
         self.client_secret = client_secret
 
 
-class IdentityProviderCreateContract(Resource):  # pylint: disable=too-many-instance-attributes
+class IdentityProviderCreateContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """Identity Provider details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -10214,6 +11022,9 @@ class IdentityProviderCreateContract(Resource):  # pylint: disable=too-many-inst
     :ivar password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C Identity
      Provider.
     :vartype password_reset_policy_name: str
+    :ivar client_library: The client library to be used in the developer portal. Only applies to
+     AAD and AAD B2C Identity Provider.
+    :vartype client_library: str
     :ivar client_id: Client Id of the Application in the external Identity Provider. It is App ID
      for Facebook login, Client ID for Google login, App ID for Microsoft.
     :vartype client_id: str
@@ -10233,6 +11044,7 @@ class IdentityProviderCreateContract(Resource):  # pylint: disable=too-many-inst
         "signin_policy_name": {"min_length": 1},
         "profile_editing_policy_name": {"min_length": 1},
         "password_reset_policy_name": {"min_length": 1},
+        "client_library": {"max_length": 16},
         "client_id": {"min_length": 1},
         "client_secret": {"min_length": 1},
     }
@@ -10249,6 +11061,7 @@ class IdentityProviderCreateContract(Resource):  # pylint: disable=too-many-inst
         "signin_policy_name": {"key": "properties.signinPolicyName", "type": "str"},
         "profile_editing_policy_name": {"key": "properties.profileEditingPolicyName", "type": "str"},
         "password_reset_policy_name": {"key": "properties.passwordResetPolicyName", "type": "str"},
+        "client_library": {"key": "properties.clientLibrary", "type": "str"},
         "client_id": {"key": "properties.clientId", "type": "str"},
         "client_secret": {"key": "properties.clientSecret", "type": "str"},
     }
@@ -10264,6 +11077,7 @@ class IdentityProviderCreateContract(Resource):  # pylint: disable=too-many-inst
         signin_policy_name: Optional[str] = None,
         profile_editing_policy_name: Optional[str] = None,
         password_reset_policy_name: Optional[str] = None,
+        client_library: Optional[str] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
         **kwargs
@@ -10290,6 +11104,9 @@ class IdentityProviderCreateContract(Resource):  # pylint: disable=too-many-inst
         :keyword password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C
          Identity Provider.
         :paramtype password_reset_policy_name: str
+        :keyword client_library: The client library to be used in the developer portal. Only applies to
+         AAD and AAD B2C Identity Provider.
+        :paramtype client_library: str
         :keyword client_id: Client Id of the Application in the external Identity Provider. It is App
          ID for Facebook login, Client ID for Google login, App ID for Microsoft.
         :paramtype client_id: str
@@ -10308,11 +11125,14 @@ class IdentityProviderCreateContract(Resource):  # pylint: disable=too-many-inst
         self.signin_policy_name = signin_policy_name
         self.profile_editing_policy_name = profile_editing_policy_name
         self.password_reset_policy_name = password_reset_policy_name
+        self.client_library = client_library
         self.client_id = client_id
         self.client_secret = client_secret
 
 
-class IdentityProviderCreateContractProperties(IdentityProviderBaseParameters):
+class IdentityProviderCreateContractProperties(
+    IdentityProviderBaseParameters
+):  # pylint: disable=too-many-instance-attributes
     """The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.
 
     All required parameters must be populated in order to send to Azure.
@@ -10336,6 +11156,9 @@ class IdentityProviderCreateContractProperties(IdentityProviderBaseParameters):
     :ivar password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C Identity
      Provider.
     :vartype password_reset_policy_name: str
+    :ivar client_library: The client library to be used in the developer portal. Only applies to
+     AAD and AAD B2C Identity Provider.
+    :vartype client_library: str
     :ivar client_id: Client Id of the Application in the external Identity Provider. It is App ID
      for Facebook login, Client ID for Google login, App ID for Microsoft. Required.
     :vartype client_id: str
@@ -10352,6 +11175,7 @@ class IdentityProviderCreateContractProperties(IdentityProviderBaseParameters):
         "signin_policy_name": {"min_length": 1},
         "profile_editing_policy_name": {"min_length": 1},
         "password_reset_policy_name": {"min_length": 1},
+        "client_library": {"max_length": 16},
         "client_id": {"required": True, "min_length": 1},
         "client_secret": {"required": True, "min_length": 1},
     }
@@ -10365,6 +11189,7 @@ class IdentityProviderCreateContractProperties(IdentityProviderBaseParameters):
         "signin_policy_name": {"key": "signinPolicyName", "type": "str"},
         "profile_editing_policy_name": {"key": "profileEditingPolicyName", "type": "str"},
         "password_reset_policy_name": {"key": "passwordResetPolicyName", "type": "str"},
+        "client_library": {"key": "clientLibrary", "type": "str"},
         "client_id": {"key": "clientId", "type": "str"},
         "client_secret": {"key": "clientSecret", "type": "str"},
     }
@@ -10382,6 +11207,7 @@ class IdentityProviderCreateContractProperties(IdentityProviderBaseParameters):
         signin_policy_name: Optional[str] = None,
         profile_editing_policy_name: Optional[str] = None,
         password_reset_policy_name: Optional[str] = None,
+        client_library: Optional[str] = None,
         **kwargs
     ):
         """
@@ -10406,6 +11232,9 @@ class IdentityProviderCreateContractProperties(IdentityProviderBaseParameters):
         :keyword password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C
          Identity Provider.
         :paramtype password_reset_policy_name: str
+        :keyword client_library: The client library to be used in the developer portal. Only applies to
+         AAD and AAD B2C Identity Provider.
+        :paramtype client_library: str
         :keyword client_id: Client Id of the Application in the external Identity Provider. It is App
          ID for Facebook login, Client ID for Google login, App ID for Microsoft. Required.
         :paramtype client_id: str
@@ -10424,6 +11253,7 @@ class IdentityProviderCreateContractProperties(IdentityProviderBaseParameters):
             signin_policy_name=signin_policy_name,
             profile_editing_policy_name=profile_editing_policy_name,
             password_reset_policy_name=password_reset_policy_name,
+            client_library=client_library,
             **kwargs
         )
         self.client_id = client_id
@@ -10469,7 +11299,7 @@ class IdentityProviderList(_serialization.Model):
         self.next_link = next_link
 
 
-class IdentityProviderUpdateParameters(_serialization.Model):
+class IdentityProviderUpdateParameters(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """Parameters supplied to update Identity Provider.
 
     :ivar type: Identity Provider Type identifier. Known values are: "facebook", "google",
@@ -10491,6 +11321,9 @@ class IdentityProviderUpdateParameters(_serialization.Model):
     :ivar password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C Identity
      Provider.
     :vartype password_reset_policy_name: str
+    :ivar client_library: The client library to be used in the developer portal. Only applies to
+     AAD and AAD B2C Identity Provider.
+    :vartype client_library: str
     :ivar client_id: Client Id of the Application in the external Identity Provider. It is App ID
      for Facebook login, Client ID for Google login, App ID for Microsoft.
     :vartype client_id: str
@@ -10506,6 +11339,7 @@ class IdentityProviderUpdateParameters(_serialization.Model):
         "signin_policy_name": {"min_length": 1},
         "profile_editing_policy_name": {"min_length": 1},
         "password_reset_policy_name": {"min_length": 1},
+        "client_library": {"max_length": 16},
         "client_id": {"min_length": 1},
         "client_secret": {"min_length": 1},
     }
@@ -10519,6 +11353,7 @@ class IdentityProviderUpdateParameters(_serialization.Model):
         "signin_policy_name": {"key": "properties.signinPolicyName", "type": "str"},
         "profile_editing_policy_name": {"key": "properties.profileEditingPolicyName", "type": "str"},
         "password_reset_policy_name": {"key": "properties.passwordResetPolicyName", "type": "str"},
+        "client_library": {"key": "properties.clientLibrary", "type": "str"},
         "client_id": {"key": "properties.clientId", "type": "str"},
         "client_secret": {"key": "properties.clientSecret", "type": "str"},
     }
@@ -10534,6 +11369,7 @@ class IdentityProviderUpdateParameters(_serialization.Model):
         signin_policy_name: Optional[str] = None,
         profile_editing_policy_name: Optional[str] = None,
         password_reset_policy_name: Optional[str] = None,
+        client_library: Optional[str] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
         **kwargs
@@ -10560,6 +11396,9 @@ class IdentityProviderUpdateParameters(_serialization.Model):
         :keyword password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C
          Identity Provider.
         :paramtype password_reset_policy_name: str
+        :keyword client_library: The client library to be used in the developer portal. Only applies to
+         AAD and AAD B2C Identity Provider.
+        :paramtype client_library: str
         :keyword client_id: Client Id of the Application in the external Identity Provider. It is App
          ID for Facebook login, Client ID for Google login, App ID for Microsoft.
         :paramtype client_id: str
@@ -10577,11 +11416,12 @@ class IdentityProviderUpdateParameters(_serialization.Model):
         self.signin_policy_name = signin_policy_name
         self.profile_editing_policy_name = profile_editing_policy_name
         self.password_reset_policy_name = password_reset_policy_name
+        self.client_library = client_library
         self.client_id = client_id
         self.client_secret = client_secret
 
 
-class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):
+class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):  # pylint: disable=too-many-instance-attributes
     """Parameters supplied to the Update Identity Provider operation.
 
     :ivar type: Identity Provider Type identifier. Known values are: "facebook", "google",
@@ -10603,6 +11443,9 @@ class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):
     :ivar password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C Identity
      Provider.
     :vartype password_reset_policy_name: str
+    :ivar client_library: The client library to be used in the developer portal. Only applies to
+     AAD and AAD B2C Identity Provider.
+    :vartype client_library: str
     :ivar client_id: Client Id of the Application in the external Identity Provider. It is App ID
      for Facebook login, Client ID for Google login, App ID for Microsoft.
     :vartype client_id: str
@@ -10618,6 +11461,7 @@ class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):
         "signin_policy_name": {"min_length": 1},
         "profile_editing_policy_name": {"min_length": 1},
         "password_reset_policy_name": {"min_length": 1},
+        "client_library": {"max_length": 16},
         "client_id": {"min_length": 1},
         "client_secret": {"min_length": 1},
     }
@@ -10631,6 +11475,7 @@ class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):
         "signin_policy_name": {"key": "signinPolicyName", "type": "str"},
         "profile_editing_policy_name": {"key": "profileEditingPolicyName", "type": "str"},
         "password_reset_policy_name": {"key": "passwordResetPolicyName", "type": "str"},
+        "client_library": {"key": "clientLibrary", "type": "str"},
         "client_id": {"key": "clientId", "type": "str"},
         "client_secret": {"key": "clientSecret", "type": "str"},
     }
@@ -10646,6 +11491,7 @@ class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):
         signin_policy_name: Optional[str] = None,
         profile_editing_policy_name: Optional[str] = None,
         password_reset_policy_name: Optional[str] = None,
+        client_library: Optional[str] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
         **kwargs
@@ -10672,6 +11518,9 @@ class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):
         :keyword password_reset_policy_name: Password Reset Policy Name. Only applies to AAD B2C
          Identity Provider.
         :paramtype password_reset_policy_name: str
+        :keyword client_library: The client library to be used in the developer portal. Only applies to
+         AAD and AAD B2C Identity Provider.
+        :paramtype client_library: str
         :keyword client_id: Client Id of the Application in the external Identity Provider. It is App
          ID for Facebook login, Client ID for Google login, App ID for Microsoft.
         :paramtype client_id: str
@@ -10689,6 +11538,7 @@ class IdentityProviderUpdateProperties(IdentityProviderBaseParameters):
             signin_policy_name=signin_policy_name,
             profile_editing_policy_name=profile_editing_policy_name,
             password_reset_policy_name=password_reset_policy_name,
+            client_library=client_library,
             **kwargs
         )
         self.client_id = client_id
@@ -10730,7 +11580,7 @@ class IssueAttachmentCollection(_serialization.Model):
         self.next_link = None
 
 
-class IssueAttachmentContract(Resource):
+class IssueAttachmentContract(ProxyResource):
     """Issue Attachment Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -10860,7 +11710,7 @@ class IssueCommentCollection(_serialization.Model):
         self.next_link = None
 
 
-class IssueCommentContract(Resource):
+class IssueCommentContract(ProxyResource):
     """Issue Comment Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -10918,7 +11768,7 @@ class IssueCommentContract(Resource):
         self.user_id = user_id
 
 
-class IssueContract(Resource):
+class IssueContract(ProxyResource):
     """Issue Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -11385,7 +12235,7 @@ class LoggerCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class LoggerContract(Resource):
+class LoggerContract(ProxyResource):
     """Logger details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -11557,7 +12407,7 @@ class NamedValueCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class NamedValueContract(Resource):
+class NamedValueContract(ProxyResource):
     """NamedValue details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -11739,7 +12589,7 @@ class NamedValueContractProperties(NamedValueEntityBaseParameters):
         self.key_vault = key_vault
 
 
-class NamedValueCreateContract(Resource):
+class NamedValueCreateContract(ProxyResource):
     """NamedValue details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -12150,7 +13000,7 @@ class NotificationCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class NotificationContract(Resource):
+class NotificationContract(ProxyResource):
     """Notification details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -12308,7 +13158,7 @@ class OpenIdConnectProviderCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class OpenidConnectProviderContract(Resource):
+class OpenidConnectProviderContract(ProxyResource):
     """OpenId Connect Provider details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -12331,6 +13181,12 @@ class OpenidConnectProviderContract(Resource):
     :vartype client_id: str
     :ivar client_secret: Client Secret of developer console which is the client application.
     :vartype client_secret: str
+    :ivar use_in_test_console: If true, the Open ID Connect provider may be used in the developer
+     portal test console. True by default if no value is provided.
+    :vartype use_in_test_console: bool
+    :ivar use_in_api_documentation: If true, the Open ID Connect provider will be used in the API
+     documentation in the developer portal. False by default if no value is provided.
+    :vartype use_in_api_documentation: bool
     """
 
     _validation = {
@@ -12349,6 +13205,8 @@ class OpenidConnectProviderContract(Resource):
         "metadata_endpoint": {"key": "properties.metadataEndpoint", "type": "str"},
         "client_id": {"key": "properties.clientId", "type": "str"},
         "client_secret": {"key": "properties.clientSecret", "type": "str"},
+        "use_in_test_console": {"key": "properties.useInTestConsole", "type": "bool"},
+        "use_in_api_documentation": {"key": "properties.useInApiDocumentation", "type": "bool"},
     }
 
     def __init__(
@@ -12359,6 +13217,8 @@ class OpenidConnectProviderContract(Resource):
         metadata_endpoint: Optional[str] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
+        use_in_test_console: Optional[bool] = None,
+        use_in_api_documentation: Optional[bool] = None,
         **kwargs
     ):
         """
@@ -12372,6 +13232,12 @@ class OpenidConnectProviderContract(Resource):
         :paramtype client_id: str
         :keyword client_secret: Client Secret of developer console which is the client application.
         :paramtype client_secret: str
+        :keyword use_in_test_console: If true, the Open ID Connect provider may be used in the
+         developer portal test console. True by default if no value is provided.
+        :paramtype use_in_test_console: bool
+        :keyword use_in_api_documentation: If true, the Open ID Connect provider will be used in the
+         API documentation in the developer portal. False by default if no value is provided.
+        :paramtype use_in_api_documentation: bool
         """
         super().__init__(**kwargs)
         self.display_name = display_name
@@ -12379,6 +13245,8 @@ class OpenidConnectProviderContract(Resource):
         self.metadata_endpoint = metadata_endpoint
         self.client_id = client_id
         self.client_secret = client_secret
+        self.use_in_test_console = use_in_test_console
+        self.use_in_api_documentation = use_in_api_documentation
 
 
 class OpenidConnectProviderUpdateContract(_serialization.Model):
@@ -12394,6 +13262,12 @@ class OpenidConnectProviderUpdateContract(_serialization.Model):
     :vartype client_id: str
     :ivar client_secret: Client Secret of developer console which is the client application.
     :vartype client_secret: str
+    :ivar use_in_test_console: If true, the Open ID Connect provider may be used in the developer
+     portal test console. True by default if no value is provided.
+    :vartype use_in_test_console: bool
+    :ivar use_in_api_documentation: If true, the Open ID Connect provider will be used in the API
+     documentation in the developer portal. False by default if no value is provided.
+    :vartype use_in_api_documentation: bool
     """
 
     _validation = {
@@ -12406,6 +13280,8 @@ class OpenidConnectProviderUpdateContract(_serialization.Model):
         "metadata_endpoint": {"key": "properties.metadataEndpoint", "type": "str"},
         "client_id": {"key": "properties.clientId", "type": "str"},
         "client_secret": {"key": "properties.clientSecret", "type": "str"},
+        "use_in_test_console": {"key": "properties.useInTestConsole", "type": "bool"},
+        "use_in_api_documentation": {"key": "properties.useInApiDocumentation", "type": "bool"},
     }
 
     def __init__(
@@ -12416,6 +13292,8 @@ class OpenidConnectProviderUpdateContract(_serialization.Model):
         metadata_endpoint: Optional[str] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
+        use_in_test_console: Optional[bool] = None,
+        use_in_api_documentation: Optional[bool] = None,
         **kwargs
     ):
         """
@@ -12429,6 +13307,12 @@ class OpenidConnectProviderUpdateContract(_serialization.Model):
         :paramtype client_id: str
         :keyword client_secret: Client Secret of developer console which is the client application.
         :paramtype client_secret: str
+        :keyword use_in_test_console: If true, the Open ID Connect provider may be used in the
+         developer portal test console. True by default if no value is provided.
+        :paramtype use_in_test_console: bool
+        :keyword use_in_api_documentation: If true, the Open ID Connect provider will be used in the
+         API documentation in the developer portal. False by default if no value is provided.
+        :paramtype use_in_api_documentation: bool
         """
         super().__init__(**kwargs)
         self.display_name = display_name
@@ -12436,6 +13320,8 @@ class OpenidConnectProviderUpdateContract(_serialization.Model):
         self.metadata_endpoint = metadata_endpoint
         self.client_id = client_id
         self.client_secret = client_secret
+        self.use_in_test_console = use_in_test_console
+        self.use_in_api_documentation = use_in_api_documentation
 
 
 class Operation(_serialization.Model):
@@ -12519,7 +13405,7 @@ class OperationCollection(_serialization.Model):
         self.next_link = None
 
 
-class OperationContract(Resource):  # pylint: disable=too-many-instance-attributes
+class OperationContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """API Operation details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -12838,7 +13724,7 @@ class OperationListResult(_serialization.Model):
         self.next_link = next_link
 
 
-class OperationResultContract(Resource):
+class OperationResultContract(ProxyResource):
     """Long Running Git Operation Results.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -13473,7 +14359,7 @@ class PolicyCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class PolicyContract(Resource):
+class PolicyContract(ProxyResource):
     """Policy Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -13523,9 +14409,9 @@ class PolicyContract(Resource):
 
 
 class PolicyDescriptionCollection(_serialization.Model):
-    """Descriptions of APIM policies.
+    """Descriptions of API Management policies.
 
-    :ivar value: Descriptions of APIM policies.
+    :ivar value: Descriptions of API Management policies.
     :vartype value: list[~azure.mgmt.apimanagement.models.PolicyDescriptionContract]
     :ivar count: Total record count number.
     :vartype count: int
@@ -13544,7 +14430,7 @@ class PolicyDescriptionCollection(_serialization.Model):
         **kwargs
     ):
         """
-        :keyword value: Descriptions of APIM policies.
+        :keyword value: Descriptions of API Management policies.
         :paramtype value: list[~azure.mgmt.apimanagement.models.PolicyDescriptionContract]
         :keyword count: Total record count number.
         :paramtype count: int
@@ -13554,7 +14440,7 @@ class PolicyDescriptionCollection(_serialization.Model):
         self.count = count
 
 
-class PolicyDescriptionContract(Resource):
+class PolicyDescriptionContract(ProxyResource):
     """Policy description details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -13596,7 +14482,393 @@ class PolicyDescriptionContract(Resource):
         self.scope = None
 
 
-class PortalDelegationSettings(Resource):
+class PolicyFragmentCollection(_serialization.Model):
+    """The response of the get policy fragments operation.
+
+    :ivar value: Policy fragment contract value.
+    :vartype value: list[~azure.mgmt.apimanagement.models.PolicyFragmentContract]
+    :ivar count: Total record count number.
+    :vartype count: int
+    :ivar next_link: Next page link if any.
+    :vartype next_link: str
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[PolicyFragmentContract]"},
+        "count": {"key": "count", "type": "int"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.PolicyFragmentContract"]] = None,
+        count: Optional[int] = None,
+        next_link: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Policy fragment contract value.
+        :paramtype value: list[~azure.mgmt.apimanagement.models.PolicyFragmentContract]
+        :keyword count: Total record count number.
+        :paramtype count: int
+        :keyword next_link: Next page link if any.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.count = count
+        self.next_link = next_link
+
+
+class PolicyFragmentContract(ProxyResource):
+    """Policy fragment contract details.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar value: Contents of the policy fragment.
+    :vartype value: str
+    :ivar description: Policy fragment description.
+    :vartype description: str
+    :ivar format: Format of the policy fragment content. Known values are: "xml" and "rawxml".
+    :vartype format: str or ~azure.mgmt.apimanagement.models.PolicyFragmentContentFormat
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "description": {"max_length": 1000},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "value": {"key": "properties.value", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "format": {"key": "properties.format", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[str] = None,
+        description: Optional[str] = None,
+        format: Optional[Union[str, "_models.PolicyFragmentContentFormat"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Contents of the policy fragment.
+        :paramtype value: str
+        :keyword description: Policy fragment description.
+        :paramtype description: str
+        :keyword format: Format of the policy fragment content. Known values are: "xml" and "rawxml".
+        :paramtype format: str or ~azure.mgmt.apimanagement.models.PolicyFragmentContentFormat
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.description = description
+        self.format = format
+
+
+class PortalConfigCollection(_serialization.Model):
+    """The collection of the developer portal configurations.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: The developer portal configurations.
+    :vartype value: list[~azure.mgmt.apimanagement.models.PortalConfigContract]
+    :ivar next_link: Next page link if any.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[PortalConfigContract]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, *, value: Optional[List["_models.PortalConfigContract"]] = None, **kwargs):
+        """
+        :keyword value: The developer portal configurations.
+        :paramtype value: list[~azure.mgmt.apimanagement.models.PortalConfigContract]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
+class PortalConfigContract(ProxyResource):
+    """The developer portal configuration contract.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar enable_basic_auth: Enable or disable Basic authentication method.
+    :vartype enable_basic_auth: bool
+    :ivar signin:
+    :vartype signin: ~azure.mgmt.apimanagement.models.PortalConfigPropertiesSignin
+    :ivar signup:
+    :vartype signup: ~azure.mgmt.apimanagement.models.PortalConfigPropertiesSignup
+    :ivar delegation: The developer portal delegation settings.
+    :vartype delegation: ~azure.mgmt.apimanagement.models.PortalConfigDelegationProperties
+    :ivar cors: The developer portal Cross-Origin Resource Sharing (CORS) settings.
+    :vartype cors: ~azure.mgmt.apimanagement.models.PortalConfigCorsProperties
+    :ivar csp: The developer portal Content Security Policy (CSP) settings.
+    :vartype csp: ~azure.mgmt.apimanagement.models.PortalConfigCspProperties
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "enable_basic_auth": {"key": "properties.enableBasicAuth", "type": "bool"},
+        "signin": {"key": "properties.signin", "type": "PortalConfigPropertiesSignin"},
+        "signup": {"key": "properties.signup", "type": "PortalConfigPropertiesSignup"},
+        "delegation": {"key": "properties.delegation", "type": "PortalConfigDelegationProperties"},
+        "cors": {"key": "properties.cors", "type": "PortalConfigCorsProperties"},
+        "csp": {"key": "properties.csp", "type": "PortalConfigCspProperties"},
+    }
+
+    def __init__(
+        self,
+        *,
+        enable_basic_auth: bool = True,
+        signin: Optional["_models.PortalConfigPropertiesSignin"] = None,
+        signup: Optional["_models.PortalConfigPropertiesSignup"] = None,
+        delegation: Optional["_models.PortalConfigDelegationProperties"] = None,
+        cors: Optional["_models.PortalConfigCorsProperties"] = None,
+        csp: Optional["_models.PortalConfigCspProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword enable_basic_auth: Enable or disable Basic authentication method.
+        :paramtype enable_basic_auth: bool
+        :keyword signin:
+        :paramtype signin: ~azure.mgmt.apimanagement.models.PortalConfigPropertiesSignin
+        :keyword signup:
+        :paramtype signup: ~azure.mgmt.apimanagement.models.PortalConfigPropertiesSignup
+        :keyword delegation: The developer portal delegation settings.
+        :paramtype delegation: ~azure.mgmt.apimanagement.models.PortalConfigDelegationProperties
+        :keyword cors: The developer portal Cross-Origin Resource Sharing (CORS) settings.
+        :paramtype cors: ~azure.mgmt.apimanagement.models.PortalConfigCorsProperties
+        :keyword csp: The developer portal Content Security Policy (CSP) settings.
+        :paramtype csp: ~azure.mgmt.apimanagement.models.PortalConfigCspProperties
+        """
+        super().__init__(**kwargs)
+        self.enable_basic_auth = enable_basic_auth
+        self.signin = signin
+        self.signup = signup
+        self.delegation = delegation
+        self.cors = cors
+        self.csp = csp
+
+
+class PortalConfigCorsProperties(_serialization.Model):
+    """The developer portal Cross-Origin Resource Sharing (CORS) settings.
+
+    :ivar allowed_origins: Allowed origins, e.g. ``https://trusted.com``.
+    :vartype allowed_origins: list[str]
+    """
+
+    _attribute_map = {
+        "allowed_origins": {"key": "allowedOrigins", "type": "[str]"},
+    }
+
+    def __init__(self, *, allowed_origins: Optional[List[str]] = None, **kwargs):
+        """
+        :keyword allowed_origins: Allowed origins, e.g. ``https://trusted.com``.
+        :paramtype allowed_origins: list[str]
+        """
+        super().__init__(**kwargs)
+        self.allowed_origins = allowed_origins
+
+
+class PortalConfigCspProperties(_serialization.Model):
+    """The developer portal Content Security Policy (CSP) settings.
+
+    :ivar mode: The mode of the developer portal Content Security Policy (CSP). Known values are:
+     "enabled", "disabled", and "reportOnly".
+    :vartype mode: str or ~azure.mgmt.apimanagement.models.PortalSettingsCspMode
+    :ivar report_uri: The URLs used by the browser to report CSP violations.
+    :vartype report_uri: list[str]
+    :ivar allowed_sources: Allowed sources, e.g. ``*.trusted.com``\ , ``trusted.com``\ ,
+     ``https://``.
+    :vartype allowed_sources: list[str]
+    """
+
+    _attribute_map = {
+        "mode": {"key": "mode", "type": "str"},
+        "report_uri": {"key": "reportUri", "type": "[str]"},
+        "allowed_sources": {"key": "allowedSources", "type": "[str]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        mode: Union[str, "_models.PortalSettingsCspMode"] = "disabled",
+        report_uri: Optional[List[str]] = None,
+        allowed_sources: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword mode: The mode of the developer portal Content Security Policy (CSP). Known values
+         are: "enabled", "disabled", and "reportOnly".
+        :paramtype mode: str or ~azure.mgmt.apimanagement.models.PortalSettingsCspMode
+        :keyword report_uri: The URLs used by the browser to report CSP violations.
+        :paramtype report_uri: list[str]
+        :keyword allowed_sources: Allowed sources, e.g. ``*.trusted.com``\ , ``trusted.com``\ ,
+         ``https://``.
+        :paramtype allowed_sources: list[str]
+        """
+        super().__init__(**kwargs)
+        self.mode = mode
+        self.report_uri = report_uri
+        self.allowed_sources = allowed_sources
+
+
+class PortalConfigDelegationProperties(_serialization.Model):
+    """PortalConfigDelegationProperties.
+
+    :ivar delegate_registration: Enable or disable delegation for user registration.
+    :vartype delegate_registration: bool
+    :ivar delegate_subscription: Enable or disable delegation for product subscriptions.
+    :vartype delegate_subscription: bool
+    :ivar delegation_url: A delegation endpoint URL.
+    :vartype delegation_url: str
+    :ivar validation_key: A base64-encoded validation key to ensure requests originate from Azure
+     API Management service.
+    :vartype validation_key: str
+    """
+
+    _attribute_map = {
+        "delegate_registration": {"key": "delegateRegistration", "type": "bool"},
+        "delegate_subscription": {"key": "delegateSubscription", "type": "bool"},
+        "delegation_url": {"key": "delegationUrl", "type": "str"},
+        "validation_key": {"key": "validationKey", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        delegate_registration: bool = False,
+        delegate_subscription: bool = False,
+        delegation_url: Optional[str] = None,
+        validation_key: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword delegate_registration: Enable or disable delegation for user registration.
+        :paramtype delegate_registration: bool
+        :keyword delegate_subscription: Enable or disable delegation for product subscriptions.
+        :paramtype delegate_subscription: bool
+        :keyword delegation_url: A delegation endpoint URL.
+        :paramtype delegation_url: str
+        :keyword validation_key: A base64-encoded validation key to ensure requests originate from
+         Azure API Management service.
+        :paramtype validation_key: str
+        """
+        super().__init__(**kwargs)
+        self.delegate_registration = delegate_registration
+        self.delegate_subscription = delegate_subscription
+        self.delegation_url = delegation_url
+        self.validation_key = validation_key
+
+
+class PortalConfigPropertiesSignin(_serialization.Model):
+    """PortalConfigPropertiesSignin.
+
+    :ivar require: Redirect anonymous users to the sign-in page.
+    :vartype require: bool
+    """
+
+    _attribute_map = {
+        "require": {"key": "require", "type": "bool"},
+    }
+
+    def __init__(self, *, require: bool = False, **kwargs):
+        """
+        :keyword require: Redirect anonymous users to the sign-in page.
+        :paramtype require: bool
+        """
+        super().__init__(**kwargs)
+        self.require = require
+
+
+class PortalConfigPropertiesSignup(_serialization.Model):
+    """PortalConfigPropertiesSignup.
+
+    :ivar terms_of_service: Terms of service settings.
+    :vartype terms_of_service:
+     ~azure.mgmt.apimanagement.models.PortalConfigTermsOfServiceProperties
+    """
+
+    _attribute_map = {
+        "terms_of_service": {"key": "termsOfService", "type": "PortalConfigTermsOfServiceProperties"},
+    }
+
+    def __init__(self, *, terms_of_service: Optional["_models.PortalConfigTermsOfServiceProperties"] = None, **kwargs):
+        """
+        :keyword terms_of_service: Terms of service settings.
+        :paramtype terms_of_service:
+         ~azure.mgmt.apimanagement.models.PortalConfigTermsOfServiceProperties
+        """
+        super().__init__(**kwargs)
+        self.terms_of_service = terms_of_service
+
+
+class PortalConfigTermsOfServiceProperties(_serialization.Model):
+    """Terms of service contract properties.
+
+    :ivar text: A terms of service text.
+    :vartype text: str
+    :ivar require_consent: Ask user for consent to the terms of service.
+    :vartype require_consent: bool
+    """
+
+    _attribute_map = {
+        "text": {"key": "text", "type": "str"},
+        "require_consent": {"key": "requireConsent", "type": "bool"},
+    }
+
+    def __init__(self, *, text: Optional[str] = None, require_consent: bool = False, **kwargs):
+        """
+        :keyword text: A terms of service text.
+        :paramtype text: str
+        :keyword require_consent: Ask user for consent to the terms of service.
+        :paramtype require_consent: bool
+        """
+        super().__init__(**kwargs)
+        self.text = text
+        self.require_consent = require_consent
+
+
+class PortalDelegationSettings(ProxyResource):
     """Delegation settings for a developer portal.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -13695,7 +14967,7 @@ class PortalRevisionCollection(_serialization.Model):
         self.next_link = None
 
 
-class PortalRevisionContract(Resource):
+class PortalRevisionContract(ProxyResource):
     """Portal Revision's contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -13763,9 +15035,9 @@ class PortalRevisionContract(Resource):
 
 
 class PortalSettingsCollection(_serialization.Model):
-    """Descriptions of APIM policies.
+    """Descriptions of API Management policies.
 
-    :ivar value: Descriptions of APIM policies.
+    :ivar value: Descriptions of API Management policies.
     :vartype value: list[~azure.mgmt.apimanagement.models.PortalSettingsContract]
     :ivar count: Total record count number.
     :vartype count: int
@@ -13780,7 +15052,7 @@ class PortalSettingsCollection(_serialization.Model):
         self, *, value: Optional[List["_models.PortalSettingsContract"]] = None, count: Optional[int] = None, **kwargs
     ):
         """
-        :keyword value: Descriptions of APIM policies.
+        :keyword value: Descriptions of API Management policies.
         :paramtype value: list[~azure.mgmt.apimanagement.models.PortalSettingsContract]
         :keyword count: Total record count number.
         :paramtype count: int
@@ -13790,7 +15062,7 @@ class PortalSettingsCollection(_serialization.Model):
         self.count = count
 
 
-class PortalSettingsContract(Resource):
+class PortalSettingsContract(ProxyResource):
     """Portal Settings for the Developer Portal.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -13895,7 +15167,7 @@ class PortalSettingValidationKeyContract(_serialization.Model):
         self.validation_key = validation_key
 
 
-class PortalSigninSettings(Resource):
+class PortalSigninSettings(ProxyResource):
     """Sign-In settings for the Developer Portal.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -13934,7 +15206,7 @@ class PortalSigninSettings(Resource):
         self.enabled = enabled
 
 
-class PortalSignupSettings(Resource):
+class PortalSignupSettings(ProxyResource):
     """Sign-Up settings for a developer portal.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -14311,7 +15583,7 @@ class ProductCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class ProductContract(Resource):
+class ProductContract(ProxyResource):
     """Product details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -15160,7 +16432,7 @@ class RecipientEmailCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class RecipientEmailContract(Resource):
+class RecipientEmailContract(ProxyResource):
     """Recipient Email details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -15264,7 +16536,7 @@ class RecipientUserCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class RecipientUserContract(Resource):
+class RecipientUserContract(ProxyResource):
     """Recipient User details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -15552,7 +16824,7 @@ class ReportRecordContract(_serialization.Model):  # pylint: disable=too-many-in
      calls returning HttpStatusCode.Unauthorized and HttpStatusCode.Forbidden and
      HttpStatusCode.TooManyRequests.
     :vartype call_count_blocked: int
-    :ivar call_count_failed: Number of calls failed due to proxy or backend errors. This includes
+    :ivar call_count_failed: Number of calls failed due to gateway or backend errors. This includes
      calls returning HttpStatusCode.BadRequest(400) and any Code between
      HttpStatusCode.InternalServerError (500) and 600.
     :vartype call_count_failed: int
@@ -15675,7 +16947,7 @@ class ReportRecordContract(_serialization.Model):  # pylint: disable=too-many-in
          calls returning HttpStatusCode.Unauthorized and HttpStatusCode.Forbidden and
          HttpStatusCode.TooManyRequests.
         :paramtype call_count_blocked: int
-        :keyword call_count_failed: Number of calls failed due to proxy or backend errors. This
+        :keyword call_count_failed: Number of calls failed due to gateway or backend errors. This
          includes calls returning HttpStatusCode.BadRequest(400) and any Code between
          HttpStatusCode.InternalServerError (500) and 600.
         :paramtype call_count_failed: int
@@ -16033,6 +17305,77 @@ class RequestReportRecordContract(_serialization.Model):  # pylint: disable=too-
         self.request_size = request_size
 
 
+class ResourceCollection(_serialization.Model):
+    """A collection of resources.
+
+    :ivar value: A collection of resources.
+    :vartype value: list[~azure.mgmt.apimanagement.models.ResourceCollectionValueItem]
+    :ivar count: Total record count number.
+    :vartype count: int
+    :ivar next_link: Next page link if any.
+    :vartype next_link: str
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ResourceCollectionValueItem]"},
+        "count": {"key": "count", "type": "int"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.ResourceCollectionValueItem"]] = None,
+        count: Optional[int] = None,
+        next_link: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: A collection of resources.
+        :paramtype value: list[~azure.mgmt.apimanagement.models.ResourceCollectionValueItem]
+        :keyword count: Total record count number.
+        :paramtype count: int
+        :keyword next_link: Next page link if any.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.count = count
+        self.next_link = next_link
+
+
+class ResourceCollectionValueItem(ProxyResource):
+    """ResourceCollectionValueItem.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+
+
 class ResourceLocationDataContract(_serialization.Model):
     """Resource location data properties.
 
@@ -16366,7 +17709,7 @@ class SchemaCollection(_serialization.Model):
         self.next_link = None
 
 
-class SchemaContract(Resource):
+class SchemaContract(ProxyResource):
     """API Schema Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -16485,7 +17828,7 @@ class SubscriptionCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class SubscriptionContract(Resource):  # pylint: disable=too-many-instance-attributes
+class SubscriptionContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """Subscription details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -17035,7 +18378,7 @@ class TagCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class TagContract(Resource):
+class TagContract(ProxyResource):
     """Tag Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -17181,7 +18524,7 @@ class TagDescriptionCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class TagDescriptionContract(Resource):
+class TagDescriptionContract(ProxyResource):
     """Contract details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -17481,7 +18824,7 @@ class TagResourceContractProperties(_serialization.Model):
         self.name = name
 
 
-class TenantConfigurationSyncStateContract(Resource):  # pylint: disable=too-many-instance-attributes
+class TenantConfigurationSyncStateContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """Result of Tenant Configuration Sync State.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -17609,7 +18952,7 @@ class TenantSettingsCollection(_serialization.Model):
         self.next_link = None
 
 
-class TenantSettingsContract(Resource):
+class TenantSettingsContract(ProxyResource):
     """Tenant Settings.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -17759,7 +19102,7 @@ class UserCollection(_serialization.Model):
         self.next_link = next_link
 
 
-class UserContract(Resource):  # pylint: disable=too-many-instance-attributes
+class UserContract(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """User details.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -18513,6 +19856,85 @@ class VirtualNetworkConfiguration(_serialization.Model):
         self.vnetid = None
         self.subnetname = None
         self.subnet_resource_id = subnet_resource_id
+
+
+class WikiContract(ProxyResource):
+    """Wiki properties.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar properties:
+    :vartype properties: ~azure.mgmt.apimanagement.models.WikiContractProperties
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "properties": {"key": "properties", "type": "WikiContractProperties"},
+    }
+
+    def __init__(self, *, properties: Optional["_models.WikiContractProperties"] = None, **kwargs):
+        """
+        :keyword properties:
+        :paramtype properties: ~azure.mgmt.apimanagement.models.WikiContractProperties
+        """
+        super().__init__(**kwargs)
+        self.properties = properties
+
+
+class WikiContractProperties(_serialization.Model):
+    """WikiContractProperties.
+
+    :ivar documents: Collection wiki documents included into this wiki.
+    :vartype documents: list[~azure.mgmt.apimanagement.models.WikiDocumentationContract]
+    """
+
+    _attribute_map = {
+        "documents": {"key": "documents", "type": "[WikiDocumentationContract]"},
+    }
+
+    def __init__(self, *, documents: Optional[List["_models.WikiDocumentationContract"]] = None, **kwargs):
+        """
+        :keyword documents: Collection wiki documents included into this wiki.
+        :paramtype documents: list[~azure.mgmt.apimanagement.models.WikiDocumentationContract]
+        """
+        super().__init__(**kwargs)
+        self.documents = documents
+
+
+class WikiDocumentationContract(_serialization.Model):
+    """Wiki documentation details.
+
+    :ivar documentation_id: Documentation Identifier.
+    :vartype documentation_id: str
+    """
+
+    _attribute_map = {
+        "documentation_id": {"key": "documentationId", "type": "str"},
+    }
+
+    def __init__(self, *, documentation_id: Optional[str] = None, **kwargs):
+        """
+        :keyword documentation_id: Documentation Identifier.
+        :paramtype documentation_id: str
+        """
+        super().__init__(**kwargs)
+        self.documentation_id = documentation_id
 
 
 class X509CertificateName(_serialization.Model):

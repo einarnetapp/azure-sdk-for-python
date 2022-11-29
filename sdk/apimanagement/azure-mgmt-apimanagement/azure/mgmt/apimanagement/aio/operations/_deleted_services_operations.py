@@ -79,10 +79,10 @@ class DeletedServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-08-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-08-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DeletedServicesCollection]
+        )
+        cls: ClsType[_models.DeletedServicesCollection] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -103,7 +103,7 @@ class DeletedServicesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -119,7 +119,7 @@ class DeletedServicesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -127,13 +127,13 @@ class DeletedServicesOperations:
             deserialized = self._deserialize("DeletedServicesCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -147,7 +147,9 @@ class DeletedServicesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/deletedservices"}  # type: ignore
+    list_by_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/deletedservices"
+    }
 
     @distributed_trace_async
     async def get_by_name(self, service_name: str, location: str, **kwargs: Any) -> _models.DeletedServiceContract:
@@ -173,10 +175,10 @@ class DeletedServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-08-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-08-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DeletedServiceContract]
+        )
+        cls: ClsType[_models.DeletedServiceContract] = kwargs.pop("cls", None)
 
         request = build_get_by_name_request(
             service_name=service_name,
@@ -188,9 +190,9 @@ class DeletedServicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -208,7 +210,9 @@ class DeletedServicesOperations:
 
         return deserialized
 
-    get_by_name.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}"}  # type: ignore
+    get_by_name.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}"
+    }
 
     async def _purge_initial(
         self, service_name: str, location: str, **kwargs: Any
@@ -224,10 +228,10 @@ class DeletedServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-08-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-08-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.DeletedServiceContract]]
+        )
+        cls: ClsType[Optional[_models.DeletedServiceContract]] = kwargs.pop("cls", None)
 
         request = build_purge_request(
             service_name=service_name,
@@ -239,9 +243,9 @@ class DeletedServicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -261,7 +265,9 @@ class DeletedServicesOperations:
 
         return deserialized
 
-    _purge_initial.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}"}  # type: ignore
+    _purge_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}"
+    }
 
     @distributed_trace_async
     async def begin_purge(self, service_name: str, location: str, **kwargs: Any) -> AsyncLROPoller[None]:
@@ -288,15 +294,15 @@ class DeletedServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-08-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-08-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._purge_initial(  # type: ignore
+            raw_result = await self._purge_initial(
                 service_name=service_name,
                 location=location,
                 api_version=api_version,
@@ -314,9 +320,9 @@ class DeletedServicesOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -328,6 +334,8 @@ class DeletedServicesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_purge.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}"}  # type: ignore
+    begin_purge.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}"
+    }

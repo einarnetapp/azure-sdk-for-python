@@ -78,14 +78,6 @@ class ApiType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     GRAPHQL = "graphql"
 
 
-class ApiVersionSetContractDetailsVersioningScheme(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """An value that determines where the API Version identifier will be located in a HTTP request."""
-
-    SEGMENT = "Segment"
-    QUERY = "Query"
-    HEADER = "Header"
-
-
 class AppType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """AppType."""
 
@@ -115,6 +107,13 @@ class AuthorizationMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PUT = "PUT"
     PATCH = "PATCH"
     DELETE = "DELETE"
+
+
+class AuthorizationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Authorization type options."""
+
+    #: OAuth2 authorization type
+    O_AUTH2 = "OAuth2"
 
 
 class BackendProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -413,6 +412,15 @@ class NameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ALREADY_EXISTS = "AlreadyExists"
 
 
+class NatGatewayState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Property can be used to enable NAT Gateway for this API Management service."""
+
+    #: Nat Gateway is enabled for the service.
+    ENABLED = "Enabled"
+    #: Nat Gateway is disabled for the service.
+    DISABLED = "Disabled"
+
+
 class NotificationName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """NotificationName."""
 
@@ -436,6 +444,15 @@ class NotificationName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     #: The following email recipients and users will receive email notifications when subscription
     #: usage gets close to usage quota.
     QUOTA_LIMIT_APPROACHING_PUBLISHER_NOTIFICATION_MESSAGE = "QuotaLimitApproachingPublisherNotificationMessage"
+
+
+class OAuth2GrantType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """OAuth2 grant type options."""
+
+    #: Authorization Code grant
+    AUTHORIZATION_CODE = "AuthorizationCode"
+    #: Client Credential grant
+    CLIENT_CREDENTIALS = "ClientCredentials"
 
 
 class OperationNameFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -473,18 +490,27 @@ class PolicyContentFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: The contents are inline and Content type is an XML document.
     XML = "xml"
-    #: The policy XML document is hosted on a http endpoint accessible from the API Management
+    #: The policy XML document is hosted on a HTTP endpoint accessible from the API Management
     #: service.
     XML_LINK = "xml-link"
     #: The contents are inline and Content type is a non XML encoded policy document.
     RAWXML = "rawxml"
-    #: The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API
+    #: The policy document is not XML encoded and is hosted on a HTTP endpoint accessible from the API
     #: Management service.
     RAWXML_LINK = "rawxml-link"
 
 
 class PolicyExportFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """PolicyExportFormat."""
+
+    #: The contents are inline and Content type is an XML document.
+    XML = "xml"
+    #: The contents are inline and Content type is a non XML encoded policy document.
+    RAWXML = "rawxml"
+
+
+class PolicyFragmentContentFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """PolicyFragmentContentFormat."""
 
     #: The contents are inline and Content type is an XML document.
     XML = "xml"
@@ -519,6 +545,17 @@ class PortalRevisionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     COMPLETED = "completed"
     #: Portal's revision publishing failed.
     FAILED = "failed"
+
+
+class PortalSettingsCspMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The mode of the developer portal Content Security Policy (CSP)."""
+
+    #: The browser will block requests not matching allowed origins.
+    ENABLED = "enabled"
+    #: The browser will not apply the origin restrictions.
+    DISABLED = "disabled"
+    #: The browser will report requests not matching allowed origins without blocking them.
+    REPORT_ONLY = "reportOnly"
 
 
 class PreferredIPVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -594,7 +631,7 @@ class SamplingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class SchemaType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Schema Type. Immutable."""
 
-    #: Xml schema type.
+    #: XML schema type.
     XML = "xml"
     #: Json schema type.
     JSON = "json"
@@ -699,6 +736,17 @@ class TemplateName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PASSWORD_RESET_BY_ADMIN_NOTIFICATION_MESSAGE = "passwordResetByAdminNotificationMessage"
     REJECT_DEVELOPER_NOTIFICATION_MESSAGE = "rejectDeveloperNotificationMessage"
     REQUEST_DEVELOPER_NOTIFICATION_MESSAGE = "requestDeveloperNotificationMessage"
+
+
+class TranslateRequiredQueryParametersConduct(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Strategy of translating required query parameters to template ones. By default has value
+    'template'. Possible values: 'template', 'query'.
+    """
+
+    #: Translates required query parameters to template ones. Is a default value
+    TEMPLATE = "template"
+    #: Leaves required query parameters as they are (no translation done).
+    QUERY = "query"
 
 
 class UserState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
