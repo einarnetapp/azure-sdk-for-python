@@ -408,12 +408,6 @@ class DayOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SATURDAY = "Saturday"
 
 
-class DevOpsAuditingSettingsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """DevOpsAuditingSettingsName."""
-
-    DEFAULT = "Default"
-
-
 class DiffBackupIntervalInHours(int, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The differential backup interval in hours. This is how many interval hours between each
     differential backup will be supported. This is only applicable to live databases but not
@@ -1066,6 +1060,12 @@ class SensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     SET = "set"
     REMOVE = "remove"
+
+
+class ServerConfigurationOptionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ServerConfigurationOptionName."""
+
+    ALLOW_POLYBASE_EXPORT = "allowPolybaseExport"
 
 
 class ServerConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
