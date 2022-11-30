@@ -48,7 +48,7 @@
         "service_client_specific": {
             "sync": {
                 "api_version": {
-                    "signature": "api_version=None, # type: Optional[str]",
+                    "signature": "api_version: Optional[str]=None,",
                     "description": "API version to use if no profile is provided, or if missing in profile.",
                     "docstring_type": "str",
                     "required": false
@@ -60,7 +60,7 @@
                     "required": false
                 },
                 "profile": {
-                    "signature": "profile=KnownProfiles.default, # type: KnownProfiles",
+                    "signature": "profile: KnownProfiles=KnownProfiles.default,",
                     "description": "A profile definition, from KnownProfiles to dict.",
                     "docstring_type": "azure.profiles.KnownProfiles",
                     "required": false
@@ -118,12 +118,8 @@
         "nsp_profiles": "NspProfilesOperations",
         "nsp_access_rules": "NspAccessRulesOperations",
         "nsp_associations": "NspAssociationsOperations",
-        "nsp_association_reconcile": "NspAssociationReconcileOperations",
+        "nsp_associations_proxy": "NspAssociationsProxyOperations",
         "perimeter_associable_resource_types": "PerimeterAssociableResourceTypesOperations",
-        "nsp_access_rules_reconcile": "NspAccessRulesReconcileOperations",
-        "nsp_links": "NspLinksOperations",
-        "nsp_link_reconcile": "NspLinkReconcileOperations",
-        "nsp_link_references": "NspLinkReferencesOperations",
-        "nsp_link_reference_reconcile": "NspLinkReferenceReconcileOperations"
+        "nsp_access_rules_reconcile": "NspAccessRulesReconcileOperations"
     }
 }

@@ -114,20 +114,18 @@ class IsGlobal(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     TRUE = "True"
 
 
+class IsMember(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """yes/no, if it is member or not."""
+
+    YES = "yes"
+    NO = "no"
+
+
 class MembershipType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Membership Type."""
 
     STATIC = "Static"
     DYNAMIC = "Dynamic"
-
-
-class NspLinkStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The NSP link state."""
-
-    APPROVED = "Approved"
-    PENDING = "Pending"
-    REJECTED = "Rejected"
-    DISCONNECTED = "Disconnected"
 
 
 class NspProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):

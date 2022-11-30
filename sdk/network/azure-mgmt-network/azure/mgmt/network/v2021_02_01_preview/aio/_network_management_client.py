@@ -12,7 +12,7 @@ from typing import Any, Awaitable, TYPE_CHECKING
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
 
-from .. import models
+from .. import models as _models
 from ..._serialization import Deserializer, Serializer
 from ._configuration import NetworkManagementClientConfiguration
 from .operations import (
@@ -32,12 +32,8 @@ from .operations import (
     NetworkSecurityPerimetersOperations,
     NspAccessRulesOperations,
     NspAccessRulesReconcileOperations,
-    NspAssociationReconcileOperations,
     NspAssociationsOperations,
-    NspLinkReconcileOperations,
-    NspLinkReferenceReconcileOperations,
-    NspLinkReferencesOperations,
-    NspLinksOperations,
+    NspAssociationsProxyOperations,
     NspProfilesOperations,
     PerimeterAssociableResourceTypesOperations,
     SecurityAdminConfigurationsOperations,
@@ -118,9 +114,9 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
     :ivar nsp_associations: NspAssociationsOperations operations
     :vartype nsp_associations:
      azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAssociationsOperations
-    :ivar nsp_association_reconcile: NspAssociationReconcileOperations operations
-    :vartype nsp_association_reconcile:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAssociationReconcileOperations
+    :ivar nsp_associations_proxy: NspAssociationsProxyOperations operations
+    :vartype nsp_associations_proxy:
+     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAssociationsProxyOperations
     :ivar perimeter_associable_resource_types: PerimeterAssociableResourceTypesOperations
      operations
     :vartype perimeter_associable_resource_types:
@@ -128,17 +124,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
     :ivar nsp_access_rules_reconcile: NspAccessRulesReconcileOperations operations
     :vartype nsp_access_rules_reconcile:
      azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAccessRulesReconcileOperations
-    :ivar nsp_links: NspLinksOperations operations
-    :vartype nsp_links: azure.mgmt.network.v2021_02_01_preview.aio.operations.NspLinksOperations
-    :ivar nsp_link_reconcile: NspLinkReconcileOperations operations
-    :vartype nsp_link_reconcile:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspLinkReconcileOperations
-    :ivar nsp_link_references: NspLinkReferencesOperations operations
-    :vartype nsp_link_references:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspLinkReferencesOperations
-    :ivar nsp_link_reference_reconcile: NspLinkReferenceReconcileOperations operations
-    :vartype nsp_link_reference_reconcile:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspLinkReferenceReconcileOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription credentials which uniquely identify the Microsoft
@@ -165,7 +150,7 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
         )
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -222,23 +207,13 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.nsp_associations = NspAssociationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.nsp_association_reconcile = NspAssociationReconcileOperations(
+        self.nsp_associations_proxy = NspAssociationsProxyOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.perimeter_associable_resource_types = PerimeterAssociableResourceTypesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.nsp_access_rules_reconcile = NspAccessRulesReconcileOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.nsp_links = NspLinksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.nsp_link_reconcile = NspLinkReconcileOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.nsp_link_references = NspLinkReferencesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.nsp_link_reference_reconcile = NspLinkReferenceReconcileOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

@@ -22,6 +22,7 @@ from ._models_py3 import AdminRule
 from ._models_py3 import AdminRuleListResult
 from ._models_py3 import BaseAdminRule
 from ._models_py3 import BaseUserRule
+from ._models_py3 import CheckMembers
 from ._models_py3 import CloudErrorBody
 from ._models_py3 import ConfigurationGroup
 from ._models_py3 import ConnectivityConfiguration
@@ -38,6 +39,7 @@ from ._models_py3 import EffectiveVirtualNetworksListResult
 from ._models_py3 import EffectiveVirtualNetworksParameter
 from ._models_py3 import GroupMembersItem
 from ._models_py3 import Hub
+from ._models_py3 import MemberDestination
 from ._models_py3 import NetworkGroup
 from ._models_py3 import NetworkGroupListResult
 from ._models_py3 import NetworkManager
@@ -56,16 +58,14 @@ from ._models_py3 import NspAccessRule
 from ._models_py3 import NspAccessRuleListResult
 from ._models_py3 import NspAssociation
 from ._models_py3 import NspAssociationsListResult
-from ._models_py3 import NspLink
-from ._models_py3 import NspLinkListResult
-from ._models_py3 import NspLinkReference
-from ._models_py3 import NspLinkReferenceListResult
 from ._models_py3 import NspProfile
 from ._models_py3 import NspProfileListResult
 from ._models_py3 import PerimeterAssociableResource
 from ._models_py3 import PerimeterAssociableResourcesListResult
 from ._models_py3 import PerimeterBasedAccessRule
 from ._models_py3 import ProxyResource
+from ._models_py3 import QueryNSPObj
+from ._models_py3 import QueryNSPReqRes
 from ._models_py3 import QueryRequestOptions
 from ._models_py3 import Resource
 from ._models_py3 import RuleCollection
@@ -73,7 +73,6 @@ from ._models_py3 import RuleCollectionListResult
 from ._models_py3 import SecurityConfiguration
 from ._models_py3 import SecurityConfigurationListResult
 from ._models_py3 import SubResource
-from ._models_py3 import SubscriptionId
 from ._models_py3 import SystemData
 from ._models_py3 import TagsObject
 from ._models_py3 import UserRule
@@ -93,8 +92,8 @@ from ._network_management_client_enums import EffectiveAdminRuleKind
 from ._network_management_client_enums import EffectiveUserRuleKind
 from ._network_management_client_enums import GroupConnectivity
 from ._network_management_client_enums import IsGlobal
+from ._network_management_client_enums import IsMember
 from ._network_management_client_enums import MembershipType
-from ._network_management_client_enums import NspLinkStatus
 from ._network_management_client_enums import NspProvisioningState
 from ._network_management_client_enums import ProvisioningState
 from ._network_management_client_enums import SecurityConfigurationRuleAccess
@@ -104,7 +103,7 @@ from ._network_management_client_enums import SecurityType
 from ._network_management_client_enums import UseHubGateway
 from ._network_management_client_enums import UserRuleKind
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -124,6 +123,7 @@ __all__ = [
     "AdminRuleListResult",
     "BaseAdminRule",
     "BaseUserRule",
+    "CheckMembers",
     "CloudErrorBody",
     "ConfigurationGroup",
     "ConnectivityConfiguration",
@@ -140,6 +140,7 @@ __all__ = [
     "EffectiveVirtualNetworksParameter",
     "GroupMembersItem",
     "Hub",
+    "MemberDestination",
     "NetworkGroup",
     "NetworkGroupListResult",
     "NetworkManager",
@@ -158,16 +159,14 @@ __all__ = [
     "NspAccessRuleListResult",
     "NspAssociation",
     "NspAssociationsListResult",
-    "NspLink",
-    "NspLinkListResult",
-    "NspLinkReference",
-    "NspLinkReferenceListResult",
     "NspProfile",
     "NspProfileListResult",
     "PerimeterAssociableResource",
     "PerimeterAssociableResourcesListResult",
     "PerimeterBasedAccessRule",
     "ProxyResource",
+    "QueryNSPObj",
+    "QueryNSPReqRes",
     "QueryRequestOptions",
     "Resource",
     "RuleCollection",
@@ -175,7 +174,6 @@ __all__ = [
     "SecurityConfiguration",
     "SecurityConfigurationListResult",
     "SubResource",
-    "SubscriptionId",
     "SystemData",
     "TagsObject",
     "UserRule",
@@ -194,8 +192,8 @@ __all__ = [
     "EffectiveUserRuleKind",
     "GroupConnectivity",
     "IsGlobal",
+    "IsMember",
     "MembershipType",
-    "NspLinkStatus",
     "NspProvisioningState",
     "ProvisioningState",
     "SecurityConfigurationRuleAccess",
