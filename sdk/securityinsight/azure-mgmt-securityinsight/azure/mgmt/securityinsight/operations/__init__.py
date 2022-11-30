@@ -25,9 +25,13 @@ from ._entity_query_templates_operations import EntityQueryTemplatesOperations
 from ._file_imports_operations import FileImportsOperations
 from ._incident_comments_operations import IncidentCommentsOperations
 from ._incident_relations_operations import IncidentRelationsOperations
+from ._incident_tasks_operations import IncidentTasksOperations
 from ._metadata_operations import MetadataOperations
 from ._office_consents_operations import OfficeConsentsOperations
 from ._sentinel_onboarding_states_operations import SentinelOnboardingStatesOperations
+from ._get_recommendations_operations import GetRecommendationsOperations
+from ._get_operations import GetOperations
+from ._update_operations import UpdateOperations
 from ._security_ml_analytics_settings_operations import SecurityMLAnalyticsSettingsOperations
 from ._product_settings_operations import ProductSettingsOperations
 from ._source_control_operations import SourceControlOperations
@@ -39,10 +43,12 @@ from ._watchlists_operations import WatchlistsOperations
 from ._watchlist_items_operations import WatchlistItemsOperations
 from ._data_connectors_operations import DataConnectorsOperations
 from ._data_connectors_check_requirements_operations import DataConnectorsCheckRequirementsOperations
+from ._content_packages_operations import ContentPackagesOperations
+from ._content_templates_operations import ContentTemplatesOperations
 from ._operations import Operations
 
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -65,9 +71,13 @@ __all__ = [
     "FileImportsOperations",
     "IncidentCommentsOperations",
     "IncidentRelationsOperations",
+    "IncidentTasksOperations",
     "MetadataOperations",
     "OfficeConsentsOperations",
     "SentinelOnboardingStatesOperations",
+    "GetRecommendationsOperations",
+    "GetOperations",
+    "UpdateOperations",
     "SecurityMLAnalyticsSettingsOperations",
     "ProductSettingsOperations",
     "SourceControlOperations",
@@ -79,6 +89,8 @@ __all__ = [
     "WatchlistItemsOperations",
     "DataConnectorsOperations",
     "DataConnectorsCheckRequirementsOperations",
+    "ContentPackagesOperations",
+    "ContentTemplatesOperations",
     "Operations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
