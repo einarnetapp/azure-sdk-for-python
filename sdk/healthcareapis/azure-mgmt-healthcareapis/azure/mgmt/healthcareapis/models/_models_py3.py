@@ -2498,7 +2498,7 @@ class ServiceCosmosDbConfigurationInfo(_serialization.Model):
     """
 
     _validation = {
-        "offer_throughput": {"maximum": 10000, "minimum": 400},
+        "offer_throughput": {"minimum": 400},
     }
 
     _attribute_map = {
