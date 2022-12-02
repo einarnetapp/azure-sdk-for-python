@@ -37,6 +37,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2022-06-01/examples/iotconnectors/iotconnector_List.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_List.json
 if __name__ == "__main__":
     main()

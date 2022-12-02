@@ -14,7 +14,7 @@ from azure.mgmt.healthcareapis import HealthcareApisManagementClient
     pip install azure-identity
     pip install azure-mgmt-healthcareapis
 # USAGE
-    python workspace_create_private_endpoint_connection.py
+    python analytics_connectors_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,17 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.workspace_private_endpoint_connections.begin_create_or_update(
+    response = client.analytics_connectors.get(
         resource_group_name="testRG",
         workspace_name="workspace1",
-        private_endpoint_connection_name="myConnection",
-        properties={
-            "properties": {"privateLinkServiceConnectionState": {"description": "Auto-Approved", "status": "Approved"}}
-        },
-    ).result()
+        analytics_connector_name="exampleconnector",
+    )
     print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/WorkspaceCreatePrivateEndpointConnection.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Get.json
 if __name__ == "__main__":
     main()

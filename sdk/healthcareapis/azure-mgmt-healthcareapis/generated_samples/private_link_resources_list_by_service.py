@@ -36,6 +36,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2022-06-01/examples/legacy/PrivateLinkResourcesListByService.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/PrivateLinkResourcesListByService.json
 if __name__ == "__main__":
     main()

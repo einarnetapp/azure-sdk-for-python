@@ -14,7 +14,7 @@ from azure.mgmt.healthcareapis import HealthcareApisManagementClient
     pip install azure-identity
     pip install azure-mgmt-healthcareapis
 # USAGE
-    python workspace_create_private_endpoint_connection.py
+    python analytics_connectors_create.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,17 +29,30 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.workspace_private_endpoint_connections.begin_create_or_update(
+    response = client.analytics_connectors.begin_create_or_update(
         resource_group_name="testRG",
         workspace_name="workspace1",
-        private_endpoint_connection_name="myConnection",
-        properties={
-            "properties": {"privateLinkServiceConnectionState": {"description": "Auto-Approved", "status": "Approved"}}
+        analytics_connector_name="exampleconnector",
+        analytics_connector={
+            "location": "westus",
+            "properties": {
+                "dataDestinationConfiguration": {"dataLakeName": "exampledatalake", "type": "datalake"},
+                "dataMappingConfiguration": {
+                    "extensionSchemaReference": "acrexample.azurecr.io/blah@sha256aaa/Extension",
+                    "filterConfigurationReference": "acrexample.azurecr.io/blah@sha256xxx",
+                    "type": "fhirToParquet",
+                },
+                "dataSourceConfiguration": {
+                    "kind": "R4",
+                    "type": "fhirservice",
+                    "url": "https://workspace-examplefhir.fhir.azurehealthcareapis.com",
+                },
+            },
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/WorkspaceCreatePrivateEndpointConnection.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Create.json
 if __name__ == "__main__":
     main()

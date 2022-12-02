@@ -31,13 +31,11 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._services_operations import (
-    build_check_name_availability_request,
+from ...operations._analytics_connectors_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
-    build_list_by_resource_group_request,
-    build_list_request,
+    build_list_by_workspace_request,
     build_update_request,
 )
 
@@ -49,14 +47,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class ServicesOperations:
+class AnalyticsConnectorsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.healthcareapis.aio.HealthcareApisManagementClient`'s
-        :attr:`services` attribute.
+        :attr:`analytics_connectors` attribute.
     """
 
     models = _models
@@ -68,18 +66,116 @@ class ServicesOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    @distributed_trace_async
-    async def get(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> _models.ServicesDescription:
-        """Get the metadata of a service instance.
+    @distributed_trace
+    def list_by_workspace(
+        self, resource_group_name: str, workspace_name: str, **kwargs: Any
+    ) -> AsyncIterable["_models.AnalyticsConnector"]:
+        """Lists all Analytics Connectors for the given workspace.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ServicesDescription or the result of cls(response)
-        :rtype: ~azure.mgmt.healthcareapis.models.ServicesDescription
+        :return: An iterator like instance of either AnalyticsConnector or the result of cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.AnalyticsConnectorCollection] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_workspace_request(
+                    resource_group_name=resource_group_name,
+                    workspace_name=workspace_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    template_url=self.list_by_workspace.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("AnalyticsConnectorCollection", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_workspace.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors"
+    }
+
+    @distributed_trace_async
+    async def get(
+        self, resource_group_name: str, workspace_name: str, analytics_connector_name: str, **kwargs: Any
+    ) -> _models.AnalyticsConnector:
+        """Gets the properties of the specified Analytics Connector.
+
+        :param resource_group_name: The name of the resource group that contains the service instance.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: AnalyticsConnector or the result of cls(response)
+        :rtype: ~azure.mgmt.healthcareapis.models.AnalyticsConnector
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -96,11 +192,12 @@ class ServicesOperations:
         api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.ServicesDescription] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            resource_name=resource_name,
+            workspace_name=workspace_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -121,7 +218,7 @@ class ServicesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("ServicesDescription", pipeline_response)
+        deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -129,16 +226,17 @@ class ServicesOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     async def _create_or_update_initial(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_description: Union[_models.ServicesDescription, IO],
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector: Union[_models.AnalyticsConnector, IO],
         **kwargs: Any
-    ) -> _models.ServicesDescription:
+    ) -> _models.AnalyticsConnector:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -154,19 +252,20 @@ class ServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.ServicesDescription] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(service_description, (IO, bytes)):
-            _content = service_description
+        if isinstance(analytics_connector, (IO, bytes)):
+            _content = analytics_connector
         else:
-            _json = self._serialize.body(service_description, "ServicesDescription")
+            _json = self._serialize.body(analytics_connector, "AnalyticsConnector")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            resource_name=resource_name,
+            workspace_name=workspace_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -191,10 +290,10 @@ class ServicesOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("ServicesDescription", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("ServicesDescription", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -202,28 +301,32 @@ class ServicesOperations:
         return deserialized  # type: ignore
 
     _create_or_update_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     @overload
     async def begin_create_or_update(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_description: _models.ServicesDescription,
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector: _models.AnalyticsConnector,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ServicesDescription]:
-        """Create or update the metadata of a service instance.
+    ) -> AsyncLROPoller[_models.AnalyticsConnector]:
+        """Creates or updates a Analytics Connector resource with the specified parameters.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
-        :param service_description: The service instance metadata. Required.
-        :type service_description: ~azure.mgmt.healthcareapis.models.ServicesDescription
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector: The parameters for creating or updating a Analytics Connector
+         resource. Required.
+        :type analytics_connector: ~azure.mgmt.healthcareapis.models.AnalyticsConnector
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -235,10 +338,10 @@ class ServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ServicesDescription or the result of
+        :return: An instance of AsyncLROPoller that returns either AnalyticsConnector or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.ServicesDescription]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -246,21 +349,25 @@ class ServicesOperations:
     async def begin_create_or_update(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_description: IO,
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ServicesDescription]:
-        """Create or update the metadata of a service instance.
+    ) -> AsyncLROPoller[_models.AnalyticsConnector]:
+        """Creates or updates a Analytics Connector resource with the specified parameters.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
-        :param service_description: The service instance metadata. Required.
-        :type service_description: IO
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector: The parameters for creating or updating a Analytics Connector
+         resource. Required.
+        :type analytics_connector: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -272,10 +379,10 @@ class ServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ServicesDescription or the result of
+        :return: An instance of AsyncLROPoller that returns either AnalyticsConnector or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.ServicesDescription]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -283,20 +390,23 @@ class ServicesOperations:
     async def begin_create_or_update(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_description: Union[_models.ServicesDescription, IO],
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector: Union[_models.AnalyticsConnector, IO],
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ServicesDescription]:
-        """Create or update the metadata of a service instance.
+    ) -> AsyncLROPoller[_models.AnalyticsConnector]:
+        """Creates or updates a Analytics Connector resource with the specified parameters.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
-        :param service_description: The service instance metadata. Is either a model type or a IO type.
-         Required.
-        :type service_description: ~azure.mgmt.healthcareapis.models.ServicesDescription or IO
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector: The parameters for creating or updating a Analytics Connector
+         resource. Is either a model type or a IO type. Required.
+        :type analytics_connector: ~azure.mgmt.healthcareapis.models.AnalyticsConnector or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -308,10 +418,10 @@ class ServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ServicesDescription or the result of
+        :return: An instance of AsyncLROPoller that returns either AnalyticsConnector or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.ServicesDescription]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -321,15 +431,16 @@ class ServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.ServicesDescription] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._create_or_update_initial(
                 resource_group_name=resource_group_name,
-                resource_name=resource_name,
-                service_description=service_description,
+                workspace_name=workspace_name,
+                analytics_connector_name=analytics_connector_name,
+                analytics_connector=analytics_connector,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -340,13 +451,16 @@ class ServicesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("ServicesDescription", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -361,16 +475,17 @@ class ServicesOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     async def _update_initial(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_patch_description: Union[_models.ServicesPatchDescription, IO],
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: Union[_models.AnalyticsConnectorPatchResource, IO],
         **kwargs: Any
-    ) -> _models.ServicesDescription:
+    ) -> _models.AnalyticsConnector:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -386,19 +501,20 @@ class ServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.ServicesDescription] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(service_patch_description, (IO, bytes)):
-            _content = service_patch_description
+        if isinstance(analytics_connector_patch_resource, (IO, bytes)):
+            _content = analytics_connector_patch_resource
         else:
-            _json = self._serialize.body(service_patch_description, "ServicesPatchDescription")
+            _json = self._serialize.body(analytics_connector_patch_resource, "AnalyticsConnectorPatchResource")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
-            resource_name=resource_name,
+            workspace_name=workspace_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -417,42 +533,50 @@ class ServicesOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200]:
+        if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("ServicesDescription", pipeline_response)
+        if response.status_code == 200:
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
+
+        if response.status_code == 202:
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
     _update_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     @overload
     async def begin_update(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_patch_description: _models.ServicesPatchDescription,
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: _models.AnalyticsConnectorPatchResource,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ServicesDescription]:
-        """Update the metadata of a service instance.
+    ) -> AsyncLROPoller[_models.AnalyticsConnector]:
+        """Patch Analytics Connector Service details.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
-        :param service_patch_description: The service instance metadata and security metadata.
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector_patch_resource: The parameters for updating a Analytics Connector.
          Required.
-        :type service_patch_description: ~azure.mgmt.healthcareapis.models.ServicesPatchDescription
+        :type analytics_connector_patch_resource:
+         ~azure.mgmt.healthcareapis.models.AnalyticsConnectorPatchResource
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -464,10 +588,10 @@ class ServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ServicesDescription or the result of
+        :return: An instance of AsyncLROPoller that returns either AnalyticsConnector or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.ServicesDescription]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -475,22 +599,25 @@ class ServicesOperations:
     async def begin_update(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_patch_description: IO,
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ServicesDescription]:
-        """Update the metadata of a service instance.
+    ) -> AsyncLROPoller[_models.AnalyticsConnector]:
+        """Patch Analytics Connector Service details.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
-        :param service_patch_description: The service instance metadata and security metadata.
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector_patch_resource: The parameters for updating a Analytics Connector.
          Required.
-        :type service_patch_description: IO
+        :type analytics_connector_patch_resource: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -502,10 +629,10 @@ class ServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ServicesDescription or the result of
+        :return: An instance of AsyncLROPoller that returns either AnalyticsConnector or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.ServicesDescription]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -513,21 +640,24 @@ class ServicesOperations:
     async def begin_update(
         self,
         resource_group_name: str,
-        resource_name: str,
-        service_patch_description: Union[_models.ServicesPatchDescription, IO],
+        workspace_name: str,
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: Union[_models.AnalyticsConnectorPatchResource, IO],
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ServicesDescription]:
-        """Update the metadata of a service instance.
+    ) -> AsyncLROPoller[_models.AnalyticsConnector]:
+        """Patch Analytics Connector Service details.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
-        :param service_patch_description: The service instance metadata and security metadata. Is
-         either a model type or a IO type. Required.
-        :type service_patch_description: ~azure.mgmt.healthcareapis.models.ServicesPatchDescription or
-         IO
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector_patch_resource: The parameters for updating a Analytics Connector.
+         Is either a model type or a IO type. Required.
+        :type analytics_connector_patch_resource:
+         ~azure.mgmt.healthcareapis.models.AnalyticsConnectorPatchResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -539,10 +669,10 @@ class ServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ServicesDescription or the result of
+        :return: An instance of AsyncLROPoller that returns either AnalyticsConnector or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.ServicesDescription]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -552,15 +682,16 @@ class ServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.ServicesDescription] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._update_initial(
                 resource_group_name=resource_group_name,
-                resource_name=resource_name,
-                service_patch_description=service_patch_description,
+                workspace_name=workspace_name,
+                analytics_connector_name=analytics_connector_name,
+                analytics_connector_patch_resource=analytics_connector_patch_resource,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -571,13 +702,16 @@ class ServicesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("ServicesDescription", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -592,11 +726,11 @@ class ServicesOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, resource_name: str, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, analytics_connector_name: str, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -616,7 +750,8 @@ class ServicesOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            resource_name=resource_name,
+            workspace_name=workspace_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -632,27 +767,31 @@ class ServicesOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [202, 204]:
+        if response.status_code not in [200, 202, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
     _delete_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     @distributed_trace_async
-    async def begin_delete(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> AsyncLROPoller[None]:
-        """Delete a service instance.
+    async def begin_delete(
+        self, resource_group_name: str, workspace_name: str, analytics_connector_name: str, **kwargs: Any
+    ) -> AsyncLROPoller[None]:
+        """Deletes a Analytics Connector.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the service instance. Required.
-        :type resource_name: str
+        :param workspace_name: The name of workspace resource. Required.
+        :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -678,7 +817,8 @@ class ServicesOperations:
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                resource_name=resource_name,
+                workspace_name=workspace_name,
+                analytics_connector_name=analytics_connector_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -692,7 +832,9 @@ class ServicesOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -707,301 +849,5 @@ class ServicesOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}"
-    }
-
-    @distributed_trace
-    def list(self, **kwargs: Any) -> AsyncIterable["_models.ServicesDescription"]:
-        """Get all the service instances in a subscription.
-
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ServicesDescription or the result of cls(response)
-        :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.healthcareapis.models.ServicesDescription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        cls: ClsType[_models.ServicesDescriptionListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_request(
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    template_url=self.list.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("ServicesDescriptionListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/services"}
-
-    @distributed_trace
-    def list_by_resource_group(
-        self, resource_group_name: str, **kwargs: Any
-    ) -> AsyncIterable["_models.ServicesDescription"]:
-        """Get all the service instances in a resource group.
-
-        :param resource_group_name: The name of the resource group that contains the service instance.
-         Required.
-        :type resource_group_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ServicesDescription or the result of cls(response)
-        :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.healthcareapis.models.ServicesDescription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        cls: ClsType[_models.ServicesDescriptionListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_resource_group_request(
-                    resource_group_name=resource_group_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("ServicesDescriptionListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_resource_group.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services"
-    }
-
-    @overload
-    async def check_name_availability(
-        self,
-        check_name_availability_inputs: _models.CheckNameAvailabilityParameters,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.ServicesNameAvailabilityInfo:
-        """Check if a service instance name is available.
-
-        :param check_name_availability_inputs: Set the name parameter in the
-         CheckNameAvailabilityParameters structure to the name of the service instance to check.
-         Required.
-        :type check_name_availability_inputs:
-         ~azure.mgmt.healthcareapis.models.CheckNameAvailabilityParameters
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ServicesNameAvailabilityInfo or the result of cls(response)
-        :rtype: ~azure.mgmt.healthcareapis.models.ServicesNameAvailabilityInfo
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def check_name_availability(
-        self, check_name_availability_inputs: IO, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.ServicesNameAvailabilityInfo:
-        """Check if a service instance name is available.
-
-        :param check_name_availability_inputs: Set the name parameter in the
-         CheckNameAvailabilityParameters structure to the name of the service instance to check.
-         Required.
-        :type check_name_availability_inputs: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ServicesNameAvailabilityInfo or the result of cls(response)
-        :rtype: ~azure.mgmt.healthcareapis.models.ServicesNameAvailabilityInfo
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def check_name_availability(
-        self, check_name_availability_inputs: Union[_models.CheckNameAvailabilityParameters, IO], **kwargs: Any
-    ) -> _models.ServicesNameAvailabilityInfo:
-        """Check if a service instance name is available.
-
-        :param check_name_availability_inputs: Set the name parameter in the
-         CheckNameAvailabilityParameters structure to the name of the service instance to check. Is
-         either a model type or a IO type. Required.
-        :type check_name_availability_inputs:
-         ~azure.mgmt.healthcareapis.models.CheckNameAvailabilityParameters or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ServicesNameAvailabilityInfo or the result of cls(response)
-        :rtype: ~azure.mgmt.healthcareapis.models.ServicesNameAvailabilityInfo
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.ServicesNameAvailabilityInfo] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(check_name_availability_inputs, (IO, bytes)):
-            _content = check_name_availability_inputs
-        else:
-            _json = self._serialize.body(check_name_availability_inputs, "CheckNameAvailabilityParameters")
-
-        request = build_check_name_availability_request(
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.check_name_availability.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("ServicesNameAvailabilityInfo", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    check_name_availability.metadata = {
-        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/checkNameAvailability"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
