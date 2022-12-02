@@ -2992,7 +2992,7 @@ class RoleManagementPolicyRule(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.id = id
-        self.rule_type = None  # type: Optional[str]
+        self.rule_type: Optional[str] = None
         self.target = target
 
 
@@ -3045,7 +3045,7 @@ class RoleManagementPolicyApprovalRule(RoleManagementPolicyRule):
         :paramtype setting: ~azure.mgmt.authorization.v2020_10_01_preview.models.ApprovalSettings
         """
         super().__init__(id=id, target=target, **kwargs)
-        self.rule_type = "RoleManagementPolicyApprovalRule"  # type: str
+        self.rule_type: str = "RoleManagementPolicyApprovalRule"
         self.setting = setting
 
 
@@ -3206,7 +3206,7 @@ class RoleManagementPolicyAuthenticationContextRule(RoleManagementPolicyRule):
         :paramtype claim_value: str
         """
         super().__init__(id=id, target=target, **kwargs)
-        self.rule_type = "RoleManagementPolicyAuthenticationContextRule"  # type: str
+        self.rule_type: str = "RoleManagementPolicyAuthenticationContextRule"
         self.is_enabled = is_enabled
         self.claim_value = claim_value
 
@@ -3262,7 +3262,7 @@ class RoleManagementPolicyEnablementRule(RoleManagementPolicyRule):
          ~azure.mgmt.authorization.v2020_10_01_preview.models.EnablementRules]
         """
         super().__init__(id=id, target=target, **kwargs)
-        self.rule_type = "RoleManagementPolicyEnablementRule"  # type: str
+        self.rule_type: str = "RoleManagementPolicyEnablementRule"
         self.enabled_rules = enabled_rules
 
 
@@ -3321,7 +3321,7 @@ class RoleManagementPolicyExpirationRule(RoleManagementPolicyRule):
         :paramtype maximum_duration: str
         """
         super().__init__(id=id, target=target, **kwargs)
-        self.rule_type = "RoleManagementPolicyExpirationRule"  # type: str
+        self.rule_type: str = "RoleManagementPolicyExpirationRule"
         self.is_expiration_required = is_expiration_required
         self.maximum_duration = maximum_duration
 
@@ -3440,7 +3440,7 @@ class RoleManagementPolicyNotificationRule(RoleManagementPolicyRule):
         :paramtype is_default_recipients_enabled: bool
         """
         super().__init__(id=id, target=target, **kwargs)
-        self.rule_type = "RoleManagementPolicyNotificationRule"  # type: str
+        self.rule_type: str = "RoleManagementPolicyNotificationRule"
         self.notification_type = notification_type
         self.notification_level = notification_level
         self.recipient_type = recipient_type

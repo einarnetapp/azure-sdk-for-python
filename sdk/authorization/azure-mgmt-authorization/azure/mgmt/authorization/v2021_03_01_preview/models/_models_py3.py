@@ -189,10 +189,10 @@ class AccessReviewDecision(_serialization.Model):  # pylint: disable=too-many-in
         self.principal_type_properties_reviewed_by_principal_type = None
         self.principal_name_properties_reviewed_by_principal_name = None
         self.user_principal_name_properties_reviewed_by_user_principal_name = None
-        self.type_properties_resource_type = None  # type: Optional[str]
+        self.type_properties_resource_type: Optional[str] = None
         self.id_properties_resource_id = None
         self.display_name_properties_resource_display_name = None
-        self.type_properties_principal_type = None  # type: Optional[str]
+        self.type_properties_principal_type: Optional[str] = None
         self.id_properties_principal_id = None
         self.display_name_properties_principal_display_name = None
 
@@ -238,7 +238,7 @@ class AccessReviewDecisionIdentity(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.id = None
         self.display_name = None
 
@@ -409,10 +409,10 @@ class AccessReviewDecisionProperties(_serialization.Model):  # pylint: disable=t
         self.principal_type_reviewed_by_principal_type = None
         self.principal_name_reviewed_by_principal_name = None
         self.user_principal_name_reviewed_by_user_principal_name = None
-        self.type_resource_type = None  # type: Optional[str]
+        self.type_resource_type: Optional[str] = None
         self.id_resource_id = None
         self.display_name_resource_display_name = None
-        self.type_principal_type = None  # type: Optional[str]
+        self.type_principal_type: Optional[str] = None
         self.id_principal_id = None
         self.display_name_principal_display_name = None
 
@@ -447,7 +447,7 @@ class AccessReviewDecisionResource(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.id = None
         self.display_name = None
 
@@ -487,7 +487,7 @@ class AccessReviewDecisionServicePrincipalIdentity(AccessReviewDecisionIdentity)
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "servicePrincipal"  # type: str
+        self.type: str = "servicePrincipal"
         self.app_id = None
 
 
@@ -526,7 +526,7 @@ class AccessReviewDecisionUserIdentity(AccessReviewDecisionIdentity):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "user"  # type: str
+        self.type: str = "user"
         self.user_principal_name = None
 
 

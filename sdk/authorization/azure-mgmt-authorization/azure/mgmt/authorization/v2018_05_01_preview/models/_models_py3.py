@@ -167,7 +167,7 @@ class AccessReviewDecision(_serialization.Model):  # pylint: disable=too-many-in
         self.principal_type_properties_reviewed_by_principal_type = None
         self.principal_name_properties_reviewed_by_principal_name = None
         self.user_principal_name_properties_reviewed_by_user_principal_name = None
-        self.type_properties_target_type = None  # type: Optional[str]
+        self.type_properties_target_type: Optional[str] = None
 
 
 class AccessReviewDecisionListResult(_serialization.Model):
@@ -313,7 +313,7 @@ class AccessReviewDecisionProperties(_serialization.Model):  # pylint: disable=t
         self.principal_type_reviewed_by_principal_type = None
         self.principal_name_reviewed_by_principal_name = None
         self.user_principal_name_reviewed_by_user_principal_name = None
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AccessReviewDecisionTarget(_serialization.Model):
@@ -342,7 +342,7 @@ class AccessReviewDecisionTarget(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AccessReviewDefaultSettings(_serialization.Model):  # pylint: disable=too-many-instance-attributes
@@ -1555,7 +1555,7 @@ class ServicePrincipalDecisionTarget(AccessReviewDecisionTarget):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "servicePrincipal"  # type: str
+        self.type: str = "servicePrincipal"
         self.principal_id = None
         self.principal_name = None
         self.app_id = None
@@ -1596,7 +1596,7 @@ class UserDecisionTarget(AccessReviewDecisionTarget):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "user"  # type: str
+        self.type: str = "user"
         self.principal_id = None
         self.principal_name = None
         self.user_principal_name = None

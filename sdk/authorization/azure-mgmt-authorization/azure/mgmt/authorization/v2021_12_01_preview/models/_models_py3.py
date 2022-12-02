@@ -302,7 +302,7 @@ class AccessReviewDecision(_serialization.Model):  # pylint: disable=too-many-in
         self.type_properties_resource_type = type_properties_resource_type
         self.id_properties_resource_id = None
         self.display_name_properties_resource_display_name = None
-        self.type_properties_principal_type = None  # type: Optional[str]
+        self.type_properties_principal_type: Optional[str] = None
         self.id_properties_principal_id = None
         self.display_name_properties_principal_display_name = None
 
@@ -348,7 +348,7 @@ class AccessReviewDecisionIdentity(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.id = None
         self.display_name = None
 
@@ -392,7 +392,7 @@ class AccessReviewDecisionInsight(_serialization.Model):
         self.id = None
         self.name = None
         self.type = None
-        self.type_properties_type = None  # type: Optional[str]
+        self.type_properties_type: Optional[str] = None
         self.insight_created_date_time = None
 
 
@@ -428,7 +428,7 @@ class AccessReviewDecisionInsightProperties(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.insight_created_date_time = None
 
 
@@ -629,7 +629,7 @@ class AccessReviewDecisionProperties(_serialization.Model):  # pylint: disable=t
         self.type_resource_type = type_resource_type
         self.id_resource_id = None
         self.display_name_resource_display_name = None
-        self.type_principal_type = None  # type: Optional[str]
+        self.type_principal_type: Optional[str] = None
         self.id_principal_id = None
         self.display_name_principal_display_name = None
 
@@ -669,7 +669,7 @@ class AccessReviewDecisionServicePrincipalIdentity(AccessReviewDecisionIdentity)
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "servicePrincipal"  # type: str
+        self.type: str = "servicePrincipal"
         self.app_id = None
 
 
@@ -708,7 +708,7 @@ class AccessReviewDecisionUserIdentity(AccessReviewDecisionIdentity):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "user"  # type: str
+        self.type: str = "user"
         self.user_principal_name = None
 
 
@@ -743,7 +743,7 @@ class AccessReviewDecisionUserSignInInsightProperties(AccessReviewDecisionInsigh
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "userSignInInsight"  # type: str
+        self.type: str = "userSignInInsight"
         self.last_sign_in_date_time = None
 
 
@@ -2806,6 +2806,8 @@ class AlertConfiguration(_serialization.Model):
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
@@ -2814,6 +2816,7 @@ class AlertConfiguration(_serialization.Model):
         "type": {"readonly": True},
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -2824,6 +2827,7 @@ class AlertConfiguration(_serialization.Model):
         "scope": {"key": "properties.scope", "type": "str"},
         "is_enabled": {"key": "properties.isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "properties.alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "properties.alertDefinition", "type": "AlertDefinition"},
     }
 
     def __init__(self, *, is_enabled: Optional[bool] = None, **kwargs):
@@ -2839,7 +2843,8 @@ class AlertConfiguration(_serialization.Model):
         self.alert_definition_id = None
         self.scope = None
         self.is_enabled = is_enabled
-        self.alert_configuration_type = None  # type: Optional[str]
+        self.alert_configuration_type: Optional[str] = None
+        self.alert_definition = None
 
 
 class AlertConfigurationListResult(_serialization.Model):
@@ -2892,12 +2897,15 @@ class AlertConfigurationProperties(_serialization.Model):
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -2905,6 +2913,7 @@ class AlertConfigurationProperties(_serialization.Model):
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
     }
 
     _subtype_map = {
@@ -2926,7 +2935,8 @@ class AlertConfigurationProperties(_serialization.Model):
         self.alert_definition_id = None
         self.scope = None
         self.is_enabled = is_enabled
-        self.alert_configuration_type = None  # type: Optional[str]
+        self.alert_configuration_type: Optional[str] = None
+        self.alert_definition = None
 
 
 class AlertDefinition(_serialization.Model):  # pylint: disable=too-many-instance-attributes
@@ -3071,7 +3081,7 @@ class AlertIncident(_serialization.Model):
         self.id = None
         self.name = None
         self.type = None
-        self.alert_incident_type = None  # type: Optional[str]
+        self.alert_incident_type: Optional[str] = None
 
 
 class AlertIncidentListResult(_serialization.Model):
@@ -3137,7 +3147,7 @@ class AlertIncidentProperties(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.alert_incident_type = None  # type: Optional[str]
+        self.alert_incident_type: Optional[str] = None
 
 
 class AlertListResult(_serialization.Model):
@@ -3239,12 +3249,15 @@ class AzureRolesAssignedOutsidePimAlertConfigurationProperties(AlertConfiguratio
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3252,6 +3265,7 @@ class AzureRolesAssignedOutsidePimAlertConfigurationProperties(AlertConfiguratio
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
     }
 
     def __init__(self, *, is_enabled: Optional[bool] = None, **kwargs):
@@ -3261,7 +3275,7 @@ class AzureRolesAssignedOutsidePimAlertConfigurationProperties(AlertConfiguratio
         :paramtype is_enabled: bool
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.alert_configuration_type = "AzureRolesAssignedOutsidePimAlertConfiguration"  # type: str
+        self.alert_configuration_type: str = "AzureRolesAssignedOutsidePimAlertConfiguration"
 
 
 class AzureRolesAssignedOutsidePimAlertIncidentProperties(
@@ -3328,7 +3342,7 @@ class AzureRolesAssignedOutsidePimAlertIncidentProperties(
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.alert_incident_type = "AzureRolesAssignedOutsidePimAlertIncident"  # type: str
+        self.alert_incident_type: str = "AzureRolesAssignedOutsidePimAlertIncident"
         self.assignee_display_name = None
         self.assignee_user_principal_name = None
         self.assignee_id = None
@@ -3387,12 +3401,15 @@ class DuplicateRoleCreatedAlertConfigurationProperties(AlertConfigurationPropert
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3400,6 +3417,7 @@ class DuplicateRoleCreatedAlertConfigurationProperties(AlertConfigurationPropert
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
     }
 
     def __init__(self, *, is_enabled: Optional[bool] = None, **kwargs):
@@ -3409,7 +3427,7 @@ class DuplicateRoleCreatedAlertConfigurationProperties(AlertConfigurationPropert
         :paramtype is_enabled: bool
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.alert_configuration_type = "DuplicateRoleCreatedAlertConfiguration"  # type: str
+        self.alert_configuration_type: str = "DuplicateRoleCreatedAlertConfiguration"
 
 
 class DuplicateRoleCreatedAlertIncidentProperties(AlertIncidentProperties):
@@ -3446,7 +3464,7 @@ class DuplicateRoleCreatedAlertIncidentProperties(AlertIncidentProperties):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.alert_incident_type = "DuplicateRoleCreatedAlertIncident"  # type: str
+        self.alert_incident_type: str = "DuplicateRoleCreatedAlertIncident"
         self.role_name = None
         self.duplicate_roles = None
         self.reason = None
@@ -3680,6 +3698,8 @@ class TooManyOwnersAssignedToResourceAlertConfigurationProperties(AlertConfigura
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     :ivar threshold_number_of_owners: The threshold number of owners.
     :vartype threshold_number_of_owners: int
     :ivar threshold_percentage_of_owners_out_of_all_role_members: The threshold percentage of
@@ -3691,6 +3711,7 @@ class TooManyOwnersAssignedToResourceAlertConfigurationProperties(AlertConfigura
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3698,6 +3719,7 @@ class TooManyOwnersAssignedToResourceAlertConfigurationProperties(AlertConfigura
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
         "threshold_number_of_owners": {"key": "thresholdNumberOfOwners", "type": "int"},
         "threshold_percentage_of_owners_out_of_all_role_members": {
             "key": "thresholdPercentageOfOwnersOutOfAllRoleMembers",
@@ -3724,7 +3746,7 @@ class TooManyOwnersAssignedToResourceAlertConfigurationProperties(AlertConfigura
         :paramtype threshold_percentage_of_owners_out_of_all_role_members: int
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.alert_configuration_type = "TooManyOwnersAssignedToResourceAlertConfiguration"  # type: str
+        self.alert_configuration_type: str = "TooManyOwnersAssignedToResourceAlertConfiguration"
         self.threshold_number_of_owners = threshold_number_of_owners
         self.threshold_percentage_of_owners_out_of_all_role_members = (
             threshold_percentage_of_owners_out_of_all_role_members
@@ -3761,7 +3783,7 @@ class TooManyOwnersAssignedToResourceAlertIncidentProperties(AlertIncidentProper
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.alert_incident_type = "TooManyOwnersAssignedToResourceAlertIncident"  # type: str
+        self.alert_incident_type: str = "TooManyOwnersAssignedToResourceAlertIncident"
         self.assignee_name = None
         self.assignee_type = None
 
@@ -3782,6 +3804,8 @@ class TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties(Alert
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     :ivar threshold_number_of_permanent_owners: The threshold number of permanent owners.
     :vartype threshold_number_of_permanent_owners: int
     :ivar threshold_percentage_of_permanent_owners_out_of_all_owners: The threshold percentage of
@@ -3793,6 +3817,7 @@ class TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties(Alert
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3800,6 +3825,7 @@ class TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties(Alert
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
         "threshold_number_of_permanent_owners": {"key": "thresholdNumberOfPermanentOwners", "type": "int"},
         "threshold_percentage_of_permanent_owners_out_of_all_owners": {
             "key": "thresholdPercentageOfPermanentOwnersOutOfAllOwners",
@@ -3826,7 +3852,7 @@ class TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties(Alert
         :paramtype threshold_percentage_of_permanent_owners_out_of_all_owners: int
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.alert_configuration_type = "TooManyPermanentOwnersAssignedToResourceAlertConfiguration"  # type: str
+        self.alert_configuration_type: str = "TooManyPermanentOwnersAssignedToResourceAlertConfiguration"
         self.threshold_number_of_permanent_owners = threshold_number_of_permanent_owners
         self.threshold_percentage_of_permanent_owners_out_of_all_owners = (
             threshold_percentage_of_permanent_owners_out_of_all_owners
@@ -3863,6 +3889,6 @@ class TooManyPermanentOwnersAssignedToResourceAlertIncidentProperties(AlertIncid
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.alert_incident_type = "TooManyPermanentOwnersAssignedToResourceAlertIncident"  # type: str
+        self.alert_incident_type: str = "TooManyPermanentOwnersAssignedToResourceAlertIncident"
         self.assignee_name = None
         self.assignee_type = None
