@@ -14,7 +14,7 @@ from azure.mgmt.iothubprovisioningservices import IotDpsClient
     pip install azure-identity
     pip install azure-mgmt-iothubprovisioningservices
 # USAGE
-    python dps_operations.py
+    python dps_list_private_link_resources.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,14 +26,16 @@ from azure.mgmt.iothubprovisioningservices import IotDpsClient
 def main():
     client = IotDpsClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
+        subscription_id="91d12660-3dec-467a-be2a-213b5544ddc0",
     )
 
-    response = client.operations.list()
-    for item in response:
-        print(item)
+    response = client.iot_dps_resource.list_private_link_resources(
+        resource_group_name="myResourceGroup",
+        resource_name="myFirstProvisioningService",
+    )
+    print(response)
 
 
-# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-12-02/examples/DPSOperations.json
+# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-12-02/examples/DPSListPrivateLinkResources.json
 if __name__ == "__main__":
     main()

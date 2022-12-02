@@ -14,7 +14,7 @@ from azure.mgmt.iothubprovisioningservices import IotDpsClient
     pip install azure-identity
     pip install azure-mgmt-iothubprovisioningservices
 # USAGE
-    python dps_check_name.py
+    python dps_create_or_update_private_endpoint_connection.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,12 +29,22 @@ def main():
         subscription_id="91d12660-3dec-467a-be2a-213b5544ddc0",
     )
 
-    response = client.iot_dps_resource.check_provisioning_service_name_availability(
-        arguments={"name": "test213123"},
-    )
+    response = client.iot_dps_resource.begin_create_or_update_private_endpoint_connection(
+        resource_group_name="myResourceGroup",
+        resource_name="myFirstProvisioningService",
+        private_endpoint_connection_name="myPrivateEndpointConnection",
+        private_endpoint_connection={
+            "properties": {
+                "privateLinkServiceConnectionState": {
+                    "description": "Approved by johndoe@contoso.com",
+                    "status": "Approved",
+                }
+            }
+        },
+    ).result()
     print(response)
 
 
-# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-02-05/examples/DPSCheckNameAvailability.json
+# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-12-02/examples/DPSCreateOrUpdatePrivateEndpointConnection.json
 if __name__ == "__main__":
     main()

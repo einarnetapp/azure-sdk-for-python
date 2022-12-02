@@ -14,7 +14,7 @@ from azure.mgmt.iothubprovisioningservices import IotDpsClient
     pip install azure-identity
     pip install azure-mgmt-iothubprovisioningservices
 # USAGE
-    python private_endpoint_connection_get.py
+    python dps_get_private_endpoint_connection.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -37,6 +37,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-02-05/examples/DPSGetPrivateEndpointConnection.json
+# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-12-02/examples/DPSGetPrivateEndpointConnection.json
 if __name__ == "__main__":
     main()

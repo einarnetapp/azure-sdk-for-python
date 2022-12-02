@@ -396,6 +396,9 @@ class IotDpsPropertiesDescription(_serialization.Model):  # pylint: disable=too-
      Indicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster
      recovery.
     :vartype enable_data_residency: bool
+    :ivar portal_operations_host_name: Portal endpoint to enable CORS for this provisioning
+     service.
+    :vartype portal_operations_host_name: str
     """
 
     _validation = {
@@ -420,6 +423,7 @@ class IotDpsPropertiesDescription(_serialization.Model):  # pylint: disable=too-
             "type": "[SharedAccessSignatureAuthorizationRuleAccessRightsDescription]",
         },
         "enable_data_residency": {"key": "enableDataResidency", "type": "bool"},
+        "portal_operations_host_name": {"key": "portalOperationsHostName", "type": "str"},
     }
 
     def __init__(
@@ -436,6 +440,7 @@ class IotDpsPropertiesDescription(_serialization.Model):  # pylint: disable=too-
             List["_models.SharedAccessSignatureAuthorizationRuleAccessRightsDescription"]
         ] = None,
         enable_data_residency: Optional[bool] = None,
+        portal_operations_host_name: Optional[str] = None,
         **kwargs
     ):
         """
@@ -468,6 +473,9 @@ class IotDpsPropertiesDescription(_serialization.Model):  # pylint: disable=too-
          Indicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster
          recovery.
         :paramtype enable_data_residency: bool
+        :keyword portal_operations_host_name: Portal endpoint to enable CORS for this provisioning
+         service.
+        :paramtype portal_operations_host_name: str
         """
         super().__init__(**kwargs)
         self.state = state
@@ -482,6 +490,7 @@ class IotDpsPropertiesDescription(_serialization.Model):  # pylint: disable=too-
         self.id_scope = None
         self.authorization_policies = authorization_policies
         self.enable_data_residency = enable_data_residency
+        self.portal_operations_host_name = portal_operations_host_name
 
 
 class IotDpsSkuDefinition(_serialization.Model):
