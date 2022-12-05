@@ -87,6 +87,10 @@ class SecurityCenter(MultiApiClientMixin, _SDKClient):
             'iot_security_solutions_analytics_recommendation': '2019-08-01',
             'jit_network_access_policies': '2020-01-01',
             'locations': '2015-06-01-preview',
+            'management_group_governance_rule': '2022-01-01-preview',
+            'management_group_governance_rules': '2022-01-01-preview',
+            'management_group_governance_rules_delete_status': '2022-01-01-preview',
+            'management_group_governance_rules_execute_status': '2022-01-01-preview',
             'mde_onboardings': '2021-10-01-preview',
             'operations': '2015-06-01-preview',
             'pricings': '2022-03-01',
@@ -120,10 +124,10 @@ class SecurityCenter(MultiApiClientMixin, _SDKClient):
         self,
         credential: "TokenCredential",
         subscription_id: str,
-        api_version=None, # type: Optional[str]
+        api_version: Optional[str]=None,
         base_url: str = "https://management.azure.com",
-        profile=KnownProfiles.default, # type: KnownProfiles
-        **kwargs  # type: Any
+        profile: KnownProfiles=KnownProfiles.default,
+        **kwargs: Any
     ):
         self._config = SecurityCenterConfiguration(credential, subscription_id, **kwargs)
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
@@ -679,6 +683,62 @@ class SecurityCenter(MultiApiClientMixin, _SDKClient):
             from .v2015_06_01_preview.operations import LocationsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'locations'".format(api_version))
+        self._config.api_version = api_version
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def management_group_governance_rule(self):
+        """Instance depends on the API version:
+
+           * 2022-01-01-preview: :class:`ManagementGroupGovernanceRuleOperations<azure.mgmt.security.v2022_01_01_preview.operations.ManagementGroupGovernanceRuleOperations>`
+        """
+        api_version = self._get_api_version('management_group_governance_rule')
+        if api_version == '2022-01-01-preview':
+            from .v2022_01_01_preview.operations import ManagementGroupGovernanceRuleOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'management_group_governance_rule'".format(api_version))
+        self._config.api_version = api_version
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def management_group_governance_rules(self):
+        """Instance depends on the API version:
+
+           * 2022-01-01-preview: :class:`ManagementGroupGovernanceRulesOperations<azure.mgmt.security.v2022_01_01_preview.operations.ManagementGroupGovernanceRulesOperations>`
+        """
+        api_version = self._get_api_version('management_group_governance_rules')
+        if api_version == '2022-01-01-preview':
+            from .v2022_01_01_preview.operations import ManagementGroupGovernanceRulesOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'management_group_governance_rules'".format(api_version))
+        self._config.api_version = api_version
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def management_group_governance_rules_delete_status(self):
+        """Instance depends on the API version:
+
+           * 2022-01-01-preview: :class:`ManagementGroupGovernanceRulesDeleteStatusOperations<azure.mgmt.security.v2022_01_01_preview.operations.ManagementGroupGovernanceRulesDeleteStatusOperations>`
+        """
+        api_version = self._get_api_version('management_group_governance_rules_delete_status')
+        if api_version == '2022-01-01-preview':
+            from .v2022_01_01_preview.operations import ManagementGroupGovernanceRulesDeleteStatusOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'management_group_governance_rules_delete_status'".format(api_version))
+        self._config.api_version = api_version
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def management_group_governance_rules_execute_status(self):
+        """Instance depends on the API version:
+
+           * 2022-01-01-preview: :class:`ManagementGroupGovernanceRulesExecuteStatusOperations<azure.mgmt.security.v2022_01_01_preview.operations.ManagementGroupGovernanceRulesExecuteStatusOperations>`
+        """
+        api_version = self._get_api_version('management_group_governance_rules_execute_status')
+        if api_version == '2022-01-01-preview':
+            from .v2022_01_01_preview.operations import ManagementGroupGovernanceRulesExecuteStatusOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'management_group_governance_rules_execute_status'".format(api_version))
         self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 

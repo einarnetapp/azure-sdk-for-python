@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, Optional, TypeVar, Union, cast
+from typing import Any, Callable, Dict, Optional, TypeVar
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -19,12 +19,10 @@ from azure.core.exceptions import (
 )
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
-from azure.core.polling import AsyncLROPoller, AsyncNoPolling, AsyncPollingMethod
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
-from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
@@ -57,7 +55,22 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    async def _get_initial(self, rule_id: str, operation_id: str, **kwargs: Any) -> Optional[_models.ExecuteRuleStatus]:
+    @distributed_trace_async
+    async def get(self, rule_id: str, operation_id: str, **kwargs: Any) -> Optional[_models.ExecuteRuleStatus]:
+        """Get a specific governance rule execution status for the requested scope by ruleId and
+        operationId.
+
+        :param rule_id: The governance rule key - unique key for the standard governance rule (GUID).
+         Required.
+        :type rule_id: str
+        :param operation_id: The governance rule execution key - unique key for the execution of
+         governance rule. Required.
+        :type operation_id: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ExecuteRuleStatus or None or the result of cls(response)
+        :rtype: ~azure.mgmt.security.v2022_01_01_preview.models.ExecuteRuleStatus or None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -69,24 +82,24 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.ExecuteRuleStatus]]
+        )
+        cls: ClsType[Optional[_models.ExecuteRuleStatus]] = kwargs.pop("cls", None)
 
         request = build_get_request(
             rule_id=rule_id,
             operation_id=operation_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self._get_initial.metadata["url"],
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -109,76 +122,6 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
 
         return deserialized
 
-    _get_initial.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"}  # type: ignore
-
-    @distributed_trace_async
-    async def begin_get(
-        self, rule_id: str, operation_id: str, **kwargs: Any
-    ) -> AsyncLROPoller[_models.ExecuteRuleStatus]:
-        """Get a specific governanceRule execution status for the requested scope by ruleId and
-        operationId.
-
-        :param rule_id: The security GovernanceRule key - unique key for the standard GovernanceRule.
-         Required.
-        :type rule_id: str
-        :param operation_id: The security GovernanceRule execution key - unique key for the execution
-         of GovernanceRule. Required.
-        :type operation_id: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ExecuteRuleStatus or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.security.v2022_01_01_preview.models.ExecuteRuleStatus]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ExecuteRuleStatus]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
-        if cont_token is None:
-            raw_result = await self._get_initial(  # type: ignore
-                rule_id=rule_id,
-                operation_id=operation_id,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("ExecuteRuleStatus", pipeline_response)
-            if cls:
-                return cls(pipeline_response, deserialized, {})
-            return deserialized
-
-        if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
-
-    begin_get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"
+    }

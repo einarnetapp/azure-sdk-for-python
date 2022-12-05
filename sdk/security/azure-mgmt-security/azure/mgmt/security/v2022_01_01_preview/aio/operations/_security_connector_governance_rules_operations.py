@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, overload
+from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -19,10 +19,12 @@ from azure.core.exceptions import (
 )
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
+from azure.core.polling import AsyncLROPoller, AsyncNoPolling, AsyncPollingMethod
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
+from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
@@ -63,14 +65,14 @@ class SecurityConnectorGovernanceRulesOperations:
     async def get(
         self, resource_group_name: str, security_connector_name: str, rule_id: str, **kwargs: Any
     ) -> _models.GovernanceRule:
-        """Get a specific governanceRule for the requested scope by ruleId.
+        """Get a specific governance rule for the requested scope by ruleId.
 
         :param resource_group_name: The name of the resource group within the user's subscription. The
          name is case insensitive. Required.
         :type resource_group_name: str
         :param security_connector_name: The security connector name. Required.
         :type security_connector_name: str
-        :param rule_id: The security GovernanceRule key - unique key for the standard GovernanceRule.
+        :param rule_id: The governance rule key - unique key for the standard governance rule (GUID).
          Required.
         :type rule_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -89,10 +91,10 @@ class SecurityConnectorGovernanceRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GovernanceRule]
+        )
+        cls: ClsType[_models.GovernanceRule] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -105,9 +107,9 @@ class SecurityConnectorGovernanceRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -124,7 +126,9 @@ class SecurityConnectorGovernanceRulesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}"
+    }
 
     @overload
     async def create_or_update(
@@ -137,17 +141,17 @@ class SecurityConnectorGovernanceRulesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.GovernanceRule:
-        """Creates or update a security GovernanceRule on the given security connector.
+        """Creates or updates a governance rule on the given security connector.
 
         :param resource_group_name: The name of the resource group within the user's subscription. The
          name is case insensitive. Required.
         :type resource_group_name: str
         :param security_connector_name: The security connector name. Required.
         :type security_connector_name: str
-        :param rule_id: The security GovernanceRule key - unique key for the standard GovernanceRule.
+        :param rule_id: The governance rule key - unique key for the standard governance rule (GUID).
          Required.
         :type rule_id: str
-        :param governance_rule: GovernanceRule over a subscription scope. Required.
+        :param governance_rule: Governance rule over a given scope. Required.
         :type governance_rule: ~azure.mgmt.security.v2022_01_01_preview.models.GovernanceRule
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -169,17 +173,17 @@ class SecurityConnectorGovernanceRulesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.GovernanceRule:
-        """Creates or update a security GovernanceRule on the given security connector.
+        """Creates or updates a governance rule on the given security connector.
 
         :param resource_group_name: The name of the resource group within the user's subscription. The
          name is case insensitive. Required.
         :type resource_group_name: str
         :param security_connector_name: The security connector name. Required.
         :type security_connector_name: str
-        :param rule_id: The security GovernanceRule key - unique key for the standard GovernanceRule.
+        :param rule_id: The governance rule key - unique key for the standard governance rule (GUID).
          Required.
         :type rule_id: str
-        :param governance_rule: GovernanceRule over a subscription scope. Required.
+        :param governance_rule: Governance rule over a given scope. Required.
         :type governance_rule: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -199,18 +203,18 @@ class SecurityConnectorGovernanceRulesOperations:
         governance_rule: Union[_models.GovernanceRule, IO],
         **kwargs: Any
     ) -> _models.GovernanceRule:
-        """Creates or update a security GovernanceRule on the given security connector.
+        """Creates or updates a governance rule on the given security connector.
 
         :param resource_group_name: The name of the resource group within the user's subscription. The
          name is case insensitive. Required.
         :type resource_group_name: str
         :param security_connector_name: The security connector name. Required.
         :type security_connector_name: str
-        :param rule_id: The security GovernanceRule key - unique key for the standard GovernanceRule.
+        :param rule_id: The governance rule key - unique key for the standard governance rule (GUID).
          Required.
         :type rule_id: str
-        :param governance_rule: GovernanceRule over a subscription scope. Is either a model type or a
-         IO type. Required.
+        :param governance_rule: Governance rule over a given scope. Is either a model type or a IO
+         type. Required.
         :type governance_rule: ~azure.mgmt.security.v2022_01_01_preview.models.GovernanceRule or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -231,11 +235,11 @@ class SecurityConnectorGovernanceRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GovernanceRule]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.GovernanceRule] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -259,9 +263,9 @@ class SecurityConnectorGovernanceRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -278,31 +282,17 @@ class SecurityConnectorGovernanceRulesOperations:
             deserialized = self._deserialize("GovernanceRule", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}"
+    }
 
-    @distributed_trace_async
-    async def delete(  # pylint: disable=inconsistent-return-statements
+    async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, security_connector_name: str, rule_id: str, **kwargs: Any
     ) -> None:
-        """Delete a GovernanceRule over a given scope.
-
-        :param resource_group_name: The name of the resource group within the user's subscription. The
-         name is case insensitive. Required.
-        :type resource_group_name: str
-        :param security_connector_name: The security connector name. Required.
-        :type security_connector_name: str
-        :param rule_id: The security GovernanceRule key - unique key for the standard GovernanceRule.
-         Required.
-        :type rule_id: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -314,10 +304,10 @@ class SecurityConnectorGovernanceRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
@@ -325,24 +315,104 @@ class SecurityConnectorGovernanceRulesOperations:
             rule_id=rule_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.delete.metadata["url"],
+            template_url=self._delete_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 204]:
+        if response.status_code not in [200, 202, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        if cls:
-            return cls(pipeline_response, None, {})
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["location"] = self._deserialize("str", response.headers.get("location"))
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}"}  # type: ignore
+        if cls:
+            return cls(pipeline_response, None, response_headers)
+
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}"
+    }
+
+    @distributed_trace_async
+    async def begin_delete(
+        self, resource_group_name: str, security_connector_name: str, rule_id: str, **kwargs: Any
+    ) -> AsyncLROPoller[None]:
+        """Delete a Governance rule over a given scope.
+
+        :param resource_group_name: The name of the resource group within the user's subscription. The
+         name is case insensitive. Required.
+        :type resource_group_name: str
+        :param security_connector_name: The security connector name. Required.
+        :type security_connector_name: str
+        :param rule_id: The governance rule key - unique key for the standard governance rule (GUID).
+         Required.
+        :type rule_id: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-01-01-preview")
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._delete_initial(  # type: ignore
+                resource_group_name=resource_group_name,
+                security_connector_name=security_connector_name,
+                rule_id=rule_id,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}"
+    }
