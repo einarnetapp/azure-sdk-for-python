@@ -40,7 +40,7 @@ class CostManagementClientConfiguration(Configuration):  # pylint: disable=too-m
 
     def __init__(self, credential: "AsyncTokenCredential", **kwargs: Any) -> None:
         super(CostManagementClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-10-01")  # type: Literal["2022-10-01"]
+        api_version: Literal["2022-10-01"] = kwargs.pop("api_version", "2022-10-01")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
