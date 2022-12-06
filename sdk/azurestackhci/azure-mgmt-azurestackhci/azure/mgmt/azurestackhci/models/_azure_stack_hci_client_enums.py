@@ -34,6 +34,9 @@ class ArcSettingAggregateState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PARTIALLY_SUCCEEDED = "PartiallySucceeded"
     PARTIALLY_CONNECTED = "PartiallyConnected"
     IN_PROGRESS = "InProgress"
+    ACCEPTED = "Accepted"
+    PROVISIONING = "Provisioning"
+    DISABLE_IN_PROGRESS = "DisableInProgress"
 
 
 class AvailabilityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -86,6 +89,19 @@ class ExtensionAggregateState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PARTIALLY_SUCCEEDED = "PartiallySucceeded"
     PARTIALLY_CONNECTED = "PartiallyConnected"
     IN_PROGRESS = "InProgress"
+    ACCEPTED = "Accepted"
+    PROVISIONING = "Provisioning"
+
+
+class HealthState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """HealthState."""
+
+    UNKNOWN = "Unknown"
+    SUCCESS = "Success"
+    FAILURE = "Failure"
+    WARNING = "Warning"
+    ERROR = "Error"
+    IN_PROGRESS = "InProgress"
 
 
 class ImdsAttestation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -121,6 +137,12 @@ class NodeArcState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     UPDATING = "Updating"
     DELETING = "Deleting"
     MOVING = "Moving"
+    PARTIALLY_SUCCEEDED = "PartiallySucceeded"
+    PARTIALLY_CONNECTED = "PartiallyConnected"
+    IN_PROGRESS = "InProgress"
+    ACCEPTED = "Accepted"
+    PROVISIONING = "Provisioning"
+    DISABLE_IN_PROGRESS = "DisableInProgress"
 
 
 class NodeExtensionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -138,6 +160,11 @@ class NodeExtensionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     UPDATING = "Updating"
     DELETING = "Deleting"
     MOVING = "Moving"
+    PARTIALLY_SUCCEEDED = "PartiallySucceeded"
+    PARTIALLY_CONNECTED = "PartiallyConnected"
+    IN_PROGRESS = "InProgress"
+    ACCEPTED = "Accepted"
+    PROVISIONING = "Provisioning"
 
 
 class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -153,11 +180,43 @@ class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the ArcSetting proxy resource."""
 
+    NOT_SPECIFIED = "NotSpecified"
+    ERROR = "Error"
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
     CANCELED = "Canceled"
+    CONNECTED = "Connected"
+    DISCONNECTED = "Disconnected"
+    DELETED = "Deleted"
+    CREATING = "Creating"
+    UPDATING = "Updating"
+    DELETING = "Deleting"
+    MOVING = "Moving"
+    PARTIALLY_SUCCEEDED = "PartiallySucceeded"
+    PARTIALLY_CONNECTED = "PartiallyConnected"
+    IN_PROGRESS = "InProgress"
     ACCEPTED = "Accepted"
     PROVISIONING = "Provisioning"
+    DISABLE_IN_PROGRESS = "DisableInProgress"
+
+
+class RebootRequirement(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """RebootRequirement."""
+
+    UNKNOWN = "Unknown"
+    TRUE = "True"
+    FALSE = "False"
+
+
+class Severity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Severity of the result (Critical, Warning, Informational, Hidden). This answers how important
+    the result is. Critical is the only update-blocking severity.
+    """
+
+    CRITICAL = "Critical"
+    WARNING = "Warning"
+    INFORMATIONAL = "Informational"
+    HIDDEN = "Hidden"
 
 
 class SoftwareAssuranceIntent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -205,6 +264,10 @@ class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     NOT_CONNECTED_RECENTLY = "NotConnectedRecently"
     DISCONNECTED = "Disconnected"
     ERROR = "Error"
+    NOT_SPECIFIED = "NotSpecified"
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    IN_PROGRESS = "InProgress"
 
 
 class UpdateRunPropertiesState(str, Enum, metaclass=CaseInsensitiveEnumMeta):

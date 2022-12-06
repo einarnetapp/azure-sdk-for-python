@@ -32,6 +32,8 @@ from ._models_py3 import PackageVersionInfo
 from ._models_py3 import PasswordCredential
 from ._models_py3 import PerNodeExtensionState
 from ._models_py3 import PerNodeState
+from ._models_py3 import PrecheckResult
+from ._models_py3 import PrecheckResultTags
 from ._models_py3 import ProxyResource
 from ._models_py3 import Publisher
 from ._models_py3 import PublisherList
@@ -63,12 +65,15 @@ from ._azure_stack_hci_client_enums import ClusterNodeType
 from ._azure_stack_hci_client_enums import CreatedByType
 from ._azure_stack_hci_client_enums import DiagnosticLevel
 from ._azure_stack_hci_client_enums import ExtensionAggregateState
+from ._azure_stack_hci_client_enums import HealthState
 from ._azure_stack_hci_client_enums import ImdsAttestation
 from ._azure_stack_hci_client_enums import ManagedServiceIdentityType
 from ._azure_stack_hci_client_enums import NodeArcState
 from ._azure_stack_hci_client_enums import NodeExtensionState
 from ._azure_stack_hci_client_enums import Origin
 from ._azure_stack_hci_client_enums import ProvisioningState
+from ._azure_stack_hci_client_enums import RebootRequirement
+from ._azure_stack_hci_client_enums import Severity
 from ._azure_stack_hci_client_enums import SoftwareAssuranceIntent
 from ._azure_stack_hci_client_enums import SoftwareAssuranceStatus
 from ._azure_stack_hci_client_enums import State
@@ -107,6 +112,8 @@ __all__ = [
     "PasswordCredential",
     "PerNodeExtensionState",
     "PerNodeState",
+    "PrecheckResult",
+    "PrecheckResultTags",
     "ProxyResource",
     "Publisher",
     "PublisherList",
@@ -137,12 +144,15 @@ __all__ = [
     "CreatedByType",
     "DiagnosticLevel",
     "ExtensionAggregateState",
+    "HealthState",
     "ImdsAttestation",
     "ManagedServiceIdentityType",
     "NodeArcState",
     "NodeExtensionState",
     "Origin",
     "ProvisioningState",
+    "RebootRequirement",
+    "Severity",
     "SoftwareAssuranceIntent",
     "SoftwareAssuranceStatus",
     "State",

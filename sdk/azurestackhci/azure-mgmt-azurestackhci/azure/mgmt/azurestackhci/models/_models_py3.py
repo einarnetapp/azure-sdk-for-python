@@ -185,7 +185,9 @@ class ArcSetting(ProxyResource):  # pylint: disable=too-many-instance-attributes
      information.
     :vartype system_data: ~azure.mgmt.azurestackhci.models.SystemData
     :ivar provisioning_state: Provisioning state of the ArcSetting proxy resource. Known values
-     are: "Succeeded", "Failed", "Canceled", "Accepted", and "Provisioning".
+     are: "NotSpecified", "Error", "Succeeded", "Failed", "Canceled", "Connected", "Disconnected",
+     "Deleted", "Creating", "Updating", "Deleting", "Moving", "PartiallySucceeded",
+     "PartiallyConnected", "InProgress", "Accepted", "Provisioning", and "DisableInProgress".
     :vartype provisioning_state: str or ~azure.mgmt.azurestackhci.models.ProvisioningState
     :ivar arc_instance_resource_group: The resource group that hosts the Arc agents, ie. Hybrid
      Compute Machine resources.
@@ -201,7 +203,7 @@ class ArcSetting(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :ivar aggregate_state: Aggregate state of Arc agent across the nodes in this HCI cluster. Known
      values are: "NotSpecified", "Error", "Succeeded", "Canceled", "Failed", "Connected",
      "Disconnected", "Deleted", "Creating", "Updating", "Deleting", "Moving", "PartiallySucceeded",
-     "PartiallyConnected", and "InProgress".
+     "PartiallyConnected", "InProgress", "Accepted", "Provisioning", and "DisableInProgress".
     :vartype aggregate_state: str or ~azure.mgmt.azurestackhci.models.ArcSettingAggregateState
     :ivar per_node_details: State of Arc agent in each of the nodes.
     :vartype per_node_details: list[~azure.mgmt.azurestackhci.models.PerNodeState]
@@ -406,11 +408,14 @@ class Cluster(TrackedResource):  # pylint: disable=too-many-instance-attributes
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
-    :ivar provisioning_state: Provisioning state. Known values are: "Succeeded", "Failed",
-     "Canceled", "Accepted", and "Provisioning".
+    :ivar provisioning_state: Provisioning state. Known values are: "NotSpecified", "Error",
+     "Succeeded", "Failed", "Canceled", "Connected", "Disconnected", "Deleted", "Creating",
+     "Updating", "Deleting", "Moving", "PartiallySucceeded", "PartiallyConnected", "InProgress",
+     "Accepted", "Provisioning", and "DisableInProgress".
     :vartype provisioning_state: str or ~azure.mgmt.azurestackhci.models.ProvisioningState
     :ivar status: Status of the cluster agent. Known values are: "NotYetRegistered",
-     "ConnectedRecently", "NotConnectedRecently", "Disconnected", and "Error".
+     "ConnectedRecently", "NotConnectedRecently", "Disconnected", "Error", "NotSpecified",
+     "Succeeded", "Failed", and "InProgress".
     :vartype status: str or ~azure.mgmt.azurestackhci.models.Status
     :ivar cloud_id: Unique, immutable resource id.
     :vartype cloud_id: str
@@ -443,6 +448,8 @@ class Cluster(TrackedResource):  # pylint: disable=too-many-instance-attributes
     :vartype last_billing_timestamp: ~datetime.datetime
     :ivar service_endpoint: Region specific DataPath Endpoint of the cluster.
     :vartype service_endpoint: str
+    :ivar resource_provider_object_id: Object id of RP Service Principal.
+    :vartype resource_provider_object_id: str
     :ivar principal_id: The service principal ID of the system assigned identity. This property
      will only be provided for a system assigned identity.
     :vartype principal_id: str
@@ -477,6 +484,7 @@ class Cluster(TrackedResource):  # pylint: disable=too-many-instance-attributes
         "last_sync_timestamp": {"readonly": True},
         "last_billing_timestamp": {"readonly": True},
         "service_endpoint": {"readonly": True},
+        "resource_provider_object_id": {"readonly": True},
         "principal_id": {"readonly": True},
         "tenant_id": {"readonly": True},
     }
@@ -508,6 +516,7 @@ class Cluster(TrackedResource):  # pylint: disable=too-many-instance-attributes
         "last_sync_timestamp": {"key": "properties.lastSyncTimestamp", "type": "iso-8601"},
         "last_billing_timestamp": {"key": "properties.lastBillingTimestamp", "type": "iso-8601"},
         "service_endpoint": {"key": "properties.serviceEndpoint", "type": "str"},
+        "resource_provider_object_id": {"key": "properties.resourceProviderObjectId", "type": "str"},
         "principal_id": {"key": "identity.principalId", "type": "str"},
         "tenant_id": {"key": "identity.tenantId", "type": "str"},
         "type_identity_type": {"key": "identity.type", "type": "str"},
@@ -580,6 +589,7 @@ class Cluster(TrackedResource):  # pylint: disable=too-many-instance-attributes
         self.last_sync_timestamp = None
         self.last_billing_timestamp = None
         self.service_endpoint = None
+        self.resource_provider_object_id = None
         self.principal_id = None
         self.tenant_id = None
         self.type_identity_type = type_identity_type
@@ -716,6 +726,8 @@ class ClusterNode(_serialization.Model):  # pylint: disable=too-many-instance-at
     :ivar node_type: Type of the cluster node hardware. Known values are: "FirstParty" and
      "ThirdParty".
     :vartype node_type: str or ~azure.mgmt.azurestackhci.models.ClusterNodeType
+    :ivar ehc_resource_id: Edge Hardware Center Resource Id.
+    :vartype ehc_resource_id: str
     :ivar manufacturer: Manufacturer of the cluster node hardware.
     :vartype manufacturer: str
     :ivar model: Model name of the cluster node hardware.
@@ -739,6 +751,7 @@ class ClusterNode(_serialization.Model):  # pylint: disable=too-many-instance-at
         "id": {"readonly": True},
         "windows_server_subscription": {"readonly": True},
         "node_type": {"readonly": True},
+        "ehc_resource_id": {"readonly": True},
         "manufacturer": {"readonly": True},
         "model": {"readonly": True},
         "os_name": {"readonly": True},
@@ -754,6 +767,7 @@ class ClusterNode(_serialization.Model):  # pylint: disable=too-many-instance-at
         "id": {"key": "id", "type": "float"},
         "windows_server_subscription": {"key": "windowsServerSubscription", "type": "str"},
         "node_type": {"key": "nodeType", "type": "str"},
+        "ehc_resource_id": {"key": "EhcResourceId", "type": "str"},
         "manufacturer": {"key": "manufacturer", "type": "str"},
         "model": {"key": "model", "type": "str"},
         "os_name": {"key": "osName", "type": "str"},
@@ -771,6 +785,7 @@ class ClusterNode(_serialization.Model):  # pylint: disable=too-many-instance-at
         self.id = None
         self.windows_server_subscription = None
         self.node_type = None
+        self.ehc_resource_id = None
         self.manufacturer = None
         self.model = None
         self.os_name = None
@@ -898,6 +913,8 @@ class ClusterReportedProperties(_serialization.Model):
     :ivar diagnostic_level: Level of diagnostic data emitted by the cluster. Known values are:
      "Off", "Basic", and "Enhanced".
     :vartype diagnostic_level: str or ~azure.mgmt.azurestackhci.models.DiagnosticLevel
+    :ivar supported_capabilities: Capabilities supported by the cluster.
+    :vartype supported_capabilities: list[str]
     """
 
     _validation = {
@@ -907,6 +924,7 @@ class ClusterReportedProperties(_serialization.Model):
         "nodes": {"readonly": True},
         "last_updated": {"readonly": True},
         "imds_attestation": {"readonly": True},
+        "supported_capabilities": {"readonly": True},
     }
 
     _attribute_map = {
@@ -917,6 +935,7 @@ class ClusterReportedProperties(_serialization.Model):
         "last_updated": {"key": "lastUpdated", "type": "iso-8601"},
         "imds_attestation": {"key": "imdsAttestation", "type": "str"},
         "diagnostic_level": {"key": "diagnosticLevel", "type": "str"},
+        "supported_capabilities": {"key": "supportedCapabilities", "type": "[str]"},
     }
 
     def __init__(self, *, diagnostic_level: Optional[Union[str, "_models.DiagnosticLevel"]] = None, **kwargs):
@@ -933,6 +952,7 @@ class ClusterReportedProperties(_serialization.Model):
         self.last_updated = None
         self.imds_attestation = None
         self.diagnostic_level = diagnostic_level
+        self.supported_capabilities = None
 
 
 class ErrorAdditionalInfo(_serialization.Model):
@@ -1043,12 +1063,14 @@ class Extension(ProxyResource):  # pylint: disable=too-many-instance-attributes
      information.
     :vartype system_data: ~azure.mgmt.azurestackhci.models.SystemData
     :ivar provisioning_state: Provisioning state of the Extension proxy resource. Known values are:
-     "Succeeded", "Failed", "Canceled", "Accepted", and "Provisioning".
+     "NotSpecified", "Error", "Succeeded", "Failed", "Canceled", "Connected", "Disconnected",
+     "Deleted", "Creating", "Updating", "Deleting", "Moving", "PartiallySucceeded",
+     "PartiallyConnected", "InProgress", "Accepted", "Provisioning", and "DisableInProgress".
     :vartype provisioning_state: str or ~azure.mgmt.azurestackhci.models.ProvisioningState
     :ivar aggregate_state: Aggregate state of Arc Extensions across the nodes in this HCI cluster.
      Known values are: "NotSpecified", "Error", "Succeeded", "Canceled", "Failed", "Connected",
      "Disconnected", "Deleted", "Creating", "Updating", "Deleting", "Moving", "PartiallySucceeded",
-     "PartiallyConnected", and "InProgress".
+     "PartiallyConnected", "InProgress", "Accepted", and "Provisioning".
     :vartype aggregate_state: str or ~azure.mgmt.azurestackhci.models.ExtensionAggregateState
     :ivar per_node_extension_details: State of Arc Extension in each of the nodes.
     :vartype per_node_extension_details:
@@ -1071,6 +1093,9 @@ class Extension(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :vartype settings: JSON
     :ivar protected_settings: Protected settings (may contain secrets).
     :vartype protected_settings: JSON
+    :ivar enable_automatic_upgrade: Indicates whether the extension should be automatically
+     upgraded by the platform if there is a newer version available.
+    :vartype enable_automatic_upgrade: bool
     """
 
     _validation = {
@@ -1098,6 +1123,7 @@ class Extension(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "auto_upgrade_minor_version": {"key": "properties.extensionParameters.autoUpgradeMinorVersion", "type": "bool"},
         "settings": {"key": "properties.extensionParameters.settings", "type": "object"},
         "protected_settings": {"key": "properties.extensionParameters.protectedSettings", "type": "object"},
+        "enable_automatic_upgrade": {"key": "properties.extensionParameters.enableAutomaticUpgrade", "type": "bool"},
     }
 
     def __init__(
@@ -1110,6 +1136,7 @@ class Extension(ProxyResource):  # pylint: disable=too-many-instance-attributes
         auto_upgrade_minor_version: Optional[bool] = None,
         settings: Optional[JSON] = None,
         protected_settings: Optional[JSON] = None,
+        enable_automatic_upgrade: Optional[bool] = None,
         **kwargs
     ):
         """
@@ -1131,6 +1158,9 @@ class Extension(ProxyResource):  # pylint: disable=too-many-instance-attributes
         :paramtype settings: JSON
         :keyword protected_settings: Protected settings (may contain secrets).
         :paramtype protected_settings: JSON
+        :keyword enable_automatic_upgrade: Indicates whether the extension should be automatically
+         upgraded by the platform if there is a newer version available.
+        :paramtype enable_automatic_upgrade: bool
         """
         super().__init__(**kwargs)
         self.provisioning_state = None
@@ -1143,6 +1173,7 @@ class Extension(ProxyResource):  # pylint: disable=too-many-instance-attributes
         self.auto_upgrade_minor_version = auto_upgrade_minor_version
         self.settings = settings
         self.protected_settings = protected_settings
+        self.enable_automatic_upgrade = enable_automatic_upgrade
 
 
 class ExtensionList(_serialization.Model):
@@ -1494,7 +1525,8 @@ class PerNodeExtensionState(_serialization.Model):
     :vartype extension: str
     :ivar state: State of Arc Extension in this node. Known values are: "NotSpecified", "Error",
      "Succeeded", "Canceled", "Failed", "Connected", "Disconnected", "Deleted", "Creating",
-     "Updating", "Deleting", and "Moving".
+     "Updating", "Deleting", "Moving", "PartiallySucceeded", "PartiallyConnected", "InProgress",
+     "Accepted", and "Provisioning".
     :vartype state: str or ~azure.mgmt.azurestackhci.models.NodeExtensionState
     """
 
@@ -1529,7 +1561,8 @@ class PerNodeState(_serialization.Model):
     :vartype arc_instance: str
     :ivar state: State of Arc agent in this node. Known values are: "NotSpecified", "Error",
      "Succeeded", "Canceled", "Failed", "Connected", "Disconnected", "Deleted", "Creating",
-     "Updating", "Deleting", and "Moving".
+     "Updating", "Deleting", "Moving", "PartiallySucceeded", "PartiallyConnected", "InProgress",
+     "Accepted", "Provisioning", and "DisableInProgress".
     :vartype state: str or ~azure.mgmt.azurestackhci.models.NodeArcState
     """
 
@@ -1551,6 +1584,151 @@ class PerNodeState(_serialization.Model):
         self.name = None
         self.arc_instance = None
         self.state = None
+
+
+class PrecheckResult(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+    """PrecheckResult.
+
+    :ivar name: Name of the individual test/rule/alert that was executed. Unique, not exposed to
+     the customer.
+    :vartype name: str
+    :ivar tags: Key-value pairs that allow grouping/filtering individual tests.
+    :vartype tags: ~azure.mgmt.azurestackhci.models.PrecheckResultTags
+    :ivar title: User-facing name; one or more sentences indicating the direct issue.
+    :vartype title: str
+    :ivar status: The status of the check running (i.e. Failed, Succeeded, In Progress). This
+     answers whether the check ran, and passed or failed. Known values are: "NotYetRegistered",
+     "ConnectedRecently", "NotConnectedRecently", "Disconnected", "Error", "NotSpecified",
+     "Succeeded", "Failed", and "InProgress".
+    :vartype status: str or ~azure.mgmt.azurestackhci.models.Status
+    :ivar severity: Severity of the result (Critical, Warning, Informational, Hidden). This answers
+     how important the result is. Critical is the only update-blocking severity. Known values are:
+     "Critical", "Warning", "Informational", and "Hidden".
+    :vartype severity: str or ~azure.mgmt.azurestackhci.models.Severity
+    :ivar description: Detailed overview of the issue and what impact the issue has on the stamp.
+    :vartype description: str
+    :ivar remediation: Set of steps that can be taken to resolve the issue found.
+    :vartype remediation: str
+    :ivar target_resource_id: The unique identifier for the affected resource (such as a node or
+     drive).
+    :vartype target_resource_id: str
+    :ivar target_resource_name: The name of the affected resource.
+    :vartype target_resource_name: str
+    :ivar timestamp: The Time in which the HealthCheck was called.
+    :vartype timestamp: ~datetime.datetime
+    :ivar additional_data: Property bag of key value pairs for additional information.
+    :vartype additional_data: str
+    :ivar health_check_source: The name of the services called for the HealthCheck (I.E.
+     Test-AzureStack, Test-Cluster).
+    :vartype health_check_source: str
+    """
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "tags": {"key": "tags", "type": "PrecheckResultTags"},
+        "title": {"key": "title", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "severity": {"key": "severity", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "remediation": {"key": "remediation", "type": "str"},
+        "target_resource_id": {"key": "targetResourceID", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "timestamp": {"key": "timestamp", "type": "iso-8601"},
+        "additional_data": {"key": "additionalData", "type": "str"},
+        "health_check_source": {"key": "healthCheckSource", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[str] = None,
+        tags: Optional["_models.PrecheckResultTags"] = None,
+        title: Optional[str] = None,
+        status: Optional[Union[str, "_models.Status"]] = None,
+        severity: Optional[Union[str, "_models.Severity"]] = None,
+        description: Optional[str] = None,
+        remediation: Optional[str] = None,
+        target_resource_id: Optional[str] = None,
+        target_resource_name: Optional[str] = None,
+        timestamp: Optional[datetime.datetime] = None,
+        additional_data: Optional[str] = None,
+        health_check_source: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: Name of the individual test/rule/alert that was executed. Unique, not exposed to
+         the customer.
+        :paramtype name: str
+        :keyword tags: Key-value pairs that allow grouping/filtering individual tests.
+        :paramtype tags: ~azure.mgmt.azurestackhci.models.PrecheckResultTags
+        :keyword title: User-facing name; one or more sentences indicating the direct issue.
+        :paramtype title: str
+        :keyword status: The status of the check running (i.e. Failed, Succeeded, In Progress). This
+         answers whether the check ran, and passed or failed. Known values are: "NotYetRegistered",
+         "ConnectedRecently", "NotConnectedRecently", "Disconnected", "Error", "NotSpecified",
+         "Succeeded", "Failed", and "InProgress".
+        :paramtype status: str or ~azure.mgmt.azurestackhci.models.Status
+        :keyword severity: Severity of the result (Critical, Warning, Informational, Hidden). This
+         answers how important the result is. Critical is the only update-blocking severity. Known
+         values are: "Critical", "Warning", "Informational", and "Hidden".
+        :paramtype severity: str or ~azure.mgmt.azurestackhci.models.Severity
+        :keyword description: Detailed overview of the issue and what impact the issue has on the
+         stamp.
+        :paramtype description: str
+        :keyword remediation: Set of steps that can be taken to resolve the issue found.
+        :paramtype remediation: str
+        :keyword target_resource_id: The unique identifier for the affected resource (such as a node or
+         drive).
+        :paramtype target_resource_id: str
+        :keyword target_resource_name: The name of the affected resource.
+        :paramtype target_resource_name: str
+        :keyword timestamp: The Time in which the HealthCheck was called.
+        :paramtype timestamp: ~datetime.datetime
+        :keyword additional_data: Property bag of key value pairs for additional information.
+        :paramtype additional_data: str
+        :keyword health_check_source: The name of the services called for the HealthCheck (I.E.
+         Test-AzureStack, Test-Cluster).
+        :paramtype health_check_source: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.tags = tags
+        self.title = title
+        self.status = status
+        self.severity = severity
+        self.description = description
+        self.remediation = remediation
+        self.target_resource_id = target_resource_id
+        self.target_resource_name = target_resource_name
+        self.timestamp = timestamp
+        self.additional_data = additional_data
+        self.health_check_source = health_check_source
+
+
+class PrecheckResultTags(_serialization.Model):
+    """Key-value pairs that allow grouping/filtering individual tests.
+
+    :ivar key: Key that allow grouping/filtering individual tests.
+    :vartype key: str
+    :ivar value: Value of the key that allow grouping/filtering individual tests.
+    :vartype value: str
+    """
+
+    _attribute_map = {
+        "key": {"key": "key", "type": "str"},
+        "value": {"key": "value", "type": "str"},
+    }
+
+    def __init__(self, *, key: Optional[str] = None, value: Optional[str] = None, **kwargs):
+        """
+        :keyword key: Key that allow grouping/filtering individual tests.
+        :paramtype key: str
+        :keyword value: Value of the key that allow grouping/filtering individual tests.
+        :paramtype value: str
+        """
+        super().__init__(**kwargs)
+        self.key = key
+        self.value = value
 
 
 class Publisher(ProxyResource):
@@ -2050,7 +2228,9 @@ class Update(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :ivar location: The geo-location where the resource lives.
     :vartype location: str
     :ivar provisioning_state: Provisioning state of the Updates proxy resource. Known values are:
-     "Succeeded", "Failed", "Canceled", "Accepted", and "Provisioning".
+     "NotSpecified", "Error", "Succeeded", "Failed", "Canceled", "Connected", "Disconnected",
+     "Deleted", "Creating", "Updating", "Deleting", "Moving", "PartiallySucceeded",
+     "PartiallyConnected", "InProgress", "Accepted", "Provisioning", and "DisableInProgress".
     :vartype provisioning_state: str or ~azure.mgmt.azurestackhci.models.ProvisioningState
     :ivar installed_date: Date that the update was installed.
     :vartype installed_date: ~datetime.datetime
@@ -2065,6 +2245,18 @@ class Update(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :ivar prerequisites: If update State is HasPrerequisite, this property contains an array of
      objects describing prerequisite updates before installing this update. Otherwise, it is empty.
     :vartype prerequisites: list[~azure.mgmt.azurestackhci.models.UpdatePrerequisite]
+    :ivar component_versions: An array of component versions for a Solution Bundle update, and an
+     empty array otherwise.
+    :vartype component_versions: list[~azure.mgmt.azurestackhci.models.PackageVersionInfo]
+    :ivar reboot_required: Known values are: "Unknown", "True", and "False".
+    :vartype reboot_required: str or ~azure.mgmt.azurestackhci.models.RebootRequirement
+    :ivar health_state: Overall health state for update-specific health checks. Known values are:
+     "Unknown", "Success", "Failure", "Warning", "Error", and "InProgress".
+    :vartype health_state: str or ~azure.mgmt.azurestackhci.models.HealthState
+    :ivar health_check_result: An array of PrecheckResult objects.
+    :vartype health_check_result: list[~azure.mgmt.azurestackhci.models.PrecheckResult]
+    :ivar health_check_date: Last time the package-specific checks were run.
+    :vartype health_check_date: ~datetime.datetime
     :ivar package_path: Path where the update package is available.
     :vartype package_path: str
     :ivar package_size_in_mb: Size of the package. This value is a combination of the size from
@@ -2115,6 +2307,11 @@ class Update(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "description": {"key": "properties.description", "type": "str"},
         "state": {"key": "properties.state", "type": "str"},
         "prerequisites": {"key": "properties.prerequisites", "type": "[UpdatePrerequisite]"},
+        "component_versions": {"key": "properties.componentVersions", "type": "[PackageVersionInfo]"},
+        "reboot_required": {"key": "properties.rebootRequired", "type": "str"},
+        "health_state": {"key": "properties.healthState", "type": "str"},
+        "health_check_result": {"key": "properties.healthCheckResult", "type": "[PrecheckResult]"},
+        "health_check_date": {"key": "properties.healthCheckDate", "type": "iso-8601"},
         "package_path": {"key": "properties.packagePath", "type": "str"},
         "package_size_in_mb": {"key": "properties.packageSizeInMb", "type": "float"},
         "display_name": {"key": "properties.displayName", "type": "str"},
@@ -2128,7 +2325,7 @@ class Update(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "notify_message": {"key": "properties.updateStateProperties.notifyMessage", "type": "str"},
     }
 
-    def __init__(
+    def __init__(  # pylint: disable=too-many-locals
         self,
         *,
         location: Optional[str] = None,
@@ -2136,6 +2333,11 @@ class Update(ProxyResource):  # pylint: disable=too-many-instance-attributes
         description: Optional[str] = None,
         state: Optional[Union[str, "_models.State"]] = None,
         prerequisites: Optional[List["_models.UpdatePrerequisite"]] = None,
+        component_versions: Optional[List["_models.PackageVersionInfo"]] = None,
+        reboot_required: Optional[Union[str, "_models.RebootRequirement"]] = None,
+        health_state: Optional[Union[str, "_models.HealthState"]] = None,
+        health_check_result: Optional[List["_models.PrecheckResult"]] = None,
+        health_check_date: Optional[datetime.datetime] = None,
         package_path: Optional[str] = None,
         package_size_in_mb: Optional[float] = None,
         display_name: Optional[str] = None,
@@ -2165,6 +2367,18 @@ class Update(ProxyResource):  # pylint: disable=too-many-instance-attributes
         :keyword prerequisites: If update State is HasPrerequisite, this property contains an array of
          objects describing prerequisite updates before installing this update. Otherwise, it is empty.
         :paramtype prerequisites: list[~azure.mgmt.azurestackhci.models.UpdatePrerequisite]
+        :keyword component_versions: An array of component versions for a Solution Bundle update, and
+         an empty array otherwise.
+        :paramtype component_versions: list[~azure.mgmt.azurestackhci.models.PackageVersionInfo]
+        :keyword reboot_required: Known values are: "Unknown", "True", and "False".
+        :paramtype reboot_required: str or ~azure.mgmt.azurestackhci.models.RebootRequirement
+        :keyword health_state: Overall health state for update-specific health checks. Known values
+         are: "Unknown", "Success", "Failure", "Warning", "Error", and "InProgress".
+        :paramtype health_state: str or ~azure.mgmt.azurestackhci.models.HealthState
+        :keyword health_check_result: An array of PrecheckResult objects.
+        :paramtype health_check_result: list[~azure.mgmt.azurestackhci.models.PrecheckResult]
+        :keyword health_check_date: Last time the package-specific checks were run.
+        :paramtype health_check_date: ~datetime.datetime
         :keyword package_path: Path where the update package is available.
         :paramtype package_path: str
         :keyword package_size_in_mb: Size of the package. This value is a combination of the size from
@@ -2203,6 +2417,11 @@ class Update(ProxyResource):  # pylint: disable=too-many-instance-attributes
         self.description = description
         self.state = state
         self.prerequisites = prerequisites
+        self.component_versions = component_versions
+        self.reboot_required = reboot_required
+        self.health_state = health_state
+        self.health_check_result = health_check_result
+        self.health_check_date = health_check_date
         self.package_path = package_path
         self.package_size_in_mb = package_size_in_mb
         self.display_name = display_name
@@ -2304,8 +2523,14 @@ class UpdateRun(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :ivar location: The geo-location where the resource lives.
     :vartype location: str
     :ivar provisioning_state: Provisioning state of the UpdateRuns proxy resource. Known values
-     are: "Succeeded", "Failed", "Canceled", "Accepted", and "Provisioning".
+     are: "NotSpecified", "Error", "Succeeded", "Failed", "Canceled", "Connected", "Disconnected",
+     "Deleted", "Creating", "Updating", "Deleting", "Moving", "PartiallySucceeded",
+     "PartiallyConnected", "InProgress", "Accepted", "Provisioning", and "DisableInProgress".
     :vartype provisioning_state: str or ~azure.mgmt.azurestackhci.models.ProvisioningState
+    :ivar time_started: Timestamp of the update run was started.
+    :vartype time_started: ~datetime.datetime
+    :ivar last_updated_time: Timestamp of the most recently completed step in the update run.
+    :vartype last_updated_time: ~datetime.datetime
     :ivar duration: Duration of the update run.
     :vartype duration: str
     :ivar state: State of the update run. Known values are: "Unknown", "Succeeded", "InProgress",
@@ -2345,6 +2570,8 @@ class UpdateRun(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "time_started": {"key": "properties.timeStarted", "type": "iso-8601"},
+        "last_updated_time": {"key": "properties.lastUpdatedTime", "type": "iso-8601"},
         "duration": {"key": "properties.duration", "type": "str"},
         "state": {"key": "properties.state", "type": "str"},
         "name_properties_progress_name": {"key": "properties.progress.name", "type": "str"},
@@ -2361,6 +2588,8 @@ class UpdateRun(ProxyResource):  # pylint: disable=too-many-instance-attributes
         self,
         *,
         location: Optional[str] = None,
+        time_started: Optional[datetime.datetime] = None,
+        last_updated_time: Optional[datetime.datetime] = None,
         duration: Optional[str] = None,
         state: Optional[Union[str, "_models.UpdateRunPropertiesState"]] = None,
         name_properties_progress_name: Optional[str] = None,
@@ -2376,6 +2605,10 @@ class UpdateRun(ProxyResource):  # pylint: disable=too-many-instance-attributes
         """
         :keyword location: The geo-location where the resource lives.
         :paramtype location: str
+        :keyword time_started: Timestamp of the update run was started.
+        :paramtype time_started: ~datetime.datetime
+        :keyword last_updated_time: Timestamp of the most recently completed step in the update run.
+        :paramtype last_updated_time: ~datetime.datetime
         :keyword duration: Duration of the update run.
         :paramtype duration: str
         :keyword state: State of the update run. Known values are: "Unknown", "Succeeded",
@@ -2402,6 +2635,8 @@ class UpdateRun(ProxyResource):  # pylint: disable=too-many-instance-attributes
         super().__init__(**kwargs)
         self.location = location
         self.provisioning_state = None
+        self.time_started = time_started
+        self.last_updated_time = last_updated_time
         self.duration = duration
         self.state = state
         self.name_properties_progress_name = name_properties_progress_name
@@ -2463,7 +2698,9 @@ class UpdateSummaries(ProxyResource):  # pylint: disable=too-many-instance-attri
     :ivar location: The geo-location where the resource lives.
     :vartype location: str
     :ivar provisioning_state: Provisioning state of the UpdateSummaries proxy resource. Known
-     values are: "Succeeded", "Failed", "Canceled", "Accepted", and "Provisioning".
+     values are: "NotSpecified", "Error", "Succeeded", "Failed", "Canceled", "Connected",
+     "Disconnected", "Deleted", "Creating", "Updating", "Deleting", "Moving", "PartiallySucceeded",
+     "PartiallyConnected", "InProgress", "Accepted", "Provisioning", and "DisableInProgress".
     :vartype provisioning_state: str or ~azure.mgmt.azurestackhci.models.ProvisioningState
     :ivar oem_family: OEM family name.
     :vartype oem_family: str
@@ -2473,6 +2710,17 @@ class UpdateSummaries(ProxyResource):  # pylint: disable=too-many-instance-attri
     :vartype package_versions: list[~azure.mgmt.azurestackhci.models.PackageVersionInfo]
     :ivar current_version: Current Solution Bundle version of the stamp.
     :vartype current_version: str
+    :ivar last_updated: Last time an update installation completed successfully.
+    :vartype last_updated: ~datetime.datetime
+    :ivar last_checked: Last time the update service successfully checked for updates.
+    :vartype last_checked: ~datetime.datetime
+    :ivar health_state: Overall health state for update-specific health checks. Known values are:
+     "Unknown", "Success", "Failure", "Warning", "Error", and "InProgress".
+    :vartype health_state: str or ~azure.mgmt.azurestackhci.models.HealthState
+    :ivar health_check_result: An array of pre-check result objects.
+    :vartype health_check_result: list[~azure.mgmt.azurestackhci.models.PrecheckResult]
+    :ivar health_check_date: Last time the package-specific checks were run.
+    :vartype health_check_date: ~datetime.datetime
     :ivar state: Overall update state of the stamp. Known values are: "Unknown",
      "AppliedSuccessfully", "UpdateAvailable", "UpdateInProgress", "UpdateFailed", "NeedsAttention",
      "PreparationInProgress", and "PreparationFailed".
@@ -2498,6 +2746,11 @@ class UpdateSummaries(ProxyResource):  # pylint: disable=too-many-instance-attri
         "hardware_model": {"key": "properties.hardwareModel", "type": "str"},
         "package_versions": {"key": "properties.packageVersions", "type": "[PackageVersionInfo]"},
         "current_version": {"key": "properties.currentVersion", "type": "str"},
+        "last_updated": {"key": "properties.lastUpdated", "type": "iso-8601"},
+        "last_checked": {"key": "properties.lastChecked", "type": "iso-8601"},
+        "health_state": {"key": "properties.healthState", "type": "str"},
+        "health_check_result": {"key": "properties.healthCheckResult", "type": "[PrecheckResult]"},
+        "health_check_date": {"key": "properties.healthCheckDate", "type": "iso-8601"},
         "state": {"key": "properties.state", "type": "str"},
     }
 
@@ -2509,6 +2762,11 @@ class UpdateSummaries(ProxyResource):  # pylint: disable=too-many-instance-attri
         hardware_model: Optional[str] = None,
         package_versions: Optional[List["_models.PackageVersionInfo"]] = None,
         current_version: Optional[str] = None,
+        last_updated: Optional[datetime.datetime] = None,
+        last_checked: Optional[datetime.datetime] = None,
+        health_state: Optional[Union[str, "_models.HealthState"]] = None,
+        health_check_result: Optional[List["_models.PrecheckResult"]] = None,
+        health_check_date: Optional[datetime.datetime] = None,
         state: Optional[Union[str, "_models.UpdateSummariesPropertiesState"]] = None,
         **kwargs
     ):
@@ -2523,6 +2781,17 @@ class UpdateSummaries(ProxyResource):  # pylint: disable=too-many-instance-attri
         :paramtype package_versions: list[~azure.mgmt.azurestackhci.models.PackageVersionInfo]
         :keyword current_version: Current Solution Bundle version of the stamp.
         :paramtype current_version: str
+        :keyword last_updated: Last time an update installation completed successfully.
+        :paramtype last_updated: ~datetime.datetime
+        :keyword last_checked: Last time the update service successfully checked for updates.
+        :paramtype last_checked: ~datetime.datetime
+        :keyword health_state: Overall health state for update-specific health checks. Known values
+         are: "Unknown", "Success", "Failure", "Warning", "Error", and "InProgress".
+        :paramtype health_state: str or ~azure.mgmt.azurestackhci.models.HealthState
+        :keyword health_check_result: An array of pre-check result objects.
+        :paramtype health_check_result: list[~azure.mgmt.azurestackhci.models.PrecheckResult]
+        :keyword health_check_date: Last time the package-specific checks were run.
+        :paramtype health_check_date: ~datetime.datetime
         :keyword state: Overall update state of the stamp. Known values are: "Unknown",
          "AppliedSuccessfully", "UpdateAvailable", "UpdateInProgress", "UpdateFailed", "NeedsAttention",
          "PreparationInProgress", and "PreparationFailed".
@@ -2535,6 +2804,11 @@ class UpdateSummaries(ProxyResource):  # pylint: disable=too-many-instance-attri
         self.hardware_model = hardware_model
         self.package_versions = package_versions
         self.current_version = current_version
+        self.last_updated = last_updated
+        self.last_checked = last_checked
+        self.health_state = health_state
+        self.health_check_result = health_check_result
+        self.health_check_date = health_check_date
         self.state = state
 
 

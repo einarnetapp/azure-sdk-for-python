@@ -14,7 +14,7 @@ from azure.mgmt.azurestackhci import AzureStackHCIClient
     pip install azure-identity
     pip install azure-mgmt-azurestackhci
 # USAGE
-    python list_operations.py
+    python delete_update_runs.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,13 +26,18 @@ from azure.mgmt.azurestackhci import AzureStackHCIClient
 def main():
     client = AzureStackHCIClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
+        subscription_id="b8d594e5-51f3-4c11-9c54-a7771b81c712",
     )
 
-    response = client.operations.list()
+    response = client.update_runs.begin_delete(
+        resource_group_name="testrg",
+        cluster_name="testcluster",
+        update_name="Microsoft4.2203.2.32",
+        update_run_name="23b779ba-0d52-4a80-8571-45ca74664ec3",
+    ).result()
     print(response)
 
 
-# x-ms-original-file: specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/stable/2022-12-01/examples/ListOperations.json
+# x-ms-original-file: specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/stable/2022-12-01/examples/DeleteUpdateRuns.json
 if __name__ == "__main__":
     main()
