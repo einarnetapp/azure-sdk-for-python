@@ -88,7 +88,7 @@ class OutboundNetworkDependenciesEndpointsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+            "api_version", _params.pop("api-version", "2022-04-01-preview")
         )
         cls: ClsType[List[_models.OutboundEnvironmentEndpoint]] = kwargs.pop("cls", None)
 

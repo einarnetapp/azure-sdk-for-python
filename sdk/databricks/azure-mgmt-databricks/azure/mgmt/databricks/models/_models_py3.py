@@ -126,8 +126,10 @@ class AccessConnector(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
-    :ivar identity: Identity for the resource.
-    :vartype identity: ~azure.mgmt.databricks.models.IdentityData
+    :ivar identity: Managed service identity (system assigned and/or user assigned identities).
+    :vartype identity: ~azure.mgmt.databricks.models.ManagedServiceIdentity
+    :ivar system_data: The system metadata relating to this resource.
+    :vartype system_data: ~azure.mgmt.databricks.models.SystemData
     :ivar properties: Azure Databricks accessConnector properties.
     :vartype properties: ~azure.mgmt.databricks.models.AccessConnectorProperties
     """
@@ -137,6 +139,7 @@ class AccessConnector(TrackedResource):
         "name": {"readonly": True},
         "type": {"readonly": True},
         "location": {"required": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
@@ -145,7 +148,8 @@ class AccessConnector(TrackedResource):
         "type": {"key": "type", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
-        "identity": {"key": "identity", "type": "IdentityData"},
+        "identity": {"key": "identity", "type": "ManagedServiceIdentity"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "properties": {"key": "properties", "type": "AccessConnectorProperties"},
     }
 
@@ -154,7 +158,7 @@ class AccessConnector(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["_models.IdentityData"] = None,
+        identity: Optional["_models.ManagedServiceIdentity"] = None,
         properties: Optional["_models.AccessConnectorProperties"] = None,
         **kwargs
     ):
@@ -163,13 +167,14 @@ class AccessConnector(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword identity: Identity for the resource.
-        :paramtype identity: ~azure.mgmt.databricks.models.IdentityData
+        :keyword identity: Managed service identity (system assigned and/or user assigned identities).
+        :paramtype identity: ~azure.mgmt.databricks.models.ManagedServiceIdentity
         :keyword properties: Azure Databricks accessConnector properties.
         :paramtype properties: ~azure.mgmt.databricks.models.AccessConnectorProperties
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.identity = identity
+        self.system_data = None
         self.properties = properties
 
 
@@ -231,23 +236,27 @@ class AccessConnectorUpdate(_serialization.Model):
 
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar identity: The identity of the resource.
-    :vartype identity: ~azure.mgmt.databricks.models.IdentityData
+    :ivar identity: Managed service identity (system assigned and/or user assigned identities).
+    :vartype identity: ~azure.mgmt.databricks.models.ManagedServiceIdentity
     """
 
     _attribute_map = {
         "tags": {"key": "tags", "type": "{str}"},
-        "identity": {"key": "identity", "type": "IdentityData"},
+        "identity": {"key": "identity", "type": "ManagedServiceIdentity"},
     }
 
     def __init__(
-        self, *, tags: Optional[Dict[str, str]] = None, identity: Optional["_models.IdentityData"] = None, **kwargs
+        self,
+        *,
+        tags: Optional[Dict[str, str]] = None,
+        identity: Optional["_models.ManagedServiceIdentity"] = None,
+        **kwargs
     ):
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword identity: The identity of the resource.
-        :paramtype identity: ~azure.mgmt.databricks.models.IdentityData
+        :keyword identity: Managed service identity (system assigned and/or user assigned identities).
+        :paramtype identity: ~azure.mgmt.databricks.models.ManagedServiceIdentity
         """
         super().__init__(**kwargs)
         self.tags = tags
@@ -751,44 +760,6 @@ class GroupIdInformationProperties(_serialization.Model):
         self.required_zone_names = required_zone_names
 
 
-class IdentityData(_serialization.Model):
-    """Identity for the resource.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar principal_id: The principal ID of resource identity.
-    :vartype principal_id: str
-    :ivar tenant_id: The tenant ID of resource.
-    :vartype tenant_id: str
-    :ivar type: The identity type. Required. Known values are: "None" and "SystemAssigned".
-    :vartype type: str or ~azure.mgmt.databricks.models.IdentityType
-    """
-
-    _validation = {
-        "principal_id": {"readonly": True},
-        "tenant_id": {"readonly": True},
-        "type": {"required": True},
-    }
-
-    _attribute_map = {
-        "principal_id": {"key": "principalId", "type": "str"},
-        "tenant_id": {"key": "tenantId", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-    }
-
-    def __init__(self, *, type: Union[str, "_models.IdentityType"], **kwargs):
-        """
-        :keyword type: The identity type. Required. Known values are: "None" and "SystemAssigned".
-        :paramtype type: str or ~azure.mgmt.databricks.models.IdentityType
-        """
-        super().__init__(**kwargs)
-        self.principal_id = None
-        self.tenant_id = None
-        self.type = type
-
-
 class ManagedDiskEncryption(_serialization.Model):
     """The object that contains details of encryption used on the workspace.
 
@@ -913,6 +884,70 @@ class ManagedIdentityConfiguration(_serialization.Model):
         self.principal_id = None
         self.tenant_id = None
         self.type = None
+
+
+class ManagedServiceIdentity(_serialization.Model):
+    """Managed service identity (system assigned and/or user assigned identities).
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar principal_id: The service principal ID of the system assigned identity. This property
+     will only be provided for a system assigned identity.
+    :vartype principal_id: str
+    :ivar tenant_id: The tenant ID of the system assigned identity. This property will only be
+     provided for a system assigned identity.
+    :vartype tenant_id: str
+    :ivar type: Type of managed service identity (where both SystemAssigned and UserAssigned types
+     are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
+     "SystemAssigned,UserAssigned".
+    :vartype type: str or ~azure.mgmt.databricks.models.ManagedServiceIdentityType
+    :ivar user_assigned_identities: The set of user assigned identities associated with the
+     resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
+     '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
+     The dictionary values can be empty objects ({}) in requests.
+    :vartype user_assigned_identities: dict[str,
+     ~azure.mgmt.databricks.models.UserAssignedIdentity]
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "user_assigned_identities": {"key": "userAssignedIdentities", "type": "{UserAssignedIdentity}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Union[str, "_models.ManagedServiceIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword type: Type of managed service identity (where both SystemAssigned and UserAssigned
+         types are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
+         "SystemAssigned,UserAssigned".
+        :paramtype type: str or ~azure.mgmt.databricks.models.ManagedServiceIdentityType
+        :keyword user_assigned_identities: The set of user assigned identities associated with the
+         resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
+         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
+         The dictionary values can be empty objects ({}) in requests.
+        :paramtype user_assigned_identities: dict[str,
+         ~azure.mgmt.databricks.models.UserAssignedIdentity]
+        """
+        super().__init__(**kwargs)
+        self.principal_id = None
+        self.tenant_id = None
+        self.type = type
+        self.user_assigned_identities = user_assigned_identities
 
 
 class Operation(_serialization.Model):
@@ -1361,6 +1396,34 @@ class SystemData(_serialization.Model):
         self.last_modified_by = last_modified_by
         self.last_modified_by_type = last_modified_by_type
         self.last_modified_at = last_modified_at
+
+
+class UserAssignedIdentity(_serialization.Model):
+    """User assigned identity properties.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar principal_id: The principal ID of the assigned identity.
+    :vartype principal_id: str
+    :ivar client_id: The client ID of the assigned identity.
+    :vartype client_id: str
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "client_id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "client_id": {"key": "clientId", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.principal_id = None
+        self.client_id = None
 
 
 class VirtualNetworkPeering(_serialization.Model):  # pylint: disable=too-many-instance-attributes

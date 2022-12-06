@@ -34,6 +34,8 @@ class AzureDatabricksManagementClient:  # pylint: disable=client-accepts-api-ver
     """The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace
     resources.
 
+    :ivar access_connectors: AccessConnectorsOperations operations
+    :vartype access_connectors: azure.mgmt.databricks.aio.operations.AccessConnectorsOperations
     :ivar workspaces: WorkspacesOperations operations
     :vartype workspaces: azure.mgmt.databricks.aio.operations.WorkspacesOperations
     :ivar operations: Operations operations
@@ -50,17 +52,12 @@ class AzureDatabricksManagementClient:  # pylint: disable=client-accepts-api-ver
      azure.mgmt.databricks.aio.operations.OutboundNetworkDependenciesEndpointsOperations
     :ivar vnet_peering: VNetPeeringOperations operations
     :vartype vnet_peering: azure.mgmt.databricks.aio.operations.VNetPeeringOperations
-    :ivar access_connectors: AccessConnectorsOperations operations
-    :vartype access_connectors: azure.mgmt.databricks.aio.operations.AccessConnectorsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-04-01-preview". Note that overriding
-     this default value may result in unsupported behavior.
-    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -81,6 +78,9 @@ class AzureDatabricksManagementClient:  # pylint: disable=client-accepts-api-ver
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.access_connectors = AccessConnectorsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.workspaces = WorkspacesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.private_link_resources = PrivateLinkResourcesOperations(
@@ -93,9 +93,6 @@ class AzureDatabricksManagementClient:  # pylint: disable=client-accepts-api-ver
             self._client, self._config, self._serialize, self._deserialize
         )
         self.vnet_peering = VNetPeeringOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.access_connectors = AccessConnectorsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> Awaitable[AsyncHttpResponse]:
         """Runs the network request through the client's chained policies.
