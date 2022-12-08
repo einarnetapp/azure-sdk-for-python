@@ -404,8 +404,6 @@ class OrchestratorSpecificConnectionDetails(_serialization.Model):
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     KubernetesConnectionDetails
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     All required parameters must be populated in order to send to Azure.
 
     :ivar instance_type: Gets the Instance type. Required.
@@ -413,7 +411,7 @@ class OrchestratorSpecificConnectionDetails(_serialization.Model):
     """
 
     _validation = {
-        "instance_type": {"required": True, "readonly": True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
@@ -425,13 +423,11 @@ class OrchestratorSpecificConnectionDetails(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.instance_type = None  # type: Optional[str]
+        self.instance_type: Optional[str] = None
 
 
 class KubernetesConnectionDetails(OrchestratorSpecificConnectionDetails):
     """Contains information used to connect to a Kubernetes cluster.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -442,7 +438,7 @@ class KubernetesConnectionDetails(OrchestratorSpecificConnectionDetails):
     """
 
     _validation = {
-        "instance_type": {"required": True, "readonly": True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
@@ -456,7 +452,7 @@ class KubernetesConnectionDetails(OrchestratorSpecificConnectionDetails):
         :paramtype kube_config: str
         """
         super().__init__(**kwargs)
-        self.instance_type = "Kubernetes"  # type: str
+        self.instance_type: str = "Kubernetes"
         self.kube_config = kube_config
 
 
