@@ -484,267 +484,6 @@ class BlobShare(_serialization.Model):
         self.sas_uri = sas_uri
 
 
-class CheckOCIDriverTaskInput(_serialization.Model):
-    """Input for the service task to check for OCI drivers.
-
-    :ivar server_version: Version of the source server to check against.  Optional.
-    :vartype server_version: str
-    """
-
-    _attribute_map = {
-        "server_version": {"key": "serverVersion", "type": "str"},
-    }
-
-    def __init__(self, *, server_version: Optional[str] = None, **kwargs):
-        """
-        :keyword server_version: Version of the source server to check against.  Optional.
-        :paramtype server_version: str
-        """
-        super().__init__(**kwargs)
-        self.server_version = server_version
-
-
-class CheckOCIDriverTaskOutput(_serialization.Model):
-    """Output for the service task to check for OCI drivers.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar installed_driver: Information about the installed driver if found and valid.
-    :vartype installed_driver: ~azure.mgmt.datamigration.models.OracleOCIDriverInfo
-    :ivar validation_errors: Validation errors.
-    :vartype validation_errors: list[~azure.mgmt.datamigration.models.ReportableException]
-    """
-
-    _validation = {
-        "validation_errors": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "installed_driver": {"key": "installedDriver", "type": "OracleOCIDriverInfo"},
-        "validation_errors": {"key": "validationErrors", "type": "[ReportableException]"},
-    }
-
-    def __init__(self, *, installed_driver: Optional["_models.OracleOCIDriverInfo"] = None, **kwargs):
-        """
-        :keyword installed_driver: Information about the installed driver if found and valid.
-        :paramtype installed_driver: ~azure.mgmt.datamigration.models.OracleOCIDriverInfo
-        """
-        super().__init__(**kwargs)
-        self.installed_driver = installed_driver
-        self.validation_errors = None
-
-
-class ProjectTaskProperties(_serialization.Model):
-    """Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.
-
-    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
-    ConnectToMongoDbTaskProperties, ConnectToSourceMySqlTaskProperties,
-    ConnectToSourceOracleSyncTaskProperties, ConnectToSourcePostgreSqlSyncTaskProperties,
-    ConnectToSourceSqlServerTaskProperties, ConnectToSourceSqlServerSyncTaskProperties,
-    ConnectToTargetAzureDbForMySqlTaskProperties,
-    ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties, ConnectToTargetSqlMITaskProperties,
-    ConnectToTargetSqlMISyncTaskProperties,
-    ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties,
-    ConnectToTargetSqlDbTaskProperties, ConnectToTargetSqlDbSyncTaskProperties,
-    GetTdeCertificatesSqlTaskProperties, GetUserTablesSqlSyncTaskProperties,
-    GetUserTablesSqlTaskProperties, GetUserTablesMySqlTaskProperties,
-    GetUserTablesOracleTaskProperties, GetUserTablesPostgreSqlTaskProperties,
-    MigrateMongoDbTaskProperties, MigrateMySqlAzureDbForMySqlOfflineTaskProperties,
-    MigrateMySqlAzureDbForMySqlSyncTaskProperties,
-    MigrateOracleAzureDbForPostgreSqlSyncTaskProperties,
-    MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties,
-    MigrateSqlServerSqlDbSyncTaskProperties, MigrateSqlServerSqlMITaskProperties,
-    MigrateSqlServerSqlMISyncTaskProperties, MigrateSqlServerSqlDbTaskProperties,
-    MigrateSsisTaskProperties, MigrateSchemaSqlServerSqlDbTaskProperties,
-    CheckOCIDriverTaskProperties, InstallOCIDriverTaskProperties, UploadOCIDriverTaskProperties,
-    ValidateMongoDbTaskProperties, ValidateOracleAzureDbForPostgreSqlSyncTaskProperties,
-    ValidateMigrationInputSqlServerSqlMITaskProperties,
-    ValidateMigrationInputSqlServerSqlMISyncTaskProperties,
-    ValidateMigrationInputSqlServerSqlDbSyncTaskProperties
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar task_type: Task type. Required. Known values are: "Connect.MongoDb",
-     "ConnectToSource.SqlServer", "ConnectToSource.SqlServer.Sync",
-     "ConnectToSource.PostgreSql.Sync", "ConnectToSource.MySql", "ConnectToSource.Oracle.Sync",
-     "ConnectToTarget.SqlDb", "ConnectToTarget.SqlDb.Sync",
-     "ConnectToTarget.AzureDbForPostgreSql.Sync",
-     "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync", "ConnectToTarget.AzureSqlDbMI",
-     "ConnectToTarget.AzureSqlDbMI.Sync.LRS", "ConnectToTarget.AzureDbForMySql",
-     "GetUserTables.Sql", "GetUserTables.AzureSqlDb.Sync", "GetUserTablesOracle",
-     "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
-     "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
-     "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
-     "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
-     "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
-     "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
-     "MigrateSchemaSqlServerSqlDb".
-    :vartype task_type: str or ~azure.mgmt.datamigration.models.TaskType
-    :ivar errors: Array of errors. This is ignored if submitted.
-    :vartype errors: list[~azure.mgmt.datamigration.models.ODataError]
-    :ivar state: The state of the task. This is ignored if submitted. Known values are: "Unknown",
-     "Queued", "Running", "Canceled", "Succeeded", "Failed", "FailedInputValidation", and "Faulted".
-    :vartype state: str or ~azure.mgmt.datamigration.models.TaskState
-    :ivar commands: Array of command properties.
-    :vartype commands: list[~azure.mgmt.datamigration.models.CommandProperties]
-    :ivar client_data: Key value pairs of client data to attach meta data information to task.
-    :vartype client_data: dict[str, str]
-    """
-
-    _validation = {
-        "task_type": {"required": True},
-        "errors": {"readonly": True},
-        "state": {"readonly": True},
-        "commands": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "task_type": {"key": "taskType", "type": "str"},
-        "errors": {"key": "errors", "type": "[ODataError]"},
-        "state": {"key": "state", "type": "str"},
-        "commands": {"key": "commands", "type": "[CommandProperties]"},
-        "client_data": {"key": "clientData", "type": "{str}"},
-    }
-
-    _subtype_map = {
-        "task_type": {
-            "Connect.MongoDb": "ConnectToMongoDbTaskProperties",
-            "ConnectToSource.MySql": "ConnectToSourceMySqlTaskProperties",
-            "ConnectToSource.Oracle.Sync": "ConnectToSourceOracleSyncTaskProperties",
-            "ConnectToSource.PostgreSql.Sync": "ConnectToSourcePostgreSqlSyncTaskProperties",
-            "ConnectToSource.SqlServer": "ConnectToSourceSqlServerTaskProperties",
-            "ConnectToSource.SqlServer.Sync": "ConnectToSourceSqlServerSyncTaskProperties",
-            "ConnectToTarget.AzureDbForMySql": "ConnectToTargetAzureDbForMySqlTaskProperties",
-            "ConnectToTarget.AzureDbForPostgreSql.Sync": "ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties",
-            "ConnectToTarget.AzureSqlDbMI": "ConnectToTargetSqlMITaskProperties",
-            "ConnectToTarget.AzureSqlDbMI.Sync.LRS": "ConnectToTargetSqlMISyncTaskProperties",
-            "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync": "ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties",
-            "ConnectToTarget.SqlDb": "ConnectToTargetSqlDbTaskProperties",
-            "ConnectToTarget.SqlDb.Sync": "ConnectToTargetSqlDbSyncTaskProperties",
-            "GetTDECertificates.Sql": "GetTdeCertificatesSqlTaskProperties",
-            "GetUserTables.AzureSqlDb.Sync": "GetUserTablesSqlSyncTaskProperties",
-            "GetUserTables.Sql": "GetUserTablesSqlTaskProperties",
-            "GetUserTablesMySql": "GetUserTablesMySqlTaskProperties",
-            "GetUserTablesOracle": "GetUserTablesOracleTaskProperties",
-            "GetUserTablesPostgreSql": "GetUserTablesPostgreSqlTaskProperties",
-            "Migrate.MongoDb": "MigrateMongoDbTaskProperties",
-            "Migrate.MySql.AzureDbForMySql": "MigrateMySqlAzureDbForMySqlOfflineTaskProperties",
-            "Migrate.MySql.AzureDbForMySql.Sync": "MigrateMySqlAzureDbForMySqlSyncTaskProperties",
-            "Migrate.Oracle.AzureDbForPostgreSql.Sync": "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties",
-            "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2": "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties",
-            "Migrate.SqlServer.AzureSqlDb.Sync": "MigrateSqlServerSqlDbSyncTaskProperties",
-            "Migrate.SqlServer.AzureSqlDbMI": "MigrateSqlServerSqlMITaskProperties",
-            "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS": "MigrateSqlServerSqlMISyncTaskProperties",
-            "Migrate.SqlServer.SqlDb": "MigrateSqlServerSqlDbTaskProperties",
-            "Migrate.Ssis": "MigrateSsisTaskProperties",
-            "MigrateSchemaSqlServerSqlDb": "MigrateSchemaSqlServerSqlDbTaskProperties",
-            "Service.Check.OCI": "CheckOCIDriverTaskProperties",
-            "Service.Install.OCI": "InstallOCIDriverTaskProperties",
-            "Service.Upload.OCI": "UploadOCIDriverTaskProperties",
-            "Validate.MongoDb": "ValidateMongoDbTaskProperties",
-            "Validate.Oracle.AzureDbPostgreSql.Sync": "ValidateOracleAzureDbForPostgreSqlSyncTaskProperties",
-            "ValidateMigrationInput.SqlServer.AzureSqlDbMI": "ValidateMigrationInputSqlServerSqlMITaskProperties",
-            "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS": "ValidateMigrationInputSqlServerSqlMISyncTaskProperties",
-            "ValidateMigrationInput.SqlServer.SqlDb.Sync": "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties",
-        }
-    }
-
-    def __init__(self, *, client_data: Optional[Dict[str, str]] = None, **kwargs):
-        """
-        :keyword client_data: Key value pairs of client data to attach meta data information to task.
-        :paramtype client_data: dict[str, str]
-        """
-        super().__init__(**kwargs)
-        self.task_type: Optional[str] = None
-        self.errors = None
-        self.state = None
-        self.commands = None
-        self.client_data = client_data
-
-
-class CheckOCIDriverTaskProperties(ProjectTaskProperties):
-    """Properties for the task that checks for OCI drivers.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar task_type: Task type. Required. Known values are: "Connect.MongoDb",
-     "ConnectToSource.SqlServer", "ConnectToSource.SqlServer.Sync",
-     "ConnectToSource.PostgreSql.Sync", "ConnectToSource.MySql", "ConnectToSource.Oracle.Sync",
-     "ConnectToTarget.SqlDb", "ConnectToTarget.SqlDb.Sync",
-     "ConnectToTarget.AzureDbForPostgreSql.Sync",
-     "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync", "ConnectToTarget.AzureSqlDbMI",
-     "ConnectToTarget.AzureSqlDbMI.Sync.LRS", "ConnectToTarget.AzureDbForMySql",
-     "GetUserTables.Sql", "GetUserTables.AzureSqlDb.Sync", "GetUserTablesOracle",
-     "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
-     "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
-     "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
-     "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
-     "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
-     "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
-     "MigrateSchemaSqlServerSqlDb".
-    :vartype task_type: str or ~azure.mgmt.datamigration.models.TaskType
-    :ivar errors: Array of errors. This is ignored if submitted.
-    :vartype errors: list[~azure.mgmt.datamigration.models.ODataError]
-    :ivar state: The state of the task. This is ignored if submitted. Known values are: "Unknown",
-     "Queued", "Running", "Canceled", "Succeeded", "Failed", "FailedInputValidation", and "Faulted".
-    :vartype state: str or ~azure.mgmt.datamigration.models.TaskState
-    :ivar commands: Array of command properties.
-    :vartype commands: list[~azure.mgmt.datamigration.models.CommandProperties]
-    :ivar client_data: Key value pairs of client data to attach meta data information to task.
-    :vartype client_data: dict[str, str]
-    :ivar input: Input for the service task to check for OCI drivers.
-    :vartype input: ~azure.mgmt.datamigration.models.CheckOCIDriverTaskInput
-    :ivar output: Task output. This is ignored if submitted.
-    :vartype output: list[~azure.mgmt.datamigration.models.CheckOCIDriverTaskOutput]
-    """
-
-    _validation = {
-        "task_type": {"required": True},
-        "errors": {"readonly": True},
-        "state": {"readonly": True},
-        "commands": {"readonly": True},
-        "output": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "task_type": {"key": "taskType", "type": "str"},
-        "errors": {"key": "errors", "type": "[ODataError]"},
-        "state": {"key": "state", "type": "str"},
-        "commands": {"key": "commands", "type": "[CommandProperties]"},
-        "client_data": {"key": "clientData", "type": "{str}"},
-        "input": {"key": "input", "type": "CheckOCIDriverTaskInput"},
-        "output": {"key": "output", "type": "[CheckOCIDriverTaskOutput]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        client_data: Optional[Dict[str, str]] = None,
-        input: Optional["_models.CheckOCIDriverTaskInput"] = None,
-        **kwargs
-    ):
-        """
-        :keyword client_data: Key value pairs of client data to attach meta data information to task.
-        :paramtype client_data: dict[str, str]
-        :keyword input: Input for the service task to check for OCI drivers.
-        :paramtype input: ~azure.mgmt.datamigration.models.CheckOCIDriverTaskInput
-        """
-        super().__init__(client_data=client_data, **kwargs)
-        self.task_type: str = "Service.Check.OCI"
-        self.input = input
-        self.output = None
-
-
 class CommandProperties(_serialization.Model):
     """Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.
 
@@ -845,6 +584,134 @@ class ConnectionInfo(_serialization.Model):
         self.type: Optional[str] = None
         self.user_name = user_name
         self.password = password
+
+
+class ProjectTaskProperties(_serialization.Model):
+    """Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.
+
+    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
+    ConnectToMongoDbTaskProperties, ConnectToSourceMySqlTaskProperties,
+    ConnectToSourceOracleSyncTaskProperties, ConnectToSourcePostgreSqlSyncTaskProperties,
+    ConnectToSourceSqlServerTaskProperties, ConnectToSourceSqlServerSyncTaskProperties,
+    ConnectToTargetAzureDbForMySqlTaskProperties,
+    ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties, ConnectToTargetSqlMITaskProperties,
+    ConnectToTargetSqlMISyncTaskProperties,
+    ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties,
+    ConnectToTargetSqlDbTaskProperties, ConnectToTargetSqlDbSyncTaskProperties,
+    GetTdeCertificatesSqlTaskProperties, GetUserTablesSqlSyncTaskProperties,
+    GetUserTablesSqlTaskProperties, GetUserTablesMySqlTaskProperties,
+    GetUserTablesOracleTaskProperties, GetUserTablesPostgreSqlTaskProperties,
+    MigrateMongoDbTaskProperties, MigrateMySqlAzureDbForMySqlOfflineTaskProperties,
+    MigrateMySqlAzureDbForMySqlSyncTaskProperties,
+    MigrateOracleAzureDbForPostgreSqlSyncTaskProperties,
+    MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties,
+    MigrateSqlServerSqlDbSyncTaskProperties, MigrateSqlServerSqlMITaskProperties,
+    MigrateSqlServerSqlMISyncTaskProperties, MigrateSqlServerSqlDbTaskProperties,
+    MigrateSsisTaskProperties, ValidateMongoDbTaskProperties,
+    ValidateOracleAzureDbForPostgreSqlSyncTaskProperties,
+    ValidateMigrationInputSqlServerSqlMITaskProperties,
+    ValidateMigrationInputSqlServerSqlMISyncTaskProperties,
+    ValidateMigrationInputSqlServerSqlDbSyncTaskProperties
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar task_type: Task type. Required. Known values are: "Connect.MongoDb",
+     "ConnectToSource.SqlServer", "ConnectToSource.SqlServer.Sync",
+     "ConnectToSource.PostgreSql.Sync", "ConnectToSource.MySql", "ConnectToSource.Oracle.Sync",
+     "ConnectToTarget.SqlDb", "ConnectToTarget.SqlDb.Sync",
+     "ConnectToTarget.AzureDbForPostgreSql.Sync",
+     "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync", "ConnectToTarget.AzureSqlDbMI",
+     "ConnectToTarget.AzureSqlDbMI.Sync.LRS", "ConnectToTarget.AzureDbForMySql",
+     "GetUserTables.Sql", "GetUserTables.AzureSqlDb.Sync", "GetUserTablesOracle",
+     "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
+     "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
+     "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
+     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
+     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
+     "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
+     "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
+     "MigrateSchemaSqlServerSqlDb".
+    :vartype task_type: str or ~azure.mgmt.datamigration.models.TaskType
+    :ivar errors: Array of errors. This is ignored if submitted.
+    :vartype errors: list[~azure.mgmt.datamigration.models.ODataError]
+    :ivar state: The state of the task. This is ignored if submitted. Known values are: "Unknown",
+     "Queued", "Running", "Canceled", "Succeeded", "Failed", "FailedInputValidation", and "Faulted".
+    :vartype state: str or ~azure.mgmt.datamigration.models.TaskState
+    :ivar commands: Array of command properties.
+    :vartype commands: list[~azure.mgmt.datamigration.models.CommandProperties]
+    :ivar client_data: Key value pairs of client data to attach meta data information to task.
+    :vartype client_data: dict[str, str]
+    """
+
+    _validation = {
+        "task_type": {"required": True},
+        "errors": {"readonly": True},
+        "state": {"readonly": True},
+        "commands": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "task_type": {"key": "taskType", "type": "str"},
+        "errors": {"key": "errors", "type": "[ODataError]"},
+        "state": {"key": "state", "type": "str"},
+        "commands": {"key": "commands", "type": "[CommandProperties]"},
+        "client_data": {"key": "clientData", "type": "{str}"},
+    }
+
+    _subtype_map = {
+        "task_type": {
+            "Connect.MongoDb": "ConnectToMongoDbTaskProperties",
+            "ConnectToSource.MySql": "ConnectToSourceMySqlTaskProperties",
+            "ConnectToSource.Oracle.Sync": "ConnectToSourceOracleSyncTaskProperties",
+            "ConnectToSource.PostgreSql.Sync": "ConnectToSourcePostgreSqlSyncTaskProperties",
+            "ConnectToSource.SqlServer": "ConnectToSourceSqlServerTaskProperties",
+            "ConnectToSource.SqlServer.Sync": "ConnectToSourceSqlServerSyncTaskProperties",
+            "ConnectToTarget.AzureDbForMySql": "ConnectToTargetAzureDbForMySqlTaskProperties",
+            "ConnectToTarget.AzureDbForPostgreSql.Sync": "ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties",
+            "ConnectToTarget.AzureSqlDbMI": "ConnectToTargetSqlMITaskProperties",
+            "ConnectToTarget.AzureSqlDbMI.Sync.LRS": "ConnectToTargetSqlMISyncTaskProperties",
+            "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync": "ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties",
+            "ConnectToTarget.SqlDb": "ConnectToTargetSqlDbTaskProperties",
+            "ConnectToTarget.SqlDb.Sync": "ConnectToTargetSqlDbSyncTaskProperties",
+            "GetTDECertificates.Sql": "GetTdeCertificatesSqlTaskProperties",
+            "GetUserTables.AzureSqlDb.Sync": "GetUserTablesSqlSyncTaskProperties",
+            "GetUserTables.Sql": "GetUserTablesSqlTaskProperties",
+            "GetUserTablesMySql": "GetUserTablesMySqlTaskProperties",
+            "GetUserTablesOracle": "GetUserTablesOracleTaskProperties",
+            "GetUserTablesPostgreSql": "GetUserTablesPostgreSqlTaskProperties",
+            "Migrate.MongoDb": "MigrateMongoDbTaskProperties",
+            "Migrate.MySql.AzureDbForMySql": "MigrateMySqlAzureDbForMySqlOfflineTaskProperties",
+            "Migrate.MySql.AzureDbForMySql.Sync": "MigrateMySqlAzureDbForMySqlSyncTaskProperties",
+            "Migrate.Oracle.AzureDbForPostgreSql.Sync": "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties",
+            "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2": "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties",
+            "Migrate.SqlServer.AzureSqlDb.Sync": "MigrateSqlServerSqlDbSyncTaskProperties",
+            "Migrate.SqlServer.AzureSqlDbMI": "MigrateSqlServerSqlMITaskProperties",
+            "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS": "MigrateSqlServerSqlMISyncTaskProperties",
+            "Migrate.SqlServer.SqlDb": "MigrateSqlServerSqlDbTaskProperties",
+            "Migrate.Ssis": "MigrateSsisTaskProperties",
+            "Validate.MongoDb": "ValidateMongoDbTaskProperties",
+            "Validate.Oracle.AzureDbPostgreSql.Sync": "ValidateOracleAzureDbForPostgreSqlSyncTaskProperties",
+            "ValidateMigrationInput.SqlServer.AzureSqlDbMI": "ValidateMigrationInputSqlServerSqlMITaskProperties",
+            "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS": "ValidateMigrationInputSqlServerSqlMISyncTaskProperties",
+            "ValidateMigrationInput.SqlServer.SqlDb.Sync": "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties",
+        }
+    }
+
+    def __init__(self, *, client_data: Optional[Dict[str, str]] = None, **kwargs):
+        """
+        :keyword client_data: Key value pairs of client data to attach meta data information to task.
+        :paramtype client_data: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.task_type: Optional[str] = None
+        self.errors = None
+        self.state = None
+        self.commands = None
+        self.client_data = client_data
 
 
 class ConnectToMongoDbTaskProperties(ProjectTaskProperties):
@@ -3149,153 +3016,6 @@ class CopyProgressDetails(_serialization.Model):  # pylint: disable=too-many-ins
         self.copy_duration = None
 
 
-class Database(_serialization.Model):  # pylint: disable=too-many-instance-attributes
-    """Information about a single database.
-
-    :ivar id: Unique identifier for the database.
-    :vartype id: str
-    :ivar name: Name of the database.
-    :vartype name: str
-    :ivar compatibility_level: SQL Server compatibility level of database. Known values are:
-     "CompatLevel80", "CompatLevel90", "CompatLevel100", "CompatLevel110", "CompatLevel120",
-     "CompatLevel130", and "CompatLevel140".
-    :vartype compatibility_level: str or ~azure.mgmt.datamigration.models.DatabaseCompatLevel
-    :ivar collation: Collation name of the database.
-    :vartype collation: str
-    :ivar server_name: Name of the server.
-    :vartype server_name: str
-    :ivar fqdn: Fully qualified name.
-    :vartype fqdn: str
-    :ivar install_id: Install id of the database.
-    :vartype install_id: str
-    :ivar server_version: Version of the server.
-    :vartype server_version: str
-    :ivar server_edition: Edition of the server.
-    :vartype server_edition: str
-    :ivar server_level: Product level of the server (RTM, SP, CTP).
-    :vartype server_level: str
-    :ivar server_default_data_path: Default path of the data files.
-    :vartype server_default_data_path: str
-    :ivar server_default_log_path: Default path of the log files.
-    :vartype server_default_log_path: str
-    :ivar server_default_backup_path: Default path of the backup folder.
-    :vartype server_default_backup_path: str
-    :ivar server_core_count: Number of cores on the server.
-    :vartype server_core_count: int
-    :ivar server_visible_online_core_count: Number of cores on the server that have VISIBLE ONLINE
-     status.
-    :vartype server_visible_online_core_count: int
-    :ivar database_state: State of the database. Known values are: "Online", "Restoring",
-     "Recovering", "RecoveryPending", "Suspect", "Emergency", "Offline", "Copying", and
-     "OfflineSecondary".
-    :vartype database_state: str or ~azure.mgmt.datamigration.models.DatabaseState
-    :ivar server_id: The unique Server Id.
-    :vartype server_id: str
-    """
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "compatibility_level": {"key": "compatibilityLevel", "type": "str"},
-        "collation": {"key": "collation", "type": "str"},
-        "server_name": {"key": "serverName", "type": "str"},
-        "fqdn": {"key": "fqdn", "type": "str"},
-        "install_id": {"key": "installId", "type": "str"},
-        "server_version": {"key": "serverVersion", "type": "str"},
-        "server_edition": {"key": "serverEdition", "type": "str"},
-        "server_level": {"key": "serverLevel", "type": "str"},
-        "server_default_data_path": {"key": "serverDefaultDataPath", "type": "str"},
-        "server_default_log_path": {"key": "serverDefaultLogPath", "type": "str"},
-        "server_default_backup_path": {"key": "serverDefaultBackupPath", "type": "str"},
-        "server_core_count": {"key": "serverCoreCount", "type": "int"},
-        "server_visible_online_core_count": {"key": "serverVisibleOnlineCoreCount", "type": "int"},
-        "database_state": {"key": "databaseState", "type": "str"},
-        "server_id": {"key": "serverId", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        name: Optional[str] = None,
-        compatibility_level: Optional[Union[str, "_models.DatabaseCompatLevel"]] = None,
-        collation: Optional[str] = None,
-        server_name: Optional[str] = None,
-        fqdn: Optional[str] = None,
-        install_id: Optional[str] = None,
-        server_version: Optional[str] = None,
-        server_edition: Optional[str] = None,
-        server_level: Optional[str] = None,
-        server_default_data_path: Optional[str] = None,
-        server_default_log_path: Optional[str] = None,
-        server_default_backup_path: Optional[str] = None,
-        server_core_count: Optional[int] = None,
-        server_visible_online_core_count: Optional[int] = None,
-        database_state: Optional[Union[str, "_models.DatabaseState"]] = None,
-        server_id: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword id: Unique identifier for the database.
-        :paramtype id: str
-        :keyword name: Name of the database.
-        :paramtype name: str
-        :keyword compatibility_level: SQL Server compatibility level of database. Known values are:
-         "CompatLevel80", "CompatLevel90", "CompatLevel100", "CompatLevel110", "CompatLevel120",
-         "CompatLevel130", and "CompatLevel140".
-        :paramtype compatibility_level: str or ~azure.mgmt.datamigration.models.DatabaseCompatLevel
-        :keyword collation: Collation name of the database.
-        :paramtype collation: str
-        :keyword server_name: Name of the server.
-        :paramtype server_name: str
-        :keyword fqdn: Fully qualified name.
-        :paramtype fqdn: str
-        :keyword install_id: Install id of the database.
-        :paramtype install_id: str
-        :keyword server_version: Version of the server.
-        :paramtype server_version: str
-        :keyword server_edition: Edition of the server.
-        :paramtype server_edition: str
-        :keyword server_level: Product level of the server (RTM, SP, CTP).
-        :paramtype server_level: str
-        :keyword server_default_data_path: Default path of the data files.
-        :paramtype server_default_data_path: str
-        :keyword server_default_log_path: Default path of the log files.
-        :paramtype server_default_log_path: str
-        :keyword server_default_backup_path: Default path of the backup folder.
-        :paramtype server_default_backup_path: str
-        :keyword server_core_count: Number of cores on the server.
-        :paramtype server_core_count: int
-        :keyword server_visible_online_core_count: Number of cores on the server that have VISIBLE
-         ONLINE status.
-        :paramtype server_visible_online_core_count: int
-        :keyword database_state: State of the database. Known values are: "Online", "Restoring",
-         "Recovering", "RecoveryPending", "Suspect", "Emergency", "Offline", "Copying", and
-         "OfflineSecondary".
-        :paramtype database_state: str or ~azure.mgmt.datamigration.models.DatabaseState
-        :keyword server_id: The unique Server Id.
-        :paramtype server_id: str
-        """
-        super().__init__(**kwargs)
-        self.id = id
-        self.name = name
-        self.compatibility_level = compatibility_level
-        self.collation = collation
-        self.server_name = server_name
-        self.fqdn = fqdn
-        self.install_id = install_id
-        self.server_version = server_version
-        self.server_edition = server_edition
-        self.server_level = server_level
-        self.server_default_data_path = server_default_data_path
-        self.server_default_log_path = server_default_log_path
-        self.server_default_backup_path = server_default_backup_path
-        self.server_core_count = server_core_count
-        self.server_visible_online_core_count = server_visible_online_core_count
-        self.database_state = database_state
-        self.server_id = server_id
-
-
 class DatabaseBackupInfo(_serialization.Model):
     """Information about backup files when existing backup mode is used.
 
@@ -3423,61 +3143,6 @@ class DatabaseFileInfo(_serialization.Model):
         self.restore_full_name = restore_full_name
         self.file_type = file_type
         self.size_mb = size_mb
-
-
-class DatabaseFileInput(_serialization.Model):
-    """Database file specific information for input.
-
-    :ivar id: Unique identifier for database file.
-    :vartype id: str
-    :ivar logical_name: Logical name of the file.
-    :vartype logical_name: str
-    :ivar physical_full_name: Operating-system full path of the file.
-    :vartype physical_full_name: str
-    :ivar restore_full_name: Suggested full path of the file for restoring.
-    :vartype restore_full_name: str
-    :ivar file_type: Database file type. Known values are: "Rows", "Log", "Filestream",
-     "NotSupported", and "Fulltext".
-    :vartype file_type: str or ~azure.mgmt.datamigration.models.DatabaseFileType
-    """
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "logical_name": {"key": "logicalName", "type": "str"},
-        "physical_full_name": {"key": "physicalFullName", "type": "str"},
-        "restore_full_name": {"key": "restoreFullName", "type": "str"},
-        "file_type": {"key": "fileType", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        logical_name: Optional[str] = None,
-        physical_full_name: Optional[str] = None,
-        restore_full_name: Optional[str] = None,
-        file_type: Optional[Union[str, "_models.DatabaseFileType"]] = None,
-        **kwargs
-    ):
-        """
-        :keyword id: Unique identifier for database file.
-        :paramtype id: str
-        :keyword logical_name: Logical name of the file.
-        :paramtype logical_name: str
-        :keyword physical_full_name: Operating-system full path of the file.
-        :paramtype physical_full_name: str
-        :keyword restore_full_name: Suggested full path of the file for restoring.
-        :paramtype restore_full_name: str
-        :keyword file_type: Database file type. Known values are: "Rows", "Log", "Filestream",
-         "NotSupported", and "Fulltext".
-        :paramtype file_type: str or ~azure.mgmt.datamigration.models.DatabaseFileType
-        """
-        super().__init__(**kwargs)
-        self.id = id
-        self.logical_name = logical_name
-        self.physical_full_name = physical_full_name
-        self.restore_full_name = restore_full_name
-        self.file_type = file_type
 
 
 class DatabaseInfo(_serialization.Model):
@@ -4237,48 +3902,6 @@ class DatabaseMigrationSqlVm(ProxyResource):
         self.properties = properties
 
 
-class DatabaseObjectName(_serialization.Model):
-    """A representation of the name of an object in a database.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar database_name: The unescaped name of the database containing the object.
-    :vartype database_name: str
-    :ivar object_name: The unescaped name of the object.
-    :vartype object_name: str
-    :ivar schema_name: The unescaped name of the schema containing the object.
-    :vartype schema_name: str
-    :ivar object_type: Type of the object in the database. Known values are: "StoredProcedures",
-     "Table", "User", "View", and "Function".
-    :vartype object_type: str or ~azure.mgmt.datamigration.models.ObjectType
-    """
-
-    _validation = {
-        "database_name": {"readonly": True},
-        "object_name": {"readonly": True},
-        "schema_name": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "database_name": {"key": "databaseName", "type": "str"},
-        "object_name": {"key": "objectName", "type": "str"},
-        "schema_name": {"key": "schemaName", "type": "str"},
-        "object_type": {"key": "objectType", "type": "str"},
-    }
-
-    def __init__(self, *, object_type: Optional[Union[str, "_models.ObjectType"]] = None, **kwargs):
-        """
-        :keyword object_type: Type of the object in the database. Known values are: "StoredProcedures",
-         "Table", "User", "View", and "Function".
-        :paramtype object_type: str or ~azure.mgmt.datamigration.models.ObjectType
-        """
-        super().__init__(**kwargs)
-        self.database_name = None
-        self.object_name = None
-        self.schema_name = None
-        self.object_type = object_type
-
-
 class DataItemMigrationSummaryResult(_serialization.Model):
     """Basic summary of a data item migration.
 
@@ -4465,95 +4088,6 @@ class DataIntegrityValidationResult(_serialization.Model):
         super().__init__(**kwargs)
         self.failed_objects = failed_objects
         self.validation_errors = validation_errors
-
-
-class DataMigrationError(_serialization.Model):
-    """Migration Task errors.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar message: Error description.
-    :vartype message: str
-    :ivar type: Error type. Known values are: "Default", "Warning", and "Error".
-    :vartype type: str or ~azure.mgmt.datamigration.models.ErrorType
-    """
-
-    _validation = {
-        "message": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "message": {"key": "message", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-    }
-
-    def __init__(self, *, type: Optional[Union[str, "_models.ErrorType"]] = None, **kwargs):
-        """
-        :keyword type: Error type. Known values are: "Default", "Warning", and "Error".
-        :paramtype type: str or ~azure.mgmt.datamigration.models.ErrorType
-        """
-        super().__init__(**kwargs)
-        self.message = None
-        self.type = type
-
-
-class DataMigrationProjectMetadata(_serialization.Model):
-    """Common metadata for migration projects.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar source_server_name: Source server name.
-    :vartype source_server_name: str
-    :ivar source_server_port: Source server port number.
-    :vartype source_server_port: str
-    :ivar source_username: Source username.
-    :vartype source_username: str
-    :ivar target_server_name: Target server name.
-    :vartype target_server_name: str
-    :ivar target_username: Target username.
-    :vartype target_username: str
-    :ivar target_db_name: Target database name.
-    :vartype target_db_name: str
-    :ivar target_using_win_auth: Whether target connection is Windows authentication.
-    :vartype target_using_win_auth: bool
-    :ivar selected_migration_tables: List of tables selected for migration.
-    :vartype selected_migration_tables:
-     list[~azure.mgmt.datamigration.models.MigrationTableMetadata]
-    """
-
-    _validation = {
-        "source_server_name": {"readonly": True},
-        "source_server_port": {"readonly": True},
-        "source_username": {"readonly": True},
-        "target_server_name": {"readonly": True},
-        "target_username": {"readonly": True},
-        "target_db_name": {"readonly": True},
-        "target_using_win_auth": {"readonly": True},
-        "selected_migration_tables": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "source_server_name": {"key": "sourceServerName", "type": "str"},
-        "source_server_port": {"key": "sourceServerPort", "type": "str"},
-        "source_username": {"key": "sourceUsername", "type": "str"},
-        "target_server_name": {"key": "targetServerName", "type": "str"},
-        "target_username": {"key": "targetUsername", "type": "str"},
-        "target_db_name": {"key": "targetDbName", "type": "str"},
-        "target_using_win_auth": {"key": "targetUsingWinAuth", "type": "bool"},
-        "selected_migration_tables": {"key": "selectedMigrationTables", "type": "[MigrationTableMetadata]"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.source_server_name = None
-        self.source_server_port = None
-        self.source_username = None
-        self.target_server_name = None
-        self.target_username = None
-        self.target_db_name = None
-        self.target_using_win_auth = None
-        self.selected_migration_tables = None
 
 
 class TrackedResource(_serialization.Model):
@@ -5018,41 +4552,6 @@ class FileStorageInfo(_serialization.Model):
         super().__init__(**kwargs)
         self.uri = uri
         self.headers = headers
-
-
-class GetProjectDetailsNonSqlTaskInput(_serialization.Model):
-    """Input for the task that reads configuration from project artifacts.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar project_name: Name of the migration project. Required.
-    :vartype project_name: str
-    :ivar project_location: A URL that points to the location to access project artifacts.
-     Required.
-    :vartype project_location: str
-    """
-
-    _validation = {
-        "project_name": {"required": True},
-        "project_location": {"required": True},
-    }
-
-    _attribute_map = {
-        "project_name": {"key": "projectName", "type": "str"},
-        "project_location": {"key": "projectLocation", "type": "str"},
-    }
-
-    def __init__(self, *, project_name: str, project_location: str, **kwargs):
-        """
-        :keyword project_name: Name of the migration project. Required.
-        :paramtype project_name: str
-        :keyword project_location: A URL that points to the location to access project artifacts.
-         Required.
-        :paramtype project_location: str
-        """
-        super().__init__(**kwargs)
-        self.project_name = project_name
-        self.project_location = project_location
 
 
 class GetTdeCertificatesSqlTaskInput(_serialization.Model):
@@ -5981,127 +5480,6 @@ class GetUserTablesSqlTaskProperties(ProjectTaskProperties):
         self.input = input
         self.output = None
         self.task_id = task_id
-
-
-class InstallOCIDriverTaskInput(_serialization.Model):
-    """Input for the service task to install an OCI driver.
-
-    :ivar driver_package_name: Name of the uploaded driver package to install.
-    :vartype driver_package_name: str
-    """
-
-    _attribute_map = {
-        "driver_package_name": {"key": "driverPackageName", "type": "str"},
-    }
-
-    def __init__(self, *, driver_package_name: Optional[str] = None, **kwargs):
-        """
-        :keyword driver_package_name: Name of the uploaded driver package to install.
-        :paramtype driver_package_name: str
-        """
-        super().__init__(**kwargs)
-        self.driver_package_name = driver_package_name
-
-
-class InstallOCIDriverTaskOutput(_serialization.Model):
-    """Output for the service task to install an OCI driver.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar validation_errors: Validation errors.
-    :vartype validation_errors: list[~azure.mgmt.datamigration.models.ReportableException]
-    """
-
-    _validation = {
-        "validation_errors": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "validation_errors": {"key": "validationErrors", "type": "[ReportableException]"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.validation_errors = None
-
-
-class InstallOCIDriverTaskProperties(ProjectTaskProperties):
-    """Properties for the task that installs an OCI driver.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar task_type: Task type. Required. Known values are: "Connect.MongoDb",
-     "ConnectToSource.SqlServer", "ConnectToSource.SqlServer.Sync",
-     "ConnectToSource.PostgreSql.Sync", "ConnectToSource.MySql", "ConnectToSource.Oracle.Sync",
-     "ConnectToTarget.SqlDb", "ConnectToTarget.SqlDb.Sync",
-     "ConnectToTarget.AzureDbForPostgreSql.Sync",
-     "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync", "ConnectToTarget.AzureSqlDbMI",
-     "ConnectToTarget.AzureSqlDbMI.Sync.LRS", "ConnectToTarget.AzureDbForMySql",
-     "GetUserTables.Sql", "GetUserTables.AzureSqlDb.Sync", "GetUserTablesOracle",
-     "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
-     "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
-     "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
-     "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
-     "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
-     "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
-     "MigrateSchemaSqlServerSqlDb".
-    :vartype task_type: str or ~azure.mgmt.datamigration.models.TaskType
-    :ivar errors: Array of errors. This is ignored if submitted.
-    :vartype errors: list[~azure.mgmt.datamigration.models.ODataError]
-    :ivar state: The state of the task. This is ignored if submitted. Known values are: "Unknown",
-     "Queued", "Running", "Canceled", "Succeeded", "Failed", "FailedInputValidation", and "Faulted".
-    :vartype state: str or ~azure.mgmt.datamigration.models.TaskState
-    :ivar commands: Array of command properties.
-    :vartype commands: list[~azure.mgmt.datamigration.models.CommandProperties]
-    :ivar client_data: Key value pairs of client data to attach meta data information to task.
-    :vartype client_data: dict[str, str]
-    :ivar input: Input for the service task to install an OCI driver.
-    :vartype input: ~azure.mgmt.datamigration.models.InstallOCIDriverTaskInput
-    :ivar output: Task output. This is ignored if submitted.
-    :vartype output: list[~azure.mgmt.datamigration.models.InstallOCIDriverTaskOutput]
-    """
-
-    _validation = {
-        "task_type": {"required": True},
-        "errors": {"readonly": True},
-        "state": {"readonly": True},
-        "commands": {"readonly": True},
-        "output": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "task_type": {"key": "taskType", "type": "str"},
-        "errors": {"key": "errors", "type": "[ODataError]"},
-        "state": {"key": "state", "type": "str"},
-        "commands": {"key": "commands", "type": "[CommandProperties]"},
-        "client_data": {"key": "clientData", "type": "{str}"},
-        "input": {"key": "input", "type": "InstallOCIDriverTaskInput"},
-        "output": {"key": "output", "type": "[InstallOCIDriverTaskOutput]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        client_data: Optional[Dict[str, str]] = None,
-        input: Optional["_models.InstallOCIDriverTaskInput"] = None,
-        **kwargs
-    ):
-        """
-        :keyword client_data: Key value pairs of client data to attach meta data information to task.
-        :paramtype client_data: dict[str, str]
-        :keyword input: Input for the service task to install an OCI driver.
-        :paramtype input: ~azure.mgmt.datamigration.models.InstallOCIDriverTaskInput
-        """
-        super().__init__(client_data=client_data, **kwargs)
-        self.task_type: str = "Service.Install.OCI"
-        self.input = input
-        self.output = None
 
 
 class IntegrationRuntimeMonitoringData(_serialization.Model):
@@ -8797,565 +8175,6 @@ class MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties(ProjectTaskPropert
         self.is_cloneable = is_cloneable
 
 
-class MigrateSchemaSqlServerSqlDbDatabaseInput(_serialization.Model):
-    """Database input for migrate schema Sql Server to Azure SQL Server scenario.
-
-    :ivar name: Name of source database.
-    :vartype name: str
-    :ivar id: Id of the source database.
-    :vartype id: str
-    :ivar target_database_name: Name of target database.
-    :vartype target_database_name: str
-    :ivar schema_setting: Database schema migration settings.
-    :vartype schema_setting: ~azure.mgmt.datamigration.models.SchemaMigrationSetting
-    """
-
-    _attribute_map = {
-        "name": {"key": "name", "type": "str"},
-        "id": {"key": "id", "type": "str"},
-        "target_database_name": {"key": "targetDatabaseName", "type": "str"},
-        "schema_setting": {"key": "schemaSetting", "type": "SchemaMigrationSetting"},
-    }
-
-    def __init__(
-        self,
-        *,
-        name: Optional[str] = None,
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        target_database_name: Optional[str] = None,
-        schema_setting: Optional["_models.SchemaMigrationSetting"] = None,
-        **kwargs
-    ):
-        """
-        :keyword name: Name of source database.
-        :paramtype name: str
-        :keyword id: Id of the source database.
-        :paramtype id: str
-        :keyword target_database_name: Name of target database.
-        :paramtype target_database_name: str
-        :keyword schema_setting: Database schema migration settings.
-        :paramtype schema_setting: ~azure.mgmt.datamigration.models.SchemaMigrationSetting
-        """
-        super().__init__(**kwargs)
-        self.name = name
-        self.id = id
-        self.target_database_name = target_database_name
-        self.schema_setting = schema_setting
-
-
-class SqlMigrationTaskInput(_serialization.Model):
-    """Base class for migration task input.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar source_connection_info: Information for connecting to source. Required.
-    :vartype source_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-    :ivar target_connection_info: Information for connecting to target. Required.
-    :vartype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-    """
-
-    _validation = {
-        "source_connection_info": {"required": True},
-        "target_connection_info": {"required": True},
-    }
-
-    _attribute_map = {
-        "source_connection_info": {"key": "sourceConnectionInfo", "type": "SqlConnectionInfo"},
-        "target_connection_info": {"key": "targetConnectionInfo", "type": "SqlConnectionInfo"},
-    }
-
-    def __init__(
-        self,
-        *,
-        source_connection_info: "_models.SqlConnectionInfo",
-        target_connection_info: "_models.SqlConnectionInfo",
-        **kwargs
-    ):
-        """
-        :keyword source_connection_info: Information for connecting to source. Required.
-        :paramtype source_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-        :keyword target_connection_info: Information for connecting to target. Required.
-        :paramtype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-        """
-        super().__init__(**kwargs)
-        self.source_connection_info = source_connection_info
-        self.target_connection_info = target_connection_info
-
-
-class MigrateSchemaSqlServerSqlDbTaskInput(SqlMigrationTaskInput):
-    """Input for task that migrates Schema for SQL Server databases to Azure SQL databases.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar source_connection_info: Information for connecting to source. Required.
-    :vartype source_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-    :ivar target_connection_info: Information for connecting to target. Required.
-    :vartype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-    :ivar selected_databases: Databases to migrate. Required.
-    :vartype selected_databases:
-     list[~azure.mgmt.datamigration.models.MigrateSchemaSqlServerSqlDbDatabaseInput]
-    :ivar encrypted_key_for_secure_fields: encrypted key for secure fields.
-    :vartype encrypted_key_for_secure_fields: str
-    :ivar started_on: Migration start time.
-    :vartype started_on: str
-    """
-
-    _validation = {
-        "source_connection_info": {"required": True},
-        "target_connection_info": {"required": True},
-        "selected_databases": {"required": True},
-    }
-
-    _attribute_map = {
-        "source_connection_info": {"key": "sourceConnectionInfo", "type": "SqlConnectionInfo"},
-        "target_connection_info": {"key": "targetConnectionInfo", "type": "SqlConnectionInfo"},
-        "selected_databases": {"key": "selectedDatabases", "type": "[MigrateSchemaSqlServerSqlDbDatabaseInput]"},
-        "encrypted_key_for_secure_fields": {"key": "encryptedKeyForSecureFields", "type": "str"},
-        "started_on": {"key": "startedOn", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        source_connection_info: "_models.SqlConnectionInfo",
-        target_connection_info: "_models.SqlConnectionInfo",
-        selected_databases: List["_models.MigrateSchemaSqlServerSqlDbDatabaseInput"],
-        encrypted_key_for_secure_fields: Optional[str] = None,
-        started_on: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword source_connection_info: Information for connecting to source. Required.
-        :paramtype source_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-        :keyword target_connection_info: Information for connecting to target. Required.
-        :paramtype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-        :keyword selected_databases: Databases to migrate. Required.
-        :paramtype selected_databases:
-         list[~azure.mgmt.datamigration.models.MigrateSchemaSqlServerSqlDbDatabaseInput]
-        :keyword encrypted_key_for_secure_fields: encrypted key for secure fields.
-        :paramtype encrypted_key_for_secure_fields: str
-        :keyword started_on: Migration start time.
-        :paramtype started_on: str
-        """
-        super().__init__(
-            source_connection_info=source_connection_info, target_connection_info=target_connection_info, **kwargs
-        )
-        self.selected_databases = selected_databases
-        self.encrypted_key_for_secure_fields = encrypted_key_for_secure_fields
-        self.started_on = started_on
-
-
-class MigrateSchemaSqlServerSqlDbTaskOutput(_serialization.Model):
-    """Output for the task that migrates Schema for SQL Server databases to Azure SQL databases.
-
-    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
-    MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel, MigrateSchemaSqlTaskOutputError,
-    MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel, MigrateSchemaSqlServerSqlDbTaskOutputError
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar result_type: Result type. Required.
-    :vartype result_type: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "result_type": {"required": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "result_type": {"key": "resultType", "type": "str"},
-    }
-
-    _subtype_map = {
-        "result_type": {
-            "DatabaseLevelOutput": "MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel",
-            "ErrorOutput": "MigrateSchemaSqlTaskOutputError",
-            "MigrationLevelOutput": "MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel",
-            "SchemaErrorOutput": "MigrateSchemaSqlServerSqlDbTaskOutputError",
-        }
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.id = None
-        self.result_type: Optional[str] = None
-
-
-class MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel(
-    MigrateSchemaSqlServerSqlDbTaskOutput
-):  # pylint: disable=too-many-instance-attributes
-    """MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar result_type: Result type. Required.
-    :vartype result_type: str
-    :ivar database_name: The name of the database.
-    :vartype database_name: str
-    :ivar state: State of the schema migration for this database. Known values are: "None",
-     "InProgress", "Failed", "Warning", "Completed", "Skipped", and "Stopped".
-    :vartype state: str or ~azure.mgmt.datamigration.models.MigrationState
-    :ivar stage: Schema migration stage for this database. Known values are: "NotStarted",
-     "ValidatingInputs", "CollectingObjects", "DownloadingScript", "GeneratingScript",
-     "UploadingScript", "DeployingSchema", "Completed", "CompletedWithWarnings", and "Failed".
-    :vartype stage: str or ~azure.mgmt.datamigration.models.SchemaMigrationStage
-    :ivar started_on: Migration start time.
-    :vartype started_on: ~datetime.datetime
-    :ivar ended_on: Migration end time.
-    :vartype ended_on: ~datetime.datetime
-    :ivar database_error_result_prefix: Prefix string to use for querying errors for this database.
-    :vartype database_error_result_prefix: str
-    :ivar schema_error_result_prefix: Prefix string to use for querying schema errors for this
-     database.
-    :vartype schema_error_result_prefix: str
-    :ivar number_of_successful_operations: Number of successful operations for this database.
-    :vartype number_of_successful_operations: int
-    :ivar number_of_failed_operations: Number of failed operations for this database.
-    :vartype number_of_failed_operations: int
-    :ivar file_id: Identifier for the file resource containing the schema of this database.
-    :vartype file_id: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "result_type": {"required": True},
-        "database_name": {"readonly": True},
-        "state": {"readonly": True},
-        "stage": {"readonly": True},
-        "started_on": {"readonly": True},
-        "ended_on": {"readonly": True},
-        "database_error_result_prefix": {"readonly": True},
-        "schema_error_result_prefix": {"readonly": True},
-        "number_of_successful_operations": {"readonly": True},
-        "number_of_failed_operations": {"readonly": True},
-        "file_id": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "result_type": {"key": "resultType", "type": "str"},
-        "database_name": {"key": "databaseName", "type": "str"},
-        "state": {"key": "state", "type": "str"},
-        "stage": {"key": "stage", "type": "str"},
-        "started_on": {"key": "startedOn", "type": "iso-8601"},
-        "ended_on": {"key": "endedOn", "type": "iso-8601"},
-        "database_error_result_prefix": {"key": "databaseErrorResultPrefix", "type": "str"},
-        "schema_error_result_prefix": {"key": "schemaErrorResultPrefix", "type": "str"},
-        "number_of_successful_operations": {"key": "numberOfSuccessfulOperations", "type": "int"},
-        "number_of_failed_operations": {"key": "numberOfFailedOperations", "type": "int"},
-        "file_id": {"key": "fileId", "type": "str"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.result_type: str = "DatabaseLevelOutput"
-        self.database_name = None
-        self.state = None
-        self.stage = None
-        self.started_on = None
-        self.ended_on = None
-        self.database_error_result_prefix = None
-        self.schema_error_result_prefix = None
-        self.number_of_successful_operations = None
-        self.number_of_failed_operations = None
-        self.file_id = None
-
-
-class MigrateSchemaSqlServerSqlDbTaskOutputError(MigrateSchemaSqlServerSqlDbTaskOutput):
-    """MigrateSchemaSqlServerSqlDbTaskOutputError.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar result_type: Result type. Required.
-    :vartype result_type: str
-    :ivar command_text: Schema command which failed.
-    :vartype command_text: str
-    :ivar error_text: Reason of failure.
-    :vartype error_text: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "result_type": {"required": True},
-        "command_text": {"readonly": True},
-        "error_text": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "result_type": {"key": "resultType", "type": "str"},
-        "command_text": {"key": "commandText", "type": "str"},
-        "error_text": {"key": "errorText", "type": "str"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.result_type: str = "SchemaErrorOutput"
-        self.command_text = None
-        self.error_text = None
-
-
-class MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel(MigrateSchemaSqlServerSqlDbTaskOutput):
-    """MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar result_type: Result type. Required.
-    :vartype result_type: str
-    :ivar state: Overall state of the schema migration. Known values are: "None", "InProgress",
-     "Failed", "Warning", "Completed", "Skipped", and "Stopped".
-    :vartype state: str or ~azure.mgmt.datamigration.models.MigrationState
-    :ivar started_on: Migration start time.
-    :vartype started_on: ~datetime.datetime
-    :ivar ended_on: Migration end time.
-    :vartype ended_on: ~datetime.datetime
-    :ivar source_server_version: Source server version.
-    :vartype source_server_version: str
-    :ivar source_server_brand_version: Source server brand version.
-    :vartype source_server_brand_version: str
-    :ivar target_server_version: Target server version.
-    :vartype target_server_version: str
-    :ivar target_server_brand_version: Target server brand version.
-    :vartype target_server_brand_version: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "result_type": {"required": True},
-        "state": {"readonly": True},
-        "started_on": {"readonly": True},
-        "ended_on": {"readonly": True},
-        "source_server_version": {"readonly": True},
-        "source_server_brand_version": {"readonly": True},
-        "target_server_version": {"readonly": True},
-        "target_server_brand_version": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "result_type": {"key": "resultType", "type": "str"},
-        "state": {"key": "state", "type": "str"},
-        "started_on": {"key": "startedOn", "type": "iso-8601"},
-        "ended_on": {"key": "endedOn", "type": "iso-8601"},
-        "source_server_version": {"key": "sourceServerVersion", "type": "str"},
-        "source_server_brand_version": {"key": "sourceServerBrandVersion", "type": "str"},
-        "target_server_version": {"key": "targetServerVersion", "type": "str"},
-        "target_server_brand_version": {"key": "targetServerBrandVersion", "type": "str"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.result_type: str = "MigrationLevelOutput"
-        self.state = None
-        self.started_on = None
-        self.ended_on = None
-        self.source_server_version = None
-        self.source_server_brand_version = None
-        self.target_server_version = None
-        self.target_server_brand_version = None
-
-
-class MigrateSchemaSqlServerSqlDbTaskProperties(ProjectTaskProperties):
-    """Properties for task that migrates Schema for SQL Server databases to Azure SQL databases.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar task_type: Task type. Required. Known values are: "Connect.MongoDb",
-     "ConnectToSource.SqlServer", "ConnectToSource.SqlServer.Sync",
-     "ConnectToSource.PostgreSql.Sync", "ConnectToSource.MySql", "ConnectToSource.Oracle.Sync",
-     "ConnectToTarget.SqlDb", "ConnectToTarget.SqlDb.Sync",
-     "ConnectToTarget.AzureDbForPostgreSql.Sync",
-     "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync", "ConnectToTarget.AzureSqlDbMI",
-     "ConnectToTarget.AzureSqlDbMI.Sync.LRS", "ConnectToTarget.AzureDbForMySql",
-     "GetUserTables.Sql", "GetUserTables.AzureSqlDb.Sync", "GetUserTablesOracle",
-     "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
-     "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
-     "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
-     "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
-     "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
-     "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
-     "MigrateSchemaSqlServerSqlDb".
-    :vartype task_type: str or ~azure.mgmt.datamigration.models.TaskType
-    :ivar errors: Array of errors. This is ignored if submitted.
-    :vartype errors: list[~azure.mgmt.datamigration.models.ODataError]
-    :ivar state: The state of the task. This is ignored if submitted. Known values are: "Unknown",
-     "Queued", "Running", "Canceled", "Succeeded", "Failed", "FailedInputValidation", and "Faulted".
-    :vartype state: str or ~azure.mgmt.datamigration.models.TaskState
-    :ivar commands: Array of command properties.
-    :vartype commands: list[~azure.mgmt.datamigration.models.CommandProperties]
-    :ivar client_data: Key value pairs of client data to attach meta data information to task.
-    :vartype client_data: dict[str, str]
-    :ivar input: Task input.
-    :vartype input: ~azure.mgmt.datamigration.models.MigrateSchemaSqlServerSqlDbTaskInput
-    :ivar output: Task output. This is ignored if submitted.
-    :vartype output: list[~azure.mgmt.datamigration.models.MigrateSchemaSqlServerSqlDbTaskOutput]
-    :ivar created_on: DateTime in UTC when the task was created.
-    :vartype created_on: str
-    :ivar task_id: Task id.
-    :vartype task_id: str
-    :ivar is_cloneable: whether the task can be cloned or not.
-    :vartype is_cloneable: bool
-    """
-
-    _validation = {
-        "task_type": {"required": True},
-        "errors": {"readonly": True},
-        "state": {"readonly": True},
-        "commands": {"readonly": True},
-        "output": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "task_type": {"key": "taskType", "type": "str"},
-        "errors": {"key": "errors", "type": "[ODataError]"},
-        "state": {"key": "state", "type": "str"},
-        "commands": {"key": "commands", "type": "[CommandProperties]"},
-        "client_data": {"key": "clientData", "type": "{str}"},
-        "input": {"key": "input", "type": "MigrateSchemaSqlServerSqlDbTaskInput"},
-        "output": {"key": "output", "type": "[MigrateSchemaSqlServerSqlDbTaskOutput]"},
-        "created_on": {"key": "createdOn", "type": "str"},
-        "task_id": {"key": "taskId", "type": "str"},
-        "is_cloneable": {"key": "isCloneable", "type": "bool"},
-    }
-
-    def __init__(
-        self,
-        *,
-        client_data: Optional[Dict[str, str]] = None,
-        input: Optional["_models.MigrateSchemaSqlServerSqlDbTaskInput"] = None,
-        created_on: Optional[str] = None,
-        task_id: Optional[str] = None,
-        is_cloneable: Optional[bool] = None,
-        **kwargs
-    ):
-        """
-        :keyword client_data: Key value pairs of client data to attach meta data information to task.
-        :paramtype client_data: dict[str, str]
-        :keyword input: Task input.
-        :paramtype input: ~azure.mgmt.datamigration.models.MigrateSchemaSqlServerSqlDbTaskInput
-        :keyword created_on: DateTime in UTC when the task was created.
-        :paramtype created_on: str
-        :keyword task_id: Task id.
-        :paramtype task_id: str
-        :keyword is_cloneable: whether the task can be cloned or not.
-        :paramtype is_cloneable: bool
-        """
-        super().__init__(client_data=client_data, **kwargs)
-        self.task_type: str = "MigrateSchemaSqlServerSqlDb"
-        self.input = input
-        self.output = None
-        self.created_on = created_on
-        self.task_id = task_id
-        self.is_cloneable = is_cloneable
-
-
-class MigrateSchemaSqlTaskOutputError(MigrateSchemaSqlServerSqlDbTaskOutput):
-    """MigrateSchemaSqlTaskOutputError.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar result_type: Result type. Required.
-    :vartype result_type: str
-    :ivar error: Migration error.
-    :vartype error: ~azure.mgmt.datamigration.models.ReportableException
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "result_type": {"required": True},
-        "error": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "result_type": {"key": "resultType", "type": "str"},
-        "error": {"key": "error", "type": "ReportableException"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.result_type: str = "ErrorOutput"
-        self.error = None
-
-
-class MigrateSqlServerDatabaseInput(_serialization.Model):
-    """Database specific information for SQL to SQL migration task inputs.
-
-    :ivar name: Name of the database.
-    :vartype name: str
-    :ivar restore_database_name: Name of the database at destination.
-    :vartype restore_database_name: str
-    :ivar backup_and_restore_folder: The backup and restore folder.
-    :vartype backup_and_restore_folder: str
-    :ivar database_files: The list of database files.
-    :vartype database_files: list[~azure.mgmt.datamigration.models.DatabaseFileInput]
-    """
-
-    _attribute_map = {
-        "name": {"key": "name", "type": "str"},
-        "restore_database_name": {"key": "restoreDatabaseName", "type": "str"},
-        "backup_and_restore_folder": {"key": "backupAndRestoreFolder", "type": "str"},
-        "database_files": {"key": "databaseFiles", "type": "[DatabaseFileInput]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        name: Optional[str] = None,
-        restore_database_name: Optional[str] = None,
-        backup_and_restore_folder: Optional[str] = None,
-        database_files: Optional[List["_models.DatabaseFileInput"]] = None,
-        **kwargs
-    ):
-        """
-        :keyword name: Name of the database.
-        :paramtype name: str
-        :keyword restore_database_name: Name of the database at destination.
-        :paramtype restore_database_name: str
-        :keyword backup_and_restore_folder: The backup and restore folder.
-        :paramtype backup_and_restore_folder: str
-        :keyword database_files: The list of database files.
-        :paramtype database_files: list[~azure.mgmt.datamigration.models.DatabaseFileInput]
-        """
-        super().__init__(**kwargs)
-        self.name = name
-        self.restore_database_name = restore_database_name
-        self.backup_and_restore_folder = backup_and_restore_folder
-        self.database_files = database_files
-
-
 class MigrateSqlServerSqlDbDatabaseInput(_serialization.Model):
     """Database specific information for SQL to Azure SQL DB migration task inputs.
 
@@ -9490,6 +8309,45 @@ class MigrateSqlServerSqlDbSyncDatabaseInput(_serialization.Model):
         self.migration_setting = migration_setting
         self.source_setting = source_setting
         self.target_setting = target_setting
+
+
+class SqlMigrationTaskInput(_serialization.Model):
+    """Base class for migration task input.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar source_connection_info: Information for connecting to source. Required.
+    :vartype source_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
+    :ivar target_connection_info: Information for connecting to target. Required.
+    :vartype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
+    """
+
+    _validation = {
+        "source_connection_info": {"required": True},
+        "target_connection_info": {"required": True},
+    }
+
+    _attribute_map = {
+        "source_connection_info": {"key": "sourceConnectionInfo", "type": "SqlConnectionInfo"},
+        "target_connection_info": {"key": "targetConnectionInfo", "type": "SqlConnectionInfo"},
+    }
+
+    def __init__(
+        self,
+        *,
+        source_connection_info: "_models.SqlConnectionInfo",
+        target_connection_info: "_models.SqlConnectionInfo",
+        **kwargs
+    ):
+        """
+        :keyword source_connection_info: Information for connecting to source. Required.
+        :paramtype source_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
+        :keyword target_connection_info: Information for connecting to target. Required.
+        :paramtype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
+        """
+        super().__init__(**kwargs)
+        self.source_connection_info = source_connection_info
+        self.target_connection_info = target_connection_info
 
 
 class MigrateSqlServerSqlDbSyncTaskInput(SqlMigrationTaskInput):
@@ -12651,34 +11509,6 @@ class MigrationStatusDetails(_serialization.Model):  # pylint: disable=too-many-
         self.pending_log_backups_count = None
 
 
-class MigrationTableMetadata(_serialization.Model):
-    """Metadata for tables selected in migration project.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar source_table_name: Source table name.
-    :vartype source_table_name: str
-    :ivar target_table_name: Target table name.
-    :vartype target_table_name: str
-    """
-
-    _validation = {
-        "source_table_name": {"readonly": True},
-        "target_table_name": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "source_table_name": {"key": "sourceTableName", "type": "str"},
-        "target_table_name": {"key": "targetTableName", "type": "str"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.source_table_name = None
-        self.target_table_name = None
-
-
 class MigrationValidationDatabaseSummaryResult(_serialization.Model):
     """Migration Validation Database level summary result.
 
@@ -14722,207 +13552,6 @@ class NodeMonitoringData(_serialization.Model):
         self.received_bytes = None
 
 
-class NonSqlDataMigrationTable(_serialization.Model):
-    """Defines metadata for table to be migrated.
-
-    :ivar source_name: Source table name.
-    :vartype source_name: str
-    """
-
-    _attribute_map = {
-        "source_name": {"key": "sourceName", "type": "str"},
-    }
-
-    def __init__(self, *, source_name: Optional[str] = None, **kwargs):
-        """
-        :keyword source_name: Source table name.
-        :paramtype source_name: str
-        """
-        super().__init__(**kwargs)
-        self.source_name = source_name
-
-
-class NonSqlDataMigrationTableResult(_serialization.Model):
-    """Object used to report the data migration results of a table.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar result_code: Result code of the data migration. Known values are: "Initial", "Completed",
-     "ObjectNotExistsInSource", "ObjectNotExistsInTarget", "TargetObjectIsInaccessible", and
-     "FatalError".
-    :vartype result_code: str or ~azure.mgmt.datamigration.models.DataMigrationResultCode
-    :ivar source_name: Name of the source table.
-    :vartype source_name: str
-    :ivar target_name: Name of the target table.
-    :vartype target_name: str
-    :ivar source_row_count: Number of rows in the source table.
-    :vartype source_row_count: int
-    :ivar target_row_count: Number of rows in the target table.
-    :vartype target_row_count: int
-    :ivar elapsed_time_in_miliseconds: Time taken to migrate the data.
-    :vartype elapsed_time_in_miliseconds: float
-    :ivar errors: List of errors, if any, during migration.
-    :vartype errors: list[~azure.mgmt.datamigration.models.DataMigrationError]
-    """
-
-    _validation = {
-        "result_code": {"readonly": True},
-        "source_name": {"readonly": True},
-        "target_name": {"readonly": True},
-        "source_row_count": {"readonly": True},
-        "target_row_count": {"readonly": True},
-        "elapsed_time_in_miliseconds": {"readonly": True},
-        "errors": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "result_code": {"key": "resultCode", "type": "str"},
-        "source_name": {"key": "sourceName", "type": "str"},
-        "target_name": {"key": "targetName", "type": "str"},
-        "source_row_count": {"key": "sourceRowCount", "type": "int"},
-        "target_row_count": {"key": "targetRowCount", "type": "int"},
-        "elapsed_time_in_miliseconds": {"key": "elapsedTimeInMiliseconds", "type": "float"},
-        "errors": {"key": "errors", "type": "[DataMigrationError]"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.result_code = None
-        self.source_name = None
-        self.target_name = None
-        self.source_row_count = None
-        self.target_row_count = None
-        self.elapsed_time_in_miliseconds = None
-        self.errors = None
-
-
-class NonSqlMigrationTaskInput(_serialization.Model):
-    """Base class for non sql migration task input.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar target_connection_info: Information for connecting to target. Required.
-    :vartype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-    :ivar target_database_name: Target database name. Required.
-    :vartype target_database_name: str
-    :ivar project_name: Name of the migration project. Required.
-    :vartype project_name: str
-    :ivar project_location: A URL that points to the drop location to access project artifacts.
-     Required.
-    :vartype project_location: str
-    :ivar selected_tables: Metadata of the tables selected for migration. Required.
-    :vartype selected_tables: list[~azure.mgmt.datamigration.models.NonSqlDataMigrationTable]
-    """
-
-    _validation = {
-        "target_connection_info": {"required": True},
-        "target_database_name": {"required": True},
-        "project_name": {"required": True},
-        "project_location": {"required": True},
-        "selected_tables": {"required": True},
-    }
-
-    _attribute_map = {
-        "target_connection_info": {"key": "targetConnectionInfo", "type": "SqlConnectionInfo"},
-        "target_database_name": {"key": "targetDatabaseName", "type": "str"},
-        "project_name": {"key": "projectName", "type": "str"},
-        "project_location": {"key": "projectLocation", "type": "str"},
-        "selected_tables": {"key": "selectedTables", "type": "[NonSqlDataMigrationTable]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        target_connection_info: "_models.SqlConnectionInfo",
-        target_database_name: str,
-        project_name: str,
-        project_location: str,
-        selected_tables: List["_models.NonSqlDataMigrationTable"],
-        **kwargs
-    ):
-        """
-        :keyword target_connection_info: Information for connecting to target. Required.
-        :paramtype target_connection_info: ~azure.mgmt.datamigration.models.SqlConnectionInfo
-        :keyword target_database_name: Target database name. Required.
-        :paramtype target_database_name: str
-        :keyword project_name: Name of the migration project. Required.
-        :paramtype project_name: str
-        :keyword project_location: A URL that points to the drop location to access project artifacts.
-         Required.
-        :paramtype project_location: str
-        :keyword selected_tables: Metadata of the tables selected for migration. Required.
-        :paramtype selected_tables: list[~azure.mgmt.datamigration.models.NonSqlDataMigrationTable]
-        """
-        super().__init__(**kwargs)
-        self.target_connection_info = target_connection_info
-        self.target_database_name = target_database_name
-        self.project_name = project_name
-        self.project_location = project_location
-        self.selected_tables = selected_tables
-
-
-class NonSqlMigrationTaskOutput(_serialization.Model):
-    """Base class for non sql migration task output.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar started_on: Migration start time.
-    :vartype started_on: ~datetime.datetime
-    :ivar ended_on: Migration end time.
-    :vartype ended_on: ~datetime.datetime
-    :ivar status: Current state of migration. Known values are: "Default", "Connecting",
-     "SourceAndTargetSelected", "SelectLogins", "Configured", "Running", "Error", "Stopped",
-     "Completed", and "CompletedWithWarnings".
-    :vartype status: str or ~azure.mgmt.datamigration.models.MigrationStatus
-    :ivar data_migration_table_results: Results of the migration. The key contains the table name
-     and the value the table result object.
-    :vartype data_migration_table_results: str
-    :ivar progress_message: Message about the progress of the migration.
-    :vartype progress_message: str
-    :ivar source_server_name: Name of source server.
-    :vartype source_server_name: str
-    :ivar target_server_name: Name of target server.
-    :vartype target_server_name: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "started_on": {"readonly": True},
-        "ended_on": {"readonly": True},
-        "status": {"readonly": True},
-        "data_migration_table_results": {"readonly": True},
-        "progress_message": {"readonly": True},
-        "source_server_name": {"readonly": True},
-        "target_server_name": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "started_on": {"key": "startedOn", "type": "iso-8601"},
-        "ended_on": {"key": "endedOn", "type": "iso-8601"},
-        "status": {"key": "status", "type": "str"},
-        "data_migration_table_results": {"key": "dataMigrationTableResults", "type": "str"},
-        "progress_message": {"key": "progressMessage", "type": "str"},
-        "source_server_name": {"key": "sourceServerName", "type": "str"},
-        "target_server_name": {"key": "targetServerName", "type": "str"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.id = None
-        self.started_on = None
-        self.ended_on = None
-        self.status = None
-        self.data_migration_table_results = None
-        self.progress_message = None
-        self.source_server_name = None
-        self.target_server_name = None
-
-
 class ODataError(_serialization.Model):
     """Error information in OData format.
 
@@ -15183,55 +13812,6 @@ class OracleConnectionInfo(ConnectionInfo):
         self.server_version = server_version
         self.port = port
         self.authentication = authentication
-
-
-class OracleOCIDriverInfo(_serialization.Model):
-    """Information about an Oracle OCI driver.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar driver_name: The name of the driver package.
-    :vartype driver_name: str
-    :ivar driver_size: The size in bytes of the driver package.
-    :vartype driver_size: str
-    :ivar archive_checksum: The MD5 Base64 encoded checksum for the driver package.
-    :vartype archive_checksum: str
-    :ivar oracle_checksum: The checksum for the driver package provided by Oracle.
-    :vartype oracle_checksum: str
-    :ivar assembly_version: Version listed in the OCI assembly 'oci.dll'.
-    :vartype assembly_version: str
-    :ivar supported_oracle_versions: List of Oracle database versions supported by this driver.
-     Only major minor of the version is listed.
-    :vartype supported_oracle_versions: list[str]
-    """
-
-    _validation = {
-        "driver_name": {"readonly": True},
-        "driver_size": {"readonly": True},
-        "archive_checksum": {"readonly": True},
-        "oracle_checksum": {"readonly": True},
-        "assembly_version": {"readonly": True},
-        "supported_oracle_versions": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "driver_name": {"key": "driverName", "type": "str"},
-        "driver_size": {"key": "driverSize", "type": "str"},
-        "archive_checksum": {"key": "archiveChecksum", "type": "str"},
-        "oracle_checksum": {"key": "oracleChecksum", "type": "str"},
-        "assembly_version": {"key": "assemblyVersion", "type": "str"},
-        "supported_oracle_versions": {"key": "supportedOracleVersions", "type": "[str]"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.driver_name = None
-        self.driver_size = None
-        self.archive_checksum = None
-        self.oracle_checksum = None
-        self.assembly_version = None
-        self.supported_oracle_versions = None
 
 
 class OrphanedUserInfo(_serialization.Model):
@@ -16345,47 +14925,6 @@ class SchemaComparisonValidationResultType(_serialization.Model):
         self.update_action = update_action
 
 
-class SchemaMigrationSetting(_serialization.Model):
-    """Settings for migrating schema from source to target.
-
-    :ivar schema_option: Option on how to migrate the schema. Known values are: "None",
-     "ExtractFromSource", and "UseStorageFile".
-    :vartype schema_option: str or ~azure.mgmt.datamigration.models.SchemaMigrationOption
-    :ivar file_id: Resource Identifier of a file resource containing the uploaded schema file.
-    :vartype file_id: str
-    :ivar file_name: Name of the file resource containing the uploaded schema file.
-    :vartype file_name: str
-    """
-
-    _attribute_map = {
-        "schema_option": {"key": "schemaOption", "type": "str"},
-        "file_id": {"key": "fileId", "type": "str"},
-        "file_name": {"key": "fileName", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        schema_option: Optional[Union[str, "_models.SchemaMigrationOption"]] = None,
-        file_id: Optional[str] = None,
-        file_name: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword schema_option: Option on how to migrate the schema. Known values are: "None",
-         "ExtractFromSource", and "UseStorageFile".
-        :paramtype schema_option: str or ~azure.mgmt.datamigration.models.SchemaMigrationOption
-        :keyword file_id: Resource Identifier of a file resource containing the uploaded schema file.
-        :paramtype file_id: str
-        :keyword file_name: Name of the file resource containing the uploaded schema file.
-        :paramtype file_name: str
-        """
-        super().__init__(**kwargs)
-        self.schema_option = schema_option
-        self.file_id = file_id
-        self.file_name = file_name
-
-
 class SelectedCertificateInput(_serialization.Model):
     """Info for certificate to be exported for TDE enabled databases.
 
@@ -16465,108 +15004,6 @@ class ServerProperties(_serialization.Model):
         self.server_edition = None
         self.server_operating_system_version = None
         self.server_database_count = None
-
-
-class ServiceOperation(_serialization.Model):
-    """Description of an action supported by the Database Migration Service.
-
-    :ivar name: The fully qualified action name, e.g. Microsoft.DataMigration/services/read.
-    :vartype name: str
-    :ivar display: Localized display text.
-    :vartype display: ~azure.mgmt.datamigration.models.ServiceOperationDisplay
-    """
-
-    _attribute_map = {
-        "name": {"key": "name", "type": "str"},
-        "display": {"key": "display", "type": "ServiceOperationDisplay"},
-    }
-
-    def __init__(
-        self, *, name: Optional[str] = None, display: Optional["_models.ServiceOperationDisplay"] = None, **kwargs
-    ):
-        """
-        :keyword name: The fully qualified action name, e.g. Microsoft.DataMigration/services/read.
-        :paramtype name: str
-        :keyword display: Localized display text.
-        :paramtype display: ~azure.mgmt.datamigration.models.ServiceOperationDisplay
-        """
-        super().__init__(**kwargs)
-        self.name = name
-        self.display = display
-
-
-class ServiceOperationDisplay(_serialization.Model):
-    """Localized display text.
-
-    :ivar provider: The localized resource provider name.
-    :vartype provider: str
-    :ivar resource: The localized resource type name.
-    :vartype resource: str
-    :ivar operation: The localized operation name.
-    :vartype operation: str
-    :ivar description: The localized operation description.
-    :vartype description: str
-    """
-
-    _attribute_map = {
-        "provider": {"key": "provider", "type": "str"},
-        "resource": {"key": "resource", "type": "str"},
-        "operation": {"key": "operation", "type": "str"},
-        "description": {"key": "description", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        provider: Optional[str] = None,
-        resource: Optional[str] = None,
-        operation: Optional[str] = None,
-        description: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword provider: The localized resource provider name.
-        :paramtype provider: str
-        :keyword resource: The localized resource type name.
-        :paramtype resource: str
-        :keyword operation: The localized operation name.
-        :paramtype operation: str
-        :keyword description: The localized operation description.
-        :paramtype description: str
-        """
-        super().__init__(**kwargs)
-        self.provider = provider
-        self.resource = resource
-        self.operation = operation
-        self.description = description
-
-
-class ServiceOperationList(_serialization.Model):
-    """OData page of action (operation) objects.
-
-    :ivar value: List of actions.
-    :vartype value: list[~azure.mgmt.datamigration.models.ServiceOperation]
-    :ivar next_link: URL to load the next page of actions.
-    :vartype next_link: str
-    """
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[ServiceOperation]"},
-        "next_link": {"key": "nextLink", "type": "str"},
-    }
-
-    def __init__(
-        self, *, value: Optional[List["_models.ServiceOperation"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
-        """
-        :keyword value: List of actions.
-        :paramtype value: list[~azure.mgmt.datamigration.models.ServiceOperation]
-        :keyword next_link: URL to load the next page of actions.
-        :paramtype next_link: str
-        """
-        super().__init__(**kwargs)
-        self.value = value
-        self.next_link = next_link
 
 
 class ServiceSku(_serialization.Model):
@@ -17441,132 +15878,6 @@ class TaskList(_serialization.Model):
         super().__init__(**kwargs)
         self.value = value
         self.next_link = next_link
-
-
-class UploadOCIDriverTaskInput(_serialization.Model):
-    """Input for the service task to upload an OCI driver.
-
-    :ivar driver_share: File share information for the OCI driver archive.
-    :vartype driver_share: ~azure.mgmt.datamigration.models.FileShare
-    """
-
-    _attribute_map = {
-        "driver_share": {"key": "driverShare", "type": "FileShare"},
-    }
-
-    def __init__(self, *, driver_share: Optional["_models.FileShare"] = None, **kwargs):
-        """
-        :keyword driver_share: File share information for the OCI driver archive.
-        :paramtype driver_share: ~azure.mgmt.datamigration.models.FileShare
-        """
-        super().__init__(**kwargs)
-        self.driver_share = driver_share
-
-
-class UploadOCIDriverTaskOutput(_serialization.Model):
-    """Output for the service task to upload an OCI driver.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar driver_package_name: The name of the driver package that was validated and uploaded.
-    :vartype driver_package_name: str
-    :ivar validation_errors: Validation errors.
-    :vartype validation_errors: list[~azure.mgmt.datamigration.models.ReportableException]
-    """
-
-    _validation = {
-        "driver_package_name": {"readonly": True},
-        "validation_errors": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "driver_package_name": {"key": "driverPackageName", "type": "str"},
-        "validation_errors": {"key": "validationErrors", "type": "[ReportableException]"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.driver_package_name = None
-        self.validation_errors = None
-
-
-class UploadOCIDriverTaskProperties(ProjectTaskProperties):
-    """Properties for the task that uploads an OCI driver.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar task_type: Task type. Required. Known values are: "Connect.MongoDb",
-     "ConnectToSource.SqlServer", "ConnectToSource.SqlServer.Sync",
-     "ConnectToSource.PostgreSql.Sync", "ConnectToSource.MySql", "ConnectToSource.Oracle.Sync",
-     "ConnectToTarget.SqlDb", "ConnectToTarget.SqlDb.Sync",
-     "ConnectToTarget.AzureDbForPostgreSql.Sync",
-     "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync", "ConnectToTarget.AzureSqlDbMI",
-     "ConnectToTarget.AzureSqlDbMI.Sync.LRS", "ConnectToTarget.AzureDbForMySql",
-     "GetUserTables.Sql", "GetUserTables.AzureSqlDb.Sync", "GetUserTablesOracle",
-     "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
-     "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
-     "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
-     "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
-     "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
-     "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
-     "MigrateSchemaSqlServerSqlDb".
-    :vartype task_type: str or ~azure.mgmt.datamigration.models.TaskType
-    :ivar errors: Array of errors. This is ignored if submitted.
-    :vartype errors: list[~azure.mgmt.datamigration.models.ODataError]
-    :ivar state: The state of the task. This is ignored if submitted. Known values are: "Unknown",
-     "Queued", "Running", "Canceled", "Succeeded", "Failed", "FailedInputValidation", and "Faulted".
-    :vartype state: str or ~azure.mgmt.datamigration.models.TaskState
-    :ivar commands: Array of command properties.
-    :vartype commands: list[~azure.mgmt.datamigration.models.CommandProperties]
-    :ivar client_data: Key value pairs of client data to attach meta data information to task.
-    :vartype client_data: dict[str, str]
-    :ivar input: Input for the service task to upload an OCI driver.
-    :vartype input: ~azure.mgmt.datamigration.models.UploadOCIDriverTaskInput
-    :ivar output: Task output. This is ignored if submitted.
-    :vartype output: list[~azure.mgmt.datamigration.models.UploadOCIDriverTaskOutput]
-    """
-
-    _validation = {
-        "task_type": {"required": True},
-        "errors": {"readonly": True},
-        "state": {"readonly": True},
-        "commands": {"readonly": True},
-        "output": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "task_type": {"key": "taskType", "type": "str"},
-        "errors": {"key": "errors", "type": "[ODataError]"},
-        "state": {"key": "state", "type": "str"},
-        "commands": {"key": "commands", "type": "[CommandProperties]"},
-        "client_data": {"key": "clientData", "type": "{str}"},
-        "input": {"key": "input", "type": "UploadOCIDriverTaskInput"},
-        "output": {"key": "output", "type": "[UploadOCIDriverTaskOutput]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        client_data: Optional[Dict[str, str]] = None,
-        input: Optional["_models.UploadOCIDriverTaskInput"] = None,
-        **kwargs
-    ):
-        """
-        :keyword client_data: Key value pairs of client data to attach meta data information to task.
-        :paramtype client_data: dict[str, str]
-        :keyword input: Input for the service task to upload an OCI driver.
-        :paramtype input: ~azure.mgmt.datamigration.models.UploadOCIDriverTaskInput
-        """
-        super().__init__(client_data=client_data, **kwargs)
-        self.task_type: str = "Service.Upload.OCI"
-        self.input = input
-        self.output = None
 
 
 class ValidateMigrationInputSqlServerSqlDbSyncTaskProperties(ProjectTaskProperties):

@@ -142,25 +142,6 @@ class DatabaseState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     OFFLINE_SECONDARY = "OfflineSecondary"
 
 
-class DataMigrationResultCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Result code of the data migration."""
-
-    INITIAL = "Initial"
-    COMPLETED = "Completed"
-    OBJECT_NOT_EXISTS_IN_SOURCE = "ObjectNotExistsInSource"
-    OBJECT_NOT_EXISTS_IN_TARGET = "ObjectNotExistsInTarget"
-    TARGET_OBJECT_IS_INACCESSIBLE = "TargetObjectIsInaccessible"
-    FATAL_ERROR = "FatalError"
-
-
-class ErrorType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Error type."""
-
-    DEFAULT = "Default"
-    WARNING = "Warning"
-    ERROR = "Error"
-
-
 class LoginMigrationStage(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum of the different stage of login migration."""
 
@@ -395,29 +376,6 @@ class ScenarioTarget(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     AZURE_DB_FOR_MY_SQL = "AzureDBForMySql"
     AZURE_DB_FOR_POSTGRES_SQL = "AzureDBForPostgresSQL"
     MONGO_DB = "MongoDB"
-
-
-class SchemaMigrationOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Option for how schema is extracted and applied to target."""
-
-    NONE = "None"
-    EXTRACT_FROM_SOURCE = "ExtractFromSource"
-    USE_STORAGE_FILE = "UseStorageFile"
-
-
-class SchemaMigrationStage(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Current stage of schema migration."""
-
-    NOT_STARTED = "NotStarted"
-    VALIDATING_INPUTS = "ValidatingInputs"
-    COLLECTING_OBJECTS = "CollectingObjects"
-    DOWNLOADING_SCRIPT = "DownloadingScript"
-    GENERATING_SCRIPT = "GeneratingScript"
-    UPLOADING_SCRIPT = "UploadingScript"
-    DEPLOYING_SCHEMA = "DeployingSchema"
-    COMPLETED = "Completed"
-    COMPLETED_WITH_WARNINGS = "CompletedWithWarnings"
-    FAILED = "Failed"
 
 
 class ServerLevelPermissionsGroup(str, Enum, metaclass=CaseInsensitiveEnumMeta):

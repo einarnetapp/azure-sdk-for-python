@@ -38,20 +38,6 @@ if TYPE_CHECKING:
 class DataMigrationManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """Data Migration Client.
 
-    :ivar database_migrations_sql_db: DatabaseMigrationsSqlDbOperations operations
-    :vartype database_migrations_sql_db:
-     azure.mgmt.datamigration.aio.operations.DatabaseMigrationsSqlDbOperations
-    :ivar database_migrations_sql_mi: DatabaseMigrationsSqlMiOperations operations
-    :vartype database_migrations_sql_mi:
-     azure.mgmt.datamigration.aio.operations.DatabaseMigrationsSqlMiOperations
-    :ivar database_migrations_sql_vm: DatabaseMigrationsSqlVmOperations operations
-    :vartype database_migrations_sql_vm:
-     azure.mgmt.datamigration.aio.operations.DatabaseMigrationsSqlVmOperations
-    :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.datamigration.aio.operations.Operations
-    :ivar sql_migration_services: SqlMigrationServicesOperations operations
-    :vartype sql_migration_services:
-     azure.mgmt.datamigration.aio.operations.SqlMigrationServicesOperations
     :ivar resource_skus: ResourceSkusOperations operations
     :vartype resource_skus: azure.mgmt.datamigration.aio.operations.ResourceSkusOperations
     :ivar services: ServicesOperations operations
@@ -66,13 +52,27 @@ class DataMigrationManagementClient:  # pylint: disable=client-accepts-api-versi
     :vartype usages: azure.mgmt.datamigration.aio.operations.UsagesOperations
     :ivar files: FilesOperations operations
     :vartype files: azure.mgmt.datamigration.aio.operations.FilesOperations
+    :ivar database_migrations_sql_db: DatabaseMigrationsSqlDbOperations operations
+    :vartype database_migrations_sql_db:
+     azure.mgmt.datamigration.aio.operations.DatabaseMigrationsSqlDbOperations
+    :ivar database_migrations_sql_mi: DatabaseMigrationsSqlMiOperations operations
+    :vartype database_migrations_sql_mi:
+     azure.mgmt.datamigration.aio.operations.DatabaseMigrationsSqlMiOperations
+    :ivar database_migrations_sql_vm: DatabaseMigrationsSqlVmOperations operations
+    :vartype database_migrations_sql_vm:
+     azure.mgmt.datamigration.aio.operations.DatabaseMigrationsSqlVmOperations
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.datamigration.aio.operations.Operations
+    :ivar sql_migration_services: SqlMigrationServicesOperations operations
+    :vartype sql_migration_services:
+     azure.mgmt.datamigration.aio.operations.SqlMigrationServicesOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: Subscription ID that identifies an Azure subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-03-30-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-11-30-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -95,6 +95,13 @@ class DataMigrationManagementClient:  # pylint: disable=client-accepts-api-versi
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.resource_skus = ResourceSkusOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.tasks = TasksOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.service_tasks = ServiceTasksOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.projects = ProjectsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.files = FilesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.database_migrations_sql_db = DatabaseMigrationsSqlDbOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -108,13 +115,6 @@ class DataMigrationManagementClient:  # pylint: disable=client-accepts-api-versi
         self.sql_migration_services = SqlMigrationServicesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.resource_skus = ResourceSkusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.tasks = TasksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.service_tasks = ServiceTasksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.projects = ProjectsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.files = FilesOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> Awaitable[AsyncHttpResponse]:
         """Runs the network request through the client's chained policies.

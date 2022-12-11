@@ -17,9 +17,6 @@ from ._models_py3 import BackupConfiguration
 from ._models_py3 import BackupFileInfo
 from ._models_py3 import BackupSetInfo
 from ._models_py3 import BlobShare
-from ._models_py3 import CheckOCIDriverTaskInput
-from ._models_py3 import CheckOCIDriverTaskOutput
-from ._models_py3 import CheckOCIDriverTaskProperties
 from ._models_py3 import CommandProperties
 from ._models_py3 import ConnectToMongoDbTaskProperties
 from ._models_py3 import ConnectToSourceMySqlTaskInput
@@ -64,15 +61,11 @@ from ._models_py3 import ConnectionInfo
 from ._models_py3 import CopyProgressDetails
 from ._models_py3 import DataIntegrityValidationResult
 from ._models_py3 import DataItemMigrationSummaryResult
-from ._models_py3 import DataMigrationError
-from ._models_py3 import DataMigrationProjectMetadata
 from ._models_py3 import DataMigrationService
 from ._models_py3 import DataMigrationServiceList
 from ._models_py3 import DataMigrationServiceStatusResponse
-from ._models_py3 import Database
 from ._models_py3 import DatabaseBackupInfo
 from ._models_py3 import DatabaseFileInfo
-from ._models_py3 import DatabaseFileInput
 from ._models_py3 import DatabaseInfo
 from ._models_py3 import DatabaseMigration
 from ._models_py3 import DatabaseMigrationListResult
@@ -83,7 +76,6 @@ from ._models_py3 import DatabaseMigrationPropertiesSqlVm
 from ._models_py3 import DatabaseMigrationSqlDb
 from ._models_py3 import DatabaseMigrationSqlMi
 from ._models_py3 import DatabaseMigrationSqlVm
-from ._models_py3 import DatabaseObjectName
 from ._models_py3 import DatabaseSummaryResult
 from ._models_py3 import DatabaseTable
 from ._models_py3 import DeleteNode
@@ -92,7 +84,6 @@ from ._models_py3 import ExecutionStatistics
 from ._models_py3 import FileList
 from ._models_py3 import FileShare
 from ._models_py3 import FileStorageInfo
-from ._models_py3 import GetProjectDetailsNonSqlTaskInput
 from ._models_py3 import GetTdeCertificatesSqlTaskInput
 from ._models_py3 import GetTdeCertificatesSqlTaskOutput
 from ._models_py3 import GetTdeCertificatesSqlTaskProperties
@@ -111,9 +102,6 @@ from ._models_py3 import GetUserTablesSqlSyncTaskProperties
 from ._models_py3 import GetUserTablesSqlTaskInput
 from ._models_py3 import GetUserTablesSqlTaskOutput
 from ._models_py3 import GetUserTablesSqlTaskProperties
-from ._models_py3 import InstallOCIDriverTaskInput
-from ._models_py3 import InstallOCIDriverTaskOutput
-from ._models_py3 import InstallOCIDriverTaskProperties
 from ._models_py3 import IntegrationRuntimeMonitoringData
 from ._models_py3 import MiSqlConnectionInfo
 from ._models_py3 import MigrateMISyncCompleteCommandInput
@@ -156,15 +144,6 @@ from ._models_py3 import MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputErro
 from ._models_py3 import MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel
 from ._models_py3 import MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel
 from ._models_py3 import MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties
-from ._models_py3 import MigrateSchemaSqlServerSqlDbDatabaseInput
-from ._models_py3 import MigrateSchemaSqlServerSqlDbTaskInput
-from ._models_py3 import MigrateSchemaSqlServerSqlDbTaskOutput
-from ._models_py3 import MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel
-from ._models_py3 import MigrateSchemaSqlServerSqlDbTaskOutputError
-from ._models_py3 import MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel
-from ._models_py3 import MigrateSchemaSqlServerSqlDbTaskProperties
-from ._models_py3 import MigrateSchemaSqlTaskOutputError
-from ._models_py3 import MigrateSqlServerDatabaseInput
 from ._models_py3 import MigrateSqlServerSqlDbDatabaseInput
 from ._models_py3 import MigrateSqlServerSqlDbSyncDatabaseInput
 from ._models_py3 import MigrateSqlServerSqlDbSyncTaskInput
@@ -211,7 +190,6 @@ from ._models_py3 import MigrationEligibilityInfo
 from ._models_py3 import MigrationOperationInput
 from ._models_py3 import MigrationReportResult
 from ._models_py3 import MigrationStatusDetails
-from ._models_py3 import MigrationTableMetadata
 from ._models_py3 import MigrationValidationDatabaseLevelResult
 from ._models_py3 import MigrationValidationDatabaseSummaryResult
 from ._models_py3 import MigrationValidationOptions
@@ -242,17 +220,12 @@ from ._models_py3 import MySqlConnectionInfo
 from ._models_py3 import NameAvailabilityRequest
 from ._models_py3 import NameAvailabilityResponse
 from ._models_py3 import NodeMonitoringData
-from ._models_py3 import NonSqlDataMigrationTable
-from ._models_py3 import NonSqlDataMigrationTableResult
-from ._models_py3 import NonSqlMigrationTaskInput
-from ._models_py3 import NonSqlMigrationTaskOutput
 from ._models_py3 import ODataError
 from ._models_py3 import OfflineConfiguration
 from ._models_py3 import OperationListResult
 from ._models_py3 import OperationsDefinition
 from ._models_py3 import OperationsDisplayDefinition
 from ._models_py3 import OracleConnectionInfo
-from ._models_py3 import OracleOCIDriverInfo
 from ._models_py3 import OrphanedUserInfo
 from ._models_py3 import PostgreSqlConnectionInfo
 from ._models_py3 import Project
@@ -278,12 +251,8 @@ from ._models_py3 import ResourceSkuRestrictions
 from ._models_py3 import ResourceSkusResult
 from ._models_py3 import SchemaComparisonValidationResult
 from ._models_py3 import SchemaComparisonValidationResultType
-from ._models_py3 import SchemaMigrationSetting
 from ._models_py3 import SelectedCertificateInput
 from ._models_py3 import ServerProperties
-from ._models_py3 import ServiceOperation
-from ._models_py3 import ServiceOperationDisplay
-from ._models_py3 import ServiceOperationList
 from ._models_py3 import ServiceSku
 from ._models_py3 import ServiceSkuList
 from ._models_py3 import SourceLocation
@@ -306,9 +275,6 @@ from ._models_py3 import SystemData
 from ._models_py3 import TargetLocation
 from ._models_py3 import TaskList
 from ._models_py3 import TrackedResource
-from ._models_py3 import UploadOCIDriverTaskInput
-from ._models_py3 import UploadOCIDriverTaskOutput
-from ._models_py3 import UploadOCIDriverTaskProperties
 from ._models_py3 import ValidateMigrationInputSqlServerSqlDbSyncTaskProperties
 from ._models_py3 import ValidateMigrationInputSqlServerSqlMISyncTaskInput
 from ._models_py3 import ValidateMigrationInputSqlServerSqlMISyncTaskOutput
@@ -331,13 +297,11 @@ from ._data_migration_management_client_enums import BackupType
 from ._data_migration_management_client_enums import CommandState
 from ._data_migration_management_client_enums import CommandType
 from ._data_migration_management_client_enums import CreatedByType
-from ._data_migration_management_client_enums import DataMigrationResultCode
 from ._data_migration_management_client_enums import DatabaseCompatLevel
 from ._data_migration_management_client_enums import DatabaseFileType
 from ._data_migration_management_client_enums import DatabaseMigrationStage
 from ._data_migration_management_client_enums import DatabaseMigrationState
 from ._data_migration_management_client_enums import DatabaseState
-from ._data_migration_management_client_enums import ErrorType
 from ._data_migration_management_client_enums import LoginMigrationStage
 from ._data_migration_management_client_enums import LoginType
 from ._data_migration_management_client_enums import MigrationState
@@ -362,8 +326,6 @@ from ._data_migration_management_client_enums import ResourceSkuRestrictionsType
 from ._data_migration_management_client_enums import ResourceType
 from ._data_migration_management_client_enums import ScenarioSource
 from ._data_migration_management_client_enums import ScenarioTarget
-from ._data_migration_management_client_enums import SchemaMigrationOption
-from ._data_migration_management_client_enums import SchemaMigrationStage
 from ._data_migration_management_client_enums import ServerLevelPermissionsGroup
 from ._data_migration_management_client_enums import ServiceProvisioningState
 from ._data_migration_management_client_enums import ServiceScalability
@@ -394,9 +356,6 @@ __all__ = [
     "BackupFileInfo",
     "BackupSetInfo",
     "BlobShare",
-    "CheckOCIDriverTaskInput",
-    "CheckOCIDriverTaskOutput",
-    "CheckOCIDriverTaskProperties",
     "CommandProperties",
     "ConnectToMongoDbTaskProperties",
     "ConnectToSourceMySqlTaskInput",
@@ -441,15 +400,11 @@ __all__ = [
     "CopyProgressDetails",
     "DataIntegrityValidationResult",
     "DataItemMigrationSummaryResult",
-    "DataMigrationError",
-    "DataMigrationProjectMetadata",
     "DataMigrationService",
     "DataMigrationServiceList",
     "DataMigrationServiceStatusResponse",
-    "Database",
     "DatabaseBackupInfo",
     "DatabaseFileInfo",
-    "DatabaseFileInput",
     "DatabaseInfo",
     "DatabaseMigration",
     "DatabaseMigrationListResult",
@@ -460,7 +415,6 @@ __all__ = [
     "DatabaseMigrationSqlDb",
     "DatabaseMigrationSqlMi",
     "DatabaseMigrationSqlVm",
-    "DatabaseObjectName",
     "DatabaseSummaryResult",
     "DatabaseTable",
     "DeleteNode",
@@ -469,7 +423,6 @@ __all__ = [
     "FileList",
     "FileShare",
     "FileStorageInfo",
-    "GetProjectDetailsNonSqlTaskInput",
     "GetTdeCertificatesSqlTaskInput",
     "GetTdeCertificatesSqlTaskOutput",
     "GetTdeCertificatesSqlTaskProperties",
@@ -488,9 +441,6 @@ __all__ = [
     "GetUserTablesSqlTaskInput",
     "GetUserTablesSqlTaskOutput",
     "GetUserTablesSqlTaskProperties",
-    "InstallOCIDriverTaskInput",
-    "InstallOCIDriverTaskOutput",
-    "InstallOCIDriverTaskProperties",
     "IntegrationRuntimeMonitoringData",
     "MiSqlConnectionInfo",
     "MigrateMISyncCompleteCommandInput",
@@ -533,15 +483,6 @@ __all__ = [
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel",
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel",
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties",
-    "MigrateSchemaSqlServerSqlDbDatabaseInput",
-    "MigrateSchemaSqlServerSqlDbTaskInput",
-    "MigrateSchemaSqlServerSqlDbTaskOutput",
-    "MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel",
-    "MigrateSchemaSqlServerSqlDbTaskOutputError",
-    "MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel",
-    "MigrateSchemaSqlServerSqlDbTaskProperties",
-    "MigrateSchemaSqlTaskOutputError",
-    "MigrateSqlServerDatabaseInput",
     "MigrateSqlServerSqlDbDatabaseInput",
     "MigrateSqlServerSqlDbSyncDatabaseInput",
     "MigrateSqlServerSqlDbSyncTaskInput",
@@ -588,7 +529,6 @@ __all__ = [
     "MigrationOperationInput",
     "MigrationReportResult",
     "MigrationStatusDetails",
-    "MigrationTableMetadata",
     "MigrationValidationDatabaseLevelResult",
     "MigrationValidationDatabaseSummaryResult",
     "MigrationValidationOptions",
@@ -619,17 +559,12 @@ __all__ = [
     "NameAvailabilityRequest",
     "NameAvailabilityResponse",
     "NodeMonitoringData",
-    "NonSqlDataMigrationTable",
-    "NonSqlDataMigrationTableResult",
-    "NonSqlMigrationTaskInput",
-    "NonSqlMigrationTaskOutput",
     "ODataError",
     "OfflineConfiguration",
     "OperationListResult",
     "OperationsDefinition",
     "OperationsDisplayDefinition",
     "OracleConnectionInfo",
-    "OracleOCIDriverInfo",
     "OrphanedUserInfo",
     "PostgreSqlConnectionInfo",
     "Project",
@@ -655,12 +590,8 @@ __all__ = [
     "ResourceSkusResult",
     "SchemaComparisonValidationResult",
     "SchemaComparisonValidationResultType",
-    "SchemaMigrationSetting",
     "SelectedCertificateInput",
     "ServerProperties",
-    "ServiceOperation",
-    "ServiceOperationDisplay",
-    "ServiceOperationList",
     "ServiceSku",
     "ServiceSkuList",
     "SourceLocation",
@@ -683,9 +614,6 @@ __all__ = [
     "TargetLocation",
     "TaskList",
     "TrackedResource",
-    "UploadOCIDriverTaskInput",
-    "UploadOCIDriverTaskOutput",
-    "UploadOCIDriverTaskProperties",
     "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties",
     "ValidateMigrationInputSqlServerSqlMISyncTaskInput",
     "ValidateMigrationInputSqlServerSqlMISyncTaskOutput",
@@ -707,13 +635,11 @@ __all__ = [
     "CommandState",
     "CommandType",
     "CreatedByType",
-    "DataMigrationResultCode",
     "DatabaseCompatLevel",
     "DatabaseFileType",
     "DatabaseMigrationStage",
     "DatabaseMigrationState",
     "DatabaseState",
-    "ErrorType",
     "LoginMigrationStage",
     "LoginType",
     "MigrationState",
@@ -738,8 +664,6 @@ __all__ = [
     "ResourceType",
     "ScenarioSource",
     "ScenarioTarget",
-    "SchemaMigrationOption",
-    "SchemaMigrationStage",
     "ServerLevelPermissionsGroup",
     "ServiceProvisioningState",
     "ServiceScalability",
