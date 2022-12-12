@@ -101,13 +101,12 @@ class ActiveDirectoryConnectorDomainDetails(_serialization.Model):
     :ivar ou_distinguished_name: The distinguished name of the Active Directory Organizational
      Unit.
     :vartype ou_distinguished_name: str
-    :ivar domain_controllers: null. Required.
+    :ivar domain_controllers: null.
     :vartype domain_controllers: ~azure.mgmt.azurearcdata.models.ActiveDirectoryDomainControllers
     """
 
     _validation = {
         "realm": {"required": True},
-        "domain_controllers": {"required": True},
     }
 
     _attribute_map = {
@@ -122,10 +121,10 @@ class ActiveDirectoryConnectorDomainDetails(_serialization.Model):
         self,
         *,
         realm: str,
-        domain_controllers: "_models.ActiveDirectoryDomainControllers",
         netbios_domain_name: Optional[str] = None,
         service_account_provisioning: Union[str, "_models.AccountProvisioningMode"] = "manual",
         ou_distinguished_name: Optional[str] = None,
+        domain_controllers: Optional["_models.ActiveDirectoryDomainControllers"] = None,
         **kwargs
     ):
         """
@@ -141,7 +140,7 @@ class ActiveDirectoryConnectorDomainDetails(_serialization.Model):
         :keyword ou_distinguished_name: The distinguished name of the Active Directory Organizational
          Unit.
         :paramtype ou_distinguished_name: str
-        :keyword domain_controllers: null. Required.
+        :keyword domain_controllers: null.
         :paramtype domain_controllers: ~azure.mgmt.azurearcdata.models.ActiveDirectoryDomainControllers
         """
         super().__init__(**kwargs)
@@ -543,6 +542,34 @@ class ActiveDirectoryInformation(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.keytab_information = keytab_information
+
+
+class ArcSqlServerDatabaseListResult(_serialization.Model):
+    """A list of Arc Sql Server database.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of  Arc Sql Server database.
+    :vartype value: list[~azure.mgmt.azurearcdata.models.SqlServerDatabaseResource]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[SqlServerDatabaseResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.value = None
+        self.next_link = None
 
 
 class BasicLoginInformation(_serialization.Model):
@@ -2088,6 +2115,320 @@ class SqlManagedInstanceUpdate(_serialization.Model):
         self.tags = tags
 
 
+class SqlServerDatabaseResource(TrackedResource):
+    """Arc Sql Server database.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.azurearcdata.models.SystemData
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives. Required.
+    :vartype location: str
+    :ivar properties: Properties of Arc Sql Server database. Required.
+    :vartype properties: ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourceProperties
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "properties": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "SqlServerDatabaseResourceProperties"},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: str,
+        properties: "_models.SqlServerDatabaseResourceProperties",
+        tags: Optional[Dict[str, str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: The geo-location where the resource lives. Required.
+        :paramtype location: str
+        :keyword properties: Properties of Arc Sql Server database. Required.
+        :paramtype properties: ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourceProperties
+        """
+        super().__init__(tags=tags, location=location, **kwargs)
+        self.properties = properties
+
+
+class SqlServerDatabaseResourceProperties(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+    """The properties of Arc Sql Server database resource.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar collation_name: Collation of the database.
+    :vartype collation_name: str
+    :ivar database_creation_date: Creation date of the database.
+    :vartype database_creation_date: ~datetime.datetime
+    :ivar compatibility_level: Compatibility level of the database.
+    :vartype compatibility_level: int
+    :ivar size_mb: Size of the database.
+    :vartype size_mb: float
+    :ivar space_available_mb: Space left of the database.
+    :vartype space_available_mb: float
+    :ivar state: State of the database. Known values are: "Online", "Restoring", "Recovering",
+     "RecoveryPending", "Suspect", "Emergency", "Offline", "Copying", and "OfflineSecondary".
+    :vartype state: str or ~azure.mgmt.azurearcdata.models.DatabaseState
+    :ivar is_read_only: Whether the database is read only or not.
+    :vartype is_read_only: bool
+    :ivar recovery_mode: Status of the database. Known values are: "Full", "Bulk-logged", and
+     "Simple".
+    :vartype recovery_mode: str or ~azure.mgmt.azurearcdata.models.RecoveryMode
+    :ivar database_options: List of features that are enabled for the database.
+    :vartype database_options:
+     ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourcePropertiesDatabaseOptions
+    :ivar backup_information:
+    :vartype backup_information:
+     ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourcePropertiesBackupInformation
+    :ivar provisioning_state: The provisioning state of the Arc-enabled SQL Server database
+     resource.
+    :vartype provisioning_state: str
+    """
+
+    _validation = {
+        "compatibility_level": {"maximum": 200, "minimum": 80},
+        "provisioning_state": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "collation_name": {"key": "collationName", "type": "str"},
+        "database_creation_date": {"key": "databaseCreationDate", "type": "iso-8601"},
+        "compatibility_level": {"key": "compatibilityLevel", "type": "int"},
+        "size_mb": {"key": "sizeMB", "type": "float"},
+        "space_available_mb": {"key": "spaceAvailableMB", "type": "float"},
+        "state": {"key": "state", "type": "str"},
+        "is_read_only": {"key": "isReadOnly", "type": "bool"},
+        "recovery_mode": {"key": "recoveryMode", "type": "str"},
+        "database_options": {"key": "databaseOptions", "type": "SqlServerDatabaseResourcePropertiesDatabaseOptions"},
+        "backup_information": {
+            "key": "backupInformation",
+            "type": "SqlServerDatabaseResourcePropertiesBackupInformation",
+        },
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        collation_name: Optional[str] = None,
+        database_creation_date: Optional[datetime.datetime] = None,
+        compatibility_level: Optional[int] = None,
+        size_mb: Optional[float] = None,
+        space_available_mb: Optional[float] = None,
+        state: Optional[Union[str, "_models.DatabaseState"]] = None,
+        is_read_only: Optional[bool] = None,
+        recovery_mode: Optional[Union[str, "_models.RecoveryMode"]] = None,
+        database_options: Optional["_models.SqlServerDatabaseResourcePropertiesDatabaseOptions"] = None,
+        backup_information: Optional["_models.SqlServerDatabaseResourcePropertiesBackupInformation"] = None,
+        **kwargs
+    ):
+        """
+        :keyword collation_name: Collation of the database.
+        :paramtype collation_name: str
+        :keyword database_creation_date: Creation date of the database.
+        :paramtype database_creation_date: ~datetime.datetime
+        :keyword compatibility_level: Compatibility level of the database.
+        :paramtype compatibility_level: int
+        :keyword size_mb: Size of the database.
+        :paramtype size_mb: float
+        :keyword space_available_mb: Space left of the database.
+        :paramtype space_available_mb: float
+        :keyword state: State of the database. Known values are: "Online", "Restoring", "Recovering",
+         "RecoveryPending", "Suspect", "Emergency", "Offline", "Copying", and "OfflineSecondary".
+        :paramtype state: str or ~azure.mgmt.azurearcdata.models.DatabaseState
+        :keyword is_read_only: Whether the database is read only or not.
+        :paramtype is_read_only: bool
+        :keyword recovery_mode: Status of the database. Known values are: "Full", "Bulk-logged", and
+         "Simple".
+        :paramtype recovery_mode: str or ~azure.mgmt.azurearcdata.models.RecoveryMode
+        :keyword database_options: List of features that are enabled for the database.
+        :paramtype database_options:
+         ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourcePropertiesDatabaseOptions
+        :keyword backup_information:
+        :paramtype backup_information:
+         ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourcePropertiesBackupInformation
+        """
+        super().__init__(**kwargs)
+        self.collation_name = collation_name
+        self.database_creation_date = database_creation_date
+        self.compatibility_level = compatibility_level
+        self.size_mb = size_mb
+        self.space_available_mb = space_available_mb
+        self.state = state
+        self.is_read_only = is_read_only
+        self.recovery_mode = recovery_mode
+        self.database_options = database_options
+        self.backup_information = backup_information
+        self.provisioning_state = None
+
+
+class SqlServerDatabaseResourcePropertiesBackupInformation(_serialization.Model):
+    """SqlServerDatabaseResourcePropertiesBackupInformation.
+
+    :ivar last_full_backup: Date time of last full backup.
+    :vartype last_full_backup: ~datetime.datetime
+    :ivar last_log_backup: Date time of last log backup.
+    :vartype last_log_backup: ~datetime.datetime
+    """
+
+    _attribute_map = {
+        "last_full_backup": {"key": "lastFullBackup", "type": "iso-8601"},
+        "last_log_backup": {"key": "lastLogBackup", "type": "iso-8601"},
+    }
+
+    def __init__(
+        self,
+        *,
+        last_full_backup: Optional[datetime.datetime] = None,
+        last_log_backup: Optional[datetime.datetime] = None,
+        **kwargs
+    ):
+        """
+        :keyword last_full_backup: Date time of last full backup.
+        :paramtype last_full_backup: ~datetime.datetime
+        :keyword last_log_backup: Date time of last log backup.
+        :paramtype last_log_backup: ~datetime.datetime
+        """
+        super().__init__(**kwargs)
+        self.last_full_backup = last_full_backup
+        self.last_log_backup = last_log_backup
+
+
+class SqlServerDatabaseResourcePropertiesDatabaseOptions(_serialization.Model):
+    """List of features that are enabled for the database.
+
+    :ivar is_auto_close_on:
+    :vartype is_auto_close_on: bool
+    :ivar is_auto_shrink_on:
+    :vartype is_auto_shrink_on: bool
+    :ivar is_auto_create_stats_on:
+    :vartype is_auto_create_stats_on: bool
+    :ivar is_auto_update_stats_on:
+    :vartype is_auto_update_stats_on: bool
+    :ivar is_remote_data_archive_enabled:
+    :vartype is_remote_data_archive_enabled: bool
+    :ivar is_memory_optimization_enabled:
+    :vartype is_memory_optimization_enabled: bool
+    :ivar is_encrypted:
+    :vartype is_encrypted: bool
+    :ivar is_trustworthy_on:
+    :vartype is_trustworthy_on: bool
+    """
+
+    _attribute_map = {
+        "is_auto_close_on": {"key": "isAutoCloseOn", "type": "bool"},
+        "is_auto_shrink_on": {"key": "isAutoShrinkOn", "type": "bool"},
+        "is_auto_create_stats_on": {"key": "isAutoCreateStatsOn", "type": "bool"},
+        "is_auto_update_stats_on": {"key": "isAutoUpdateStatsOn", "type": "bool"},
+        "is_remote_data_archive_enabled": {"key": "isRemoteDataArchiveEnabled", "type": "bool"},
+        "is_memory_optimization_enabled": {"key": "isMemoryOptimizationEnabled", "type": "bool"},
+        "is_encrypted": {"key": "isEncrypted", "type": "bool"},
+        "is_trustworthy_on": {"key": "isTrustworthyOn", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        is_auto_close_on: Optional[bool] = None,
+        is_auto_shrink_on: Optional[bool] = None,
+        is_auto_create_stats_on: Optional[bool] = None,
+        is_auto_update_stats_on: Optional[bool] = None,
+        is_remote_data_archive_enabled: Optional[bool] = None,
+        is_memory_optimization_enabled: Optional[bool] = None,
+        is_encrypted: Optional[bool] = None,
+        is_trustworthy_on: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword is_auto_close_on:
+        :paramtype is_auto_close_on: bool
+        :keyword is_auto_shrink_on:
+        :paramtype is_auto_shrink_on: bool
+        :keyword is_auto_create_stats_on:
+        :paramtype is_auto_create_stats_on: bool
+        :keyword is_auto_update_stats_on:
+        :paramtype is_auto_update_stats_on: bool
+        :keyword is_remote_data_archive_enabled:
+        :paramtype is_remote_data_archive_enabled: bool
+        :keyword is_memory_optimization_enabled:
+        :paramtype is_memory_optimization_enabled: bool
+        :keyword is_encrypted:
+        :paramtype is_encrypted: bool
+        :keyword is_trustworthy_on:
+        :paramtype is_trustworthy_on: bool
+        """
+        super().__init__(**kwargs)
+        self.is_auto_close_on = is_auto_close_on
+        self.is_auto_shrink_on = is_auto_shrink_on
+        self.is_auto_create_stats_on = is_auto_create_stats_on
+        self.is_auto_update_stats_on = is_auto_update_stats_on
+        self.is_remote_data_archive_enabled = is_remote_data_archive_enabled
+        self.is_memory_optimization_enabled = is_memory_optimization_enabled
+        self.is_encrypted = is_encrypted
+        self.is_trustworthy_on = is_trustworthy_on
+
+
+class SqlServerDatabaseUpdate(_serialization.Model):
+    """An update to database resource.
+
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar properties: The data controller's properties.
+    :vartype properties: ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourceProperties
+    """
+
+    _attribute_map = {
+        "tags": {"key": "tags", "type": "{str}"},
+        "properties": {"key": "properties", "type": "SqlServerDatabaseResourceProperties"},
+    }
+
+    def __init__(
+        self,
+        *,
+        tags: Optional[Dict[str, str]] = None,
+        properties: Optional["_models.SqlServerDatabaseResourceProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword properties: The data controller's properties.
+        :paramtype properties: ~azure.mgmt.azurearcdata.models.SqlServerDatabaseResourceProperties
+        """
+        super().__init__(**kwargs)
+        self.tags = tags
+        self.properties = properties
+
+
 class SqlServerInstance(TrackedResource):
     """A SqlServerInstance.
 
@@ -2200,6 +2541,9 @@ class SqlServerInstanceProperties(_serialization.Model):  # pylint: disable=too-
     :vartype create_time: str
     :ivar v_core: The number of logical processors used by the SQL Server instance.
     :vartype v_core: str
+    :ivar cores: The number of total cores of the Operating System Environment (OSE) hosting the
+     SQL Server instance.
+    :vartype cores: str
     :ivar status: The cloud connectivity status. Required. Known values are: "Connected",
      "Disconnected", "Registered", and "Unknown".
     :vartype status: str or ~azure.mgmt.azurearcdata.models.ConnectionStatus
@@ -2248,6 +2592,7 @@ class SqlServerInstanceProperties(_serialization.Model):  # pylint: disable=too-
         "container_resource_id": {"key": "containerResourceId", "type": "str"},
         "create_time": {"key": "createTime", "type": "str"},
         "v_core": {"key": "vCore", "type": "str"},
+        "cores": {"key": "cores", "type": "str"},
         "status": {"key": "status", "type": "str"},
         "patch_level": {"key": "patchLevel", "type": "str"},
         "collation": {"key": "collation", "type": "str"},
@@ -2271,6 +2616,7 @@ class SqlServerInstanceProperties(_serialization.Model):  # pylint: disable=too-
         version: Optional[Union[str, "_models.SqlVersion"]] = None,
         edition: Optional[Union[str, "_models.EditionType"]] = None,
         v_core: Optional[str] = None,
+        cores: Optional[str] = None,
         patch_level: Optional[str] = None,
         collation: Optional[str] = None,
         current_version: Optional[str] = None,
@@ -2296,6 +2642,9 @@ class SqlServerInstanceProperties(_serialization.Model):  # pylint: disable=too-
         :paramtype container_resource_id: str
         :keyword v_core: The number of logical processors used by the SQL Server instance.
         :paramtype v_core: str
+        :keyword cores: The number of total cores of the Operating System Environment (OSE) hosting the
+         SQL Server instance.
+        :paramtype cores: str
         :keyword status: The cloud connectivity status. Required. Known values are: "Connected",
          "Disconnected", "Registered", and "Unknown".
         :paramtype status: str or ~azure.mgmt.azurearcdata.models.ConnectionStatus
@@ -2334,6 +2683,7 @@ class SqlServerInstanceProperties(_serialization.Model):  # pylint: disable=too-
         self.container_resource_id = container_resource_id
         self.create_time = None
         self.v_core = v_core
+        self.cores = cores
         self.status = status
         self.patch_level = patch_level
         self.collation = collation

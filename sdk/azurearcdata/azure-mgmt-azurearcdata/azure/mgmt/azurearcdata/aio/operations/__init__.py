@@ -12,6 +12,7 @@ from ._sql_server_instances_operations import SqlServerInstancesOperations
 from ._data_controllers_operations import DataControllersOperations
 from ._active_directory_connectors_operations import ActiveDirectoryConnectorsOperations
 from ._postgres_instances_operations import PostgresInstancesOperations
+from ._sql_server_databases_operations import SqlServerDatabasesOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
@@ -24,6 +25,7 @@ __all__ = [
     "DataControllersOperations",
     "ActiveDirectoryConnectorsOperations",
     "PostgresInstancesOperations",
+    "SqlServerDatabasesOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

@@ -55,6 +55,20 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     KEY = "Key"
 
 
+class DatabaseState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """State of the database."""
+
+    ONLINE = "Online"
+    RESTORING = "Restoring"
+    RECOVERING = "Recovering"
+    RECOVERY_PENDING = "RecoveryPending"
+    SUSPECT = "Suspect"
+    EMERGENCY = "Emergency"
+    OFFLINE = "Offline"
+    COPYING = "Copying"
+    OFFLINE_SECONDARY = "OfflineSecondary"
+
+
 class DefenderStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of Azure Defender."""
 
@@ -114,6 +128,14 @@ class OperationOrigin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     USER = "user"
     SYSTEM = "system"
+
+
+class RecoveryMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Status of the database."""
+
+    FULL = "Full"
+    BULK_LOGGED = "Bulk-logged"
+    SIMPLE = "Simple"
 
 
 class SqlManagedInstanceSkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
