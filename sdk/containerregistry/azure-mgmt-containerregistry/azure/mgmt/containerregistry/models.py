@@ -7,4 +7,5 @@
 from .v2018_02_01_preview.models import *
 from .v2019_04_01.models import *
 from .v2019_06_01_preview.models import *
-from .v2021_09_01.models import *
+from .v2022_02_01_preview.models import *
+from .v2022_12_01.models import *
