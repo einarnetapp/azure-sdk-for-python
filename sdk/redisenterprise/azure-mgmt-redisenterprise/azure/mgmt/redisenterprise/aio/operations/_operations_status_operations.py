@@ -57,11 +57,11 @@ class OperationsStatusOperations:
 
     @distributed_trace_async
     async def get(self, location: str, operation_id: str, **kwargs: Any) -> _models.OperationStatus:
-        """Gets the status of operation.
+        """Gets information about a database in a RedisEnterprise cluster.
 
-        :param location: The name of Azure region. Required.
+        :param location: The location name. Required.
         :type location: str
-        :param operation_id: The ID of an ongoing async operation. Required.
+        :param operation_id: Operation ID. Required.
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: OperationStatus or the result of cls(response)

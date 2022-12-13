@@ -60,18 +60,17 @@ class PrivateLinkResourcesOperations:
     @distributed_trace
     def list_by_cluster(
         self, resource_group_name: str, cluster_name: str, **kwargs: Any
-    ) -> AsyncIterable["_models.PrivateLinkResource"]:
-        """Gets the private link resources that need to be created for a RedisEnterprise cluster.
+    ) -> AsyncIterable["_models.PrivateLink"]:
+        """Lists all private link resources in a RedisEnterprise cluster.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param cluster_name: The name of the RedisEnterprise cluster. Required.
+        :param cluster_name: Name of cluster. Required.
         :type cluster_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PrivateLinkResource or the result of cls(response)
-        :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.redisenterprise.models.PrivateLinkResource]
+        :return: An iterator like instance of either PrivateLink or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.redisenterprise.models.PrivateLink]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -80,7 +79,7 @@ class PrivateLinkResourcesOperations:
         api_version: Literal["2022-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.PrivateLinkResourceListResult] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PrivateLinkListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -124,11 +123,11 @@ class PrivateLinkResourcesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("PrivateLinkResourceListResult", pipeline_response)
+            deserialized = self._deserialize("PrivateLinkListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
-            return None, AsyncList(list_of_elem)
+            return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)

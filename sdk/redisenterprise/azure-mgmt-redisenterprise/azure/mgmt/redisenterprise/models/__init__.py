@@ -8,20 +8,16 @@
 
 from ._models_py3 import AccessKeys
 from ._models_py3 import Cluster
-from ._models_py3 import ClusterList
+from ._models_py3 import ClusterListResult
 from ._models_py3 import ClusterUpdate
 from ._models_py3 import Database
-from ._models_py3 import DatabaseList
-from ._models_py3 import DatabasePropertiesGeoReplication
-from ._models_py3 import DatabaseUpdate
+from ._models_py3 import DatabaseListResult
 from ._models_py3 import ErrorAdditionalInfo
 from ._models_py3 import ErrorDetail
 from ._models_py3 import ErrorResponse
-from ._models_py3 import ExportClusterParameters
+from ._models_py3 import ExportParameters
 from ._models_py3 import ForceUnlinkParameters
-from ._models_py3 import ImportClusterParameters
-from ._models_py3 import LinkedDatabase
-from ._models_py3 import Module
+from ._models_py3 import ImportParameters
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
@@ -30,25 +26,25 @@ from ._models_py3 import Persistence
 from ._models_py3 import PrivateEndpoint
 from ._models_py3 import PrivateEndpointConnection
 from ._models_py3 import PrivateEndpointConnectionListResult
-from ._models_py3 import PrivateLinkResource
-from ._models_py3 import PrivateLinkResourceListResult
+from ._models_py3 import PrivateLink
+from ._models_py3 import PrivateLinkListResult
 from ._models_py3 import PrivateLinkServiceConnectionState
 from ._models_py3 import ProxyResource
 from ._models_py3 import RegenerateKeyParameters
 from ._models_py3 import Resource
 from ._models_py3 import Sku
+from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
 
-from ._redis_enterprise_management_client_enums import AccessKeyType
 from ._redis_enterprise_management_client_enums import ActionType
 from ._redis_enterprise_management_client_enums import AofFrequency
-from ._redis_enterprise_management_client_enums import ClusteringPolicy
+from ._redis_enterprise_management_client_enums import ClientProtocol
+from ._redis_enterprise_management_client_enums import CreatedByType
 from ._redis_enterprise_management_client_enums import EvictionPolicy
-from ._redis_enterprise_management_client_enums import LinkState
+from ._redis_enterprise_management_client_enums import KeyType
 from ._redis_enterprise_management_client_enums import Origin
 from ._redis_enterprise_management_client_enums import PrivateEndpointConnectionProvisioningState
 from ._redis_enterprise_management_client_enums import PrivateEndpointServiceConnectionStatus
-from ._redis_enterprise_management_client_enums import Protocol
 from ._redis_enterprise_management_client_enums import ProvisioningState
 from ._redis_enterprise_management_client_enums import RdbFrequency
 from ._redis_enterprise_management_client_enums import ResourceState
@@ -61,20 +57,16 @@ from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     "AccessKeys",
     "Cluster",
-    "ClusterList",
+    "ClusterListResult",
     "ClusterUpdate",
     "Database",
-    "DatabaseList",
-    "DatabasePropertiesGeoReplication",
-    "DatabaseUpdate",
+    "DatabaseListResult",
     "ErrorAdditionalInfo",
     "ErrorDetail",
     "ErrorResponse",
-    "ExportClusterParameters",
+    "ExportParameters",
     "ForceUnlinkParameters",
-    "ImportClusterParameters",
-    "LinkedDatabase",
-    "Module",
+    "ImportParameters",
     "Operation",
     "OperationDisplay",
     "OperationListResult",
@@ -83,24 +75,24 @@ __all__ = [
     "PrivateEndpoint",
     "PrivateEndpointConnection",
     "PrivateEndpointConnectionListResult",
-    "PrivateLinkResource",
-    "PrivateLinkResourceListResult",
+    "PrivateLink",
+    "PrivateLinkListResult",
     "PrivateLinkServiceConnectionState",
     "ProxyResource",
     "RegenerateKeyParameters",
     "Resource",
     "Sku",
+    "SystemData",
     "TrackedResource",
-    "AccessKeyType",
     "ActionType",
     "AofFrequency",
-    "ClusteringPolicy",
+    "ClientProtocol",
+    "CreatedByType",
     "EvictionPolicy",
-    "LinkState",
+    "KeyType",
     "Origin",
     "PrivateEndpointConnectionProvisioningState",
     "PrivateEndpointServiceConnectionStatus",
-    "Protocol",
     "ProvisioningState",
     "RdbFrequency",
     "ResourceState",

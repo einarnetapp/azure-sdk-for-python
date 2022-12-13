@@ -52,9 +52,11 @@ def build_get_request(location: str, operation_id: str, subscription_id: str, **
         "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/operationsStatus/{operationId}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "location": _SERIALIZER.url("location", location, "str", min_length=1),
-        "operationId": _SERIALIZER.url("operation_id", operation_id, "str", min_length=1),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "location": _SERIALIZER.url("location", location, "str", min_length=1),
+        "operationId": _SERIALIZER.url(
+            "operation_id", operation_id, "str", min_length=1, pattern=r"[a-z0-9][-a-z0-9]*"
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -89,11 +91,11 @@ class OperationsStatusOperations:
 
     @distributed_trace
     def get(self, location: str, operation_id: str, **kwargs: Any) -> _models.OperationStatus:
-        """Gets the status of operation.
+        """Gets information about a database in a RedisEnterprise cluster.
 
-        :param location: The name of Azure region. Required.
+        :param location: The location name. Required.
         :type location: str
-        :param operation_id: The ID of an ongoing async operation. Required.
+        :param operation_id: Operation ID. Required.
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: OperationStatus or the result of cls(response)

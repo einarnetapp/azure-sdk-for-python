@@ -59,7 +59,7 @@ class Operations:
 
     @distributed_trace
     def list(self, **kwargs: Any) -> AsyncIterable["_models.Operation"]:
-        """Lists all of the available REST API operations of the Microsoft.Cache provider.
+        """List the operations for the provider.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either Operation or the result of cls(response)
