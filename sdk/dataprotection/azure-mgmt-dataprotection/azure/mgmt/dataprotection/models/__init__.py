@@ -64,10 +64,6 @@ from ._models_py3 import Datasource
 from ._models_py3 import DatasourceSet
 from ._models_py3 import Day
 from ._models_py3 import DeleteOption
-from ._models_py3 import DeletedBackupInstance
-from ._models_py3 import DeletedBackupInstanceResource
-from ._models_py3 import DeletedBackupInstanceResourceList
-from ._models_py3 import DeletionInfo
 from ._models_py3 import DppBaseResource
 from ._models_py3 import DppBaseResourceList
 from ._models_py3 import DppIdentityDetails
@@ -85,7 +81,6 @@ from ._models_py3 import FeatureValidationRequestBase
 from ._models_py3 import FeatureValidationResponse
 from ._models_py3 import FeatureValidationResponseBase
 from ._models_py3 import ImmediateCopyOption
-from ._models_py3 import ImmutabilitySettings
 from ._models_py3 import InnerError
 from ._models_py3 import ItemLevelRestoreCriteria
 from ._models_py3 import ItemLevelRestoreTargetInfo
@@ -107,10 +102,6 @@ from ._models_py3 import RecoveryPointDataStoreDetails
 from ._models_py3 import RecoveryPointsFilters
 from ._models_py3 import ResourceGuard
 from ._models_py3 import ResourceGuardOperation
-from ._models_py3 import ResourceGuardOperationDetail
-from ._models_py3 import ResourceGuardProxyBase
-from ._models_py3 import ResourceGuardProxyBaseResource
-from ._models_py3 import ResourceGuardProxyBaseResourceList
 from ._models_py3 import ResourceGuardResource
 from ._models_py3 import ResourceGuardResourceList
 from ._models_py3 import ResourceMoveDetails
@@ -124,8 +115,6 @@ from ._models_py3 import ScheduleBasedBackupCriteria
 from ._models_py3 import ScheduleBasedTriggerContext
 from ._models_py3 import SecretStoreBasedAuthCredentials
 from ._models_py3 import SecretStoreResource
-from ._models_py3 import SecuritySettings
-from ._models_py3 import SoftDeleteSettings
 from ._models_py3 import SourceLifeCycle
 from ._models_py3 import StorageSetting
 from ._models_py3 import SupportedFeature
@@ -136,8 +125,6 @@ from ._models_py3 import TargetCopySetting
 from ._models_py3 import TargetDetails
 from ._models_py3 import TriggerBackupRequest
 from ._models_py3 import TriggerContext
-from ._models_py3 import UnlockDeleteRequest
-from ._models_py3 import UnlockDeleteResponse
 from ._models_py3 import UserFacingError
 from ._models_py3 import ValidateForBackupRequest
 from ._models_py3 import ValidateRestoreRequestObject
@@ -150,18 +137,15 @@ from ._data_protection_client_enums import DataStoreTypes
 from ._data_protection_client_enums import DayOfWeek
 from ._data_protection_client_enums import FeatureSupportStatus
 from ._data_protection_client_enums import FeatureType
-from ._data_protection_client_enums import ImmutabilityState
 from ._data_protection_client_enums import Month
 from ._data_protection_client_enums import ProvisioningState
 from ._data_protection_client_enums import RecoveryOption
 from ._data_protection_client_enums import RehydrationPriority
 from ._data_protection_client_enums import RehydrationStatus
-from ._data_protection_client_enums import ResourceGuardProvisioningState
 from ._data_protection_client_enums import ResourceMoveState
 from ._data_protection_client_enums import RestoreSourceDataStoreType
 from ._data_protection_client_enums import RestoreTargetLocationType
 from ._data_protection_client_enums import SecretStoreType
-from ._data_protection_client_enums import SoftDeleteState
 from ._data_protection_client_enums import SourceDataStoreType
 from ._data_protection_client_enums import Status
 from ._data_protection_client_enums import StorageSettingStoreTypes
@@ -170,7 +154,7 @@ from ._data_protection_client_enums import SyncType
 from ._data_protection_client_enums import ValidationType
 from ._data_protection_client_enums import WeekNumber
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -232,10 +216,6 @@ __all__ = [
     "DatasourceSet",
     "Day",
     "DeleteOption",
-    "DeletedBackupInstance",
-    "DeletedBackupInstanceResource",
-    "DeletedBackupInstanceResourceList",
-    "DeletionInfo",
     "DppBaseResource",
     "DppBaseResourceList",
     "DppIdentityDetails",
@@ -253,7 +233,6 @@ __all__ = [
     "FeatureValidationResponse",
     "FeatureValidationResponseBase",
     "ImmediateCopyOption",
-    "ImmutabilitySettings",
     "InnerError",
     "ItemLevelRestoreCriteria",
     "ItemLevelRestoreTargetInfo",
@@ -275,10 +254,6 @@ __all__ = [
     "RecoveryPointsFilters",
     "ResourceGuard",
     "ResourceGuardOperation",
-    "ResourceGuardOperationDetail",
-    "ResourceGuardProxyBase",
-    "ResourceGuardProxyBaseResource",
-    "ResourceGuardProxyBaseResourceList",
     "ResourceGuardResource",
     "ResourceGuardResourceList",
     "ResourceMoveDetails",
@@ -292,8 +267,6 @@ __all__ = [
     "ScheduleBasedTriggerContext",
     "SecretStoreBasedAuthCredentials",
     "SecretStoreResource",
-    "SecuritySettings",
-    "SoftDeleteSettings",
     "SourceLifeCycle",
     "StorageSetting",
     "SupportedFeature",
@@ -304,8 +277,6 @@ __all__ = [
     "TargetDetails",
     "TriggerBackupRequest",
     "TriggerContext",
-    "UnlockDeleteRequest",
-    "UnlockDeleteResponse",
     "UserFacingError",
     "ValidateForBackupRequest",
     "ValidateRestoreRequestObject",
@@ -317,18 +288,15 @@ __all__ = [
     "DayOfWeek",
     "FeatureSupportStatus",
     "FeatureType",
-    "ImmutabilityState",
     "Month",
     "ProvisioningState",
     "RecoveryOption",
     "RehydrationPriority",
     "RehydrationStatus",
-    "ResourceGuardProvisioningState",
     "ResourceMoveState",
     "RestoreSourceDataStoreType",
     "RestoreTargetLocationType",
     "SecretStoreType",
-    "SoftDeleteState",
     "SourceDataStoreType",
     "Status",
     "StorageSettingStoreTypes",

@@ -91,14 +91,6 @@ class FeatureType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DATA_SOURCE_TYPE = "DataSourceType"
 
 
-class ImmutabilityState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Immutability state."""
-
-    DISABLED = "Disabled"
-    UNLOCKED = "Unlocked"
-    LOCKED = "Locked"
-
-
 class Month(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Month."""
 
@@ -150,16 +142,6 @@ class RehydrationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     FAILED = "FAILED"
 
 
-class ResourceGuardProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Provisioning state of the BackupVault resource."""
-
-    FAILED = "Failed"
-    PROVISIONING = "Provisioning"
-    SUCCEEDED = "Succeeded"
-    UNKNOWN = "Unknown"
-    UPDATING = "Updating"
-
-
 class ResourceMoveState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Resource move state for backup vault."""
 
@@ -201,17 +183,6 @@ class SecretStoreType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     AZURE_KEY_VAULT = "AzureKeyVault"
 
 
-class SoftDeleteState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """State of soft delete."""
-
-    #: Soft Delete is turned off for the BackupVault
-    OFF = "Off"
-    #: Soft Delete is enabled for the BackupVault but can be turned off
-    ON = "On"
-    #: Soft Delete is permanently enabled for the BackupVault and the setting cannot be changed
-    ALWAYS_ON = "AlwaysOn"
-
-
 class SourceDataStoreType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets or sets the type of the source data store."""
 
@@ -235,7 +206,7 @@ class StorageSettingStoreTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets or sets the type of the datastore."""
 
     ARCHIVE_STORE = "ArchiveStore"
-    SNAPSHOT_STORE = "SnapshotStore"
+    OPERATIONAL_STORE = "OperationalStore"
     VAULT_STORE = "VaultStore"
 
 
