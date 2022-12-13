@@ -34,7 +34,7 @@ if TYPE_CHECKING:
 class HybridComputeManagementClient(
     HybridComputeManagementClientOperationsMixin
 ):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """The Hybrid Compute Management Client.
+    """The Hybrid Compute Management  Client.
 
     :ivar machines: MachinesOperations operations
     :vartype machines: azure.mgmt.hybridcompute.aio.operations.MachinesOperations
