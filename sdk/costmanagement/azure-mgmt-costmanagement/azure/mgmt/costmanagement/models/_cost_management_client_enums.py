@@ -354,9 +354,11 @@ class PivotType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class QueryColumnType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of the column in the export."""
+    """The type of the column in the report."""
 
-    TAG = "Tag"
+    #: The tag associated with the cost data.
+    TAG_KEY = "TagKey"
+    #: The dimension of cost data.
     DIMENSION = "Dimension"
 
 
@@ -373,13 +375,6 @@ class RecurrenceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     WEEKLY = "Weekly"
     MONTHLY = "Monthly"
     ANNUALLY = "Annually"
-
-
-class ReportConfigColumnType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of the column in the report."""
-
-    TAG = "Tag"
-    DIMENSION = "Dimension"
 
 
 class ReportConfigSortingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
