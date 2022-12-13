@@ -47,7 +47,9 @@ def build_list_by_cluster_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2022-12-30-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-12-30-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -80,7 +82,9 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2022-12-30-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-12-30-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -146,7 +150,7 @@ class PublishersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2022-12-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PublisherList] = kwargs.pop("cls", None)
@@ -247,7 +251,7 @@ class PublishersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2022-12-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Publisher] = kwargs.pop("cls", None)

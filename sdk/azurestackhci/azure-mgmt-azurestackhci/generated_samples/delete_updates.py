@@ -14,7 +14,7 @@ from azure.mgmt.azurestackhci import AzureStackHCIClient
     pip install azure-identity
     pip install azure-mgmt-azurestackhci
 # USAGE
-    python get_sku.py
+    python delete_updates.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,19 +26,17 @@ from azure.mgmt.azurestackhci import AzureStackHCIClient
 def main():
     client = AzureStackHCIClient(
         credential=DefaultAzureCredential(),
-        subscription_id="fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+        subscription_id="b8d594e5-51f3-4c11-9c54-a7771b81c712",
     )
 
-    response = client.skus.get(
-        resource_group_name="test-rg",
-        cluster_name="myCluster",
-        publisher_name="publisher1",
-        offer_name="offer1",
-        sku_name="sku1",
-    )
+    response = client.updates.begin_delete(
+        resource_group_name="testrg",
+        cluster_name="testcluster",
+        update_name="Microsoft4.2203.2.32",
+    ).result()
     print(response)
 
 
-# x-ms-original-file: specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/preview/2022-12-30-preview/examples/GetSku.json
+# x-ms-original-file: specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/preview/2022-12-30-preview/examples/DeleteUpdates.json
 if __name__ == "__main__":
     main()

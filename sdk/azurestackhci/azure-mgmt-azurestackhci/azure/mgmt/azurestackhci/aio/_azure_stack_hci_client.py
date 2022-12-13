@@ -42,10 +42,10 @@ class AzureStackHCIClient:  # pylint: disable=client-accepts-api-version-keyword
     :vartype clusters: azure.mgmt.azurestackhci.aio.operations.ClustersOperations
     :ivar extensions: ExtensionsOperations operations
     :vartype extensions: azure.mgmt.azurestackhci.aio.operations.ExtensionsOperations
-    :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.azurestackhci.aio.operations.Operations
     :ivar offers: OffersOperations operations
     :vartype offers: azure.mgmt.azurestackhci.aio.operations.OffersOperations
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.azurestackhci.aio.operations.Operations
     :ivar publishers: PublishersOperations operations
     :vartype publishers: azure.mgmt.azurestackhci.aio.operations.PublishersOperations
     :ivar skus: SkusOperations operations
@@ -62,8 +62,8 @@ class AzureStackHCIClient:  # pylint: disable=client-accepts-api-version-keyword
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2022-12-30-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -88,8 +88,8 @@ class AzureStackHCIClient:  # pylint: disable=client-accepts-api-version-keyword
         self.arc_settings = ArcSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.clusters = ClustersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.extensions = ExtensionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.offers = OffersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.publishers = PublishersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.skus = SkusOperations(self._client, self._config, self._serialize, self._deserialize)
         self.update_runs = UpdateRunsOperations(self._client, self._config, self._serialize, self._deserialize)
