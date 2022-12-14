@@ -4331,6 +4331,54 @@ class IntegrationRuntimeNodeMonitoringData(_serialization.Model):
         self.received_bytes = None
 
 
+class IntegrationRuntimeOperationStatus(_serialization.Model):
+    """Integration Runtime Operation Status Properties.
+
+    :ivar status: status of Start Integrationruntimes. Known values are: "InProgress", "Succeeded",
+     and "Failed".
+    :vartype status: str or ~azure.mgmt.synapse.models.WorkspaceStatus
+    :ivar name: The operation name.
+    :vartype name: str
+    :ivar properties: The operation properties.
+    :vartype properties: JSON
+    :ivar error: The operation error message.
+    :vartype error: str
+    """
+
+    _attribute_map = {
+        "status": {"key": "status", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
+        "error": {"key": "error", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        status: Optional[Union[str, "_models.WorkspaceStatus"]] = None,
+        name: Optional[str] = None,
+        properties: Optional[JSON] = None,
+        error: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword status: status of Start Integrationruntimes. Known values are: "InProgress",
+         "Succeeded", and "Failed".
+        :paramtype status: str or ~azure.mgmt.synapse.models.WorkspaceStatus
+        :keyword name: The operation name.
+        :paramtype name: str
+        :keyword properties: The operation properties.
+        :paramtype properties: JSON
+        :keyword error: The operation error message.
+        :paramtype error: str
+        """
+        super().__init__(**kwargs)
+        self.status = status
+        self.name = name
+        self.properties = properties
+        self.error = error
+
+
 class IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint(_serialization.Model):
     """Azure-SSIS integration runtime outbound network dependency endpoints for one category.
 
@@ -4805,6 +4853,54 @@ class IntegrationRuntimeStatusResponse(_serialization.Model):
         self.type: Optional[str] = None
         self.data_factory_name = None
         self.state = None
+
+
+class IntegrationRuntimeStopOperationStatus(_serialization.Model):
+    """Integration Runtime Operation Status Properties.
+
+    :ivar status: status of Start Integrationruntimes. Known values are: "InProgress", "Succeeded",
+     and "Failed".
+    :vartype status: str or ~azure.mgmt.synapse.models.WorkspaceStatus
+    :ivar name: The operation name.
+    :vartype name: str
+    :ivar properties: The operation properties.
+    :vartype properties: JSON
+    :ivar error: The operation error message.
+    :vartype error: str
+    """
+
+    _attribute_map = {
+        "status": {"key": "status", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
+        "error": {"key": "error", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        status: Optional[Union[str, "_models.WorkspaceStatus"]] = None,
+        name: Optional[str] = None,
+        properties: Optional[JSON] = None,
+        error: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword status: status of Start Integrationruntimes. Known values are: "InProgress",
+         "Succeeded", and "Failed".
+        :paramtype status: str or ~azure.mgmt.synapse.models.WorkspaceStatus
+        :keyword name: The operation name.
+        :paramtype name: str
+        :keyword properties: The operation properties.
+        :paramtype properties: JSON
+        :keyword error: The operation error message.
+        :paramtype error: str
+        """
+        super().__init__(**kwargs)
+        self.status = status
+        self.name = name
+        self.properties = properties
+        self.error = error
 
 
 class IntegrationRuntimeVNetProperties(_serialization.Model):
