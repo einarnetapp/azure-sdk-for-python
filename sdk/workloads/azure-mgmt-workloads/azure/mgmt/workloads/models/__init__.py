@@ -11,6 +11,7 @@ from ._models_py3 import BackupProfile
 from ._models_py3 import CacheProfile
 from ._models_py3 import CentralServerConfiguration
 from ._models_py3 import CentralServerVmDetails
+from ._models_py3 import CreateAndMountFileShareConfiguration
 from ._models_py3 import DB2ProviderInstanceProperties
 from ._models_py3 import DatabaseConfiguration
 from ._models_py3 import DatabaseProfile
@@ -19,7 +20,10 @@ from ._models_py3 import DeployerVmPackages
 from ._models_py3 import DeploymentConfiguration
 from ._models_py3 import DeploymentWithOSConfiguration
 from ._models_py3 import DiscoveryConfiguration
+from ._models_py3 import DiskConfiguration
 from ._models_py3 import DiskInfo
+from ._models_py3 import DiskSku
+from ._models_py3 import DiskVolumeConfiguration
 from ._models_py3 import EnqueueReplicationServerProperties
 from ._models_py3 import EnqueueServerProperties
 from ._models_py3 import Error
@@ -29,6 +33,7 @@ from ._models_py3 import ErrorDetail
 from ._models_py3 import ErrorInnerError
 from ._models_py3 import ErrorResponse
 from ._models_py3 import ExternalInstallationSoftwareConfiguration
+from ._models_py3 import FileShareConfiguration
 from ._models_py3 import FileshareProfile
 from ._models_py3 import GatewayServerProperties
 from ._models_py3 import HanaDbProviderInstanceProperties
@@ -37,11 +42,13 @@ from ._models_py3 import HighAvailabilitySoftwareConfiguration
 from ._models_py3 import ImageReference
 from ._models_py3 import InfrastructureConfiguration
 from ._models_py3 import LinuxConfiguration
+from ._models_py3 import LoadBalancerDetails
 from ._models_py3 import ManagedRGConfiguration
 from ._models_py3 import MessageServerProperties
 from ._models_py3 import Monitor
 from ._models_py3 import MonitorListResult
 from ._models_py3 import MonitorPropertiesErrors
+from ._models_py3 import MountFileShareConfiguration
 from ._models_py3 import MsSqlServerProviderInstanceProperties
 from ._models_py3 import NetworkConfiguration
 from ._models_py3 import NetworkProfile
@@ -102,6 +109,7 @@ from ._models_py3 import ServiceInitiatedSoftwareConfiguration
 from ._models_py3 import SingleServerConfiguration
 from ._models_py3 import SingleServerRecommendationResult
 from ._models_py3 import SiteProfile
+from ._models_py3 import SkipFileShareConfiguration
 from ._models_py3 import Sku
 from ._models_py3 import SkuCapability
 from ._models_py3 import SkuCapacity
@@ -116,6 +124,8 @@ from ._models_py3 import SshConfiguration
 from ._models_py3 import SshKeyPair
 from ._models_py3 import SshPublicKey
 from ._models_py3 import StopRequest
+from ._models_py3 import StorageConfiguration
+from ._models_py3 import StorageInformation
 from ._models_py3 import SystemData
 from ._models_py3 import Tags
 from ._models_py3 import ThreeTierConfiguration
@@ -139,9 +149,11 @@ from ._workloads_client_enums import ActionType
 from ._workloads_client_enums import ApplicationProvisioningState
 from ._workloads_client_enums import AzureFrontDoorEnabled
 from ._workloads_client_enums import CentralServerVirtualMachineType
+from ._workloads_client_enums import ConfigurationType
 from ._workloads_client_enums import CreatedByType
 from ._workloads_client_enums import DatabaseTier
 from ._workloads_client_enums import DatabaseType
+from ._workloads_client_enums import DiskSkuName
 from ._workloads_client_enums import DiskStorageType
 from ._workloads_client_enums import EnableBackup
 from ._workloads_client_enums import EnableSslEnforcement
@@ -195,6 +207,7 @@ __all__ = [
     "CacheProfile",
     "CentralServerConfiguration",
     "CentralServerVmDetails",
+    "CreateAndMountFileShareConfiguration",
     "DB2ProviderInstanceProperties",
     "DatabaseConfiguration",
     "DatabaseProfile",
@@ -203,7 +216,10 @@ __all__ = [
     "DeploymentConfiguration",
     "DeploymentWithOSConfiguration",
     "DiscoveryConfiguration",
+    "DiskConfiguration",
     "DiskInfo",
+    "DiskSku",
+    "DiskVolumeConfiguration",
     "EnqueueReplicationServerProperties",
     "EnqueueServerProperties",
     "Error",
@@ -213,6 +229,7 @@ __all__ = [
     "ErrorInnerError",
     "ErrorResponse",
     "ExternalInstallationSoftwareConfiguration",
+    "FileShareConfiguration",
     "FileshareProfile",
     "GatewayServerProperties",
     "HanaDbProviderInstanceProperties",
@@ -221,11 +238,13 @@ __all__ = [
     "ImageReference",
     "InfrastructureConfiguration",
     "LinuxConfiguration",
+    "LoadBalancerDetails",
     "ManagedRGConfiguration",
     "MessageServerProperties",
     "Monitor",
     "MonitorListResult",
     "MonitorPropertiesErrors",
+    "MountFileShareConfiguration",
     "MsSqlServerProviderInstanceProperties",
     "NetworkConfiguration",
     "NetworkProfile",
@@ -286,6 +305,7 @@ __all__ = [
     "SingleServerConfiguration",
     "SingleServerRecommendationResult",
     "SiteProfile",
+    "SkipFileShareConfiguration",
     "Sku",
     "SkuCapability",
     "SkuCapacity",
@@ -300,6 +320,8 @@ __all__ = [
     "SshKeyPair",
     "SshPublicKey",
     "StopRequest",
+    "StorageConfiguration",
+    "StorageInformation",
     "SystemData",
     "Tags",
     "ThreeTierConfiguration",
@@ -322,9 +344,11 @@ __all__ = [
     "ApplicationProvisioningState",
     "AzureFrontDoorEnabled",
     "CentralServerVirtualMachineType",
+    "ConfigurationType",
     "CreatedByType",
     "DatabaseTier",
     "DatabaseType",
+    "DiskSkuName",
     "DiskStorageType",
     "EnableBackup",
     "EnableSslEnforcement",

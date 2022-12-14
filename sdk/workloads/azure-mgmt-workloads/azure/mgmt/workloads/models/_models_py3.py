@@ -230,16 +230,21 @@ class CentralServerVmDetails(_serialization.Model):
     :vartype type: str or ~azure.mgmt.workloads.models.CentralServerVirtualMachineType
     :ivar virtual_machine_id:
     :vartype virtual_machine_id: str
+    :ivar storage_details: Storage details of all the Storage Accounts attached to the ASCS Virtual
+     Machine. For e.g. NFS on AFS Shared Storage.
+    :vartype storage_details: list[~azure.mgmt.workloads.models.StorageInformation]
     """
 
     _validation = {
         "type": {"readonly": True},
         "virtual_machine_id": {"readonly": True},
+        "storage_details": {"readonly": True},
     }
 
     _attribute_map = {
         "type": {"key": "type", "type": "str"},
         "virtual_machine_id": {"key": "virtualMachineId", "type": "str"},
+        "storage_details": {"key": "storageDetails", "type": "[StorageInformation]"},
     }
 
     def __init__(self, **kwargs):
@@ -247,6 +252,83 @@ class CentralServerVmDetails(_serialization.Model):
         super().__init__(**kwargs)
         self.type = None
         self.virtual_machine_id = None
+        self.storage_details = None
+
+
+class FileShareConfiguration(_serialization.Model):
+    """File Share configuration details, populated with information on storage configuration mounted on the VIS. The createAndMount option is selected in case of missing input.
+
+    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
+    CreateAndMountFileShareConfiguration, MountFileShareConfiguration, SkipFileShareConfiguration
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar configuration_type: The type of file share config. Required. Known values are: "Skip",
+     "CreateAndMount", and "Mount".
+    :vartype configuration_type: str or ~azure.mgmt.workloads.models.ConfigurationType
+    """
+
+    _validation = {
+        "configuration_type": {"required": True},
+    }
+
+    _attribute_map = {
+        "configuration_type": {"key": "configurationType", "type": "str"},
+    }
+
+    _subtype_map = {
+        "configuration_type": {
+            "CreateAndMount": "CreateAndMountFileShareConfiguration",
+            "Mount": "MountFileShareConfiguration",
+            "Skip": "SkipFileShareConfiguration",
+        }
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.configuration_type: Optional[str] = None
+
+
+class CreateAndMountFileShareConfiguration(FileShareConfiguration):
+    """Gets or sets the file share configuration where the transport directory fileshare is created and mounted as a part of the create infra flow.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar configuration_type: The type of file share config. Required. Known values are: "Skip",
+     "CreateAndMount", and "Mount".
+    :vartype configuration_type: str or ~azure.mgmt.workloads.models.ConfigurationType
+    :ivar resource_group: The name of file share resource group. The app rg is used in case of
+     missing input.
+    :vartype resource_group: str
+    :ivar storage_account_name: The name of file share storage account name . A custom name is used
+     in case of missing input.
+    :vartype storage_account_name: str
+    """
+
+    _validation = {
+        "configuration_type": {"required": True},
+    }
+
+    _attribute_map = {
+        "configuration_type": {"key": "configurationType", "type": "str"},
+        "resource_group": {"key": "resourceGroup", "type": "str"},
+        "storage_account_name": {"key": "storageAccountName", "type": "str"},
+    }
+
+    def __init__(self, *, resource_group: Optional[str] = None, storage_account_name: Optional[str] = None, **kwargs):
+        """
+        :keyword resource_group: The name of file share resource group. The app rg is used in case of
+         missing input.
+        :paramtype resource_group: str
+        :keyword storage_account_name: The name of file share storage account name . A custom name is
+         used in case of missing input.
+        :paramtype storage_account_name: str
+        """
+        super().__init__(**kwargs)
+        self.configuration_type: str = "CreateAndMount"
+        self.resource_group = resource_group
+        self.storage_account_name = storage_account_name
 
 
 class DatabaseConfiguration(_serialization.Model):
@@ -263,6 +345,8 @@ class DatabaseConfiguration(_serialization.Model):
      ~azure.mgmt.workloads.models.VirtualMachineConfiguration
     :ivar instance_count: The number of database VMs. Required.
     :vartype instance_count: int
+    :ivar disk_configuration: Gets or sets the disk configuration.
+    :vartype disk_configuration: ~azure.mgmt.workloads.models.DiskConfiguration
     """
 
     _validation = {
@@ -276,6 +360,7 @@ class DatabaseConfiguration(_serialization.Model):
         "subnet_id": {"key": "subnetId", "type": "str"},
         "virtual_machine_configuration": {"key": "virtualMachineConfiguration", "type": "VirtualMachineConfiguration"},
         "instance_count": {"key": "instanceCount", "type": "int"},
+        "disk_configuration": {"key": "diskConfiguration", "type": "DiskConfiguration"},
     }
 
     def __init__(
@@ -285,6 +370,7 @@ class DatabaseConfiguration(_serialization.Model):
         virtual_machine_configuration: "_models.VirtualMachineConfiguration",
         instance_count: int,
         database_type: Optional[Union[str, "_models.SAPDatabaseType"]] = None,
+        disk_configuration: Optional["_models.DiskConfiguration"] = None,
         **kwargs
     ):
         """
@@ -298,12 +384,15 @@ class DatabaseConfiguration(_serialization.Model):
          ~azure.mgmt.workloads.models.VirtualMachineConfiguration
         :keyword instance_count: The number of database VMs. Required.
         :paramtype instance_count: int
+        :keyword disk_configuration: Gets or sets the disk configuration.
+        :paramtype disk_configuration: ~azure.mgmt.workloads.models.DiskConfiguration
         """
         super().__init__(**kwargs)
         self.database_type = database_type
         self.subnet_id = subnet_id
         self.virtual_machine_configuration = virtual_machine_configuration
         self.instance_count = instance_count
+        self.disk_configuration = disk_configuration
 
 
 class DatabaseProfile(_serialization.Model):  # pylint: disable=too-many-instance-attributes
@@ -433,16 +522,21 @@ class DatabaseVmDetails(_serialization.Model):
     :ivar status: Defines the SAP Instance status. Known values are: "Starting", "Running",
      "Stopping", "Offline", "PartiallyRunning", and "Unavailable".
     :vartype status: str or ~azure.mgmt.workloads.models.SAPVirtualInstanceStatus
+    :ivar storage_details: Storage details of all the Storage Accounts attached to the Database
+     Virtual Machine. For e.g. NFS on AFS Shared Storage.
+    :vartype storage_details: list[~azure.mgmt.workloads.models.StorageInformation]
     """
 
     _validation = {
         "virtual_machine_id": {"readonly": True},
         "status": {"readonly": True},
+        "storage_details": {"readonly": True},
     }
 
     _attribute_map = {
         "virtual_machine_id": {"key": "virtualMachineId", "type": "str"},
         "status": {"key": "status", "type": "str"},
+        "storage_details": {"key": "storageDetails", "type": "[StorageInformation]"},
     }
 
     def __init__(self, **kwargs):
@@ -450,6 +544,7 @@ class DatabaseVmDetails(_serialization.Model):
         super().__init__(**kwargs)
         self.virtual_machine_id = None
         self.status = None
+        self.storage_details = None
 
 
 class ProviderSpecificProperties(_serialization.Model):
@@ -793,6 +888,34 @@ class DiscoveryConfiguration(SAPConfiguration):
         self.app_location = None
 
 
+class DiskConfiguration(_serialization.Model):
+    """The Disk Configuration Details.
+
+    :ivar disk_volume_configurations: The disk configuration for the db volume. For HANA, Required
+     volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume :
+     ['backup'].
+    :vartype disk_volume_configurations: dict[str,
+     ~azure.mgmt.workloads.models.DiskVolumeConfiguration]
+    """
+
+    _attribute_map = {
+        "disk_volume_configurations": {"key": "diskVolumeConfigurations", "type": "{DiskVolumeConfiguration}"},
+    }
+
+    def __init__(
+        self, *, disk_volume_configurations: Optional[Dict[str, "_models.DiskVolumeConfiguration"]] = None, **kwargs
+    ):
+        """
+        :keyword disk_volume_configurations: The disk configuration for the db volume. For HANA,
+         Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume
+         : ['backup'].
+        :paramtype disk_volume_configurations: dict[str,
+         ~azure.mgmt.workloads.models.DiskVolumeConfiguration]
+        """
+        super().__init__(**kwargs)
+        self.disk_volume_configurations = disk_volume_configurations
+
+
 class DiskInfo(_serialization.Model):
     """Disk resource creation details.
 
@@ -827,6 +950,67 @@ class DiskInfo(_serialization.Model):
         super().__init__(**kwargs)
         self.storage_type = storage_type
         self.size_in_gb = size_in_gb
+
+
+class DiskSku(_serialization.Model):
+    """The disk sku.
+
+    :ivar name: Defines the disk sku name. Known values are: "Standard_LRS", "Premium_LRS",
+     "StandardSSD_LRS", "UltraSSD_LRS", "Premium_ZRS", "StandardSSD_ZRS", and "PremiumV2_LRS".
+    :vartype name: str or ~azure.mgmt.workloads.models.DiskSkuName
+    """
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+    }
+
+    def __init__(self, *, name: Optional[Union[str, "_models.DiskSkuName"]] = None, **kwargs):
+        """
+        :keyword name: Defines the disk sku name. Known values are: "Standard_LRS", "Premium_LRS",
+         "StandardSSD_LRS", "UltraSSD_LRS", "Premium_ZRS", "StandardSSD_ZRS", and "PremiumV2_LRS".
+        :paramtype name: str or ~azure.mgmt.workloads.models.DiskSkuName
+        """
+        super().__init__(**kwargs)
+        self.name = name
+
+
+class DiskVolumeConfiguration(_serialization.Model):
+    """The disk configuration required for the selected volume.
+
+    :ivar count: The total number of disks required for the concerned volume.
+    :vartype count: int
+    :ivar size_gb: The disk size in GB.
+    :vartype size_gb: int
+    :ivar sku: The disk SKU details.
+    :vartype sku: ~azure.mgmt.workloads.models.DiskSku
+    """
+
+    _attribute_map = {
+        "count": {"key": "count", "type": "int"},
+        "size_gb": {"key": "sizeGB", "type": "int"},
+        "sku": {"key": "sku", "type": "DiskSku"},
+    }
+
+    def __init__(
+        self,
+        *,
+        count: Optional[int] = None,
+        size_gb: Optional[int] = None,
+        sku: Optional["_models.DiskSku"] = None,
+        **kwargs
+    ):
+        """
+        :keyword count: The total number of disks required for the concerned volume.
+        :paramtype count: int
+        :keyword size_gb: The disk size in GB.
+        :paramtype size_gb: int
+        :keyword sku: The disk SKU details.
+        :paramtype sku: ~azure.mgmt.workloads.models.DiskSku
+        """
+        super().__init__(**kwargs)
+        self.count = count
+        self.size_gb = size_gb
+        self.sku = sku
 
 
 class EnqueueReplicationServerProperties(_serialization.Model):
@@ -1642,6 +1826,29 @@ class LinuxConfiguration(OSConfiguration):
         self.ssh_key_pair = ssh_key_pair
 
 
+class LoadBalancerDetails(_serialization.Model):
+    """The Load Balancer details such as Load Balancer ID.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id:
+    :vartype id: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.id = None
+
+
 class ManagedRGConfiguration(_serialization.Model):
     """Managed resource group configuration.
 
@@ -2015,6 +2222,45 @@ class MonitorPropertiesErrors(Error):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
+
+
+class MountFileShareConfiguration(FileShareConfiguration):
+    """Gets or sets the file share configuration where the transport directory fileshare already exists, and user wishes to mount the fileshare as a part of the create infra flow.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar configuration_type: The type of file share config. Required. Known values are: "Skip",
+     "CreateAndMount", and "Mount".
+    :vartype configuration_type: str or ~azure.mgmt.workloads.models.ConfigurationType
+    :ivar id: The fileshare resource ID. Required.
+    :vartype id: str
+    :ivar private_endpoint_id: The private endpoint resource ID. Required.
+    :vartype private_endpoint_id: str
+    """
+
+    _validation = {
+        "configuration_type": {"required": True},
+        "id": {"required": True},
+        "private_endpoint_id": {"required": True},
+    }
+
+    _attribute_map = {
+        "configuration_type": {"key": "configurationType", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "private_endpoint_id": {"key": "privateEndpointId", "type": "str"},
+    }
+
+    def __init__(self, *, id: str, private_endpoint_id: str, **kwargs):  # pylint: disable=redefined-builtin
+        """
+        :keyword id: The fileshare resource ID. Required.
+        :paramtype id: str
+        :keyword private_endpoint_id: The private endpoint resource ID. Required.
+        :paramtype private_endpoint_id: str
+        """
+        super().__init__(**kwargs)
+        self.configuration_type: str = "Mount"
+        self.id = id
+        self.private_endpoint_id = private_endpoint_id
 
 
 class MsSqlServerProviderInstanceProperties(ProviderSpecificProperties):
@@ -3679,6 +3925,9 @@ class SAPApplicationServerInstance(TrackedResource):  # pylint: disable=too-many
     :ivar status: Defines the SAP Instance status. Known values are: "Starting", "Running",
      "Stopping", "Offline", "PartiallyRunning", and "Unavailable".
     :vartype status: str or ~azure.mgmt.workloads.models.SAPVirtualInstanceStatus
+    :ivar storage_details: Storage details of all the Storage Accounts attached to the App Virtual
+     Machine. For e.g. NFS on AFS Shared Storage.
+    :vartype storage_details: list[~azure.mgmt.workloads.models.StorageInformation]
     :ivar health: Defines the health of SAP Instances. Known values are: "Unknown", "Healthy",
      "Unhealthy", and "Degraded".
     :vartype health: str or ~azure.mgmt.workloads.models.SAPHealthState
@@ -3707,6 +3956,7 @@ class SAPApplicationServerInstance(TrackedResource):  # pylint: disable=too-many
         "icm_https_port": {"readonly": True},
         "virtual_machine_id": {"readonly": True},
         "status": {"readonly": True},
+        "storage_details": {"readonly": True},
         "health": {"readonly": True},
         "provisioning_state": {"readonly": True},
         "errors": {"readonly": True},
@@ -3730,6 +3980,7 @@ class SAPApplicationServerInstance(TrackedResource):  # pylint: disable=too-many
         "icm_https_port": {"key": "properties.icmHttpsPort", "type": "int"},
         "virtual_machine_id": {"key": "properties.virtualMachineId", "type": "str"},
         "status": {"key": "properties.status", "type": "str"},
+        "storage_details": {"key": "properties.storageDetails", "type": "[StorageInformation]"},
         "health": {"key": "properties.health", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "errors": {"key": "properties.errors", "type": "SAPVirtualInstanceError"},
@@ -3754,6 +4005,7 @@ class SAPApplicationServerInstance(TrackedResource):  # pylint: disable=too-many
         self.icm_https_port = None
         self.virtual_machine_id = None
         self.status = None
+        self.storage_details = None
         self.health = None
         self.provisioning_state = None
         self.errors = None
@@ -3960,6 +4212,9 @@ class SAPCentralServerInstance(TrackedResource):  # pylint: disable=too-many-ins
     :vartype kernel_version: str
     :ivar kernel_patch: The central services instance Kernel Patch level.
     :vartype kernel_patch: str
+    :ivar load_balancer_details: The Load Balancer details such as LoadBalancer ID attached to ASCS
+     Virtual Machines.
+    :vartype load_balancer_details: ~azure.mgmt.workloads.models.LoadBalancerDetails
     :ivar vm_details: The list of virtual machines corresponding to the Central Services instance.
     :vartype vm_details: list[~azure.mgmt.workloads.models.CentralServerVmDetails]
     :ivar status: Defines the SAP Instance status. Known values are: "Starting", "Running",
@@ -3986,6 +4241,7 @@ class SAPCentralServerInstance(TrackedResource):  # pylint: disable=too-many-ins
         "subnet": {"readonly": True},
         "kernel_version": {"readonly": True},
         "kernel_patch": {"readonly": True},
+        "load_balancer_details": {"readonly": True},
         "vm_details": {"readonly": True},
         "status": {"readonly": True},
         "health": {"readonly": True},
@@ -4011,6 +4267,7 @@ class SAPCentralServerInstance(TrackedResource):  # pylint: disable=too-many-ins
         },
         "kernel_version": {"key": "properties.kernelVersion", "type": "str"},
         "kernel_patch": {"key": "properties.kernelPatch", "type": "str"},
+        "load_balancer_details": {"key": "properties.loadBalancerDetails", "type": "LoadBalancerDetails"},
         "vm_details": {"key": "properties.vmDetails", "type": "[CentralServerVmDetails]"},
         "status": {"key": "properties.status", "type": "str"},
         "health": {"key": "properties.health", "type": "str"},
@@ -4054,6 +4311,7 @@ class SAPCentralServerInstance(TrackedResource):  # pylint: disable=too-many-ins
         self.enqueue_replication_server_properties = enqueue_replication_server_properties
         self.kernel_version = None
         self.kernel_patch = None
+        self.load_balancer_details = None
         self.vm_details = None
         self.status = None
         self.health = None
@@ -4092,6 +4350,9 @@ class SAPDatabaseInstance(TrackedResource):  # pylint: disable=too-many-instance
     :vartype database_type: str
     :ivar ip_address: Database IP Address.
     :vartype ip_address: str
+    :ivar load_balancer_details: The Load Balancer details such as LoadBalancer ID attached to
+     Database Virtual Machines.
+    :vartype load_balancer_details: ~azure.mgmt.workloads.models.LoadBalancerDetails
     :ivar vm_details: The list of virtual machines corresponding to the Database resource.
     :vartype vm_details: list[~azure.mgmt.workloads.models.DatabaseVmDetails]
     :ivar status: Defines the SAP Instance status. Known values are: "Starting", "Running",
@@ -4115,6 +4376,7 @@ class SAPDatabaseInstance(TrackedResource):  # pylint: disable=too-many-instance
         "database_sid": {"readonly": True},
         "database_type": {"readonly": True},
         "ip_address": {"readonly": True},
+        "load_balancer_details": {"readonly": True},
         "vm_details": {"readonly": True},
         "status": {"readonly": True},
         "provisioning_state": {"readonly": True},
@@ -4132,6 +4394,7 @@ class SAPDatabaseInstance(TrackedResource):  # pylint: disable=too-many-instance
         "database_sid": {"key": "properties.databaseSid", "type": "str"},
         "database_type": {"key": "properties.databaseType", "type": "str"},
         "ip_address": {"key": "properties.ipAddress", "type": "str"},
+        "load_balancer_details": {"key": "properties.loadBalancerDetails", "type": "LoadBalancerDetails"},
         "vm_details": {"key": "properties.vmDetails", "type": "[DatabaseVmDetails]"},
         "status": {"key": "properties.status", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
@@ -4150,6 +4413,7 @@ class SAPDatabaseInstance(TrackedResource):  # pylint: disable=too-many-instance
         self.database_sid = None
         self.database_type = None
         self.ip_address = None
+        self.load_balancer_details = None
         self.vm_details = None
         self.status = None
         self.provisioning_state = None
@@ -5172,6 +5436,8 @@ class SingleServerConfiguration(InfrastructureConfiguration):
     :ivar virtual_machine_configuration: Gets or sets the virtual machine configuration. Required.
     :vartype virtual_machine_configuration:
      ~azure.mgmt.workloads.models.VirtualMachineConfiguration
+    :ivar db_disk_configuration: Gets or sets the disk configuration.
+    :vartype db_disk_configuration: ~azure.mgmt.workloads.models.DiskConfiguration
     """
 
     _validation = {
@@ -5188,6 +5454,7 @@ class SingleServerConfiguration(InfrastructureConfiguration):
         "database_type": {"key": "databaseType", "type": "str"},
         "subnet_id": {"key": "subnetId", "type": "str"},
         "virtual_machine_configuration": {"key": "virtualMachineConfiguration", "type": "VirtualMachineConfiguration"},
+        "db_disk_configuration": {"key": "dbDiskConfiguration", "type": "DiskConfiguration"},
     }
 
     def __init__(
@@ -5198,6 +5465,7 @@ class SingleServerConfiguration(InfrastructureConfiguration):
         virtual_machine_configuration: "_models.VirtualMachineConfiguration",
         network_configuration: Optional["_models.NetworkConfiguration"] = None,
         database_type: Optional[Union[str, "_models.SAPDatabaseType"]] = None,
+        db_disk_configuration: Optional["_models.DiskConfiguration"] = None,
         **kwargs
     ):
         """
@@ -5214,6 +5482,8 @@ class SingleServerConfiguration(InfrastructureConfiguration):
          Required.
         :paramtype virtual_machine_configuration:
          ~azure.mgmt.workloads.models.VirtualMachineConfiguration
+        :keyword db_disk_configuration: Gets or sets the disk configuration.
+        :paramtype db_disk_configuration: ~azure.mgmt.workloads.models.DiskConfiguration
         """
         super().__init__(app_resource_group=app_resource_group, **kwargs)
         self.deployment_type: str = "SingleServer"
@@ -5221,6 +5491,7 @@ class SingleServerConfiguration(InfrastructureConfiguration):
         self.database_type = database_type
         self.subnet_id = subnet_id
         self.virtual_machine_configuration = virtual_machine_configuration
+        self.db_disk_configuration = db_disk_configuration
 
 
 class SingleServerRecommendationResult(SAPSizingRecommendationResult):
@@ -5272,6 +5543,30 @@ class SiteProfile(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.domain_name = domain_name
+
+
+class SkipFileShareConfiguration(FileShareConfiguration):
+    """Gets or sets the file share configuration for scenarios where transport directory fileshare is not created or required.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar configuration_type: The type of file share config. Required. Known values are: "Skip",
+     "CreateAndMount", and "Mount".
+    :vartype configuration_type: str or ~azure.mgmt.workloads.models.ConfigurationType
+    """
+
+    _validation = {
+        "configuration_type": {"required": True},
+    }
+
+    _attribute_map = {
+        "configuration_type": {"key": "configurationType", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.configuration_type: str = "Skip"
 
 
 class Sku(_serialization.Model):
@@ -5828,6 +6123,60 @@ class StopRequest(_serialization.Model):
         self.hard_stop = hard_stop
 
 
+class StorageConfiguration(_serialization.Model):
+    """Gets or sets the storage configuration.
+
+    :ivar transport_file_share_configuration: The properties of the transport directory attached to
+     the VIS. The default for transportFileShareConfiguration is the createAndMount flow if storage
+     configuration is missing.
+    :vartype transport_file_share_configuration:
+     ~azure.mgmt.workloads.models.FileShareConfiguration
+    """
+
+    _attribute_map = {
+        "transport_file_share_configuration": {
+            "key": "transportFileShareConfiguration",
+            "type": "FileShareConfiguration",
+        },
+    }
+
+    def __init__(
+        self, *, transport_file_share_configuration: Optional["_models.FileShareConfiguration"] = None, **kwargs
+    ):
+        """
+        :keyword transport_file_share_configuration: The properties of the transport directory attached
+         to the VIS. The default for transportFileShareConfiguration is the createAndMount flow if
+         storage configuration is missing.
+        :paramtype transport_file_share_configuration:
+         ~azure.mgmt.workloads.models.FileShareConfiguration
+        """
+        super().__init__(**kwargs)
+        self.transport_file_share_configuration = transport_file_share_configuration
+
+
+class StorageInformation(_serialization.Model):
+    """Storage details of all the Storage accounts attached to the VM. For e.g. NFS on AFS Shared Storage.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id:
+    :vartype id: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.id = None
+
+
 class SystemData(_serialization.Model):
     """Metadata pertaining to creation and last modification of the resource.
 
@@ -5933,6 +6282,8 @@ class ThreeTierConfiguration(InfrastructureConfiguration):
     :vartype database_server: ~azure.mgmt.workloads.models.DatabaseConfiguration
     :ivar high_availability_config: The high availability configuration.
     :vartype high_availability_config: ~azure.mgmt.workloads.models.HighAvailabilityConfiguration
+    :ivar storage_configuration: The storage configuration.
+    :vartype storage_configuration: ~azure.mgmt.workloads.models.StorageConfiguration
     """
 
     _validation = {
@@ -5951,6 +6302,7 @@ class ThreeTierConfiguration(InfrastructureConfiguration):
         "application_server": {"key": "applicationServer", "type": "ApplicationServerConfiguration"},
         "database_server": {"key": "databaseServer", "type": "DatabaseConfiguration"},
         "high_availability_config": {"key": "highAvailabilityConfig", "type": "HighAvailabilityConfiguration"},
+        "storage_configuration": {"key": "storageConfiguration", "type": "StorageConfiguration"},
     }
 
     def __init__(
@@ -5962,6 +6314,7 @@ class ThreeTierConfiguration(InfrastructureConfiguration):
         database_server: "_models.DatabaseConfiguration",
         network_configuration: Optional["_models.NetworkConfiguration"] = None,
         high_availability_config: Optional["_models.HighAvailabilityConfiguration"] = None,
+        storage_configuration: Optional["_models.StorageConfiguration"] = None,
         **kwargs
     ):
         """
@@ -5978,6 +6331,8 @@ class ThreeTierConfiguration(InfrastructureConfiguration):
         :paramtype database_server: ~azure.mgmt.workloads.models.DatabaseConfiguration
         :keyword high_availability_config: The high availability configuration.
         :paramtype high_availability_config: ~azure.mgmt.workloads.models.HighAvailabilityConfiguration
+        :keyword storage_configuration: The storage configuration.
+        :paramtype storage_configuration: ~azure.mgmt.workloads.models.StorageConfiguration
         """
         super().__init__(app_resource_group=app_resource_group, **kwargs)
         self.deployment_type: str = "ThreeTier"
@@ -5986,6 +6341,7 @@ class ThreeTierConfiguration(InfrastructureConfiguration):
         self.application_server = application_server
         self.database_server = database_server
         self.high_availability_config = high_availability_config
+        self.storage_configuration = storage_configuration
 
 
 class ThreeTierRecommendationResult(SAPSizingRecommendationResult):
