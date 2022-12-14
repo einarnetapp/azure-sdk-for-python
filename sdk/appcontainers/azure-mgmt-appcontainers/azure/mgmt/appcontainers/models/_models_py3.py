@@ -13,13 +13,18 @@ from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
-if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
-    from .. import models as _models
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    from .. import models as _models
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
@@ -1565,7 +1570,7 @@ class Configuration(_serialization.Model):
         self,
         *,
         secrets: Optional[List["_models.Secret"]] = None,
-        active_revisions_mode: Optional[Union[str, "_models.ActiveRevisionsMode"]] = None,
+        active_revisions_mode: Union[str, "_models.ActiveRevisionsMode"] = "Single",
         ingress: Optional["_models.Ingress"] = None,
         registries: Optional[List["_models.RegistryCredentials"]] = None,
         dapr: Optional["_models.Dapr"] = None,
@@ -1996,7 +2001,7 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
         "custom_domain_verification_id": {"key": "properties.customDomainVerificationId", "type": "str"},
         "configuration": {"key": "properties.configuration", "type": "Configuration"},
         "template": {"key": "properties.template", "type": "Template"},
-        "outbound_ip_addresses": {"key": "properties.outboundIPAddresses", "type": "[str]"},
+        "outbound_ip_addresses": {"key": "properties.outboundIpAddresses", "type": "[str]"},
         "event_stream_endpoint": {"key": "properties.eventStreamEndpoint", "type": "str"},
     }
 
@@ -2490,6 +2495,72 @@ class CookieExpiration(_serialization.Model):
         self.time_to_expiration = time_to_expiration
 
 
+class CorsPolicy(_serialization.Model):
+    """Cross-Origin-Resource-Sharing policy.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar allowed_origins: allowed origins. Required.
+    :vartype allowed_origins: list[str]
+    :ivar allowed_methods: allowed HTTP methods.
+    :vartype allowed_methods: list[str]
+    :ivar allowed_headers: allowed HTTP headers.
+    :vartype allowed_headers: list[str]
+    :ivar expose_headers: expose HTTP headers.
+    :vartype expose_headers: list[str]
+    :ivar max_age: max time client can cache the result.
+    :vartype max_age: int
+    :ivar allow_credentials: allow credential or not.
+    :vartype allow_credentials: bool
+    """
+
+    _validation = {
+        "allowed_origins": {"required": True},
+    }
+
+    _attribute_map = {
+        "allowed_origins": {"key": "allowedOrigins", "type": "[str]"},
+        "allowed_methods": {"key": "allowedMethods", "type": "[str]"},
+        "allowed_headers": {"key": "allowedHeaders", "type": "[str]"},
+        "expose_headers": {"key": "exposeHeaders", "type": "[str]"},
+        "max_age": {"key": "maxAge", "type": "int"},
+        "allow_credentials": {"key": "allowCredentials", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        allowed_origins: List[str],
+        allowed_methods: Optional[List[str]] = None,
+        allowed_headers: Optional[List[str]] = None,
+        expose_headers: Optional[List[str]] = None,
+        max_age: Optional[int] = None,
+        allow_credentials: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword allowed_origins: allowed origins. Required.
+        :paramtype allowed_origins: list[str]
+        :keyword allowed_methods: allowed HTTP methods.
+        :paramtype allowed_methods: list[str]
+        :keyword allowed_headers: allowed HTTP headers.
+        :paramtype allowed_headers: list[str]
+        :keyword expose_headers: expose HTTP headers.
+        :paramtype expose_headers: list[str]
+        :keyword max_age: max time client can cache the result.
+        :paramtype max_age: int
+        :keyword allow_credentials: allow credential or not.
+        :paramtype allow_credentials: bool
+        """
+        super().__init__(**kwargs)
+        self.allowed_origins = allowed_origins
+        self.allowed_methods = allowed_methods
+        self.allowed_headers = allowed_headers
+        self.expose_headers = expose_headers
+        self.max_age = max_age
+        self.allow_credentials = allow_credentials
+
+
 class CustomDomain(_serialization.Model):
     """Custom Domain of a Container App.
 
@@ -2551,7 +2622,7 @@ class CustomDomainConfiguration(_serialization.Model):
     :ivar certificate_value: PFX or PEM blob.
     :vartype certificate_value: bytes
     :ivar certificate_password: Certificate password.
-    :vartype certificate_password: bytes
+    :vartype certificate_password: str
     :ivar expiration_date: Certificate expiration date.
     :vartype expiration_date: ~datetime.datetime
     :ivar thumbprint: Certificate thumbprint.
@@ -2571,7 +2642,7 @@ class CustomDomainConfiguration(_serialization.Model):
         "custom_domain_verification_id": {"key": "customDomainVerificationId", "type": "str"},
         "dns_suffix": {"key": "dnsSuffix", "type": "str"},
         "certificate_value": {"key": "certificateValue", "type": "bytearray"},
-        "certificate_password": {"key": "certificatePassword", "type": "bytearray"},
+        "certificate_password": {"key": "certificatePassword", "type": "str"},
         "expiration_date": {"key": "expirationDate", "type": "iso-8601"},
         "thumbprint": {"key": "thumbprint", "type": "str"},
         "subject_name": {"key": "subjectName", "type": "str"},
@@ -2582,7 +2653,7 @@ class CustomDomainConfiguration(_serialization.Model):
         *,
         dns_suffix: Optional[str] = None,
         certificate_value: Optional[bytes] = None,
-        certificate_password: Optional[bytes] = None,
+        certificate_password: Optional[str] = None,
         **kwargs
     ):
         """
@@ -2591,7 +2662,7 @@ class CustomDomainConfiguration(_serialization.Model):
         :keyword certificate_value: PFX or PEM blob.
         :paramtype certificate_value: bytes
         :keyword certificate_password: Certificate password.
-        :paramtype certificate_password: bytes
+        :paramtype certificate_password: str
         """
         super().__init__(**kwargs)
         self.custom_domain_verification_id = None
@@ -2918,9 +2989,9 @@ class Dapr(_serialization.Model):
     def __init__(
         self,
         *,
-        enabled: Optional[bool] = None,
+        enabled: bool = False,
         app_id: Optional[str] = None,
-        app_protocol: Optional[Union[str, "_models.AppProtocol"]] = None,
+        app_protocol: Union[str, "_models.AppProtocol"] = "http",
         app_port: Optional[int] = None,
         http_read_buffer_size: Optional[int] = None,
         http_max_request_size: Optional[int] = None,
@@ -3022,7 +3093,7 @@ class DaprComponent(ProxyResource):  # pylint: disable=too-many-instance-attribu
         *,
         component_type: Optional[str] = None,
         version: Optional[str] = None,
-        ignore_errors: Optional[bool] = None,
+        ignore_errors: bool = False,
         init_timeout: Optional[str] = None,
         secrets: Optional[List["_models.Secret"]] = None,
         secret_store_component: Optional[str] = None,
@@ -3162,7 +3233,7 @@ class DaprSecretsCollection(_serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Collection of secrets used by a Dapr component. Required.
-    :vartype value: list[~azure.mgmt.appcontainers.models.Secret]
+    :vartype value: list[~azure.mgmt.appcontainers.models.DaprSecret]
     """
 
     _validation = {
@@ -3170,13 +3241,13 @@ class DaprSecretsCollection(_serialization.Model):
     }
 
     _attribute_map = {
-        "value": {"key": "value", "type": "[Secret]"},
+        "value": {"key": "value", "type": "[DaprSecret]"},
     }
 
-    def __init__(self, *, value: List["_models.Secret"], **kwargs):
+    def __init__(self, *, value: List["_models.DaprSecret"], **kwargs):
         """
         :keyword value: Collection of secrets used by a Dapr component. Required.
-        :paramtype value: list[~azure.mgmt.appcontainers.models.Secret]
+        :paramtype value: list[~azure.mgmt.appcontainers.models.DaprSecret]
         """
         super().__init__(**kwargs)
         self.value = value
@@ -4525,7 +4596,7 @@ class IdentityProviders(_serialization.Model):
         self.custom_open_id_connect_providers = custom_open_id_connect_providers
 
 
-class Ingress(_serialization.Model):
+class Ingress(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """Container App Ingress configuration.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -4551,6 +4622,16 @@ class Ingress(_serialization.Model):
     :ivar ip_security_restrictions: Rules to restrict incoming IP address.
     :vartype ip_security_restrictions:
      list[~azure.mgmt.appcontainers.models.IpSecurityRestrictionRule]
+    :ivar sticky_sessions: Sticky Sessions for Single Revision Mode.
+    :vartype sticky_sessions: ~azure.mgmt.appcontainers.models.IngressStickySessions
+    :ivar client_certificate_mode: Client certificate mode for mTLS authentication. Ignore
+     indicates server drops client certificate on forwarding. Accept indicates server forwards
+     client certificate but does not require a client certificate. Require indicates server requires
+     a client certificate. Known values are: "ignore", "accept", and "require".
+    :vartype client_certificate_mode: str or
+     ~azure.mgmt.appcontainers.models.IngressClientCertificateMode
+    :ivar cors_policy: CORS policy for container app.
+    :vartype cors_policy: ~azure.mgmt.appcontainers.models.CorsPolicy
     """
 
     _validation = {
@@ -4567,6 +4648,9 @@ class Ingress(_serialization.Model):
         "custom_domains": {"key": "customDomains", "type": "[CustomDomain]"},
         "allow_insecure": {"key": "allowInsecure", "type": "bool"},
         "ip_security_restrictions": {"key": "ipSecurityRestrictions", "type": "[IpSecurityRestrictionRule]"},
+        "sticky_sessions": {"key": "stickySessions", "type": "IngressStickySessions"},
+        "client_certificate_mode": {"key": "clientCertificateMode", "type": "str"},
+        "cors_policy": {"key": "corsPolicy", "type": "CorsPolicy"},
     }
 
     def __init__(
@@ -4575,11 +4659,14 @@ class Ingress(_serialization.Model):
         external: bool = False,
         target_port: Optional[int] = None,
         exposed_port: Optional[int] = None,
-        transport: Optional[Union[str, "_models.IngressTransportMethod"]] = None,
+        transport: Union[str, "_models.IngressTransportMethod"] = "auto",
         traffic: Optional[List["_models.TrafficWeight"]] = None,
         custom_domains: Optional[List["_models.CustomDomain"]] = None,
-        allow_insecure: Optional[bool] = None,
+        allow_insecure: bool = False,
         ip_security_restrictions: Optional[List["_models.IpSecurityRestrictionRule"]] = None,
+        sticky_sessions: Optional["_models.IngressStickySessions"] = None,
+        client_certificate_mode: Optional[Union[str, "_models.IngressClientCertificateMode"]] = None,
+        cors_policy: Optional["_models.CorsPolicy"] = None,
         **kwargs
     ):
         """
@@ -4602,6 +4689,16 @@ class Ingress(_serialization.Model):
         :keyword ip_security_restrictions: Rules to restrict incoming IP address.
         :paramtype ip_security_restrictions:
          list[~azure.mgmt.appcontainers.models.IpSecurityRestrictionRule]
+        :keyword sticky_sessions: Sticky Sessions for Single Revision Mode.
+        :paramtype sticky_sessions: ~azure.mgmt.appcontainers.models.IngressStickySessions
+        :keyword client_certificate_mode: Client certificate mode for mTLS authentication. Ignore
+         indicates server drops client certificate on forwarding. Accept indicates server forwards
+         client certificate but does not require a client certificate. Require indicates server requires
+         a client certificate. Known values are: "ignore", "accept", and "require".
+        :paramtype client_certificate_mode: str or
+         ~azure.mgmt.appcontainers.models.IngressClientCertificateMode
+        :keyword cors_policy: CORS policy for container app.
+        :paramtype cors_policy: ~azure.mgmt.appcontainers.models.CorsPolicy
         """
         super().__init__(**kwargs)
         self.fqdn = None
@@ -4613,6 +4710,29 @@ class Ingress(_serialization.Model):
         self.custom_domains = custom_domains
         self.allow_insecure = allow_insecure
         self.ip_security_restrictions = ip_security_restrictions
+        self.sticky_sessions = sticky_sessions
+        self.client_certificate_mode = client_certificate_mode
+        self.cors_policy = cors_policy
+
+
+class IngressStickySessions(_serialization.Model):
+    """Sticky Sessions for Single Revision Mode.
+
+    :ivar affinity: Sticky Session Affinity. Known values are: "sticky" and "none".
+    :vartype affinity: str or ~azure.mgmt.appcontainers.models.Affinity
+    """
+
+    _attribute_map = {
+        "affinity": {"key": "affinity", "type": "str"},
+    }
+
+    def __init__(self, *, affinity: Optional[Union[str, "_models.Affinity"]] = None, **kwargs):
+        """
+        :keyword affinity: Sticky Session Affinity. Known values are: "sticky" and "none".
+        :paramtype affinity: str or ~azure.mgmt.appcontainers.models.Affinity
+        """
+        super().__init__(**kwargs)
+        self.affinity = affinity
 
 
 class InitContainer(BaseContainer):
@@ -4901,6 +5021,182 @@ class LoginScopes(_serialization.Model):
         self.scopes = scopes
 
 
+class ManagedCertificate(TrackedResource):
+    """Managed certificates used for Custom Domain bindings of Container Apps in a Managed Environment.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.appcontainers.models.SystemData
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives. Required.
+    :vartype location: str
+    :ivar properties: Certificate resource specific properties.
+    :vartype properties: ~azure.mgmt.appcontainers.models.ManagedCertificateProperties
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ManagedCertificateProperties"},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: str,
+        tags: Optional[Dict[str, str]] = None,
+        properties: Optional["_models.ManagedCertificateProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: The geo-location where the resource lives. Required.
+        :paramtype location: str
+        :keyword properties: Certificate resource specific properties.
+        :paramtype properties: ~azure.mgmt.appcontainers.models.ManagedCertificateProperties
+        """
+        super().__init__(tags=tags, location=location, **kwargs)
+        self.properties = properties
+
+
+class ManagedCertificateCollection(_serialization.Model):
+    """Collection of Managed Certificates.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: Collection of resources. Required.
+    :vartype value: list[~azure.mgmt.appcontainers.models.ManagedCertificate]
+    :ivar next_link: Link to next page of resources.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"required": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ManagedCertificate]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, *, value: List["_models.ManagedCertificate"], **kwargs):
+        """
+        :keyword value: Collection of resources. Required.
+        :paramtype value: list[~azure.mgmt.appcontainers.models.ManagedCertificate]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
+class ManagedCertificatePatch(_serialization.Model):
+    """A managed certificate to update.
+
+    :ivar tags: Application-specific metadata in the form of key-value pairs.
+    :vartype tags: dict[str, str]
+    """
+
+    _attribute_map = {
+        "tags": {"key": "tags", "type": "{str}"},
+    }
+
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+        """
+        :keyword tags: Application-specific metadata in the form of key-value pairs.
+        :paramtype tags: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.tags = tags
+
+
+class ManagedCertificateProperties(_serialization.Model):
+    """Certificate resource specific properties.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar provisioning_state: Provisioning state of the certificate. Known values are: "Succeeded",
+     "Failed", "Canceled", "DeleteFailed", and "Pending".
+    :vartype provisioning_state: str or
+     ~azure.mgmt.appcontainers.models.CertificateProvisioningState
+    :ivar subject_name: Subject name of the certificate.
+    :vartype subject_name: str
+    :ivar error: Any error occurred during the certificate provision.
+    :vartype error: str
+    :ivar domain_control_validation: Selected type of domain control validation for managed
+     certificates. Known values are: "CNAME", "HTTP", and "TXT".
+    :vartype domain_control_validation: str or
+     ~azure.mgmt.appcontainers.models.ManagedCertificateDomainControlValidation
+    :ivar validation_token: A TXT token used for DNS TXT domain control validation when issuing
+     this type of managed certificates.
+    :vartype validation_token: str
+    """
+
+    _validation = {
+        "provisioning_state": {"readonly": True},
+        "error": {"readonly": True},
+        "validation_token": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "subject_name": {"key": "subjectName", "type": "str"},
+        "error": {"key": "error", "type": "str"},
+        "domain_control_validation": {"key": "domainControlValidation", "type": "str"},
+        "validation_token": {"key": "validationToken", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        subject_name: Optional[str] = None,
+        domain_control_validation: Optional[Union[str, "_models.ManagedCertificateDomainControlValidation"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword subject_name: Subject name of the certificate.
+        :paramtype subject_name: str
+        :keyword domain_control_validation: Selected type of domain control validation for managed
+         certificates. Known values are: "CNAME", "HTTP", and "TXT".
+        :paramtype domain_control_validation: str or
+         ~azure.mgmt.appcontainers.models.ManagedCertificateDomainControlValidation
+        """
+        super().__init__(**kwargs)
+        self.provisioning_state = None
+        self.subject_name = subject_name
+        self.error = None
+        self.domain_control_validation = domain_control_validation
+        self.validation_token = None
+
+
 class ManagedEnvironment(TrackedResource):  # pylint: disable=too-many-instance-attributes
     """An environment for hosting container apps.
 
@@ -4925,6 +5221,8 @@ class ManagedEnvironment(TrackedResource):  # pylint: disable=too-many-instance-
     :vartype location: str
     :ivar sku: SKU properties of the Environment.
     :vartype sku: ~azure.mgmt.appcontainers.models.EnvironmentSkuProperties
+    :ivar kind: Kind of the Environment.
+    :vartype kind: str
     :ivar provisioning_state: Provisioning state of the Environment. Known values are: "Succeeded",
      "Failed", "Canceled", "Waiting", "InitializationInProgress", "InfrastructureSetupInProgress",
      "InfrastructureSetupComplete", "ScheduledForDelete", "UpgradeRequested", and "UpgradeFailed".
@@ -4980,6 +5278,7 @@ class ManagedEnvironment(TrackedResource):  # pylint: disable=too-many-instance-
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
         "sku": {"key": "sku", "type": "EnvironmentSkuProperties"},
+        "kind": {"key": "kind", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "dapr_ai_instrumentation_key": {"key": "properties.daprAIInstrumentationKey", "type": "str"},
         "dapr_ai_connection_string": {"key": "properties.daprAIConnectionString", "type": "str"},
@@ -5003,6 +5302,7 @@ class ManagedEnvironment(TrackedResource):  # pylint: disable=too-many-instance-
         location: str,
         tags: Optional[Dict[str, str]] = None,
         sku: Optional["_models.EnvironmentSkuProperties"] = None,
+        kind: Optional[str] = None,
         dapr_ai_instrumentation_key: Optional[str] = None,
         dapr_ai_connection_string: Optional[str] = None,
         vnet_configuration: Optional["_models.VnetConfiguration"] = None,
@@ -5019,6 +5319,8 @@ class ManagedEnvironment(TrackedResource):  # pylint: disable=too-many-instance-
         :paramtype location: str
         :keyword sku: SKU properties of the Environment.
         :paramtype sku: ~azure.mgmt.appcontainers.models.EnvironmentSkuProperties
+        :keyword kind: Kind of the Environment.
+        :paramtype kind: str
         :keyword dapr_ai_instrumentation_key: Azure Monitor instrumentation key used by Dapr to export
          Service to Service communication telemetry.
         :paramtype dapr_ai_instrumentation_key: str
@@ -5041,6 +5343,7 @@ class ManagedEnvironment(TrackedResource):  # pylint: disable=too-many-instance-
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.sku = sku
+        self.kind = kind
         self.provisioning_state = None
         self.dapr_ai_instrumentation_key = dapr_ai_instrumentation_key
         self.dapr_ai_connection_string = dapr_ai_connection_string
@@ -5327,7 +5630,13 @@ class OpenIdConnectClientCredential(_serialization.Model):
         "client_secret_setting_name": {"key": "clientSecretSettingName", "type": "str"},
     }
 
-    def __init__(self, *, method: Optional[str] = None, client_secret_setting_name: Optional[str] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        method: Optional[Literal["ClientSecretPost"]] = None,
+        client_secret_setting_name: Optional[str] = None,
+        **kwargs
+    ):
         """
         :keyword method: The method that should be used to authenticate the user. Default value is
          "ClientSecretPost".
@@ -5975,7 +6284,7 @@ class Scale(_serialization.Model):
         self,
         *,
         min_replicas: Optional[int] = None,
-        max_replicas: Optional[int] = None,
+        max_replicas: int = 10,
         rules: Optional[List["_models.ScaleRule"]] = None,
         **kwargs
     ):
@@ -6539,13 +6848,17 @@ class VnetConfiguration(_serialization.Model):
      environments do not have a public static IP resource. They must provide runtimeSubnetId and
      infrastructureSubnetId if enabling this property.
     :vartype internal: bool
+    :ivar control_plane_subnet_id: Resource ID of a subnet for control plane components. This
+     subnet must be in the same VNET as the subnet defined in infrastructureSubnetId. Must not
+     overlap with any other provided IP ranges.
+    :vartype control_plane_subnet_id: str
     :ivar infrastructure_subnet_id: Resource ID of a subnet for infrastructure components. This
-     subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with
-     any other provided IP ranges.
+     subnet must be in the same VNET as the subnet defined in controlPlaneSubnetId if provided. Must
+     not overlap with any other provided IP ranges.
     :vartype infrastructure_subnet_id: str
-    :ivar runtime_subnet_id: Resource ID of a subnet that Container App containers are injected
-     into. This subnet must be in the same VNET as the subnet defined in infrastructureSubnetId.
-     Must not overlap with any other provided IP ranges.
+    :ivar runtime_subnet_id: This field is deprecated and not used. If you wish to provide your own
+     subnet that Container App containers are injected into, then you should leverage the
+     infrastructureSubnetId.
     :vartype runtime_subnet_id: str
     :ivar docker_bridge_cidr: CIDR notation IP range assigned to the Docker bridge, network. Must
      not overlap with any other provided IP ranges.
@@ -6562,6 +6875,7 @@ class VnetConfiguration(_serialization.Model):
 
     _attribute_map = {
         "internal": {"key": "internal", "type": "bool"},
+        "control_plane_subnet_id": {"key": "controlPlaneSubnetId", "type": "str"},
         "infrastructure_subnet_id": {"key": "infrastructureSubnetId", "type": "str"},
         "runtime_subnet_id": {"key": "runtimeSubnetId", "type": "str"},
         "docker_bridge_cidr": {"key": "dockerBridgeCidr", "type": "str"},
@@ -6574,6 +6888,7 @@ class VnetConfiguration(_serialization.Model):
         self,
         *,
         internal: Optional[bool] = None,
+        control_plane_subnet_id: Optional[str] = None,
         infrastructure_subnet_id: Optional[str] = None,
         runtime_subnet_id: Optional[str] = None,
         docker_bridge_cidr: Optional[str] = None,
@@ -6587,13 +6902,17 @@ class VnetConfiguration(_serialization.Model):
          environments do not have a public static IP resource. They must provide runtimeSubnetId and
          infrastructureSubnetId if enabling this property.
         :paramtype internal: bool
+        :keyword control_plane_subnet_id: Resource ID of a subnet for control plane components. This
+         subnet must be in the same VNET as the subnet defined in infrastructureSubnetId. Must not
+         overlap with any other provided IP ranges.
+        :paramtype control_plane_subnet_id: str
         :keyword infrastructure_subnet_id: Resource ID of a subnet for infrastructure components. This
-         subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with
-         any other provided IP ranges.
+         subnet must be in the same VNET as the subnet defined in controlPlaneSubnetId if provided. Must
+         not overlap with any other provided IP ranges.
         :paramtype infrastructure_subnet_id: str
-        :keyword runtime_subnet_id: Resource ID of a subnet that Container App containers are injected
-         into. This subnet must be in the same VNET as the subnet defined in infrastructureSubnetId.
-         Must not overlap with any other provided IP ranges.
+        :keyword runtime_subnet_id: This field is deprecated and not used. If you wish to provide your
+         own subnet that Container App containers are injected into, then you should leverage the
+         infrastructureSubnetId.
         :paramtype runtime_subnet_id: str
         :keyword docker_bridge_cidr: CIDR notation IP range assigned to the Docker bridge, network.
          Must not overlap with any other provided IP ranges.
@@ -6611,6 +6930,7 @@ class VnetConfiguration(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.internal = internal
+        self.control_plane_subnet_id = control_plane_subnet_id
         self.infrastructure_subnet_id = infrastructure_subnet_id
         self.runtime_subnet_id = runtime_subnet_id
         self.docker_bridge_cidr = docker_bridge_cidr
