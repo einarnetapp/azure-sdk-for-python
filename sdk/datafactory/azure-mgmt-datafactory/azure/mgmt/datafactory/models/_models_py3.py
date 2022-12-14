@@ -134,7 +134,7 @@ class Activity(_serialization.Model):
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
         self.name = name
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.description = description
         self.depends_on = depends_on
         self.user_properties = user_properties
@@ -467,8 +467,8 @@ class LinkedService(_serialization.Model):
     MongoDbLinkedService, MongoDbAtlasLinkedService, MongoDbV2LinkedService, MySqlLinkedService,
     NetezzaLinkedService, ODataLinkedService, OdbcLinkedService, Office365LinkedService,
     OracleLinkedService, OracleCloudStorageLinkedService, OracleServiceCloudLinkedService,
-    PaypalLinkedService, PhoenixLinkedService, PostgreSqlLinkedService, PrestoLinkedService,
-    QuickBooksLinkedService, QuickbaseLinkedService, ResponsysLinkedService,
+    PaypalLinkedService, PhoenixLinkedService, PostgreSqlLinkedService, PowerBILinkedService,
+    PrestoLinkedService, QuickBooksLinkedService, QuickbaseLinkedService, ResponsysLinkedService,
     RestServiceLinkedService, SalesforceLinkedService, SalesforceMarketingCloudLinkedService,
     SalesforceServiceCloudLinkedService, SapBWLinkedService, SapCloudForCustomerLinkedService,
     SapEccLinkedService, SapHanaLinkedService, SapOdpLinkedService, SapOpenHubLinkedService,
@@ -591,6 +591,7 @@ class LinkedService(_serialization.Model):
             "Paypal": "PaypalLinkedService",
             "Phoenix": "PhoenixLinkedService",
             "PostgreSql": "PostgreSqlLinkedService",
+            "PowerBI": "PowerBILinkedService",
             "Presto": "PrestoLinkedService",
             "QuickBooks": "QuickBooksLinkedService",
             "Quickbase": "QuickbaseLinkedService",
@@ -652,7 +653,7 @@ class LinkedService(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.connect_via = connect_via
         self.description = description
         self.parameters = parameters
@@ -804,7 +805,7 @@ class AmazonMWSLinkedService(LinkedService):  # pylint: disable=too-many-instanc
             annotations=annotations,
             **kwargs
         )
-        self.type = "AmazonMWS"  # type: str
+        self.type: str = "AmazonMWS"
         self.endpoint = endpoint
         self.marketplace_id = marketplace_id
         self.seller_id = seller_id
@@ -1029,7 +1030,7 @@ class Dataset(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.description = description
         self.structure = structure
         self.schema = schema
@@ -1137,7 +1138,7 @@ class AmazonMWSObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "AmazonMWSObject"  # type: str
+        self.type: str = "AmazonMWSObject"
         self.table_name = table_name
 
 
@@ -1259,7 +1260,7 @@ class CopySource(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.source_retry_count = source_retry_count
         self.source_retry_wait = source_retry_wait
         self.max_concurrent_connections = max_concurrent_connections
@@ -1431,7 +1432,7 @@ class TabularSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "TabularSource"  # type: str
+        self.type: str = "TabularSource"
         self.query_timeout = query_timeout
         self.additional_columns = additional_columns
 
@@ -1534,7 +1535,7 @@ class AmazonMWSSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AmazonMWSSource"  # type: str
+        self.type: str = "AmazonMWSSource"
         self.query = query
 
 
@@ -1627,7 +1628,7 @@ class AmazonRdsForOracleLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AmazonRdsForOracle"  # type: str
+        self.type: str = "AmazonRdsForOracle"
         self.connection_string = connection_string
         self.password = password
         self.encrypted_credential = encrypted_credential
@@ -1802,7 +1803,7 @@ class AmazonRdsForOracleSource(CopySource):  # pylint: disable=too-many-instance
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AmazonRdsForOracleSource"  # type: str
+        self.type: str = "AmazonRdsForOracleSource"
         self.oracle_reader_query = oracle_reader_query
         self.query_timeout = query_timeout
         self.partition_option = partition_option
@@ -1918,7 +1919,7 @@ class AmazonRdsForOracleTableDataset(Dataset):  # pylint: disable=too-many-insta
             folder=folder,
             **kwargs
         )
-        self.type = "AmazonRdsForOracleTable"  # type: str
+        self.type: str = "AmazonRdsForOracleTable"
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
 
@@ -2030,7 +2031,7 @@ class AmazonRdsForSqlServerLinkedService(LinkedService):  # pylint: disable=too-
             annotations=annotations,
             **kwargs
         )
-        self.type = "AmazonRdsForSqlServer"  # type: str
+        self.type: str = "AmazonRdsForSqlServer"
         self.connection_string = connection_string
         self.user_name = user_name
         self.password = password
@@ -2173,7 +2174,7 @@ class AmazonRdsForSqlServerSource(TabularSource):  # pylint: disable=too-many-in
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AmazonRdsForSqlServerSource"  # type: str
+        self.type: str = "AmazonRdsForSqlServerSource"
         self.sql_reader_query = sql_reader_query
         self.sql_reader_stored_procedure_name = sql_reader_stored_procedure_name
         self.stored_procedure_parameters = stored_procedure_parameters
@@ -2290,7 +2291,7 @@ class AmazonRdsForSqlServerTableDataset(Dataset):  # pylint: disable=too-many-in
             folder=folder,
             **kwargs
         )
-        self.type = "AmazonRdsForSqlServerTable"  # type: str
+        self.type: str = "AmazonRdsForSqlServerTable"
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
 
@@ -2409,7 +2410,7 @@ class AmazonRedshiftLinkedService(LinkedService):  # pylint: disable=too-many-in
             annotations=annotations,
             **kwargs
         )
-        self.type = "AmazonRedshift"  # type: str
+        self.type: str = "AmazonRedshift"
         self.server = server
         self.username = username
         self.password = password
@@ -2524,7 +2525,7 @@ class AmazonRedshiftSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AmazonRedshiftSource"  # type: str
+        self.type: str = "AmazonRedshiftSource"
         self.query = query
         self.redshift_unload_settings = redshift_unload_settings
 
@@ -2645,7 +2646,7 @@ class AmazonRedshiftTableDataset(Dataset):  # pylint: disable=too-many-instance-
             folder=folder,
             **kwargs
         )
-        self.type = "AmazonRedshiftTable"  # type: str
+        self.type: str = "AmazonRedshiftTable"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -2761,7 +2762,7 @@ class AmazonS3CompatibleLinkedService(LinkedService):  # pylint: disable=too-man
             annotations=annotations,
             **kwargs
         )
-        self.type = "AmazonS3Compatible"  # type: str
+        self.type: str = "AmazonS3Compatible"
         self.access_key_id = access_key_id
         self.secret_access_key = secret_access_key
         self.service_url = service_url
@@ -2843,7 +2844,7 @@ class DatasetLocation(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.folder_path = folder_path
         self.file_name = file_name
 
@@ -2915,7 +2916,7 @@ class AmazonS3CompatibleLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "AmazonS3CompatibleLocation"  # type: str
+        self.type: str = "AmazonS3CompatibleLocation"
         self.bucket_name = bucket_name
         self.version = version
 
@@ -2994,7 +2995,7 @@ class StoreReadSettings(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.max_concurrent_connections = max_concurrent_connections
         self.disable_metrics_collection = disable_metrics_collection
 
@@ -3133,7 +3134,7 @@ class AmazonS3CompatibleReadSettings(StoreReadSettings):  # pylint: disable=too-
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AmazonS3CompatibleReadSettings"  # type: str
+        self.type: str = "AmazonS3CompatibleReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -3299,7 +3300,7 @@ class AmazonS3Dataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "AmazonS3Object"  # type: str
+        self.type: str = "AmazonS3Object"
         self.bucket_name = bucket_name
         self.key = key
         self.prefix = prefix
@@ -3424,7 +3425,7 @@ class AmazonS3LinkedService(LinkedService):  # pylint: disable=too-many-instance
             annotations=annotations,
             **kwargs
         )
-        self.type = "AmazonS3"  # type: str
+        self.type: str = "AmazonS3"
         self.authentication_type = authentication_type
         self.access_key_id = access_key_id
         self.secret_access_key = secret_access_key
@@ -3500,7 +3501,7 @@ class AmazonS3Location(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "AmazonS3Location"  # type: str
+        self.type: str = "AmazonS3Location"
         self.bucket_name = bucket_name
         self.version = version
 
@@ -3639,7 +3640,7 @@ class AmazonS3ReadSettings(StoreReadSettings):  # pylint: disable=too-many-insta
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AmazonS3ReadSettings"  # type: str
+        self.type: str = "AmazonS3ReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -3739,7 +3740,7 @@ class ControlActivity(Activity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Container"  # type: str
+        self.type: str = "Container"
 
 
 class AppendVariableActivity(ControlActivity):
@@ -3819,7 +3820,7 @@ class AppendVariableActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "AppendVariable"  # type: str
+        self.type: str = "AppendVariable"
         self.variable_name = variable_name
         self.value = value
 
@@ -3909,7 +3910,7 @@ class AppFiguresLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AppFigures"  # type: str
+        self.type: str = "AppFigures"
         self.user_name = user_name
         self.password = password
         self.client_key = client_key
@@ -4019,7 +4020,7 @@ class AsanaLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Asana"  # type: str
+        self.type: str = "Asana"
         self.api_token = api_token
         self.encrypted_credential = encrypted_credential
 
@@ -4137,7 +4138,7 @@ class AvroDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Avro"  # type: str
+        self.type: str = "Avro"
         self.location = location
         self.avro_compression_codec = avro_compression_codec
         self.avro_compression_level = avro_compression_level
@@ -4202,7 +4203,7 @@ class DatasetStorageFormat(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.serializer = serializer
         self.deserializer = deserializer
 
@@ -4254,7 +4255,7 @@ class AvroFormat(DatasetStorageFormat):
         super().__init__(
             additional_properties=additional_properties, serializer=serializer, deserializer=deserializer, **kwargs
         )
-        self.type = "AvroFormat"  # type: str
+        self.type: str = "AvroFormat"
 
 
 class CopySink(_serialization.Model):
@@ -4393,7 +4394,7 @@ class CopySink(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.write_batch_size = write_batch_size
         self.write_batch_timeout = write_batch_timeout
         self.sink_retry_count = sink_retry_count
@@ -4504,7 +4505,7 @@ class AvroSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AvroSink"  # type: str
+        self.type: str = "AvroSink"
         self.store_settings = store_settings
         self.format_settings = format_settings
 
@@ -4595,7 +4596,7 @@ class AvroSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AvroSource"  # type: str
+        self.type: str = "AvroSource"
         self.store_settings = store_settings
         self.additional_columns = additional_columns
 
@@ -4643,7 +4644,7 @@ class FormatWriteSettings(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AvroWriteSettings(FormatWriteSettings):
@@ -4709,7 +4710,7 @@ class AvroWriteSettings(FormatWriteSettings):
         :paramtype file_name_prefix: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "AvroWriteSettings"  # type: str
+        self.type: str = "AvroWriteSettings"
         self.record_name = record_name
         self.record_namespace = record_namespace
         self.max_rows_per_file = max_rows_per_file
@@ -4748,7 +4749,7 @@ class CustomSetupBase(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AzPowerShellSetup(CustomSetupBase):
@@ -4778,7 +4779,7 @@ class AzPowerShellSetup(CustomSetupBase):
         :paramtype version: str
         """
         super().__init__(**kwargs)
-        self.type = "AzPowerShellSetup"  # type: str
+        self.type: str = "AzPowerShellSetup"
         self.version = version
 
 
@@ -4902,7 +4903,7 @@ class AzureBatchLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureBatch"  # type: str
+        self.type: str = "AzureBatch"
         self.account_name = account_name
         self.access_key = access_key
         self.batch_uri = batch_uri
@@ -5056,7 +5057,7 @@ class AzureBlobDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "AzureBlob"  # type: str
+        self.type: str = "AzureBlob"
         self.folder_path = folder_path
         self.table_root_location = table_root_location
         self.file_name = file_name
@@ -5186,7 +5187,7 @@ class AzureBlobFSDataset(Dataset):  # pylint: disable=too-many-instance-attribut
             folder=folder,
             **kwargs
         )
-        self.type = "AzureBlobFSFile"  # type: str
+        self.type: str = "AzureBlobFSFile"
         self.folder_path = folder_path
         self.file_name = file_name
         self.format = format
@@ -5348,7 +5349,7 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureBlobFS"  # type: str
+        self.type: str = "AzureBlobFS"
         self.url = url
         self.account_key = account_key
         self.service_principal_id = service_principal_id
@@ -5420,7 +5421,7 @@ class AzureBlobFSLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "AzureBlobFSLocation"  # type: str
+        self.type: str = "AzureBlobFSLocation"
         self.file_system = file_system
 
 
@@ -5550,7 +5551,7 @@ class AzureBlobFSReadSettings(StoreReadSettings):  # pylint: disable=too-many-in
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureBlobFSReadSettings"  # type: str
+        self.type: str = "AzureBlobFSReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -5666,7 +5667,7 @@ class AzureBlobFSSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureBlobFSSink"  # type: str
+        self.type: str = "AzureBlobFSSink"
         self.copy_behavior = copy_behavior
         self.metadata = metadata
 
@@ -5767,7 +5768,7 @@ class AzureBlobFSSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureBlobFSSource"  # type: str
+        self.type: str = "AzureBlobFSSource"
         self.treat_empty_as_null = treat_empty_as_null
         self.skip_header_line_count = skip_header_line_count
         self.recursive = recursive
@@ -5844,7 +5845,7 @@ class StoreWriteSettings(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.max_concurrent_connections = max_concurrent_connections
         self.disable_metrics_collection = disable_metrics_collection
         self.copy_behavior = copy_behavior
@@ -5919,7 +5920,7 @@ class AzureBlobFSWriteSettings(StoreWriteSettings):
             copy_behavior=copy_behavior,
             **kwargs
         )
-        self.type = "AzureBlobFSWriteSettings"  # type: str
+        self.type: str = "AzureBlobFSWriteSettings"
         self.block_size_in_mb = block_size_in_mb
 
 
@@ -6085,7 +6086,7 @@ class AzureBlobStorageLinkedService(LinkedService):  # pylint: disable=too-many-
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureBlobStorage"  # type: str
+        self.type: str = "AzureBlobStorage"
         self.connection_string = connection_string
         self.account_key = account_key
         self.sas_uri = sas_uri
@@ -6159,7 +6160,7 @@ class AzureBlobStorageLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "AzureBlobStorageLocation"  # type: str
+        self.type: str = "AzureBlobStorageLocation"
         self.container = container
 
 
@@ -6297,7 +6298,7 @@ class AzureBlobStorageReadSettings(StoreReadSettings):  # pylint: disable=too-ma
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureBlobStorageReadSettings"  # type: str
+        self.type: str = "AzureBlobStorageReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -6379,7 +6380,7 @@ class AzureBlobStorageWriteSettings(StoreWriteSettings):
             copy_behavior=copy_behavior,
             **kwargs
         )
-        self.type = "AzureBlobStorageWriteSettings"  # type: str
+        self.type: str = "AzureBlobStorageWriteSettings"
         self.block_size_in_mb = block_size_in_mb
 
 
@@ -6489,7 +6490,7 @@ class AzureDatabricksDeltaLakeDataset(Dataset):  # pylint: disable=too-many-inst
             folder=folder,
             **kwargs
         )
-        self.type = "AzureDatabricksDeltaLakeDataset"  # type: str
+        self.type: str = "AzureDatabricksDeltaLakeDataset"
         self.table = table
         self.database = database
 
@@ -6533,7 +6534,7 @@ class ExportSettings(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AzureDatabricksDeltaLakeExportCommand(ExportSettings):
@@ -6585,7 +6586,7 @@ class AzureDatabricksDeltaLakeExportCommand(ExportSettings):
         :paramtype timestamp_format: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "AzureDatabricksDeltaLakeExportCommand"  # type: str
+        self.type: str = "AzureDatabricksDeltaLakeExportCommand"
         self.date_format = date_format
         self.timestamp_format = timestamp_format
 
@@ -6629,7 +6630,7 @@ class ImportSettings(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AzureDatabricksDeltaLakeImportCommand(ImportSettings):
@@ -6681,7 +6682,7 @@ class AzureDatabricksDeltaLakeImportCommand(ImportSettings):
         :paramtype timestamp_format: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "AzureDatabricksDeltaLakeImportCommand"  # type: str
+        self.type: str = "AzureDatabricksDeltaLakeImportCommand"
         self.date_format = date_format
         self.timestamp_format = timestamp_format
 
@@ -6801,7 +6802,7 @@ class AzureDatabricksDeltaLakeLinkedService(LinkedService):  # pylint: disable=t
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureDatabricksDeltaLake"  # type: str
+        self.type: str = "AzureDatabricksDeltaLake"
         self.domain = domain
         self.access_token = access_token
         self.cluster_id = cluster_id
@@ -6915,7 +6916,7 @@ class AzureDatabricksDeltaLakeSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureDatabricksDeltaLakeSink"  # type: str
+        self.type: str = "AzureDatabricksDeltaLakeSink"
         self.pre_copy_script = pre_copy_script
         self.import_settings = import_settings
 
@@ -7007,7 +7008,7 @@ class AzureDatabricksDeltaLakeSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureDatabricksDeltaLakeSource"  # type: str
+        self.type: str = "AzureDatabricksDeltaLakeSource"
         self.query = query
         self.export_settings = export_settings
 
@@ -7249,7 +7250,7 @@ class AzureDatabricksLinkedService(LinkedService):  # pylint: disable=too-many-i
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureDatabricks"  # type: str
+        self.type: str = "AzureDatabricks"
         self.domain = domain
         self.access_token = access_token
         self.authentication = authentication
@@ -7389,7 +7390,7 @@ class ExecutionActivity(Activity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Execution"  # type: str
+        self.type: str = "Execution"
         self.linked_service_name = linked_service_name
         self.policy = policy
 
@@ -7490,7 +7491,7 @@ class AzureDataExplorerCommandActivity(ExecutionActivity):
             policy=policy,
             **kwargs
         )
-        self.type = "AzureDataExplorerCommand"  # type: str
+        self.type: str = "AzureDataExplorerCommand"
         self.command = command
         self.command_timeout = command_timeout
 
@@ -7609,7 +7610,7 @@ class AzureDataExplorerLinkedService(LinkedService):  # pylint: disable=too-many
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureDataExplorer"  # type: str
+        self.type: str = "AzureDataExplorer"
         self.endpoint = endpoint
         self.service_principal_id = service_principal_id
         self.service_principal_key = service_principal_key
@@ -7732,7 +7733,7 @@ class AzureDataExplorerSink(CopySink):  # pylint: disable=too-many-instance-attr
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureDataExplorerSink"  # type: str
+        self.type: str = "AzureDataExplorerSink"
         self.ingestion_mapping_name = ingestion_mapping_name
         self.ingestion_mapping_as_json = ingestion_mapping_as_json
         self.flush_immediately = flush_immediately
@@ -7843,7 +7844,7 @@ class AzureDataExplorerSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureDataExplorerSource"  # type: str
+        self.type: str = "AzureDataExplorerSource"
         self.query = query
         self.no_truncation = no_truncation
         self.query_timeout = query_timeout
@@ -7950,7 +7951,7 @@ class AzureDataExplorerTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "AzureDataExplorerTable"  # type: str
+        self.type: str = "AzureDataExplorerTable"
         self.table = table
 
 
@@ -8086,7 +8087,7 @@ class AzureDataLakeAnalyticsLinkedService(LinkedService):  # pylint: disable=too
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureDataLakeAnalytics"  # type: str
+        self.type: str = "AzureDataLakeAnalytics"
         self.account_name = account_name
         self.service_principal_id = service_principal_id
         self.service_principal_key = service_principal_key
@@ -8219,7 +8220,7 @@ class AzureDataLakeStoreDataset(Dataset):  # pylint: disable=too-many-instance-a
             folder=folder,
             **kwargs
         )
-        self.type = "AzureDataLakeStoreFile"  # type: str
+        self.type: str = "AzureDataLakeStoreFile"
         self.folder_path = folder_path
         self.file_name = file_name
         self.format = format
@@ -8373,7 +8374,7 @@ class AzureDataLakeStoreLinkedService(LinkedService):  # pylint: disable=too-man
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureDataLakeStore"  # type: str
+        self.type: str = "AzureDataLakeStore"
         self.data_lake_store_uri = data_lake_store_uri
         self.service_principal_id = service_principal_id
         self.service_principal_key = service_principal_key
@@ -8437,7 +8438,7 @@ class AzureDataLakeStoreLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "AzureDataLakeStoreLocation"  # type: str
+        self.type: str = "AzureDataLakeStoreLocation"
 
 
 class AzureDataLakeStoreReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-attributes
@@ -8586,7 +8587,7 @@ class AzureDataLakeStoreReadSettings(StoreReadSettings):  # pylint: disable=too-
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureDataLakeStoreReadSettings"  # type: str
+        self.type: str = "AzureDataLakeStoreReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -8702,7 +8703,7 @@ class AzureDataLakeStoreSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureDataLakeStoreSink"  # type: str
+        self.type: str = "AzureDataLakeStoreSink"
         self.copy_behavior = copy_behavior
         self.enable_adls_single_file_parallel = enable_adls_single_file_parallel
 
@@ -8787,7 +8788,7 @@ class AzureDataLakeStoreSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureDataLakeStoreSource"  # type: str
+        self.type: str = "AzureDataLakeStoreSource"
         self.recursive = recursive
 
 
@@ -8862,7 +8863,7 @@ class AzureDataLakeStoreWriteSettings(StoreWriteSettings):
             copy_behavior=copy_behavior,
             **kwargs
         )
-        self.type = "AzureDataLakeStoreWriteSettings"  # type: str
+        self.type: str = "AzureDataLakeStoreWriteSettings"
         self.expiry_date_time = expiry_date_time
 
 
@@ -9004,7 +9005,7 @@ class AzureFileStorageLinkedService(LinkedService):  # pylint: disable=too-many-
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureFileStorage"  # type: str
+        self.type: str = "AzureFileStorage"
         self.host = host
         self.user_id = user_id
         self.password = password
@@ -9068,7 +9069,7 @@ class AzureFileStorageLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "AzureFileStorageLocation"  # type: str
+        self.type: str = "AzureFileStorageLocation"
 
 
 class AzureFileStorageReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-attributes
@@ -9205,7 +9206,7 @@ class AzureFileStorageReadSettings(StoreReadSettings):  # pylint: disable=too-ma
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureFileStorageReadSettings"  # type: str
+        self.type: str = "AzureFileStorageReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -9279,7 +9280,7 @@ class AzureFileStorageWriteSettings(StoreWriteSettings):
             copy_behavior=copy_behavior,
             **kwargs
         )
-        self.type = "AzureFileStorageWriteSettings"  # type: str
+        self.type: str = "AzureFileStorageWriteSettings"
 
 
 class AzureFunctionActivity(ExecutionActivity):  # pylint: disable=too-many-instance-attributes
@@ -9397,7 +9398,7 @@ class AzureFunctionActivity(ExecutionActivity):  # pylint: disable=too-many-inst
             policy=policy,
             **kwargs
         )
-        self.type = "AzureFunctionActivity"  # type: str
+        self.type: str = "AzureFunctionActivity"
         self.method = method
         self.function_name = function_name
         self.headers = headers
@@ -9513,7 +9514,7 @@ class AzureFunctionLinkedService(LinkedService):  # pylint: disable=too-many-ins
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureFunction"  # type: str
+        self.type: str = "AzureFunction"
         self.function_app_url = function_app_url
         self.function_key = function_key
         self.encrypted_credential = encrypted_credential
@@ -9601,7 +9602,7 @@ class AzureKeyVaultLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureKeyVault"  # type: str
+        self.type: str = "AzureKeyVault"
         self.base_url = base_url
         self.credential = credential
 
@@ -9631,7 +9632,7 @@ class SecretBase(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AzureKeyVaultSecretReference(SecretBase):
@@ -9683,7 +9684,7 @@ class AzureKeyVaultSecretReference(SecretBase):
         :paramtype secret_version: JSON
         """
         super().__init__(**kwargs)
-        self.type = "AzureKeyVaultSecret"  # type: str
+        self.type: str = "AzureKeyVaultSecret"
         self.store = store
         self.secret_name = secret_name
         self.secret_version = secret_version
@@ -9777,7 +9778,7 @@ class AzureMariaDBLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureMariaDB"  # type: str
+        self.type: str = "AzureMariaDB"
         self.connection_string = connection_string
         self.pwd = pwd
         self.encrypted_credential = encrypted_credential
@@ -9881,7 +9882,7 @@ class AzureMariaDBSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AzureMariaDBSource"  # type: str
+        self.type: str = "AzureMariaDBSource"
         self.query = query
 
 
@@ -9983,7 +9984,7 @@ class AzureMariaDBTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "AzureMariaDBTable"  # type: str
+        self.type: str = "AzureMariaDBTable"
         self.table_name = table_name
 
 
@@ -10101,7 +10102,7 @@ class AzureMLBatchExecutionActivity(ExecutionActivity):  # pylint: disable=too-m
             policy=policy,
             **kwargs
         )
-        self.type = "AzureMLBatchExecution"  # type: str
+        self.type: str = "AzureMLBatchExecution"
         self.global_parameters = global_parameters
         self.web_service_outputs = web_service_outputs
         self.web_service_inputs = web_service_inputs
@@ -10263,7 +10264,7 @@ class AzureMLExecutePipelineActivity(ExecutionActivity):  # pylint: disable=too-
             policy=policy,
             **kwargs
         )
-        self.type = "AzureMLExecutePipeline"  # type: str
+        self.type: str = "AzureMLExecutePipeline"
         self.ml_pipeline_id = ml_pipeline_id
         self.ml_pipeline_endpoint_id = ml_pipeline_endpoint_id
         self.version = version
@@ -10406,7 +10407,7 @@ class AzureMLLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureML"  # type: str
+        self.type: str = "AzureML"
         self.ml_endpoint = ml_endpoint
         self.api_key = api_key
         self.update_resource_endpoint = update_resource_endpoint
@@ -10544,7 +10545,7 @@ class AzureMLServiceLinkedService(LinkedService):  # pylint: disable=too-many-in
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureMLService"  # type: str
+        self.type: str = "AzureMLService"
         self.subscription_id = subscription_id
         self.resource_group_name = resource_group_name
         self.ml_workspace_name = ml_workspace_name
@@ -10667,7 +10668,7 @@ class AzureMLUpdateResourceActivity(ExecutionActivity):  # pylint: disable=too-m
             policy=policy,
             **kwargs
         )
-        self.type = "AzureMLUpdateResource"  # type: str
+        self.type: str = "AzureMLUpdateResource"
         self.trained_model_name = trained_model_name
         self.trained_model_linked_service_name = trained_model_linked_service_name
         self.trained_model_file_path = trained_model_file_path
@@ -10799,7 +10800,7 @@ class AzureMySqlLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureMySql"  # type: str
+        self.type: str = "AzureMySql"
         self.connection_string = connection_string
         self.password = password
         self.encrypted_credential = encrypted_credential
@@ -10903,7 +10904,7 @@ class AzureMySqlSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureMySqlSink"  # type: str
+        self.type: str = "AzureMySqlSink"
         self.pre_copy_script = pre_copy_script
 
 
@@ -11003,7 +11004,7 @@ class AzureMySqlSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AzureMySqlSource"  # type: str
+        self.type: str = "AzureMySqlSource"
         self.query = query
 
 
@@ -11115,7 +11116,7 @@ class AzureMySqlTableDataset(Dataset):  # pylint: disable=too-many-instance-attr
             folder=folder,
             **kwargs
         )
-        self.type = "AzureMySqlTable"  # type: str
+        self.type: str = "AzureMySqlTable"
         self.table_name = table_name
         self.table = table
 
@@ -11208,7 +11209,7 @@ class AzurePostgreSqlLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzurePostgreSql"  # type: str
+        self.type: str = "AzurePostgreSql"
         self.connection_string = connection_string
         self.password = password
         self.encrypted_credential = encrypted_credential
@@ -11312,7 +11313,7 @@ class AzurePostgreSqlSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzurePostgreSqlSink"  # type: str
+        self.type: str = "AzurePostgreSqlSink"
         self.pre_copy_script = pre_copy_script
 
 
@@ -11414,7 +11415,7 @@ class AzurePostgreSqlSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AzurePostgreSqlSource"  # type: str
+        self.type: str = "AzurePostgreSqlSource"
         self.query = query
 
 
@@ -11534,7 +11535,7 @@ class AzurePostgreSqlTableDataset(Dataset):  # pylint: disable=too-many-instance
             folder=folder,
             **kwargs
         )
-        self.type = "AzurePostgreSqlTable"  # type: str
+        self.type: str = "AzurePostgreSqlTable"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -11630,7 +11631,7 @@ class AzureQueueSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureQueueSink"  # type: str
+        self.type: str = "AzureQueueSink"
 
 
 class AzureSearchIndexDataset(Dataset):
@@ -11734,7 +11735,7 @@ class AzureSearchIndexDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "AzureSearchIndex"  # type: str
+        self.type: str = "AzureSearchIndex"
         self.index_name = index_name
 
 
@@ -11838,7 +11839,7 @@ class AzureSearchIndexSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureSearchIndexSink"  # type: str
+        self.type: str = "AzureSearchIndexSink"
         self.write_behavior = write_behavior
 
 
@@ -11931,7 +11932,7 @@ class AzureSearchLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureSearch"  # type: str
+        self.type: str = "AzureSearch"
         self.url = url
         self.key = key
         self.encrypted_credential = encrypted_credential
@@ -12076,7 +12077,7 @@ class AzureSqlDatabaseLinkedService(LinkedService):  # pylint: disable=too-many-
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureSqlDatabase"  # type: str
+        self.type: str = "AzureSqlDatabase"
         self.connection_string = connection_string
         self.password = password
         self.service_principal_id = service_principal_id
@@ -12219,7 +12220,7 @@ class AzureSqlDWLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureSqlDW"  # type: str
+        self.type: str = "AzureSqlDW"
         self.connection_string = connection_string
         self.password = password
         self.service_principal_id = service_principal_id
@@ -12346,7 +12347,7 @@ class AzureSqlDWTableDataset(Dataset):  # pylint: disable=too-many-instance-attr
             folder=folder,
             **kwargs
         )
-        self.type = "AzureSqlDWTable"  # type: str
+        self.type: str = "AzureSqlDWTable"
         self.table_name = table_name
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
@@ -12491,7 +12492,7 @@ class AzureSqlMILinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureSqlMI"  # type: str
+        self.type: str = "AzureSqlMI"
         self.connection_string = connection_string
         self.password = password
         self.service_principal_id = service_principal_id
@@ -12619,7 +12620,7 @@ class AzureSqlMITableDataset(Dataset):  # pylint: disable=too-many-instance-attr
             folder=folder,
             **kwargs
         )
-        self.type = "AzureSqlMITable"  # type: str
+        self.type: str = "AzureSqlMITable"
         self.table_name = table_name
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
@@ -12786,7 +12787,7 @@ class AzureSqlSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureSqlSink"  # type: str
+        self.type: str = "AzureSqlSink"
         self.sql_writer_stored_procedure_name = sql_writer_stored_procedure_name
         self.sql_writer_table_type = sql_writer_table_type
         self.pre_copy_script = pre_copy_script
@@ -12933,7 +12934,7 @@ class AzureSqlSource(TabularSource):  # pylint: disable=too-many-instance-attrib
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AzureSqlSource"  # type: str
+        self.type: str = "AzureSqlSource"
         self.sql_reader_query = sql_reader_query
         self.sql_reader_stored_procedure_name = sql_reader_stored_procedure_name
         self.stored_procedure_parameters = stored_procedure_parameters
@@ -13058,7 +13059,7 @@ class AzureSqlTableDataset(Dataset):  # pylint: disable=too-many-instance-attrib
             folder=folder,
             **kwargs
         )
-        self.type = "AzureSqlTable"  # type: str
+        self.type: str = "AzureSqlTable"
         self.table_name = table_name
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
@@ -13166,7 +13167,7 @@ class AzureStorageLinkedService(LinkedService):  # pylint: disable=too-many-inst
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureStorage"  # type: str
+        self.type: str = "AzureStorage"
         self.connection_string = connection_string
         self.account_key = account_key
         self.sas_uri = sas_uri
@@ -13265,7 +13266,7 @@ class AzureSynapseArtifactsLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureSynapseArtifacts"  # type: str
+        self.type: str = "AzureSynapseArtifacts"
         self.endpoint = endpoint
         self.authentication = authentication
         self.workspace_resource_id = workspace_resource_id
@@ -13372,7 +13373,7 @@ class AzureTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "AzureTable"  # type: str
+        self.type: str = "AzureTable"
         self.table_name = table_name
 
 
@@ -13498,7 +13499,7 @@ class AzureTableSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "AzureTableSink"  # type: str
+        self.type: str = "AzureTableSink"
         self.azure_table_default_partition_key_value = azure_table_default_partition_key_value
         self.azure_table_partition_key_name = azure_table_partition_key_name
         self.azure_table_row_key_name = azure_table_row_key_name
@@ -13611,7 +13612,7 @@ class AzureTableSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "AzureTableSource"  # type: str
+        self.type: str = "AzureTableSource"
         self.azure_table_source_query = azure_table_source_query
         self.azure_table_source_ignore_table_not_found = azure_table_source_ignore_table_not_found
 
@@ -13718,7 +13719,7 @@ class AzureTableStorageLinkedService(LinkedService):  # pylint: disable=too-many
             annotations=annotations,
             **kwargs
         )
-        self.type = "AzureTableStorage"  # type: str
+        self.type: str = "AzureTableStorage"
         self.connection_string = connection_string
         self.account_key = account_key
         self.sas_uri = sas_uri
@@ -13865,7 +13866,7 @@ class BinaryDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Binary"  # type: str
+        self.type: str = "Binary"
         self.location = location
         self.compression = compression
 
@@ -13911,7 +13912,7 @@ class FormatReadSettings(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class BinaryReadSettings(FormatReadSettings):
@@ -13953,7 +13954,7 @@ class BinaryReadSettings(FormatReadSettings):
         :paramtype compression_properties: ~azure.mgmt.datafactory.models.CompressionReadSettings
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "BinaryReadSettings"  # type: str
+        self.type: str = "BinaryReadSettings"
         self.compression_properties = compression_properties
 
 
@@ -14053,7 +14054,7 @@ class BinarySink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "BinarySink"  # type: str
+        self.type: str = "BinarySink"
         self.store_settings = store_settings
 
 
@@ -14141,7 +14142,7 @@ class BinarySource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "BinarySource"  # type: str
+        self.type: str = "BinarySource"
         self.store_settings = store_settings
         self.format_settings = format_settings
 
@@ -14211,7 +14212,7 @@ class Trigger(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.description = description
         self.runtime_state = None
         self.annotations = annotations
@@ -14289,7 +14290,7 @@ class MultiplePipelineTrigger(Trigger):
         super().__init__(
             additional_properties=additional_properties, description=description, annotations=annotations, **kwargs
         )
-        self.type = "MultiplePipelineTrigger"  # type: str
+        self.type: str = "MultiplePipelineTrigger"
         self.pipelines = pipelines
 
 
@@ -14399,7 +14400,7 @@ class BlobEventsTrigger(MultiplePipelineTrigger):  # pylint: disable=too-many-in
             pipelines=pipelines,
             **kwargs
         )
-        self.type = "BlobEventsTrigger"  # type: str
+        self.type: str = "BlobEventsTrigger"
         self.blob_path_begins_with = blob_path_begins_with
         self.blob_path_ends_with = blob_path_ends_with
         self.ignore_empty_blobs = ignore_empty_blobs
@@ -14535,7 +14536,7 @@ class BlobSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "BlobSink"  # type: str
+        self.type: str = "BlobSink"
         self.blob_writer_overwrite_files = blob_writer_overwrite_files
         self.blob_writer_date_time_format = blob_writer_date_time_format
         self.blob_writer_add_header = blob_writer_add_header
@@ -14639,7 +14640,7 @@ class BlobSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "BlobSource"  # type: str
+        self.type: str = "BlobSource"
         self.treat_empty_as_null = treat_empty_as_null
         self.skip_header_line_count = skip_header_line_count
         self.recursive = recursive
@@ -14733,7 +14734,7 @@ class BlobTrigger(MultiplePipelineTrigger):
             pipelines=pipelines,
             **kwargs
         )
-        self.type = "BlobTrigger"  # type: str
+        self.type: str = "BlobTrigger"
         self.folder_path = folder_path
         self.max_concurrency = max_concurrency
         self.linked_service = linked_service
@@ -14851,7 +14852,7 @@ class CassandraLinkedService(LinkedService):  # pylint: disable=too-many-instanc
             annotations=annotations,
             **kwargs
         )
-        self.type = "Cassandra"  # type: str
+        self.type: str = "Cassandra"
         self.host = host
         self.authentication_type = authentication_type
         self.port = port
@@ -14976,7 +14977,7 @@ class CassandraSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "CassandraSource"  # type: str
+        self.type: str = "CassandraSource"
         self.query = query
         self.consistency_level = consistency_level
 
@@ -15089,7 +15090,7 @@ class CassandraTableDataset(Dataset):  # pylint: disable=too-many-instance-attri
             folder=folder,
             **kwargs
         )
-        self.type = "CassandraTable"  # type: str
+        self.type: str = "CassandraTable"
         self.table_name = table_name
         self.keyspace = keyspace
 
@@ -15173,7 +15174,7 @@ class ChainingTrigger(Trigger):
         super().__init__(
             additional_properties=additional_properties, description=description, annotations=annotations, **kwargs
         )
-        self.type = "ChainingTrigger"  # type: str
+        self.type: str = "ChainingTrigger"
         self.pipeline = pipeline
         self.depends_on = depends_on
         self.run_dimension = run_dimension
@@ -15271,7 +15272,7 @@ class CmdkeySetup(CustomSetupBase):
         :paramtype password: ~azure.mgmt.datafactory.models.SecretBase
         """
         super().__init__(**kwargs)
-        self.type = "CmdkeySetup"  # type: str
+        self.type: str = "CmdkeySetup"
         self.target_name = target_name
         self.user_name = user_name
         self.password = password
@@ -15399,7 +15400,7 @@ class CommonDataServiceForAppsEntityDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "CommonDataServiceForAppsEntity"  # type: str
+        self.type: str = "CommonDataServiceForAppsEntity"
         self.entity_name = entity_name
 
 
@@ -15591,7 +15592,7 @@ class CommonDataServiceForAppsLinkedService(LinkedService):  # pylint: disable=t
             annotations=annotations,
             **kwargs
         )
-        self.type = "CommonDataServiceForApps"  # type: str
+        self.type: str = "CommonDataServiceForApps"
         self.deployment_type = deployment_type
         self.host_name = host_name
         self.port = port
@@ -15721,7 +15722,7 @@ class CommonDataServiceForAppsSink(CopySink):  # pylint: disable=too-many-instan
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "CommonDataServiceForAppsSink"  # type: str
+        self.type: str = "CommonDataServiceForAppsSink"
         self.write_behavior = write_behavior
         self.ignore_null_values = ignore_null_values
         self.alternate_key_name = alternate_key_name
@@ -15815,7 +15816,7 @@ class CommonDataServiceForAppsSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "CommonDataServiceForAppsSource"  # type: str
+        self.type: str = "CommonDataServiceForAppsSource"
         self.query = query
         self.additional_columns = additional_columns
 
@@ -15852,7 +15853,7 @@ class ComponentSetup(CustomSetupBase):
         :paramtype license_key: ~azure.mgmt.datafactory.models.SecretBase
         """
         super().__init__(**kwargs)
-        self.type = "ComponentSetup"  # type: str
+        self.type: str = "ComponentSetup"
         self.component_name = component_name
         self.license_key = license_key
 
@@ -15897,7 +15898,7 @@ class CompressionReadSettings(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class ConcurLinkedService(LinkedService):  # pylint: disable=too-many-instance-attributes
@@ -16030,7 +16031,7 @@ class ConcurLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "Concur"  # type: str
+        self.type: str = "Concur"
         self.connection_properties = connection_properties
         self.client_id = client_id
         self.username = username
@@ -16139,7 +16140,7 @@ class ConcurObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "ConcurObject"  # type: str
+        self.type: str = "ConcurObject"
         self.table_name = table_name
 
 
@@ -16241,7 +16242,7 @@ class ConcurSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "ConcurSource"  # type: str
+        self.type: str = "ConcurSource"
         self.query = query
 
 
@@ -16482,7 +16483,7 @@ class CopyActivity(ExecutionActivity):  # pylint: disable=too-many-instance-attr
             policy=policy,
             **kwargs
         )
-        self.type = "Copy"  # type: str
+        self.type: str = "Copy"
         self.inputs = inputs
         self.outputs = outputs
         self.source = source
@@ -16566,7 +16567,7 @@ class CopyTranslator(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class CosmosDbLinkedService(LinkedService):  # pylint: disable=too-many-instance-attributes
@@ -16744,7 +16745,7 @@ class CosmosDbLinkedService(LinkedService):  # pylint: disable=too-many-instance
             annotations=annotations,
             **kwargs
         )
-        self.type = "CosmosDb"  # type: str
+        self.type: str = "CosmosDb"
         self.connection_string = connection_string
         self.account_endpoint = account_endpoint
         self.database = database
@@ -16860,7 +16861,7 @@ class CosmosDbMongoDbApiCollectionDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "CosmosDbMongoDbApiCollection"  # type: str
+        self.type: str = "CosmosDbMongoDbApiCollection"
         self.collection = collection
 
 
@@ -16956,7 +16957,7 @@ class CosmosDbMongoDbApiLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "CosmosDbMongoDbApi"  # type: str
+        self.type: str = "CosmosDbMongoDbApi"
         self.is_server_version_above32 = is_server_version_above32
         self.connection_string = connection_string
         self.database = database
@@ -17062,7 +17063,7 @@ class CosmosDbMongoDbApiSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "CosmosDbMongoDbApiSink"  # type: str
+        self.type: str = "CosmosDbMongoDbApiSink"
         self.write_behavior = write_behavior
 
 
@@ -17182,7 +17183,7 @@ class CosmosDbMongoDbApiSource(CopySource):  # pylint: disable=too-many-instance
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "CosmosDbMongoDbApiSource"  # type: str
+        self.type: str = "CosmosDbMongoDbApiSource"
         self.filter = filter
         self.cursor_methods = cursor_methods
         self.batch_size = batch_size
@@ -17291,7 +17292,7 @@ class CosmosDbSqlApiCollectionDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "CosmosDbSqlApiCollection"  # type: str
+        self.type: str = "CosmosDbSqlApiCollection"
         self.collection_name = collection_name
 
 
@@ -17393,7 +17394,7 @@ class CosmosDbSqlApiSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "CosmosDbSqlApiSink"  # type: str
+        self.type: str = "CosmosDbSqlApiSink"
         self.write_behavior = write_behavior
 
 
@@ -17507,7 +17508,7 @@ class CosmosDbSqlApiSource(CopySource):  # pylint: disable=too-many-instance-att
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "CosmosDbSqlApiSource"  # type: str
+        self.type: str = "CosmosDbSqlApiSource"
         self.query = query
         self.page_size = page_size
         self.preferred_regions = preferred_regions
@@ -17603,7 +17604,7 @@ class CouchbaseLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Couchbase"  # type: str
+        self.type: str = "Couchbase"
         self.connection_string = connection_string
         self.cred_string = cred_string
         self.encrypted_credential = encrypted_credential
@@ -17707,7 +17708,7 @@ class CouchbaseSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "CouchbaseSource"  # type: str
+        self.type: str = "CouchbaseSource"
         self.query = query
 
 
@@ -17809,7 +17810,7 @@ class CouchbaseTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "CouchbaseTable"  # type: str
+        self.type: str = "CouchbaseTable"
         self.table_name = table_name
 
 
@@ -18021,9 +18022,43 @@ class Credential(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.description = description
         self.annotations = annotations
+
+
+class CredentialListResponse(_serialization.Model):
+    """A list of credential resources.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: List of credentials. Required.
+    :vartype value: list[~azure.mgmt.datafactory.models.ManagedIdentityCredentialResource]
+    :ivar next_link: The link to the next page of results, if any remaining results exist.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"required": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ManagedIdentityCredentialResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self, *, value: List["_models.ManagedIdentityCredentialResource"], next_link: Optional[str] = None, **kwargs
+    ):
+        """
+        :keyword value: List of credentials. Required.
+        :paramtype value: list[~azure.mgmt.datafactory.models.ManagedIdentityCredentialResource]
+        :keyword next_link: The link to the next page of results, if any remaining results exist.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = next_link
 
 
 class CredentialReference(_serialization.Model):
@@ -18290,7 +18325,7 @@ class CustomActivity(ExecutionActivity):  # pylint: disable=too-many-instance-at
             policy=policy,
             **kwargs
         )
-        self.type = "Custom"  # type: str
+        self.type: str = "Custom"
         self.command = command
         self.resource_linked_service = resource_linked_service
         self.folder_path = folder_path
@@ -18430,7 +18465,7 @@ class CustomDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "CustomDataset"  # type: str
+        self.type: str = "CustomDataset"
         self.type_properties = type_properties
 
 
@@ -18505,7 +18540,7 @@ class CustomDataSourceLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "CustomDataSource"  # type: str
+        self.type: str = "CustomDataSource"
         self.type_properties = type_properties
 
 
@@ -18603,7 +18638,7 @@ class CustomEventsTrigger(MultiplePipelineTrigger):
             pipelines=pipelines,
             **kwargs
         )
-        self.type = "CustomEventsTrigger"  # type: str
+        self.type: str = "CustomEventsTrigger"
         self.subject_begins_with = subject_begins_with
         self.subject_ends_with = subject_ends_with
         self.events = events
@@ -18715,7 +18750,7 @@ class DatabricksNotebookActivity(ExecutionActivity):  # pylint: disable=too-many
             policy=policy,
             **kwargs
         )
-        self.type = "DatabricksNotebook"  # type: str
+        self.type: str = "DatabricksNotebook"
         self.notebook_path = notebook_path
         self.base_parameters = base_parameters
         self.libraries = libraries
@@ -18824,7 +18859,7 @@ class DatabricksSparkJarActivity(ExecutionActivity):  # pylint: disable=too-many
             policy=policy,
             **kwargs
         )
-        self.type = "DatabricksSparkJar"  # type: str
+        self.type: str = "DatabricksSparkJar"
         self.main_class_name = main_class_name
         self.parameters = parameters
         self.libraries = libraries
@@ -18931,7 +18966,7 @@ class DatabricksSparkPythonActivity(ExecutionActivity):  # pylint: disable=too-m
             policy=policy,
             **kwargs
         )
-        self.type = "DatabricksSparkPython"  # type: str
+        self.type: str = "DatabricksSparkPython"
         self.python_file = python_file
         self.parameters = parameters
         self.libraries = libraries
@@ -18989,7 +19024,7 @@ class DataFlow(_serialization.Model):
         :paramtype folder: ~azure.mgmt.datafactory.models.DataFlowFolder
         """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.description = description
         self.annotations = annotations
         self.folder = folder
@@ -19941,7 +19976,7 @@ class DataLakeAnalyticsUSQLActivity(ExecutionActivity):  # pylint: disable=too-m
             policy=policy,
             **kwargs
         )
-        self.type = "DataLakeAnalyticsU-SQL"  # type: str
+        self.type: str = "DataLakeAnalyticsU-SQL"
         self.script_path = script_path
         self.script_linked_service = script_linked_service
         self.degree_of_parallelism = degree_of_parallelism
@@ -20323,7 +20358,7 @@ class DataworldLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Dataworld"  # type: str
+        self.type: str = "Dataworld"
         self.api_token = api_token
         self.encrypted_credential = encrypted_credential
 
@@ -20468,7 +20503,7 @@ class Db2LinkedService(LinkedService):  # pylint: disable=too-many-instance-attr
             annotations=annotations,
             **kwargs
         )
-        self.type = "Db2"  # type: str
+        self.type: str = "Db2"
         self.connection_string = connection_string
         self.server = server
         self.database = database
@@ -20576,7 +20611,7 @@ class Db2Source(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "Db2Source"  # type: str
+        self.type: str = "Db2Source"
         self.query = query
 
 
@@ -20694,7 +20729,7 @@ class Db2TableDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Db2Table"  # type: str
+        self.type: str = "Db2Table"
         self.table_name = table_name
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
@@ -20825,7 +20860,7 @@ class DeleteActivity(ExecutionActivity):  # pylint: disable=too-many-instance-at
             policy=policy,
             **kwargs
         )
-        self.type = "Delete"  # type: str
+        self.type: str = "Delete"
         self.recursive = recursive
         self.max_concurrent_connections = max_concurrent_connections
         self.enable_logging = enable_logging
@@ -21024,7 +21059,7 @@ class DelimitedTextDataset(Dataset):  # pylint: disable=too-many-instance-attrib
             folder=folder,
             **kwargs
         )
-        self.type = "DelimitedText"  # type: str
+        self.type: str = "DelimitedText"
         self.location = location
         self.column_delimiter = column_delimiter
         self.row_delimiter = row_delimiter
@@ -21084,7 +21119,7 @@ class DelimitedTextReadSettings(FormatReadSettings):
         :paramtype compression_properties: ~azure.mgmt.datafactory.models.CompressionReadSettings
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "DelimitedTextReadSettings"  # type: str
+        self.type: str = "DelimitedTextReadSettings"
         self.skip_line_count = skip_line_count
         self.compression_properties = compression_properties
 
@@ -21191,7 +21226,7 @@ class DelimitedTextSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DelimitedTextSink"  # type: str
+        self.type: str = "DelimitedTextSink"
         self.store_settings = store_settings
         self.format_settings = format_settings
 
@@ -21288,7 +21323,7 @@ class DelimitedTextSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DelimitedTextSource"  # type: str
+        self.type: str = "DelimitedTextSource"
         self.store_settings = store_settings
         self.format_settings = format_settings
         self.additional_columns = additional_columns
@@ -21362,7 +21397,7 @@ class DelimitedTextWriteSettings(FormatWriteSettings):
         :paramtype file_name_prefix: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "DelimitedTextWriteSettings"  # type: str
+        self.type: str = "DelimitedTextWriteSettings"
         self.quote_all_text = quote_all_text
         self.file_extension = file_extension
         self.max_rows_per_file = max_rows_per_file
@@ -21399,7 +21434,7 @@ class DependencyReference(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class DistcpSettings(_serialization.Model):
@@ -21557,7 +21592,7 @@ class DocumentDbCollectionDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "DocumentDbCollection"  # type: str
+        self.type: str = "DocumentDbCollection"
         self.collection_name = collection_name
 
 
@@ -21667,7 +21702,7 @@ class DocumentDbCollectionSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DocumentDbCollectionSink"  # type: str
+        self.type: str = "DocumentDbCollectionSink"
         self.nesting_separator = nesting_separator
         self.write_behavior = write_behavior
 
@@ -21774,7 +21809,7 @@ class DocumentDbCollectionSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DocumentDbCollectionSource"  # type: str
+        self.type: str = "DocumentDbCollectionSource"
         self.query = query
         self.nesting_separator = nesting_separator
         self.query_timeout = query_timeout
@@ -21869,7 +21904,7 @@ class DrillLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Drill"  # type: str
+        self.type: str = "Drill"
         self.connection_string = connection_string
         self.pwd = pwd
         self.encrypted_credential = encrypted_credential
@@ -21973,7 +22008,7 @@ class DrillSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "DrillSource"  # type: str
+        self.type: str = "DrillSource"
         self.query = query
 
 
@@ -22092,7 +22127,7 @@ class DrillTableDataset(Dataset):  # pylint: disable=too-many-instance-attribute
             folder=folder,
             **kwargs
         )
-        self.type = "DrillTable"  # type: str
+        self.type: str = "DrillTable"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -22291,7 +22326,7 @@ class DynamicsAXLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "DynamicsAX"  # type: str
+        self.type: str = "DynamicsAX"
         self.url = url
         self.service_principal_id = service_principal_id
         self.service_principal_key = service_principal_key
@@ -22401,7 +22436,7 @@ class DynamicsAXResourceDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "DynamicsAXResource"  # type: str
+        self.type: str = "DynamicsAXResource"
         self.path = path
 
 
@@ -22515,7 +22550,7 @@ class DynamicsAXSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "DynamicsAXSource"  # type: str
+        self.type: str = "DynamicsAXSource"
         self.query = query
         self.http_request_timeout = http_request_timeout
 
@@ -22620,7 +22655,7 @@ class DynamicsCrmEntityDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "DynamicsCrmEntity"  # type: str
+        self.type: str = "DynamicsCrmEntity"
         self.entity_name = entity_name
 
 
@@ -22805,7 +22840,7 @@ class DynamicsCrmLinkedService(LinkedService):  # pylint: disable=too-many-insta
             annotations=annotations,
             **kwargs
         )
-        self.type = "DynamicsCrm"  # type: str
+        self.type: str = "DynamicsCrm"
         self.deployment_type = deployment_type
         self.host_name = host_name
         self.port = port
@@ -22935,7 +22970,7 @@ class DynamicsCrmSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DynamicsCrmSink"  # type: str
+        self.type: str = "DynamicsCrmSink"
         self.write_behavior = write_behavior
         self.ignore_null_values = ignore_null_values
         self.alternate_key_name = alternate_key_name
@@ -23029,7 +23064,7 @@ class DynamicsCrmSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DynamicsCrmSource"  # type: str
+        self.type: str = "DynamicsCrmSource"
         self.query = query
         self.additional_columns = additional_columns
 
@@ -23134,7 +23169,7 @@ class DynamicsEntityDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "DynamicsEntity"  # type: str
+        self.type: str = "DynamicsEntity"
         self.entity_name = entity_name
 
 
@@ -23324,7 +23359,7 @@ class DynamicsLinkedService(LinkedService):  # pylint: disable=too-many-instance
             annotations=annotations,
             **kwargs
         )
-        self.type = "Dynamics"  # type: str
+        self.type: str = "Dynamics"
         self.deployment_type = deployment_type
         self.host_name = host_name
         self.port = port
@@ -23455,7 +23490,7 @@ class DynamicsSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DynamicsSink"  # type: str
+        self.type: str = "DynamicsSink"
         self.write_behavior = write_behavior
         self.ignore_null_values = ignore_null_values
         self.alternate_key_name = alternate_key_name
@@ -23549,7 +23584,7 @@ class DynamicsSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "DynamicsSource"  # type: str
+        self.type: str = "DynamicsSource"
         self.query = query
         self.additional_columns = additional_columns
 
@@ -23676,7 +23711,7 @@ class EloquaLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "Eloqua"  # type: str
+        self.type: str = "Eloqua"
         self.endpoint = endpoint
         self.username = username
         self.password = password
@@ -23784,7 +23819,7 @@ class EloquaObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "EloquaObject"  # type: str
+        self.type: str = "EloquaObject"
         self.table_name = table_name
 
 
@@ -23886,7 +23921,7 @@ class EloquaSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "EloquaSource"  # type: str
+        self.type: str = "EloquaSource"
         self.query = query
 
 
@@ -24016,7 +24051,7 @@ class EnvironmentVariableSetup(CustomSetupBase):
         :paramtype variable_value: str
         """
         super().__init__(**kwargs)
-        self.type = "EnvironmentVariableSetup"  # type: str
+        self.type: str = "EnvironmentVariableSetup"
         self.variable_name = variable_name
         self.variable_value = variable_value
 
@@ -24166,7 +24201,7 @@ class ExcelDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Excel"  # type: str
+        self.type: str = "Excel"
         self.location = location
         self.sheet_name = sheet_name
         self.sheet_index = sheet_index
@@ -24262,7 +24297,7 @@ class ExcelSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "ExcelSource"  # type: str
+        self.type: str = "ExcelSource"
         self.store_settings = store_settings
         self.additional_columns = additional_columns
 
@@ -24405,7 +24440,7 @@ class ExecuteDataFlowActivity(ExecutionActivity):  # pylint: disable=too-many-in
             policy=policy,
             **kwargs
         )
-        self.type = "ExecuteDataFlow"  # type: str
+        self.type: str = "ExecuteDataFlow"
         self.data_flow = data_flow
         self.staging = staging
         self.integration_runtime = integration_runtime
@@ -24631,7 +24666,7 @@ class ExecutePipelineActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "ExecutePipeline"  # type: str
+        self.type: str = "ExecutePipeline"
         self.policy = policy
         self.pipeline = pipeline
         self.parameters = parameters
@@ -24951,7 +24986,7 @@ class ExecuteSSISPackageActivity(ExecutionActivity):  # pylint: disable=too-many
             policy=policy,
             **kwargs
         )
-        self.type = "ExecuteSSISPackage"  # type: str
+        self.type: str = "ExecuteSSISPackage"
         self.package_location = package_location
         self.runtime = runtime
         self.logging_level = logging_level
@@ -25110,7 +25145,7 @@ class ExecuteWranglingDataflowActivity(Activity):  # pylint: disable=too-many-in
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "ExecuteWranglingDataflow"  # type: str
+        self.type: str = "ExecuteWranglingDataflow"
         self.policy = policy
         self.data_flow = data_flow
         self.staging = staging
@@ -25515,7 +25550,7 @@ class FactoryRepoConfiguration(_serialization.Model):
         :paramtype disable_publish: bool
         """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.account_name = account_name
         self.repository_name = repository_name
         self.collaboration_branch = collaboration_branch
@@ -25617,7 +25652,7 @@ class FactoryGitHubConfiguration(FactoryRepoConfiguration):
             disable_publish=disable_publish,
             **kwargs
         )
-        self.type = "FactoryGitHubConfiguration"  # type: str
+        self.type: str = "FactoryGitHubConfiguration"
         self.host_name = host_name
         self.client_id = client_id
         self.client_secret = client_secret
@@ -25868,7 +25903,7 @@ class FactoryVSTSConfiguration(FactoryRepoConfiguration):
             disable_publish=disable_publish,
             **kwargs
         )
-        self.type = "FactoryVSTSConfiguration"  # type: str
+        self.type: str = "FactoryVSTSConfiguration"
         self.project_name = project_name
         self.tenant_id = tenant_id
 
@@ -25960,7 +25995,7 @@ class FailActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Fail"  # type: str
+        self.type: str = "Fail"
         self.message = message
         self.error_code = error_code
 
@@ -26062,7 +26097,7 @@ class FileServerLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "FileServer"  # type: str
+        self.type: str = "FileServer"
         self.host = host
         self.user_id = user_id
         self.password = password
@@ -26120,7 +26155,7 @@ class FileServerLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "FileServerLocation"  # type: str
+        self.type: str = "FileServerLocation"
 
 
 class FileServerReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-attributes
@@ -26257,7 +26292,7 @@ class FileServerReadSettings(StoreReadSettings):  # pylint: disable=too-many-ins
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "FileServerReadSettings"  # type: str
+        self.type: str = "FileServerReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -26331,7 +26366,7 @@ class FileServerWriteSettings(StoreWriteSettings):
             copy_behavior=copy_behavior,
             **kwargs
         )
-        self.type = "FileServerWriteSettings"  # type: str
+        self.type: str = "FileServerWriteSettings"
 
 
 class FileShareDataset(Dataset):  # pylint: disable=too-many-instance-attributes
@@ -26478,7 +26513,7 @@ class FileShareDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "FileShare"  # type: str
+        self.type: str = "FileShare"
         self.folder_path = folder_path
         self.file_name = file_name
         self.modified_datetime_start = modified_datetime_start
@@ -26584,7 +26619,7 @@ class FileSystemSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "FileSystemSink"  # type: str
+        self.type: str = "FileSystemSink"
         self.copy_behavior = copy_behavior
 
 
@@ -26676,7 +26711,7 @@ class FileSystemSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "FileSystemSource"  # type: str
+        self.type: str = "FileSystemSource"
         self.recursive = recursive
         self.additional_columns = additional_columns
 
@@ -26760,7 +26795,7 @@ class FilterActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Filter"  # type: str
+        self.type: str = "Filter"
         self.items = items
         self.condition = condition
 
@@ -26840,7 +26875,7 @@ class Flowlet(DataFlow):
         :paramtype script_lines: list[str]
         """
         super().__init__(description=description, annotations=annotations, folder=folder, **kwargs)
-        self.type = "Flowlet"  # type: str
+        self.type: str = "Flowlet"
         self.sources = sources
         self.sinks = sinks
         self.transformations = transformations
@@ -26942,7 +26977,7 @@ class ForEachActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "ForEach"  # type: str
+        self.type: str = "ForEach"
         self.is_sequential = is_sequential
         self.batch_count = batch_count
         self.items = items
@@ -27073,7 +27108,7 @@ class FtpReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-a
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "FtpReadSettings"  # type: str
+        self.type: str = "FtpReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -27219,7 +27254,7 @@ class FtpServerLinkedService(LinkedService):  # pylint: disable=too-many-instanc
             annotations=annotations,
             **kwargs
         )
-        self.type = "FtpServer"  # type: str
+        self.type: str = "FtpServer"
         self.host = host
         self.port = port
         self.authentication_type = authentication_type
@@ -27281,7 +27316,7 @@ class FtpServerLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "FtpServerLocation"  # type: str
+        self.type: str = "FtpServerLocation"
 
 
 class GetDataFactoryOperationStatusResponse(_serialization.Model):
@@ -27418,7 +27453,7 @@ class GetMetadataActivity(ExecutionActivity):  # pylint: disable=too-many-instan
             policy=policy,
             **kwargs
         )
-        self.type = "GetMetadata"  # type: str
+        self.type: str = "GetMetadata"
         self.dataset = dataset
         self.field_list = field_list
         self.store_settings = store_settings
@@ -27823,7 +27858,7 @@ class GoogleAdWordsLinkedService(LinkedService):  # pylint: disable=too-many-ins
             annotations=annotations,
             **kwargs
         )
-        self.type = "GoogleAdWords"  # type: str
+        self.type: str = "GoogleAdWords"
         self.connection_properties = connection_properties
         self.client_customer_id = client_customer_id
         self.developer_token = developer_token
@@ -27936,7 +27971,7 @@ class GoogleAdWordsObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "GoogleAdWordsObject"  # type: str
+        self.type: str = "GoogleAdWordsObject"
         self.table_name = table_name
 
 
@@ -28038,7 +28073,7 @@ class GoogleAdWordsSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "GoogleAdWordsSource"  # type: str
+        self.type: str = "GoogleAdWordsSource"
         self.query = query
 
 
@@ -28210,7 +28245,7 @@ class GoogleBigQueryLinkedService(LinkedService):  # pylint: disable=too-many-in
             annotations=annotations,
             **kwargs
         )
-        self.type = "GoogleBigQuery"  # type: str
+        self.type: str = "GoogleBigQuery"
         self.project = project
         self.additional_projects = additional_projects
         self.request_google_drive_scope = request_google_drive_scope
@@ -28341,7 +28376,7 @@ class GoogleBigQueryObjectDataset(Dataset):  # pylint: disable=too-many-instance
             folder=folder,
             **kwargs
         )
-        self.type = "GoogleBigQueryObject"  # type: str
+        self.type: str = "GoogleBigQueryObject"
         self.table_name = table_name
         self.table = table
         self.dataset = dataset
@@ -28445,7 +28480,7 @@ class GoogleBigQuerySource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "GoogleBigQuerySource"  # type: str
+        self.type: str = "GoogleBigQuerySource"
         self.query = query
 
 
@@ -28551,7 +28586,7 @@ class GoogleCloudStorageLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "GoogleCloudStorage"  # type: str
+        self.type: str = "GoogleCloudStorage"
         self.access_key_id = access_key_id
         self.secret_access_key = secret_access_key
         self.service_url = service_url
@@ -28625,7 +28660,7 @@ class GoogleCloudStorageLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "GoogleCloudStorageLocation"  # type: str
+        self.type: str = "GoogleCloudStorageLocation"
         self.bucket_name = bucket_name
         self.version = version
 
@@ -28764,7 +28799,7 @@ class GoogleCloudStorageReadSettings(StoreReadSettings):  # pylint: disable=too-
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "GoogleCloudStorageReadSettings"  # type: str
+        self.type: str = "GoogleCloudStorageReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -28858,7 +28893,7 @@ class GoogleSheetsLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "GoogleSheets"  # type: str
+        self.type: str = "GoogleSheets"
         self.api_token = api_token
         self.encrypted_credential = encrypted_credential
 
@@ -28951,7 +28986,7 @@ class GreenplumLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Greenplum"  # type: str
+        self.type: str = "Greenplum"
         self.connection_string = connection_string
         self.pwd = pwd
         self.encrypted_credential = encrypted_credential
@@ -29055,7 +29090,7 @@ class GreenplumSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "GreenplumSource"  # type: str
+        self.type: str = "GreenplumSource"
         self.query = query
 
 
@@ -29174,7 +29209,7 @@ class GreenplumTableDataset(Dataset):  # pylint: disable=too-many-instance-attri
             folder=folder,
             **kwargs
         )
-        self.type = "GreenplumTable"  # type: str
+        self.type: str = "GreenplumTable"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -29333,7 +29368,7 @@ class HBaseLinkedService(LinkedService):  # pylint: disable=too-many-instance-at
             annotations=annotations,
             **kwargs
         )
-        self.type = "HBase"  # type: str
+        self.type: str = "HBase"
         self.host = host
         self.port = port
         self.http_path = http_path
@@ -29445,7 +29480,7 @@ class HBaseObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "HBaseObject"  # type: str
+        self.type: str = "HBaseObject"
         self.table_name = table_name
 
 
@@ -29547,7 +29582,7 @@ class HBaseSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "HBaseSource"  # type: str
+        self.type: str = "HBaseSource"
         self.query = query
 
 
@@ -29656,7 +29691,7 @@ class HdfsLinkedService(LinkedService):  # pylint: disable=too-many-instance-att
             annotations=annotations,
             **kwargs
         )
-        self.type = "Hdfs"  # type: str
+        self.type: str = "Hdfs"
         self.url = url
         self.authentication_type = authentication_type
         self.encrypted_credential = encrypted_credential
@@ -29715,7 +29750,7 @@ class HdfsLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "HdfsLocation"  # type: str
+        self.type: str = "HdfsLocation"
 
 
 class HdfsReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-attributes
@@ -29850,7 +29885,7 @@ class HdfsReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "HdfsReadSettings"  # type: str
+        self.type: str = "HdfsReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -29949,7 +29984,7 @@ class HdfsSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "HdfsSource"  # type: str
+        self.type: str = "HdfsSource"
         self.recursive = recursive
         self.distcp_settings = distcp_settings
 
@@ -30084,7 +30119,7 @@ class HDInsightHiveActivity(ExecutionActivity):  # pylint: disable=too-many-inst
             policy=policy,
             **kwargs
         )
-        self.type = "HDInsightHive"  # type: str
+        self.type: str = "HDInsightHive"
         self.storage_linked_services = storage_linked_services
         self.arguments = arguments
         self.get_debug_info = get_debug_info
@@ -30225,7 +30260,7 @@ class HDInsightLinkedService(LinkedService):  # pylint: disable=too-many-instanc
             annotations=annotations,
             **kwargs
         )
-        self.type = "HDInsight"  # type: str
+        self.type: str = "HDInsight"
         self.cluster_uri = cluster_uri
         self.user_name = user_name
         self.password = password
@@ -30367,7 +30402,7 @@ class HDInsightMapReduceActivity(ExecutionActivity):  # pylint: disable=too-many
             policy=policy,
             **kwargs
         )
-        self.type = "HDInsightMapReduce"  # type: str
+        self.type: str = "HDInsightMapReduce"
         self.storage_linked_services = storage_linked_services
         self.arguments = arguments
         self.get_debug_info = get_debug_info
@@ -30724,7 +30759,7 @@ class HDInsightOnDemandLinkedService(LinkedService):  # pylint: disable=too-many
             annotations=annotations,
             **kwargs
         )
-        self.type = "HDInsightOnDemand"  # type: str
+        self.type: str = "HDInsightOnDemand"
         self.cluster_size = cluster_size
         self.time_to_live = time_to_live
         self.version = version
@@ -30879,7 +30914,7 @@ class HDInsightPigActivity(ExecutionActivity):  # pylint: disable=too-many-insta
             policy=policy,
             **kwargs
         )
-        self.type = "HDInsightPig"  # type: str
+        self.type: str = "HDInsightPig"
         self.storage_linked_services = storage_linked_services
         self.arguments = arguments
         self.get_debug_info = get_debug_info
@@ -31026,7 +31061,7 @@ class HDInsightSparkActivity(ExecutionActivity):  # pylint: disable=too-many-ins
             policy=policy,
             **kwargs
         )
-        self.type = "HDInsightSpark"  # type: str
+        self.type: str = "HDInsightSpark"
         self.root_path = root_path
         self.entry_file_path = entry_file_path
         self.arguments = arguments
@@ -31200,7 +31235,7 @@ class HDInsightStreamingActivity(ExecutionActivity):  # pylint: disable=too-many
             policy=policy,
             **kwargs
         )
-        self.type = "HDInsightStreaming"  # type: str
+        self.type: str = "HDInsightStreaming"
         self.storage_linked_services = storage_linked_services
         self.arguments = arguments
         self.get_debug_info = get_debug_info
@@ -31417,7 +31452,7 @@ class HiveLinkedService(LinkedService):  # pylint: disable=too-many-instance-att
             annotations=annotations,
             **kwargs
         )
-        self.type = "Hive"  # type: str
+        self.type: str = "Hive"
         self.host = host
         self.port = port
         self.server_type = server_type
@@ -31552,7 +31587,7 @@ class HiveObjectDataset(Dataset):  # pylint: disable=too-many-instance-attribute
             folder=folder,
             **kwargs
         )
-        self.type = "HiveObject"  # type: str
+        self.type: str = "HiveObject"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -31656,7 +31691,7 @@ class HiveSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "HiveSource"  # type: str
+        self.type: str = "HiveSource"
         self.query = query
 
 
@@ -31802,7 +31837,7 @@ class HttpDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "HttpFile"  # type: str
+        self.type: str = "HttpFile"
         self.relative_url = relative_url
         self.request_method = request_method
         self.request_body = request_body
@@ -31961,7 +31996,7 @@ class HttpLinkedService(LinkedService):  # pylint: disable=too-many-instance-att
             annotations=annotations,
             **kwargs
         )
-        self.type = "HttpServer"  # type: str
+        self.type: str = "HttpServer"
         self.url = url
         self.authentication_type = authentication_type
         self.user_name = user_name
@@ -32073,7 +32108,7 @@ class HttpReadSettings(StoreReadSettings):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "HttpReadSettings"  # type: str
+        self.type: str = "HttpReadSettings"
         self.request_method = request_method
         self.request_body = request_body
         self.additional_headers = additional_headers
@@ -32141,7 +32176,7 @@ class HttpServerLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "HttpServerLocation"  # type: str
+        self.type: str = "HttpServerLocation"
         self.relative_url = relative_url
 
 
@@ -32229,7 +32264,7 @@ class HttpSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "HttpSource"  # type: str
+        self.type: str = "HttpSource"
         self.http_request_timeout = http_request_timeout
 
 
@@ -32362,7 +32397,7 @@ class HubspotLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "Hubspot"  # type: str
+        self.type: str = "Hubspot"
         self.client_id = client_id
         self.client_secret = client_secret
         self.access_token = access_token
@@ -32471,7 +32506,7 @@ class HubspotObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "HubspotObject"  # type: str
+        self.type: str = "HubspotObject"
         self.table_name = table_name
 
 
@@ -32573,7 +32608,7 @@ class HubspotSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "HubspotSource"  # type: str
+        self.type: str = "HubspotSource"
         self.query = query
 
 
@@ -32669,7 +32704,7 @@ class IfConditionActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "IfCondition"  # type: str
+        self.type: str = "IfCondition"
         self.expression = expression
         self.if_true_activities = if_true_activities
         self.if_false_activities = if_false_activities
@@ -32830,7 +32865,7 @@ class ImpalaLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "Impala"  # type: str
+        self.type: str = "Impala"
         self.host = host
         self.port = port
         self.authentication_type = authentication_type
@@ -32959,7 +32994,7 @@ class ImpalaObjectDataset(Dataset):  # pylint: disable=too-many-instance-attribu
             folder=folder,
             **kwargs
         )
-        self.type = "ImpalaObject"  # type: str
+        self.type: str = "ImpalaObject"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -33063,7 +33098,7 @@ class ImpalaSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "ImpalaSource"  # type: str
+        self.type: str = "ImpalaSource"
         self.query = query
 
 
@@ -33184,7 +33219,7 @@ class InformixLinkedService(LinkedService):  # pylint: disable=too-many-instance
             annotations=annotations,
             **kwargs
         )
-        self.type = "Informix"  # type: str
+        self.type: str = "Informix"
         self.connection_string = connection_string
         self.authentication_type = authentication_type
         self.credential = credential
@@ -33291,7 +33326,7 @@ class InformixSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "InformixSink"  # type: str
+        self.type: str = "InformixSink"
         self.pre_copy_script = pre_copy_script
 
 
@@ -33391,7 +33426,7 @@ class InformixSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "InformixSource"  # type: str
+        self.type: str = "InformixSource"
         self.query = query
 
 
@@ -33494,7 +33529,7 @@ class InformixTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "InformixTable"  # type: str
+        self.type: str = "InformixTable"
         self.table_name = table_name
 
 
@@ -33540,7 +33575,7 @@ class IntegrationRuntime(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.description = description
 
 
@@ -34509,7 +34544,7 @@ class IntegrationRuntimeStatus(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.data_factory_name = None
         self.state = None
 
@@ -34770,7 +34805,7 @@ class JiraLinkedService(LinkedService):  # pylint: disable=too-many-instance-att
             annotations=annotations,
             **kwargs
         )
-        self.type = "Jira"  # type: str
+        self.type: str = "Jira"
         self.host = host
         self.port = port
         self.username = username
@@ -34879,7 +34914,7 @@ class JiraObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "JiraObject"  # type: str
+        self.type: str = "JiraObject"
         self.table_name = table_name
 
 
@@ -34981,7 +35016,7 @@ class JiraSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "JiraSource"  # type: str
+        self.type: str = "JiraSource"
         self.query = query
 
 
@@ -35103,7 +35138,7 @@ class JsonDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Json"  # type: str
+        self.type: str = "Json"
         self.location = location
         self.encoding_name = encoding_name
         self.compression = compression
@@ -35208,7 +35243,7 @@ class JsonFormat(DatasetStorageFormat):
         super().__init__(
             additional_properties=additional_properties, serializer=serializer, deserializer=deserializer, **kwargs
         )
-        self.type = "JsonFormat"  # type: str
+        self.type: str = "JsonFormat"
         self.file_pattern = file_pattern
         self.nesting_separator = nesting_separator
         self.encoding_name = encoding_name
@@ -35255,7 +35290,7 @@ class JsonReadSettings(FormatReadSettings):
         :paramtype compression_properties: ~azure.mgmt.datafactory.models.CompressionReadSettings
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "JsonReadSettings"  # type: str
+        self.type: str = "JsonReadSettings"
         self.compression_properties = compression_properties
 
 
@@ -35361,7 +35396,7 @@ class JsonSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "JsonSink"  # type: str
+        self.type: str = "JsonSink"
         self.store_settings = store_settings
         self.format_settings = format_settings
 
@@ -35458,7 +35493,7 @@ class JsonSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "JsonSource"  # type: str
+        self.type: str = "JsonSource"
         self.store_settings = store_settings
         self.format_settings = format_settings
         self.additional_columns = additional_columns
@@ -35501,7 +35536,7 @@ class JsonWriteSettings(FormatWriteSettings):
         :paramtype file_pattern: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "JsonWriteSettings"  # type: str
+        self.type: str = "JsonWriteSettings"
         self.file_pattern = file_pattern
 
 
@@ -35580,7 +35615,7 @@ class LinkedIntegrationRuntimeType(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.authorization_type = None  # type: Optional[str]
+        self.authorization_type: Optional[str] = None
 
 
 class LinkedIntegrationRuntimeKeyAuthorization(LinkedIntegrationRuntimeType):
@@ -35610,7 +35645,7 @@ class LinkedIntegrationRuntimeKeyAuthorization(LinkedIntegrationRuntimeType):
         :paramtype key: ~azure.mgmt.datafactory.models.SecureString
         """
         super().__init__(**kwargs)
-        self.authorization_type = "Key"  # type: str
+        self.authorization_type: str = "Key"
         self.key = key
 
 
@@ -35647,7 +35682,7 @@ class LinkedIntegrationRuntimeRbacAuthorization(LinkedIntegrationRuntimeType):
         :paramtype credential: ~azure.mgmt.datafactory.models.CredentialReference
         """
         super().__init__(**kwargs)
-        self.authorization_type = "RBAC"  # type: str
+        self.authorization_type: str = "RBAC"
         self.resource_id = resource_id
         self.credential = credential
 
@@ -36082,7 +36117,7 @@ class LookupActivity(ExecutionActivity):  # pylint: disable=too-many-instance-at
             policy=policy,
             **kwargs
         )
-        self.type = "Lookup"  # type: str
+        self.type: str = "Lookup"
         self.source = source
         self.dataset = dataset
         self.first_row_only = first_row_only
@@ -36201,7 +36236,7 @@ class MagentoLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "Magento"  # type: str
+        self.type: str = "Magento"
         self.host = host
         self.access_token = access_token
         self.use_encrypted_endpoints = use_encrypted_endpoints
@@ -36308,7 +36343,7 @@ class MagentoObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MagentoObject"  # type: str
+        self.type: str = "MagentoObject"
         self.table_name = table_name
 
 
@@ -36410,7 +36445,7 @@ class MagentoSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "MagentoSource"  # type: str
+        self.type: str = "MagentoSource"
         self.query = query
 
 
@@ -36467,8 +36502,52 @@ class ManagedIdentityCredential(Credential):
         super().__init__(
             additional_properties=additional_properties, description=description, annotations=annotations, **kwargs
         )
-        self.type = "ManagedIdentity"  # type: str
+        self.type: str = "ManagedIdentity"
         self.resource_id = resource_id
+
+
+class ManagedIdentityCredentialResource(SubResource):
+    """Credential resource type.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: The resource identifier.
+    :vartype id: str
+    :ivar name: The resource name.
+    :vartype name: str
+    :ivar type: The resource type.
+    :vartype type: str
+    :ivar etag: Etag identifies change in the resource.
+    :vartype etag: str
+    :ivar properties: Managed Identity Credential properties. Required.
+    :vartype properties: ~azure.mgmt.datafactory.models.ManagedIdentityCredential
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "properties": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "properties": {"key": "properties", "type": "ManagedIdentityCredential"},
+    }
+
+    def __init__(self, *, properties: "_models.ManagedIdentityCredential", **kwargs):
+        """
+        :keyword properties: Managed Identity Credential properties. Required.
+        :paramtype properties: ~azure.mgmt.datafactory.models.ManagedIdentityCredential
+        """
+        super().__init__(**kwargs)
+        self.properties = properties
 
 
 class ManagedIntegrationRuntime(IntegrationRuntime):
@@ -36555,7 +36634,7 @@ class ManagedIntegrationRuntime(IntegrationRuntime):
          ~azure.mgmt.datafactory.models.IntegrationRuntimeCustomerVirtualNetwork
         """
         super().__init__(additional_properties=additional_properties, description=description, **kwargs)
-        self.type = "Managed"  # type: str
+        self.type: str = "Managed"
         self.state = None
         self.managed_virtual_network = managed_virtual_network
         self.compute_properties = compute_properties
@@ -36775,7 +36854,7 @@ class ManagedIntegrationRuntimeStatus(IntegrationRuntimeStatus):
         :paramtype additional_properties: dict[str, JSON]
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "Managed"  # type: str
+        self.type: str = "Managed"
         self.create_time = None
         self.nodes = None
         self.other_errors = None
@@ -37158,7 +37237,7 @@ class MappingDataFlow(DataFlow):
         :paramtype script_lines: list[str]
         """
         super().__init__(description=description, annotations=annotations, folder=folder, **kwargs)
-        self.type = "MappingDataFlow"  # type: str
+        self.type: str = "MappingDataFlow"
         self.sources = sources
         self.sinks = sinks
         self.transformations = transformations
@@ -37254,7 +37333,7 @@ class MariaDBLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "MariaDB"  # type: str
+        self.type: str = "MariaDB"
         self.connection_string = connection_string
         self.pwd = pwd
         self.encrypted_credential = encrypted_credential
@@ -37358,7 +37437,7 @@ class MariaDBSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "MariaDBSource"  # type: str
+        self.type: str = "MariaDBSource"
         self.query = query
 
 
@@ -37460,7 +37539,7 @@ class MariaDBTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MariaDBTable"  # type: str
+        self.type: str = "MariaDBTable"
         self.table_name = table_name
 
 
@@ -37585,7 +37664,7 @@ class MarketoLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "Marketo"  # type: str
+        self.type: str = "Marketo"
         self.endpoint = endpoint
         self.client_id = client_id
         self.client_secret = client_secret
@@ -37693,7 +37772,7 @@ class MarketoObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MarketoObject"  # type: str
+        self.type: str = "MarketoObject"
         self.table_name = table_name
 
 
@@ -37795,7 +37874,7 @@ class MarketoSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "MarketoSource"  # type: str
+        self.type: str = "MarketoSource"
         self.query = query
 
 
@@ -37942,7 +38021,7 @@ class MicrosoftAccessLinkedService(LinkedService):  # pylint: disable=too-many-i
             annotations=annotations,
             **kwargs
         )
-        self.type = "MicrosoftAccess"  # type: str
+        self.type: str = "MicrosoftAccess"
         self.connection_string = connection_string
         self.authentication_type = authentication_type
         self.credential = credential
@@ -38049,7 +38128,7 @@ class MicrosoftAccessSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "MicrosoftAccessSink"  # type: str
+        self.type: str = "MicrosoftAccessSink"
         self.pre_copy_script = pre_copy_script
 
 
@@ -38139,7 +38218,7 @@ class MicrosoftAccessSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "MicrosoftAccessSource"  # type: str
+        self.type: str = "MicrosoftAccessSource"
         self.query = query
         self.additional_columns = additional_columns
 
@@ -38244,7 +38323,7 @@ class MicrosoftAccessTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MicrosoftAccessTable"  # type: str
+        self.type: str = "MicrosoftAccessTable"
         self.table_name = table_name
 
 
@@ -38349,7 +38428,7 @@ class MongoDbAtlasCollectionDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MongoDbAtlasCollection"  # type: str
+        self.type: str = "MongoDbAtlasCollection"
         self.collection = collection
 
 
@@ -38437,7 +38516,7 @@ class MongoDbAtlasLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "MongoDbAtlas"  # type: str
+        self.type: str = "MongoDbAtlas"
         self.connection_string = connection_string
         self.database = database
 
@@ -38542,7 +38621,7 @@ class MongoDbAtlasSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "MongoDbAtlasSink"  # type: str
+        self.type: str = "MongoDbAtlasSink"
         self.write_behavior = write_behavior
 
 
@@ -38662,7 +38741,7 @@ class MongoDbAtlasSource(CopySource):  # pylint: disable=too-many-instance-attri
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "MongoDbAtlasSource"  # type: str
+        self.type: str = "MongoDbAtlasSource"
         self.filter = filter
         self.cursor_methods = cursor_methods
         self.batch_size = batch_size
@@ -38771,7 +38850,7 @@ class MongoDbCollectionDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MongoDbCollection"  # type: str
+        self.type: str = "MongoDbCollection"
         self.collection_name = collection_name
 
 
@@ -38992,7 +39071,7 @@ class MongoDbLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "MongoDb"  # type: str
+        self.type: str = "MongoDb"
         self.server = server
         self.authentication_type = authentication_type
         self.database_name = database_name
@@ -39093,7 +39172,7 @@ class MongoDbSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "MongoDbSource"  # type: str
+        self.type: str = "MongoDbSource"
         self.query = query
         self.additional_columns = additional_columns
 
@@ -39199,7 +39278,7 @@ class MongoDbV2CollectionDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MongoDbV2Collection"  # type: str
+        self.type: str = "MongoDbV2Collection"
         self.collection = collection
 
 
@@ -39287,7 +39366,7 @@ class MongoDbV2LinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "MongoDbV2"  # type: str
+        self.type: str = "MongoDbV2"
         self.connection_string = connection_string
         self.database = database
 
@@ -39392,7 +39471,7 @@ class MongoDbV2Sink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "MongoDbV2Sink"  # type: str
+        self.type: str = "MongoDbV2Sink"
         self.write_behavior = write_behavior
 
 
@@ -39512,7 +39591,7 @@ class MongoDbV2Source(CopySource):  # pylint: disable=too-many-instance-attribut
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "MongoDbV2Source"  # type: str
+        self.type: str = "MongoDbV2Source"
         self.filter = filter
         self.cursor_methods = cursor_methods
         self.batch_size = batch_size
@@ -39607,7 +39686,7 @@ class MySqlLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "MySql"  # type: str
+        self.type: str = "MySql"
         self.connection_string = connection_string
         self.password = password
         self.encrypted_credential = encrypted_credential
@@ -39709,7 +39788,7 @@ class MySqlSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "MySqlSource"  # type: str
+        self.type: str = "MySqlSource"
         self.query = query
 
 
@@ -39811,7 +39890,7 @@ class MySqlTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "MySqlTable"  # type: str
+        self.type: str = "MySqlTable"
         self.table_name = table_name
 
 
@@ -39903,7 +39982,7 @@ class NetezzaLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Netezza"  # type: str
+        self.type: str = "Netezza"
         self.connection_string = connection_string
         self.pwd = pwd
         self.encrypted_credential = encrypted_credential
@@ -40071,7 +40150,7 @@ class NetezzaSource(TabularSource):  # pylint: disable=too-many-instance-attribu
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "NetezzaSource"  # type: str
+        self.type: str = "NetezzaSource"
         self.query = query
         self.partition_option = partition_option
         self.partition_settings = partition_settings
@@ -40193,7 +40272,7 @@ class NetezzaTableDataset(Dataset):  # pylint: disable=too-many-instance-attribu
             folder=folder,
             **kwargs
         )
-        self.type = "NetezzaTable"  # type: str
+        self.type: str = "NetezzaTable"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -40426,7 +40505,7 @@ class ODataLinkedService(LinkedService):  # pylint: disable=too-many-instance-at
             annotations=annotations,
             **kwargs
         )
-        self.type = "OData"  # type: str
+        self.type: str = "OData"
         self.url = url
         self.authentication_type = authentication_type
         self.user_name = user_name
@@ -40541,7 +40620,7 @@ class ODataResourceDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "ODataResource"  # type: str
+        self.type: str = "ODataResource"
         self.path = path
 
 
@@ -40645,7 +40724,7 @@ class ODataSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "ODataSource"  # type: str
+        self.type: str = "ODataSource"
         self.query = query
         self.http_request_timeout = http_request_timeout
         self.additional_columns = additional_columns
@@ -40766,7 +40845,7 @@ class OdbcLinkedService(LinkedService):  # pylint: disable=too-many-instance-att
             annotations=annotations,
             **kwargs
         )
-        self.type = "Odbc"  # type: str
+        self.type: str = "Odbc"
         self.connection_string = connection_string
         self.authentication_type = authentication_type
         self.credential = credential
@@ -40873,7 +40952,7 @@ class OdbcSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "OdbcSink"  # type: str
+        self.type: str = "OdbcSink"
         self.pre_copy_script = pre_copy_script
 
 
@@ -40973,7 +41052,7 @@ class OdbcSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "OdbcSource"  # type: str
+        self.type: str = "OdbcSource"
         self.query = query
 
 
@@ -41075,7 +41154,7 @@ class OdbcTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "OdbcTable"  # type: str
+        self.type: str = "OdbcTable"
         self.table_name = table_name
 
 
@@ -41188,7 +41267,7 @@ class Office365Dataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Office365Table"  # type: str
+        self.type: str = "Office365Table"
         self.table_name = table_name
         self.predicate = predicate
 
@@ -41301,7 +41380,7 @@ class Office365LinkedService(LinkedService):  # pylint: disable=too-many-instanc
             annotations=annotations,
             **kwargs
         )
-        self.type = "Office365"  # type: str
+        self.type: str = "Office365"
         self.office365_tenant_id = office365_tenant_id
         self.service_principal_tenant_id = service_principal_tenant_id
         self.service_principal_id = service_principal_id
@@ -41431,7 +41510,7 @@ class Office365Source(CopySource):  # pylint: disable=too-many-instance-attribut
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "Office365Source"  # type: str
+        self.type: str = "Office365Source"
         self.allowed_groups = allowed_groups
         self.user_scope_filter_uri = user_scope_filter_uri
         self.date_filter_column = date_filter_column
@@ -41888,7 +41967,7 @@ class OracleCloudStorageLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "OracleCloudStorage"  # type: str
+        self.type: str = "OracleCloudStorage"
         self.access_key_id = access_key_id
         self.secret_access_key = secret_access_key
         self.service_url = service_url
@@ -41962,7 +42041,7 @@ class OracleCloudStorageLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "OracleCloudStorageLocation"  # type: str
+        self.type: str = "OracleCloudStorageLocation"
         self.bucket_name = bucket_name
         self.version = version
 
@@ -42101,7 +42180,7 @@ class OracleCloudStorageReadSettings(StoreReadSettings):  # pylint: disable=too-
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "OracleCloudStorageReadSettings"  # type: str
+        self.type: str = "OracleCloudStorageReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -42203,7 +42282,7 @@ class OracleLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Oracle"  # type: str
+        self.type: str = "Oracle"
         self.connection_string = connection_string
         self.password = password
         self.encrypted_credential = encrypted_credential
@@ -42390,7 +42469,7 @@ class OracleServiceCloudLinkedService(LinkedService):  # pylint: disable=too-man
             annotations=annotations,
             **kwargs
         )
-        self.type = "OracleServiceCloud"  # type: str
+        self.type: str = "OracleServiceCloud"
         self.host = host
         self.username = username
         self.password = password
@@ -42498,7 +42577,7 @@ class OracleServiceCloudObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "OracleServiceCloudObject"  # type: str
+        self.type: str = "OracleServiceCloudObject"
         self.table_name = table_name
 
 
@@ -42600,7 +42679,7 @@ class OracleServiceCloudSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "OracleServiceCloudSource"  # type: str
+        self.type: str = "OracleServiceCloudSource"
         self.query = query
 
 
@@ -42702,7 +42781,7 @@ class OracleSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "OracleSink"  # type: str
+        self.type: str = "OracleSink"
         self.pre_copy_script = pre_copy_script
 
 
@@ -42817,7 +42896,7 @@ class OracleSource(CopySource):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "OracleSource"  # type: str
+        self.type: str = "OracleSource"
         self.oracle_reader_query = oracle_reader_query
         self.query_timeout = query_timeout
         self.partition_option = partition_option
@@ -42941,7 +43020,7 @@ class OracleTableDataset(Dataset):  # pylint: disable=too-many-instance-attribut
             folder=folder,
             **kwargs
         )
-        self.type = "OracleTable"  # type: str
+        self.type: str = "OracleTable"
         self.table_name = table_name
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
@@ -43053,7 +43132,7 @@ class OrcDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Orc"  # type: str
+        self.type: str = "Orc"
         self.location = location
         self.orc_compression_codec = orc_compression_codec
 
@@ -43105,7 +43184,7 @@ class OrcFormat(DatasetStorageFormat):
         super().__init__(
             additional_properties=additional_properties, serializer=serializer, deserializer=deserializer, **kwargs
         )
-        self.type = "OrcFormat"  # type: str
+        self.type: str = "OrcFormat"
 
 
 class OrcSink(CopySink):
@@ -43210,7 +43289,7 @@ class OrcSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "OrcSink"  # type: str
+        self.type: str = "OrcSink"
         self.store_settings = store_settings
         self.format_settings = format_settings
 
@@ -43301,7 +43380,7 @@ class OrcSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "OrcSource"  # type: str
+        self.type: str = "OrcSource"
         self.store_settings = store_settings
         self.additional_columns = additional_columns
 
@@ -43357,7 +43436,7 @@ class OrcWriteSettings(FormatWriteSettings):
         :paramtype file_name_prefix: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "OrcWriteSettings"  # type: str
+        self.type: str = "OrcWriteSettings"
         self.max_rows_per_file = max_rows_per_file
         self.file_name_prefix = file_name_prefix
 
@@ -43535,7 +43614,7 @@ class ParquetDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Parquet"  # type: str
+        self.type: str = "Parquet"
         self.location = location
         self.compression_codec = compression_codec
 
@@ -43587,7 +43666,7 @@ class ParquetFormat(DatasetStorageFormat):
         super().__init__(
             additional_properties=additional_properties, serializer=serializer, deserializer=deserializer, **kwargs
         )
-        self.type = "ParquetFormat"  # type: str
+        self.type: str = "ParquetFormat"
 
 
 class ParquetSink(CopySink):
@@ -43692,7 +43771,7 @@ class ParquetSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "ParquetSink"  # type: str
+        self.type: str = "ParquetSink"
         self.store_settings = store_settings
         self.format_settings = format_settings
 
@@ -43783,7 +43862,7 @@ class ParquetSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "ParquetSource"  # type: str
+        self.type: str = "ParquetSource"
         self.store_settings = store_settings
         self.additional_columns = additional_columns
 
@@ -43839,7 +43918,7 @@ class ParquetWriteSettings(FormatWriteSettings):
         :paramtype file_name_prefix: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "ParquetWriteSettings"  # type: str
+        self.type: str = "ParquetWriteSettings"
         self.max_rows_per_file = max_rows_per_file
         self.file_name_prefix = file_name_prefix
 
@@ -43964,7 +44043,7 @@ class PaypalLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "Paypal"  # type: str
+        self.type: str = "Paypal"
         self.host = host
         self.client_id = client_id
         self.client_secret = client_secret
@@ -44072,7 +44151,7 @@ class PaypalObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "PaypalObject"  # type: str
+        self.type: str = "PaypalObject"
         self.table_name = table_name
 
 
@@ -44174,7 +44253,7 @@ class PaypalSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "PaypalSource"  # type: str
+        self.type: str = "PaypalSource"
         self.query = query
 
 
@@ -44344,7 +44423,7 @@ class PhoenixLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "Phoenix"  # type: str
+        self.type: str = "Phoenix"
         self.host = host
         self.port = port
         self.http_path = http_path
@@ -44475,7 +44554,7 @@ class PhoenixObjectDataset(Dataset):  # pylint: disable=too-many-instance-attrib
             folder=folder,
             **kwargs
         )
-        self.type = "PhoenixObject"  # type: str
+        self.type: str = "PhoenixObject"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -44579,7 +44658,7 @@ class PhoenixSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "PhoenixSource"  # type: str
+        self.type: str = "PhoenixSource"
         self.query = query
 
 
@@ -45158,7 +45237,7 @@ class PostgreSqlLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "PostgreSql"  # type: str
+        self.type: str = "PostgreSql"
         self.connection_string = connection_string
         self.password = password
         self.encrypted_credential = encrypted_credential
@@ -45260,7 +45339,7 @@ class PostgreSqlSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "PostgreSqlSource"  # type: str
+        self.type: str = "PostgreSqlSource"
         self.query = query
 
 
@@ -45378,10 +45457,93 @@ class PostgreSqlTableDataset(Dataset):  # pylint: disable=too-many-instance-attr
             folder=folder,
             **kwargs
         )
-        self.type = "PostgreSqlTable"  # type: str
+        self.type: str = "PostgreSqlTable"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
+
+
+class PowerBILinkedService(LinkedService):
+    """Power BI linked service.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, JSON]
+    :ivar type: Type of linked service. Required.
+    :vartype type: str
+    :ivar connect_via: The integration runtime reference.
+    :vartype connect_via: ~azure.mgmt.datafactory.models.IntegrationRuntimeReference
+    :ivar description: Linked service description.
+    :vartype description: str
+    :ivar parameters: Parameters for linked service.
+    :vartype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
+    :ivar annotations: List of tags that can be used for describing the linked service.
+    :vartype annotations: list[JSON]
+    :ivar workspace_id: The Power BI workspace id. Required.
+    :vartype workspace_id: str
+    :ivar tenant_id: The tenant id to which the Power BI workspace belongs. Required.
+    :vartype tenant_id: str
+    """
+
+    _validation = {
+        "type": {"required": True},
+        "workspace_id": {"required": True},
+        "tenant_id": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+        "connect_via": {"key": "connectVia", "type": "IntegrationRuntimeReference"},
+        "description": {"key": "description", "type": "str"},
+        "parameters": {"key": "parameters", "type": "{ParameterSpecification}"},
+        "annotations": {"key": "annotations", "type": "[object]"},
+        "workspace_id": {"key": "typeProperties.workspaceId", "type": "str"},
+        "tenant_id": {"key": "typeProperties.tenantId", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        workspace_id: str,
+        tenant_id: str,
+        additional_properties: Optional[Dict[str, JSON]] = None,
+        connect_via: Optional["_models.IntegrationRuntimeReference"] = None,
+        description: Optional[str] = None,
+        parameters: Optional[Dict[str, "_models.ParameterSpecification"]] = None,
+        annotations: Optional[List[JSON]] = None,
+        **kwargs
+    ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, JSON]
+        :keyword connect_via: The integration runtime reference.
+        :paramtype connect_via: ~azure.mgmt.datafactory.models.IntegrationRuntimeReference
+        :keyword description: Linked service description.
+        :paramtype description: str
+        :keyword parameters: Parameters for linked service.
+        :paramtype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
+        :keyword annotations: List of tags that can be used for describing the linked service.
+        :paramtype annotations: list[JSON]
+        :keyword workspace_id: The Power BI workspace id. Required.
+        :paramtype workspace_id: str
+        :keyword tenant_id: The tenant id to which the Power BI workspace belongs. Required.
+        :paramtype tenant_id: str
+        """
+        super().__init__(
+            additional_properties=additional_properties,
+            connect_via=connect_via,
+            description=description,
+            parameters=parameters,
+            annotations=annotations,
+            **kwargs
+        )
+        self.type: str = "PowerBI"
+        self.workspace_id = workspace_id
+        self.tenant_id = tenant_id
 
 
 class PowerQuerySink(DataFlowSink):
@@ -45748,7 +45910,7 @@ class PrestoLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "Presto"  # type: str
+        self.type: str = "Presto"
         self.host = host
         self.server_version = server_version
         self.catalog = catalog
@@ -45880,7 +46042,7 @@ class PrestoObjectDataset(Dataset):  # pylint: disable=too-many-instance-attribu
             folder=folder,
             **kwargs
         )
-        self.type = "PrestoObject"  # type: str
+        self.type: str = "PrestoObject"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -45984,7 +46146,7 @@ class PrestoSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "PrestoSource"  # type: str
+        self.type: str = "PrestoSource"
         self.query = query
 
 
@@ -46442,7 +46604,7 @@ class QuickbaseLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Quickbase"  # type: str
+        self.type: str = "Quickbase"
         self.url = url
         self.user_token = user_token
         self.encrypted_credential = encrypted_credential
@@ -46574,7 +46736,7 @@ class QuickBooksLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "QuickBooks"  # type: str
+        self.type: str = "QuickBooks"
         self.connection_properties = connection_properties
         self.endpoint = endpoint
         self.company_id = company_id
@@ -46684,7 +46846,7 @@ class QuickBooksObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "QuickBooksObject"  # type: str
+        self.type: str = "QuickBooksObject"
         self.table_name = table_name
 
 
@@ -46786,7 +46948,7 @@ class QuickBooksSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "QuickBooksSource"  # type: str
+        self.type: str = "QuickBooksSource"
         self.query = query
 
 
@@ -47076,7 +47238,7 @@ class RelationalSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "RelationalSource"  # type: str
+        self.type: str = "RelationalSource"
         self.query = query
         self.additional_columns = additional_columns
 
@@ -47181,7 +47343,7 @@ class RelationalTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "RelationalTable"  # type: str
+        self.type: str = "RelationalTable"
         self.table_name = table_name
 
 
@@ -47320,7 +47482,7 @@ class RerunTumblingWindowTrigger(Trigger):
         super().__init__(
             additional_properties=additional_properties, description=description, annotations=annotations, **kwargs
         )
-        self.type = "RerunTumblingWindowTrigger"  # type: str
+        self.type: str = "RerunTumblingWindowTrigger"
         self.parent_trigger = parent_trigger
         self.requested_start_time = requested_start_time
         self.requested_end_time = requested_end_time
@@ -47453,7 +47615,7 @@ class ResponsysLinkedService(LinkedService):  # pylint: disable=too-many-instanc
             annotations=annotations,
             **kwargs
         )
-        self.type = "Responsys"  # type: str
+        self.type: str = "Responsys"
         self.endpoint = endpoint
         self.client_id = client_id
         self.client_secret = client_secret
@@ -47561,7 +47723,7 @@ class ResponsysObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "ResponsysObject"  # type: str
+        self.type: str = "ResponsysObject"
         self.table_name = table_name
 
 
@@ -47663,7 +47825,7 @@ class ResponsysSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "ResponsysSource"  # type: str
+        self.type: str = "ResponsysSource"
         self.query = query
 
 
@@ -47799,7 +47961,7 @@ class RestResourceDataset(Dataset):  # pylint: disable=too-many-instance-attribu
             folder=folder,
             **kwargs
         )
-        self.type = "RestResource"  # type: str
+        self.type: str = "RestResource"
         self.relative_url = relative_url
         self.request_method = request_method
         self.request_body = request_body
@@ -48018,7 +48180,7 @@ class RestServiceLinkedService(LinkedService):  # pylint: disable=too-many-insta
             annotations=annotations,
             **kwargs
         )
-        self.type = "RestService"  # type: str
+        self.type: str = "RestService"
         self.url = url
         self.enable_server_certificate_validation = enable_server_certificate_validation
         self.authentication_type = authentication_type
@@ -48171,7 +48333,7 @@ class RestSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "RestSink"  # type: str
+        self.type: str = "RestSink"
         self.request_method = request_method
         self.additional_headers = additional_headers
         self.http_request_timeout = http_request_timeout
@@ -48309,7 +48471,7 @@ class RestSource(CopySource):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "RestSource"  # type: str
+        self.type: str = "RestSource"
         self.request_method = request_method
         self.request_body = request_body
         self.additional_headers = additional_headers
@@ -48639,7 +48801,7 @@ class SalesforceLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "Salesforce"  # type: str
+        self.type: str = "Salesforce"
         self.environment_url = environment_url
         self.username = username
         self.password = password
@@ -48774,7 +48936,7 @@ class SalesforceMarketingCloudLinkedService(LinkedService):  # pylint: disable=t
             annotations=annotations,
             **kwargs
         )
-        self.type = "SalesforceMarketingCloud"  # type: str
+        self.type: str = "SalesforceMarketingCloud"
         self.connection_properties = connection_properties
         self.client_id = client_id
         self.client_secret = client_secret
@@ -48882,7 +49044,7 @@ class SalesforceMarketingCloudObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SalesforceMarketingCloudObject"  # type: str
+        self.type: str = "SalesforceMarketingCloudObject"
         self.table_name = table_name
 
 
@@ -48984,7 +49146,7 @@ class SalesforceMarketingCloudSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SalesforceMarketingCloudSource"  # type: str
+        self.type: str = "SalesforceMarketingCloudSource"
         self.query = query
 
 
@@ -49088,7 +49250,7 @@ class SalesforceObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SalesforceObject"  # type: str
+        self.type: str = "SalesforceObject"
         self.object_api_name = object_api_name
 
 
@@ -49214,7 +49376,7 @@ class SalesforceServiceCloudLinkedService(LinkedService):  # pylint: disable=too
             annotations=annotations,
             **kwargs
         )
-        self.type = "SalesforceServiceCloud"  # type: str
+        self.type: str = "SalesforceServiceCloud"
         self.environment_url = environment_url
         self.username = username
         self.password = password
@@ -49324,7 +49486,7 @@ class SalesforceServiceCloudObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SalesforceServiceCloudObject"  # type: str
+        self.type: str = "SalesforceServiceCloudObject"
         self.object_api_name = object_api_name
 
 
@@ -49451,7 +49613,7 @@ class SalesforceServiceCloudSink(CopySink):  # pylint: disable=too-many-instance
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SalesforceServiceCloudSink"  # type: str
+        self.type: str = "SalesforceServiceCloudSink"
         self.write_behavior = write_behavior
         self.external_id_field_name = external_id_field_name
         self.ignore_null_values = ignore_null_values
@@ -49551,7 +49713,7 @@ class SalesforceServiceCloudSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SalesforceServiceCloudSource"  # type: str
+        self.type: str = "SalesforceServiceCloudSource"
         self.query = query
         self.read_behavior = read_behavior
         self.additional_columns = additional_columns
@@ -49680,7 +49842,7 @@ class SalesforceSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SalesforceSink"  # type: str
+        self.type: str = "SalesforceSink"
         self.write_behavior = write_behavior
         self.external_id_field_name = external_id_field_name
         self.ignore_null_values = ignore_null_values
@@ -49790,7 +49952,7 @@ class SalesforceSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SalesforceSource"  # type: str
+        self.type: str = "SalesforceSource"
         self.query = query
         self.read_behavior = read_behavior
 
@@ -49887,7 +50049,7 @@ class SapBwCubeDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SapBwCube"  # type: str
+        self.type: str = "SapBwCube"
 
 
 class SapBWLinkedService(LinkedService):  # pylint: disable=too-many-instance-attributes
@@ -50005,7 +50167,7 @@ class SapBWLinkedService(LinkedService):  # pylint: disable=too-many-instance-at
             annotations=annotations,
             **kwargs
         )
-        self.type = "SapBW"  # type: str
+        self.type: str = "SapBW"
         self.server = server
         self.system_number = system_number
         self.client_id = client_id
@@ -50110,7 +50272,7 @@ class SapBwSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SapBwSource"  # type: str
+        self.type: str = "SapBwSource"
         self.query = query
 
 
@@ -50213,7 +50375,7 @@ class SapCloudForCustomerLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "SapCloudForCustomer"  # type: str
+        self.type: str = "SapCloudForCustomer"
         self.url = url
         self.username = username
         self.password = password
@@ -50321,7 +50483,7 @@ class SapCloudForCustomerResourceDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SapCloudForCustomerResource"  # type: str
+        self.type: str = "SapCloudForCustomerResource"
         self.path = path
 
 
@@ -50437,7 +50599,7 @@ class SapCloudForCustomerSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SapCloudForCustomerSink"  # type: str
+        self.type: str = "SapCloudForCustomerSink"
         self.write_behavior = write_behavior
         self.http_request_timeout = http_request_timeout
 
@@ -50552,7 +50714,7 @@ class SapCloudForCustomerSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SapCloudForCustomerSource"  # type: str
+        self.type: str = "SapCloudForCustomerSource"
         self.query = query
         self.http_request_timeout = http_request_timeout
 
@@ -50656,7 +50818,7 @@ class SapEccLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "SapEcc"  # type: str
+        self.type: str = "SapEcc"
         self.url = url
         self.username = username
         self.password = password
@@ -50764,7 +50926,7 @@ class SapEccResourceDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SapEccResource"  # type: str
+        self.type: str = "SapEccResource"
         self.path = path
 
 
@@ -50878,7 +51040,7 @@ class SapEccSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SapEccSource"  # type: str
+        self.type: str = "SapEccSource"
         self.query = query
         self.http_request_timeout = http_request_timeout
 
@@ -50995,7 +51157,7 @@ class SapHanaLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "SapHana"  # type: str
+        self.type: str = "SapHana"
         self.connection_string = connection_string
         self.server = server
         self.authentication_type = authentication_type
@@ -51145,7 +51307,7 @@ class SapHanaSource(TabularSource):  # pylint: disable=too-many-instance-attribu
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SapHanaSource"  # type: str
+        self.type: str = "SapHanaSource"
         self.query = query
         self.packet_size = packet_size
         self.partition_option = partition_option
@@ -51259,7 +51421,7 @@ class SapHanaTableDataset(Dataset):  # pylint: disable=too-many-instance-attribu
             folder=folder,
             **kwargs
         )
-        self.type = "SapHanaTable"  # type: str
+        self.type: str = "SapHanaTable"
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
 
@@ -51476,7 +51638,7 @@ class SapOdpLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "SapOdp"  # type: str
+        self.type: str = "SapOdp"
         self.server = server
         self.system_number = system_number
         self.client_id = client_id
@@ -51607,7 +51769,7 @@ class SapOdpResourceDataset(Dataset):  # pylint: disable=too-many-instance-attri
             folder=folder,
             **kwargs
         )
-        self.type = "SapOdpResource"  # type: str
+        self.type: str = "SapOdpResource"
         self.context = context
         self.object_name = object_name
 
@@ -51734,7 +51896,7 @@ class SapOdpSource(TabularSource):  # pylint: disable=too-many-instance-attribut
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SapOdpSource"  # type: str
+        self.type: str = "SapOdpSource"
         self.extraction_mode = extraction_mode
         self.subscriber_process = subscriber_process
         self.selection = selection
@@ -51898,7 +52060,7 @@ class SapOpenHubLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "SapOpenHub"  # type: str
+        self.type: str = "SapOpenHub"
         self.server = server
         self.system_number = system_number
         self.client_id = client_id
@@ -52038,7 +52200,7 @@ class SapOpenHubSource(TabularSource):  # pylint: disable=too-many-instance-attr
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SapOpenHubSource"  # type: str
+        self.type: str = "SapOpenHubSource"
         self.exclude_last_request = exclude_last_request
         self.base_request_id = base_request_id
         self.custom_rfc_read_table_function_module = custom_rfc_read_table_function_module
@@ -52164,7 +52326,7 @@ class SapOpenHubTableDataset(Dataset):  # pylint: disable=too-many-instance-attr
             folder=folder,
             **kwargs
         )
-        self.type = "SapOpenHubTable"  # type: str
+        self.type: str = "SapOpenHubTable"
         self.open_hub_destination_name = open_hub_destination_name
         self.exclude_last_request = exclude_last_request
         self.base_request_id = base_request_id
@@ -52366,7 +52528,7 @@ class SapTableLinkedService(LinkedService):  # pylint: disable=too-many-instance
             annotations=annotations,
             **kwargs
         )
-        self.type = "SapTable"  # type: str
+        self.type: str = "SapTable"
         self.server = server
         self.system_number = system_number
         self.client_id = client_id
@@ -52544,7 +52706,7 @@ class SapTableResourceDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SapTableResource"  # type: str
+        self.type: str = "SapTableResource"
         self.table_name = table_name
 
 
@@ -52714,7 +52876,7 @@ class SapTableSource(TabularSource):  # pylint: disable=too-many-instance-attrib
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SapTableSource"  # type: str
+        self.type: str = "SapTableSource"
         self.row_count = row_count
         self.row_skips = row_skips
         self.rfc_table_fields = rfc_table_fields
@@ -52797,7 +52959,7 @@ class ScheduleTrigger(MultiplePipelineTrigger):
             pipelines=pipelines,
             **kwargs
         )
-        self.type = "ScheduleTrigger"  # type: str
+        self.type: str = "ScheduleTrigger"
         self.recurrence = recurrence
 
 
@@ -53019,7 +53181,7 @@ class ScriptActivity(ExecutionActivity):  # pylint: disable=too-many-instance-at
             policy=policy,
             **kwargs
         )
-        self.type = "Script"  # type: str
+        self.type: str = "Script"
         self.script_block_execution_timeout = script_block_execution_timeout
         self.scripts = scripts
         self.log_settings = log_settings
@@ -53200,7 +53362,7 @@ class SecureString(SecretBase):
         :paramtype value: str
         """
         super().__init__(**kwargs)
-        self.type = "SecureString"  # type: str
+        self.type: str = "SecureString"
         self.value = value
 
 
@@ -53246,7 +53408,7 @@ class SelfDependencyTumblingWindowTriggerReference(DependencyReference):
         :paramtype size: str
         """
         super().__init__(**kwargs)
-        self.type = "SelfDependencyTumblingWindowTriggerReference"  # type: str
+        self.type: str = "SelfDependencyTumblingWindowTriggerReference"
         self.offset = offset
         self.size = size
 
@@ -53297,7 +53459,7 @@ class SelfHostedIntegrationRuntime(IntegrationRuntime):
         :paramtype linked_info: ~azure.mgmt.datafactory.models.LinkedIntegrationRuntimeType
         """
         super().__init__(additional_properties=additional_properties, description=description, **kwargs)
-        self.type = "SelfHosted"  # type: str
+        self.type: str = "SelfHosted"
         self.linked_info = linked_info
 
 
@@ -53547,7 +53709,7 @@ class SelfHostedIntegrationRuntimeStatus(IntegrationRuntimeStatus):  # pylint: d
         :paramtype links: list[~azure.mgmt.datafactory.models.LinkedIntegrationRuntime]
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "SelfHosted"  # type: str
+        self.type: str = "SelfHosted"
         self.create_time = None
         self.task_queue_id = None
         self.internal_channel_encryption = None
@@ -53714,7 +53876,7 @@ class ServiceNowLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "ServiceNow"  # type: str
+        self.type: str = "ServiceNow"
         self.endpoint = endpoint
         self.authentication_type = authentication_type
         self.username = username
@@ -53825,7 +53987,7 @@ class ServiceNowObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "ServiceNowObject"  # type: str
+        self.type: str = "ServiceNowObject"
         self.table_name = table_name
 
 
@@ -53927,7 +54089,7 @@ class ServiceNowSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "ServiceNowSource"  # type: str
+        self.type: str = "ServiceNowSource"
         self.query = query
 
 
@@ -53996,7 +54158,7 @@ class ServicePrincipalCredential(Credential):
         super().__init__(
             additional_properties=additional_properties, description=description, annotations=annotations, **kwargs
         )
-        self.type = "ServicePrincipal"  # type: str
+        self.type: str = "ServicePrincipal"
         self.service_principal_id = service_principal_id
         self.service_principal_key = service_principal_key
         self.tenant = tenant
@@ -54079,7 +54241,7 @@ class SetVariableActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "SetVariable"  # type: str
+        self.type: str = "SetVariable"
         self.variable_name = variable_name
         self.value = value
 
@@ -54135,7 +54297,7 @@ class SftpLocation(DatasetLocation):
         super().__init__(
             additional_properties=additional_properties, folder_path=folder_path, file_name=file_name, **kwargs
         )
-        self.type = "SftpLocation"  # type: str
+        self.type: str = "SftpLocation"
 
 
 class SftpReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-attributes
@@ -54272,7 +54434,7 @@ class SftpReadSettings(StoreReadSettings):  # pylint: disable=too-many-instance-
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SftpReadSettings"  # type: str
+        self.type: str = "SftpReadSettings"
         self.recursive = recursive
         self.wildcard_folder_path = wildcard_folder_path
         self.wildcard_file_name = wildcard_file_name
@@ -54446,7 +54608,7 @@ class SftpServerLinkedService(LinkedService):  # pylint: disable=too-many-instan
             annotations=annotations,
             **kwargs
         )
-        self.type = "Sftp"  # type: str
+        self.type: str = "Sftp"
         self.host = host
         self.port = port
         self.authentication_type = authentication_type
@@ -54539,7 +54701,7 @@ class SftpWriteSettings(StoreWriteSettings):
             copy_behavior=copy_behavior,
             **kwargs
         )
-        self.type = "SftpWriteSettings"  # type: str
+        self.type: str = "SftpWriteSettings"
         self.operation_timeout = operation_timeout
         self.use_temp_file_rename = use_temp_file_rename
 
@@ -54660,7 +54822,7 @@ class SharePointOnlineListLinkedService(LinkedService):  # pylint: disable=too-m
             annotations=annotations,
             **kwargs
         )
-        self.type = "SharePointOnlineList"  # type: str
+        self.type: str = "SharePointOnlineList"
         self.site_url = site_url
         self.tenant_id = tenant_id
         self.service_principal_id = service_principal_id
@@ -54768,7 +54930,7 @@ class SharePointOnlineListResourceDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SharePointOnlineListResource"  # type: str
+        self.type: str = "SharePointOnlineListResource"
         self.list_name = list_name
 
 
@@ -54862,7 +55024,7 @@ class SharePointOnlineListSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SharePointOnlineListSource"  # type: str
+        self.type: str = "SharePointOnlineListSource"
         self.query = query
         self.http_request_timeout = http_request_timeout
 
@@ -54982,7 +55144,7 @@ class ShopifyLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "Shopify"  # type: str
+        self.type: str = "Shopify"
         self.host = host
         self.access_token = access_token
         self.use_encrypted_endpoints = use_encrypted_endpoints
@@ -55089,7 +55251,7 @@ class ShopifyObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "ShopifyObject"  # type: str
+        self.type: str = "ShopifyObject"
         self.table_name = table_name
 
 
@@ -55191,7 +55353,7 @@ class ShopifySource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "ShopifySource"  # type: str
+        self.type: str = "ShopifySource"
         self.query = query
 
 
@@ -55306,7 +55468,7 @@ class SmartsheetLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Smartsheet"  # type: str
+        self.type: str = "Smartsheet"
         self.api_token = api_token
         self.encrypted_credential = encrypted_credential
 
@@ -55419,7 +55581,7 @@ class SnowflakeDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "SnowflakeTable"  # type: str
+        self.type: str = "SnowflakeTable"
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
 
@@ -55481,7 +55643,7 @@ class SnowflakeExportCopyCommand(ExportSettings):
         :paramtype additional_format_options: dict[str, JSON]
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "SnowflakeExportCopyCommand"  # type: str
+        self.type: str = "SnowflakeExportCopyCommand"
         self.additional_copy_options = additional_copy_options
         self.additional_format_options = additional_format_options
 
@@ -55543,7 +55705,7 @@ class SnowflakeImportCopyCommand(ImportSettings):
         :paramtype additional_format_options: dict[str, JSON]
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "SnowflakeImportCopyCommand"  # type: str
+        self.type: str = "SnowflakeImportCopyCommand"
         self.additional_copy_options = additional_copy_options
         self.additional_format_options = additional_format_options
 
@@ -55637,7 +55799,7 @@ class SnowflakeLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Snowflake"  # type: str
+        self.type: str = "Snowflake"
         self.connection_string = connection_string
         self.password = password
         self.encrypted_credential = encrypted_credential
@@ -55747,7 +55909,7 @@ class SnowflakeSink(CopySink):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SnowflakeSink"  # type: str
+        self.type: str = "SnowflakeSink"
         self.pre_copy_script = pre_copy_script
         self.import_settings = import_settings
 
@@ -55776,12 +55938,13 @@ class SnowflakeSource(CopySource):
     :vartype disable_metrics_collection: JSON
     :ivar query: Snowflake Sql query. Type: string (or Expression with resultType string).
     :vartype query: JSON
-    :ivar export_settings: Snowflake export settings.
+    :ivar export_settings: Snowflake export settings. Required.
     :vartype export_settings: ~azure.mgmt.datafactory.models.SnowflakeExportCopyCommand
     """
 
     _validation = {
         "type": {"required": True},
+        "export_settings": {"required": True},
     }
 
     _attribute_map = {
@@ -55798,13 +55961,13 @@ class SnowflakeSource(CopySource):
     def __init__(
         self,
         *,
+        export_settings: "_models.SnowflakeExportCopyCommand",
         additional_properties: Optional[Dict[str, JSON]] = None,
         source_retry_count: Optional[JSON] = None,
         source_retry_wait: Optional[JSON] = None,
         max_concurrent_connections: Optional[JSON] = None,
         disable_metrics_collection: Optional[JSON] = None,
         query: Optional[JSON] = None,
-        export_settings: Optional["_models.SnowflakeExportCopyCommand"] = None,
         **kwargs
     ):
         """
@@ -55825,7 +55988,7 @@ class SnowflakeSource(CopySource):
         :paramtype disable_metrics_collection: JSON
         :keyword query: Snowflake Sql query. Type: string (or Expression with resultType string).
         :paramtype query: JSON
-        :keyword export_settings: Snowflake export settings.
+        :keyword export_settings: Snowflake export settings. Required.
         :paramtype export_settings: ~azure.mgmt.datafactory.models.SnowflakeExportCopyCommand
         """
         super().__init__(
@@ -55836,7 +55999,7 @@ class SnowflakeSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SnowflakeSource"  # type: str
+        self.type: str = "SnowflakeSource"
         self.query = query
         self.export_settings = export_settings
 
@@ -56021,7 +56184,7 @@ class SparkLinkedService(LinkedService):  # pylint: disable=too-many-instance-at
             annotations=annotations,
             **kwargs
         )
-        self.type = "Spark"  # type: str
+        self.type: str = "Spark"
         self.host = host
         self.port = port
         self.server_type = server_type
@@ -56153,7 +56316,7 @@ class SparkObjectDataset(Dataset):  # pylint: disable=too-many-instance-attribut
             folder=folder,
             **kwargs
         )
-        self.type = "SparkObject"  # type: str
+        self.type: str = "SparkObject"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -56257,7 +56420,7 @@ class SparkSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SparkSource"  # type: str
+        self.type: str = "SparkSource"
         self.query = query
 
 
@@ -56481,7 +56644,7 @@ class SqlDWSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SqlDWSink"  # type: str
+        self.type: str = "SqlDWSink"
         self.pre_copy_script = pre_copy_script
         self.allow_poly_base = allow_poly_base
         self.poly_base_settings = poly_base_settings
@@ -56625,7 +56788,7 @@ class SqlDWSource(TabularSource):  # pylint: disable=too-many-instance-attribute
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SqlDWSource"  # type: str
+        self.type: str = "SqlDWSource"
         self.sql_reader_query = sql_reader_query
         self.sql_reader_stored_procedure_name = sql_reader_stored_procedure_name
         self.stored_procedure_parameters = stored_procedure_parameters
@@ -56824,7 +56987,7 @@ class SqlMISink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SqlMISink"  # type: str
+        self.type: str = "SqlMISink"
         self.sql_writer_stored_procedure_name = sql_writer_stored_procedure_name
         self.sql_writer_table_type = sql_writer_table_type
         self.pre_copy_script = pre_copy_script
@@ -56971,7 +57134,7 @@ class SqlMISource(TabularSource):  # pylint: disable=too-many-instance-attribute
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SqlMISource"  # type: str
+        self.type: str = "SqlMISource"
         self.sql_reader_query = sql_reader_query
         self.sql_reader_stored_procedure_name = sql_reader_stored_procedure_name
         self.stored_procedure_parameters = stored_procedure_parameters
@@ -57144,7 +57307,7 @@ class SqlServerLinkedService(LinkedService):  # pylint: disable=too-many-instanc
             annotations=annotations,
             **kwargs
         )
-        self.type = "SqlServer"  # type: str
+        self.type: str = "SqlServer"
         self.connection_string = connection_string
         self.user_name = user_name
         self.password = password
@@ -57313,7 +57476,7 @@ class SqlServerSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SqlServerSink"  # type: str
+        self.type: str = "SqlServerSink"
         self.sql_writer_stored_procedure_name = sql_writer_stored_procedure_name
         self.sql_writer_table_type = sql_writer_table_type
         self.pre_copy_script = pre_copy_script
@@ -57460,7 +57623,7 @@ class SqlServerSource(TabularSource):  # pylint: disable=too-many-instance-attri
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SqlServerSource"  # type: str
+        self.type: str = "SqlServerSource"
         self.sql_reader_query = sql_reader_query
         self.sql_reader_stored_procedure_name = sql_reader_stored_procedure_name
         self.stored_procedure_parameters = stored_procedure_parameters
@@ -57565,7 +57728,7 @@ class SqlServerStoredProcedureActivity(ExecutionActivity):
             policy=policy,
             **kwargs
         )
-        self.type = "SqlServerStoredProcedure"  # type: str
+        self.type: str = "SqlServerStoredProcedure"
         self.stored_procedure_name = stored_procedure_name
         self.stored_procedure_parameters = stored_procedure_parameters
 
@@ -57686,7 +57849,7 @@ class SqlServerTableDataset(Dataset):  # pylint: disable=too-many-instance-attri
             folder=folder,
             **kwargs
         )
-        self.type = "SqlServerTable"  # type: str
+        self.type: str = "SqlServerTable"
         self.table_name = table_name
         self.schema_type_properties_schema = schema_type_properties_schema
         self.table = table
@@ -57853,7 +58016,7 @@ class SqlSink(CopySink):  # pylint: disable=too-many-instance-attributes
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "SqlSink"  # type: str
+        self.type: str = "SqlSink"
         self.sql_writer_stored_procedure_name = sql_writer_stored_procedure_name
         self.sql_writer_table_type = sql_writer_table_type
         self.pre_copy_script = pre_copy_script
@@ -58004,7 +58167,7 @@ class SqlSource(TabularSource):  # pylint: disable=too-many-instance-attributes
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SqlSource"  # type: str
+        self.type: str = "SqlSource"
         self.sql_reader_query = sql_reader_query
         self.sql_reader_stored_procedure_name = sql_reader_stored_procedure_name
         self.stored_procedure_parameters = stored_procedure_parameters
@@ -58192,7 +58355,7 @@ class SquareLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "Square"  # type: str
+        self.type: str = "Square"
         self.connection_properties = connection_properties
         self.host = host
         self.client_id = client_id
@@ -58302,7 +58465,7 @@ class SquareObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SquareObject"  # type: str
+        self.type: str = "SquareObject"
         self.table_name = table_name
 
 
@@ -58404,7 +58567,7 @@ class SquareSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SquareSource"  # type: str
+        self.type: str = "SquareSource"
         self.query = query
 
 
@@ -58561,7 +58724,7 @@ class SsisObjectMetadata(_serialization.Model):
         :paramtype description: str
         """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.id = id
         self.name = name
         self.description = description
@@ -58623,7 +58786,7 @@ class SsisEnvironment(SsisObjectMetadata):
         :paramtype variables: list[~azure.mgmt.datafactory.models.SsisVariable]
         """
         super().__init__(id=id, name=name, description=description, **kwargs)
-        self.type = "Environment"  # type: str
+        self.type: str = "Environment"
         self.folder_id = folder_id
         self.variables = variables
 
@@ -58786,7 +58949,7 @@ class SsisFolder(SsisObjectMetadata):
         :paramtype description: str
         """
         super().__init__(id=id, name=name, description=description, **kwargs)
-        self.type = "Folder"  # type: str
+        self.type: str = "Folder"
 
 
 class SSISLogLocation(_serialization.Model):
@@ -58990,7 +59153,7 @@ class SsisPackage(SsisObjectMetadata):
         :paramtype parameters: list[~azure.mgmt.datafactory.models.SsisParameter]
         """
         super().__init__(id=id, name=name, description=description, **kwargs)
-        self.type = "Package"  # type: str
+        self.type: str = "Package"
         self.folder_id = folder_id
         self.project_version = project_version
         self.project_id = project_id
@@ -59265,7 +59428,7 @@ class SsisProject(SsisObjectMetadata):
         :paramtype parameters: list[~azure.mgmt.datafactory.models.SsisParameter]
         """
         super().__init__(id=id, name=name, description=description, **kwargs)
-        self.type = "Project"  # type: str
+        self.type: str = "Project"
         self.folder_id = folder_id
         self.version = version
         self.environment_refs = environment_refs
@@ -59561,7 +59724,7 @@ class SwitchActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Switch"  # type: str
+        self.type: str = "Switch"
         self.on = on
         self.cases = cases
         self.default_activities = default_activities
@@ -59714,7 +59877,7 @@ class SybaseLinkedService(LinkedService):  # pylint: disable=too-many-instance-a
             annotations=annotations,
             **kwargs
         )
-        self.type = "Sybase"  # type: str
+        self.type: str = "Sybase"
         self.server = server
         self.database = database
         self.schema = schema
@@ -59820,7 +59983,7 @@ class SybaseSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "SybaseSource"  # type: str
+        self.type: str = "SybaseSource"
         self.query = query
 
 
@@ -59923,7 +60086,7 @@ class SybaseTableDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "SybaseTable"  # type: str
+        self.type: str = "SybaseTable"
         self.table_name = table_name
 
 
@@ -60064,7 +60227,7 @@ class SynapseNotebookActivity(ExecutionActivity):  # pylint: disable=too-many-in
             policy=policy,
             **kwargs
         )
-        self.type = "SynapseNotebook"  # type: str
+        self.type: str = "SynapseNotebook"
         self.notebook = notebook
         self.spark_pool = spark_pool
         self.parameters = parameters
@@ -60299,7 +60462,7 @@ class SynapseSparkJobDefinitionActivity(ExecutionActivity):  # pylint: disable=t
             policy=policy,
             **kwargs
         )
-        self.type = "SparkJob"  # type: str
+        self.type: str = "SparkJob"
         self.spark_job = spark_job
         self.arguments = arguments
         self.file = file
@@ -60446,7 +60609,7 @@ class TabularTranslator(CopyTranslator):
         :paramtype type_conversion_settings: ~azure.mgmt.datafactory.models.TypeConversionSettings
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "TabularTranslator"  # type: str
+        self.type: str = "TabularTranslator"
         self.column_mappings = column_mappings
         self.schema_mapping = schema_mapping
         self.collection_reference = collection_reference
@@ -60497,7 +60660,7 @@ class TarGZipReadSettings(CompressionReadSettings):
         :paramtype preserve_compression_file_name_as_folder: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "TarGZipReadSettings"  # type: str
+        self.type: str = "TarGZipReadSettings"
         self.preserve_compression_file_name_as_folder = preserve_compression_file_name_as_folder
 
 
@@ -60542,7 +60705,7 @@ class TarReadSettings(CompressionReadSettings):
         :paramtype preserve_compression_file_name_as_folder: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "TarReadSettings"  # type: str
+        self.type: str = "TarReadSettings"
         self.preserve_compression_file_name_as_folder = preserve_compression_file_name_as_folder
 
 
@@ -60659,7 +60822,7 @@ class TeamDeskLinkedService(LinkedService):  # pylint: disable=too-many-instance
             annotations=annotations,
             **kwargs
         )
-        self.type = "TeamDesk"  # type: str
+        self.type: str = "TeamDesk"
         self.authentication_type = authentication_type
         self.url = url
         self.user_name = user_name
@@ -60780,7 +60943,7 @@ class TeradataLinkedService(LinkedService):  # pylint: disable=too-many-instance
             annotations=annotations,
             **kwargs
         )
-        self.type = "Teradata"  # type: str
+        self.type: str = "Teradata"
         self.connection_string = connection_string
         self.server = server
         self.authentication_type = authentication_type
@@ -60949,7 +61112,7 @@ class TeradataSource(TabularSource):  # pylint: disable=too-many-instance-attrib
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "TeradataSource"  # type: str
+        self.type: str = "TeradataSource"
         self.query = query
         self.partition_option = partition_option
         self.partition_settings = partition_settings
@@ -61062,7 +61225,7 @@ class TeradataTableDataset(Dataset):  # pylint: disable=too-many-instance-attrib
             folder=folder,
             **kwargs
         )
-        self.type = "TeradataTable"  # type: str
+        self.type: str = "TeradataTable"
         self.database = database
         self.table = table
 
@@ -61188,7 +61351,7 @@ class TextFormat(DatasetStorageFormat):  # pylint: disable=too-many-instance-att
         super().__init__(
             additional_properties=additional_properties, serializer=serializer, deserializer=deserializer, **kwargs
         )
-        self.type = "TextFormat"  # type: str
+        self.type: str = "TextFormat"
         self.column_delimiter = column_delimiter
         self.row_delimiter = row_delimiter
         self.escape_char = escape_char
@@ -61232,7 +61395,7 @@ class TriggerDependencyReference(DependencyReference):
         :paramtype reference_trigger: ~azure.mgmt.datafactory.models.TriggerReference
         """
         super().__init__(**kwargs)
-        self.type = "TriggerDependencyReference"  # type: str
+        self.type: str = "TriggerDependencyReference"
         self.reference_trigger = reference_trigger
 
 
@@ -61715,7 +61878,7 @@ class TumblingWindowTrigger(Trigger):  # pylint: disable=too-many-instance-attri
         super().__init__(
             additional_properties=additional_properties, description=description, annotations=annotations, **kwargs
         )
-        self.type = "TumblingWindowTrigger"  # type: str
+        self.type: str = "TumblingWindowTrigger"
         self.pipeline = pipeline
         self.frequency = frequency
         self.interval = interval
@@ -61781,7 +61944,7 @@ class TumblingWindowTriggerDependencyReference(TriggerDependencyReference):
         :paramtype size: str
         """
         super().__init__(reference_trigger=reference_trigger, **kwargs)
-        self.type = "TumblingWindowTriggerDependencyReference"  # type: str
+        self.type: str = "TumblingWindowTriggerDependencyReference"
         self.offset = offset
         self.size = size
 
@@ -61864,7 +62027,7 @@ class TwilioLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Twilio"  # type: str
+        self.type: str = "Twilio"
         self.user_name = user_name
         self.password = password
 
@@ -62036,7 +62199,7 @@ class UntilActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Until"  # type: str
+        self.type: str = "Until"
         self.expression = expression
         self.timeout = timeout
         self.activities = activities
@@ -62311,7 +62474,7 @@ class ValidationActivity(ControlActivity):  # pylint: disable=too-many-instance-
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Validation"  # type: str
+        self.type: str = "Validation"
         self.timeout = timeout
         self.sleep = sleep
         self.minimum_size = minimum_size
@@ -62439,7 +62602,7 @@ class VerticaLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Vertica"  # type: str
+        self.type: str = "Vertica"
         self.connection_string = connection_string
         self.pwd = pwd
         self.encrypted_credential = encrypted_credential
@@ -62543,7 +62706,7 @@ class VerticaSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "VerticaSource"  # type: str
+        self.type: str = "VerticaSource"
         self.query = query
 
 
@@ -62663,7 +62826,7 @@ class VerticaTableDataset(Dataset):  # pylint: disable=too-many-instance-attribu
             folder=folder,
             **kwargs
         )
-        self.type = "VerticaTable"  # type: str
+        self.type: str = "VerticaTable"
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
@@ -62741,7 +62904,7 @@ class WaitActivity(ControlActivity):
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "Wait"  # type: str
+        self.type: str = "Wait"
         self.wait_time_in_seconds = wait_time_in_seconds
 
 
@@ -62890,7 +63053,7 @@ class WebActivity(ExecutionActivity):  # pylint: disable=too-many-instance-attri
             policy=policy,
             **kwargs
         )
-        self.type = "WebActivity"  # type: str
+        self.type: str = "WebActivity"
         self.method = method
         self.url = url
         self.headers = headers
@@ -63020,7 +63183,7 @@ class WebLinkedServiceTypeProperties(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.url = url
-        self.authentication_type = None  # type: Optional[str]
+        self.authentication_type: Optional[str] = None
 
 
 class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
@@ -63053,7 +63216,7 @@ class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
         :paramtype url: JSON
         """
         super().__init__(url=url, **kwargs)
-        self.authentication_type = "Anonymous"  # type: str
+        self.authentication_type: str = "Anonymous"
 
 
 class WebBasicAuthentication(WebLinkedServiceTypeProperties):
@@ -63100,7 +63263,7 @@ class WebBasicAuthentication(WebLinkedServiceTypeProperties):
         :paramtype password: ~azure.mgmt.datafactory.models.SecretBase
         """
         super().__init__(url=url, **kwargs)
-        self.authentication_type = "Basic"  # type: str
+        self.authentication_type: str = "Basic"
         self.username = username
         self.password = password
 
@@ -63147,7 +63310,7 @@ class WebClientCertificateAuthentication(WebLinkedServiceTypeProperties):
         :paramtype password: ~azure.mgmt.datafactory.models.SecretBase
         """
         super().__init__(url=url, **kwargs)
-        self.authentication_type = "ClientCertificate"  # type: str
+        self.authentication_type: str = "ClientCertificate"
         self.pfx = pfx
         self.password = password
 
@@ -63279,7 +63442,7 @@ class WebHookActivity(ControlActivity):  # pylint: disable=too-many-instance-att
             user_properties=user_properties,
             **kwargs
         )
-        self.type = "WebHook"  # type: str
+        self.type: str = "WebHook"
         self.method = method
         self.url = url
         self.timeout = timeout
@@ -63360,7 +63523,7 @@ class WebLinkedService(LinkedService):
             annotations=annotations,
             **kwargs
         )
-        self.type = "Web"  # type: str
+        self.type: str = "Web"
         self.type_properties = type_properties
 
 
@@ -63444,7 +63607,7 @@ class WebSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "WebSource"  # type: str
+        self.type: str = "WebSource"
         self.additional_columns = additional_columns
 
 
@@ -63557,7 +63720,7 @@ class WebTableDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "WebTable"  # type: str
+        self.type: str = "WebTable"
         self.index = index
         self.path = path
 
@@ -63625,7 +63788,7 @@ class WranglingDataFlow(DataFlow):
         :paramtype document_locale: str
         """
         super().__init__(description=description, annotations=annotations, folder=folder, **kwargs)
-        self.type = "WranglingDataFlow"  # type: str
+        self.type: str = "WranglingDataFlow"
         self.sources = sources
         self.script = script
         self.document_locale = document_locale
@@ -63762,7 +63925,7 @@ class XeroLinkedService(LinkedService):  # pylint: disable=too-many-instance-att
             annotations=annotations,
             **kwargs
         )
-        self.type = "Xero"  # type: str
+        self.type: str = "Xero"
         self.connection_properties = connection_properties
         self.host = host
         self.consumer_key = consumer_key
@@ -63871,7 +64034,7 @@ class XeroObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "XeroObject"  # type: str
+        self.type: str = "XeroObject"
         self.table_name = table_name
 
 
@@ -63973,7 +64136,7 @@ class XeroSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "XeroSource"  # type: str
+        self.type: str = "XeroSource"
         self.query = query
 
 
@@ -64102,7 +64265,7 @@ class XmlDataset(Dataset):  # pylint: disable=too-many-instance-attributes
             folder=folder,
             **kwargs
         )
-        self.type = "Xml"  # type: str
+        self.type: str = "Xml"
         self.location = location
         self.encoding_name = encoding_name
         self.null_value = null_value
@@ -64184,7 +64347,7 @@ class XmlReadSettings(FormatReadSettings):
         :paramtype namespace_prefixes: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "XmlReadSettings"  # type: str
+        self.type: str = "XmlReadSettings"
         self.compression_properties = compression_properties
         self.validation_mode = validation_mode
         self.detect_data_type = detect_data_type
@@ -64284,7 +64447,7 @@ class XmlSource(CopySource):
             disable_metrics_collection=disable_metrics_collection,
             **kwargs
         )
-        self.type = "XmlSource"  # type: str
+        self.type: str = "XmlSource"
         self.store_settings = store_settings
         self.format_settings = format_settings
         self.additional_columns = additional_columns
@@ -64402,7 +64565,7 @@ class ZendeskLinkedService(LinkedService):  # pylint: disable=too-many-instance-
             annotations=annotations,
             **kwargs
         )
-        self.type = "Zendesk"  # type: str
+        self.type: str = "Zendesk"
         self.authentication_type = authentication_type
         self.url = url
         self.user_name = user_name
@@ -64452,7 +64615,7 @@ class ZipDeflateReadSettings(CompressionReadSettings):
         :paramtype preserve_zip_file_name_as_folder: JSON
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.type = "ZipDeflateReadSettings"  # type: str
+        self.type: str = "ZipDeflateReadSettings"
         self.preserve_zip_file_name_as_folder = preserve_zip_file_name_as_folder
 
 
@@ -64576,7 +64739,7 @@ class ZohoLinkedService(LinkedService):  # pylint: disable=too-many-instance-att
             annotations=annotations,
             **kwargs
         )
-        self.type = "Zoho"  # type: str
+        self.type: str = "Zoho"
         self.connection_properties = connection_properties
         self.endpoint = endpoint
         self.access_token = access_token
@@ -64684,7 +64847,7 @@ class ZohoObjectDataset(Dataset):
             folder=folder,
             **kwargs
         )
-        self.type = "ZohoObject"  # type: str
+        self.type: str = "ZohoObject"
         self.table_name = table_name
 
 
@@ -64786,5 +64949,5 @@ class ZohoSource(TabularSource):
             additional_columns=additional_columns,
             **kwargs
         )
-        self.type = "ZohoSource"  # type: str
+        self.type: str = "ZohoSource"
         self.query = query
