@@ -187,6 +187,22 @@ class LoginType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     EXTERNAL_GROUP = "ExternalGroup"
 
 
+class MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevelMigrationType(
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
+    """MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevelMigrationType."""
+
+    INITIAL_LOAD = "InitialLoad"
+
+
+class MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevelMigrationType(
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
+    """MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevelMigrationType."""
+
+    CDC = "Cdc"
+
+
 class MigrationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Current state of migration."""
 
@@ -567,6 +583,7 @@ class TaskType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MIGRATE_SQL_SERVER_SQL_DB = "Migrate.SqlServer.SqlDb"
     MIGRATE_SQL_SERVER_AZURE_SQL_DB_SYNC = "Migrate.SqlServer.AzureSqlDb.Sync"
     MIGRATE_MY_SQL_AZURE_DB_FOR_MY_SQL_SYNC = "Migrate.MySql.AzureDbForMySql.Sync"
+    MIGRATE_MY_SQL_AZURE_DB_FOR_MY_SQL_REPLICATE_CHANGES = "Migrate.MySql.AzureDbForMySql.ReplicateChanges"
     MIGRATE_MY_SQL_AZURE_DB_FOR_MY_SQL = "Migrate.MySql.AzureDbForMySql"
     MIGRATE_POSTGRE_SQL_AZURE_DB_FOR_POSTGRE_SQL_SYNC_V2 = "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2"
     MIGRATE_ORACLE_AZURE_DB_FOR_POSTGRE_SQL_SYNC = "Migrate.Oracle.AzureDbForPostgreSql.Sync"

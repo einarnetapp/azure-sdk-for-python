@@ -33,7 +33,14 @@ def main():
         group_name="DmsSdkRg",
         service_name="DmsSdkService",
         task_name="DmsSdkTask",
-        parameters={"properties": {"input": {"serverVersion": "NA"}, "taskType": "Service.Check.OCI"}},
+        parameters={
+            "properties": {
+                "input": {
+                    "sourceConnectionInfo": {"port": 3306, "serverName": "localhost", "type": "MySqlConnectionInfo"}
+                },
+                "taskType": "ConnectToSource.MySql",
+            }
+        },
     )
     print(response)
 

@@ -550,6 +550,7 @@ class ProjectTaskProperties(_serialization.Model):
     GetUserTablesSqlTaskProperties, GetUserTablesMySqlTaskProperties,
     GetUserTablesOracleTaskProperties, GetUserTablesPostgreSqlTaskProperties,
     MigrateMongoDbTaskProperties, MigrateMySqlAzureDbForMySqlOfflineTaskProperties,
+    MigrateMySqlAzureDbForMySqlReplicateChangesTaskProperties,
     MigrateMySqlAzureDbForMySqlSyncTaskProperties,
     MigrateOracleAzureDbForPostgreSqlSyncTaskProperties,
     MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties,
@@ -577,9 +578,10 @@ class ProjectTaskProperties(_serialization.Model):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -634,6 +636,7 @@ class ProjectTaskProperties(_serialization.Model):
             "GetUserTablesPostgreSql": "GetUserTablesPostgreSqlTaskProperties",
             "Migrate.MongoDb": "MigrateMongoDbTaskProperties",
             "Migrate.MySql.AzureDbForMySql": "MigrateMySqlAzureDbForMySqlOfflineTaskProperties",
+            "Migrate.MySql.AzureDbForMySql.ReplicateChanges": "MigrateMySqlAzureDbForMySqlReplicateChangesTaskProperties",
             "Migrate.MySql.AzureDbForMySql.Sync": "MigrateMySqlAzureDbForMySqlSyncTaskProperties",
             "Migrate.Oracle.AzureDbForPostgreSql.Sync": "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties",
             "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2": "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties",
@@ -685,9 +688,10 @@ class CheckOCIDriverTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -865,9 +869,10 @@ class ConnectToMongoDbTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -1003,9 +1008,10 @@ class ConnectToSourceMySqlTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -1188,9 +1194,10 @@ class ConnectToSourceOracleSyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -1335,9 +1342,10 @@ class ConnectToSourcePostgreSqlSyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -1413,9 +1421,10 @@ class ConnectToSourceSqlServerSyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -1867,9 +1876,10 @@ class ConnectToSourceSqlServerTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -2043,9 +2053,10 @@ class ConnectToTargetAzureDbForMySqlTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -2206,9 +2217,10 @@ class ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties(ProjectTaskPropertie
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -2398,9 +2410,10 @@ class ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties(ProjectTaskPro
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -2518,9 +2531,10 @@ class ConnectToTargetSqlDbSyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -2674,9 +2688,10 @@ class ConnectToTargetSqlDbTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -2836,9 +2851,10 @@ class ConnectToTargetSqlMISyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -3016,9 +3032,10 @@ class ConnectToTargetSqlMITaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -5153,9 +5170,10 @@ class GetTdeCertificatesSqlTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -5297,9 +5315,10 @@ class GetUserTablesMySqlTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -5441,9 +5460,10 @@ class GetUserTablesOracleTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -5586,9 +5606,10 @@ class GetUserTablesPostgreSqlTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -5759,9 +5780,10 @@ class GetUserTablesSqlSyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -5916,9 +5938,10 @@ class GetUserTablesSqlTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -6044,9 +6067,10 @@ class InstallOCIDriverTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -6243,9 +6267,10 @@ class MigrateMongoDbTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -6344,11 +6369,79 @@ class MigrateMySqlAzureDbForMySqlOfflineDatabaseInput(_serialization.Model):
         self.table_map = table_map
 
 
-class MigrateMySqlAzureDbForMySqlOfflineTaskInput(_serialization.Model):
+class MySqlSchemaMigrationOptions(_serialization.Model):
+    """MySQL schema migration options.
+
+    :ivar migrate_all_views: If true, all view definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_views: bool
+    :ivar migrate_all_triggers: If true, all trigger definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_triggers: bool
+    :ivar migrate_all_events: If true, all event definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_events: bool
+    :ivar migrate_all_routines: If true, all routine definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_routines: bool
+    """
+
+    _attribute_map = {
+        "migrate_all_views": {"key": "migrateAllViews", "type": "bool"},
+        "migrate_all_triggers": {"key": "migrateAllTriggers", "type": "bool"},
+        "migrate_all_events": {"key": "migrateAllEvents", "type": "bool"},
+        "migrate_all_routines": {"key": "migrateAllRoutines", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        migrate_all_views: bool = False,
+        migrate_all_triggers: bool = False,
+        migrate_all_events: bool = False,
+        migrate_all_routines: bool = False,
+        **kwargs
+    ):
+        """
+        :keyword migrate_all_views: If true, all view definitions will be migrated in the selected
+         databases.
+        :paramtype migrate_all_views: bool
+        :keyword migrate_all_triggers: If true, all trigger definitions will be migrated in the
+         selected databases.
+        :paramtype migrate_all_triggers: bool
+        :keyword migrate_all_events: If true, all event definitions will be migrated in the selected
+         databases.
+        :paramtype migrate_all_events: bool
+        :keyword migrate_all_routines: If true, all routine definitions will be migrated in the
+         selected databases.
+        :paramtype migrate_all_routines: bool
+        """
+        super().__init__(**kwargs)
+        self.migrate_all_views = migrate_all_views
+        self.migrate_all_triggers = migrate_all_triggers
+        self.migrate_all_events = migrate_all_events
+        self.migrate_all_routines = migrate_all_routines
+
+
+class MigrateMySqlAzureDbForMySqlOfflineTaskInput(
+    MySqlSchemaMigrationOptions
+):  # pylint: disable=too-many-instance-attributes
     """Input for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations.
 
     All required parameters must be populated in order to send to Azure.
 
+    :ivar migrate_all_views: If true, all view definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_views: bool
+    :ivar migrate_all_triggers: If true, all trigger definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_triggers: bool
+    :ivar migrate_all_events: If true, all event definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_events: bool
+    :ivar migrate_all_routines: If true, all routine definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_routines: bool
     :ivar source_connection_info: Connection information for source MySQL. Required.
     :vartype source_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
     :ivar target_connection_info: Connection information for target Azure Database for MySQL.
@@ -6361,9 +6454,15 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskInput(_serialization.Model):
     :vartype make_source_server_read_only: bool
     :ivar started_on: Parameter to specify when the migration started.
     :vartype started_on: ~datetime.datetime
+    :ivar source_server_resource_id: Optional resource Id of the source server if it is an azure
+     instance.
+    :vartype source_server_resource_id: str
+    :ivar target_server_resource_id: Optional resource Id of the target server.
+    :vartype target_server_resource_id: str
     :ivar optional_agent_settings: Optional parameters for fine tuning the data transfer rate
      during migration.
-    :vartype optional_agent_settings: dict[str, str]
+    :vartype optional_agent_settings:
+     ~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlOfflineTaskInputOptionalAgentSettings
     :ivar encrypted_key_for_secure_fields: encrypted key for secure fields.
     :vartype encrypted_key_for_secure_fields: str
     """
@@ -6375,12 +6474,21 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskInput(_serialization.Model):
     }
 
     _attribute_map = {
+        "migrate_all_views": {"key": "migrateAllViews", "type": "bool"},
+        "migrate_all_triggers": {"key": "migrateAllTriggers", "type": "bool"},
+        "migrate_all_events": {"key": "migrateAllEvents", "type": "bool"},
+        "migrate_all_routines": {"key": "migrateAllRoutines", "type": "bool"},
         "source_connection_info": {"key": "sourceConnectionInfo", "type": "MySqlConnectionInfo"},
         "target_connection_info": {"key": "targetConnectionInfo", "type": "MySqlConnectionInfo"},
         "selected_databases": {"key": "selectedDatabases", "type": "[MigrateMySqlAzureDbForMySqlOfflineDatabaseInput]"},
         "make_source_server_read_only": {"key": "makeSourceServerReadOnly", "type": "bool"},
         "started_on": {"key": "startedOn", "type": "iso-8601"},
-        "optional_agent_settings": {"key": "optionalAgentSettings", "type": "{str}"},
+        "source_server_resource_id": {"key": "sourceServerResourceId", "type": "str"},
+        "target_server_resource_id": {"key": "targetServerResourceId", "type": "str"},
+        "optional_agent_settings": {
+            "key": "optionalAgentSettings",
+            "type": "MigrateMySqlAzureDbForMySqlOfflineTaskInputOptionalAgentSettings",
+        },
         "encrypted_key_for_secure_fields": {"key": "encryptedKeyForSecureFields", "type": "str"},
     }
 
@@ -6390,13 +6498,33 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskInput(_serialization.Model):
         source_connection_info: "_models.MySqlConnectionInfo",
         target_connection_info: "_models.MySqlConnectionInfo",
         selected_databases: List["_models.MigrateMySqlAzureDbForMySqlOfflineDatabaseInput"],
+        migrate_all_views: bool = False,
+        migrate_all_triggers: bool = False,
+        migrate_all_events: bool = False,
+        migrate_all_routines: bool = False,
         make_source_server_read_only: bool = False,
         started_on: Optional[datetime.datetime] = None,
-        optional_agent_settings: Optional[Dict[str, str]] = None,
+        source_server_resource_id: Optional[str] = None,
+        target_server_resource_id: Optional[str] = None,
+        optional_agent_settings: Optional[
+            "_models.MigrateMySqlAzureDbForMySqlOfflineTaskInputOptionalAgentSettings"
+        ] = None,
         encrypted_key_for_secure_fields: Optional[str] = None,
         **kwargs
     ):
         """
+        :keyword migrate_all_views: If true, all view definitions will be migrated in the selected
+         databases.
+        :paramtype migrate_all_views: bool
+        :keyword migrate_all_triggers: If true, all trigger definitions will be migrated in the
+         selected databases.
+        :paramtype migrate_all_triggers: bool
+        :keyword migrate_all_events: If true, all event definitions will be migrated in the selected
+         databases.
+        :paramtype migrate_all_events: bool
+        :keyword migrate_all_routines: If true, all routine definitions will be migrated in the
+         selected databases.
+        :paramtype migrate_all_routines: bool
         :keyword source_connection_info: Connection information for source MySQL. Required.
         :paramtype source_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
         :keyword target_connection_info: Connection information for target Azure Database for MySQL.
@@ -6409,23 +6537,114 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskInput(_serialization.Model):
         :paramtype make_source_server_read_only: bool
         :keyword started_on: Parameter to specify when the migration started.
         :paramtype started_on: ~datetime.datetime
+        :keyword source_server_resource_id: Optional resource Id of the source server if it is an azure
+         instance.
+        :paramtype source_server_resource_id: str
+        :keyword target_server_resource_id: Optional resource Id of the target server.
+        :paramtype target_server_resource_id: str
         :keyword optional_agent_settings: Optional parameters for fine tuning the data transfer rate
          during migration.
-        :paramtype optional_agent_settings: dict[str, str]
+        :paramtype optional_agent_settings:
+         ~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlOfflineTaskInputOptionalAgentSettings
         :keyword encrypted_key_for_secure_fields: encrypted key for secure fields.
         :paramtype encrypted_key_for_secure_fields: str
         """
-        super().__init__(**kwargs)
+        super().__init__(
+            migrate_all_views=migrate_all_views,
+            migrate_all_triggers=migrate_all_triggers,
+            migrate_all_events=migrate_all_events,
+            migrate_all_routines=migrate_all_routines,
+            **kwargs
+        )
         self.source_connection_info = source_connection_info
         self.target_connection_info = target_connection_info
         self.selected_databases = selected_databases
         self.make_source_server_read_only = make_source_server_read_only
         self.started_on = started_on
+        self.source_server_resource_id = source_server_resource_id
+        self.target_server_resource_id = target_server_resource_id
         self.optional_agent_settings = optional_agent_settings
         self.encrypted_key_for_secure_fields = encrypted_key_for_secure_fields
 
 
-class MigrateMySqlAzureDbForMySqlOfflineTaskOutput(_serialization.Model):
+class MigrateMySqlAzureDbForMySqlOfflineTaskInputOptionalAgentSettings(_serialization.Model):
+    """Optional parameters for fine tuning the data transfer rate during migration.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, str]
+    :ivar enable_consistent_backup: Setting to enable transactional consistency.
+    :vartype enable_consistent_backup: bool
+    """
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{str}"},
+        "enable_consistent_backup": {"key": "enableConsistentBackup", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        additional_properties: Optional[Dict[str, str]] = None,
+        enable_consistent_backup: bool = False,
+        **kwargs
+    ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, str]
+        :keyword enable_consistent_backup: Setting to enable transactional consistency.
+        :paramtype enable_consistent_backup: bool
+        """
+        super().__init__(**kwargs)
+        self.additional_properties = additional_properties
+        self.enable_consistent_backup = enable_consistent_backup
+
+
+class MigrateMySqlAzureDbForMySqlTaskResult(_serialization.Model):
+    """Output for the task that migrates MySQL databases to Azure Database for MySQL.
+
+    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
+    MigrateMySqlAzureDbForMySqlOfflineTaskOutput,
+    MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput,
+    MigrateMySqlAzureDbForMySqlSyncTaskOutput
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Result identifier.
+    :vartype id: str
+    :ivar result_type: Result type. Required.
+    :vartype result_type: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "result_type": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "result_type": {"key": "resultType", "type": "str"},
+    }
+
+    _subtype_map = {
+        "result_type": {
+            "MigrateMySqlAzureDbForMySqlOfflineTaskOutput": "MigrateMySqlAzureDbForMySqlOfflineTaskOutput",
+            "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput": "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput",
+            "MigrateMySqlAzureDbForMySqlSyncTaskOutput": "MigrateMySqlAzureDbForMySqlSyncTaskOutput",
+        }
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.id = None
+        self.result_type: Optional[str] = None
+
+
+class MigrateMySqlAzureDbForMySqlOfflineTaskOutput(MigrateMySqlAzureDbForMySqlTaskResult):
     """Output for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
@@ -6466,8 +6685,7 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskOutput(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.result_type: Optional[str] = None
+        self.result_type: str = "MigrateMySqlAzureDbForMySqlOfflineTaskOutput"
 
 
 class MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel(
@@ -6626,6 +6844,9 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel(
     :vartype id: str
     :ivar result_type: Result type. Required.
     :vartype result_type: str
+    :ivar migration_type: "InitialLoad"
+    :vartype migration_type: str or
+     ~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevelMigrationType
     :ivar started_on: Migration start time.
     :vartype started_on: ~datetime.datetime
     :ivar ended_on: Migration end time.
@@ -6659,11 +6880,14 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel(
     :vartype exceptions_and_warnings: list[~azure.mgmt.datamigration.models.ReportableException]
     :ivar last_storage_update: Last time the storage was updated.
     :vartype last_storage_update: ~datetime.datetime
+    :ivar source_binlog_position: The binlog position when the consistent snapshot was taken.
+    :vartype source_binlog_position: ~azure.mgmt.datamigration.models.MySqlBinlogPositionOutput
     """
 
     _validation = {
         "id": {"readonly": True},
         "result_type": {"required": True},
+        "migration_type": {"readonly": True},
         "started_on": {"readonly": True},
         "ended_on": {"readonly": True},
         "duration_in_seconds": {"readonly": True},
@@ -6677,11 +6901,13 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel(
         "target_server_brand_version": {"readonly": True},
         "exceptions_and_warnings": {"readonly": True},
         "last_storage_update": {"readonly": True},
+        "source_binlog_position": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "result_type": {"key": "resultType", "type": "str"},
+        "migration_type": {"key": "migrationType", "type": "str"},
         "started_on": {"key": "startedOn", "type": "iso-8601"},
         "ended_on": {"key": "endedOn", "type": "iso-8601"},
         "duration_in_seconds": {"key": "durationInSeconds", "type": "int"},
@@ -6697,6 +6923,7 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel(
         "target_server_brand_version": {"key": "targetServerBrandVersion", "type": "str"},
         "exceptions_and_warnings": {"key": "exceptionsAndWarnings", "type": "[ReportableException]"},
         "last_storage_update": {"key": "lastStorageUpdate", "type": "iso-8601"},
+        "source_binlog_position": {"key": "sourceBinlogPosition", "type": "MySqlBinlogPositionOutput"},
     }
 
     def __init__(
@@ -6715,6 +6942,7 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel(
         """
         super().__init__(**kwargs)
         self.result_type: str = "MigrationLevelOutput"
+        self.migration_type = None
         self.started_on = None
         self.ended_on = None
         self.duration_in_seconds = None
@@ -6730,6 +6958,7 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel(
         self.target_server_brand_version = None
         self.exceptions_and_warnings = None
         self.last_storage_update = None
+        self.source_binlog_position = None
 
 
 class MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel(
@@ -6833,9 +7062,10 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -6908,7 +7138,7 @@ class MigrateMySqlAzureDbForMySqlOfflineTaskProperties(ProjectTaskProperties):
         self.task_id = task_id
 
 
-class MigrateMySqlAzureDbForMySqlSyncDatabaseInput(_serialization.Model):
+class MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput(_serialization.Model):
     """Database specific information for MySQL to Azure Database for MySQL migration task inputs.
 
     :ivar name: Name of the database.
@@ -6916,12 +7146,6 @@ class MigrateMySqlAzureDbForMySqlSyncDatabaseInput(_serialization.Model):
     :ivar target_database_name: Name of target database. Note: Target database will be truncated
      before starting migration.
     :vartype target_database_name: str
-    :ivar migration_setting: Migration settings which tune the migration behavior.
-    :vartype migration_setting: dict[str, str]
-    :ivar source_setting: Source settings to tune source endpoint migration behavior.
-    :vartype source_setting: dict[str, str]
-    :ivar target_setting: Target settings to tune target endpoint migration behavior.
-    :vartype target_setting: dict[str, str]
     :ivar table_map: Mapping of source to target tables.
     :vartype table_map: dict[str, str]
     """
@@ -6929,9 +7153,6 @@ class MigrateMySqlAzureDbForMySqlSyncDatabaseInput(_serialization.Model):
     _attribute_map = {
         "name": {"key": "name", "type": "str"},
         "target_database_name": {"key": "targetDatabaseName", "type": "str"},
-        "migration_setting": {"key": "migrationSetting", "type": "{str}"},
-        "source_setting": {"key": "sourceSetting", "type": "{str}"},
-        "target_setting": {"key": "targetSetting", "type": "{str}"},
         "table_map": {"key": "tableMap", "type": "{str}"},
     }
 
@@ -6940,9 +7161,6 @@ class MigrateMySqlAzureDbForMySqlSyncDatabaseInput(_serialization.Model):
         *,
         name: Optional[str] = None,
         target_database_name: Optional[str] = None,
-        migration_setting: Optional[Dict[str, str]] = None,
-        source_setting: Optional[Dict[str, str]] = None,
-        target_setting: Optional[Dict[str, str]] = None,
         table_map: Optional[Dict[str, str]] = None,
         **kwargs
     ):
@@ -6952,26 +7170,17 @@ class MigrateMySqlAzureDbForMySqlSyncDatabaseInput(_serialization.Model):
         :keyword target_database_name: Name of target database. Note: Target database will be truncated
          before starting migration.
         :paramtype target_database_name: str
-        :keyword migration_setting: Migration settings which tune the migration behavior.
-        :paramtype migration_setting: dict[str, str]
-        :keyword source_setting: Source settings to tune source endpoint migration behavior.
-        :paramtype source_setting: dict[str, str]
-        :keyword target_setting: Target settings to tune target endpoint migration behavior.
-        :paramtype target_setting: dict[str, str]
         :keyword table_map: Mapping of source to target tables.
         :paramtype table_map: dict[str, str]
         """
         super().__init__(**kwargs)
         self.name = name
         self.target_database_name = target_database_name
-        self.migration_setting = migration_setting
-        self.source_setting = source_setting
-        self.target_setting = target_setting
         self.table_map = table_map
 
 
-class MigrateMySqlAzureDbForMySqlSyncTaskInput(_serialization.Model):
-    """Input for the task that migrates MySQL databases to Azure Database for MySQL for online migrations.
+class MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput(_serialization.Model):
+    """Input for the task that migrates MySQL databases to Azure Database for MySQL for the replicate changes migrations.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -6982,7 +7191,23 @@ class MigrateMySqlAzureDbForMySqlSyncTaskInput(_serialization.Model):
     :vartype target_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
     :ivar selected_databases: Databases to migrate. Required.
     :vartype selected_databases:
-     list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlSyncDatabaseInput]
+     list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput]
+    :ivar make_source_server_read_only: Setting to set the source server read only.
+    :vartype make_source_server_read_only: bool
+    :ivar started_on: Parameter to specify when the migration started.
+    :vartype started_on: ~datetime.datetime
+    :ivar source_server_resource_id: Optional resource Id of the source server if it is an azure
+     instance.
+    :vartype source_server_resource_id: str
+    :ivar target_server_resource_id: Optional resource Id of the target server.
+    :vartype target_server_resource_id: str
+    :ivar optional_agent_settings: Optional parameters for fine tuning the data transfer rate
+     during migration.
+    :vartype optional_agent_settings: dict[str, str]
+    :ivar bin_log_info: The binlog position to start replicating changes at.
+    :vartype bin_log_info: ~azure.mgmt.datamigration.models.MySqlBinlogPositionInput
+    :ivar encrypted_key_for_secure_fields: encrypted key for secure fields.
+    :vartype encrypted_key_for_secure_fields: str
     """
 
     _validation = {
@@ -6994,7 +7219,17 @@ class MigrateMySqlAzureDbForMySqlSyncTaskInput(_serialization.Model):
     _attribute_map = {
         "source_connection_info": {"key": "sourceConnectionInfo", "type": "MySqlConnectionInfo"},
         "target_connection_info": {"key": "targetConnectionInfo", "type": "MySqlConnectionInfo"},
-        "selected_databases": {"key": "selectedDatabases", "type": "[MigrateMySqlAzureDbForMySqlSyncDatabaseInput]"},
+        "selected_databases": {
+            "key": "selectedDatabases",
+            "type": "[MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput]",
+        },
+        "make_source_server_read_only": {"key": "makeSourceServerReadOnly", "type": "bool"},
+        "started_on": {"key": "startedOn", "type": "iso-8601"},
+        "source_server_resource_id": {"key": "sourceServerResourceId", "type": "str"},
+        "target_server_resource_id": {"key": "targetServerResourceId", "type": "str"},
+        "optional_agent_settings": {"key": "optionalAgentSettings", "type": "{str}"},
+        "bin_log_info": {"key": "binLogInfo", "type": "MySqlBinlogPositionInput"},
+        "encrypted_key_for_secure_fields": {"key": "encryptedKeyForSecureFields", "type": "str"},
     }
 
     def __init__(
@@ -7002,7 +7237,14 @@ class MigrateMySqlAzureDbForMySqlSyncTaskInput(_serialization.Model):
         *,
         source_connection_info: "_models.MySqlConnectionInfo",
         target_connection_info: "_models.MySqlConnectionInfo",
-        selected_databases: List["_models.MigrateMySqlAzureDbForMySqlSyncDatabaseInput"],
+        selected_databases: List["_models.MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput"],
+        make_source_server_read_only: bool = False,
+        started_on: Optional[datetime.datetime] = None,
+        source_server_resource_id: Optional[str] = None,
+        target_server_resource_id: Optional[str] = None,
+        optional_agent_settings: Optional[Dict[str, str]] = None,
+        bin_log_info: Optional["_models.MySqlBinlogPositionInput"] = None,
+        encrypted_key_for_secure_fields: Optional[str] = None,
         **kwargs
     ):
         """
@@ -7013,23 +7255,43 @@ class MigrateMySqlAzureDbForMySqlSyncTaskInput(_serialization.Model):
         :paramtype target_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
         :keyword selected_databases: Databases to migrate. Required.
         :paramtype selected_databases:
-         list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlSyncDatabaseInput]
+         list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput]
+        :keyword make_source_server_read_only: Setting to set the source server read only.
+        :paramtype make_source_server_read_only: bool
+        :keyword started_on: Parameter to specify when the migration started.
+        :paramtype started_on: ~datetime.datetime
+        :keyword source_server_resource_id: Optional resource Id of the source server if it is an azure
+         instance.
+        :paramtype source_server_resource_id: str
+        :keyword target_server_resource_id: Optional resource Id of the target server.
+        :paramtype target_server_resource_id: str
+        :keyword optional_agent_settings: Optional parameters for fine tuning the data transfer rate
+         during migration.
+        :paramtype optional_agent_settings: dict[str, str]
+        :keyword bin_log_info: The binlog position to start replicating changes at.
+        :paramtype bin_log_info: ~azure.mgmt.datamigration.models.MySqlBinlogPositionInput
+        :keyword encrypted_key_for_secure_fields: encrypted key for secure fields.
+        :paramtype encrypted_key_for_secure_fields: str
         """
         super().__init__(**kwargs)
         self.source_connection_info = source_connection_info
         self.target_connection_info = target_connection_info
         self.selected_databases = selected_databases
+        self.make_source_server_read_only = make_source_server_read_only
+        self.started_on = started_on
+        self.source_server_resource_id = source_server_resource_id
+        self.target_server_resource_id = target_server_resource_id
+        self.optional_agent_settings = optional_agent_settings
+        self.bin_log_info = bin_log_info
+        self.encrypted_key_for_secure_fields = encrypted_key_for_secure_fields
 
 
-class MigrateMySqlAzureDbForMySqlSyncTaskOutput(_serialization.Model):
-    """Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations.
+class MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput(MigrateMySqlAzureDbForMySqlTaskResult):
+    """Output for the task that migrates MySQL databases to Azure Database for MySQL for the replicate changes migrations.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
-    MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError,
-    MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel,
-    MigrateMySqlAzureDbForMySqlSyncTaskOutputError,
-    MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel,
-    MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel
+    MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError,
+    MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -7053,182 +7315,19 @@ class MigrateMySqlAzureDbForMySqlSyncTaskOutput(_serialization.Model):
 
     _subtype_map = {
         "result_type": {
-            "DatabaseLevelErrorOutput": "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError",
-            "DatabaseLevelOutput": "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel",
-            "ErrorOutput": "MigrateMySqlAzureDbForMySqlSyncTaskOutputError",
-            "MigrationLevelOutput": "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel",
-            "TableLevelOutput": "MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel",
+            "ErrorOutput": "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError",
+            "MigrationLevelOutput": "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel",
         }
     }
 
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.result_type: Optional[str] = None
+        self.result_type: str = "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput"
 
 
-class MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError(MigrateMySqlAzureDbForMySqlSyncTaskOutput):
-    """MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar result_type: Result type. Required.
-    :vartype result_type: str
-    :ivar error_message: Error message.
-    :vartype error_message: str
-    :ivar events: List of error events.
-    :vartype events: list[~azure.mgmt.datamigration.models.SyncMigrationDatabaseErrorEvent]
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "result_type": {"required": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "result_type": {"key": "resultType", "type": "str"},
-        "error_message": {"key": "errorMessage", "type": "str"},
-        "events": {"key": "events", "type": "[SyncMigrationDatabaseErrorEvent]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        error_message: Optional[str] = None,
-        events: Optional[List["_models.SyncMigrationDatabaseErrorEvent"]] = None,
-        **kwargs
-    ):
-        """
-        :keyword error_message: Error message.
-        :paramtype error_message: str
-        :keyword events: List of error events.
-        :paramtype events: list[~azure.mgmt.datamigration.models.SyncMigrationDatabaseErrorEvent]
-        """
-        super().__init__(**kwargs)
-        self.result_type: str = "DatabaseLevelErrorOutput"
-        self.error_message = error_message
-        self.events = events
-
-
-class MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel(
-    MigrateMySqlAzureDbForMySqlSyncTaskOutput
-):  # pylint: disable=too-many-instance-attributes
-    """MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Result identifier.
-    :vartype id: str
-    :ivar result_type: Result type. Required.
-    :vartype result_type: str
-    :ivar database_name: Name of the database.
-    :vartype database_name: str
-    :ivar started_on: Migration start time.
-    :vartype started_on: ~datetime.datetime
-    :ivar ended_on: Migration end time.
-    :vartype ended_on: ~datetime.datetime
-    :ivar migration_state: Migration state that this database is in. Known values are: "UNDEFINED",
-     "CONFIGURING", "INITIALIAZING", "STARTING", "RUNNING", "READY_TO_COMPLETE", "COMPLETING",
-     "COMPLETE", "CANCELLING", "CANCELLED", "FAILED", "VALIDATING", "VALIDATION_COMPLETE",
-     "VALIDATION_FAILED", "RESTORE_IN_PROGRESS", "RESTORE_COMPLETED", "BACKUP_IN_PROGRESS", and
-     "BACKUP_COMPLETED".
-    :vartype migration_state: str or
-     ~azure.mgmt.datamigration.models.SyncDatabaseMigrationReportingState
-    :ivar incoming_changes: Number of incoming changes.
-    :vartype incoming_changes: int
-    :ivar applied_changes: Number of applied changes.
-    :vartype applied_changes: int
-    :ivar cdc_insert_counter: Number of cdc inserts.
-    :vartype cdc_insert_counter: int
-    :ivar cdc_delete_counter: Number of cdc deletes.
-    :vartype cdc_delete_counter: int
-    :ivar cdc_update_counter: Number of cdc updates.
-    :vartype cdc_update_counter: int
-    :ivar full_load_completed_tables: Number of tables completed in full load.
-    :vartype full_load_completed_tables: int
-    :ivar full_load_loading_tables: Number of tables loading in full load.
-    :vartype full_load_loading_tables: int
-    :ivar full_load_queued_tables: Number of tables queued in full load.
-    :vartype full_load_queued_tables: int
-    :ivar full_load_errored_tables: Number of tables errored in full load.
-    :vartype full_load_errored_tables: int
-    :ivar initialization_completed: Indicates if initial load (full load) has been completed.
-    :vartype initialization_completed: bool
-    :ivar latency: CDC apply latency.
-    :vartype latency: int
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "result_type": {"required": True},
-        "database_name": {"readonly": True},
-        "started_on": {"readonly": True},
-        "ended_on": {"readonly": True},
-        "migration_state": {"readonly": True},
-        "incoming_changes": {"readonly": True},
-        "applied_changes": {"readonly": True},
-        "cdc_insert_counter": {"readonly": True},
-        "cdc_delete_counter": {"readonly": True},
-        "cdc_update_counter": {"readonly": True},
-        "full_load_completed_tables": {"readonly": True},
-        "full_load_loading_tables": {"readonly": True},
-        "full_load_queued_tables": {"readonly": True},
-        "full_load_errored_tables": {"readonly": True},
-        "initialization_completed": {"readonly": True},
-        "latency": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "result_type": {"key": "resultType", "type": "str"},
-        "database_name": {"key": "databaseName", "type": "str"},
-        "started_on": {"key": "startedOn", "type": "iso-8601"},
-        "ended_on": {"key": "endedOn", "type": "iso-8601"},
-        "migration_state": {"key": "migrationState", "type": "str"},
-        "incoming_changes": {"key": "incomingChanges", "type": "int"},
-        "applied_changes": {"key": "appliedChanges", "type": "int"},
-        "cdc_insert_counter": {"key": "cdcInsertCounter", "type": "int"},
-        "cdc_delete_counter": {"key": "cdcDeleteCounter", "type": "int"},
-        "cdc_update_counter": {"key": "cdcUpdateCounter", "type": "int"},
-        "full_load_completed_tables": {"key": "fullLoadCompletedTables", "type": "int"},
-        "full_load_loading_tables": {"key": "fullLoadLoadingTables", "type": "int"},
-        "full_load_queued_tables": {"key": "fullLoadQueuedTables", "type": "int"},
-        "full_load_errored_tables": {"key": "fullLoadErroredTables", "type": "int"},
-        "initialization_completed": {"key": "initializationCompleted", "type": "bool"},
-        "latency": {"key": "latency", "type": "int"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.result_type: str = "DatabaseLevelOutput"
-        self.database_name = None
-        self.started_on = None
-        self.ended_on = None
-        self.migration_state = None
-        self.incoming_changes = None
-        self.applied_changes = None
-        self.cdc_insert_counter = None
-        self.cdc_delete_counter = None
-        self.cdc_update_counter = None
-        self.full_load_completed_tables = None
-        self.full_load_loading_tables = None
-        self.full_load_queued_tables = None
-        self.full_load_errored_tables = None
-        self.initialization_completed = None
-        self.latency = None
-
-
-class MigrateMySqlAzureDbForMySqlSyncTaskOutputError(MigrateMySqlAzureDbForMySqlSyncTaskOutput):
-    """MigrateMySqlAzureDbForMySqlSyncTaskOutputError.
+class MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError(MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput):
+    """MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -7261,8 +7360,10 @@ class MigrateMySqlAzureDbForMySqlSyncTaskOutputError(MigrateMySqlAzureDbForMySql
         self.error = None
 
 
-class MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel(MigrateMySqlAzureDbForMySqlSyncTaskOutput):
-    """MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel.
+class MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel(
+    MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput
+):  # pylint: disable=too-many-instance-attributes
+    """MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -7272,58 +7373,372 @@ class MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel(MigrateMySqlAzureD
     :vartype id: str
     :ivar result_type: Result type. Required.
     :vartype result_type: str
+    :ivar migration_type: "Cdc"
+    :vartype migration_type: str or
+     ~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevelMigrationType
     :ivar started_on: Migration start time.
     :vartype started_on: ~datetime.datetime
     :ivar ended_on: Migration end time.
     :vartype ended_on: ~datetime.datetime
+    :ivar status: Current status of migration. Known values are: "Default", "Connecting",
+     "SourceAndTargetSelected", "SelectLogins", "Configured", "Running", "Error", "Stopped",
+     "Completed", and "CompletedWithWarnings".
+    :vartype status: str or ~azure.mgmt.datamigration.models.MigrationStatus
     :ivar source_server_version: Source server version.
     :vartype source_server_version: str
-    :ivar source_server: Source server name.
-    :vartype source_server: str
     :ivar target_server_version: Target server version.
     :vartype target_server_version: str
-    :ivar target_server: Target server name.
-    :vartype target_server: str
+    :ivar last_storage_update: Last time the migration status storage was updated.
+    :vartype last_storage_update: ~datetime.datetime
+    :ivar migration_id: Migration Identifier.
+    :vartype migration_id: str
+    :ivar has_server_level_error: Indicates that the migration has server level error.
+    :vartype has_server_level_error: bool
+    :ivar retrying_summary: Retrying summary.
+    :vartype retrying_summary: JSON
+    :ivar total_retrying_time: Total amount of time during the migration where operations were
+     impacted by transient errors.
+    :vartype total_retrying_time: str
+    :ivar total_source_retry_count: Total number of retries that have occurred due to transient
+     errors raised by the source server.
+    :vartype total_source_retry_count: int
+    :ivar total_target_retry_count: Total number of retries that have occurred due to transient
+     errors raised by the target server.
+    :vartype total_target_retry_count: int
+    :ivar total_other_retry_count: Total number of retries that have occurred due to transient
+     errors raised by the unknown source.
+    :vartype total_other_retry_count: int
+    :ivar continuous_data_movement_progress: Migration progress.
+    :vartype continuous_data_movement_progress:
+     ~azure.mgmt.datamigration.models.MySqlContinuousDataMovementProgress
     """
 
     _validation = {
         "id": {"readonly": True},
         "result_type": {"required": True},
+        "migration_type": {"readonly": True},
         "started_on": {"readonly": True},
         "ended_on": {"readonly": True},
+        "status": {"readonly": True},
         "source_server_version": {"readonly": True},
-        "source_server": {"readonly": True},
         "target_server_version": {"readonly": True},
-        "target_server": {"readonly": True},
+        "last_storage_update": {"readonly": True},
+        "migration_id": {"readonly": True},
+        "has_server_level_error": {"readonly": True},
+        "retrying_summary": {"readonly": True},
+        "total_retrying_time": {"readonly": True, "pattern": r"^(\d+\.)?\d{2}:\d{2}:\d{2}$"},
+        "total_source_retry_count": {"readonly": True},
+        "total_target_retry_count": {"readonly": True},
+        "total_other_retry_count": {"readonly": True},
+        "continuous_data_movement_progress": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "result_type": {"key": "resultType", "type": "str"},
+        "migration_type": {"key": "migrationType", "type": "str"},
         "started_on": {"key": "startedOn", "type": "iso-8601"},
         "ended_on": {"key": "endedOn", "type": "iso-8601"},
+        "status": {"key": "status", "type": "str"},
         "source_server_version": {"key": "sourceServerVersion", "type": "str"},
-        "source_server": {"key": "sourceServer", "type": "str"},
         "target_server_version": {"key": "targetServerVersion", "type": "str"},
-        "target_server": {"key": "targetServer", "type": "str"},
+        "last_storage_update": {"key": "lastStorageUpdate", "type": "iso-8601"},
+        "migration_id": {"key": "migrationId", "type": "str"},
+        "has_server_level_error": {"key": "hasServerLevelError", "type": "bool"},
+        "retrying_summary": {"key": "retryingSummary", "type": "object"},
+        "total_retrying_time": {"key": "totalRetryingTime", "type": "str"},
+        "total_source_retry_count": {"key": "totalSourceRetryCount", "type": "int"},
+        "total_target_retry_count": {"key": "totalTargetRetryCount", "type": "int"},
+        "total_other_retry_count": {"key": "totalOtherRetryCount", "type": "int"},
+        "continuous_data_movement_progress": {
+            "key": "continuousDataMovementProgress",
+            "type": "MySqlContinuousDataMovementProgress",
+        },
     }
 
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
         self.result_type: str = "MigrationLevelOutput"
+        self.migration_type = None
         self.started_on = None
         self.ended_on = None
+        self.status = None
         self.source_server_version = None
-        self.source_server = None
         self.target_server_version = None
-        self.target_server = None
+        self.last_storage_update = None
+        self.migration_id = None
+        self.has_server_level_error = None
+        self.retrying_summary = None
+        self.total_retrying_time = None
+        self.total_source_retry_count = None
+        self.total_target_retry_count = None
+        self.total_other_retry_count = None
+        self.continuous_data_movement_progress = None
 
 
-class MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel(
-    MigrateMySqlAzureDbForMySqlSyncTaskOutput
+class MigrateMySqlAzureDbForMySqlReplicateChangesTaskProperties(ProjectTaskProperties):
+    """Properties for the task that migrates MySQL databases to Azure Database for MySQL for replicate changes migrations.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar task_type: Task type. Required. Known values are: "Connect.MongoDb",
+     "ConnectToSource.SqlServer", "ConnectToSource.SqlServer.Sync",
+     "ConnectToSource.PostgreSql.Sync", "ConnectToSource.MySql", "ConnectToSource.Oracle.Sync",
+     "ConnectToTarget.SqlDb", "ConnectToTarget.SqlDb.Sync",
+     "ConnectToTarget.AzureDbForPostgreSql.Sync",
+     "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync", "ConnectToTarget.AzureSqlDbMI",
+     "ConnectToTarget.AzureSqlDbMI.Sync.LRS", "ConnectToTarget.AzureDbForMySql",
+     "GetUserTables.Sql", "GetUserTables.AzureSqlDb.Sync", "GetUserTablesOracle",
+     "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
+     "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
+     "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
+     "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
+     "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
+     "MigrateSchemaSqlServerSqlDb".
+    :vartype task_type: str or ~azure.mgmt.datamigration.models.TaskType
+    :ivar errors: Array of errors. This is ignored if submitted.
+    :vartype errors: list[~azure.mgmt.datamigration.models.ODataError]
+    :ivar state: The state of the task. This is ignored if submitted. Known values are: "Unknown",
+     "Queued", "Running", "Canceled", "Succeeded", "Failed", "FailedInputValidation", and "Faulted".
+    :vartype state: str or ~azure.mgmt.datamigration.models.TaskState
+    :ivar commands: Array of command properties.
+    :vartype commands: list[~azure.mgmt.datamigration.models.CommandProperties]
+    :ivar client_data: Key value pairs of client data to attach meta data information to task.
+    :vartype client_data: dict[str, str]
+    :ivar input: Task input.
+    :vartype input:
+     ~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput
+    :ivar output: Task output. This is ignored if submitted.
+    :vartype output:
+     list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput]
+    :ivar is_cloneable: whether the task can be cloned or not.
+    :vartype is_cloneable: bool
+    :ivar task_id: Task id.
+    :vartype task_id: str
+    """
+
+    _validation = {
+        "task_type": {"required": True},
+        "errors": {"readonly": True},
+        "state": {"readonly": True},
+        "commands": {"readonly": True},
+        "output": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "task_type": {"key": "taskType", "type": "str"},
+        "errors": {"key": "errors", "type": "[ODataError]"},
+        "state": {"key": "state", "type": "str"},
+        "commands": {"key": "commands", "type": "[CommandProperties]"},
+        "client_data": {"key": "clientData", "type": "{str}"},
+        "input": {"key": "input", "type": "MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput"},
+        "output": {"key": "output", "type": "[MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput]"},
+        "is_cloneable": {"key": "isCloneable", "type": "bool"},
+        "task_id": {"key": "taskId", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        client_data: Optional[Dict[str, str]] = None,
+        input: Optional["_models.MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput"] = None,
+        is_cloneable: Optional[bool] = None,
+        task_id: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword client_data: Key value pairs of client data to attach meta data information to task.
+        :paramtype client_data: dict[str, str]
+        :keyword input: Task input.
+        :paramtype input:
+         ~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput
+        :keyword is_cloneable: whether the task can be cloned or not.
+        :paramtype is_cloneable: bool
+        :keyword task_id: Task id.
+        :paramtype task_id: str
+        """
+        super().__init__(client_data=client_data, **kwargs)
+        self.task_type: str = "Migrate.MySql.AzureDbForMySql.ReplicateChanges"
+        self.input = input
+        self.output = None
+        self.is_cloneable = is_cloneable
+        self.task_id = task_id
+
+
+class MigrateMySqlAzureDbForMySqlSyncDatabaseInput(_serialization.Model):
+    """Database specific information for MySQL to Azure Database for MySQL migration task inputs.
+
+    :ivar name: Name of the database.
+    :vartype name: str
+    :ivar target_database_name: Name of target database. Note: Target database will be truncated
+     before starting migration.
+    :vartype target_database_name: str
+    :ivar table_map: Mapping of source to target tables.
+    :vartype table_map: dict[str, str]
+    """
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "target_database_name": {"key": "targetDatabaseName", "type": "str"},
+        "table_map": {"key": "tableMap", "type": "{str}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[str] = None,
+        target_database_name: Optional[str] = None,
+        table_map: Optional[Dict[str, str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: Name of the database.
+        :paramtype name: str
+        :keyword target_database_name: Name of target database. Note: Target database will be truncated
+         before starting migration.
+        :paramtype target_database_name: str
+        :keyword table_map: Mapping of source to target tables.
+        :paramtype table_map: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.target_database_name = target_database_name
+        self.table_map = table_map
+
+
+class MigrateMySqlAzureDbForMySqlSyncTaskInput(
+    MySqlSchemaMigrationOptions
 ):  # pylint: disable=too-many-instance-attributes
-    """MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel.
+    """Input for the task that migrates MySQL databases to Azure Database for MySQL for online migrations.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar migrate_all_views: If true, all view definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_views: bool
+    :ivar migrate_all_triggers: If true, all trigger definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_triggers: bool
+    :ivar migrate_all_events: If true, all event definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_events: bool
+    :ivar migrate_all_routines: If true, all routine definitions will be migrated in the selected
+     databases.
+    :vartype migrate_all_routines: bool
+    :ivar source_connection_info: Connection information for source MySQL. Required.
+    :vartype source_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
+    :ivar target_connection_info: Connection information for target Azure Database for MySQL.
+     Required.
+    :vartype target_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
+    :ivar selected_databases: Databases to migrate. Required.
+    :vartype selected_databases:
+     list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlSyncDatabaseInput]
+    :ivar source_server_resource_id: Optional resource Id of the source server if it is an azure
+     instance.
+    :vartype source_server_resource_id: str
+    :ivar target_server_resource_id: Optional resource Id of the target server.
+    :vartype target_server_resource_id: str
+    :ivar optional_agent_settings: Optional parameters for fine tuning the data transfer rate
+     during migration.
+    :vartype optional_agent_settings: dict[str, str]
+    :ivar encrypted_key_for_secure_fields: encrypted key for secure fields.
+    :vartype encrypted_key_for_secure_fields: str
+    """
+
+    _validation = {
+        "source_connection_info": {"required": True},
+        "target_connection_info": {"required": True},
+        "selected_databases": {"required": True},
+    }
+
+    _attribute_map = {
+        "migrate_all_views": {"key": "migrateAllViews", "type": "bool"},
+        "migrate_all_triggers": {"key": "migrateAllTriggers", "type": "bool"},
+        "migrate_all_events": {"key": "migrateAllEvents", "type": "bool"},
+        "migrate_all_routines": {"key": "migrateAllRoutines", "type": "bool"},
+        "source_connection_info": {"key": "sourceConnectionInfo", "type": "MySqlConnectionInfo"},
+        "target_connection_info": {"key": "targetConnectionInfo", "type": "MySqlConnectionInfo"},
+        "selected_databases": {"key": "selectedDatabases", "type": "[MigrateMySqlAzureDbForMySqlSyncDatabaseInput]"},
+        "source_server_resource_id": {"key": "sourceServerResourceId", "type": "str"},
+        "target_server_resource_id": {"key": "targetServerResourceId", "type": "str"},
+        "optional_agent_settings": {"key": "optionalAgentSettings", "type": "{str}"},
+        "encrypted_key_for_secure_fields": {"key": "encryptedKeyForSecureFields", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        source_connection_info: "_models.MySqlConnectionInfo",
+        target_connection_info: "_models.MySqlConnectionInfo",
+        selected_databases: List["_models.MigrateMySqlAzureDbForMySqlSyncDatabaseInput"],
+        migrate_all_views: bool = False,
+        migrate_all_triggers: bool = False,
+        migrate_all_events: bool = False,
+        migrate_all_routines: bool = False,
+        source_server_resource_id: Optional[str] = None,
+        target_server_resource_id: Optional[str] = None,
+        optional_agent_settings: Optional[Dict[str, str]] = None,
+        encrypted_key_for_secure_fields: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword migrate_all_views: If true, all view definitions will be migrated in the selected
+         databases.
+        :paramtype migrate_all_views: bool
+        :keyword migrate_all_triggers: If true, all trigger definitions will be migrated in the
+         selected databases.
+        :paramtype migrate_all_triggers: bool
+        :keyword migrate_all_events: If true, all event definitions will be migrated in the selected
+         databases.
+        :paramtype migrate_all_events: bool
+        :keyword migrate_all_routines: If true, all routine definitions will be migrated in the
+         selected databases.
+        :paramtype migrate_all_routines: bool
+        :keyword source_connection_info: Connection information for source MySQL. Required.
+        :paramtype source_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
+        :keyword target_connection_info: Connection information for target Azure Database for MySQL.
+         Required.
+        :paramtype target_connection_info: ~azure.mgmt.datamigration.models.MySqlConnectionInfo
+        :keyword selected_databases: Databases to migrate. Required.
+        :paramtype selected_databases:
+         list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlSyncDatabaseInput]
+        :keyword source_server_resource_id: Optional resource Id of the source server if it is an azure
+         instance.
+        :paramtype source_server_resource_id: str
+        :keyword target_server_resource_id: Optional resource Id of the target server.
+        :paramtype target_server_resource_id: str
+        :keyword optional_agent_settings: Optional parameters for fine tuning the data transfer rate
+         during migration.
+        :paramtype optional_agent_settings: dict[str, str]
+        :keyword encrypted_key_for_secure_fields: encrypted key for secure fields.
+        :paramtype encrypted_key_for_secure_fields: str
+        """
+        super().__init__(
+            migrate_all_views=migrate_all_views,
+            migrate_all_triggers=migrate_all_triggers,
+            migrate_all_events=migrate_all_events,
+            migrate_all_routines=migrate_all_routines,
+            **kwargs
+        )
+        self.source_connection_info = source_connection_info
+        self.target_connection_info = target_connection_info
+        self.selected_databases = selected_databases
+        self.source_server_resource_id = source_server_resource_id
+        self.target_server_resource_id = target_server_resource_id
+        self.optional_agent_settings = optional_agent_settings
+        self.encrypted_key_for_secure_fields = encrypted_key_for_secure_fields
+
+
+class MigrateMySqlAzureDbForMySqlSyncTaskOutput(MigrateMySqlAzureDbForMySqlTaskResult):
+    """Output for the task that migrates MySQL databases to Azure Database for MySQL for sync migrations.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -7333,88 +7748,22 @@ class MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel(
     :vartype id: str
     :ivar result_type: Result type. Required.
     :vartype result_type: str
-    :ivar table_name: Name of the table.
-    :vartype table_name: str
-    :ivar database_name: Name of the database.
-    :vartype database_name: str
-    :ivar cdc_insert_counter: Number of applied inserts.
-    :vartype cdc_insert_counter: str
-    :ivar cdc_update_counter: Number of applied updates.
-    :vartype cdc_update_counter: str
-    :ivar cdc_delete_counter: Number of applied deletes.
-    :vartype cdc_delete_counter: str
-    :ivar full_load_est_finish_time: Estimate to finish full load.
-    :vartype full_load_est_finish_time: ~datetime.datetime
-    :ivar full_load_started_on: Full load start time.
-    :vartype full_load_started_on: ~datetime.datetime
-    :ivar full_load_ended_on: Full load end time.
-    :vartype full_load_ended_on: ~datetime.datetime
-    :ivar full_load_total_rows: Number of rows applied in full load.
-    :vartype full_load_total_rows: int
-    :ivar state: Current state of the table migration. Known values are: "BEFORE_LOAD",
-     "FULL_LOAD", "COMPLETED", "CANCELED", "ERROR", and "FAILED".
-    :vartype state: str or ~azure.mgmt.datamigration.models.SyncTableMigrationState
-    :ivar total_changes_applied: Total number of applied changes.
-    :vartype total_changes_applied: int
-    :ivar data_errors_counter: Number of data errors occurred.
-    :vartype data_errors_counter: int
-    :ivar last_modified_time: Last modified time on target.
-    :vartype last_modified_time: ~datetime.datetime
     """
 
     _validation = {
         "id": {"readonly": True},
         "result_type": {"required": True},
-        "table_name": {"readonly": True},
-        "database_name": {"readonly": True},
-        "cdc_insert_counter": {"readonly": True},
-        "cdc_update_counter": {"readonly": True},
-        "cdc_delete_counter": {"readonly": True},
-        "full_load_est_finish_time": {"readonly": True},
-        "full_load_started_on": {"readonly": True},
-        "full_load_ended_on": {"readonly": True},
-        "full_load_total_rows": {"readonly": True},
-        "state": {"readonly": True},
-        "total_changes_applied": {"readonly": True},
-        "data_errors_counter": {"readonly": True},
-        "last_modified_time": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "result_type": {"key": "resultType", "type": "str"},
-        "table_name": {"key": "tableName", "type": "str"},
-        "database_name": {"key": "databaseName", "type": "str"},
-        "cdc_insert_counter": {"key": "cdcInsertCounter", "type": "str"},
-        "cdc_update_counter": {"key": "cdcUpdateCounter", "type": "str"},
-        "cdc_delete_counter": {"key": "cdcDeleteCounter", "type": "str"},
-        "full_load_est_finish_time": {"key": "fullLoadEstFinishTime", "type": "iso-8601"},
-        "full_load_started_on": {"key": "fullLoadStartedOn", "type": "iso-8601"},
-        "full_load_ended_on": {"key": "fullLoadEndedOn", "type": "iso-8601"},
-        "full_load_total_rows": {"key": "fullLoadTotalRows", "type": "int"},
-        "state": {"key": "state", "type": "str"},
-        "total_changes_applied": {"key": "totalChangesApplied", "type": "int"},
-        "data_errors_counter": {"key": "dataErrorsCounter", "type": "int"},
-        "last_modified_time": {"key": "lastModifiedTime", "type": "iso-8601"},
     }
 
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.result_type: str = "TableLevelOutput"
-        self.table_name = None
-        self.database_name = None
-        self.cdc_insert_counter = None
-        self.cdc_update_counter = None
-        self.cdc_delete_counter = None
-        self.full_load_est_finish_time = None
-        self.full_load_started_on = None
-        self.full_load_ended_on = None
-        self.full_load_total_rows = None
-        self.state = None
-        self.total_changes_applied = None
-        self.data_errors_counter = None
-        self.last_modified_time = None
+        self.result_type: str = "MigrateMySqlAzureDbForMySqlSyncTaskOutput"
 
 
 class MigrateMySqlAzureDbForMySqlSyncTaskProperties(ProjectTaskProperties):
@@ -7435,9 +7784,10 @@ class MigrateMySqlAzureDbForMySqlSyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -7455,8 +7805,7 @@ class MigrateMySqlAzureDbForMySqlSyncTaskProperties(ProjectTaskProperties):
     :ivar input: Task input.
     :vartype input: ~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlSyncTaskInput
     :ivar output: Task output. This is ignored if submitted.
-    :vartype output:
-     list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlSyncTaskOutput]
+    :vartype output: list[~azure.mgmt.datamigration.models.MigrateMySqlAzureDbForMySqlTaskResult]
     """
 
     _validation = {
@@ -7474,7 +7823,7 @@ class MigrateMySqlAzureDbForMySqlSyncTaskProperties(ProjectTaskProperties):
         "commands": {"key": "commands", "type": "[CommandProperties]"},
         "client_data": {"key": "clientData", "type": "{str}"},
         "input": {"key": "input", "type": "MigrateMySqlAzureDbForMySqlSyncTaskInput"},
-        "output": {"key": "output", "type": "[MigrateMySqlAzureDbForMySqlSyncTaskOutput]"},
+        "output": {"key": "output", "type": "[MigrateMySqlAzureDbForMySqlTaskResult]"},
     }
 
     def __init__(
@@ -7514,9 +7863,10 @@ class MigrateOracleAzureDbForPostgreSqlSyncTaskProperties(ProjectTaskProperties)
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -8713,9 +9063,10 @@ class MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties(ProjectTaskPropert
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -9195,9 +9546,10 @@ class MigrateSchemaSqlServerSqlDbTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -9966,9 +10318,10 @@ class MigrateSqlServerSqlDbSyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -10792,9 +11145,10 @@ class MigrateSqlServerSqlDbTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -11370,9 +11724,10 @@ class MigrateSqlServerSqlMISyncTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -11962,9 +12317,10 @@ class MigrateSqlServerSqlMITaskProperties(ProjectTaskProperties):  # pylint: dis
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -12308,9 +12664,10 @@ class MigrateSsisTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -14499,6 +14856,69 @@ class MongoDbThrottlingSettings(_serialization.Model):
         self.max_parallelism = max_parallelism
 
 
+class MySqlBinlogPositionInput(_serialization.Model):
+    """MySQL binlog reference.
+
+    :ivar filename: Specifies the MySQL binlog file name.
+    :vartype filename: str
+    :ivar position: Specifies the position in the binlog file.
+    :vartype position: int
+    """
+
+    _attribute_map = {
+        "filename": {"key": "filename", "type": "str"},
+        "position": {"key": "position", "type": "int"},
+    }
+
+    def __init__(self, *, filename: Optional[str] = None, position: Optional[int] = None, **kwargs):
+        """
+        :keyword filename: Specifies the MySQL binlog file name.
+        :paramtype filename: str
+        :keyword position: Specifies the position in the binlog file.
+        :paramtype position: int
+        """
+        super().__init__(**kwargs)
+        self.filename = filename
+        self.position = position
+
+
+class MySqlBinlogPositionOutput(_serialization.Model):
+    """MySQL binlog reference.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar name: Specifies the MySQL binlog file name.
+    :vartype name: str
+    :ivar position: Specifies the position in the binlog file.
+    :vartype position: int
+    :ivar file_seq_num: Specifies the the sequential number of the binlog fie, extracted from the
+     file name.
+    :vartype file_seq_num: int
+    """
+
+    _validation = {
+        "name": {"readonly": True},
+        "position": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "position": {"key": "position", "type": "int"},
+        "file_seq_num": {"key": "fileSeqNum", "type": "int"},
+    }
+
+    def __init__(self, *, file_seq_num: Optional[int] = None, **kwargs):
+        """
+        :keyword file_seq_num: Specifies the the sequential number of the binlog fie, extracted from
+         the file name.
+        :paramtype file_seq_num: int
+        """
+        super().__init__(**kwargs)
+        self.name = None
+        self.position = None
+        self.file_seq_num = file_seq_num
+
+
 class MySqlConnectionInfo(ConnectionInfo):
     """Information for connecting to MySQL server.
 
@@ -14585,6 +15005,80 @@ class MySqlConnectionInfo(ConnectionInfo):
         self.encrypt_connection = encrypt_connection
         self.authentication = authentication
         self.additional_settings = additional_settings
+
+
+class MySqlContinuousDataMovementProgress(_serialization.Model):
+    """MySqlContinuousDataMovementProgress.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar binlog_position: Current binlog position of the last event committed at target.
+    :vartype binlog_position: ~azure.mgmt.datamigration.models.MySqlBinlogPositionOutput
+    :ivar timestamp: The timestamp exposed by the last binlog event that has been committed at
+     target.
+    :vartype timestamp: ~datetime.datetime
+    :ivar number_of_rows_inserted: The total number of rows inserted at target.
+    :vartype number_of_rows_inserted: int
+    :ivar number_of_rows_updated: The total number of rows updated at target.
+    :vartype number_of_rows_updated: int
+    :ivar number_of_rows_deleted: The total number of rows deleted at target.
+    :vartype number_of_rows_deleted: int
+    :ivar number_of_query_events_processed: The total number of query events executed at target,
+     such as DDL, or DML when using mixed binlog mode.
+    :vartype number_of_query_events_processed: int
+    :ivar number_of_write_rows_events_processed: The the total number of the WRITE_ROWS_EVENTs
+     processed.
+    :vartype number_of_write_rows_events_processed: int
+    :ivar number_of_update_rows_events_processed: The the total number of the UPDATE_ROWS_EVENTs
+     processed.
+    :vartype number_of_update_rows_events_processed: int
+    :ivar number_of_delete_rows_events_processed: The total number of the DELETE_ROWS_EVENTs
+     processed.
+    :vartype number_of_delete_rows_events_processed: int
+    :ivar seconds_behind_source: The the number of seconds the replica server is behind the source
+     server.
+    :vartype seconds_behind_source: int
+    """
+
+    _validation = {
+        "binlog_position": {"readonly": True},
+        "timestamp": {"readonly": True},
+        "number_of_rows_inserted": {"readonly": True},
+        "number_of_rows_updated": {"readonly": True},
+        "number_of_rows_deleted": {"readonly": True},
+        "number_of_query_events_processed": {"readonly": True},
+        "number_of_write_rows_events_processed": {"readonly": True},
+        "number_of_update_rows_events_processed": {"readonly": True},
+        "number_of_delete_rows_events_processed": {"readonly": True},
+        "seconds_behind_source": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "binlog_position": {"key": "binlogPosition", "type": "MySqlBinlogPositionOutput"},
+        "timestamp": {"key": "timestamp", "type": "iso-8601"},
+        "number_of_rows_inserted": {"key": "numberOfRowsInserted", "type": "int"},
+        "number_of_rows_updated": {"key": "numberOfRowsUpdated", "type": "int"},
+        "number_of_rows_deleted": {"key": "numberOfRowsDeleted", "type": "int"},
+        "number_of_query_events_processed": {"key": "numberOfQueryEventsProcessed", "type": "int"},
+        "number_of_write_rows_events_processed": {"key": "numberOfWriteRowsEventsProcessed", "type": "int"},
+        "number_of_update_rows_events_processed": {"key": "numberOfUpdateRowsEventsProcessed", "type": "int"},
+        "number_of_delete_rows_events_processed": {"key": "numberOfDeleteRowsEventsProcessed", "type": "int"},
+        "seconds_behind_source": {"key": "secondsBehindSource", "type": "int"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.binlog_position = None
+        self.timestamp = None
+        self.number_of_rows_inserted = None
+        self.number_of_rows_updated = None
+        self.number_of_rows_deleted = None
+        self.number_of_query_events_processed = None
+        self.number_of_write_rows_events_processed = None
+        self.number_of_update_rows_events_processed = None
+        self.number_of_delete_rows_events_processed = None
+        self.seconds_behind_source = None
 
 
 class NameAvailabilityRequest(_serialization.Model):
@@ -17509,9 +18003,10 @@ class UploadOCIDriverTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -17587,9 +18082,10 @@ class ValidateMigrationInputSqlServerSqlDbSyncTaskProperties(ProjectTaskProperti
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -17778,9 +18274,10 @@ class ValidateMigrationInputSqlServerSqlMISyncTaskProperties(ProjectTaskProperti
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -18006,9 +18503,10 @@ class ValidateMigrationInputSqlServerSqlMITaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -18086,9 +18584,10 @@ class ValidateMongoDbTaskProperties(ProjectTaskProperties):
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and
@@ -18164,9 +18663,10 @@ class ValidateOracleAzureDbForPostgreSqlSyncTaskProperties(ProjectTaskProperties
      "GetUserTablesPostgreSql", "GetUserTablesMySql", "Migrate.MongoDb",
      "Migrate.SqlServer.AzureSqlDbMI", "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
      "Migrate.SqlServer.SqlDb", "Migrate.SqlServer.AzureSqlDb.Sync",
-     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql",
-     "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2", "Migrate.Oracle.AzureDbForPostgreSql.Sync",
-     "ValidateMigrationInput.SqlServer.SqlDb.Sync", "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+     "Migrate.MySql.AzureDbForMySql.Sync", "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+     "Migrate.MySql.AzureDbForMySql", "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
+     "Migrate.Oracle.AzureDbForPostgreSql.Sync", "ValidateMigrationInput.SqlServer.SqlDb.Sync",
+     "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
      "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS", "Validate.MongoDb",
      "Validate.Oracle.AzureDbPostgreSql.Sync", "GetTDECertificates.Sql", "Migrate.Ssis",
      "Service.Check.OCI", "Service.Upload.OCI", "Service.Install.OCI", and

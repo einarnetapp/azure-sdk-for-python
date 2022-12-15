@@ -122,21 +122,24 @@ from ._models_py3 import MigrateMISyncCompleteCommandProperties
 from ._models_py3 import MigrateMongoDbTaskProperties
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineDatabaseInput
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskInput
+from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskInputOptionalAgentSettings
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskOutput
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskOutputError
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel
 from ._models_py3 import MigrateMySqlAzureDbForMySqlOfflineTaskProperties
+from ._models_py3 import MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput
+from ._models_py3 import MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput
+from ._models_py3 import MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput
+from ._models_py3 import MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError
+from ._models_py3 import MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel
+from ._models_py3 import MigrateMySqlAzureDbForMySqlReplicateChangesTaskProperties
 from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncDatabaseInput
 from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskInput
 from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskOutput
-from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError
-from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel
-from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskOutputError
-from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel
-from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel
 from ._models_py3 import MigrateMySqlAzureDbForMySqlSyncTaskProperties
+from ._models_py3 import MigrateMySqlAzureDbForMySqlTaskResult
 from ._models_py3 import MigrateOracleAzureDbForPostgreSqlSyncTaskProperties
 from ._models_py3 import MigrateOracleAzureDbPostgreSqlSyncDatabaseInput
 from ._models_py3 import MigrateOracleAzureDbPostgreSqlSyncTaskInput
@@ -238,7 +241,11 @@ from ._models_py3 import MongoDbShardKeyField
 from ._models_py3 import MongoDbShardKeyInfo
 from ._models_py3 import MongoDbShardKeySetting
 from ._models_py3 import MongoDbThrottlingSettings
+from ._models_py3 import MySqlBinlogPositionInput
+from ._models_py3 import MySqlBinlogPositionOutput
 from ._models_py3 import MySqlConnectionInfo
+from ._models_py3 import MySqlContinuousDataMovementProgress
+from ._models_py3 import MySqlSchemaMigrationOptions
 from ._models_py3 import NameAvailabilityRequest
 from ._models_py3 import NameAvailabilityResponse
 from ._models_py3 import NodeMonitoringData
@@ -340,6 +347,12 @@ from ._data_migration_management_client_enums import DatabaseState
 from ._data_migration_management_client_enums import ErrorType
 from ._data_migration_management_client_enums import LoginMigrationStage
 from ._data_migration_management_client_enums import LoginType
+from ._data_migration_management_client_enums import (
+    MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevelMigrationType,
+)
+from ._data_migration_management_client_enums import (
+    MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevelMigrationType,
+)
 from ._data_migration_management_client_enums import MigrationState
 from ._data_migration_management_client_enums import MigrationStatus
 from ._data_migration_management_client_enums import MongoDbClusterType
@@ -499,21 +512,24 @@ __all__ = [
     "MigrateMongoDbTaskProperties",
     "MigrateMySqlAzureDbForMySqlOfflineDatabaseInput",
     "MigrateMySqlAzureDbForMySqlOfflineTaskInput",
+    "MigrateMySqlAzureDbForMySqlOfflineTaskInputOptionalAgentSettings",
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutput",
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel",
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutputError",
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel",
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel",
     "MigrateMySqlAzureDbForMySqlOfflineTaskProperties",
+    "MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput",
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput",
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput",
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError",
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel",
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskProperties",
     "MigrateMySqlAzureDbForMySqlSyncDatabaseInput",
     "MigrateMySqlAzureDbForMySqlSyncTaskInput",
     "MigrateMySqlAzureDbForMySqlSyncTaskOutput",
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError",
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel",
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputError",
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel",
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel",
     "MigrateMySqlAzureDbForMySqlSyncTaskProperties",
+    "MigrateMySqlAzureDbForMySqlTaskResult",
     "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties",
     "MigrateOracleAzureDbPostgreSqlSyncDatabaseInput",
     "MigrateOracleAzureDbPostgreSqlSyncTaskInput",
@@ -615,7 +631,11 @@ __all__ = [
     "MongoDbShardKeyInfo",
     "MongoDbShardKeySetting",
     "MongoDbThrottlingSettings",
+    "MySqlBinlogPositionInput",
+    "MySqlBinlogPositionOutput",
     "MySqlConnectionInfo",
+    "MySqlContinuousDataMovementProgress",
+    "MySqlSchemaMigrationOptions",
     "NameAvailabilityRequest",
     "NameAvailabilityResponse",
     "NodeMonitoringData",
@@ -716,6 +736,8 @@ __all__ = [
     "ErrorType",
     "LoginMigrationStage",
     "LoginType",
+    "MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevelMigrationType",
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevelMigrationType",
     "MigrationState",
     "MigrationStatus",
     "MongoDbClusterType",
