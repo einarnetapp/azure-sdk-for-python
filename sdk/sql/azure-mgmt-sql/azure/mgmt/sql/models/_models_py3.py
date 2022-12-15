@@ -16766,6 +16766,77 @@ class ServerCommunicationLinkListResult(_serialization.Model):
         self.value = value
 
 
+class ServerConfigurationOption(ProxyResource):
+    """A server configuration option.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar server_configuration_option_value: Value of the server configuration option.
+    :vartype server_configuration_option_value: int
+    :ivar provisioning_state: Provisioning state of server configuration option. Known values are:
+     "Created", "InProgress", "Succeeded", "Failed", and "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "server_configuration_option_value": {"key": "properties.serverConfigurationOptionValue", "type": "int"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+    }
+
+    def __init__(self, *, server_configuration_option_value: Optional[int] = None, **kwargs):
+        """
+        :keyword server_configuration_option_value: Value of the server configuration option.
+        :paramtype server_configuration_option_value: int
+        """
+        super().__init__(**kwargs)
+        self.server_configuration_option_value = server_configuration_option_value
+        self.provisioning_state = None
+
+
+class ServerConfigurationOptionListResult(_serialization.Model):
+    """A list of server configuration options.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ServerConfigurationOption]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ServerConfigurationOption]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
 class ServerConnectionPolicy(ProxyResource):
     """A server connection policy.
 
@@ -16872,9 +16943,6 @@ class ServerDevOpsAuditingSettings(ProxyResource):
      <https://go.microsoft.com/fwlink/?linkid=2033207>`_
      or `Diagnostic Settings PowerShell <https://go.microsoft.com/fwlink/?linkid=2033043>`_.
     :vartype is_azure_monitor_target_enabled: bool
-    :ivar is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
-     storage.
-    :vartype is_managed_identity_in_use: bool
     :ivar state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
      isAzureMonitorTargetEnabled are required. Known values are: "Enabled" and "Disabled".
     :vartype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -16912,7 +16980,6 @@ class ServerDevOpsAuditingSettings(ProxyResource):
         "type": {"key": "type", "type": "str"},
         "system_data": {"key": "systemData", "type": "SystemData"},
         "is_azure_monitor_target_enabled": {"key": "properties.isAzureMonitorTargetEnabled", "type": "bool"},
-        "is_managed_identity_in_use": {"key": "properties.isManagedIdentityInUse", "type": "bool"},
         "state": {"key": "properties.state", "type": "str"},
         "storage_endpoint": {"key": "properties.storageEndpoint", "type": "str"},
         "storage_account_access_key": {"key": "properties.storageAccountAccessKey", "type": "str"},
@@ -16923,7 +16990,6 @@ class ServerDevOpsAuditingSettings(ProxyResource):
         self,
         *,
         is_azure_monitor_target_enabled: Optional[bool] = None,
-        is_managed_identity_in_use: Optional[bool] = None,
         state: Optional[Union[str, "_models.BlobAuditingPolicyState"]] = None,
         storage_endpoint: Optional[str] = None,
         storage_account_access_key: Optional[str] = None,
@@ -16947,9 +17013,6 @@ class ServerDevOpsAuditingSettings(ProxyResource):
          <https://go.microsoft.com/fwlink/?linkid=2033207>`_
          or `Diagnostic Settings PowerShell <https://go.microsoft.com/fwlink/?linkid=2033043>`_.
         :paramtype is_azure_monitor_target_enabled: bool
-        :keyword is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
-         storage.
-        :paramtype is_managed_identity_in_use: bool
         :keyword state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
          isAzureMonitorTargetEnabled are required. Known values are: "Enabled" and "Disabled".
         :paramtype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -16977,7 +17040,6 @@ class ServerDevOpsAuditingSettings(ProxyResource):
         super().__init__(**kwargs)
         self.system_data = None
         self.is_azure_monitor_target_enabled = is_azure_monitor_target_enabled
-        self.is_managed_identity_in_use = is_managed_identity_in_use
         self.state = state
         self.storage_endpoint = storage_endpoint
         self.storage_account_access_key = storage_account_access_key
