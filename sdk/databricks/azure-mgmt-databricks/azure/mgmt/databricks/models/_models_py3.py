@@ -128,6 +128,8 @@ class AccessConnector(TrackedResource):
     :vartype location: str
     :ivar identity: Identity for the resource.
     :vartype identity: ~azure.mgmt.databricks.models.IdentityData
+    :ivar system_data: The system metadata relating to this resource.
+    :vartype system_data: ~azure.mgmt.databricks.models.SystemData
     :ivar properties: Azure Databricks accessConnector properties.
     :vartype properties: ~azure.mgmt.databricks.models.AccessConnectorProperties
     """
@@ -137,6 +139,7 @@ class AccessConnector(TrackedResource):
         "name": {"readonly": True},
         "type": {"readonly": True},
         "location": {"required": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
@@ -146,6 +149,7 @@ class AccessConnector(TrackedResource):
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
         "identity": {"key": "identity", "type": "IdentityData"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "properties": {"key": "properties", "type": "AccessConnectorProperties"},
     }
 
@@ -170,6 +174,7 @@ class AccessConnector(TrackedResource):
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.identity = identity
+        self.system_data = None
         self.properties = properties
 
 
@@ -944,18 +949,21 @@ class Operation(_serialization.Model):
 class OperationDisplay(_serialization.Model):
     """The object that represents the operation.
 
-    :ivar provider: Service provider: Microsoft.ResourceProvider.
+    :ivar provider: Service provider: ex Microsoft.Databricks.
     :vartype provider: str
     :ivar resource: Resource on which the operation is performed.
     :vartype resource: str
     :ivar operation: Operation type: Read, write, delete, etc.
     :vartype operation: str
+    :ivar description: Description for the resource operation.
+    :vartype description: str
     """
 
     _attribute_map = {
         "provider": {"key": "provider", "type": "str"},
         "resource": {"key": "resource", "type": "str"},
         "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
     def __init__(
@@ -964,20 +972,24 @@ class OperationDisplay(_serialization.Model):
         provider: Optional[str] = None,
         resource: Optional[str] = None,
         operation: Optional[str] = None,
+        description: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword provider: Service provider: Microsoft.ResourceProvider.
+        :keyword provider: Service provider: ex Microsoft.Databricks.
         :paramtype provider: str
         :keyword resource: Resource on which the operation is performed.
         :paramtype resource: str
         :keyword operation: Operation type: Read, write, delete, etc.
         :paramtype operation: str
+        :keyword description: Description for the resource operation.
+        :paramtype description: str
         """
         super().__init__(**kwargs)
         self.provider = provider
         self.resource = resource
         self.operation = operation
+        self.description = description
 
 
 class OperationListResult(_serialization.Model):
@@ -1117,6 +1129,8 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
 
     :ivar private_endpoint: Private endpoint.
     :vartype private_endpoint: ~azure.mgmt.databricks.models.PrivateEndpoint
+    :ivar group_ids: GroupIds from the private link service resource.
+    :vartype group_ids: list[str]
     :ivar private_link_service_connection_state: Private endpoint connection state. Required.
     :vartype private_link_service_connection_state:
      ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionState
@@ -1133,6 +1147,7 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
 
     _attribute_map = {
         "private_endpoint": {"key": "privateEndpoint", "type": "PrivateEndpoint"},
+        "group_ids": {"key": "groupIds", "type": "[str]"},
         "private_link_service_connection_state": {
             "key": "privateLinkServiceConnectionState",
             "type": "PrivateLinkServiceConnectionState",
@@ -1145,17 +1160,21 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
         *,
         private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState",
         private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+        group_ids: Optional[List[str]] = None,
         **kwargs
     ):
         """
         :keyword private_endpoint: Private endpoint.
         :paramtype private_endpoint: ~azure.mgmt.databricks.models.PrivateEndpoint
+        :keyword group_ids: GroupIds from the private link service resource.
+        :paramtype group_ids: list[str]
         :keyword private_link_service_connection_state: Private endpoint connection state. Required.
         :paramtype private_link_service_connection_state:
          ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionState
         """
         super().__init__(**kwargs)
         self.private_endpoint = private_endpoint
+        self.group_ids = group_ids
         self.private_link_service_connection_state = private_link_service_connection_state
         self.provisioning_state = None
 
@@ -1230,8 +1249,8 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
     :vartype status: str or ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionStatus
     :ivar description: The description for the current state of a private endpoint connection.
     :vartype description: str
-    :ivar action_required: Actions required for a private endpoint connection.
-    :vartype action_required: str
+    :ivar actions_required: Actions required for a private endpoint connection.
+    :vartype actions_required: str
     """
 
     _validation = {
@@ -1241,7 +1260,7 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
     _attribute_map = {
         "status": {"key": "status", "type": "str"},
         "description": {"key": "description", "type": "str"},
-        "action_required": {"key": "actionRequired", "type": "str"},
+        "actions_required": {"key": "actionsRequired", "type": "str"},
     }
 
     def __init__(
@@ -1249,7 +1268,7 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         *,
         status: Union[str, "_models.PrivateLinkServiceConnectionStatus"],
         description: Optional[str] = None,
-        action_required: Optional[str] = None,
+        actions_required: Optional[str] = None,
         **kwargs
     ):
         """
@@ -1258,13 +1277,13 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         :paramtype status: str or ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionStatus
         :keyword description: The description for the current state of a private endpoint connection.
         :paramtype description: str
-        :keyword action_required: Actions required for a private endpoint connection.
-        :paramtype action_required: str
+        :keyword actions_required: Actions required for a private endpoint connection.
+        :paramtype actions_required: str
         """
         super().__init__(**kwargs)
         self.status = status
         self.description = description
-        self.action_required = action_required
+        self.actions_required = actions_required
 
 
 class Sku(_serialization.Model):
@@ -1663,6 +1682,7 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         "created_date_time": {"readonly": True},
         "workspace_id": {"readonly": True},
         "workspace_url": {"readonly": True},
+        "disk_encryption_set_id": {"readonly": True},
         "private_endpoint_connections": {"readonly": True},
     }
 
@@ -1713,7 +1733,6 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         updated_by: Optional["_models.CreatedBy"] = None,
         storage_account_identity: Optional["_models.ManagedIdentityConfiguration"] = None,
         managed_disk_identity: Optional["_models.ManagedIdentityConfiguration"] = None,
-        disk_encryption_set_id: Optional[str] = None,
         encryption: Optional["_models.WorkspacePropertiesEncryption"] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         required_nsg_rules: Optional[Union[str, "_models.RequiredNsgRules"]] = None,
@@ -1745,8 +1764,6 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         :keyword managed_disk_identity: The details of Managed Identity of Disk Encryption Set used for
          Managed Disk Encryption.
         :paramtype managed_disk_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
-        :keyword disk_encryption_set_id: The resource Id of the managed disk encryption set.
-        :paramtype disk_encryption_set_id: str
         :keyword encryption: Encryption properties for databricks workspace.
         :paramtype encryption: ~azure.mgmt.databricks.models.WorkspacePropertiesEncryption
         :keyword public_network_access: The network access type for accessing workspace. Set value to
@@ -1773,7 +1790,7 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         self.workspace_url = None
         self.storage_account_identity = storage_account_identity
         self.managed_disk_identity = managed_disk_identity
-        self.disk_encryption_set_id = disk_encryption_set_id
+        self.disk_encryption_set_id = None
         self.encryption = encryption
         self.private_endpoint_connections = None
         self.public_network_access = public_network_access
