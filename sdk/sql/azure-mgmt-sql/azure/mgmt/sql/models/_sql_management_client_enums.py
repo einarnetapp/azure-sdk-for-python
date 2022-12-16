@@ -699,6 +699,19 @@ class ManagedInstanceProxyOverride(str, Enum, metaclass=CaseInsensitiveEnumMeta)
     DEFAULT = "Default"
 
 
+class ManagedLedgerDigestUploadsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ManagedLedgerDigestUploadsName."""
+
+    CURRENT = "current"
+
+
+class ManagedLedgerDigestUploadsState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the state of ledger digest upload."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
 class ManagedServerCreateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Specifies the mode of database creation.
 
@@ -1068,6 +1081,12 @@ class SensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOVE = "remove"
 
 
+class ServerConfigurationOptionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ServerConfigurationOptionName."""
+
+    ALLOW_POLYBASE_EXPORT = "allowPolybaseExport"
+
+
 class ServerConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The server connection type."""
 
@@ -1217,6 +1236,12 @@ class SqlVulnerabilityAssessmentState(str, Enum, metaclass=CaseInsensitiveEnumMe
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class StartStopScheduleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """StartStopScheduleName."""
+
+    DEFAULT = "default"
 
 
 class StorageCapabilityStorageAccountType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
