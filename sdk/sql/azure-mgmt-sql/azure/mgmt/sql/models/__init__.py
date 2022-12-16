@@ -216,6 +216,8 @@ from ._models_py3 import ManagedInstanceVcoresCapability
 from ._models_py3 import ManagedInstanceVersionCapability
 from ._models_py3 import ManagedInstanceVulnerabilityAssessment
 from ._models_py3 import ManagedInstanceVulnerabilityAssessmentListResult
+from ._models_py3 import ManagedLedgerDigestUploads
+from ._models_py3 import ManagedLedgerDigestUploadsListResult
 from ._models_py3 import ManagedServerDnsAlias
 from ._models_py3 import ManagedServerDnsAliasAcquisition
 from ._models_py3 import ManagedServerDnsAliasCreation
@@ -305,6 +307,8 @@ from ._models_py3 import ServerBlobAuditingPolicy
 from ._models_py3 import ServerBlobAuditingPolicyListResult
 from ._models_py3 import ServerCommunicationLink
 from ._models_py3 import ServerCommunicationLinkListResult
+from ._models_py3 import ServerConfigurationOption
+from ._models_py3 import ServerConfigurationOptionListResult
 from ._models_py3 import ServerConnectionPolicy
 from ._models_py3 import ServerConnectionPolicyListResult
 from ._models_py3 import ServerDevOpsAuditSettingsListResult
@@ -436,7 +440,6 @@ from ._sql_management_client_enums import DatabaseReadScale
 from ._sql_management_client_enums import DatabaseState
 from ._sql_management_client_enums import DatabaseStatus
 from ._sql_management_client_enums import DayOfWeek
-from ._sql_management_client_enums import DevOpsAuditingSettingsName
 from ._sql_management_client_enums import DiffBackupIntervalInHours
 from ._sql_management_client_enums import DtcName
 from ._sql_management_client_enums import ElasticPoolLicenseType
@@ -469,6 +472,8 @@ from ._sql_management_client_enums import ManagedInstanceLicenseType
 from ._sql_management_client_enums import ManagedInstanceLongTermRetentionPolicyName
 from ._sql_management_client_enums import ManagedInstancePropertiesProvisioningState
 from ._sql_management_client_enums import ManagedInstanceProxyOverride
+from ._sql_management_client_enums import ManagedLedgerDigestUploadsName
+from ._sql_management_client_enums import ManagedLedgerDigestUploadsState
 from ._sql_management_client_enums import ManagedServerCreateMode
 from ._sql_management_client_enums import ManagedShortTermRetentionPolicyName
 from ._sql_management_client_enums import ManagementOperationState
@@ -512,6 +517,7 @@ from ._sql_management_client_enums import SecurityEventType
 from ._sql_management_client_enums import SensitivityLabelRank
 from ._sql_management_client_enums import SensitivityLabelSource
 from ._sql_management_client_enums import SensitivityLabelUpdateKind
+from ._sql_management_client_enums import ServerConfigurationOptionName
 from ._sql_management_client_enums import ServerConnectionType
 from ._sql_management_client_enums import ServerKeyType
 from ._sql_management_client_enums import ServerNetworkAccessFlag
@@ -545,7 +551,7 @@ from ._sql_management_client_enums import VulnerabilityAssessmentPolicyBaselineN
 from ._sql_management_client_enums import VulnerabilityAssessmentScanState
 from ._sql_management_client_enums import VulnerabilityAssessmentScanTriggerType
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -759,6 +765,8 @@ __all__ = [
     "ManagedInstanceVersionCapability",
     "ManagedInstanceVulnerabilityAssessment",
     "ManagedInstanceVulnerabilityAssessmentListResult",
+    "ManagedLedgerDigestUploads",
+    "ManagedLedgerDigestUploadsListResult",
     "ManagedServerDnsAlias",
     "ManagedServerDnsAliasAcquisition",
     "ManagedServerDnsAliasCreation",
@@ -848,6 +856,8 @@ __all__ = [
     "ServerBlobAuditingPolicyListResult",
     "ServerCommunicationLink",
     "ServerCommunicationLinkListResult",
+    "ServerConfigurationOption",
+    "ServerConfigurationOptionListResult",
     "ServerConnectionPolicy",
     "ServerConnectionPolicyListResult",
     "ServerDevOpsAuditSettingsListResult",
@@ -978,7 +988,6 @@ __all__ = [
     "DatabaseState",
     "DatabaseStatus",
     "DayOfWeek",
-    "DevOpsAuditingSettingsName",
     "DiffBackupIntervalInHours",
     "DtcName",
     "ElasticPoolLicenseType",
@@ -1011,6 +1020,8 @@ __all__ = [
     "ManagedInstanceLongTermRetentionPolicyName",
     "ManagedInstancePropertiesProvisioningState",
     "ManagedInstanceProxyOverride",
+    "ManagedLedgerDigestUploadsName",
+    "ManagedLedgerDigestUploadsState",
     "ManagedServerCreateMode",
     "ManagedShortTermRetentionPolicyName",
     "ManagementOperationState",
@@ -1054,6 +1065,7 @@ __all__ = [
     "SensitivityLabelRank",
     "SensitivityLabelSource",
     "SensitivityLabelUpdateKind",
+    "ServerConfigurationOptionName",
     "ServerConnectionType",
     "ServerKeyType",
     "ServerNetworkAccessFlag",
