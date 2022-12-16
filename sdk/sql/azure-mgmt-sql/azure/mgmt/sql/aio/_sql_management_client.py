@@ -12,7 +12,7 @@ from typing import Any, Awaitable, TYPE_CHECKING
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
 
-from .. import models
+from .. import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import SqlManagementClientConfiguration
 from .operations import (
@@ -104,6 +104,7 @@ from .operations import (
     ManagedInstanceTdeCertificatesOperations,
     ManagedInstanceVulnerabilityAssessmentsOperations,
     ManagedInstancesOperations,
+    ManagedLedgerDigestUploadsOperations,
     ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations,
     ManagedServerDnsAliasesOperations,
     ManagedServerSecurityAlertPoliciesOperations,
@@ -126,6 +127,7 @@ from .operations import (
     ServerAzureADOnlyAuthenticationsOperations,
     ServerBlobAuditingPoliciesOperations,
     ServerCommunicationLinksOperations,
+    ServerConfigurationOptionsOperations,
     ServerConnectionPoliciesOperations,
     ServerDevOpsAuditSettingsOperations,
     ServerDnsAliasesOperations,
@@ -148,6 +150,7 @@ from .operations import (
     SqlVulnerabilityAssessmentScansOperations,
     SqlVulnerabilityAssessmentsOperations,
     SqlVulnerabilityAssessmentsSettingsOperations,
+    StartStopManagedInstanceSchedulesOperations,
     SubscriptionUsagesOperations,
     SynapseLinkWorkspacesOperations,
     SyncAgentsOperations,
@@ -440,8 +443,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      LongTermRetentionManagedInstanceBackupsOperations operations
     :vartype long_term_retention_managed_instance_backups:
      azure.mgmt.sql.aio.operations.LongTermRetentionManagedInstanceBackupsOperations
-    :ivar managed_instances: ManagedInstancesOperations operations
-    :vartype managed_instances: azure.mgmt.sql.aio.operations.ManagedInstancesOperations
     :ivar restorable_dropped_databases: RestorableDroppedDatabasesOperations operations
     :vartype restorable_dropped_databases:
      azure.mgmt.sql.aio.operations.RestorableDroppedDatabasesOperations
@@ -582,6 +583,18 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
     :vartype synapse_link_workspaces: azure.mgmt.sql.aio.operations.SynapseLinkWorkspacesOperations
     :ivar virtual_clusters: VirtualClustersOperations operations
     :vartype virtual_clusters: azure.mgmt.sql.aio.operations.VirtualClustersOperations
+    :ivar managed_instances: ManagedInstancesOperations operations
+    :vartype managed_instances: azure.mgmt.sql.aio.operations.ManagedInstancesOperations
+    :ivar server_configuration_options: ServerConfigurationOptionsOperations operations
+    :vartype server_configuration_options:
+     azure.mgmt.sql.aio.operations.ServerConfigurationOptionsOperations
+    :ivar managed_ledger_digest_uploads: ManagedLedgerDigestUploadsOperations operations
+    :vartype managed_ledger_digest_uploads:
+     azure.mgmt.sql.aio.operations.ManagedLedgerDigestUploadsOperations
+    :ivar start_stop_managed_instance_schedules: StartStopManagedInstanceSchedulesOperations
+     operations
+    :vartype start_stop_managed_instance_schedules:
+     azure.mgmt.sql.aio.operations.StartStopManagedInstanceSchedulesOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription ID that identifies an Azure subscription. Required.
@@ -604,7 +617,7 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         )
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -862,9 +875,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self.long_term_retention_managed_instance_backups = LongTermRetentionManagedInstanceBackupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_instances = ManagedInstancesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.restorable_dropped_databases = RestorableDroppedDatabasesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -997,6 +1007,18 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
             self._client, self._config, self._serialize, self._deserialize
         )
         self.virtual_clusters = VirtualClustersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_instances = ManagedInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.server_configuration_options = ServerConfigurationOptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_ledger_digest_uploads = ManagedLedgerDigestUploadsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.start_stop_managed_instance_schedules = StartStopManagedInstanceSchedulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 
