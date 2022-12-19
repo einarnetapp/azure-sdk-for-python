@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import AdminKeyResult
+from ._models_py3 import AsyncOperationResult
 from ._models_py3 import CheckNameAvailabilityInput
 from ._models_py3 import CheckNameAvailabilityOutput
 from ._models_py3 import CloudErrorBody
@@ -30,23 +31,35 @@ from ._models_py3 import Resource
 from ._models_py3 import SearchManagementRequestOptions
 from ._models_py3 import SearchService
 from ._models_py3 import SearchServiceListResult
+from ._models_py3 import SearchServiceUpdate
+from ._models_py3 import ShareablePrivateLinkResourceProperties
+from ._models_py3 import ShareablePrivateLinkResourceType
+from ._models_py3 import SharedPrivateLinkResource
+from ._models_py3 import SharedPrivateLinkResourceListResult
+from ._models_py3 import SharedPrivateLinkResourceProperties
 from ._models_py3 import Sku
+from ._models_py3 import TrackedResource
 
 from ._search_management_client_enums import AdminKeyKind
 from ._search_management_client_enums import HostingMode
 from ._search_management_client_enums import IdentityType
+from ._search_management_client_enums import PrivateLinkServiceConnectionProvisioningState
 from ._search_management_client_enums import PrivateLinkServiceConnectionStatus
 from ._search_management_client_enums import ProvisioningState
 from ._search_management_client_enums import PublicNetworkAccess
 from ._search_management_client_enums import SearchServiceStatus
+from ._search_management_client_enums import SharedPrivateLinkResourceAsyncOperationResult
+from ._search_management_client_enums import SharedPrivateLinkResourceProvisioningState
+from ._search_management_client_enums import SharedPrivateLinkResourceStatus
 from ._search_management_client_enums import SkuName
 from ._search_management_client_enums import UnavailableNameReason
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "AdminKeyResult",
+    "AsyncOperationResult",
     "CheckNameAvailabilityInput",
     "CheckNameAvailabilityOutput",
     "CloudErrorBody",
@@ -70,14 +83,25 @@ __all__ = [
     "SearchManagementRequestOptions",
     "SearchService",
     "SearchServiceListResult",
+    "SearchServiceUpdate",
+    "ShareablePrivateLinkResourceProperties",
+    "ShareablePrivateLinkResourceType",
+    "SharedPrivateLinkResource",
+    "SharedPrivateLinkResourceListResult",
+    "SharedPrivateLinkResourceProperties",
     "Sku",
+    "TrackedResource",
     "AdminKeyKind",
     "HostingMode",
     "IdentityType",
+    "PrivateLinkServiceConnectionProvisioningState",
     "PrivateLinkServiceConnectionStatus",
     "ProvisioningState",
     "PublicNetworkAccess",
     "SearchServiceStatus",
+    "SharedPrivateLinkResourceAsyncOperationResult",
+    "SharedPrivateLinkResourceProvisioningState",
+    "SharedPrivateLinkResourceStatus",
     "SkuName",
     "UnavailableNameReason",
 ]
