@@ -10,10 +10,25 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
+class AadAuthFailureMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Describes what response the data plane API of a Search service would send for requests that
+    failed authentication.
+    """
+
+    #: Indicates that requests that failed authentication should be presented with an HTTP status code
+    #: of 403 (Forbidden).
+    HTTP403 = "http403"
+    #: Indicates that requests that failed authentication should be presented with an HTTP status code
+    #: of 401 (Unauthorized) and present a Bearer Challenge.
+    HTTP401_WITH_BEARER_CHALLENGE = "http401WithBearerChallenge"
+
+
 class AdminKeyKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """AdminKeyKind."""
 
+    #: The primary API key for the search service.
     PRIMARY = "primary"
+    #: The secondary API key for the search service.
     SECONDARY = "secondary"
 
 
@@ -24,7 +39,9 @@ class HostingMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     all other SKUs, this value must be 'default'.
     """
 
+    #: The limit on number of indexes is determined by the default limits for the SKU.
     DEFAULT = "default"
+    #: Only application for standard3 SKU, where the search service can have up to 1000 indexes.
     HIGH_DENSITY = "highDensity"
 
 
@@ -35,29 +52,57 @@ class IdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SYSTEM_ASSIGNED = "SystemAssigned"
 
 
+class PrivateLinkServiceConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The provisioning state of the private link service connection. Can be Updating, Deleting,
+    Failed, Succeeded, or Incomplete.
+    """
+
+    #: The private link service connection is in the process of being created along with other
+    #: resources for it to be fully functional.
+    UPDATING = "Updating"
+    #: The private link service connection is in the process of being deleted.
+    DELETING = "Deleting"
+    #: The private link service connection has failed to be provisioned or deleted.
+    FAILED = "Failed"
+    #: The private link service connection has finished provisioning and is ready for approval.
+    SUCCEEDED = "Succeeded"
+    #: Provisioning request for the private link service connection resource has been accepted but the
+    #: process of creation has not commenced yet.
+    INCOMPLETE = "Incomplete"
+    #: Provisioning request for the private link service connection resource has been canceled
+    CANCELED = "Canceled"
+
+
 class PrivateLinkServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the the private link service connection. Can be Pending, Approved, Rejected, or
     Disconnected.
     """
 
+    #: The private endpoint connection has been created and is pending approval.
     PENDING = "Pending"
+    #: The private endpoint connection is approved and is ready for use.
     APPROVED = "Approved"
+    #: The private endpoint connection has been rejected and cannot be used.
     REJECTED = "Rejected"
+    #: The private endpoint connection has been removed from the service.
     DISCONNECTED = "Disconnected"
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The state of the last provisioning operation performed on the Search service. Provisioning is
+    """The state of the last provisioning operation performed on the search service. Provisioning is
     an intermediate state that occurs while service capacity is being established. After capacity
     is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can
     poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by
     using the Get Search Service operation to see when an operation is completed. If you are using
     the free service, this value tends to come back as 'succeeded' directly in the call to Create
-    Search service. This is because the free service uses capacity that is already set up.
+    search service. This is because the free service uses capacity that is already set up.
     """
 
+    #: The last provisioning operation has completed successfully.
     SUCCEEDED = "succeeded"
+    #: The search service is being provisioned or scaled up or down.
     PROVISIONING = "provisioning"
+    #: The last provisioning operation has failed.
     FAILED = "failed"
 
 
@@ -72,28 +117,66 @@ class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class SearchServiceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The status of the Search service. Possible values include: 'running': The Search service is
-    running and no provisioning operations are underway. 'provisioning': The Search service is
-    being provisioned or scaled up or down. 'deleting': The Search service is being deleted.
-    'degraded': The Search service is degraded. This can occur when the underlying search units are
-    not healthy. The Search service is most likely operational, but performance might be slow and
-    some requests might be dropped. 'disabled': The Search service is disabled. In this state, the
-    service will reject all API requests. 'error': The Search service is in an error state. If your
+    """The status of the search service. Possible values include: 'running': The search service is
+    running and no provisioning operations are underway. 'provisioning': The search service is
+    being provisioned or scaled up or down. 'deleting': The search service is being deleted.
+    'degraded': The search service is degraded. This can occur when the underlying search units are
+    not healthy. The search service is most likely operational, but performance might be slow and
+    some requests might be dropped. 'disabled': The search service is disabled. In this state, the
+    service will reject all API requests. 'error': The search service is in an error state. If your
     service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team
     is actively investigating the underlying issue. Dedicated services in these states are still
     chargeable based on the number of search units provisioned.
     """
 
+    #: The search service is running and no provisioning operations are underway.
     RUNNING = "running"
+    #: The search service is being provisioned or scaled up or down.
     PROVISIONING = "provisioning"
+    #: The search service is being deleted.
     DELETING = "deleting"
+    #: The search service is degraded because underlying search units are not healthy.
     DEGRADED = "degraded"
+    #: The search service is disabled and all API requests will be rejected.
     DISABLED = "disabled"
+    #: The search service is in error state, indicating either a failure to provision or to be
+    #: deleted.
     ERROR = "error"
+    #: The search service is in a subscription that's disabled.
+    STOPPED = "stopped"
+
+
+class SharedPrivateLinkResourceAsyncOperationResult(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The current status of the long running asynchronous shared private link resource operation."""
+
+    RUNNING = "Running"
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+
+
+class SharedPrivateLinkResourceProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The provisioning state of the shared private link resource. Can be Updating, Deleting, Failed,
+    Succeeded or Incomplete.
+    """
+
+    UPDATING = "Updating"
+    DELETING = "Deleting"
+    FAILED = "Failed"
+    SUCCEEDED = "Succeeded"
+    INCOMPLETE = "Incomplete"
+
+
+class SharedPrivateLinkResourceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected."""
+
+    PENDING = "Pending"
+    APPROVED = "Approved"
+    REJECTED = "Rejected"
+    DISCONNECTED = "Disconnected"
 
 
 class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The SKU of the Search service. Valid values include: 'free': Shared service. 'basic': Dedicated
+    """The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated
     service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12
     replicas. 'standard2': Similar to standard, but with more capacity per search unit.
     'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3
@@ -102,12 +185,20 @@ class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'.
     """
 
+    #: Free tier, with no SLA guarantees and a subset of features offered to paid tiers.
     FREE = "free"
+    #: Paid tier dedicated service with up to 3 replicas.
     BASIC = "basic"
+    #: Paid tier dedicated service with up to 12 partitions and 12 replicas.
     STANDARD = "standard"
+    #: Similar to 'standard', but with more capacity per search unit.
     STANDARD2 = "standard2"
+    #: The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions
+    #: with more indexes if you also set the hostingMode property to 'highDensity').
     STANDARD3 = "standard3"
+    #: Paid tier dedicated service that supports 1TB per partition, up to 12 partitions.
     STORAGE_OPTIMIZED_L1 = "storage_optimized_l1"
+    #: Paid tier dedicated service that supports 2TB per partition, up to 12 partitions.
     STORAGE_OPTIMIZED_L2 = "storage_optimized_l2"
 
 
@@ -117,5 +208,7 @@ class UnavailableNameReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     indicates that the name is already in use and is therefore unavailable.
     """
 
+    #: The search service name does not match naming requirements.
     INVALID = "Invalid"
+    #: The search service name is already assigned to a different search service.
     ALREADY_EXISTS = "AlreadyExists"
