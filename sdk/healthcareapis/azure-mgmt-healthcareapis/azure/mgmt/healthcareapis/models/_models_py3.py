@@ -1549,6 +1549,161 @@ class LogSpecification(_serialization.Model):
         self.blob_duration = blob_duration
 
 
+class MedtechMappingValidationError(_serialization.Model):
+    """A mapping validation error.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar message: The validation error message.
+    :vartype message: str
+    :ivar level: Indicates the severity of the validation error. Known values are: "ERROR" and
+     "WARN".
+    :vartype level: str or ~azure.mgmt.healthcareapis.models.MedtechMappingValidationErrorLevel
+    :ivar category: Indicates the type of validation being performed. Known values are:
+     "NORMALIZATION" and "FHIRTRANSFORMATION".
+    :vartype category: str or ~azure.mgmt.healthcareapis.models.MedtechMappingValidationCategory
+    :ivar line_info: Associates the validation error with the position on the mapping template
+     where it occurred.
+    :vartype line_info: ~azure.mgmt.healthcareapis.models.MedtechMappingValidationLineInfo
+    """
+
+    _validation = {
+        "level": {"readonly": True},
+        "category": {"readonly": True},
+        "line_info": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "message": {"key": "message", "type": "str"},
+        "level": {"key": "level", "type": "str"},
+        "category": {"key": "category", "type": "str"},
+        "line_info": {"key": "lineInfo", "type": "MedtechMappingValidationLineInfo"},
+    }
+
+    def __init__(self, *, message: Optional[str] = None, **kwargs):
+        """
+        :keyword message: The validation error message.
+        :paramtype message: str
+        """
+        super().__init__(**kwargs)
+        self.message = message
+        self.level = None
+        self.category = None
+        self.line_info = None
+
+
+class MedtechMappingValidationLineInfo(_serialization.Model):
+    """Associates the validation error with the position on the mapping template where it occurred.
+
+    :ivar line_number: The line on which the validation error was discovered.
+    :vartype line_number: int
+    :ivar line_position: The position on the line which the validation error was discovered.
+    :vartype line_position: int
+    """
+
+    _attribute_map = {
+        "line_number": {"key": "lineNumber", "type": "int"},
+        "line_position": {"key": "linePosition", "type": "int"},
+    }
+
+    def __init__(self, *, line_number: Optional[int] = None, line_position: Optional[int] = None, **kwargs):
+        """
+        :keyword line_number: The line on which the validation error was discovered.
+        :paramtype line_number: int
+        :keyword line_position: The position on the line which the validation error was discovered.
+        :paramtype line_position: int
+        """
+        super().__init__(**kwargs)
+        self.line_number = line_number
+        self.line_position = line_position
+
+
+class MedtechMeasurement(_serialization.Model):
+    """A measurement extracted during the Medtech device event normalization process.
+
+    :ivar type: The type of measurement being collected.
+    :vartype type: str
+    :ivar correlation_id: The id used to group values into a single observation.
+    :vartype correlation_id: str
+    :ivar device_id: The id of the device that collected the measurement.
+    :vartype device_id: str
+    :ivar encounter_id: The id of the encounter.
+    :vartype encounter_id: str
+    :ivar occurrence_time_utc: The time that device collected the measurement.
+    :vartype occurrence_time_utc: str
+    :ivar properties:
+    :vartype properties: list[~azure.mgmt.healthcareapis.models.MedtechMeasurementProperty]
+    """
+
+    _attribute_map = {
+        "type": {"key": "type", "type": "str"},
+        "correlation_id": {"key": "correlationId", "type": "str"},
+        "device_id": {"key": "deviceId", "type": "str"},
+        "encounter_id": {"key": "encounterId", "type": "str"},
+        "occurrence_time_utc": {"key": "occurrenceTimeUtc", "type": "str"},
+        "properties": {"key": "properties", "type": "[MedtechMeasurementProperty]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Optional[str] = None,
+        correlation_id: Optional[str] = None,
+        device_id: Optional[str] = None,
+        encounter_id: Optional[str] = None,
+        occurrence_time_utc: Optional[str] = None,
+        properties: Optional[List["_models.MedtechMeasurementProperty"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword type: The type of measurement being collected.
+        :paramtype type: str
+        :keyword correlation_id: The id used to group values into a single observation.
+        :paramtype correlation_id: str
+        :keyword device_id: The id of the device that collected the measurement.
+        :paramtype device_id: str
+        :keyword encounter_id: The id of the encounter.
+        :paramtype encounter_id: str
+        :keyword occurrence_time_utc: The time that device collected the measurement.
+        :paramtype occurrence_time_utc: str
+        :keyword properties:
+        :paramtype properties: list[~azure.mgmt.healthcareapis.models.MedtechMeasurementProperty]
+        """
+        super().__init__(**kwargs)
+        self.type = type
+        self.correlation_id = correlation_id
+        self.device_id = device_id
+        self.encounter_id = encounter_id
+        self.occurrence_time_utc = occurrence_time_utc
+        self.properties = properties
+
+
+class MedtechMeasurementProperty(_serialization.Model):
+    """The values for an extracted measurment.
+
+    :ivar name: The name of the measurement.
+    :vartype name: str
+    :ivar value: The value of the measurement.
+    :vartype value: str
+    """
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
+    }
+
+    def __init__(self, *, name: Optional[str] = None, value: Optional[str] = None, **kwargs):
+        """
+        :keyword name: The name of the measurement.
+        :paramtype name: str
+        :keyword value: The value of the measurement.
+        :paramtype value: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.value = value
+
+
 class MetricDimension(_serialization.Model):
     """Specifications of the Dimension of metrics.
 
@@ -1614,20 +1769,10 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
     :ivar fill_gap_with_zero: Optional. If set to true, then zero will be returned for time
      duration where no metric is emitted/published.
     :vartype fill_gap_with_zero: bool
-    :ivar metric_filter_pattern: Pattern for the filter of the metric.
-    :vartype metric_filter_pattern: str
     :ivar dimensions: Dimensions of the metric.
     :vartype dimensions: list[~azure.mgmt.healthcareapis.models.MetricDimension]
-    :ivar is_internal: Whether the metric is internal.
-    :vartype is_internal: bool
-    :ivar source_mdm_account: The source MDM account.
-    :vartype source_mdm_account: str
-    :ivar source_mdm_namespace: The source MDM namespace.
+    :ivar source_mdm_namespace: Name of the MDM namespace. Optional.
     :vartype source_mdm_namespace: str
-    :ivar enable_regional_mdm_account: Whether regional MDM account enabled.
-    :vartype enable_regional_mdm_account: bool
-    :ivar resource_id_dimension_name_override: The resource Id dimension name override.
-    :vartype resource_id_dimension_name_override: str
     """
 
     _attribute_map = {
@@ -1640,13 +1785,8 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
         "supported_aggregation_types": {"key": "supportedAggregationTypes", "type": "[str]"},
         "supported_time_grain_types": {"key": "supportedTimeGrainTypes", "type": "[str]"},
         "fill_gap_with_zero": {"key": "fillGapWithZero", "type": "bool"},
-        "metric_filter_pattern": {"key": "metricFilterPattern", "type": "str"},
         "dimensions": {"key": "dimensions", "type": "[MetricDimension]"},
-        "is_internal": {"key": "isInternal", "type": "bool"},
-        "source_mdm_account": {"key": "sourceMdmAccount", "type": "str"},
         "source_mdm_namespace": {"key": "sourceMdmNamespace", "type": "str"},
-        "enable_regional_mdm_account": {"key": "enableRegionalMdmAccount", "type": "bool"},
-        "resource_id_dimension_name_override": {"key": "resourceIdDimensionNameOverride", "type": "str"},
     }
 
     def __init__(
@@ -1661,13 +1801,8 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
         supported_aggregation_types: Optional[List[str]] = None,
         supported_time_grain_types: Optional[List[str]] = None,
         fill_gap_with_zero: Optional[bool] = None,
-        metric_filter_pattern: Optional[str] = None,
         dimensions: Optional[List["_models.MetricDimension"]] = None,
-        is_internal: Optional[bool] = None,
-        source_mdm_account: Optional[str] = None,
         source_mdm_namespace: Optional[str] = None,
-        enable_regional_mdm_account: Optional[bool] = None,
-        resource_id_dimension_name_override: Optional[str] = None,
         **kwargs
     ):
         """
@@ -1692,20 +1827,10 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
         :keyword fill_gap_with_zero: Optional. If set to true, then zero will be returned for time
          duration where no metric is emitted/published.
         :paramtype fill_gap_with_zero: bool
-        :keyword metric_filter_pattern: Pattern for the filter of the metric.
-        :paramtype metric_filter_pattern: str
         :keyword dimensions: Dimensions of the metric.
         :paramtype dimensions: list[~azure.mgmt.healthcareapis.models.MetricDimension]
-        :keyword is_internal: Whether the metric is internal.
-        :paramtype is_internal: bool
-        :keyword source_mdm_account: The source MDM account.
-        :paramtype source_mdm_account: str
-        :keyword source_mdm_namespace: The source MDM namespace.
+        :keyword source_mdm_namespace: Name of the MDM namespace. Optional.
         :paramtype source_mdm_namespace: str
-        :keyword enable_regional_mdm_account: Whether regional MDM account enabled.
-        :paramtype enable_regional_mdm_account: bool
-        :keyword resource_id_dimension_name_override: The resource Id dimension name override.
-        :paramtype resource_id_dimension_name_override: str
         """
         super().__init__(**kwargs)
         self.name = name
@@ -1717,13 +1842,8 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
         self.supported_aggregation_types = supported_aggregation_types
         self.supported_time_grain_types = supported_time_grain_types
         self.fill_gap_with_zero = fill_gap_with_zero
-        self.metric_filter_pattern = metric_filter_pattern
         self.dimensions = dimensions
-        self.is_internal = is_internal
-        self.source_mdm_account = source_mdm_account
         self.source_mdm_namespace = source_mdm_namespace
-        self.enable_regional_mdm_account = enable_regional_mdm_account
-        self.resource_id_dimension_name_override = resource_id_dimension_name_override
 
 
 class OperationDetail(_serialization.Model):
@@ -3217,6 +3337,177 @@ class UserAssignedIdentity(_serialization.Model):
         super().__init__(**kwargs)
         self.principal_id = None
         self.client_id = None
+
+
+class ValidateMedtechMappingsDeviceResult(_serialization.Model):
+    """A result returned when processing a single device event in Medtech Mapping Validation Service.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar aggregated_count: Indicates how many Device Events produced the associated Exception.
+    :vartype aggregated_count: JSON
+    :ivar device_event: The device event which was validated.
+    :vartype device_event: JSON
+    :ivar exceptions: A list of mapping validation error.
+    :vartype exceptions: list[~azure.mgmt.healthcareapis.models.MedtechMappingValidationError]
+    :ivar measurements: A collection of measurements which were produced.
+    :vartype measurements: list[~azure.mgmt.healthcareapis.models.MedtechMeasurement]
+    :ivar observations: A collection of observations which were produced.
+    :vartype observations: list[JSON]
+    """
+
+    _validation = {
+        "exceptions": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "aggregated_count": {"key": "aggregatedCount", "type": "object"},
+        "device_event": {"key": "deviceEvent", "type": "object"},
+        "exceptions": {"key": "exceptions", "type": "[MedtechMappingValidationError]"},
+        "measurements": {"key": "measurements", "type": "[MedtechMeasurement]"},
+        "observations": {"key": "observations", "type": "[object]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        aggregated_count: Optional[JSON] = None,
+        device_event: Optional[JSON] = None,
+        measurements: Optional[List["_models.MedtechMeasurement"]] = None,
+        observations: Optional[List[JSON]] = None,
+        **kwargs
+    ):
+        """
+        :keyword aggregated_count: Indicates how many Device Events produced the associated Exception.
+        :paramtype aggregated_count: JSON
+        :keyword device_event: The device event which was validated.
+        :paramtype device_event: JSON
+        :keyword measurements: A collection of measurements which were produced.
+        :paramtype measurements: list[~azure.mgmt.healthcareapis.models.MedtechMeasurement]
+        :keyword observations: A collection of observations which were produced.
+        :paramtype observations: list[JSON]
+        """
+        super().__init__(**kwargs)
+        self.aggregated_count = aggregated_count
+        self.device_event = device_event
+        self.exceptions = None
+        self.measurements = measurements
+        self.observations = observations
+
+
+class ValidateMedtechMappingsParameters(_serialization.Model):
+    """Input values for the Medtech Mapping Validation Service.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar aggregate_errors: Indicates if validation results will be aggregated. Known values are:
+     "True" and "False".
+    :vartype aggregate_errors: str or ~azure.mgmt.healthcareapis.models.AggregateErrors
+    :ivar device_mapping: The Medtech device mapping template. Required.
+    :vartype device_mapping: ~azure.mgmt.healthcareapis.models.IotMappingProperties
+    :ivar fhir_mapping: The Medtech FHIR mapping template.
+    :vartype fhir_mapping: ~azure.mgmt.healthcareapis.models.IotMappingProperties
+    :ivar device_events: A collection of device events.
+    :vartype device_events: list[JSON]
+    """
+
+    _validation = {
+        "device_mapping": {"required": True},
+    }
+
+    _attribute_map = {
+        "aggregate_errors": {"key": "aggregateErrors", "type": "str"},
+        "device_mapping": {"key": "deviceMapping", "type": "IotMappingProperties"},
+        "fhir_mapping": {"key": "fhirMapping", "type": "IotMappingProperties"},
+        "device_events": {"key": "deviceEvents", "type": "[object]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        device_mapping: "_models.IotMappingProperties",
+        aggregate_errors: Optional[Union[str, "_models.AggregateErrors"]] = None,
+        fhir_mapping: Optional["_models.IotMappingProperties"] = None,
+        device_events: Optional[List[JSON]] = None,
+        **kwargs
+    ):
+        """
+        :keyword aggregate_errors: Indicates if validation results will be aggregated. Known values
+         are: "True" and "False".
+        :paramtype aggregate_errors: str or ~azure.mgmt.healthcareapis.models.AggregateErrors
+        :keyword device_mapping: The Medtech device mapping template. Required.
+        :paramtype device_mapping: ~azure.mgmt.healthcareapis.models.IotMappingProperties
+        :keyword fhir_mapping: The Medtech FHIR mapping template.
+        :paramtype fhir_mapping: ~azure.mgmt.healthcareapis.models.IotMappingProperties
+        :keyword device_events: A collection of device events.
+        :paramtype device_events: list[JSON]
+        """
+        super().__init__(**kwargs)
+        self.aggregate_errors = aggregate_errors
+        self.device_mapping = device_mapping
+        self.fhir_mapping = fhir_mapping
+        self.device_events = device_events
+
+
+class ValidateMedtechMappingsResult(_serialization.Model):
+    """The result returned from the Medtech Mapping Validation Service.
+
+    :ivar template_result: The result from validating the mapping templates.
+    :vartype template_result:
+     ~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsResultTemplateResult
+    :ivar device_results: Results from validating each device event against the supplied mapping
+     templates.
+    :vartype device_results:
+     list[~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsDeviceResult]
+    """
+
+    _attribute_map = {
+        "template_result": {"key": "templateResult", "type": "ValidateMedtechMappingsResultTemplateResult"},
+        "device_results": {"key": "deviceResults", "type": "[ValidateMedtechMappingsDeviceResult]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        template_result: Optional["_models.ValidateMedtechMappingsResultTemplateResult"] = None,
+        device_results: Optional[List["_models.ValidateMedtechMappingsDeviceResult"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword template_result: The result from validating the mapping templates.
+        :paramtype template_result:
+         ~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsResultTemplateResult
+        :keyword device_results: Results from validating each device event against the supplied mapping
+         templates.
+        :paramtype device_results:
+         list[~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsDeviceResult]
+        """
+        super().__init__(**kwargs)
+        self.template_result = template_result
+        self.device_results = device_results
+
+
+class ValidateMedtechMappingsResultTemplateResult(_serialization.Model):
+    """The result from validating the mapping templates.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar exceptions: A list of mapping validation error.
+    :vartype exceptions: list[~azure.mgmt.healthcareapis.models.MedtechMappingValidationError]
+    """
+
+    _validation = {
+        "exceptions": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "exceptions": {"key": "exceptions", "type": "[MedtechMappingValidationError]"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.exceptions = None
 
 
 class Workspace(TaggedResource):
