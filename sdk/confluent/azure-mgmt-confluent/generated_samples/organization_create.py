@@ -36,6 +36,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/confluent/resource-manager/Microsoft.Confluent/stable/2021-12-01/examples/Organization_Create.json
+# x-ms-original-file: specification/confluent/resource-manager/Microsoft.Confluent/preview/2022-10-07-preview/examples/Organization_Create.json
 if __name__ == "__main__":
     main()

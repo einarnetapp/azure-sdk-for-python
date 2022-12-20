@@ -14,7 +14,7 @@ from azure.mgmt.confluent import ConfluentManagementClient
     pip install azure-identity
     pip install azure-mgmt-confluent
 # USAGE
-    python confluent_delete.py
+    python validations_validate_organizations_v2.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,13 +29,35 @@ def main():
         subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
-    response = client.organization.begin_delete(
+    response = client.validations.validate_organization_v2(
         resource_group_name="myResourceGroup",
         organization_name="myOrganization",
-    ).result()
+        body={
+            "location": "West US",
+            "properties": {
+                "offerDetail": {
+                    "id": "string",
+                    "planId": "string",
+                    "planName": "string",
+                    "privateOfferId": "string",
+                    "privateOfferIds": ["string"],
+                    "publisherId": "string",
+                    "termUnit": "string",
+                },
+                "userDetail": {
+                    "aadEmail": "abc@microsoft.com",
+                    "emailAddress": "abc@microsoft.com",
+                    "firstName": "string",
+                    "lastName": "string",
+                    "userPrincipalName": "abc@microsoft.com",
+                },
+            },
+            "tags": {"Environment": "Dev"},
+        },
+    )
     print(response)
 
 
-# x-ms-original-file: specification/confluent/resource-manager/Microsoft.Confluent/stable/2021-12-01/examples/Organization_Delete.json
+# x-ms-original-file: specification/confluent/resource-manager/Microsoft.Confluent/preview/2022-10-07-preview/examples/Validations_ValidateOrganizationsV2.json
 if __name__ == "__main__":
     main()

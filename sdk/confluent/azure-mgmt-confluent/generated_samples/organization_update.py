@@ -14,7 +14,7 @@ from azure.mgmt.confluent import ConfluentManagementClient
     pip install azure-identity
     pip install azure-mgmt-confluent
 # USAGE
-    python confluent_update.py
+    python organization_update.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -36,6 +36,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/confluent/resource-manager/Microsoft.Confluent/stable/2021-12-01/examples/Organization_Update.json
+# x-ms-original-file: specification/confluent/resource-manager/Microsoft.Confluent/preview/2022-10-07-preview/examples/Organization_Update.json
 if __name__ == "__main__":
     main()

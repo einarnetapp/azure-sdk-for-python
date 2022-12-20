@@ -188,10 +188,34 @@ class ErrorResponseBody(_serialization.Model):
         self.details = None
 
 
+class LinkOrganization(_serialization.Model):
+    """Link an existing Confluent organization.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar token: User auth token. Required.
+    :vartype token: str
+    """
+
+    _validation = {
+        "token": {"required": True},
+    }
+
+    _attribute_map = {
+        "token": {"key": "token", "type": "str"},
+    }
+
+    def __init__(self, *, token: str, **kwargs):
+        """
+        :keyword token: User auth token. Required.
+        :paramtype token: str
+        """
+        super().__init__(**kwargs)
+        self.token = token
+
+
 class OfferDetail(_serialization.Model):
     """Confluent Offer detail.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -205,6 +229,12 @@ class OfferDetail(_serialization.Model):
     :vartype plan_name: str
     :ivar term_unit: Offer Plan Term unit. Required.
     :vartype term_unit: str
+    :ivar term_id: Offer Plan Term Id.
+    :vartype term_id: str
+    :ivar private_offer_id: Private Offer Id.
+    :vartype private_offer_id: str
+    :ivar private_offer_ids: Array of Private Offer Ids.
+    :vartype private_offer_ids: list[str]
     :ivar status: SaaS Offer Status. Known values are: "Started", "PendingFulfillmentStart",
      "InProgress", "Subscribed", "Suspended", "Reinstated", "Succeeded", "Failed", "Unsubscribed",
      and "Updating".
@@ -214,10 +244,11 @@ class OfferDetail(_serialization.Model):
     _validation = {
         "publisher_id": {"required": True, "max_length": 50},
         "id": {"required": True, "max_length": 50},
-        "plan_id": {"required": True, "max_length": 50},
-        "plan_name": {"required": True, "max_length": 50},
+        "plan_id": {"required": True, "max_length": 200},
+        "plan_name": {"required": True, "max_length": 200},
         "term_unit": {"required": True, "max_length": 25},
-        "status": {"readonly": True},
+        "term_id": {"max_length": 50},
+        "private_offer_id": {"max_length": 255},
     }
 
     _attribute_map = {
@@ -226,6 +257,9 @@ class OfferDetail(_serialization.Model):
         "plan_id": {"key": "planId", "type": "str"},
         "plan_name": {"key": "planName", "type": "str"},
         "term_unit": {"key": "termUnit", "type": "str"},
+        "term_id": {"key": "termId", "type": "str"},
+        "private_offer_id": {"key": "privateOfferId", "type": "str"},
+        "private_offer_ids": {"key": "privateOfferIds", "type": "[str]"},
         "status": {"key": "status", "type": "str"},
     }
 
@@ -237,6 +271,10 @@ class OfferDetail(_serialization.Model):
         plan_id: str,
         plan_name: str,
         term_unit: str,
+        term_id: Optional[str] = None,
+        private_offer_id: Optional[str] = None,
+        private_offer_ids: Optional[List[str]] = None,
+        status: Optional[Union[str, "_models.SaaSOfferStatus"]] = None,
         **kwargs
     ):
         """
@@ -250,6 +288,16 @@ class OfferDetail(_serialization.Model):
         :paramtype plan_name: str
         :keyword term_unit: Offer Plan Term unit. Required.
         :paramtype term_unit: str
+        :keyword term_id: Offer Plan Term Id.
+        :paramtype term_id: str
+        :keyword private_offer_id: Private Offer Id.
+        :paramtype private_offer_id: str
+        :keyword private_offer_ids: Array of Private Offer Ids.
+        :paramtype private_offer_ids: list[str]
+        :keyword status: SaaS Offer Status. Known values are: "Started", "PendingFulfillmentStart",
+         "InProgress", "Subscribed", "Suspended", "Reinstated", "Succeeded", "Failed", "Unsubscribed",
+         and "Updating".
+        :paramtype status: str or ~azure.mgmt.confluent.models.SaaSOfferStatus
         """
         super().__init__(**kwargs)
         self.publisher_id = publisher_id
@@ -257,7 +305,10 @@ class OfferDetail(_serialization.Model):
         self.plan_id = plan_id
         self.plan_name = plan_name
         self.term_unit = term_unit
-        self.status = None
+        self.term_id = term_id
+        self.private_offer_id = private_offer_id
+        self.private_offer_ids = private_offer_ids
+        self.status = status
 
 
 class OperationDisplay(_serialization.Model):
@@ -406,6 +457,8 @@ class OrganizationResource(_serialization.Model):  # pylint: disable=too-many-in
     :vartype offer_detail: ~azure.mgmt.confluent.models.OfferDetail
     :ivar user_detail: Subscriber detail. Required.
     :vartype user_detail: ~azure.mgmt.confluent.models.UserDetail
+    :ivar link_organization: Link an existing Confluent organization.
+    :vartype link_organization: ~azure.mgmt.confluent.models.LinkOrganization
     """
 
     _validation = {
@@ -434,6 +487,7 @@ class OrganizationResource(_serialization.Model):  # pylint: disable=too-many-in
         "sso_url": {"key": "properties.ssoUrl", "type": "str"},
         "offer_detail": {"key": "properties.offerDetail", "type": "OfferDetail"},
         "user_detail": {"key": "properties.userDetail", "type": "UserDetail"},
+        "link_organization": {"key": "properties.linkOrganization", "type": "LinkOrganization"},
     }
 
     def __init__(
@@ -443,6 +497,7 @@ class OrganizationResource(_serialization.Model):  # pylint: disable=too-many-in
         user_detail: "_models.UserDetail",
         tags: Optional[Dict[str, str]] = None,
         location: Optional[str] = None,
+        link_organization: Optional["_models.LinkOrganization"] = None,
         **kwargs
     ):
         """
@@ -454,6 +509,8 @@ class OrganizationResource(_serialization.Model):  # pylint: disable=too-many-in
         :paramtype offer_detail: ~azure.mgmt.confluent.models.OfferDetail
         :keyword user_detail: Subscriber detail. Required.
         :paramtype user_detail: ~azure.mgmt.confluent.models.UserDetail
+        :keyword link_organization: Link an existing Confluent organization.
+        :paramtype link_organization: ~azure.mgmt.confluent.models.LinkOrganization
         """
         super().__init__(**kwargs)
         self.id = None
@@ -468,6 +525,7 @@ class OrganizationResource(_serialization.Model):  # pylint: disable=too-many-in
         self.sso_url = None
         self.offer_detail = offer_detail
         self.user_detail = user_detail
+        self.link_organization = link_organization
 
 
 class OrganizationResourceListResult(_serialization.Model):
@@ -616,6 +674,10 @@ class UserDetail(_serialization.Model):
     :vartype last_name: str
     :ivar email_address: Email address. Required.
     :vartype email_address: str
+    :ivar user_principal_name: User principal name.
+    :vartype user_principal_name: str
+    :ivar aad_email: AAD email address.
+    :vartype aad_email: str
     """
 
     _validation = {
@@ -628,10 +690,19 @@ class UserDetail(_serialization.Model):
         "first_name": {"key": "firstName", "type": "str"},
         "last_name": {"key": "lastName", "type": "str"},
         "email_address": {"key": "emailAddress", "type": "str"},
+        "user_principal_name": {"key": "userPrincipalName", "type": "str"},
+        "aad_email": {"key": "aadEmail", "type": "str"},
     }
 
     def __init__(
-        self, *, email_address: str, first_name: Optional[str] = None, last_name: Optional[str] = None, **kwargs
+        self,
+        *,
+        email_address: str,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
+        user_principal_name: Optional[str] = None,
+        aad_email: Optional[str] = None,
+        **kwargs
     ):
         """
         :keyword first_name: First name.
@@ -640,8 +711,34 @@ class UserDetail(_serialization.Model):
         :paramtype last_name: str
         :keyword email_address: Email address. Required.
         :paramtype email_address: str
+        :keyword user_principal_name: User principal name.
+        :paramtype user_principal_name: str
+        :keyword aad_email: AAD email address.
+        :paramtype aad_email: str
         """
         super().__init__(**kwargs)
         self.first_name = first_name
         self.last_name = last_name
         self.email_address = email_address
+        self.user_principal_name = user_principal_name
+        self.aad_email = aad_email
+
+
+class ValidationResponse(_serialization.Model):
+    """Validation response from the provider.
+
+    :ivar info: Info from the response.
+    :vartype info: dict[str, str]
+    """
+
+    _attribute_map = {
+        "info": {"key": "info", "type": "{str}"},
+    }
+
+    def __init__(self, *, info: Optional[Dict[str, str]] = None, **kwargs):
+        """
+        :keyword info: Info from the response.
+        :paramtype info: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.info = info
