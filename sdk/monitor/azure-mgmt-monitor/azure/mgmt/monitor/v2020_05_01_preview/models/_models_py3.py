@@ -443,7 +443,8 @@ class ScheduledQueryRuleResource(TrackedResource):  # pylint: disable=too-many-i
     :vartype etag: str
     :ivar created_with_api_version: The api-version used when creating this alert rule.
     :vartype created_with_api_version: str
-    :ivar is_legacy_log_analytics_rule: True if alert rule is legacy Log Analytic rule.
+    :ivar is_legacy_log_analytics_rule: True if alert rule is legacy Log Analytic rule. The default
+     is false.
     :vartype is_legacy_log_analytics_rule: bool
     :ivar description: The description of the scheduled query rule.
     :vartype description: str
@@ -626,7 +627,8 @@ class ScheduledQueryRuleResourcePatch(_serialization.Model):  # pylint: disable=
     :vartype tags: dict[str, str]
     :ivar created_with_api_version: The api-version used when creating this alert rule.
     :vartype created_with_api_version: str
-    :ivar is_legacy_log_analytics_rule: True if alert rule is legacy Log Analytic rule.
+    :ivar is_legacy_log_analytics_rule: True if alert rule is legacy Log Analytic rule. The default
+     is false.
     :vartype is_legacy_log_analytics_rule: bool
     :ivar description: The description of the scheduled query rule.
     :vartype description: str
