@@ -8,6 +8,8 @@
 
 from ._operations import Operations
 from ._workspaces_operations import WorkspacesOperations
+from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations
+from ._private_link_resources_operations import PrivateLinkResourcesOperations
 from ._scaling_plans_operations import ScalingPlansOperations
 from ._scaling_plan_pooled_schedules_operations import ScalingPlanPooledSchedulesOperations
 from ._application_groups_operations import ApplicationGroupsOperations
@@ -21,12 +23,14 @@ from ._msix_packages_operations import MSIXPackagesOperations
 from ._msix_images_operations import MsixImagesOperations
 
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "Operations",
     "WorkspacesOperations",
+    "PrivateEndpointConnectionsOperations",
+    "PrivateLinkResourcesOperations",
     "ScalingPlansOperations",
     "ScalingPlanPooledSchedulesOperations",
     "ApplicationGroupsOperations",
