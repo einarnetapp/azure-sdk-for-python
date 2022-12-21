@@ -789,7 +789,7 @@ class BenefitRecommendationProperties(_serialization.Model):  # pylint: disable=
         self.cost_without_benefit = None
         self.recommendation_details = recommendation_details
         self.all_recommendation_details = None
-        self.scope = None  # type: Optional[str]
+        self.scope: Optional[str] = None
 
 
 class BenefitRecommendationsListResult(_serialization.Model):
@@ -895,7 +895,7 @@ class BenefitUtilizationSummary(Resource):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class BenefitUtilizationSummaryProperties(_serialization.Model):
@@ -1704,6 +1704,37 @@ class ErrorDetails(_serialization.Model):
         self.message = None
 
 
+class ErrorDetailsWithNestedDetails(ErrorDetails):
+    """The details of the error.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar code: Error code.
+    :vartype code: str
+    :ivar message: Error message indicating why the operation failed.
+    :vartype message: str
+    :ivar details: The additional details of the error.
+    :vartype details: list[~azure.mgmt.costmanagement.models.ErrorDetails]
+    """
+
+    _validation = {
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "details": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetails]"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.details = None
+
+
 class ErrorResponse(_serialization.Model):
     """Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
 
@@ -1728,6 +1759,35 @@ class ErrorResponse(_serialization.Model):
         """
         :keyword error: The details of the error.
         :paramtype error: ~azure.mgmt.costmanagement.models.ErrorDetails
+        """
+        super().__init__(**kwargs)
+        self.error = error
+
+
+class ErrorResponseWithNestedDetails(_serialization.Model):
+    """Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+
+    Some Error responses:
+
+
+    *
+      429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header.
+
+    *
+      503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
+
+        :ivar error: The details of the error.
+        :vartype error: ~azure.mgmt.costmanagement.models.ErrorDetailsWithNestedDetails
+    """
+
+    _attribute_map = {
+        "error": {"key": "error", "type": "ErrorDetailsWithNestedDetails"},
+    }
+
+    def __init__(self, *, error: Optional["_models.ErrorDetailsWithNestedDetails"] = None, **kwargs):
+        """
+        :keyword error: The details of the error.
+        :paramtype error: ~azure.mgmt.costmanagement.models.ErrorDetailsWithNestedDetails
         """
         super().__init__(**kwargs)
         self.error = error
@@ -3289,7 +3349,7 @@ class IncludedQuantityUtilizationSummary(BenefitUtilizationSummary):
         :paramtype benefit_type: str or ~azure.mgmt.costmanagement.models.BenefitKind
         """
         super().__init__(**kwargs)
-        self.kind = "IncludedQuantity"  # type: str
+        self.kind: str = "IncludedQuantity"
         self.arm_sku_name = None
         self.benefit_id = None
         self.benefit_order_id = None
@@ -3929,7 +3989,8 @@ class QueryGrouping(_serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Has type of the column to group. Required. Known values are: "Tag" and "Dimension".
+    :ivar type: Has type of the column to group. Required. Known values are: "TagKey" and
+     "Dimension".
     :vartype type: str or ~azure.mgmt.costmanagement.models.QueryColumnType
     :ivar name: The name of the column to group. Required.
     :vartype name: str
@@ -3947,7 +4008,7 @@ class QueryGrouping(_serialization.Model):
 
     def __init__(self, *, type: Union[str, "_models.QueryColumnType"], name: str, **kwargs):
         """
-        :keyword type: Has type of the column to group. Required. Known values are: "Tag" and
+        :keyword type: Has type of the column to group. Required. Known values are: "TagKey" and
          "Dimension".
         :paramtype type: str or ~azure.mgmt.costmanagement.models.QueryColumnType
         :keyword name: The name of the column to group. Required.
@@ -4323,8 +4384,9 @@ class ReportConfigGrouping(_serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Has type of the column to group. Required. Known values are: "Tag" and "Dimension".
-    :vartype type: str or ~azure.mgmt.costmanagement.models.ReportConfigColumnType
+    :ivar type: Has type of the column to group. Required. Known values are: "TagKey" and
+     "Dimension".
+    :vartype type: str or ~azure.mgmt.costmanagement.models.QueryColumnType
     :ivar name: The name of the column to group. This version supports subscription lowest possible
      grain. Required.
     :vartype name: str
@@ -4340,11 +4402,11 @@ class ReportConfigGrouping(_serialization.Model):
         "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(self, *, type: Union[str, "_models.ReportConfigColumnType"], name: str, **kwargs):
+    def __init__(self, *, type: Union[str, "_models.QueryColumnType"], name: str, **kwargs):
         """
-        :keyword type: Has type of the column to group. Required. Known values are: "Tag" and
+        :keyword type: Has type of the column to group. Required. Known values are: "TagKey" and
          "Dimension".
-        :paramtype type: str or ~azure.mgmt.costmanagement.models.ReportConfigColumnType
+        :paramtype type: str or ~azure.mgmt.costmanagement.models.QueryColumnType
         :keyword name: The name of the column to group. This version supports subscription lowest
          possible grain. Required.
         :paramtype name: str
@@ -4512,7 +4574,7 @@ class SavingsPlanUtilizationSummary(BenefitUtilizationSummary):  # pylint: disab
         :paramtype benefit_type: str or ~azure.mgmt.costmanagement.models.BenefitKind
         """
         super().__init__(**kwargs)
-        self.kind = "SavingsPlan"  # type: str
+        self.kind: str = "SavingsPlan"
         self.arm_sku_name = None
         self.benefit_id = None
         self.benefit_order_id = None
@@ -5011,7 +5073,7 @@ class SharedScopeBenefitRecommendationProperties(
             recommendation_details=recommendation_details,
             **kwargs
         )
-        self.scope = "Shared"  # type: str
+        self.scope: str = "Shared"
 
 
 class SingleScopeBenefitRecommendationProperties(
@@ -5132,7 +5194,7 @@ class SingleScopeBenefitRecommendationProperties(
             recommendation_details=recommendation_details,
             **kwargs
         )
-        self.scope = "Single"  # type: str
+        self.scope: str = "Single"
         self.subscription_id = None
         self.resource_group = None
 
