@@ -47,9 +47,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -75,9 +73,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -107,9 +103,7 @@ def build_delete_request(resource_group_name: str, scope_name: str, subscription
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -140,9 +134,7 @@ def build_get_request(resource_group_name: str, scope_name: str, subscription_id
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -175,9 +167,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -213,9 +203,7 @@ def build_update_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -251,9 +239,7 @@ def build_get_validation_details_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -284,9 +270,7 @@ def build_get_validation_details_for_machine_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-08-11-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-11-preview")
-    )
+    api_version: Literal["2022-11-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-10"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -346,7 +330,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.HybridComputePrivateLinkScopeListResult] = kwargs.pop("cls", None)
@@ -435,7 +419,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.HybridComputePrivateLinkScopeListResult] = kwargs.pop("cls", None)
@@ -522,7 +506,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -550,8 +534,16 @@ class PrivateLinkScopesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, None, response_headers)
 
     _delete_initial.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}"
@@ -581,7 +573,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -648,7 +640,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.HybridComputePrivateLinkScope] = kwargs.pop("cls", None)
@@ -785,7 +777,7 @@ class PrivateLinkScopesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -938,7 +930,7 @@ class PrivateLinkScopesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1016,7 +1008,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PrivateLinkScopeValidationDetails] = kwargs.pop("cls", None)
@@ -1083,7 +1075,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-08-11-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-10"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PrivateLinkScopeValidationDetails] = kwargs.pop("cls", None)
