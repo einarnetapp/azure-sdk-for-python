@@ -47,6 +47,14 @@ class CentralServerVirtualMachineType(str, Enum, metaclass=CaseInsensitiveEnumMe
     STANDBY = "Standby"
 
 
+class ConfigurationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of file share config."""
+
+    SKIP = "Skip"
+    CREATE_AND_MOUNT = "CreateAndMount"
+    MOUNT = "Mount"
+
+
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource."""
 
@@ -68,6 +76,18 @@ class DatabaseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Database type."""
 
     MY_SQL = "MySql"
+
+
+class DiskSkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Defines the disk sku name."""
+
+    STANDARD_LRS = "Standard_LRS"
+    PREMIUM_LRS = "Premium_LRS"
+    STANDARD_SSD_LRS = "StandardSSD_LRS"
+    ULTRA_SSD_LRS = "UltraSSD_LRS"
+    PREMIUM_ZRS = "Premium_ZRS"
+    STANDARD_SSD_ZRS = "StandardSSD_ZRS"
+    PREMIUM_V2_LRS = "PremiumV2_LRS"
 
 
 class DiskStorageType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
