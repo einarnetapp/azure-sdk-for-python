@@ -60,47 +60,48 @@ class HealthCheckName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represents the name of the health check operation performed."""
 
     #: Verifies the SessionHost is joined to a domain. If this check fails is classified as fatal as
-    #: no connection can succeed if the SessionHost is not joined to the domain.
+    #: no connection can succeed if the SessionHost is not joined to the domain. (Currently Enabled)
     DOMAIN_JOINED_CHECK = "DomainJoinedCheck"
     #: Verifies the SessionHost is not experiencing domain trust issues that will prevent
     #: authentication on SessionHost at connection time when session is created. If this check fails
     #: is classified as fatal as no connection can succeed if we cannot reach the domain for
-    #: authentication on the SessionHost.
+    #: authentication on the SessionHost. (Currently Enabled)
     DOMAIN_TRUST_CHECK = "DomainTrustCheck"
     #: Verifies the FSLogix service is up and running to make sure users' profiles are loaded in the
     #: session. If this check fails is classified as fatal as even if the connection can succeed, user
     #: experience is bad as the user profile cannot be loaded and user will get a temporary profile in
-    #: the session.
+    #: the session. (Currently Disabled)
     FS_LOGIX_HEALTH_CHECK = "FSLogixHealthCheck"
     #: Verifies that the SxS stack is up and running so connections can succeed. If this check fails
-    #: is classified as fatal as no connection can succeed if the SxS stack is not ready.
+    #: is classified as fatal as no connection can succeed if the SxS stack is not ready. (Currently
+    #: Enabled)
     SX_S_STACK_LISTENER_CHECK = "SxSStackListenerCheck"
     #: Verifies that the required WVD service and Geneva URLs are reachable from the SessionHost.
     #: These URLs are: RdTokenUri, RdBrokerURI, RdDiagnosticsUri and storage blob URLs for agent
     #: monitoring (geneva). If this check fails, it is non fatal and the machine still can service
     #: connections, main issue may be that monitoring agent is unable to store warm path data (logs,
-    #: operations ...).
+    #: operations ...). (Currently Disabled)
     URLS_ACCESSIBLE_CHECK = "UrlsAccessibleCheck"
     #: Verifies that the required Geneva agent is running. If this check fails, it is non fatal and
     #: the machine still can service connections, main issue may be that monitoring agent is missing
-    #: or running (possibly) older version.
+    #: or running (possibly) older version. (Currently Enabled)
     MONITORING_AGENT_CHECK = "MonitoringAgentCheck"
     #: Verifies the domain the SessionHost is joined to is still reachable. If this check fails is
     #: classified as fatal as no connection can succeed if the domain the SessionHost is joined is not
-    #: reachable at the time of connection.
+    #: reachable at the time of connection. (Currently Disabled)
     DOMAIN_REACHABLE = "DomainReachable"
     #: Verifies whether the WebRTCRedirector component is healthy. The WebRTCRedirector component is
     #: used to optimize video and audio performance in Microsoft Teams. This checks whether the
     #: component is still running, and whether there is a higher version available. If this check
     #: fails, it is non fatal and the machine still can service connections, main issue may be the
-    #: WebRTCRedirector component has to be restarted or updated.
+    #: WebRTCRedirector component has to be restarted or updated. (Currently Disabled)
     WEB_RTC_REDIRECTOR_CHECK = "WebRTCRedirectorCheck"
     #: Verifies the value of SecurityLayer registration key. If the value is 0 (SecurityLayer.RDP)
     #: this check fails with Error code = NativeMethodErrorCode.E_FAIL and is fatal. If the value is 1
     #: (SecurityLayer.Negotiate) this check fails with Error code =
-    #: NativeMethodErrorCode.ERROR_SUCCESS and is non fatal.
+    #: NativeMethodErrorCode.ERROR_SUCCESS and is non fatal. (Currently Disabled)
     SUPPORTED_ENCRYPTION_CHECK = "SupportedEncryptionCheck"
-    #: Verifies the metadata service is accessible and return compute properties.
+    #: Verifies the metadata service is accessible and return compute properties. (Currently Enabled)
     META_DATA_SERVICE_CHECK = "MetaDataServiceCheck"
     #: Verifies that the AppAttachService is healthy (there were no issues during package staging).
     #: The AppAttachService is used to enable the staging/registration (and eventual
@@ -108,7 +109,7 @@ class HealthCheckName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     #: whether the component had any failures during package staging. Failures in staging will prevent
     #: some MSIX apps from working properly for the end user. If this check fails, it is non fatal and
     #: the machine still can service connections, main issue may be certain apps will not work for
-    #: end-users.
+    #: end-users. (Currently Enabled)
     APP_ATTACH_HEALTH_CHECK = "AppAttachHealthCheck"
 
 
@@ -123,6 +124,17 @@ class HealthCheckResult(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     HEALTH_CHECK_FAILED = "HealthCheckFailed"
     #: We received a Shutdown notification.
     SESSION_HOST_SHUTDOWN = "SessionHostShutdown"
+
+
+class HostpoolPublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Enabled allows this resource to be accessed from both public and private networks, Disabled
+    allows this resource to only be accessed via private endpoints.
+    """
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+    ENABLED_FOR_SESSION_HOSTS_ONLY = "EnabledForSessionHostsOnly"
+    ENABLED_FOR_CLIENTS_ONLY = "EnabledForClientsOnly"
 
 
 class HostPoolType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -160,6 +172,32 @@ class PreferredAppGroupType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     NONE = "None"
     DESKTOP = "Desktop"
     RAIL_APPLICATIONS = "RailApplications"
+
+
+class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The current provisioning state."""
+
+    SUCCEEDED = "Succeeded"
+    CREATING = "Creating"
+    DELETING = "Deleting"
+    FAILED = "Failed"
+
+
+class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The private endpoint connection status."""
+
+    PENDING = "Pending"
+    APPROVED = "Approved"
+    REJECTED = "Rejected"
+
+
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Enabled allows this resource to be accessed from both public and private networks, Disabled
+    allows this resource to only be accessed via private endpoints.
+    """
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 
 class RegistrationTokenOperation(str, Enum, metaclass=CaseInsensitiveEnumMeta):

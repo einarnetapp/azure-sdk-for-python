@@ -14,7 +14,7 @@ from azure.mgmt.desktopvirtualization import DesktopVirtualizationMgmtClient
     pip install azure-identity
     pip install azure-mgmt-desktopvirtualization
 # USAGE
-    python applications_list.py
+    python private_endpoint_connection_get_by_host_pool.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,14 @@ def main():
         subscription_id="daefabc0-95b4-48b3-b645-8a753a63c4fa",
     )
 
-    response = client.applications.list(
+    response = client.private_endpoint_connections.get_by_host_pool(
         resource_group_name="resourceGroup1",
-        application_group_name="applicationGroup1",
+        host_pool_name="hostPool1",
+        private_endpoint_connection_name="hostPool1.377103f1-5179-4bdf-8556-4cdd3207cc5b",
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/desktopvirtualization/resource-manager/Microsoft.DesktopVirtualization/stable/2022-09-09/examples/Application_List.json
+# x-ms-original-file: specification/desktopvirtualization/resource-manager/Microsoft.DesktopVirtualization/preview/2022-10-14-preview/examples/PrivateEndpointConnection_GetByHostPool.json
 if __name__ == "__main__":
     main()
