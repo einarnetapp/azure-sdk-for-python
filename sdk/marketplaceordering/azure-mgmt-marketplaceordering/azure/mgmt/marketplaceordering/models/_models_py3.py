@@ -203,6 +203,109 @@ class ErrorResponseError(_serialization.Model):
         self.message = None
 
 
+class OldAgreementTerms(Resource):
+    """Terms properties for provided Publisher/Offer/Plan tuple.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar id_properties_id: A unique identifier of the agreement.
+    :vartype id_properties_id: str
+    :ivar publisher: Publisher identifier string of image being deployed.
+    :vartype publisher: str
+    :ivar offer: Offer identifier string of image being deployed.
+    :vartype offer: str
+    :ivar sign_date: Date and time in UTC of when the terms were accepted. This is empty if state
+     is cancelled.
+    :vartype sign_date: ~datetime.datetime
+    :ivar cancel_date: Date and time in UTC of when the terms were cancelled. This is empty if
+     state is active.
+    :vartype cancel_date: ~datetime.datetime
+    :ivar state: Whether the agreement is active or cancelled. Known values are: "Active" and
+     "Canceled".
+    :vartype state: str or ~azure.mgmt.marketplaceordering.models.State
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "id_properties_id": {"key": "properties.id", "type": "str"},
+        "publisher": {"key": "properties.publisher", "type": "str"},
+        "offer": {"key": "properties.offer", "type": "str"},
+        "sign_date": {"key": "properties.signDate", "type": "iso-8601"},
+        "cancel_date": {"key": "properties.cancelDate", "type": "iso-8601"},
+        "state": {"key": "properties.state", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        id_properties_id: Optional[str] = None,
+        publisher: Optional[str] = None,
+        offer: Optional[str] = None,
+        sign_date: Optional[datetime.datetime] = None,
+        cancel_date: Optional[datetime.datetime] = None,
+        state: Optional[Union[str, "_models.State"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword id_properties_id: A unique identifier of the agreement.
+        :paramtype id_properties_id: str
+        :keyword publisher: Publisher identifier string of image being deployed.
+        :paramtype publisher: str
+        :keyword offer: Offer identifier string of image being deployed.
+        :paramtype offer: str
+        :keyword sign_date: Date and time in UTC of when the terms were accepted. This is empty if
+         state is cancelled.
+        :paramtype sign_date: ~datetime.datetime
+        :keyword cancel_date: Date and time in UTC of when the terms were cancelled. This is empty if
+         state is active.
+        :paramtype cancel_date: ~datetime.datetime
+        :keyword state: Whether the agreement is active or cancelled. Known values are: "Active" and
+         "Canceled".
+        :paramtype state: str or ~azure.mgmt.marketplaceordering.models.State
+        """
+        super().__init__(**kwargs)
+        self.id_properties_id = id_properties_id
+        self.publisher = publisher
+        self.offer = offer
+        self.sign_date = sign_date
+        self.cancel_date = cancel_date
+        self.state = state
+
+
+class OldAgreementTermsList(_serialization.Model):
+    """Agreement Terms definition list.
+
+    :ivar value:
+    :vartype value: list[~azure.mgmt.marketplaceordering.models.OldAgreementTerms]
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[OldAgreementTerms]"},
+    }
+
+    def __init__(self, *, value: Optional[List["_models.OldAgreementTerms"]] = None, **kwargs):
+        """
+        :keyword value:
+        :paramtype value: list[~azure.mgmt.marketplaceordering.models.OldAgreementTerms]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+
+
 class Operation(_serialization.Model):
     """Microsoft.MarketplaceOrdering REST API operation.
 
