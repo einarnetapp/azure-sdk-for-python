@@ -39,6 +39,7 @@ from ...operations._services_operations import (
     build_list_by_resource_group_request,
     build_list_request,
     build_update_request,
+    build_validate_medtech_mappings_request,
 )
 
 if sys.version_info >= (3, 8):
@@ -93,7 +94,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServicesDescription] = kwargs.pop("cls", None)
@@ -150,7 +151,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -317,7 +318,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -382,7 +383,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -548,7 +549,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -609,7 +610,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -668,7 +669,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -723,7 +724,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServicesDescriptionListResult] = kwargs.pop("cls", None)
@@ -811,7 +812,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServicesDescriptionListResult] = kwargs.pop("cls", None)
@@ -957,7 +958,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1004,4 +1005,123 @@ class ServicesOperations:
 
     check_name_availability.metadata = {
         "url": "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/checkNameAvailability"
+    }
+
+    @overload
+    async def validate_medtech_mappings(
+        self,
+        validation_request_inputs: _models.ValidateMedtechMappingsParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.ValidateMedtechMappingsResult:
+        """Validates Medtech mapping files against sample device data.
+
+        :param validation_request_inputs: The mapping files and device events which will be validated.
+         Required.
+        :type validation_request_inputs:
+         ~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ValidateMedtechMappingsResult or the result of cls(response)
+        :rtype: ~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def validate_medtech_mappings(
+        self, validation_request_inputs: IO, *, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.ValidateMedtechMappingsResult:
+        """Validates Medtech mapping files against sample device data.
+
+        :param validation_request_inputs: The mapping files and device events which will be validated.
+         Required.
+        :type validation_request_inputs: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ValidateMedtechMappingsResult or the result of cls(response)
+        :rtype: ~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def validate_medtech_mappings(
+        self, validation_request_inputs: Union[_models.ValidateMedtechMappingsParameters, IO], **kwargs: Any
+    ) -> _models.ValidateMedtechMappingsResult:
+        """Validates Medtech mapping files against sample device data.
+
+        :param validation_request_inputs: The mapping files and device events which will be validated.
+         Is either a model type or a IO type. Required.
+        :type validation_request_inputs:
+         ~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsParameters or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ValidateMedtechMappingsResult or the result of cls(response)
+        :rtype: ~azure.mgmt.healthcareapis.models.ValidateMedtechMappingsResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ValidateMedtechMappingsResult] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(validation_request_inputs, (IO, bytes)):
+            _content = validation_request_inputs
+        else:
+            _json = self._serialize.body(validation_request_inputs, "ValidateMedtechMappingsParameters")
+
+        request = build_validate_medtech_mappings_request(
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.validate_medtech_mappings.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ValidateMedtechMappingsResult", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    validate_medtech_mappings.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/validateMedtechMappings"
     }

@@ -16,6 +16,13 @@ class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     INTERNAL = "Internal"
 
 
+class AggregateErrors(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if validation results will be aggregated."""
+
+    TRUE = "True"
+    FALSE = "False"
+
+
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource."""
 
@@ -60,6 +67,20 @@ class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     SYSTEM_ASSIGNED = "SystemAssigned"
     NONE = "None"
+
+
+class MedtechMappingValidationCategory(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates the type of validation being performed."""
+
+    NORMALIZATION = "NORMALIZATION"
+    FHIRTRANSFORMATION = "FHIRTRANSFORMATION"
+
+
+class MedtechMappingValidationErrorLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates the severity of the validation error."""
+
+    ERROR = "ERROR"
+    WARN = "WARN"
 
 
 class OperationResultStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):

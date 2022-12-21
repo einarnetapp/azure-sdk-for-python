@@ -36,6 +36,10 @@ from ._models_py3 import IotMappingProperties
 from ._models_py3 import ListOperations
 from ._models_py3 import LocationBasedResource
 from ._models_py3 import LogSpecification
+from ._models_py3 import MedtechMappingValidationError
+from ._models_py3 import MedtechMappingValidationLineInfo
+from ._models_py3 import MedtechMeasurement
+from ._models_py3 import MedtechMeasurementProperty
 from ._models_py3 import MetricDimension
 from ._models_py3 import MetricSpecification
 from ._models_py3 import OperationDetail
@@ -76,18 +80,25 @@ from ._models_py3 import ServicesResourceIdentity
 from ._models_py3 import SystemData
 from ._models_py3 import TaggedResource
 from ._models_py3 import UserAssignedIdentity
+from ._models_py3 import ValidateMedtechMappingsDeviceResult
+from ._models_py3 import ValidateMedtechMappingsParameters
+from ._models_py3 import ValidateMedtechMappingsResult
+from ._models_py3 import ValidateMedtechMappingsResultTemplateResult
 from ._models_py3 import Workspace
 from ._models_py3 import WorkspaceList
 from ._models_py3 import WorkspacePatchResource
 from ._models_py3 import WorkspaceProperties
 
 from ._healthcare_apis_management_client_enums import ActionType
+from ._healthcare_apis_management_client_enums import AggregateErrors
 from ._healthcare_apis_management_client_enums import CreatedByType
 from ._healthcare_apis_management_client_enums import FhirResourceVersionPolicy
 from ._healthcare_apis_management_client_enums import FhirServiceKind
 from ._healthcare_apis_management_client_enums import IotIdentityResolutionType
 from ._healthcare_apis_management_client_enums import Kind
 from ._healthcare_apis_management_client_enums import ManagedServiceIdentityType
+from ._healthcare_apis_management_client_enums import MedtechMappingValidationCategory
+from ._healthcare_apis_management_client_enums import MedtechMappingValidationErrorLevel
 from ._healthcare_apis_management_client_enums import OperationResultStatus
 from ._healthcare_apis_management_client_enums import PrivateEndpointConnectionProvisioningState
 from ._healthcare_apis_management_client_enums import PrivateEndpointServiceConnectionStatus
@@ -131,6 +142,10 @@ __all__ = [
     "ListOperations",
     "LocationBasedResource",
     "LogSpecification",
+    "MedtechMappingValidationError",
+    "MedtechMappingValidationLineInfo",
+    "MedtechMeasurement",
+    "MedtechMeasurementProperty",
     "MetricDimension",
     "MetricSpecification",
     "OperationDetail",
@@ -171,17 +186,24 @@ __all__ = [
     "SystemData",
     "TaggedResource",
     "UserAssignedIdentity",
+    "ValidateMedtechMappingsDeviceResult",
+    "ValidateMedtechMappingsParameters",
+    "ValidateMedtechMappingsResult",
+    "ValidateMedtechMappingsResultTemplateResult",
     "Workspace",
     "WorkspaceList",
     "WorkspacePatchResource",
     "WorkspaceProperties",
     "ActionType",
+    "AggregateErrors",
     "CreatedByType",
     "FhirResourceVersionPolicy",
     "FhirServiceKind",
     "IotIdentityResolutionType",
     "Kind",
     "ManagedServiceIdentityType",
+    "MedtechMappingValidationCategory",
+    "MedtechMappingValidationErrorLevel",
     "OperationResultStatus",
     "PrivateEndpointConnectionProvisioningState",
     "PrivateEndpointServiceConnectionStatus",
