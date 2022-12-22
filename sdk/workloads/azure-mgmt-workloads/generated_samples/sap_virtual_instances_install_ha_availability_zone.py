@@ -14,7 +14,7 @@ from azure.mgmt.workloads import WorkloadsClient
     pip install azure-identity
     pip install azure-mgmt-workloads
 # USAGE
-    python sap_virtual_instances_create_ha_av_zone.py
+    python sap_virtual_instances_install_ha_availability_zone.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -36,6 +36,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/workloads/resource-manager/Microsoft.Workloads/preview/2021-12-01-preview/examples/sapvirtualinstances/SAPVirtualInstances_Create_HA_AvZone.json
+# x-ms-original-file: specification/workloads/resource-manager/Microsoft.Workloads/preview/2021-12-01-preview/examples/sapvirtualinstances/SAPVirtualInstances_Install_HA_AvailabilityZone.json
 if __name__ == "__main__":
     main()
