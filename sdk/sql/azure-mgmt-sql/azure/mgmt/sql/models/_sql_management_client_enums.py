@@ -408,12 +408,6 @@ class DayOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SATURDAY = "Saturday"
 
 
-class DevOpsAuditingSettingsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """DevOpsAuditingSettingsName."""
-
-    DEFAULT = "Default"
-
-
 class DiffBackupIntervalInHours(int, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The differential backup interval in hours. This is how many interval hours between each
     differential backup will be supported. This is only applicable to live databases but not
@@ -697,6 +691,19 @@ class ManagedInstanceProxyOverride(str, Enum, metaclass=CaseInsensitiveEnumMeta)
     PROXY = "Proxy"
     REDIRECT = "Redirect"
     DEFAULT = "Default"
+
+
+class ManagedLedgerDigestUploadsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ManagedLedgerDigestUploadsName."""
+
+    CURRENT = "current"
+
+
+class ManagedLedgerDigestUploadsState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the state of ledger digest upload."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 
 class ManagedServerCreateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1068,6 +1075,12 @@ class SensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOVE = "remove"
 
 
+class ServerConfigurationOptionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ServerConfigurationOptionName."""
+
+    ALLOW_POLYBASE_EXPORT = "allowPolybaseExport"
+
+
 class ServerConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The server connection type."""
 
@@ -1217,6 +1230,12 @@ class SqlVulnerabilityAssessmentState(str, Enum, metaclass=CaseInsensitiveEnumMe
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class StartStopScheduleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """StartStopScheduleName."""
+
+    DEFAULT = "default"
 
 
 class StorageCapabilityStorageAccountType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
