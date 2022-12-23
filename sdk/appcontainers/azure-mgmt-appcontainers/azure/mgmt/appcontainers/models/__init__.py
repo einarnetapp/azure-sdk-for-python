@@ -55,6 +55,7 @@ from ._models_py3 import ContainerAppProbeTcpSocket
 from ._models_py3 import ContainerAppSecret
 from ._models_py3 import ContainerResources
 from ._models_py3 import CookieExpiration
+from ._models_py3 import CorsPolicy
 from ._models_py3 import CustomDomain
 from ._models_py3 import CustomDomainConfiguration
 from ._models_py3 import CustomHostnameAnalysisResult
@@ -65,6 +66,7 @@ from ._models_py3 import CustomScaleRule
 from ._models_py3 import Dapr
 from ._models_py3 import DaprComponent
 from ._models_py3 import DaprComponentsCollection
+from ._models_py3 import DaprConfiguration
 from ._models_py3 import DaprMetadata
 from ._models_py3 import DaprSecret
 from ._models_py3 import DaprSecretsCollection
@@ -102,13 +104,19 @@ from ._models_py3 import HttpSettings
 from ._models_py3 import HttpSettingsRoutes
 from ._models_py3 import IdentityProviders
 from ._models_py3 import Ingress
+from ._models_py3 import IngressStickySessions
 from ._models_py3 import InitContainer
 from ._models_py3 import IpSecurityRestrictionRule
 from ._models_py3 import JwtClaimChecks
+from ._models_py3 import KedaConfiguration
 from ._models_py3 import LogAnalyticsConfiguration
 from ._models_py3 import Login
 from ._models_py3 import LoginRoutes
 from ._models_py3 import LoginScopes
+from ._models_py3 import ManagedCertificate
+from ._models_py3 import ManagedCertificateCollection
+from ._models_py3 import ManagedCertificatePatch
+from ._models_py3 import ManagedCertificateProperties
 from ._models_py3 import ManagedEnvironment
 from ._models_py3 import ManagedEnvironmentOutboundSettings
 from ._models_py3 import ManagedEnvironmentStorage
@@ -159,6 +167,7 @@ from ._models_py3 import WorkloadProfileStatesProperties
 from ._container_apps_api_client_enums import AccessMode
 from ._container_apps_api_client_enums import Action
 from ._container_apps_api_client_enums import ActiveRevisionsMode
+from ._container_apps_api_client_enums import Affinity
 from ._container_apps_api_client_enums import AppProtocol
 from ._container_apps_api_client_enums import Applicability
 from ._container_apps_api_client_enums import BindingType
@@ -173,8 +182,10 @@ from ._container_apps_api_client_enums import DnsVerificationTestResult
 from ._container_apps_api_client_enums import EnvironmentProvisioningState
 from ._container_apps_api_client_enums import ExtendedLocationTypes
 from ._container_apps_api_client_enums import ForwardProxyConvention
+from ._container_apps_api_client_enums import IngressClientCertificateMode
 from ._container_apps_api_client_enums import IngressTransportMethod
 from ._container_apps_api_client_enums import LogLevel
+from ._container_apps_api_client_enums import ManagedCertificateDomainControlValidation
 from ._container_apps_api_client_enums import ManagedEnvironmentOutBoundType
 from ._container_apps_api_client_enums import ManagedServiceIdentityType
 from ._container_apps_api_client_enums import RevisionHealthState
@@ -186,7 +197,7 @@ from ._container_apps_api_client_enums import StorageType
 from ._container_apps_api_client_enums import Type
 from ._container_apps_api_client_enums import UnauthenticatedClientActionV2
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -239,6 +250,7 @@ __all__ = [
     "ContainerAppSecret",
     "ContainerResources",
     "CookieExpiration",
+    "CorsPolicy",
     "CustomDomain",
     "CustomDomainConfiguration",
     "CustomHostnameAnalysisResult",
@@ -249,6 +261,7 @@ __all__ = [
     "Dapr",
     "DaprComponent",
     "DaprComponentsCollection",
+    "DaprConfiguration",
     "DaprMetadata",
     "DaprSecret",
     "DaprSecretsCollection",
@@ -286,13 +299,19 @@ __all__ = [
     "HttpSettingsRoutes",
     "IdentityProviders",
     "Ingress",
+    "IngressStickySessions",
     "InitContainer",
     "IpSecurityRestrictionRule",
     "JwtClaimChecks",
+    "KedaConfiguration",
     "LogAnalyticsConfiguration",
     "Login",
     "LoginRoutes",
     "LoginScopes",
+    "ManagedCertificate",
+    "ManagedCertificateCollection",
+    "ManagedCertificatePatch",
+    "ManagedCertificateProperties",
     "ManagedEnvironment",
     "ManagedEnvironmentOutboundSettings",
     "ManagedEnvironmentStorage",
@@ -342,6 +361,7 @@ __all__ = [
     "AccessMode",
     "Action",
     "ActiveRevisionsMode",
+    "Affinity",
     "AppProtocol",
     "Applicability",
     "BindingType",
@@ -356,8 +376,10 @@ __all__ = [
     "EnvironmentProvisioningState",
     "ExtendedLocationTypes",
     "ForwardProxyConvention",
+    "IngressClientCertificateMode",
     "IngressTransportMethod",
     "LogLevel",
+    "ManagedCertificateDomainControlValidation",
     "ManagedEnvironmentOutBoundType",
     "ManagedServiceIdentityType",
     "RevisionHealthState",

@@ -41,6 +41,13 @@ class ActiveRevisionsMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SINGLE = "Single"
 
 
+class Affinity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Sticky Session Affinity."""
+
+    STICKY = "sticky"
+    NONE = "none"
+
+
 class Applicability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """indicates whether the profile is default for the location."""
 
@@ -165,6 +172,17 @@ class ForwardProxyConvention(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CUSTOM = "Custom"
 
 
+class IngressClientCertificateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Client certificate mode for mTLS authentication. Ignore indicates server drops client
+    certificate on forwarding. Accept indicates server forwards client certificate but does not
+    require a client certificate. Require indicates server requires a client certificate.
+    """
+
+    IGNORE = "ignore"
+    ACCEPT = "accept"
+    REQUIRE = "require"
+
+
 class IngressTransportMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Ingress transport protocol."""
 
@@ -183,6 +201,14 @@ class LogLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DEBUG = "debug"
     WARN = "warn"
     ERROR = "error"
+
+
+class ManagedCertificateDomainControlValidation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Selected type of domain control validation for managed certificates."""
+
+    CNAME = "CNAME"
+    HTTP = "HTTP"
+    TXT = "TXT"
 
 
 class ManagedEnvironmentOutBoundType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
