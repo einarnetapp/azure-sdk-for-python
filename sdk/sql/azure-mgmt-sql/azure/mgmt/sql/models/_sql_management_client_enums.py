@@ -59,6 +59,13 @@ class AggregationFunctionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SUM = "sum"
 
 
+class AlwaysEncryptedEnclaveType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of enclave requested on the database i.e. Default or VBS enclaves."""
+
+    DEFAULT = "Default"
+    VBS = "VBS"
+
+
 class AuthenticationName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """AuthenticationName."""
 
@@ -139,6 +146,15 @@ class AutomaticTuningServerReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DEFAULT = "Default"
     DISABLED = "Disabled"
     AUTO_CONFIGURED = "AutoConfigured"
+
+
+class AvailabilityZoneType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the availability zone the database is pinned to."""
+
+    NO_PREFERENCE = "NoPreference"
+    ONE = "1"
+    TWO = "2"
+    THREE = "3"
 
 
 class BackupStorageRedundancy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -305,6 +321,12 @@ class DatabaseIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     USER_ASSIGNED = "UserAssigned"
 
 
+class DatabaseKeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The database key type. Only supported value is 'AzureKeyVault'."""
+
+    AZURE_KEY_VAULT = "AzureKeyVault"
+
+
 class DatabaseLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The license type to apply for this database. ``LicenseIncluded`` if you need a license, or
     ``BasePrice`` if you have a license and are eligible for the Azure Hybrid Benefit.
@@ -406,12 +428,6 @@ class DayOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     THURSDAY = "Thursday"
     FRIDAY = "Friday"
     SATURDAY = "Saturday"
-
-
-class DevOpsAuditingSettingsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """DevOpsAuditingSettingsName."""
-
-    DEFAULT = "Default"
 
 
 class DiffBackupIntervalInHours(int, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -697,6 +713,19 @@ class ManagedInstanceProxyOverride(str, Enum, metaclass=CaseInsensitiveEnumMeta)
     PROXY = "Proxy"
     REDIRECT = "Redirect"
     DEFAULT = "Default"
+
+
+class ManagedLedgerDigestUploadsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ManagedLedgerDigestUploadsName."""
+
+    CURRENT = "current"
+
+
+class ManagedLedgerDigestUploadsState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the state of ledger digest upload."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 
 class ManagedServerCreateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1068,6 +1097,12 @@ class SensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOVE = "remove"
 
 
+class ServerConfigurationOptionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ServerConfigurationOptionName."""
+
+    ALLOW_POLYBASE_EXPORT = "allowPolybaseExport"
+
+
 class ServerConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The server connection type."""
 
@@ -1217,6 +1252,12 @@ class SqlVulnerabilityAssessmentState(str, Enum, metaclass=CaseInsensitiveEnumMe
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class StartStopScheduleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """StartStopScheduleName."""
+
+    DEFAULT = "default"
 
 
 class StorageCapabilityStorageAccountType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
