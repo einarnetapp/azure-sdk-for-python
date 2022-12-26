@@ -12,17 +12,20 @@ from typing import Any, Awaitable, TYPE_CHECKING
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
 
-from .. import models
+from .. import models as _models
 from ..._serialization import Deserializer, Serializer
 from ._configuration import SecurityCenterConfiguration
 from .operations import (
     GovernanceAssignmentsOperations,
     GovernanceRuleOperations,
     GovernanceRulesOperations,
+    ManagementGroupGovernanceRuleOperations,
+    ManagementGroupGovernanceRulesOperationResultOperations,
+    ManagementGroupGovernanceRulesOperations,
     SecurityConnectorGovernanceRuleOperations,
-    SecurityConnectorGovernanceRulesExecuteStatusOperations,
+    SecurityConnectorGovernanceRulesOperationResultOperations,
     SecurityConnectorGovernanceRulesOperations,
-    SubscriptionGovernanceRulesExecuteStatusOperations,
+    SubscriptionGovernanceRulesOperationResultOperations,
 )
 
 if TYPE_CHECKING:
@@ -46,14 +49,24 @@ class SecurityCenter:  # pylint: disable=client-accepts-api-version-keyword,too-
      operations
     :vartype security_connector_governance_rules:
      azure.mgmt.security.v2022_01_01_preview.aio.operations.SecurityConnectorGovernanceRulesOperations
-    :ivar subscription_governance_rules_execute_status:
-     SubscriptionGovernanceRulesExecuteStatusOperations operations
-    :vartype subscription_governance_rules_execute_status:
-     azure.mgmt.security.v2022_01_01_preview.aio.operations.SubscriptionGovernanceRulesExecuteStatusOperations
-    :ivar security_connector_governance_rules_execute_status:
-     SecurityConnectorGovernanceRulesExecuteStatusOperations operations
-    :vartype security_connector_governance_rules_execute_status:
-     azure.mgmt.security.v2022_01_01_preview.aio.operations.SecurityConnectorGovernanceRulesExecuteStatusOperations
+    :ivar management_group_governance_rule: ManagementGroupGovernanceRuleOperations operations
+    :vartype management_group_governance_rule:
+     azure.mgmt.security.v2022_01_01_preview.aio.operations.ManagementGroupGovernanceRuleOperations
+    :ivar management_group_governance_rules: ManagementGroupGovernanceRulesOperations operations
+    :vartype management_group_governance_rules:
+     azure.mgmt.security.v2022_01_01_preview.aio.operations.ManagementGroupGovernanceRulesOperations
+    :ivar subscription_governance_rules_operation_result:
+     SubscriptionGovernanceRulesOperationResultOperations operations
+    :vartype subscription_governance_rules_operation_result:
+     azure.mgmt.security.v2022_01_01_preview.aio.operations.SubscriptionGovernanceRulesOperationResultOperations
+    :ivar security_connector_governance_rules_operation_result:
+     SecurityConnectorGovernanceRulesOperationResultOperations operations
+    :vartype security_connector_governance_rules_operation_result:
+     azure.mgmt.security.v2022_01_01_preview.aio.operations.SecurityConnectorGovernanceRulesOperationResultOperations
+    :ivar management_group_governance_rules_operation_result:
+     ManagementGroupGovernanceRulesOperationResultOperations operations
+    :vartype management_group_governance_rules_operation_result:
+     azure.mgmt.security.v2022_01_01_preview.aio.operations.ManagementGroupGovernanceRulesOperationResultOperations
     :ivar governance_assignments: GovernanceAssignmentsOperations operations
     :vartype governance_assignments:
      azure.mgmt.security.v2022_01_01_preview.aio.operations.GovernanceAssignmentsOperations
@@ -61,6 +74,8 @@ class SecurityCenter:  # pylint: disable=client-accepts-api-version-keyword,too-
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: Azure subscription ID. Required.
     :type subscription_id: str
+    :param management_group_id: Azure Management Group ID. Required.
+    :type management_group_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
     :keyword api_version: Api Version. Default value is "2022-01-01-preview". Note that overriding
@@ -74,13 +89,16 @@ class SecurityCenter:  # pylint: disable=client-accepts-api-version-keyword,too-
         self,
         credential: "AsyncTokenCredential",
         subscription_id: str,
+        management_group_id: str,
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = SecurityCenterConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
+        self._config = SecurityCenterConfiguration(
+            credential=credential, subscription_id=subscription_id, management_group_id=management_group_id, **kwargs
+        )
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -94,11 +112,22 @@ class SecurityCenter:  # pylint: disable=client-accepts-api-version-keyword,too-
         self.security_connector_governance_rules = SecurityConnectorGovernanceRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.subscription_governance_rules_execute_status = SubscriptionGovernanceRulesExecuteStatusOperations(
+        self.management_group_governance_rule = ManagementGroupGovernanceRuleOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.security_connector_governance_rules_execute_status = (
-            SecurityConnectorGovernanceRulesExecuteStatusOperations(
+        self.management_group_governance_rules = ManagementGroupGovernanceRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.subscription_governance_rules_operation_result = SubscriptionGovernanceRulesOperationResultOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.security_connector_governance_rules_operation_result = (
+            SecurityConnectorGovernanceRulesOperationResultOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
+        self.management_group_governance_rules_operation_result = (
+            ManagementGroupGovernanceRulesOperationResultOperations(
                 self._client, self._config, self._serialize, self._deserialize
             )
         )

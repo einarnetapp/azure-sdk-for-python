@@ -67,7 +67,7 @@ class CustomAlertRule(_serialization.Model):
         self.display_name = None
         self.description = None
         self.is_enabled = is_enabled
-        self.rule_type = None  # type: Optional[str]
+        self.rule_type: Optional[str] = None
 
 
 class ThresholdCustomAlertRule(CustomAlertRule):
@@ -124,7 +124,7 @@ class ThresholdCustomAlertRule(CustomAlertRule):
         :paramtype max_threshold: int
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.rule_type = "ThresholdCustomAlertRule"  # type: str
+        self.rule_type: str = "ThresholdCustomAlertRule"
         self.min_threshold = min_threshold
         self.max_threshold = max_threshold
 
@@ -223,7 +223,7 @@ class TimeWindowCustomAlertRule(ThresholdCustomAlertRule):
         :paramtype time_window_size: ~datetime.timedelta
         """
         super().__init__(is_enabled=is_enabled, min_threshold=min_threshold, max_threshold=max_threshold, **kwargs)
-        self.rule_type = "TimeWindowCustomAlertRule"  # type: str
+        self.rule_type: str = "TimeWindowCustomAlertRule"
         self.time_window_size = time_window_size
 
 
@@ -296,7 +296,7 @@ class ActiveConnectionsNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "ActiveConnectionsNotInAllowedRange"  # type: str
+        self.rule_type: str = "ActiveConnectionsNotInAllowedRange"
 
 
 class AdditionalWorkspacesProperties(_serialization.Model):
@@ -392,7 +392,7 @@ class ListCustomAlertRule(CustomAlertRule):
         :paramtype is_enabled: bool
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.rule_type = "ListCustomAlertRule"  # type: str
+        self.rule_type: str = "ListCustomAlertRule"
         self.value_type = None
 
 
@@ -458,7 +458,7 @@ class AllowlistCustomAlertRule(ListCustomAlertRule):
         :paramtype allowlist_values: list[str]
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.rule_type = "AllowlistCustomAlertRule"  # type: str
+        self.rule_type: str = "AllowlistCustomAlertRule"
         self.allowlist_values = allowlist_values
 
 
@@ -531,7 +531,7 @@ class AmqpC2DMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "AmqpC2DMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "AmqpC2DMessagesNotInAllowedRange"
 
 
 class AmqpC2DRejectedMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -603,7 +603,7 @@ class AmqpC2DRejectedMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "AmqpC2DRejectedMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "AmqpC2DRejectedMessagesNotInAllowedRange"
 
 
 class AmqpD2CMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -675,7 +675,7 @@ class AmqpD2CMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "AmqpD2CMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "AmqpD2CMessagesNotInAllowedRange"
 
 
 class CloudErrorBody(_serialization.Model):
@@ -771,7 +771,7 @@ class ConnectionFromIpNotAllowed(AllowlistCustomAlertRule):
         :paramtype allowlist_values: list[str]
         """
         super().__init__(is_enabled=is_enabled, allowlist_values=allowlist_values, **kwargs)
-        self.rule_type = "ConnectionFromIpNotAllowed"  # type: str
+        self.rule_type: str = "ConnectionFromIpNotAllowed"
 
 
 class ConnectionToIpNotAllowed(AllowlistCustomAlertRule):
@@ -824,7 +824,7 @@ class ConnectionToIpNotAllowed(AllowlistCustomAlertRule):
         :paramtype allowlist_values: list[str]
         """
         super().__init__(is_enabled=is_enabled, allowlist_values=allowlist_values, **kwargs)
-        self.rule_type = "ConnectionToIpNotAllowed"  # type: str
+        self.rule_type: str = "ConnectionToIpNotAllowed"
 
 
 class DenylistCustomAlertRule(ListCustomAlertRule):
@@ -877,7 +877,7 @@ class DenylistCustomAlertRule(ListCustomAlertRule):
         :paramtype denylist_values: list[str]
         """
         super().__init__(is_enabled=is_enabled, **kwargs)
-        self.rule_type = "DenylistCustomAlertRule"  # type: str
+        self.rule_type: str = "DenylistCustomAlertRule"
         self.denylist_values = denylist_values
 
 
@@ -1083,7 +1083,7 @@ class DirectMethodInvokesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "DirectMethodInvokesNotInAllowedRange"  # type: str
+        self.rule_type: str = "DirectMethodInvokesNotInAllowedRange"
 
 
 class ErrorAdditionalInfo(_serialization.Model):
@@ -1183,7 +1183,7 @@ class FailedLocalLoginsNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "FailedLocalLoginsNotInAllowedRange"  # type: str
+        self.rule_type: str = "FailedLocalLoginsNotInAllowedRange"
 
 
 class FileUploadsNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -1255,7 +1255,7 @@ class FileUploadsNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "FileUploadsNotInAllowedRange"  # type: str
+        self.rule_type: str = "FileUploadsNotInAllowedRange"
 
 
 class HttpC2DMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -1327,7 +1327,7 @@ class HttpC2DMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "HttpC2DMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "HttpC2DMessagesNotInAllowedRange"
 
 
 class HttpC2DRejectedMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -1399,7 +1399,7 @@ class HttpC2DRejectedMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "HttpC2DRejectedMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "HttpC2DRejectedMessagesNotInAllowedRange"
 
 
 class HttpD2CMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -1471,7 +1471,7 @@ class HttpD2CMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "HttpD2CMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "HttpD2CMessagesNotInAllowedRange"
 
 
 class TagsResource(_serialization.Model):
@@ -2323,7 +2323,7 @@ class LocalUserNotAllowed(AllowlistCustomAlertRule):
         :paramtype allowlist_values: list[str]
         """
         super().__init__(is_enabled=is_enabled, allowlist_values=allowlist_values, **kwargs)
-        self.rule_type = "LocalUserNotAllowed"  # type: str
+        self.rule_type: str = "LocalUserNotAllowed"
 
 
 class MqttC2DMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -2395,7 +2395,7 @@ class MqttC2DMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "MqttC2DMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "MqttC2DMessagesNotInAllowedRange"
 
 
 class MqttC2DRejectedMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -2467,7 +2467,7 @@ class MqttC2DRejectedMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "MqttC2DRejectedMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "MqttC2DRejectedMessagesNotInAllowedRange"
 
 
 class MqttD2CMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -2539,7 +2539,7 @@ class MqttD2CMessagesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "MqttD2CMessagesNotInAllowedRange"  # type: str
+        self.rule_type: str = "MqttD2CMessagesNotInAllowedRange"
 
 
 class ProcessNotAllowed(AllowlistCustomAlertRule):
@@ -2592,7 +2592,7 @@ class ProcessNotAllowed(AllowlistCustomAlertRule):
         :paramtype allowlist_values: list[str]
         """
         super().__init__(is_enabled=is_enabled, allowlist_values=allowlist_values, **kwargs)
-        self.rule_type = "ProcessNotAllowed"  # type: str
+        self.rule_type: str = "ProcessNotAllowed"
 
 
 class QueuePurgesNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -2664,7 +2664,7 @@ class QueuePurgesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "QueuePurgesNotInAllowedRange"  # type: str
+        self.rule_type: str = "QueuePurgesNotInAllowedRange"
 
 
 class RecommendationConfigurationProperties(_serialization.Model):
@@ -2861,7 +2861,7 @@ class TwinUpdatesNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "TwinUpdatesNotInAllowedRange"  # type: str
+        self.rule_type: str = "TwinUpdatesNotInAllowedRange"
 
 
 class UnauthorizedOperationsNotInAllowedRange(TimeWindowCustomAlertRule):
@@ -2933,7 +2933,7 @@ class UnauthorizedOperationsNotInAllowedRange(TimeWindowCustomAlertRule):
             time_window_size=time_window_size,
             **kwargs
         )
-        self.rule_type = "UnauthorizedOperationsNotInAllowedRange"  # type: str
+        self.rule_type: str = "UnauthorizedOperationsNotInAllowedRange"
 
 
 class UpdateIotSecuritySolutionData(TagsResource):

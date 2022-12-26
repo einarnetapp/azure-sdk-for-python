@@ -51,7 +51,7 @@ class AdditionalData(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.assessed_resource_type = None  # type: Optional[str]
+        self.assessed_resource_type: Optional[str] = None
 
 
 class Resource(_serialization.Model):
@@ -494,7 +494,7 @@ class AutomationAction(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.action_type = None  # type: Optional[str]
+        self.action_type: Optional[str] = None
 
 
 class AutomationActionEventHub(AutomationAction):
@@ -539,7 +539,7 @@ class AutomationActionEventHub(AutomationAction):
         :paramtype connection_string: str
         """
         super().__init__(**kwargs)
-        self.action_type = "EventHub"  # type: str
+        self.action_type: str = "EventHub"
         self.event_hub_resource_id = event_hub_resource_id
         self.sas_policy_name = None
         self.connection_string = connection_string
@@ -579,7 +579,7 @@ class AutomationActionLogicApp(AutomationAction):
         :paramtype uri: str
         """
         super().__init__(**kwargs)
-        self.action_type = "LogicApp"  # type: str
+        self.action_type: str = "LogicApp"
         self.logic_app_resource_id = logic_app_resource_id
         self.uri = uri
 
@@ -611,7 +611,7 @@ class AutomationActionWorkspace(AutomationAction):
         :paramtype workspace_resource_id: str
         """
         super().__init__(**kwargs)
-        self.action_type = "Workspace"  # type: str
+        self.action_type: str = "Workspace"
         self.workspace_resource_id = workspace_resource_id
 
 
@@ -844,7 +844,7 @@ class ResourceDetails(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.source = None  # type: Optional[str]
+        self.source: Optional[str] = None
 
 
 class AzureResourceDetails(ResourceDetails):
@@ -874,7 +874,7 @@ class AzureResourceDetails(ResourceDetails):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.source = "Azure"  # type: str
+        self.source: str = "Azure"
         self.id = None
 
 
@@ -980,7 +980,7 @@ class ContainerRegistryVulnerabilityProperties(AdditionalData):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.assessed_resource_type = "ContainerRegistryVulnerability"  # type: str
+        self.assessed_resource_type: str = "ContainerRegistryVulnerability"
         self.type = None
         self.cvss = None
         self.patchable = None
@@ -1121,7 +1121,7 @@ class OnPremiseResourceDetails(ResourceDetails):
         :paramtype machine_name: str
         """
         super().__init__(**kwargs)
-        self.source = "OnPremise"  # type: str
+        self.source: str = "OnPremise"
         self.workspace_id = workspace_id
         self.vmuuid = vmuuid
         self.source_computer_id = source_computer_id
@@ -1202,7 +1202,7 @@ class OnPremiseSqlResourceDetails(OnPremiseResourceDetails):
             machine_name=machine_name,
             **kwargs
         )
-        self.source = "OnPremiseSql"  # type: str
+        self.source: str = "OnPremiseSql"
         self.server_name = server_name
         self.database_name = database_name
 
@@ -1716,7 +1716,7 @@ class ServerVulnerabilityProperties(AdditionalData):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.assessed_resource_type = "ServerVulnerabilityAssessment"  # type: str
+        self.assessed_resource_type: str = "ServerVulnerabilityAssessment"
         self.type = None
         self.cvss = None
         self.patchable = None
@@ -1758,7 +1758,7 @@ class SqlServerVulnerabilityProperties(AdditionalData):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.assessed_resource_type = "SqlServerVulnerability"  # type: str
+        self.assessed_resource_type: str = "SqlServerVulnerability"
         self.type = None
         self.query = None
 

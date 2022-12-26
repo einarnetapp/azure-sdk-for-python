@@ -45,3 +45,14 @@ class GovernanceRuleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     INTEGRATED = "Integrated"
     #: The source of the rule type definition is ServiceNow
     SERVICE_NOW = "ServiceNow"
+
+
+class OperationResult(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The status of the long run operation result of governance rule."""
+
+    #: The operation succeeded
+    SUCCEEDED = "Succeeded"
+    #: The operation failed
+    FAILED = "Failed"
+    #: The operation canceled
+    CANCELED = "Canceled"

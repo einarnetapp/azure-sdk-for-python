@@ -85,7 +85,7 @@ class Setting(Resource):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class AlertSyncSettings(Setting):
@@ -129,7 +129,7 @@ class AlertSyncSettings(Setting):
         :paramtype enabled: bool
         """
         super().__init__(**kwargs)
-        self.kind = "AlertSyncSettings"  # type: str
+        self.kind: str = "AlertSyncSettings"
         self.enabled = enabled
 
 
@@ -217,7 +217,7 @@ class DataExportSettings(Setting):
         :paramtype enabled: bool
         """
         super().__init__(**kwargs)
-        self.kind = "DataExportSettings"  # type: str
+        self.kind: str = "DataExportSettings"
         self.enabled = enabled
 
 
