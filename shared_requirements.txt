@@ -482,6 +482,7 @@ opentelemetry-sdk<2.0.0,>=1.5.0,!=1.10a0
 #override azure-cognitiveservices-vision-contentmoderator azure-mgmt-core>=1.2.0,<2.0.0
 #override azure-cognitiveservices-vision-customvision azure-mgmt-core>=1.2.0,<2.0.0
 #override azure-cognitiveservices-vision-face azure-mgmt-core>=1.2.0,<2.0.0
+#override azure-mgmt-media typing-extensions>=4.3.0; python_version<'3.8.0'
 #override azure-mgmt-billing typing-extensions>=4.3.0; python_version<'3.8.0'
 #override azure-graphrbac azure-mgmt-core>=1.2.0,<2.0.0
 #override azure-mgmt-devspaces msrest>=0.7.1
