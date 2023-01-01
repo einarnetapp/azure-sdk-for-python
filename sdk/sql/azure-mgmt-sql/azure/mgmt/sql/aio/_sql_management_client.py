@@ -143,10 +143,8 @@ from .operations import (
     SqlVulnerabilityAssessmentBaselinesOperations,
     SqlVulnerabilityAssessmentExecuteScanOperations,
     SqlVulnerabilityAssessmentRuleBaselineOperations,
-    SqlVulnerabilityAssessmentRuleBaselinesOperations,
     SqlVulnerabilityAssessmentScanResultOperations,
     SqlVulnerabilityAssessmentScansOperations,
-    SqlVulnerabilityAssessmentsOperations,
     SqlVulnerabilityAssessmentsSettingsOperations,
     SubscriptionUsagesOperations,
     SynapseLinkWorkspacesOperations,
@@ -555,10 +553,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      SqlVulnerabilityAssessmentRuleBaselineOperations operations
     :vartype sql_vulnerability_assessment_rule_baseline:
      azure.mgmt.sql.aio.operations.SqlVulnerabilityAssessmentRuleBaselineOperations
-    :ivar sql_vulnerability_assessment_rule_baselines:
-     SqlVulnerabilityAssessmentRuleBaselinesOperations operations
-    :vartype sql_vulnerability_assessment_rule_baselines:
-     azure.mgmt.sql.aio.operations.SqlVulnerabilityAssessmentRuleBaselinesOperations
     :ivar sql_vulnerability_assessment_scan_result: SqlVulnerabilityAssessmentScanResultOperations
      operations
     :vartype sql_vulnerability_assessment_scan_result:
@@ -570,9 +564,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      operations
     :vartype sql_vulnerability_assessments_settings:
      azure.mgmt.sql.aio.operations.SqlVulnerabilityAssessmentsSettingsOperations
-    :ivar sql_vulnerability_assessments: SqlVulnerabilityAssessmentsOperations operations
-    :vartype sql_vulnerability_assessments:
-     azure.mgmt.sql.aio.operations.SqlVulnerabilityAssessmentsOperations
     :ivar managed_database_move_operations: ManagedDatabaseMoveOperationsOperations operations
     :vartype managed_database_move_operations:
      azure.mgmt.sql.aio.operations.ManagedDatabaseMoveOperationsOperations
@@ -972,9 +963,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self.sql_vulnerability_assessment_rule_baseline = SqlVulnerabilityAssessmentRuleBaselineOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.sql_vulnerability_assessment_rule_baselines = SqlVulnerabilityAssessmentRuleBaselinesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.sql_vulnerability_assessment_scan_result = SqlVulnerabilityAssessmentScanResultOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -982,9 +970,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
             self._client, self._config, self._serialize, self._deserialize
         )
         self.sql_vulnerability_assessments_settings = SqlVulnerabilityAssessmentsSettingsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sql_vulnerability_assessments = SqlVulnerabilityAssessmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.managed_database_move_operations = ManagedDatabaseMoveOperationsOperations(
