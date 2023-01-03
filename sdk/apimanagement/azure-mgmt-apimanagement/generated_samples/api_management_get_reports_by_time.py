@@ -6,6 +6,8 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+import isodate
+
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.apimanagement import ApiManagementClient
 
@@ -33,7 +35,7 @@ def main():
         resource_group_name="rg1",
         service_name="apimService1",
         filter="timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'",
-        interval="PT15M",
+        interval=isodate.parse_duration("PT15M"),
     )
     for item in response:
         print(item)
