@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_update_service_to_new_vnet_and_availability_zones.py
+    python api_management_update_service_to_new_vnet_and_azs.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,

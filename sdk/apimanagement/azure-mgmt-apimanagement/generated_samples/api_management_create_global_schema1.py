@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_create_schema2.py
+    python api_management_create_global_schema1.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -36,28 +36,14 @@ def main():
         parameters={
             "properties": {
                 "description": "sample schema description",
-                "document": {
-                    "$id": "https://example.com/person.schema.json",
-                    "$schema": "https://json-schema.org/draft/2020-12/schema",
-                    "properties": {
-                        "age": {
-                            "description": "Age in years which must be equal to or greater than zero.",
-                            "minimum": 0,
-                            "type": "integer",
-                        },
-                        "firstName": {"description": "The person's first name.", "type": "string"},
-                        "lastName": {"description": "The person's last name.", "type": "string"},
-                    },
-                    "title": "Person",
-                    "type": "object",
-                },
-                "schemaType": "json",
+                "schemaType": "xml",
+                "value": '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"\r\n           xmlns:tns="http://tempuri.org/PurchaseOrderSchema.xsd"\r\n           targetNamespace="http://tempuri.org/PurchaseOrderSchema.xsd"\r\n           elementFormDefault="qualified">\r\n <xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/>\r\n <xsd:complexType name="PurchaseOrderType">\r\n  <xsd:sequence>\r\n   <xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/>\r\n   <xsd:element name="BillTo" type="tns:USAddress"/>\r\n  </xsd:sequence>\r\n  <xsd:attribute name="OrderDate" type="xsd:date"/>\r\n </xsd:complexType>\r\n\r\n <xsd:complexType name="USAddress">\r\n  <xsd:sequence>\r\n   <xsd:element name="name"   type="xsd:string"/>\r\n   <xsd:element name="street" type="xsd:string"/>\r\n   <xsd:element name="city"   type="xsd:string"/>\r\n   <xsd:element name="state"  type="xsd:string"/>\r\n   <xsd:element name="zip"    type="xsd:integer"/>\r\n  </xsd:sequence>\r\n  <xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/>\r\n </xsd:complexType>\r\n</xsd:schema>',
             }
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementCreateGlobalSchema2.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementCreateGlobalSchema1.json
 if __name__ == "__main__":
     main()

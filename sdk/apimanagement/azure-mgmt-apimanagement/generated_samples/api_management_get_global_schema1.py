@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_list_gatewaycertificate_authorities.py
+    python api_management_get_global_schema1.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,15 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.gateway_certificate_authority.list_by_service(
+    response = client.global_schema.get(
         resource_group_name="rg1",
         service_name="apimService1",
-        gateway_id="gw1",
+        schema_id="schema1",
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementListGatewayCertificateAuthorities.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementGetGlobalSchema1.json
 if __name__ == "__main__":
     main()
