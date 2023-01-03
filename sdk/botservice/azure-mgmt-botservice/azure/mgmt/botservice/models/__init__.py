@@ -45,6 +45,7 @@ from ._models_py3 import LineRegistration
 from ._models_py3 import ListChannelWithKeysResponse
 from ._models_py3 import MsTeamsChannel
 from ._models_py3 import MsTeamsChannelProperties
+from ._models_py3 import Omnichannel
 from ._models_py3 import OperationDisplayInfo
 from ._models_py3 import OperationEntity
 from ._models_py3 import OperationEntityListResult
@@ -77,6 +78,10 @@ from ._models_py3 import SmsChannel
 from ._models_py3 import SmsChannelProperties
 from ._models_py3 import TelegramChannel
 from ._models_py3 import TelegramChannelProperties
+from ._models_py3 import TelephonyChannel
+from ._models_py3 import TelephonyChannelProperties
+from ._models_py3 import TelephonyChannelResourceApiConfiguration
+from ._models_py3 import TelephonyPhoneNumbers
 from ._models_py3 import WebChatChannel
 from ._models_py3 import WebChatChannelProperties
 from ._models_py3 import WebChatSite
@@ -137,6 +142,7 @@ __all__ = [
     "ListChannelWithKeysResponse",
     "MsTeamsChannel",
     "MsTeamsChannelProperties",
+    "Omnichannel",
     "OperationDisplayInfo",
     "OperationEntity",
     "OperationEntityListResult",
@@ -169,6 +175,10 @@ __all__ = [
     "SmsChannelProperties",
     "TelegramChannel",
     "TelegramChannelProperties",
+    "TelephonyChannel",
+    "TelephonyChannelProperties",
+    "TelephonyChannelResourceApiConfiguration",
+    "TelephonyPhoneNumbers",
     "WebChatChannel",
     "WebChatChannelProperties",
     "WebChatSite",
