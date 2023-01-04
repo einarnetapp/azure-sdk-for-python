@@ -301,7 +301,7 @@ class DataSet(ProxyDto):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ADLSGen1FileDataSet(DataSet):  # pylint: disable=too-many-instance-attributes
@@ -389,7 +389,7 @@ class ADLSGen1FileDataSet(DataSet):  # pylint: disable=too-many-instance-attribu
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen1File"  # type: str
+        self.kind: str = "AdlsGen1File"
         self.account_name = account_name
         self.data_set_id = None
         self.file_name = file_name
@@ -468,7 +468,7 @@ class ADLSGen1FolderDataSet(DataSet):
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen1Folder"  # type: str
+        self.kind: str = "AdlsGen1Folder"
         self.account_name = account_name
         self.data_set_id = None
         self.folder_path = folder_path
@@ -561,7 +561,7 @@ class ADLSGen2FileDataSet(DataSet):  # pylint: disable=too-many-instance-attribu
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen2File"  # type: str
+        self.kind: str = "AdlsGen2File"
         self.data_set_id = None
         self.file_path = file_path
         self.file_system = file_system
@@ -632,7 +632,7 @@ class DataSetMapping(ProxyDto):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ADLSGen2FileDataSetMapping(DataSetMapping):  # pylint: disable=too-many-instance-attributes
@@ -738,7 +738,7 @@ class ADLSGen2FileDataSetMapping(DataSetMapping):  # pylint: disable=too-many-in
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen2File"  # type: str
+        self.kind: str = "AdlsGen2File"
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
         self.file_path = file_path
@@ -822,7 +822,7 @@ class ADLSGen2FileSystemDataSet(DataSet):
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen2FileSystem"  # type: str
+        self.kind: str = "AdlsGen2FileSystem"
         self.data_set_id = None
         self.file_system = file_system
         self.resource_group = resource_group
@@ -920,7 +920,7 @@ class ADLSGen2FileSystemDataSetMapping(DataSetMapping):  # pylint: disable=too-m
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen2FileSystem"  # type: str
+        self.kind: str = "AdlsGen2FileSystem"
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
         self.file_system = file_system
@@ -1015,7 +1015,7 @@ class ADLSGen2FolderDataSet(DataSet):  # pylint: disable=too-many-instance-attri
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen2Folder"  # type: str
+        self.kind: str = "AdlsGen2Folder"
         self.data_set_id = None
         self.file_system = file_system
         self.folder_path = folder_path
@@ -1121,7 +1121,7 @@ class ADLSGen2FolderDataSetMapping(DataSetMapping):  # pylint: disable=too-many-
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "AdlsGen2Folder"  # type: str
+        self.kind: str = "AdlsGen2Folder"
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
         self.file_system = file_system
@@ -1204,7 +1204,7 @@ class BlobContainerDataSet(DataSet):
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "Container"  # type: str
+        self.kind: str = "Container"
         self.container_name = container_name
         self.data_set_id = None
         self.resource_group = resource_group
@@ -1302,7 +1302,7 @@ class BlobContainerDataSetMapping(DataSetMapping):  # pylint: disable=too-many-i
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "Container"  # type: str
+        self.kind: str = "Container"
         self.container_name = container_name
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
@@ -1397,7 +1397,7 @@ class BlobDataSet(DataSet):  # pylint: disable=too-many-instance-attributes
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "Blob"  # type: str
+        self.kind: str = "Blob"
         self.container_name = container_name
         self.data_set_id = None
         self.file_path = file_path
@@ -1509,7 +1509,7 @@ class BlobDataSetMapping(DataSetMapping):  # pylint: disable=too-many-instance-a
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "Blob"  # type: str
+        self.kind: str = "Blob"
         self.container_name = container_name
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
@@ -1606,7 +1606,7 @@ class BlobFolderDataSet(DataSet):  # pylint: disable=too-many-instance-attribute
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "BlobFolder"  # type: str
+        self.kind: str = "BlobFolder"
         self.container_name = container_name
         self.data_set_id = None
         self.prefix = prefix
@@ -1712,7 +1712,7 @@ class BlobFolderDataSetMapping(DataSetMapping):  # pylint: disable=too-many-inst
         :paramtype subscription_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "BlobFolder"  # type: str
+        self.kind: str = "BlobFolder"
         self.container_name = container_name
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
@@ -2410,7 +2410,7 @@ class KustoClusterDataSet(DataSet):
         :paramtype kusto_cluster_resource_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "KustoCluster"  # type: str
+        self.kind: str = "KustoCluster"
         self.data_set_id = None
         self.kusto_cluster_resource_id = kusto_cluster_resource_id
         self.location = None
@@ -2484,7 +2484,7 @@ class KustoClusterDataSetMapping(DataSetMapping):
         :paramtype kusto_cluster_resource_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "KustoCluster"  # type: str
+        self.kind: str = "KustoCluster"
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
         self.kusto_cluster_resource_id = kusto_cluster_resource_id
@@ -2553,7 +2553,7 @@ class KustoDatabaseDataSet(DataSet):
         :paramtype kusto_database_resource_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "KustoDatabase"  # type: str
+        self.kind: str = "KustoDatabase"
         self.data_set_id = None
         self.kusto_database_resource_id = kusto_database_resource_id
         self.location = None
@@ -2627,7 +2627,7 @@ class KustoDatabaseDataSetMapping(DataSetMapping):
         :paramtype kusto_cluster_resource_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "KustoDatabase"  # type: str
+        self.kind: str = "KustoDatabase"
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
         self.kusto_cluster_resource_id = kusto_cluster_resource_id
@@ -3138,7 +3138,7 @@ class SourceShareSynchronizationSetting(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ScheduledSourceSynchronizationSetting(SourceShareSynchronizationSetting):
@@ -3178,7 +3178,7 @@ class ScheduledSourceSynchronizationSetting(SourceShareSynchronizationSetting):
         :paramtype synchronization_time: ~datetime.datetime
         """
         super().__init__(**kwargs)
-        self.kind = "ScheduleBased"  # type: str
+        self.kind: str = "ScheduleBased"
         self.recurrence_interval = recurrence_interval
         self.synchronization_time = synchronization_time
 
@@ -3226,7 +3226,7 @@ class SynchronizationSetting(ProxyDto):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ScheduledSynchronizationSetting(SynchronizationSetting):
@@ -3300,7 +3300,7 @@ class ScheduledSynchronizationSetting(SynchronizationSetting):
         :paramtype synchronization_time: ~datetime.datetime
         """
         super().__init__(**kwargs)
-        self.kind = "ScheduleBased"  # type: str
+        self.kind: str = "ScheduleBased"
         self.created_at = None
         self.provisioning_state = None
         self.recurrence_interval = recurrence_interval
@@ -3351,7 +3351,7 @@ class Trigger(ProxyDto):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ScheduledTrigger(Trigger):  # pylint: disable=too-many-instance-attributes
@@ -3438,7 +3438,7 @@ class ScheduledTrigger(Trigger):  # pylint: disable=too-many-instance-attributes
         :paramtype synchronization_time: ~datetime.datetime
         """
         super().__init__(**kwargs)
-        self.kind = "ScheduleBased"  # type: str
+        self.kind: str = "ScheduleBased"
         self.created_at = None
         self.provisioning_state = None
         self.recurrence_interval = recurrence_interval
@@ -4044,7 +4044,7 @@ class SqlDBTableDataSet(DataSet):
         :paramtype table_name: str
         """
         super().__init__(**kwargs)
-        self.kind = "SqlDBTable"  # type: str
+        self.kind: str = "SqlDBTable"
         self.database_name = database_name
         self.data_set_id = None
         self.schema_name = schema_name
@@ -4142,7 +4142,7 @@ class SqlDBTableDataSetMapping(DataSetMapping):  # pylint: disable=too-many-inst
         :paramtype table_name: str
         """
         super().__init__(**kwargs)
-        self.kind = "SqlDBTable"  # type: str
+        self.kind: str = "SqlDBTable"
         self.database_name = database_name
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
@@ -4226,7 +4226,7 @@ class SqlDWTableDataSet(DataSet):
         :paramtype table_name: str
         """
         super().__init__(**kwargs)
-        self.kind = "SqlDWTable"  # type: str
+        self.kind: str = "SqlDWTable"
         self.data_set_id = None
         self.data_warehouse_name = data_warehouse_name
         self.schema_name = schema_name
@@ -4324,7 +4324,7 @@ class SqlDWTableDataSetMapping(DataSetMapping):  # pylint: disable=too-many-inst
         :paramtype table_name: str
         """
         super().__init__(**kwargs)
-        self.kind = "SqlDWTable"  # type: str
+        self.kind: str = "SqlDWTable"
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
         self.data_warehouse_name = data_warehouse_name
@@ -4391,7 +4391,7 @@ class SynapseWorkspaceSqlPoolTableDataSet(DataSet):
         :paramtype synapse_workspace_sql_pool_table_resource_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "SynapseWorkspaceSqlPoolTable"  # type: str
+        self.kind: str = "SynapseWorkspaceSqlPoolTable"
         self.data_set_id = None
         self.synapse_workspace_sql_pool_table_resource_id = synapse_workspace_sql_pool_table_resource_id
 
@@ -4464,7 +4464,7 @@ class SynapseWorkspaceSqlPoolTableDataSetMapping(DataSetMapping):
         :paramtype synapse_workspace_sql_pool_table_resource_id: str
         """
         super().__init__(**kwargs)
-        self.kind = "SynapseWorkspaceSqlPoolTable"  # type: str
+        self.kind: str = "SynapseWorkspaceSqlPoolTable"
         self.data_set_id = data_set_id
         self.data_set_mapping_status = None
         self.provisioning_state = None

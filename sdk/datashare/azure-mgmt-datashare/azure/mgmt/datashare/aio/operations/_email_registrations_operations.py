@@ -134,11 +134,11 @@ class EmailRegistrationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2020-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-09-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.EmailRegistration]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.EmailRegistration] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -159,9 +159,9 @@ class EmailRegistrationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -179,7 +179,7 @@ class EmailRegistrationsOperations:
 
         return deserialized
 
-    activate_email.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/activateEmail"}  # type: ignore
+    activate_email.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/activateEmail"}
 
     @distributed_trace_async
     async def register_email(self, location: str, **kwargs: Any) -> _models.EmailRegistration:
@@ -205,10 +205,10 @@ class EmailRegistrationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2020-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-09-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.EmailRegistration]
+        )
+        cls: ClsType[_models.EmailRegistration] = kwargs.pop("cls", None)
 
         request = build_register_email_request(
             location=location,
@@ -218,9 +218,9 @@ class EmailRegistrationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -238,4 +238,4 @@ class EmailRegistrationsOperations:
 
         return deserialized
 
-    register_email.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/registerEmail"}  # type: ignore
+    register_email.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/registerEmail"}

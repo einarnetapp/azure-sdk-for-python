@@ -81,10 +81,10 @@ class ConsumerInvitationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2020-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-09-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConsumerInvitationList]
+        )
+        cls: ClsType[_models.ConsumerInvitationList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -105,7 +105,7 @@ class ConsumerInvitationsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -121,7 +121,7 @@ class ConsumerInvitationsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -129,13 +129,13 @@ class ConsumerInvitationsOperations:
             deserialized = self._deserialize("ConsumerInvitationList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -149,7 +149,7 @@ class ConsumerInvitationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_invitations.metadata = {"url": "/providers/Microsoft.DataShare/listInvitations"}  # type: ignore
+    list_invitations.metadata = {"url": "/providers/Microsoft.DataShare/listInvitations"}
 
     @distributed_trace_async
     async def get(self, location: str, invitation_id: str, **kwargs: Any) -> _models.ConsumerInvitation:
@@ -177,10 +177,10 @@ class ConsumerInvitationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2020-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-09-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConsumerInvitation]
+        )
+        cls: ClsType[_models.ConsumerInvitation] = kwargs.pop("cls", None)
 
         request = build_get_request(
             location=location,
@@ -191,9 +191,9 @@ class ConsumerInvitationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -211,7 +211,7 @@ class ConsumerInvitationsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/consumerInvitations/{invitationId}"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/consumerInvitations/{invitationId}"}
 
     @overload
     async def reject_invitation(
@@ -291,11 +291,11 @@ class ConsumerInvitationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2020-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-09-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConsumerInvitation]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ConsumerInvitation] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -316,9 +316,9 @@ class ConsumerInvitationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -336,4 +336,4 @@ class ConsumerInvitationsOperations:
 
         return deserialized
 
-    reject_invitation.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/rejectInvitation"}  # type: ignore
+    reject_invitation.metadata = {"url": "/providers/Microsoft.DataShare/locations/{location}/rejectInvitation"}
