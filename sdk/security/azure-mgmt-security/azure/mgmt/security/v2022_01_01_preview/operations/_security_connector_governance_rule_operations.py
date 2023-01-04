@@ -47,9 +47,9 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2022-01-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2022-01-01-preview")
-    )  # type: Literal["2022-01-01-preview"]
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -64,10 +64,12 @@ def build_list_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "securityConnectorName": _SERIALIZER.url("security_connector_name", security_connector_name, "str"),
+        "securityConnectorName": _SERIALIZER.url(
+            "security_connector_name", security_connector_name, "str", pattern=r"^[-\w\._\(\)]+$"
+        ),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -101,7 +103,7 @@ class SecurityConnectorGovernanceRuleOperations:
     def list(
         self, resource_group_name: str, security_connector_name: str, **kwargs: Any
     ) -> Iterable["_models.GovernanceRule"]:
-        """Get a list of all relevant governanceRules over a security connector level scope.
+        """Get a list of all relevant governance rules over a security connector level scope.
 
         :param resource_group_name: The name of the resource group within the user's subscription. The
          name is case insensitive. Required.
@@ -117,10 +119,10 @@ class SecurityConnectorGovernanceRuleOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GovernanceRuleList]
+        )
+        cls: ClsType[_models.GovernanceRuleList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -143,7 +145,7 @@ class SecurityConnectorGovernanceRuleOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -159,7 +161,7 @@ class SecurityConnectorGovernanceRuleOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -167,13 +169,13 @@ class SecurityConnectorGovernanceRuleOperations:
             deserialized = self._deserialize("GovernanceRuleList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -186,4 +188,6 @@ class SecurityConnectorGovernanceRuleOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules"
+    }

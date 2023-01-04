@@ -908,7 +908,7 @@ class ResourceDetails(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.source = None  # type: Optional[str]
+        self.source: Optional[str] = None
 
 
 class AzureResourceDetails(ResourceDetails):
@@ -938,7 +938,7 @@ class AzureResourceDetails(ResourceDetails):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.source = "Azure"  # type: str
+        self.source: str = "Azure"
         self.id = None
 
 
@@ -2014,7 +2014,7 @@ class OnPremiseResourceDetails(ResourceDetails):
         :paramtype machine_name: str
         """
         super().__init__(**kwargs)
-        self.source = "OnPremise"  # type: str
+        self.source: str = "OnPremise"
         self.workspace_id = workspace_id
         self.vmuuid = vmuuid
         self.source_computer_id = source_computer_id
@@ -2095,7 +2095,7 @@ class OnPremiseSqlResourceDetails(OnPremiseResourceDetails):
             machine_name=machine_name,
             **kwargs
         )
-        self.source = "OnPremiseSql"  # type: str
+        self.source: str = "OnPremiseSql"
         self.server_name = server_name
         self.database_name = database_name
 

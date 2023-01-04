@@ -59,7 +59,7 @@ class EnvironmentData(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.environment_type = None  # type: Optional[str]
+        self.environment_type: Optional[str] = None
 
 
 class AwsEnvironmentData(EnvironmentData):
@@ -92,7 +92,7 @@ class AwsEnvironmentData(EnvironmentData):
          ~azure.mgmt.security.v2022_08_01_preview.models.AwsOrganizationalData
         """
         super().__init__(**kwargs)
-        self.environment_type = "AwsAccount"  # type: str
+        self.environment_type: str = "AwsAccount"
         self.organizational_data = organizational_data
 
 
@@ -128,7 +128,7 @@ class AwsOrganizationalData(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.organization_membership_type = None  # type: Optional[str]
+        self.organization_membership_type: Optional[str] = None
 
 
 class AwsOrganizationalDataMaster(AwsOrganizationalData):
@@ -170,7 +170,7 @@ class AwsOrganizationalDataMaster(AwsOrganizationalData):
         :paramtype excluded_account_ids: list[str]
         """
         super().__init__(**kwargs)
-        self.organization_membership_type = "Organization"  # type: str
+        self.organization_membership_type: str = "Organization"
         self.stackset_name = stackset_name
         self.excluded_account_ids = excluded_account_ids
 
@@ -205,7 +205,7 @@ class AwsOrganizationalDataMember(AwsOrganizationalData):
         :paramtype parent_hierarchy_id: str
         """
         super().__init__(**kwargs)
-        self.organization_membership_type = "Member"  # type: str
+        self.organization_membership_type: str = "Member"
         self.parent_hierarchy_id = parent_hierarchy_id
 
 
@@ -231,7 +231,7 @@ class AzureDevOpsScopeEnvironmentData(EnvironmentData):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.environment_type = "AzureDevOpsScope"  # type: str
+        self.environment_type: str = "AzureDevOpsScope"
 
 
 class AzureTrackedResourceLocation(_serialization.Model):
@@ -357,7 +357,7 @@ class CloudOffering(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.offering_type = None  # type: Optional[str]
+        self.offering_type: Optional[str] = None
         self.description = None
 
 
@@ -408,7 +408,7 @@ class CspmMonitorAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.CspmMonitorAwsOfferingNativeCloudConnection
         """
         super().__init__(**kwargs)
-        self.offering_type = "CspmMonitorAws"  # type: str
+        self.offering_type: str = "CspmMonitorAws"
         self.native_cloud_connection = native_cloud_connection
 
 
@@ -463,7 +463,7 @@ class CspmMonitorAzureDevOpsOffering(CloudOffering):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.offering_type = "CspmMonitorAzureDevOps"  # type: str
+        self.offering_type: str = "CspmMonitorAzureDevOps"
 
 
 class CspmMonitorGcpOffering(CloudOffering):
@@ -513,7 +513,7 @@ class CspmMonitorGcpOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.CspmMonitorGcpOfferingNativeCloudConnection
         """
         super().__init__(**kwargs)
-        self.offering_type = "CspmMonitorGcp"  # type: str
+        self.offering_type: str = "CspmMonitorGcp"
         self.native_cloud_connection = native_cloud_connection
 
 
@@ -582,7 +582,7 @@ class CspmMonitorGithubOffering(CloudOffering):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.offering_type = "CspmMonitorGithub"  # type: str
+        self.offering_type: str = "CspmMonitorGithub"
 
 
 class DefenderCspmAwsOffering(CloudOffering):
@@ -624,7 +624,7 @@ class DefenderCspmAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.DefenderCspmAwsOfferingVmScanners
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderCspmAws"  # type: str
+        self.offering_type: str = "DefenderCspmAws"
         self.vm_scanners = vm_scanners
 
 
@@ -732,7 +732,7 @@ class DefenderCspmGcpOffering(CloudOffering):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderCspmGcp"  # type: str
+        self.offering_type: str = "DefenderCspmGcp"
 
 
 class DefenderFoDatabasesAwsOffering(CloudOffering):
@@ -789,7 +789,7 @@ class DefenderFoDatabasesAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.DefenderFoDatabasesAwsOfferingRds
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForDatabasesAws"  # type: str
+        self.offering_type: str = "DefenderForDatabasesAws"
         self.arc_auto_provisioning = arc_auto_provisioning
         self.rds = rds
 
@@ -979,7 +979,7 @@ class DefenderForContainersAwsOffering(CloudOffering):  # pylint: disable=too-ma
         :paramtype scuba_external_id: str
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForContainersAws"  # type: str
+        self.offering_type: str = "DefenderForContainersAws"
         self.kubernetes_service = kubernetes_service
         self.kubernetes_scuba_reader = kubernetes_scuba_reader
         self.cloud_watch_to_kinesis = cloud_watch_to_kinesis
@@ -1198,7 +1198,7 @@ class DefenderForContainersGcpOffering(CloudOffering):
         :paramtype policy_agent_auto_provisioning_flag: bool
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForContainersGcp"  # type: str
+        self.offering_type: str = "DefenderForContainersGcp"
         self.native_cloud_connection = native_cloud_connection
         self.data_pipeline_native_cloud_connection = data_pipeline_native_cloud_connection
         self.audit_logs_auto_provisioning_flag = audit_logs_auto_provisioning_flag
@@ -1338,7 +1338,7 @@ class DefenderForDatabasesGcpOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.DefenderForDatabasesGcpOfferingDefenderForDatabasesArcAutoProvisioning
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForDatabasesGcp"  # type: str
+        self.offering_type: str = "DefenderForDatabasesGcp"
         self.arc_auto_provisioning = arc_auto_provisioning
         self.defender_for_databases_arc_auto_provisioning = defender_for_databases_arc_auto_provisioning
 
@@ -1429,7 +1429,7 @@ class DefenderForDevOpsAzureDevOpsOffering(CloudOffering):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForDevOpsAzureDevOps"  # type: str
+        self.offering_type: str = "DefenderForDevOpsAzureDevOps"
 
 
 class DefenderForDevOpsGithubOffering(CloudOffering):
@@ -1463,7 +1463,7 @@ class DefenderForDevOpsGithubOffering(CloudOffering):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForDevOpsGithub"  # type: str
+        self.offering_type: str = "DefenderForDevOpsGithub"
 
 
 class DefenderForServersAwsOffering(CloudOffering):
@@ -1564,7 +1564,7 @@ class DefenderForServersAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.DefenderForServersAwsOfferingVmScanners
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForServersAws"  # type: str
+        self.offering_type: str = "DefenderForServersAws"
         self.defender_for_servers = defender_for_servers
         self.arc_auto_provisioning = arc_auto_provisioning
         self.va_auto_provisioning = va_auto_provisioning
@@ -1887,7 +1887,7 @@ class DefenderForServersGcpOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.DefenderForServersGcpOfferingSubPlan
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForServersGcp"  # type: str
+        self.offering_type: str = "DefenderForServersGcp"
         self.defender_for_servers = defender_for_servers
         self.arc_auto_provisioning = arc_auto_provisioning
         self.va_auto_provisioning = va_auto_provisioning
@@ -2136,7 +2136,7 @@ class GcpOrganizationalData(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.organization_membership_type = None  # type: Optional[str]
+        self.organization_membership_type: Optional[str] = None
 
 
 class GcpOrganizationalDataMember(GcpOrganizationalData):
@@ -2178,7 +2178,7 @@ class GcpOrganizationalDataMember(GcpOrganizationalData):
         :paramtype management_project_number: str
         """
         super().__init__(**kwargs)
-        self.organization_membership_type = "Member"  # type: str
+        self.organization_membership_type: str = "Member"
         self.parent_hierarchy_id = parent_hierarchy_id
         self.management_project_number = management_project_number
 
@@ -2234,7 +2234,7 @@ class GcpOrganizationalDataOrganization(GcpOrganizationalData):
         :paramtype workload_identity_provider_id: str
         """
         super().__init__(**kwargs)
-        self.organization_membership_type = "Organization"  # type: str
+        self.organization_membership_type: str = "Organization"
         self.excluded_project_numbers = excluded_project_numbers
         self.service_account_email_address = service_account_email_address
         self.workload_identity_provider_id = workload_identity_provider_id
@@ -2317,7 +2317,7 @@ class GcpProjectEnvironmentData(EnvironmentData):
         :paramtype project_details: ~azure.mgmt.security.v2022_08_01_preview.models.GcpProjectDetails
         """
         super().__init__(**kwargs)
-        self.environment_type = "GcpProject"  # type: str
+        self.environment_type: str = "GcpProject"
         self.organizational_data = organizational_data
         self.project_details = project_details
 
@@ -2344,7 +2344,7 @@ class GithubScopeEnvironmentData(EnvironmentData):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.environment_type = "GithubScope"  # type: str
+        self.environment_type: str = "GithubScope"
 
 
 class InformationProtectionAwsOffering(CloudOffering):
@@ -2394,7 +2394,7 @@ class InformationProtectionAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2022_08_01_preview.models.InformationProtectionAwsOfferingInformationProtection
         """
         super().__init__(**kwargs)
-        self.offering_type = "InformationProtectionAws"  # type: str
+        self.offering_type: str = "InformationProtectionAws"
         self.information_protection = information_protection
 
 
