@@ -4937,10 +4937,11 @@ class ApplicationGatewaySku(_serialization.Model):
     """SKU of an application gateway.
 
     :ivar name: Name of an application gateway SKU. Known values are: "Standard_Small",
-     "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2", and "WAF_v2".
+     "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2",
+     "Standard_Basic", and "WAF_v2".
     :vartype name: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewaySkuName
     :ivar tier: Tier of an application gateway. Known values are: "Standard", "WAF", "Standard_v2",
-     and "WAF_v2".
+     "WAF_v2", and "Standard_Basic".
     :vartype tier: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewayTier
     :ivar capacity: Capacity (instance count) of an application gateway.
     :vartype capacity: int
@@ -4962,10 +4963,11 @@ class ApplicationGatewaySku(_serialization.Model):
     ):
         """
         :keyword name: Name of an application gateway SKU. Known values are: "Standard_Small",
-         "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2", and "WAF_v2".
+         "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2",
+         "Standard_Basic", and "WAF_v2".
         :paramtype name: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewaySkuName
         :keyword tier: Tier of an application gateway. Known values are: "Standard", "WAF",
-         "Standard_v2", and "WAF_v2".
+         "Standard_v2", "WAF_v2", and "Standard_Basic".
         :paramtype tier: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewayTier
         :keyword capacity: Capacity (instance count) of an application gateway.
         :paramtype capacity: int
