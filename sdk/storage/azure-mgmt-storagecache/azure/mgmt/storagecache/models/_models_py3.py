@@ -265,24 +265,48 @@ class BlobNfsTarget(_serialization.Model):
     :vartype target: str
     :ivar usage_model: Identifies the StorageCache usage model to be used for this storage target.
     :vartype usage_model: str
+    :ivar verification_timer: Amount of time (in seconds) the cache waits before it checks the
+     back-end storage for file updates.
+    :vartype verification_timer: int
+    :ivar write_back_timer: Amount of time (in seconds) the cache waits after the last file change
+     before it copies the changed file to back-end storage.
+    :vartype write_back_timer: int
     """
 
     _attribute_map = {
         "target": {"key": "target", "type": "str"},
         "usage_model": {"key": "usageModel", "type": "str"},
+        "verification_timer": {"key": "verificationTimer", "type": "int"},
+        "write_back_timer": {"key": "writeBackTimer", "type": "int"},
     }
 
-    def __init__(self, *, target: Optional[str] = None, usage_model: Optional[str] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        target: Optional[str] = None,
+        usage_model: Optional[str] = None,
+        verification_timer: Optional[int] = None,
+        write_back_timer: Optional[int] = None,
+        **kwargs
+    ):
         """
         :keyword target: Resource ID of the storage container.
         :paramtype target: str
         :keyword usage_model: Identifies the StorageCache usage model to be used for this storage
          target.
         :paramtype usage_model: str
+        :keyword verification_timer: Amount of time (in seconds) the cache waits before it checks the
+         back-end storage for file updates.
+        :paramtype verification_timer: int
+        :keyword write_back_timer: Amount of time (in seconds) the cache waits after the last file
+         change before it copies the changed file to back-end storage.
+        :paramtype write_back_timer: int
         """
         super().__init__(**kwargs)
         self.target = target
         self.usage_model = usage_model
+        self.verification_timer = verification_timer
+        self.write_back_timer = write_back_timer
 
 
 class Cache(_serialization.Model):  # pylint: disable=too-many-instance-attributes
@@ -1488,6 +1512,12 @@ class Nfs3Target(_serialization.Model):
     :vartype target: str
     :ivar usage_model: Identifies the StorageCache usage model to be used for this storage target.
     :vartype usage_model: str
+    :ivar verification_timer: Amount of time (in seconds) the cache waits before it checks the
+     back-end storage for file updates.
+    :vartype verification_timer: int
+    :ivar write_back_timer: Amount of time (in seconds) the cache waits after the last file change
+     before it copies the changed file to back-end storage.
+    :vartype write_back_timer: int
     """
 
     _validation = {
@@ -1497,19 +1527,37 @@ class Nfs3Target(_serialization.Model):
     _attribute_map = {
         "target": {"key": "target", "type": "str"},
         "usage_model": {"key": "usageModel", "type": "str"},
+        "verification_timer": {"key": "verificationTimer", "type": "int"},
+        "write_back_timer": {"key": "writeBackTimer", "type": "int"},
     }
 
-    def __init__(self, *, target: Optional[str] = None, usage_model: Optional[str] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        target: Optional[str] = None,
+        usage_model: Optional[str] = None,
+        verification_timer: Optional[int] = None,
+        write_back_timer: Optional[int] = None,
+        **kwargs
+    ):
         """
         :keyword target: IP address or host name of an NFSv3 host (e.g., 10.0.44.44).
         :paramtype target: str
         :keyword usage_model: Identifies the StorageCache usage model to be used for this storage
          target.
         :paramtype usage_model: str
+        :keyword verification_timer: Amount of time (in seconds) the cache waits before it checks the
+         back-end storage for file updates.
+        :paramtype verification_timer: int
+        :keyword write_back_timer: Amount of time (in seconds) the cache waits after the last file
+         change before it copies the changed file to back-end storage.
+        :paramtype write_back_timer: int
         """
         super().__init__(**kwargs)
         self.target = target
         self.usage_model = usage_model
+        self.verification_timer = verification_timer
+        self.write_back_timer = write_back_timer
 
 
 class NfsAccessPolicy(_serialization.Model):
