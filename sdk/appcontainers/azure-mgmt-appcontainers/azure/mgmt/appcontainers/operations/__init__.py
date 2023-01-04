@@ -22,7 +22,11 @@ from ._managed_environments_diagnostics_operations import ManagedEnvironmentsDia
 from ._operations import Operations
 from ._managed_environments_operations import ManagedEnvironmentsOperations
 from ._certificates_operations import CertificatesOperations
+from ._managed_certificates_operations import ManagedCertificatesOperations
 from ._namespaces_operations import NamespacesOperations
+from ._dapr_resiliency_circuit_breaker_policies_operations import DaprResiliencyCircuitBreakerPoliciesOperations
+from ._dapr_resiliency_timeout_policies_operations import DaprResiliencyTimeoutPoliciesOperations
+from ._dapr_resiliency_retry_policies_operations import DaprResiliencyRetryPoliciesOperations
 from ._dapr_components_operations import DaprComponentsOperations
 from ._managed_environments_storages_operations import ManagedEnvironmentsStoragesOperations
 from ._container_apps_source_controls_operations import ContainerAppsSourceControlsOperations
@@ -48,7 +52,11 @@ __all__ = [
     "Operations",
     "ManagedEnvironmentsOperations",
     "CertificatesOperations",
+    "ManagedCertificatesOperations",
     "NamespacesOperations",
+    "DaprResiliencyCircuitBreakerPoliciesOperations",
+    "DaprResiliencyTimeoutPoliciesOperations",
+    "DaprResiliencyRetryPoliciesOperations",
     "DaprComponentsOperations",
     "ManagedEnvironmentsStoragesOperations",
     "ContainerAppsSourceControlsOperations",

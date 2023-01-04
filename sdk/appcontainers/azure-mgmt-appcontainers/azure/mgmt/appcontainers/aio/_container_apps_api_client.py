@@ -30,6 +30,10 @@ from .operations import (
     ContainerAppsRevisionsOperations,
     ContainerAppsSourceControlsOperations,
     DaprComponentsOperations,
+    DaprResiliencyCircuitBreakerPoliciesOperations,
+    DaprResiliencyRetryPoliciesOperations,
+    DaprResiliencyTimeoutPoliciesOperations,
+    ManagedCertificatesOperations,
     ManagedEnvironmentDiagnosticsOperations,
     ManagedEnvironmentsDiagnosticsOperations,
     ManagedEnvironmentsOperations,
@@ -92,8 +96,21 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
      azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentsOperations
     :ivar certificates: CertificatesOperations operations
     :vartype certificates: azure.mgmt.appcontainers.aio.operations.CertificatesOperations
+    :ivar managed_certificates: ManagedCertificatesOperations operations
+    :vartype managed_certificates:
+     azure.mgmt.appcontainers.aio.operations.ManagedCertificatesOperations
     :ivar namespaces: NamespacesOperations operations
     :vartype namespaces: azure.mgmt.appcontainers.aio.operations.NamespacesOperations
+    :ivar dapr_resiliency_circuit_breaker_policies: DaprResiliencyCircuitBreakerPoliciesOperations
+     operations
+    :vartype dapr_resiliency_circuit_breaker_policies:
+     azure.mgmt.appcontainers.aio.operations.DaprResiliencyCircuitBreakerPoliciesOperations
+    :ivar dapr_resiliency_timeout_policies: DaprResiliencyTimeoutPoliciesOperations operations
+    :vartype dapr_resiliency_timeout_policies:
+     azure.mgmt.appcontainers.aio.operations.DaprResiliencyTimeoutPoliciesOperations
+    :ivar dapr_resiliency_retry_policies: DaprResiliencyRetryPoliciesOperations operations
+    :vartype dapr_resiliency_retry_policies:
+     azure.mgmt.appcontainers.aio.operations.DaprResiliencyRetryPoliciesOperations
     :ivar dapr_components: DaprComponentsOperations operations
     :vartype dapr_components: azure.mgmt.appcontainers.aio.operations.DaprComponentsOperations
     :ivar managed_environments_storages: ManagedEnvironmentsStoragesOperations operations
@@ -108,8 +125,8 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -171,7 +188,19 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
             self._client, self._config, self._serialize, self._deserialize
         )
         self.certificates = CertificatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.managed_certificates = ManagedCertificatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.namespaces = NamespacesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dapr_resiliency_circuit_breaker_policies = DaprResiliencyCircuitBreakerPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dapr_resiliency_timeout_policies = DaprResiliencyTimeoutPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dapr_resiliency_retry_policies = DaprResiliencyRetryPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.dapr_components = DaprComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.managed_environments_storages = ManagedEnvironmentsStoragesOperations(
             self._client, self._config, self._serialize, self._deserialize
