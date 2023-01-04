@@ -303,26 +303,6 @@ class CloudErrorBody(_serialization.Model):
         self.details = details
 
 
-class ConfidentialComputeProperties(_serialization.Model):
-    """The properties for confidential container group.
-
-    :ivar cce_policy: The base64 encoded confidential compute enforcement policy.
-    :vartype cce_policy: str
-    """
-
-    _attribute_map = {
-        "cce_policy": {"key": "ccePolicy", "type": "str"},
-    }
-
-    def __init__(self, *, cce_policy: Optional[str] = None, **kwargs):
-        """
-        :keyword cce_policy: The base64 encoded confidential compute enforcement policy.
-        :paramtype cce_policy: str
-        """
-        super().__init__(**kwargs)
-        self.cce_policy = cce_policy
-
-
 class Container(_serialization.Model):
     """A container instance.
 
@@ -594,8 +574,7 @@ class ContainerGroupProperties(_serialization.Model):  # pylint: disable=too-man
     :vartype subnet_ids: list[~azure.mgmt.containerinstance.models.ContainerGroupSubnetId]
     :ivar dns_config: The DNS config information for a container group.
     :vartype dns_config: ~azure.mgmt.containerinstance.models.DnsConfiguration
-    :ivar sku: The SKU for a container group. Known values are: "Standard", "Dedicated", and
-     "Confidential".
+    :ivar sku: The SKU for a container group. Known values are: "Standard" and "Dedicated".
     :vartype sku: str or ~azure.mgmt.containerinstance.models.ContainerGroupSku
     :ivar encryption_properties: The encryption properties for a container group.
     :vartype encryption_properties: ~azure.mgmt.containerinstance.models.EncryptionProperties
@@ -603,11 +582,6 @@ class ContainerGroupProperties(_serialization.Model):  # pylint: disable=too-man
     :vartype init_containers: list[~azure.mgmt.containerinstance.models.InitContainerDefinition]
     :ivar extensions: extensions used by virtual kubelet.
     :vartype extensions: list[~azure.mgmt.containerinstance.models.DeploymentExtensionSpec]
-    :ivar confidential_compute_properties: The properties for confidential container group.
-    :vartype confidential_compute_properties:
-     ~azure.mgmt.containerinstance.models.ConfidentialComputeProperties
-    :ivar priority: The priority of the container group. Known values are: "Regular" and "Spot".
-    :vartype priority: str or ~azure.mgmt.containerinstance.models.ContainerGroupPriority
     """
 
     _validation = {
@@ -637,11 +611,6 @@ class ContainerGroupProperties(_serialization.Model):  # pylint: disable=too-man
         "encryption_properties": {"key": "properties.encryptionProperties", "type": "EncryptionProperties"},
         "init_containers": {"key": "properties.initContainers", "type": "[InitContainerDefinition]"},
         "extensions": {"key": "properties.extensions", "type": "[DeploymentExtensionSpec]"},
-        "confidential_compute_properties": {
-            "key": "properties.confidentialComputeProperties",
-            "type": "ConfidentialComputeProperties",
-        },
-        "priority": {"key": "properties.priority", "type": "str"},
     }
 
     def __init__(
@@ -661,8 +630,6 @@ class ContainerGroupProperties(_serialization.Model):  # pylint: disable=too-man
         encryption_properties: Optional["_models.EncryptionProperties"] = None,
         init_containers: Optional[List["_models.InitContainerDefinition"]] = None,
         extensions: Optional[List["_models.DeploymentExtensionSpec"]] = None,
-        confidential_compute_properties: Optional["_models.ConfidentialComputeProperties"] = None,
-        priority: Optional[Union[str, "_models.ContainerGroupPriority"]] = None,
         **kwargs
     ):
         """
@@ -696,8 +663,7 @@ class ContainerGroupProperties(_serialization.Model):  # pylint: disable=too-man
         :paramtype subnet_ids: list[~azure.mgmt.containerinstance.models.ContainerGroupSubnetId]
         :keyword dns_config: The DNS config information for a container group.
         :paramtype dns_config: ~azure.mgmt.containerinstance.models.DnsConfiguration
-        :keyword sku: The SKU for a container group. Known values are: "Standard", "Dedicated", and
-         "Confidential".
+        :keyword sku: The SKU for a container group. Known values are: "Standard" and "Dedicated".
         :paramtype sku: str or ~azure.mgmt.containerinstance.models.ContainerGroupSku
         :keyword encryption_properties: The encryption properties for a container group.
         :paramtype encryption_properties: ~azure.mgmt.containerinstance.models.EncryptionProperties
@@ -705,11 +671,6 @@ class ContainerGroupProperties(_serialization.Model):  # pylint: disable=too-man
         :paramtype init_containers: list[~azure.mgmt.containerinstance.models.InitContainerDefinition]
         :keyword extensions: extensions used by virtual kubelet.
         :paramtype extensions: list[~azure.mgmt.containerinstance.models.DeploymentExtensionSpec]
-        :keyword confidential_compute_properties: The properties for confidential container group.
-        :paramtype confidential_compute_properties:
-         ~azure.mgmt.containerinstance.models.ConfidentialComputeProperties
-        :keyword priority: The priority of the container group. Known values are: "Regular" and "Spot".
-        :paramtype priority: str or ~azure.mgmt.containerinstance.models.ContainerGroupPriority
         """
         super().__init__(**kwargs)
         self.identity = identity
@@ -728,8 +689,6 @@ class ContainerGroupProperties(_serialization.Model):  # pylint: disable=too-man
         self.encryption_properties = encryption_properties
         self.init_containers = init_containers
         self.extensions = extensions
-        self.confidential_compute_properties = confidential_compute_properties
-        self.priority = priority
 
 
 class Resource(_serialization.Model):
@@ -833,8 +792,7 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
     :vartype subnet_ids: list[~azure.mgmt.containerinstance.models.ContainerGroupSubnetId]
     :ivar dns_config: The DNS config information for a container group.
     :vartype dns_config: ~azure.mgmt.containerinstance.models.DnsConfiguration
-    :ivar sku: The SKU for a container group. Known values are: "Standard", "Dedicated", and
-     "Confidential".
+    :ivar sku: The SKU for a container group. Known values are: "Standard" and "Dedicated".
     :vartype sku: str or ~azure.mgmt.containerinstance.models.ContainerGroupSku
     :ivar encryption_properties: The encryption properties for a container group.
     :vartype encryption_properties: ~azure.mgmt.containerinstance.models.EncryptionProperties
@@ -842,11 +800,6 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
     :vartype init_containers: list[~azure.mgmt.containerinstance.models.InitContainerDefinition]
     :ivar extensions: extensions used by virtual kubelet.
     :vartype extensions: list[~azure.mgmt.containerinstance.models.DeploymentExtensionSpec]
-    :ivar confidential_compute_properties: The properties for confidential container group.
-    :vartype confidential_compute_properties:
-     ~azure.mgmt.containerinstance.models.ConfidentialComputeProperties
-    :ivar priority: The priority of the container group. Known values are: "Regular" and "Spot".
-    :vartype priority: str or ~azure.mgmt.containerinstance.models.ContainerGroupPriority
     :ivar id: The resource id.
     :vartype id: str
     :ivar name: The resource name.
@@ -891,11 +844,6 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
         "encryption_properties": {"key": "properties.encryptionProperties", "type": "EncryptionProperties"},
         "init_containers": {"key": "properties.initContainers", "type": "[InitContainerDefinition]"},
         "extensions": {"key": "properties.extensions", "type": "[DeploymentExtensionSpec]"},
-        "confidential_compute_properties": {
-            "key": "properties.confidentialComputeProperties",
-            "type": "ConfidentialComputeProperties",
-        },
-        "priority": {"key": "properties.priority", "type": "str"},
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
@@ -904,7 +852,7 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
         "zones": {"key": "zones", "type": "[str]"},
     }
 
-    def __init__(  # pylint: disable=too-many-locals
+    def __init__(
         self,
         *,
         containers: List["_models.Container"],
@@ -921,8 +869,6 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
         encryption_properties: Optional["_models.EncryptionProperties"] = None,
         init_containers: Optional[List["_models.InitContainerDefinition"]] = None,
         extensions: Optional[List["_models.DeploymentExtensionSpec"]] = None,
-        confidential_compute_properties: Optional["_models.ConfidentialComputeProperties"] = None,
-        priority: Optional[Union[str, "_models.ContainerGroupPriority"]] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
         zones: Optional[List[str]] = None,
@@ -959,8 +905,7 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
         :paramtype subnet_ids: list[~azure.mgmt.containerinstance.models.ContainerGroupSubnetId]
         :keyword dns_config: The DNS config information for a container group.
         :paramtype dns_config: ~azure.mgmt.containerinstance.models.DnsConfiguration
-        :keyword sku: The SKU for a container group. Known values are: "Standard", "Dedicated", and
-         "Confidential".
+        :keyword sku: The SKU for a container group. Known values are: "Standard" and "Dedicated".
         :paramtype sku: str or ~azure.mgmt.containerinstance.models.ContainerGroupSku
         :keyword encryption_properties: The encryption properties for a container group.
         :paramtype encryption_properties: ~azure.mgmt.containerinstance.models.EncryptionProperties
@@ -968,11 +913,6 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
         :paramtype init_containers: list[~azure.mgmt.containerinstance.models.InitContainerDefinition]
         :keyword extensions: extensions used by virtual kubelet.
         :paramtype extensions: list[~azure.mgmt.containerinstance.models.DeploymentExtensionSpec]
-        :keyword confidential_compute_properties: The properties for confidential container group.
-        :paramtype confidential_compute_properties:
-         ~azure.mgmt.containerinstance.models.ConfidentialComputeProperties
-        :keyword priority: The priority of the container group. Known values are: "Regular" and "Spot".
-        :paramtype priority: str or ~azure.mgmt.containerinstance.models.ContainerGroupPriority
         :keyword location: The resource location.
         :paramtype location: str
         :keyword tags: The resource tags.
@@ -998,8 +938,6 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
             encryption_properties=encryption_properties,
             init_containers=init_containers,
             extensions=extensions,
-            confidential_compute_properties=confidential_compute_properties,
-            priority=priority,
             **kwargs
         )
         self.identity = identity
@@ -1018,8 +956,6 @@ class ContainerGroup(Resource, ContainerGroupProperties):  # pylint: disable=too
         self.encryption_properties = encryption_properties
         self.init_containers = init_containers
         self.extensions = extensions
-        self.confidential_compute_properties = confidential_compute_properties
-        self.priority = priority
         self.id = None
         self.name = None
         self.type = None

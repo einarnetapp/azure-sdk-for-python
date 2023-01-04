@@ -24,13 +24,6 @@ class ContainerGroupNetworkProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta
     UDP = "UDP"
 
 
-class ContainerGroupPriority(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The priority of the container group."""
-
-    REGULAR = "Regular"
-    SPOT = "Spot"
-
-
 class ContainerGroupRestartPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Restart policy for all containers within the container group.
 
@@ -50,7 +43,6 @@ class ContainerGroupSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     STANDARD = "Standard"
     DEDICATED = "Dedicated"
-    CONFIDENTIAL = "Confidential"
 
 
 class ContainerInstanceOperationsOrigin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
