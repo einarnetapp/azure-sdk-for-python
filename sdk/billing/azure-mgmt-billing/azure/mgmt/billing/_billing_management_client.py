@@ -12,7 +12,7 @@ from typing import Any, TYPE_CHECKING
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
-from . import models
+from . import models as _models
 from ._configuration import BillingManagementClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
@@ -20,7 +20,6 @@ from .operations import (
     AgreementsOperations,
     AvailableBalancesOperations,
     BillingAccountsOperations,
-    BillingPeriodsOperations,
     BillingPermissionsOperations,
     BillingProfilesOperations,
     BillingPropertyOperations,
@@ -28,7 +27,6 @@ from .operations import (
     BillingRoleDefinitionsOperations,
     BillingSubscriptionsOperations,
     CustomersOperations,
-    EnrollmentAccountsOperations,
     InstructionsOperations,
     InvoiceSectionsOperations,
     InvoicesOperations,
@@ -45,7 +43,7 @@ if TYPE_CHECKING:
 
 
 class BillingManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """Billing client provides access to billing resources for Azure subscriptions.
+    """Billing Client.
 
     :ivar billing_accounts: BillingAccountsOperations operations
     :vartype billing_accounts: azure.mgmt.billing.operations.BillingAccountsOperations
@@ -85,10 +83,6 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
     :vartype agreements: azure.mgmt.billing.operations.AgreementsOperations
     :ivar reservations: ReservationsOperations operations
     :vartype reservations: azure.mgmt.billing.operations.ReservationsOperations
-    :ivar enrollment_accounts: EnrollmentAccountsOperations operations
-    :vartype enrollment_accounts: azure.mgmt.billing.operations.EnrollmentAccountsOperations
-    :ivar billing_periods: BillingPeriodsOperations operations
-    :vartype billing_periods: azure.mgmt.billing.operations.BillingPeriodsOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.billing.operations.Operations
     :param credential: Credential needed for the client to connect to Azure. Required.
@@ -97,6 +91,9 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2023-04-01". Note that overriding this
+     default value may result in unsupported behavior.
+    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -113,7 +110,7 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
         )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -153,10 +150,6 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
         )
         self.agreements = AgreementsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.reservations = ReservationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.enrollment_accounts = EnrollmentAccountsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.billing_periods = BillingPeriodsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
@@ -181,15 +174,12 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
         request_copy.url = self._client.format_url(request_copy.url)
         return self._client.send_request(request_copy, **kwargs)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self._client.close()
 
-    def __enter__(self):
-        # type: () -> BillingManagementClient
+    def __enter__(self) -> "BillingManagementClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details):
-        # type: (Any) -> None
+    def __exit__(self, *exc_details) -> None:
         self._client.__exit__(*exc_details)

@@ -8,6 +8,7 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, Callable, Dict, IO, Iterable, List, Optional, TypeVar, Union, cast, overload
+import urllib.parse
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -48,7 +49,7 @@ def build_list_by_billing_account_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -57,7 +58,7 @@ def build_list_by_billing_account_request(
         "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -76,7 +77,7 @@ def build_list_by_billing_profile_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -89,7 +90,7 @@ def build_list_by_billing_profile_request(
         "billingProfileName": _SERIALIZER.url("billing_profile_name", billing_profile_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -106,7 +107,7 @@ def build_get_request(billing_account_name: str, invoice_name: str, **kwargs: An
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -118,7 +119,7 @@ def build_get_request(billing_account_name: str, invoice_name: str, **kwargs: An
         "invoiceName": _SERIALIZER.url("invoice_name", invoice_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -133,7 +134,7 @@ def build_get_by_id_request(invoice_name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -142,7 +143,7 @@ def build_get_by_id_request(invoice_name: str, **kwargs: Any) -> HttpRequest:
         "invoiceName": _SERIALIZER.url("invoice_name", invoice_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -159,7 +160,7 @@ def build_download_invoice_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -172,7 +173,7 @@ def build_download_invoice_request(
         "invoiceName": _SERIALIZER.url("invoice_name", invoice_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -188,8 +189,8 @@ def build_download_multiple_billing_profile_invoices_request(billing_account_nam
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -200,7 +201,7 @@ def build_download_multiple_billing_profile_invoices_request(billing_account_nam
         "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -219,7 +220,7 @@ def build_list_by_billing_subscription_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -231,7 +232,7 @@ def build_list_by_billing_subscription_request(
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["periodStartDate"] = _SERIALIZER.query("period_start_date", period_start_date, "str")
@@ -250,7 +251,7 @@ def build_get_by_subscription_and_invoice_id_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -263,7 +264,7 @@ def build_get_by_subscription_and_invoice_id_request(
         "invoiceName": _SERIALIZER.url("invoice_name", invoice_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -280,7 +281,7 @@ def build_download_billing_subscription_invoice_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -293,7 +294,7 @@ def build_download_billing_subscription_invoice_request(
         "invoiceName": _SERIALIZER.url("invoice_name", invoice_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -309,8 +310,8 @@ def build_download_multiple_billing_subscription_invoices_request(subscription_i
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2023-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -322,7 +323,7 @@ def build_download_multiple_billing_subscription_invoices_request(subscription_i
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -378,8 +379,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.InvoiceListResult]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.InvoiceListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -402,12 +405,23 @@ class InvoicesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
-                request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -415,13 +429,13 @@ class InvoicesOperations:
             deserialized = self._deserialize("InvoiceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -435,7 +449,9 @@ class InvoicesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_billing_account.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices"}  # type: ignore
+    list_by_billing_account.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices"
+    }
 
     @distributed_trace
     def list_by_billing_profile(
@@ -468,8 +484,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.InvoiceListResult]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.InvoiceListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -493,12 +511,23 @@ class InvoicesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
-                request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -506,13 +535,13 @@ class InvoicesOperations:
             deserialized = self._deserialize("InvoiceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -526,7 +555,9 @@ class InvoicesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_billing_profile.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices"}  # type: ignore
+    list_by_billing_profile.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices"
+    }
 
     @distributed_trace
     def get(self, billing_account_name: str, invoice_name: str, **kwargs: Any) -> _models.Invoice:
@@ -553,8 +584,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Invoice]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.Invoice] = kwargs.pop("cls", None)
 
         request = build_get_request(
             billing_account_name=billing_account_name,
@@ -565,9 +598,9 @@ class InvoicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -585,7 +618,7 @@ class InvoicesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}"}
 
     @distributed_trace
     def get_by_id(self, invoice_name: str, **kwargs: Any) -> _models.Invoice:
@@ -610,8 +643,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Invoice]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.Invoice] = kwargs.pop("cls", None)
 
         request = build_get_by_id_request(
             invoice_name=invoice_name,
@@ -621,9 +656,9 @@ class InvoicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -641,7 +676,7 @@ class InvoicesOperations:
 
         return deserialized
 
-    get_by_id.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/invoices/{invoiceName}"}  # type: ignore
+    get_by_id.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/invoices/{invoiceName}"}
 
     def _download_invoice_initial(
         self, billing_account_name: str, invoice_name: str, download_token: str, **kwargs: Any
@@ -657,8 +692,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.DownloadUrl]]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[Optional[_models.DownloadUrl]] = kwargs.pop("cls", None)
 
         request = build_download_invoice_request(
             billing_account_name=billing_account_name,
@@ -670,9 +707,9 @@ class InvoicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -697,7 +734,9 @@ class InvoicesOperations:
 
         return deserialized
 
-    _download_invoice_initial.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download"}  # type: ignore
+    _download_invoice_initial.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download"
+    }
 
     @distributed_trace
     def begin_download_invoice(
@@ -728,13 +767,15 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DownloadUrl]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.DownloadUrl] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._download_invoice_initial(  # type: ignore
+            raw_result = self._download_invoice_initial(
                 billing_account_name=billing_account_name,
                 invoice_name=invoice_name,
                 download_token=download_token,
@@ -753,9 +794,9 @@ class InvoicesOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: PollingMethod = cast(
                 PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: PollingMethod
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -767,9 +808,11 @@ class InvoicesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_download_invoice.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download"}  # type: ignore
+    begin_download_invoice.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download"
+    }
 
     def _download_multiple_billing_profile_invoices_initial(
         self, billing_account_name: str, download_urls: Union[List[str], IO], **kwargs: Any
@@ -785,9 +828,11 @@ class InvoicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.DownloadUrl]]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Optional[_models.DownloadUrl]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -808,9 +853,9 @@ class InvoicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -835,7 +880,9 @@ class InvoicesOperations:
 
         return deserialized
 
-    _download_multiple_billing_profile_invoices_initial.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments"}  # type: ignore
+    _download_multiple_billing_profile_invoices_initial.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments"
+    }
 
     @overload
     def begin_download_multiple_billing_profile_invoices(
@@ -932,14 +979,16 @@ class InvoicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DownloadUrl]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.DownloadUrl] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._download_multiple_billing_profile_invoices_initial(  # type: ignore
+            raw_result = self._download_multiple_billing_profile_invoices_initial(
                 billing_account_name=billing_account_name,
                 download_urls=download_urls,
                 api_version=api_version,
@@ -958,9 +1007,9 @@ class InvoicesOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: PollingMethod = cast(
                 PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: PollingMethod
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -972,9 +1021,11 @@ class InvoicesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_download_multiple_billing_profile_invoices.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments"}  # type: ignore
+    begin_download_multiple_billing_profile_invoices.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments"
+    }
 
     @distributed_trace
     def list_by_billing_subscription(
@@ -994,8 +1045,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.InvoiceListResult]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.InvoiceListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -1018,12 +1071,23 @@ class InvoicesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
-                request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -1031,13 +1095,13 @@ class InvoicesOperations:
             deserialized = self._deserialize("InvoiceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -1051,7 +1115,9 @@ class InvoicesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_billing_subscription.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices"}  # type: ignore
+    list_by_billing_subscription.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices"
+    }
 
     @distributed_trace
     def get_by_subscription_and_invoice_id(self, invoice_name: str, **kwargs: Any) -> _models.Invoice:
@@ -1075,8 +1141,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Invoice]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.Invoice] = kwargs.pop("cls", None)
 
         request = build_get_by_subscription_and_invoice_id_request(
             invoice_name=invoice_name,
@@ -1087,9 +1155,9 @@ class InvoicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1107,7 +1175,9 @@ class InvoicesOperations:
 
         return deserialized
 
-    get_by_subscription_and_invoice_id.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}"}  # type: ignore
+    get_by_subscription_and_invoice_id.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}"
+    }
 
     def _download_billing_subscription_invoice_initial(
         self, invoice_name: str, download_token: str, **kwargs: Any
@@ -1123,8 +1193,10 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.DownloadUrl]]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[Optional[_models.DownloadUrl]] = kwargs.pop("cls", None)
 
         request = build_download_billing_subscription_invoice_request(
             invoice_name=invoice_name,
@@ -1136,9 +1208,9 @@ class InvoicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1163,7 +1235,9 @@ class InvoicesOperations:
 
         return deserialized
 
-    _download_billing_subscription_invoice_initial.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download"}  # type: ignore
+    _download_billing_subscription_invoice_initial.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download"
+    }
 
     @distributed_trace
     def begin_download_billing_subscription_invoice(
@@ -1191,13 +1265,15 @@ class InvoicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DownloadUrl]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.DownloadUrl] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._download_billing_subscription_invoice_initial(  # type: ignore
+            raw_result = self._download_billing_subscription_invoice_initial(
                 invoice_name=invoice_name,
                 download_token=download_token,
                 api_version=api_version,
@@ -1215,9 +1291,9 @@ class InvoicesOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: PollingMethod = cast(
                 PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: PollingMethod
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -1229,9 +1305,11 @@ class InvoicesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_download_billing_subscription_invoice.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download"}  # type: ignore
+    begin_download_billing_subscription_invoice.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download"
+    }
 
     def _download_multiple_billing_subscription_invoices_initial(
         self, download_urls: Union[List[str], IO], **kwargs: Any
@@ -1247,9 +1325,11 @@ class InvoicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.DownloadUrl]]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Optional[_models.DownloadUrl]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1270,9 +1350,9 @@ class InvoicesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -1297,7 +1377,9 @@ class InvoicesOperations:
 
         return deserialized
 
-    _download_multiple_billing_subscription_invoices_initial.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments"}  # type: ignore
+    _download_multiple_billing_subscription_invoices_initial.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments"
+    }
 
     @overload
     def begin_download_multiple_billing_subscription_invoices(
@@ -1380,14 +1462,16 @@ class InvoicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-05-01"))  # type: Literal["2020-05-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DownloadUrl]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        api_version: Literal["2023-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.DownloadUrl] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._download_multiple_billing_subscription_invoices_initial(  # type: ignore
+            raw_result = self._download_multiple_billing_subscription_invoices_initial(
                 download_urls=download_urls,
                 api_version=api_version,
                 content_type=content_type,
@@ -1405,9 +1489,9 @@ class InvoicesOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: PollingMethod = cast(
                 PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: PollingMethod
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -1419,6 +1503,8 @@ class InvoicesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_download_multiple_billing_subscription_invoices.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments"}  # type: ignore
+    begin_download_multiple_billing_subscription_invoices.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments"
+    }

@@ -15,8 +15,6 @@ from ._models_py3 import AzurePlan
 from ._models_py3 import BillingAccount
 from ._models_py3 import BillingAccountListResult
 from ._models_py3 import BillingAccountUpdateRequest
-from ._models_py3 import BillingPeriod
-from ._models_py3 import BillingPeriodsListResult
 from ._models_py3 import BillingPermissionsListResult
 from ._models_py3 import BillingPermissionsProperties
 from ._models_py3 import BillingProfile
@@ -40,8 +38,6 @@ from ._models_py3 import DownloadUrl
 from ._models_py3 import Enrollment
 from ._models_py3 import EnrollmentAccount
 from ._models_py3 import EnrollmentAccountContext
-from ._models_py3 import EnrollmentAccountListResult
-from ._models_py3 import EnrollmentAccountSummary
 from ._models_py3 import EnrollmentPolicies
 from ._models_py3 import ErrorDetails
 from ._models_py3 import ErrorResponse
@@ -121,7 +117,7 @@ from ._billing_management_client_enums import TransactionTypeKind
 from ._billing_management_client_enums import ViewCharges
 from ._billing_management_client_enums import ViewChargesPolicy
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -134,8 +130,6 @@ __all__ = [
     "BillingAccount",
     "BillingAccountListResult",
     "BillingAccountUpdateRequest",
-    "BillingPeriod",
-    "BillingPeriodsListResult",
     "BillingPermissionsListResult",
     "BillingPermissionsProperties",
     "BillingProfile",
@@ -159,8 +153,6 @@ __all__ = [
     "Enrollment",
     "EnrollmentAccount",
     "EnrollmentAccountContext",
-    "EnrollmentAccountListResult",
-    "EnrollmentAccountSummary",
     "EnrollmentPolicies",
     "ErrorDetails",
     "ErrorResponse",

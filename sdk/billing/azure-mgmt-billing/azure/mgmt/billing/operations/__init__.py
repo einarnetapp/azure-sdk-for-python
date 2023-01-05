@@ -24,12 +24,10 @@ from ._billing_role_definitions_operations import BillingRoleDefinitionsOperatio
 from ._billing_role_assignments_operations import BillingRoleAssignmentsOperations
 from ._agreements_operations import AgreementsOperations
 from ._reservations_operations import ReservationsOperations
-from ._enrollment_accounts_operations import EnrollmentAccountsOperations
-from ._billing_periods_operations import BillingPeriodsOperations
 from ._operations import Operations
 
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -51,8 +49,6 @@ __all__ = [
     "BillingRoleAssignmentsOperations",
     "AgreementsOperations",
     "ReservationsOperations",
-    "EnrollmentAccountsOperations",
-    "BillingPeriodsOperations",
     "Operations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
