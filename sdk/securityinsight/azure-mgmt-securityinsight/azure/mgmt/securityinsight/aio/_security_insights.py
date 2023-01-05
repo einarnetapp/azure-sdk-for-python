@@ -32,6 +32,8 @@ from .operations import (
     EntityQueriesOperations,
     EntityQueryTemplatesOperations,
     EntityRelationsOperations,
+    ExportConnectionsOperations,
+    ExportJobsOperations,
     FileImportsOperations,
     GetOperations,
     GetRecommendationsOperations,
@@ -101,6 +103,11 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :ivar entity_query_templates: EntityQueryTemplatesOperations operations
     :vartype entity_query_templates:
      azure.mgmt.securityinsight.aio.operations.EntityQueryTemplatesOperations
+    :ivar export_connections: ExportConnectionsOperations operations
+    :vartype export_connections:
+     azure.mgmt.securityinsight.aio.operations.ExportConnectionsOperations
+    :ivar export_jobs: ExportJobsOperations operations
+    :vartype export_jobs: azure.mgmt.securityinsight.aio.operations.ExportJobsOperations
     :ivar file_imports: FileImportsOperations operations
     :vartype file_imports: azure.mgmt.securityinsight.aio.operations.FileImportsOperations
     :ivar incident_comments: IncidentCommentsOperations operations
@@ -161,7 +168,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-12-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-03-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -212,6 +219,10 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self.entity_query_templates = EntityQueryTemplatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.export_connections = ExportConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.export_jobs = ExportJobsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.file_imports = FileImportsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.incident_comments = IncidentCommentsOperations(
             self._client, self._config, self._serialize, self._deserialize

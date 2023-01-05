@@ -406,10 +406,9 @@ class ConnectivityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ContentType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The content type of a source control path."""
+    """The content type of an export connection path."""
 
     ANALYTIC_RULE = "AnalyticRule"
-    WORKBOOK = "Workbook"
 
 
 class Context(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -783,6 +782,28 @@ class EventGroupingAggregationKind(str, Enum, metaclass=CaseInsensitiveEnumMeta)
 
     SINGLE_ALERT = "SingleAlert"
     ALERT_PER_RESULT = "AlertPerResult"
+
+
+class ExportJobOutcome(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The outcome of the export job."""
+
+    SUCCESS = "Success"
+    FAILED = "Failed"
+
+
+class ExportJobStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The status of the export job."""
+
+    QUEUED = "Queued"
+    IN_PROGRESS = "InProgress"
+    COMPLETE = "Complete"
+
+
+class ExportType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of export for export connection."""
+
+    SCHEDULED = "Scheduled"
+    ON_DEMAND = "OnDemand"
 
 
 class FileFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1320,7 +1341,6 @@ class UebaDataSources(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class Version(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The version of the source control."""
+    """The version of the export connection."""
 
     V1 = "V1"
-    V2 = "V2"

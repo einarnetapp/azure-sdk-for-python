@@ -6083,7 +6083,7 @@ class Content(_serialization.Model):
 class ContentPathMap(_serialization.Model):
     """The mapping of content type to a repo path.
 
-    :ivar content_type: Content type. Known values are: "AnalyticRule" and "Workbook".
+    :ivar content_type: Content type. "AnalyticRule"
     :vartype content_type: str or ~azure.mgmt.securityinsight.models.ContentType
     :ivar path: The path to the content.
     :vartype path: str
@@ -6098,7 +6098,7 @@ class ContentPathMap(_serialization.Model):
         self, *, content_type: Optional[Union[str, "_models.ContentType"]] = None, path: Optional[str] = None, **kwargs
     ):
         """
-        :keyword content_type: Content type. Known values are: "AnalyticRule" and "Workbook".
+        :keyword content_type: Content type. "AnalyticRule"
         :paramtype content_type: str or ~azure.mgmt.securityinsight.models.ContentType
         :keyword path: The path to the content.
         :paramtype path: str
@@ -8212,6 +8212,398 @@ class ExpansionResultsMetadata(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.aggregations = aggregations
+
+
+class ExportConnection(ResourceWithEtag):  # pylint: disable=too-many-instance-attributes
+    """Represents a ExportConnection in Azure Security Insights.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
+    :ivar etag: Etag of the azure resource.
+    :vartype etag: str
+    :ivar connection_id: The id (a Guid) of the export connection.
+    :vartype connection_id: str
+    :ivar version: The version number associated with the export connection. "V1"
+    :vartype version: str or ~azure.mgmt.securityinsight.models.Version
+    :ivar display_name: The display name of the export connection.
+    :vartype display_name: str
+    :ivar description: A description of the export connection.
+    :vartype description: str
+    :ivar repo_type: The repository type of the export connection. Known values are: "Github" and
+     "DevOps".
+    :vartype repo_type: str or ~azure.mgmt.securityinsight.models.RepoType
+    :ivar content_types: Array of export connection content types.
+    :vartype content_types: list[str or ~azure.mgmt.securityinsight.models.ContentType]
+    :ivar repository: Repository metadata.
+    :vartype repository: ~azure.mgmt.securityinsight.models.Repository
+    :ivar export_type: Export type of the export connection. Known values are: "Scheduled" and
+     "OnDemand".
+    :vartype export_type: str or ~azure.mgmt.securityinsight.models.ExportType
+    :ivar next_scheduled_time: The next export run time in the format of a UTC date string.
+    :vartype next_scheduled_time: str
+    :ivar run_frequency_in_minutes: Export frequency of connection in minutes (int).
+    :vartype run_frequency_in_minutes: int
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "etag": {"key": "etag", "type": "str"},
+        "connection_id": {"key": "properties.connectionId", "type": "str"},
+        "version": {"key": "properties.version", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "repo_type": {"key": "properties.repoType", "type": "str"},
+        "content_types": {"key": "properties.contentTypes", "type": "[str]"},
+        "repository": {"key": "properties.repository", "type": "Repository"},
+        "export_type": {"key": "properties.exportType", "type": "str"},
+        "next_scheduled_time": {"key": "properties.nextScheduledTime", "type": "str"},
+        "run_frequency_in_minutes": {"key": "properties.runFrequencyInMinutes", "type": "int"},
+    }
+
+    def __init__(
+        self,
+        *,
+        etag: Optional[str] = None,
+        connection_id: Optional[str] = None,
+        version: Optional[Union[str, "_models.Version"]] = None,
+        display_name: Optional[str] = None,
+        description: Optional[str] = None,
+        repo_type: Optional[Union[str, "_models.RepoType"]] = None,
+        content_types: Optional[List[Union[str, "_models.ContentType"]]] = None,
+        repository: Optional["_models.Repository"] = None,
+        export_type: Optional[Union[str, "_models.ExportType"]] = None,
+        next_scheduled_time: Optional[str] = None,
+        run_frequency_in_minutes: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword etag: Etag of the azure resource.
+        :paramtype etag: str
+        :keyword connection_id: The id (a Guid) of the export connection.
+        :paramtype connection_id: str
+        :keyword version: The version number associated with the export connection. "V1"
+        :paramtype version: str or ~azure.mgmt.securityinsight.models.Version
+        :keyword display_name: The display name of the export connection.
+        :paramtype display_name: str
+        :keyword description: A description of the export connection.
+        :paramtype description: str
+        :keyword repo_type: The repository type of the export connection. Known values are: "Github"
+         and "DevOps".
+        :paramtype repo_type: str or ~azure.mgmt.securityinsight.models.RepoType
+        :keyword content_types: Array of export connection content types.
+        :paramtype content_types: list[str or ~azure.mgmt.securityinsight.models.ContentType]
+        :keyword repository: Repository metadata.
+        :paramtype repository: ~azure.mgmt.securityinsight.models.Repository
+        :keyword export_type: Export type of the export connection. Known values are: "Scheduled" and
+         "OnDemand".
+        :paramtype export_type: str or ~azure.mgmt.securityinsight.models.ExportType
+        :keyword next_scheduled_time: The next export run time in the format of a UTC date string.
+        :paramtype next_scheduled_time: str
+        :keyword run_frequency_in_minutes: Export frequency of connection in minutes (int).
+        :paramtype run_frequency_in_minutes: int
+        """
+        super().__init__(etag=etag, **kwargs)
+        self.connection_id = connection_id
+        self.version = version
+        self.display_name = display_name
+        self.description = description
+        self.repo_type = repo_type
+        self.content_types = content_types
+        self.repository = repository
+        self.export_type = export_type
+        self.next_scheduled_time = next_scheduled_time
+        self.run_frequency_in_minutes = run_frequency_in_minutes
+
+
+class ExportConnectionList(_serialization.Model):
+    """List all the export connections.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar next_link: URL to fetch the next set of export connections.
+    :vartype next_link: str
+    :ivar value: Array of export connections. Required.
+    :vartype value: list[~azure.mgmt.securityinsight.models.ExportConnection]
+    """
+
+    _validation = {
+        "next_link": {"readonly": True},
+        "value": {"required": True},
+    }
+
+    _attribute_map = {
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[ExportConnection]"},
+    }
+
+    def __init__(self, *, value: List["_models.ExportConnection"], **kwargs):
+        """
+        :keyword value: Array of export connections. Required.
+        :paramtype value: list[~azure.mgmt.securityinsight.models.ExportConnection]
+        """
+        super().__init__(**kwargs)
+        self.next_link = None
+        self.value = value
+
+
+class ExportJob(ResourceWithEtag):  # pylint: disable=too-many-instance-attributes
+    """Represents a ExportJob in Azure Security Insights.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
+    :ivar etag: Etag of the azure resource.
+    :vartype etag: str
+    :ivar job_id: The id (a Guid) of the export job.
+    :vartype job_id: str
+    :ivar connection_id: The id (a Guid) of the export connection.
+    :vartype connection_id: str
+    :ivar version: The version number associated with the export job. "V1"
+    :vartype version: str or ~azure.mgmt.securityinsight.models.Version
+    :ivar description: A description of the export job.
+    :vartype description: str
+    :ivar export_type: Export type of the export job. Known values are: "Scheduled" and "OnDemand".
+    :vartype export_type: str or ~azure.mgmt.securityinsight.models.ExportType
+    :ivar start_time: Start time of the export job.
+    :vartype start_time: str
+    :ivar end_time: End time of the export job.
+    :vartype end_time: str
+    :ivar last_update_time: Last update time of the export job.
+    :vartype last_update_time: str
+    :ivar job_result: Export type of the export job.
+    :vartype job_result: ~azure.mgmt.securityinsight.models.ExportJobResultInfo
+    :ivar export_contents: Array of export job content info types.
+    :vartype export_contents: list[~azure.mgmt.securityinsight.models.ExportJobContentInfo]
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "job_result": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "etag": {"key": "etag", "type": "str"},
+        "job_id": {"key": "properties.jobId", "type": "str"},
+        "connection_id": {"key": "properties.connectionId", "type": "str"},
+        "version": {"key": "properties.version", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "export_type": {"key": "properties.exportType", "type": "str"},
+        "start_time": {"key": "properties.startTime", "type": "str"},
+        "end_time": {"key": "properties.endTime", "type": "str"},
+        "last_update_time": {"key": "properties.lastUpdateTime", "type": "str"},
+        "job_result": {"key": "properties.jobResult", "type": "ExportJobResultInfo"},
+        "export_contents": {"key": "properties.exportContents", "type": "[ExportJobContentInfo]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        etag: Optional[str] = None,
+        job_id: Optional[str] = None,
+        connection_id: Optional[str] = None,
+        version: Optional[Union[str, "_models.Version"]] = None,
+        description: Optional[str] = None,
+        export_type: Optional[Union[str, "_models.ExportType"]] = None,
+        start_time: Optional[str] = None,
+        end_time: Optional[str] = None,
+        last_update_time: Optional[str] = None,
+        export_contents: Optional[List["_models.ExportJobContentInfo"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword etag: Etag of the azure resource.
+        :paramtype etag: str
+        :keyword job_id: The id (a Guid) of the export job.
+        :paramtype job_id: str
+        :keyword connection_id: The id (a Guid) of the export connection.
+        :paramtype connection_id: str
+        :keyword version: The version number associated with the export job. "V1"
+        :paramtype version: str or ~azure.mgmt.securityinsight.models.Version
+        :keyword description: A description of the export job.
+        :paramtype description: str
+        :keyword export_type: Export type of the export job. Known values are: "Scheduled" and
+         "OnDemand".
+        :paramtype export_type: str or ~azure.mgmt.securityinsight.models.ExportType
+        :keyword start_time: Start time of the export job.
+        :paramtype start_time: str
+        :keyword end_time: End time of the export job.
+        :paramtype end_time: str
+        :keyword last_update_time: Last update time of the export job.
+        :paramtype last_update_time: str
+        :keyword export_contents: Array of export job content info types.
+        :paramtype export_contents: list[~azure.mgmt.securityinsight.models.ExportJobContentInfo]
+        """
+        super().__init__(etag=etag, **kwargs)
+        self.job_id = job_id
+        self.connection_id = connection_id
+        self.version = version
+        self.description = description
+        self.export_type = export_type
+        self.start_time = start_time
+        self.end_time = end_time
+        self.last_update_time = last_update_time
+        self.job_result = None
+        self.export_contents = export_contents
+
+
+class ExportJobContentInfo(_serialization.Model):
+    """Details about the export job contents.
+
+    :ivar content_type: Different content types for a job. "AnalyticRule"
+    :vartype content_type: str or ~azure.mgmt.securityinsight.models.ContentType
+    :ivar content_ids: All content ids exported in the job.
+    :vartype content_ids: list[str]
+    """
+
+    _attribute_map = {
+        "content_type": {"key": "contentType", "type": "str"},
+        "content_ids": {"key": "contentIds", "type": "[str]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        content_type: Optional[Union[str, "_models.ContentType"]] = None,
+        content_ids: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword content_type: Different content types for a job. "AnalyticRule"
+        :paramtype content_type: str or ~azure.mgmt.securityinsight.models.ContentType
+        :keyword content_ids: All content ids exported in the job.
+        :paramtype content_ids: list[str]
+        """
+        super().__init__(**kwargs)
+        self.content_type = content_type
+        self.content_ids = content_ids
+
+
+class ExportJobList(_serialization.Model):
+    """List all the export jobs.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar next_link: URL to fetch the next set of export jobs.
+    :vartype next_link: str
+    :ivar value: Array of export jobs. Required.
+    :vartype value: list[~azure.mgmt.securityinsight.models.ExportJob]
+    """
+
+    _validation = {
+        "next_link": {"readonly": True},
+        "value": {"required": True},
+    }
+
+    _attribute_map = {
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[ExportJob]"},
+    }
+
+    def __init__(self, *, value: List["_models.ExportJob"], **kwargs):
+        """
+        :keyword value: Array of export jobs. Required.
+        :paramtype value: list[~azure.mgmt.securityinsight.models.ExportJob]
+        """
+        super().__init__(**kwargs)
+        self.next_link = None
+        self.value = value
+
+
+class ExportJobResultInfo(_serialization.Model):
+    """Details about the export job result.
+
+    :ivar job_outcome: Different outcomes for a job. Known values are: "Success" and "Failed".
+    :vartype job_outcome: str or ~azure.mgmt.securityinsight.models.ExportJobOutcome
+    :ivar webhook_url: Different statuses for a job. Known values are: "Queued", "InProgress", and
+     "Complete".
+    :vartype webhook_url: str or ~azure.mgmt.securityinsight.models.ExportJobStatus
+    :ivar message: Export message for job.
+    :vartype message: str
+    :ivar pull_request_url: URL for the export job pull request.
+    :vartype pull_request_url: str
+    :ivar pull_request_id: Id for the export job pull request.
+    :vartype pull_request_id: str
+    """
+
+    _attribute_map = {
+        "job_outcome": {"key": "jobOutcome", "type": "str"},
+        "webhook_url": {"key": "webhookUrl", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "pull_request_url": {"key": "pullRequestUrl", "type": "str"},
+        "pull_request_id": {"key": "pullRequestId", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        job_outcome: Optional[Union[str, "_models.ExportJobOutcome"]] = None,
+        webhook_url: Optional[Union[str, "_models.ExportJobStatus"]] = None,
+        message: Optional[str] = None,
+        pull_request_url: Optional[str] = None,
+        pull_request_id: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword job_outcome: Different outcomes for a job. Known values are: "Success" and "Failed".
+        :paramtype job_outcome: str or ~azure.mgmt.securityinsight.models.ExportJobOutcome
+        :keyword webhook_url: Different statuses for a job. Known values are: "Queued", "InProgress",
+         and "Complete".
+        :paramtype webhook_url: str or ~azure.mgmt.securityinsight.models.ExportJobStatus
+        :keyword message: Export message for job.
+        :paramtype message: str
+        :keyword pull_request_url: URL for the export job pull request.
+        :paramtype pull_request_url: str
+        :keyword pull_request_id: Id for the export job pull request.
+        :paramtype pull_request_id: str
+        """
+        super().__init__(**kwargs)
+        self.job_outcome = job_outcome
+        self.webhook_url = webhook_url
+        self.message = message
+        self.pull_request_url = pull_request_url
+        self.pull_request_id = pull_request_id
 
 
 class EyesOn(Settings):
@@ -18736,6 +19128,32 @@ class Repository(_serialization.Model):
     :vartype url: str
     :ivar branch: Branch name of repository.
     :vartype branch: str
+    """
+
+    _attribute_map = {
+        "url": {"key": "url", "type": "str"},
+        "branch": {"key": "branch", "type": "str"},
+    }
+
+    def __init__(self, *, url: Optional[str] = None, branch: Optional[str] = None, **kwargs):
+        """
+        :keyword url: Url of repository.
+        :paramtype url: str
+        :keyword branch: Branch name of repository.
+        :paramtype branch: str
+        """
+        super().__init__(**kwargs)
+        self.url = url
+        self.branch = branch
+
+
+class RepositoryAutoGenerated(_serialization.Model):
+    """metadata of a repository.
+
+    :ivar url: Url of repository.
+    :vartype url: str
+    :ivar branch: Branch name of repository.
+    :vartype branch: str
     :ivar display_url: Display url of repository.
     :vartype display_url: str
     :ivar deployment_logs_url: Url to access repository action logs.
@@ -20461,8 +20879,7 @@ class SourceControl(ResourceWithEtag):  # pylint: disable=too-many-instance-attr
     :vartype etag: str
     :ivar id_properties_id: The id (a Guid) of the source control.
     :vartype id_properties_id: str
-    :ivar version: The version number associated with the source control. Known values are: "V1"
-     and "V2".
+    :ivar version: The version number associated with the source control. "V1"
     :vartype version: str or ~azure.mgmt.securityinsight.models.Version
     :ivar display_name: The display name of the source control.
     :vartype display_name: str
@@ -20474,7 +20891,7 @@ class SourceControl(ResourceWithEtag):  # pylint: disable=too-many-instance-attr
     :ivar content_types: Array of source control content types.
     :vartype content_types: list[str or ~azure.mgmt.securityinsight.models.ContentType]
     :ivar repository: Repository metadata.
-    :vartype repository: ~azure.mgmt.securityinsight.models.Repository
+    :vartype repository: ~azure.mgmt.securityinsight.models.RepositoryAutoGenerated
     :ivar repository_resource_info: Information regarding the resources created in user's
      repository.
     :vartype repository_resource_info: ~azure.mgmt.securityinsight.models.RepositoryResourceInfo
@@ -20501,7 +20918,7 @@ class SourceControl(ResourceWithEtag):  # pylint: disable=too-many-instance-attr
         "description": {"key": "properties.description", "type": "str"},
         "repo_type": {"key": "properties.repoType", "type": "str"},
         "content_types": {"key": "properties.contentTypes", "type": "[str]"},
-        "repository": {"key": "properties.repository", "type": "Repository"},
+        "repository": {"key": "properties.repository", "type": "RepositoryAutoGenerated"},
         "repository_resource_info": {"key": "properties.repositoryResourceInfo", "type": "RepositoryResourceInfo"},
         "last_deployment_info": {"key": "properties.lastDeploymentInfo", "type": "DeploymentInfo"},
     }
@@ -20516,7 +20933,7 @@ class SourceControl(ResourceWithEtag):  # pylint: disable=too-many-instance-attr
         description: Optional[str] = None,
         repo_type: Optional[Union[str, "_models.RepoType"]] = None,
         content_types: Optional[List[Union[str, "_models.ContentType"]]] = None,
-        repository: Optional["_models.Repository"] = None,
+        repository: Optional["_models.RepositoryAutoGenerated"] = None,
         repository_resource_info: Optional["_models.RepositoryResourceInfo"] = None,
         last_deployment_info: Optional["_models.DeploymentInfo"] = None,
         **kwargs
@@ -20526,8 +20943,7 @@ class SourceControl(ResourceWithEtag):  # pylint: disable=too-many-instance-attr
         :paramtype etag: str
         :keyword id_properties_id: The id (a Guid) of the source control.
         :paramtype id_properties_id: str
-        :keyword version: The version number associated with the source control. Known values are: "V1"
-         and "V2".
+        :keyword version: The version number associated with the source control. "V1"
         :paramtype version: str or ~azure.mgmt.securityinsight.models.Version
         :keyword display_name: The display name of the source control.
         :paramtype display_name: str
@@ -20539,7 +20955,7 @@ class SourceControl(ResourceWithEtag):  # pylint: disable=too-many-instance-attr
         :keyword content_types: Array of source control content types.
         :paramtype content_types: list[str or ~azure.mgmt.securityinsight.models.ContentType]
         :keyword repository: Repository metadata.
-        :paramtype repository: ~azure.mgmt.securityinsight.models.Repository
+        :paramtype repository: ~azure.mgmt.securityinsight.models.RepositoryAutoGenerated
         :keyword repository_resource_info: Information regarding the resources created in user's
          repository.
         :paramtype repository_resource_info: ~azure.mgmt.securityinsight.models.RepositoryResourceInfo

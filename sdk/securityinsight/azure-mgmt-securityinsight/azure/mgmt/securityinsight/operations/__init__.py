@@ -22,6 +22,8 @@ from ._entities_relations_operations import EntitiesRelationsOperations
 from ._entity_relations_operations import EntityRelationsOperations
 from ._entity_queries_operations import EntityQueriesOperations
 from ._entity_query_templates_operations import EntityQueryTemplatesOperations
+from ._export_connections_operations import ExportConnectionsOperations
+from ._export_jobs_operations import ExportJobsOperations
 from ._file_imports_operations import FileImportsOperations
 from ._incident_comments_operations import IncidentCommentsOperations
 from ._incident_relations_operations import IncidentRelationsOperations
@@ -66,6 +68,8 @@ __all__ = [
     "EntityRelationsOperations",
     "EntityQueriesOperations",
     "EntityQueryTemplatesOperations",
+    "ExportConnectionsOperations",
+    "ExportJobsOperations",
     "FileImportsOperations",
     "IncidentCommentsOperations",
     "IncidentRelationsOperations",
