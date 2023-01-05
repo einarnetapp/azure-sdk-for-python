@@ -475,6 +475,8 @@ class MaintenanceConfiguration(Resource):  # pylint: disable=too-many-instance-a
     :vartype visibility: str or ~azure.mgmt.maintenance.models.Visibility
     :ivar install_patches: The input parameters to be passed to the patch run operation.
     :vartype install_patches: ~azure.mgmt.maintenance.models.InputPatchConfiguration
+    :ivar overrides: Override Properties for the maintenance Configuration.
+    :vartype overrides: list[~azure.mgmt.maintenance.models.MaintenanceOverrideProperties]
     :ivar start_date_time: Effective start date of the maintenance window in YYYY-MM-DD hh:mm
      format. The start date can be set to either the current date or future date. The window will be
      created in the time zone provided and adjusted to daylight savings according to that time zone.
@@ -526,6 +528,7 @@ class MaintenanceConfiguration(Resource):  # pylint: disable=too-many-instance-a
         "maintenance_scope": {"key": "properties.maintenanceScope", "type": "str"},
         "visibility": {"key": "properties.visibility", "type": "str"},
         "install_patches": {"key": "properties.installPatches", "type": "InputPatchConfiguration"},
+        "overrides": {"key": "properties.overrides.overrides", "type": "[MaintenanceOverrideProperties]"},
         "start_date_time": {"key": "properties.maintenanceWindow.startDateTime", "type": "str"},
         "expiration_date_time": {"key": "properties.maintenanceWindow.expirationDateTime", "type": "str"},
         "duration": {"key": "properties.maintenanceWindow.duration", "type": "str"},
@@ -543,6 +546,7 @@ class MaintenanceConfiguration(Resource):  # pylint: disable=too-many-instance-a
         maintenance_scope: Optional[Union[str, "_models.MaintenanceScope"]] = None,
         visibility: Optional[Union[str, "_models.Visibility"]] = None,
         install_patches: Optional["_models.InputPatchConfiguration"] = None,
+        overrides: Optional[List["_models.MaintenanceOverrideProperties"]] = None,
         start_date_time: Optional[str] = None,
         expiration_date_time: Optional[str] = None,
         duration: Optional[str] = None,
@@ -569,6 +573,8 @@ class MaintenanceConfiguration(Resource):  # pylint: disable=too-many-instance-a
         :paramtype visibility: str or ~azure.mgmt.maintenance.models.Visibility
         :keyword install_patches: The input parameters to be passed to the patch run operation.
         :paramtype install_patches: ~azure.mgmt.maintenance.models.InputPatchConfiguration
+        :keyword overrides: Override Properties for the maintenance Configuration.
+        :paramtype overrides: list[~azure.mgmt.maintenance.models.MaintenanceOverrideProperties]
         :keyword start_date_time: Effective start date of the maintenance window in YYYY-MM-DD hh:mm
          format. The start date can be set to either the current date or future date. The window will be
          created in the time zone provided and adjusted to daylight savings according to that time zone.
@@ -608,6 +614,7 @@ class MaintenanceConfiguration(Resource):  # pylint: disable=too-many-instance-a
         self.maintenance_scope = maintenance_scope
         self.visibility = visibility
         self.install_patches = install_patches
+        self.overrides = overrides
         self.start_date_time = start_date_time
         self.expiration_date_time = expiration_date_time
         self.duration = duration
@@ -633,6 +640,68 @@ class MaintenanceError(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.error = error
+
+
+class MaintenanceOverrideProperties(_serialization.Model):
+    """Definition of a MaintenanceOverrideProperties.
+
+    :ivar start_date_time: Effective start date of the maintenance override window in YYYY-MM-DD
+     hh:mm format. The start date can be set to either the current date or future date. The window
+     will be created in the time zone provided and adjusted to daylight savings according to that
+     time zone.
+    :vartype start_date_time: ~datetime.datetime
+    :ivar end_date_time: Effective end date of the maintenance override window in YYYY-MM-DD hh:mm
+     format. The window will be created in the time zone provided and adjusted to daylight savings
+     according to that time zone. Expiration date must be set to a future date. If not provided, it
+     will be set to the maximum datetime 9999-12-31 23:59:59.
+    :vartype end_date_time: ~datetime.datetime
+    :ivar time_zone: Name of the timezone. List of timezones can be obtained by executing
+     [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell. Example: Pacific Standard Time, UTC,
+     W. Europe Standard Time, Korea Standard Time, Cen. Australia Standard Time.
+    :vartype time_zone: str
+    :ivar override_properties: Gets or sets overrideProperties of the maintenanceConfiguration.
+    :vartype override_properties: dict[str, str]
+    """
+
+    _attribute_map = {
+        "start_date_time": {"key": "startDateTime", "type": "iso-8601"},
+        "end_date_time": {"key": "endDateTime", "type": "iso-8601"},
+        "time_zone": {"key": "timeZone", "type": "str"},
+        "override_properties": {"key": "overrideProperties", "type": "{str}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        start_date_time: Optional[datetime.datetime] = None,
+        end_date_time: Optional[datetime.datetime] = None,
+        time_zone: Optional[str] = None,
+        override_properties: Optional[Dict[str, str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword start_date_time: Effective start date of the maintenance override window in YYYY-MM-DD
+         hh:mm format. The start date can be set to either the current date or future date. The window
+         will be created in the time zone provided and adjusted to daylight savings according to that
+         time zone.
+        :paramtype start_date_time: ~datetime.datetime
+        :keyword end_date_time: Effective end date of the maintenance override window in YYYY-MM-DD
+         hh:mm format. The window will be created in the time zone provided and adjusted to daylight
+         savings according to that time zone. Expiration date must be set to a future date. If not
+         provided, it will be set to the maximum datetime 9999-12-31 23:59:59.
+        :paramtype end_date_time: ~datetime.datetime
+        :keyword time_zone: Name of the timezone. List of timezones can be obtained by executing
+         [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell. Example: Pacific Standard Time, UTC,
+         W. Europe Standard Time, Korea Standard Time, Cen. Australia Standard Time.
+        :paramtype time_zone: str
+        :keyword override_properties: Gets or sets overrideProperties of the maintenanceConfiguration.
+        :paramtype override_properties: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.start_date_time = start_date_time
+        self.end_date_time = end_date_time
+        self.time_zone = time_zone
+        self.override_properties = override_properties
 
 
 class Operation(_serialization.Model):
