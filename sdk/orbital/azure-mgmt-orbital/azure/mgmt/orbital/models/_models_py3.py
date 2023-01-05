@@ -27,24 +27,29 @@ JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 class AuthorizedGroundstation(_serialization.Model):
     """Authorized groundstation.
 
-    :ivar ground_station: Groundstation name.
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar ground_station: Groundstation name. Required.
     :vartype ground_station: str
-    :ivar expiration_date: Date of authorization expiration.
+    :ivar expiration_date: Date of authorization expiration. Required.
     :vartype expiration_date: ~datetime.date
     """
+
+    _validation = {
+        "ground_station": {"required": True},
+        "expiration_date": {"required": True},
+    }
 
     _attribute_map = {
         "ground_station": {"key": "groundStation", "type": "str"},
         "expiration_date": {"key": "expirationDate", "type": "date"},
     }
 
-    def __init__(
-        self, *, ground_station: Optional[str] = None, expiration_date: Optional[datetime.date] = None, **kwargs
-    ):
+    def __init__(self, *, ground_station: str, expiration_date: datetime.date, **kwargs):
         """
-        :keyword ground_station: Groundstation name.
+        :keyword ground_station: Groundstation name. Required.
         :paramtype ground_station: str
-        :keyword expiration_date: Date of authorization expiration.
+        :keyword expiration_date: Date of authorization expiration. Required.
         :paramtype expiration_date: ~datetime.date
         """
         super().__init__(**kwargs)
@@ -1048,6 +1053,10 @@ class ContactProfile(TrackedResource):  # pylint: disable=too-many-instance-attr
     :ivar network_configuration: Network configuration of customer virtual network.
     :vartype network_configuration:
      ~azure.mgmt.orbital.models.ContactProfilesPropertiesNetworkConfiguration
+    :ivar third_party_configurations: Third-party mission configuration of the Contact Profile.
+     Describes RF links, modem processing, and IP endpoints.
+    :vartype third_party_configurations:
+     list[~azure.mgmt.orbital.models.ContactProfileThirdPartyConfiguration]
     :ivar links: Links of the Contact Profile. Describes RF links, modem processing, and IP
      endpoints.
     :vartype links: list[~azure.mgmt.orbital.models.ContactProfileLink]
@@ -1079,6 +1088,10 @@ class ContactProfile(TrackedResource):  # pylint: disable=too-many-instance-attr
             "key": "properties.networkConfiguration",
             "type": "ContactProfilesPropertiesNetworkConfiguration",
         },
+        "third_party_configurations": {
+            "key": "properties.thirdPartyConfigurations",
+            "type": "[ContactProfileThirdPartyConfiguration]",
+        },
         "links": {"key": "properties.links", "type": "[ContactProfileLink]"},
     }
 
@@ -1093,6 +1106,7 @@ class ContactProfile(TrackedResource):  # pylint: disable=too-many-instance-attr
         auto_tracking_configuration: Optional[Union[str, "_models.AutoTrackingConfiguration"]] = None,
         event_hub_uri: Optional[str] = None,
         network_configuration: Optional["_models.ContactProfilesPropertiesNetworkConfiguration"] = None,
+        third_party_configurations: Optional[List["_models.ContactProfileThirdPartyConfiguration"]] = None,
         links: Optional[List["_models.ContactProfileLink"]] = None,
         **kwargs
     ):
@@ -1122,6 +1136,10 @@ class ContactProfile(TrackedResource):  # pylint: disable=too-many-instance-attr
         :keyword network_configuration: Network configuration of customer virtual network.
         :paramtype network_configuration:
          ~azure.mgmt.orbital.models.ContactProfilesPropertiesNetworkConfiguration
+        :keyword third_party_configurations: Third-party mission configuration of the Contact Profile.
+         Describes RF links, modem processing, and IP endpoints.
+        :paramtype third_party_configurations:
+         list[~azure.mgmt.orbital.models.ContactProfileThirdPartyConfiguration]
         :keyword links: Links of the Contact Profile. Describes RF links, modem processing, and IP
          endpoints.
         :paramtype links: list[~azure.mgmt.orbital.models.ContactProfileLink]
@@ -1134,6 +1152,7 @@ class ContactProfile(TrackedResource):  # pylint: disable=too-many-instance-attr
         self.auto_tracking_configuration = auto_tracking_configuration
         self.event_hub_uri = event_hub_uri
         self.network_configuration = network_configuration
+        self.third_party_configurations = third_party_configurations
         self.links = links
 
 
@@ -1361,6 +1380,10 @@ class ContactProfilesProperties(_serialization.Model):
     :ivar network_configuration: Network configuration of customer virtual network. Required.
     :vartype network_configuration:
      ~azure.mgmt.orbital.models.ContactProfilesPropertiesNetworkConfiguration
+    :ivar third_party_configurations: Third-party mission configuration of the Contact Profile.
+     Describes RF links, modem processing, and IP endpoints.
+    :vartype third_party_configurations:
+     list[~azure.mgmt.orbital.models.ContactProfileThirdPartyConfiguration]
     :ivar links: Links of the Contact Profile. Describes RF links, modem processing, and IP
      endpoints. Required.
     :vartype links: list[~azure.mgmt.orbital.models.ContactProfileLink]
@@ -1381,6 +1404,10 @@ class ContactProfilesProperties(_serialization.Model):
             "key": "networkConfiguration",
             "type": "ContactProfilesPropertiesNetworkConfiguration",
         },
+        "third_party_configurations": {
+            "key": "thirdPartyConfigurations",
+            "type": "[ContactProfileThirdPartyConfiguration]",
+        },
         "links": {"key": "links", "type": "[ContactProfileLink]"},
     }
 
@@ -1394,6 +1421,7 @@ class ContactProfilesProperties(_serialization.Model):
         minimum_elevation_degrees: Optional[float] = None,
         auto_tracking_configuration: Optional[Union[str, "_models.AutoTrackingConfiguration"]] = None,
         event_hub_uri: Optional[str] = None,
+        third_party_configurations: Optional[List["_models.ContactProfileThirdPartyConfiguration"]] = None,
         **kwargs
     ):
         """
@@ -1418,6 +1446,10 @@ class ContactProfilesProperties(_serialization.Model):
         :keyword network_configuration: Network configuration of customer virtual network. Required.
         :paramtype network_configuration:
          ~azure.mgmt.orbital.models.ContactProfilesPropertiesNetworkConfiguration
+        :keyword third_party_configurations: Third-party mission configuration of the Contact Profile.
+         Describes RF links, modem processing, and IP endpoints.
+        :paramtype third_party_configurations:
+         list[~azure.mgmt.orbital.models.ContactProfileThirdPartyConfiguration]
         :keyword links: Links of the Contact Profile. Describes RF links, modem processing, and IP
          endpoints. Required.
         :paramtype links: list[~azure.mgmt.orbital.models.ContactProfileLink]
@@ -1429,6 +1461,7 @@ class ContactProfilesProperties(_serialization.Model):
         self.auto_tracking_configuration = auto_tracking_configuration
         self.event_hub_uri = event_hub_uri
         self.network_configuration = network_configuration
+        self.third_party_configurations = third_party_configurations
         self.links = links
 
 
@@ -1458,6 +1491,10 @@ class ContactProfileProperties(ContactProfilesProperties):
     :ivar network_configuration: Network configuration of customer virtual network. Required.
     :vartype network_configuration:
      ~azure.mgmt.orbital.models.ContactProfilesPropertiesNetworkConfiguration
+    :ivar third_party_configurations: Third-party mission configuration of the Contact Profile.
+     Describes RF links, modem processing, and IP endpoints.
+    :vartype third_party_configurations:
+     list[~azure.mgmt.orbital.models.ContactProfileThirdPartyConfiguration]
     :ivar links: Links of the Contact Profile. Describes RF links, modem processing, and IP
      endpoints. Required.
     :vartype links: list[~azure.mgmt.orbital.models.ContactProfileLink]
@@ -1478,6 +1515,10 @@ class ContactProfileProperties(ContactProfilesProperties):
             "key": "networkConfiguration",
             "type": "ContactProfilesPropertiesNetworkConfiguration",
         },
+        "third_party_configurations": {
+            "key": "thirdPartyConfigurations",
+            "type": "[ContactProfileThirdPartyConfiguration]",
+        },
         "links": {"key": "links", "type": "[ContactProfileLink]"},
     }
 
@@ -1491,6 +1532,7 @@ class ContactProfileProperties(ContactProfilesProperties):
         minimum_elevation_degrees: Optional[float] = None,
         auto_tracking_configuration: Optional[Union[str, "_models.AutoTrackingConfiguration"]] = None,
         event_hub_uri: Optional[str] = None,
+        third_party_configurations: Optional[List["_models.ContactProfileThirdPartyConfiguration"]] = None,
         **kwargs
     ):
         """
@@ -1515,6 +1557,10 @@ class ContactProfileProperties(ContactProfilesProperties):
         :keyword network_configuration: Network configuration of customer virtual network. Required.
         :paramtype network_configuration:
          ~azure.mgmt.orbital.models.ContactProfilesPropertiesNetworkConfiguration
+        :keyword third_party_configurations: Third-party mission configuration of the Contact Profile.
+         Describes RF links, modem processing, and IP endpoints.
+        :paramtype third_party_configurations:
+         list[~azure.mgmt.orbital.models.ContactProfileThirdPartyConfiguration]
         :keyword links: Links of the Contact Profile. Describes RF links, modem processing, and IP
          endpoints. Required.
         :paramtype links: list[~azure.mgmt.orbital.models.ContactProfileLink]
@@ -1526,6 +1572,7 @@ class ContactProfileProperties(ContactProfilesProperties):
             auto_tracking_configuration=auto_tracking_configuration,
             event_hub_uri=event_hub_uri,
             network_configuration=network_configuration,
+            third_party_configurations=third_party_configurations,
             links=links,
             **kwargs
         )
@@ -1559,6 +1606,43 @@ class ContactProfilesPropertiesNetworkConfiguration(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.subnet_id = subnet_id
+
+
+class ContactProfileThirdPartyConfiguration(_serialization.Model):
+    """ContactProfileThirdPartyConfiguration.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar provider_name: Name of the third-party provider. Required.
+    :vartype provider_name: str
+    :ivar mission_configuration: Name of string referencing the configuration describing contact
+     set-up for a particular mission. Expected values are those which have been created in
+     collaboration with the partner network. Required.
+    :vartype mission_configuration: str
+    """
+
+    _validation = {
+        "provider_name": {"required": True},
+        "mission_configuration": {"required": True},
+    }
+
+    _attribute_map = {
+        "provider_name": {"key": "providerName", "type": "str"},
+        "mission_configuration": {"key": "missionConfiguration", "type": "str"},
+    }
+
+    def __init__(self, *, provider_name: str, mission_configuration: str, **kwargs):
+        """
+        :keyword provider_name: Name of the third-party provider. Required.
+        :paramtype provider_name: str
+        :keyword mission_configuration: Name of string referencing the configuration describing contact
+         set-up for a particular mission. Expected values are those which have been created in
+         collaboration with the partner network. Required.
+        :paramtype mission_configuration: str
+        """
+        super().__init__(**kwargs)
+        self.provider_name = provider_name
+        self.mission_configuration = mission_configuration
 
 
 class ContactsPropertiesAntennaConfiguration(_serialization.Model):

@@ -26,6 +26,7 @@ from ._models_py3 import ContactProfileLink
 from ._models_py3 import ContactProfileLinkChannel
 from ._models_py3 import ContactProfileListResult
 from ._models_py3 import ContactProfileProperties
+from ._models_py3 import ContactProfileThirdPartyConfiguration
 from ._models_py3 import ContactProfilesProperties
 from ._models_py3 import ContactProfilesPropertiesNetworkConfiguration
 from ._models_py3 import ContactsPropertiesAntennaConfiguration
@@ -90,6 +91,7 @@ __all__ = [
     "ContactProfileLinkChannel",
     "ContactProfileListResult",
     "ContactProfileProperties",
+    "ContactProfileThirdPartyConfiguration",
     "ContactProfilesProperties",
     "ContactProfilesPropertiesNetworkConfiguration",
     "ContactsPropertiesAntennaConfiguration",

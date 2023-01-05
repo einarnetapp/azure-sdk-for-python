@@ -49,7 +49,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-01"))
+    api_version: Literal["2022-11-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -82,7 +82,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-01"))
+    api_version: Literal["2022-11-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -118,7 +118,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-01"))
+    api_version: Literal["2022-11-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -151,7 +151,7 @@ def build_update_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-01"))
+    api_version: Literal["2022-11-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -187,7 +187,7 @@ def build_list_by_subscription_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-01"))
+    api_version: Literal["2022-11-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -215,7 +215,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-01"))
+    api_version: Literal["2022-11-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -287,7 +287,7 @@ class ContactProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ContactProfile] = kwargs.pop("cls", None)
@@ -337,6 +337,7 @@ class ContactProfilesOperations:
         auto_tracking_configuration: Optional[Union[str, _models.AutoTrackingConfiguration]] = None,
         event_hub_uri: Optional[str] = None,
         network_configuration: Optional[_models.ContactProfilesPropertiesNetworkConfiguration] = None,
+        third_party_configurations: Optional[List[_models.ContactProfileThirdPartyConfiguration]] = None,
         links: Optional[List[_models.ContactProfileLink]] = None,
         **kwargs: Any
     ) -> _models.ContactProfile:
@@ -351,7 +352,7 @@ class ContactProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
@@ -367,6 +368,7 @@ class ContactProfilesOperations:
             network_configuration=network_configuration,
             provisioning_state=provisioning_state,
             tags=tags,
+            third_party_configurations=third_party_configurations,
         )
         _json = self._serialize.body(_parameters, "ContactProfile")
 
@@ -427,6 +429,7 @@ class ContactProfilesOperations:
         auto_tracking_configuration: Optional[Union[str, _models.AutoTrackingConfiguration]] = None,
         event_hub_uri: Optional[str] = None,
         network_configuration: Optional[_models.ContactProfilesPropertiesNetworkConfiguration] = None,
+        third_party_configurations: Optional[List[_models.ContactProfileThirdPartyConfiguration]] = None,
         links: Optional[List[_models.ContactProfileLink]] = None,
         **kwargs: Any
     ) -> LROPoller[_models.ContactProfile]:
@@ -465,6 +468,10 @@ class ContactProfilesOperations:
          is None.
         :type network_configuration:
          ~azure.mgmt.orbital.models.ContactProfilesPropertiesNetworkConfiguration
+        :param third_party_configurations: Third-party mission configuration of the Contact Profile.
+         Describes RF links, modem processing, and IP endpoints. Default value is None.
+        :type third_party_configurations:
+         list[~azure.mgmt.orbital.models.ContactProfileThirdPartyConfiguration]
         :param links: Links of the Contact Profile. Describes RF links, modem processing, and IP
          endpoints. Default value is None.
         :type links: list[~azure.mgmt.orbital.models.ContactProfileLink]
@@ -484,7 +491,7 @@ class ContactProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
@@ -504,6 +511,7 @@ class ContactProfilesOperations:
                 auto_tracking_configuration=auto_tracking_configuration,
                 event_hub_uri=event_hub_uri,
                 network_configuration=network_configuration,
+                third_party_configurations=third_party_configurations,
                 links=links,
                 api_version=api_version,
                 content_type=content_type,
@@ -555,7 +563,7 @@ class ContactProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -617,7 +625,7 @@ class ContactProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -679,7 +687,7 @@ class ContactProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -844,7 +852,7 @@ class ContactProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -913,7 +921,7 @@ class ContactProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ContactProfileListResult] = kwargs.pop("cls", None)
@@ -1008,7 +1016,7 @@ class ContactProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01"] = kwargs.pop(
+        api_version: Literal["2022-11-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ContactProfileListResult] = kwargs.pop("cls", None)

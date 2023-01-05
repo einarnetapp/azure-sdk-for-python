@@ -22,6 +22,7 @@ class ApiVersionParameter(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     TWO_THOUSAND_TWENTY09_01_PREVIEW = "2020-09-01-preview"
     TWO_THOUSAND_TWENTY_ONE04_04_PREVIEW = "2021-04-04-preview"
     TWO_THOUSAND_TWENTY_TWO03_01 = "2022-03-01"
+    TWO_THOUSAND_TWENTY_TWO11_01 = "2022-11-01"
 
 
 class AutoTrackingConfiguration(str, Enum, metaclass=CaseInsensitiveEnumMeta):
