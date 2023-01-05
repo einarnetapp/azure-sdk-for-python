@@ -36,6 +36,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2022-08-11-preview/examples/Machines_Get.json
+# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2022-12-27-preview/examples/Machines_Get.json
 if __name__ == "__main__":
     main()
