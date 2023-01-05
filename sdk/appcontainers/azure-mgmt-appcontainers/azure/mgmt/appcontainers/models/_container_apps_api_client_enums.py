@@ -41,6 +41,13 @@ class ActiveRevisionsMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SINGLE = "Single"
 
 
+class Affinity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Sticky Session Affinity."""
+
+    STICKY = "sticky"
+    NONE = "none"
+
+
 class Applicability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """indicates whether the profile is default for the location."""
 
@@ -194,6 +201,14 @@ class LogLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DEBUG = "debug"
     WARN = "warn"
     ERROR = "error"
+
+
+class ManagedCertificateDomainControlValidation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Selected type of domain control validation for managed certificates."""
+
+    CNAME = "CNAME"
+    HTTP = "HTTP"
+    TXT = "TXT"
 
 
 class ManagedEnvironmentOutBoundType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
