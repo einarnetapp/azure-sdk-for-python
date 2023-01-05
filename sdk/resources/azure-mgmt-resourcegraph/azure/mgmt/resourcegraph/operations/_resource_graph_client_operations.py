@@ -28,15 +28,10 @@ from .. import models as _models
 from .._serialization import Serializer
 from .._vendor import ResourceGraphClientMixinABC, _convert_request
 
-if sys.version_info >= (3, 9):
-    from collections.abc import MutableMapping
-else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
 else:
     from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
-JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
@@ -244,7 +239,7 @@ class ResourceGraphClientOperationsMixin(ResourceGraphClientMixinABC):
     @overload
     def resources_history(
         self, request: _models.ResourcesHistoryRequest, *, content_type: str = "application/json", **kwargs: Any
-    ) -> JSON:
+    ) -> Dict[str, Any]:
         """List all snapshots of a resource for a given time interval.
 
         :param request: Request specifying the query and its options. Required.
@@ -253,13 +248,15 @@ class ResourceGraphClientOperationsMixin(ResourceGraphClientMixinABC):
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: JSON or the result of cls(response)
-        :rtype: JSON
+        :return: dict mapping str to any or the result of cls(response)
+        :rtype: dict[str, any]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    def resources_history(self, request: IO, *, content_type: str = "application/json", **kwargs: Any) -> JSON:
+    def resources_history(
+        self, request: IO, *, content_type: str = "application/json", **kwargs: Any
+    ) -> Dict[str, Any]:
         """List all snapshots of a resource for a given time interval.
 
         :param request: Request specifying the query and its options. Required.
@@ -268,13 +265,13 @@ class ResourceGraphClientOperationsMixin(ResourceGraphClientMixinABC):
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: JSON or the result of cls(response)
-        :rtype: JSON
+        :return: dict mapping str to any or the result of cls(response)
+        :rtype: dict[str, any]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace
-    def resources_history(self, request: Union[_models.ResourcesHistoryRequest, IO], **kwargs: Any) -> JSON:
+    def resources_history(self, request: Union[_models.ResourcesHistoryRequest, IO], **kwargs: Any) -> Dict[str, Any]:
         """List all snapshots of a resource for a given time interval.
 
         :param request: Request specifying the query and its options. Is either a model type or a IO
@@ -284,8 +281,8 @@ class ResourceGraphClientOperationsMixin(ResourceGraphClientMixinABC):
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: JSON or the result of cls(response)
-        :rtype: JSON
+        :return: dict mapping str to any or the result of cls(response)
+        :rtype: dict[str, any]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -303,7 +300,7 @@ class ResourceGraphClientOperationsMixin(ResourceGraphClientMixinABC):
             "api_version", _params.pop("api-version", "2021-06-01-preview")
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
+        cls: ClsType[Dict[str, Any]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -336,7 +333,7 @@ class ResourceGraphClientOperationsMixin(ResourceGraphClientMixinABC):
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("object", pipeline_response)
+        deserialized = self._deserialize("{object}", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
