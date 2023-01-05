@@ -33,7 +33,7 @@ if TYPE_CHECKING:
 
 
 class AgriFoodMgmtClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """APIs documentation for Azure AgFoodPlatform Resource Provider Service.
+    """APIs documentation for Azure AgFoodPlatform Resource Provider Services.
 
     :ivar extensions: ExtensionsOperations operations
     :vartype extensions: azure.mgmt.agrifood.operations.ExtensionsOperations
