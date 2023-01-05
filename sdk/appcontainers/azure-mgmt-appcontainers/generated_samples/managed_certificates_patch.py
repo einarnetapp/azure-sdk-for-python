@@ -14,7 +14,7 @@ from azure.mgmt.appcontainers import ContainerAppsAPIClient
     pip install azure-identity
     pip install azure-mgmt-appcontainers
 # USAGE
-    python revisions_deactivate.py
+    python managed_certificates_patch.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,15 @@ def main():
         subscription_id="34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     )
 
-    response = client.container_apps_revisions.deactivate_revision(
-        resource_group_name="rg",
-        container_app_name="testcontainerApp0",
-        revision_name="testcontainerApp0-pjxhsye",
+    response = client.managed_certificates.update(
+        resource_group_name="examplerg",
+        environment_name="testcontainerenv",
+        managed_certificate_name="certificate-firendly-name",
+        managed_certificate_envelope={"tags": {"tag1": "value1", "tag2": "value2"}},
     )
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/preview/2022-11-01-preview/examples/Revisions_Deactivate.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/preview/2022-11-01-preview/examples/ManagedCertificates_Patch.json
 if __name__ == "__main__":
     main()
