@@ -11,17 +11,15 @@
 
 from typing import Any, Optional, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
-
 from azure.mgmt.core import AsyncARMPipelineClient
 from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
 
+from .._serialization import Deserializer, Serializer
 from ._configuration import AppPlatformManagementClientConfiguration
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from azure.core.credentials import TokenCredential
     from azure.core.credentials_async import AsyncTokenCredential
 
 class _SDKClient(object):
@@ -42,9 +40,9 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
     The api-version parameter sets the default API version if the operation
     group is not described in the profile.
 
-    :param credential: Credential needed for the client to connect to Azure.
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: Gets subscription ID which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    :param subscription_id: Gets subscription ID which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. Required.
     :type subscription_id: str
     :param api_version: API version to use if no profile is provided, or if missing in profile.
     :type api_version: str
@@ -71,7 +69,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
         api_version: Optional[str] = None,
         base_url: str = "https://management.azure.com",
         profile: KnownProfiles = KnownProfiles.default,
-        **kwargs  # type: Any
+        **kwargs: Any
     ) -> None:
         self._config = AppPlatformManagementClientConfiguration(credential, subscription_id, **kwargs)
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
@@ -140,6 +138,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import ApiPortalCustomDomainsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'api_portal_custom_domains'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -159,6 +158,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import ApiPortalsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'api_portals'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -193,6 +193,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import AppsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'apps'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -227,6 +228,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import BindingsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'bindings'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -249,6 +251,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import BuildServiceOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'build_service'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -271,6 +274,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import BuildServiceAgentPoolOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'build_service_agent_pool'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -293,6 +297,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import BuildServiceBuilderOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'build_service_builder'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -315,6 +320,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import BuildpackBindingOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'buildpack_binding'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -349,6 +355,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import CertificatesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'certificates'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -383,6 +390,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import ConfigServersOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'config_servers'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -405,6 +413,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import ConfigurationServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'configuration_services'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -439,6 +448,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import CustomDomainsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'custom_domains'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -473,6 +483,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import DeploymentsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'deployments'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -492,6 +503,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import GatewayCustomDomainsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'gateway_custom_domains'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -511,6 +523,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import GatewayRouteConfigsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'gateway_route_configs'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -530,6 +543,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import GatewaysOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'gateways'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -564,6 +578,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import MonitoringSettingsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'monitoring_settings'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -598,6 +613,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -632,6 +648,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import RuntimeVersionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'runtime_versions'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -654,6 +671,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import ServiceRegistriesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'service_registries'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -688,6 +706,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import ServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'services'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -722,6 +741,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import SkusOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'skus'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -744,6 +764,7 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_01_preview.aio.operations import StoragesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'storages'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     async def close(self):
