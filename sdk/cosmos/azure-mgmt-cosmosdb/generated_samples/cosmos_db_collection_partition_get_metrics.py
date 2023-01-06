@@ -14,7 +14,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
     pip install azure-identity
     pip install azure-mgmt-cosmosdb
 # USAGE
-    python approve_or_reject_a_private_endpoint_connection_with_a_given_name..py
+    python cosmos_db_collection_partition_get_metrics.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,25 +26,20 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="00000000-1111-2222-3333-444444444444",
+        subscription_id="subid",
     )
 
-    response = client.private_endpoint_connections.begin_create_or_update(
+    response = client.collection_partition.list_metrics(
         resource_group_name="rg1",
         account_name="ddb1",
-        private_endpoint_connection_name="privateEndpointConnectionName",
-        parameters={
-            "properties": {
-                "privateLinkServiceConnectionState": {
-                    "description": "Approved by johndoe@contoso.com",
-                    "status": "Approved",
-                }
-            }
-        },
-    ).result()
-    print(response)
+        database_rid="databaseRid",
+        collection_rid="collectionRid",
+        filter="$filter=(name.value eq 'Max RUs Per Second') and timeGrain eq duration'PT1M' and startTime eq '2017-11-19T23:53:55.2780000Z' and endTime eq '2017-11-20T23:58:55.2780000Z",
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBPrivateEndpointConnectionUpdate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBCollectionPartitionGetMetrics.json
 if __name__ == "__main__":
     main()

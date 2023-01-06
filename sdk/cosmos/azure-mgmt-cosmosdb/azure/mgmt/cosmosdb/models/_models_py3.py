@@ -390,7 +390,7 @@ class DataTransferDataSourceSink(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.component = None  # type: Optional[str]
+        self.component: Optional[str] = None
 
 
 class AzureBlobDataTransferDataSourceSink(DataTransferDataSourceSink):
@@ -426,7 +426,7 @@ class AzureBlobDataTransferDataSourceSink(DataTransferDataSourceSink):
         :paramtype endpoint_url: str
         """
         super().__init__(**kwargs)
-        self.component = "AzureBlobStorage"  # type: str
+        self.component: str = "AzureBlobStorage"
         self.container_name = container_name
         self.endpoint_url = endpoint_url
 
@@ -488,7 +488,7 @@ class BackupPolicy(_serialization.Model):
         :paramtype migration_state: ~azure.mgmt.cosmosdb.models.BackupPolicyMigrationState
         """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
         self.migration_state = migration_state
 
 
@@ -3048,7 +3048,7 @@ class ContinuousModeBackupPolicy(BackupPolicy):
         :paramtype continuous_mode_properties: ~azure.mgmt.cosmosdb.models.ContinuousModeProperties
         """
         super().__init__(migration_state=migration_state, **kwargs)
-        self.type = "Continuous"  # type: str
+        self.type: str = "Continuous"
         self.continuous_mode_properties = continuous_mode_properties
 
 
@@ -3178,7 +3178,7 @@ class CosmosCassandraDataTransferDataSourceSink(DataTransferDataSourceSink):
         :paramtype table_name: str
         """
         super().__init__(**kwargs)
-        self.component = "CosmosDBCassandra"  # type: str
+        self.component: str = "CosmosDBCassandra"
         self.keyspace_name = keyspace_name
         self.table_name = table_name
 
@@ -3217,7 +3217,7 @@ class CosmosMongoDataTransferDataSourceSink(DataTransferDataSourceSink):
         :paramtype collection_name: str
         """
         super().__init__(**kwargs)
-        self.component = "CosmosDBMongo"  # type: str
+        self.component: str = "CosmosDBMongo"
         self.database_name = database_name
         self.collection_name = collection_name
 
@@ -3256,7 +3256,7 @@ class CosmosSqlDataTransferDataSourceSink(DataTransferDataSourceSink):
         :paramtype container_name: str
         """
         super().__init__(**kwargs)
-        self.component = "CosmosDBSql"  # type: str
+        self.component: str = "CosmosDBSql"
         self.database_name = database_name
         self.container_name = container_name
 
@@ -5131,7 +5131,7 @@ class ServiceResourceProperties(_serialization.Model):
         self.creation_time = None
         self.instance_size = instance_size
         self.instance_count = instance_count
-        self.service_type = None  # type: Optional[str]
+        self.service_type: Optional[str] = None
         self.status = None
 
 
@@ -5204,7 +5204,7 @@ class DataTransferServiceResourceProperties(ServiceResourceProperties):
             instance_count=instance_count,
             **kwargs
         )
-        self.service_type = "DataTransfer"  # type: str
+        self.service_type: str = "DataTransfer"
         self.locations = None
 
 
@@ -5479,7 +5479,7 @@ class GraphAPIComputeServiceResourceProperties(ServiceResourceProperties):
             instance_count=instance_count,
             **kwargs
         )
-        self.service_type = "GraphAPICompute"  # type: str
+        self.service_type: str = "GraphAPICompute"
         self.graph_api_compute_endpoint = graph_api_compute_endpoint
         self.locations = None
 
@@ -7195,7 +7195,7 @@ class MaterializedViewsBuilderServiceResourceProperties(ServiceResourcePropertie
             instance_count=instance_count,
             **kwargs
         )
-        self.service_type = "MaterializedViewsBuilder"  # type: str
+        self.service_type: str = "MaterializedViewsBuilder"
         self.locations = None
 
 
@@ -9178,7 +9178,7 @@ class PeriodicModeBackupPolicy(BackupPolicy):
         :paramtype periodic_mode_properties: ~azure.mgmt.cosmosdb.models.PeriodicModeProperties
         """
         super().__init__(migration_state=migration_state, **kwargs)
-        self.type = "Periodic"  # type: str
+        self.type: str = "Periodic"
         self.periodic_mode_properties = periodic_mode_properties
 
 
@@ -12767,7 +12767,7 @@ class SqlDedicatedGatewayServiceResourceProperties(ServiceResourceProperties):
             instance_count=instance_count,
             **kwargs
         )
-        self.service_type = "SqlDedicatedGateway"  # type: str
+        self.service_type: str = "SqlDedicatedGateway"
         self.sql_dedicated_gateway_endpoint = sql_dedicated_gateway_endpoint
         self.locations = None
 

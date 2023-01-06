@@ -14,7 +14,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
     pip install azure-identity
     pip install azure-mgmt-cosmosdb
 # USAGE
-    python data_transfer_service_get.py
+    python cosmos_db_graph_resource_create_update.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,19 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.service.get(
+    response = client.graph_resources.begin_create_update_graph(
         resource_group_name="rg1",
         account_name="ddb1",
-        service_name="DataTransfer",
-    )
+        graph_name="graphName",
+        create_update_graph_parameters={
+            "location": "West US",
+            "properties": {"options": {}, "resource": {"id": "graphName"}},
+            "tags": {},
+        },
+    ).result()
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBDataTransferServiceGet.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBGraphResourceCreateUpdate.json
 if __name__ == "__main__":
     main()
