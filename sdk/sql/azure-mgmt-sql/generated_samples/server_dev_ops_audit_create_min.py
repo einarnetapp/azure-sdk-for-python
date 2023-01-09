@@ -32,11 +32,11 @@ def main():
     response = client.server_dev_ops_audit_settings.begin_create_or_update(
         resource_group_name="devAuditTestRG",
         server_name="devOpsAuditTestSvr",
-        dev_ops_auditing_settings_name="Default",
+        dev_ops_auditing_settings_name="default",
         parameters={
             "properties": {
                 "state": "Enabled",
-                "storageAccountAccessKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+                "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
                 "storageEndpoint": "https://mystorage.blob.core.windows.net",
             }
         },
@@ -44,6 +44,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/sql/resource-manager/Microsoft.Sql/preview/2022-02-01-preview/examples/ServerDevOpsAuditCreateMin.json
+# x-ms-original-file: specification/sql/resource-manager/Microsoft.Sql/preview/2020-11-01-preview/examples/ServerDevOpsAuditCreateMin.json
 if __name__ == "__main__":
     main()

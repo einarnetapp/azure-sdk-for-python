@@ -26,6 +26,7 @@ from .operations import (
     DatabaseAutomaticTuningOperations,
     DatabaseBlobAuditingPoliciesOperations,
     DatabaseColumnsOperations,
+    DatabaseEncryptionProtectorsOperations,
     DatabaseExtensionsOperations,
     DatabaseOperationsOperations,
     DatabaseRecommendedActionsOperations,
@@ -104,6 +105,7 @@ from .operations import (
     ManagedInstanceTdeCertificatesOperations,
     ManagedInstanceVulnerabilityAssessmentsOperations,
     ManagedInstancesOperations,
+    ManagedLedgerDigestUploadsOperations,
     ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations,
     ManagedServerDnsAliasesOperations,
     ManagedServerSecurityAlertPoliciesOperations,
@@ -126,6 +128,7 @@ from .operations import (
     ServerAzureADOnlyAuthenticationsOperations,
     ServerBlobAuditingPoliciesOperations,
     ServerCommunicationLinksOperations,
+    ServerConfigurationOptionsOperations,
     ServerConnectionPoliciesOperations,
     ServerDevOpsAuditSettingsOperations,
     ServerDnsAliasesOperations,
@@ -148,6 +151,7 @@ from .operations import (
     SqlVulnerabilityAssessmentScansOperations,
     SqlVulnerabilityAssessmentsOperations,
     SqlVulnerabilityAssessmentsSettingsOperations,
+    StartStopManagedInstanceSchedulesOperations,
     SubscriptionUsagesOperations,
     SynapseLinkWorkspacesOperations,
     SyncAgentsOperations,
@@ -424,8 +428,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
     :vartype ledger_digest_uploads: azure.mgmt.sql.operations.LedgerDigestUploadsOperations
     :ivar outbound_firewall_rules: OutboundFirewallRulesOperations operations
     :vartype outbound_firewall_rules: azure.mgmt.sql.operations.OutboundFirewallRulesOperations
-    :ivar servers: ServersOperations operations
-    :vartype servers: azure.mgmt.sql.operations.ServersOperations
     :ivar usages: UsagesOperations operations
     :vartype usages: azure.mgmt.sql.operations.UsagesOperations
     :ivar long_term_retention_backups: LongTermRetentionBackupsOperations operations
@@ -435,8 +437,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      LongTermRetentionManagedInstanceBackupsOperations operations
     :vartype long_term_retention_managed_instance_backups:
      azure.mgmt.sql.operations.LongTermRetentionManagedInstanceBackupsOperations
-    :ivar managed_instances: ManagedInstancesOperations operations
-    :vartype managed_instances: azure.mgmt.sql.operations.ManagedInstancesOperations
     :ivar restorable_dropped_databases: RestorableDroppedDatabasesOperations operations
     :vartype restorable_dropped_databases:
      azure.mgmt.sql.operations.RestorableDroppedDatabasesOperations
@@ -576,6 +576,23 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
     :vartype synapse_link_workspaces: azure.mgmt.sql.operations.SynapseLinkWorkspacesOperations
     :ivar virtual_clusters: VirtualClustersOperations operations
     :vartype virtual_clusters: azure.mgmt.sql.operations.VirtualClustersOperations
+    :ivar managed_instances: ManagedInstancesOperations operations
+    :vartype managed_instances: azure.mgmt.sql.operations.ManagedInstancesOperations
+    :ivar server_configuration_options: ServerConfigurationOptionsOperations operations
+    :vartype server_configuration_options:
+     azure.mgmt.sql.operations.ServerConfigurationOptionsOperations
+    :ivar database_encryption_protectors: DatabaseEncryptionProtectorsOperations operations
+    :vartype database_encryption_protectors:
+     azure.mgmt.sql.operations.DatabaseEncryptionProtectorsOperations
+    :ivar managed_ledger_digest_uploads: ManagedLedgerDigestUploadsOperations operations
+    :vartype managed_ledger_digest_uploads:
+     azure.mgmt.sql.operations.ManagedLedgerDigestUploadsOperations
+    :ivar servers: ServersOperations operations
+    :vartype servers: azure.mgmt.sql.operations.ServersOperations
+    :ivar start_stop_managed_instance_schedules: StartStopManagedInstanceSchedulesOperations
+     operations
+    :vartype start_stop_managed_instance_schedules:
+     azure.mgmt.sql.operations.StartStopManagedInstanceSchedulesOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The subscription ID that identifies an Azure subscription. Required.
@@ -848,15 +865,11 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self.outbound_firewall_rules = OutboundFirewallRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.servers = ServersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.long_term_retention_backups = LongTermRetentionBackupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.long_term_retention_managed_instance_backups = LongTermRetentionManagedInstanceBackupsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.managed_instances = ManagedInstancesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.restorable_dropped_databases = RestorableDroppedDatabasesOperations(
@@ -991,6 +1004,22 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
             self._client, self._config, self._serialize, self._deserialize
         )
         self.virtual_clusters = VirtualClustersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_instances = ManagedInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.server_configuration_options = ServerConfigurationOptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.database_encryption_protectors = DatabaseEncryptionProtectorsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_ledger_digest_uploads = ManagedLedgerDigestUploadsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.servers = ServersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.start_stop_managed_instance_schedules = StartStopManagedInstanceSchedulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

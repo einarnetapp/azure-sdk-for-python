@@ -148,6 +148,15 @@ class AutomaticTuningServerReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     AUTO_CONFIGURED = "AutoConfigured"
 
 
+class AvailabilityZoneType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the availability zone the database is pinned to."""
+
+    NO_PREFERENCE = "NoPreference"
+    ONE = "1"
+    TWO = "2"
+    THREE = "3"
+
+
 class BackupStorageRedundancy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The storage redundancy type of the copied backup."""
 
@@ -312,6 +321,12 @@ class DatabaseIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     USER_ASSIGNED = "UserAssigned"
 
 
+class DatabaseKeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The database key type. Only supported value is 'AzureKeyVault'."""
+
+    AZURE_KEY_VAULT = "AzureKeyVault"
+
+
 class DatabaseLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The license type to apply for this database. ``LicenseIncluded`` if you need a license, or
     ``BasePrice`` if you have a license and are eligible for the Azure Hybrid Benefit.
@@ -415,12 +430,6 @@ class DayOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SATURDAY = "Saturday"
 
 
-class DevOpsAuditingSettingsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """DevOpsAuditingSettingsName."""
-
-    DEFAULT = "Default"
-
-
 class DiffBackupIntervalInHours(int, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The differential backup interval in hours. This is how many interval hours between each
     differential backup will be supported. This is only applicable to live databases but not
@@ -464,6 +473,13 @@ class EncryptionProtectorName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """EncryptionProtectorName."""
 
     CURRENT = "current"
+
+
+class ExternalGovernanceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Status of external governance."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 
 class FailoverGroupReplicationRole(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -704,6 +720,19 @@ class ManagedInstanceProxyOverride(str, Enum, metaclass=CaseInsensitiveEnumMeta)
     PROXY = "Proxy"
     REDIRECT = "Redirect"
     DEFAULT = "Default"
+
+
+class ManagedLedgerDigestUploadsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ManagedLedgerDigestUploadsName."""
+
+    CURRENT = "current"
+
+
+class ManagedLedgerDigestUploadsState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the state of ledger digest upload."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 
 class ManagedServerCreateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1075,6 +1104,12 @@ class SensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOVE = "remove"
 
 
+class ServerConfigurationOptionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ServerConfigurationOptionName."""
+
+    ALLOW_POLYBASE_EXPORT = "allowPolybaseExport"
+
+
 class ServerConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The server connection type."""
 
@@ -1091,12 +1126,22 @@ class ServerKeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ServerNetworkAccessFlag(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Whether or not public endpoint access is allowed for this server.  Value is optional but if
+    """Whether or not to restrict outbound network access for this server.  Value is optional but if
     passed in, must be 'Enabled' or 'Disabled'.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class ServerPublicNetworkAccessFlag(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Whether or not public endpoint access is allowed for this server.  Value is optional but if
+    passed in, must be 'Enabled' or 'Disabled' or 'SecuredByPerimeter'.
+    """
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+    SECURED_BY_PERIMETER = "SecuredByPerimeter"
 
 
 class ServerTrustGroupPropertiesTrustScopesItem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1224,6 +1269,12 @@ class SqlVulnerabilityAssessmentState(str, Enum, metaclass=CaseInsensitiveEnumMe
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class StartStopScheduleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """StartStopScheduleName."""
+
+    DEFAULT = "default"
 
 
 class StorageCapabilityStorageAccountType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
