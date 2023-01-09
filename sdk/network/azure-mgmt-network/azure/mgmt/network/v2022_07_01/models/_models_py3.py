@@ -4937,10 +4937,11 @@ class ApplicationGatewaySku(_serialization.Model):
     """SKU of an application gateway.
 
     :ivar name: Name of an application gateway SKU. Known values are: "Standard_Small",
-     "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2", and "WAF_v2".
+     "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2",
+     "Standard_Basic", and "WAF_v2".
     :vartype name: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewaySkuName
     :ivar tier: Tier of an application gateway. Known values are: "Standard", "WAF", "Standard_v2",
-     and "WAF_v2".
+     "WAF_v2", and "Standard_Basic".
     :vartype tier: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewayTier
     :ivar capacity: Capacity (instance count) of an application gateway.
     :vartype capacity: int
@@ -4962,10 +4963,11 @@ class ApplicationGatewaySku(_serialization.Model):
     ):
         """
         :keyword name: Name of an application gateway SKU. Known values are: "Standard_Small",
-         "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2", and "WAF_v2".
+         "Standard_Medium", "Standard_Large", "WAF_Medium", "WAF_Large", "Standard_v2",
+         "Standard_Basic", and "WAF_v2".
         :paramtype name: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewaySkuName
         :keyword tier: Tier of an application gateway. Known values are: "Standard", "WAF",
-         "Standard_v2", and "WAF_v2".
+         "Standard_v2", "WAF_v2", and "Standard_Basic".
         :paramtype tier: str or ~azure.mgmt.network.v2022_07_01.models.ApplicationGatewayTier
         :keyword capacity: Capacity (instance count) of an application gateway.
         :paramtype capacity: int
@@ -10797,6 +10799,9 @@ class ConnectivityParameters(_serialization.Model):
     :vartype destination: ~azure.mgmt.network.v2022_07_01.models.ConnectivityDestination
     :ivar protocol: Network protocol. Known values are: "Tcp", "Http", "Https", and "Icmp".
     :vartype protocol: str or ~azure.mgmt.network.v2022_07_01.models.Protocol
+    :ivar analysis_modes: Analysis Modes. Known values are: "NextHop", "NCD", "PortScan", and
+     "Default".
+    :vartype analysis_modes: str or ~azure.mgmt.network.v2022_07_01.models.AnalysisModes
     :ivar protocol_configuration: Configuration of the protocol.
     :vartype protocol_configuration: ~azure.mgmt.network.v2022_07_01.models.ProtocolConfiguration
     :ivar preferred_ip_version: Preferred IP version of the connection. Known values are: "IPv4"
@@ -10813,6 +10818,7 @@ class ConnectivityParameters(_serialization.Model):
         "source": {"key": "source", "type": "ConnectivitySource"},
         "destination": {"key": "destination", "type": "ConnectivityDestination"},
         "protocol": {"key": "protocol", "type": "str"},
+        "analysis_modes": {"key": "analysisModes", "type": "str"},
         "protocol_configuration": {"key": "protocolConfiguration", "type": "ProtocolConfiguration"},
         "preferred_ip_version": {"key": "preferredIPVersion", "type": "str"},
     }
@@ -10823,6 +10829,7 @@ class ConnectivityParameters(_serialization.Model):
         source: "_models.ConnectivitySource",
         destination: "_models.ConnectivityDestination",
         protocol: Optional[Union[str, "_models.Protocol"]] = None,
+        analysis_modes: Optional[Union[str, "_models.AnalysisModes"]] = None,
         protocol_configuration: Optional["_models.ProtocolConfiguration"] = None,
         preferred_ip_version: Optional[Union[str, "_models.IPVersion"]] = None,
         **kwargs
@@ -10834,6 +10841,9 @@ class ConnectivityParameters(_serialization.Model):
         :paramtype destination: ~azure.mgmt.network.v2022_07_01.models.ConnectivityDestination
         :keyword protocol: Network protocol. Known values are: "Tcp", "Http", "Https", and "Icmp".
         :paramtype protocol: str or ~azure.mgmt.network.v2022_07_01.models.Protocol
+        :keyword analysis_modes: Analysis Modes. Known values are: "NextHop", "NCD", "PortScan", and
+         "Default".
+        :paramtype analysis_modes: str or ~azure.mgmt.network.v2022_07_01.models.AnalysisModes
         :keyword protocol_configuration: Configuration of the protocol.
         :paramtype protocol_configuration: ~azure.mgmt.network.v2022_07_01.models.ProtocolConfiguration
         :keyword preferred_ip_version: Preferred IP version of the connection. Known values are: "IPv4"
@@ -10844,6 +10854,7 @@ class ConnectivityParameters(_serialization.Model):
         self.source = source
         self.destination = destination
         self.protocol = protocol
+        self.analysis_modes = analysis_modes
         self.protocol_configuration = protocol_configuration
         self.preferred_ip_version = preferred_ip_version
 
@@ -10858,6 +10869,8 @@ class ConnectivitySource(_serialization.Model):
     :vartype resource_id: str
     :ivar port: The source port from which a connectivity check will be performed.
     :vartype port: int
+    :ivar vmss_index: The vmss instance name from which a connectivity check will be performed.
+    :vartype vmss_index: str
     """
 
     _validation = {
@@ -10868,19 +10881,23 @@ class ConnectivitySource(_serialization.Model):
     _attribute_map = {
         "resource_id": {"key": "resourceId", "type": "str"},
         "port": {"key": "port", "type": "int"},
+        "vmss_index": {"key": "vmssIndex", "type": "str"},
     }
 
-    def __init__(self, *, resource_id: str, port: Optional[int] = None, **kwargs):
+    def __init__(self, *, resource_id: str, port: Optional[int] = None, vmss_index: Optional[str] = None, **kwargs):
         """
         :keyword resource_id: The ID of the resource from which a connectivity check will be initiated.
          Required.
         :paramtype resource_id: str
         :keyword port: The source port from which a connectivity check will be performed.
         :paramtype port: int
+        :keyword vmss_index: The vmss instance name from which a connectivity check will be performed.
+        :paramtype vmss_index: str
         """
         super().__init__(**kwargs)
         self.resource_id = resource_id
         self.port = port
+        self.vmss_index = vmss_index
 
 
 class Container(SubResource):

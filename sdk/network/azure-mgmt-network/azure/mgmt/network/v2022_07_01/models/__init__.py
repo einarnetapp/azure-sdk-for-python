@@ -689,6 +689,7 @@ from ._network_management_client_enums import Access
 from ._network_management_client_enums import ActionType
 from ._network_management_client_enums import AddressPrefixType
 from ._network_management_client_enums import AdminRuleKind
+from ._network_management_client_enums import AnalysisModes
 from ._network_management_client_enums import ApplicationGatewayBackendHealthServerHealth
 from ._network_management_client_enums import ApplicationGatewayClientRevocationOptions
 from ._network_management_client_enums import ApplicationGatewayCookieBasedAffinity
@@ -1576,6 +1577,7 @@ __all__ = [
     "ActionType",
     "AddressPrefixType",
     "AdminRuleKind",
+    "AnalysisModes",
     "ApplicationGatewayBackendHealthServerHealth",
     "ApplicationGatewayClientRevocationOptions",
     "ApplicationGatewayCookieBasedAffinity",
