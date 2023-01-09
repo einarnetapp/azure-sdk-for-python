@@ -334,7 +334,7 @@ class ConfigurationInfo(_serialization.Model):
     def __init__(
         self,
         *,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         action: Optional[Union[str, "_models.ActionType"]] = None,
         customized_keys: Optional[Dict[str, str]] = None,
         additional_configurations: Optional[Dict[str, str]] = None,
@@ -1178,8 +1178,8 @@ class FirewallRules(_serialization.Model):
         self,
         *,
         ip_ranges: Optional[List[str]] = None,
-        azure_services: Optional[Union[str, "_models.AllowType"]] = None,
-        caller_client_ip: Optional[Union[str, "_models.AllowType"]] = None,
+        azure_services: Union[str, "_models.AllowType"] = "false",
+        caller_client_ip: Union[str, "_models.AllowType"] = "false",
         **kwargs
     ):
         """
@@ -1694,7 +1694,7 @@ class PublicNetworkSolution(_serialization.Model):
     def __init__(
         self,
         *,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         action: Optional[Union[str, "_models.ActionType"]] = None,
         firewall_rules: Optional["_models.FirewallRules"] = None,
         **kwargs
@@ -1889,7 +1889,7 @@ class ServicePrincipalCertificateAuthInfo(AuthInfoBase):
         client_id: str,
         principal_id: str,
         certificate: str,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         roles: Optional[List[str]] = None,
         **kwargs
     ):
@@ -1965,7 +1965,7 @@ class ServicePrincipalSecretAuthInfo(AuthInfoBase, DatabaseAadAuthInfo):
         principal_id: str,
         secret: str,
         user_name: Optional[str] = None,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         roles: Optional[List[str]] = None,
         **kwargs
     ):
@@ -2055,7 +2055,7 @@ class SystemAssignedIdentityAuthInfo(AuthInfoBase, DatabaseAadAuthInfo):
         self,
         *,
         user_name: Optional[str] = None,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         roles: Optional[List[str]] = None,
         **kwargs
     ):
@@ -2178,7 +2178,7 @@ class UserAccountAuthInfo(AuthInfoBase, DatabaseAadAuthInfo):
         *,
         user_name: Optional[str] = None,
         principal_id: Optional[str] = None,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         roles: Optional[List[str]] = None,
         **kwargs
     ):
@@ -2244,7 +2244,7 @@ class UserAssignedIdentityAuthInfo(AuthInfoBase, DatabaseAadAuthInfo):
         user_name: Optional[str] = None,
         client_id: Optional[str] = None,
         subscription_id: Optional[str] = None,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         roles: Optional[List[str]] = None,
         **kwargs
     ):
@@ -2470,7 +2470,7 @@ class VNetSolution(_serialization.Model):
         self,
         *,
         type: Optional[Union[str, "_models.VNetSolutionType"]] = None,
-        delete_or_update_behavior: Optional[Union[str, "_models.DeleteOrUpdateBehavior"]] = None,
+        delete_or_update_behavior: Union[str, "_models.DeleteOrUpdateBehavior"] = "Default",
         **kwargs
     ):
         """
