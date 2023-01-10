@@ -653,7 +653,7 @@ class ChargesListResult(_serialization.Model):
         self.value = None
 
 
-class ChargeSummary(Resource):
+class ChargeSummary(ProxyResource):
     """A charge summary resource.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
@@ -663,16 +663,15 @@ class ChargeSummary(Resource):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: The full qualified ARM ID of an event.
+    :ivar id: Resource Id.
     :vartype id: str
-    :ivar name: The ID that uniquely identifies an event.
+    :ivar name: Resource name.
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar etag: The etag for the resource.
-    :vartype etag: str
-    :ivar tags: Resource tags.
-    :vartype tags: dict[str, str]
+    :ivar e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+     used to determine whether the user is updating the latest version or not.
+    :vartype e_tag: str
     :ivar kind: Specifies the kind of charge summary. Required. Known values are: "legacy" and
      "modern".
     :vartype kind: str or ~azure.mgmt.consumption.models.ChargeSummaryKind
@@ -682,8 +681,6 @@ class ChargeSummary(Resource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
-        "etag": {"readonly": True},
-        "tags": {"readonly": True},
         "kind": {"required": True},
     }
 
@@ -691,16 +688,19 @@ class ChargeSummary(Resource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
-        "etag": {"key": "etag", "type": "str"},
-        "tags": {"key": "tags", "type": "{str}"},
+        "e_tag": {"key": "eTag", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
     }
 
     _subtype_map = {"kind": {"legacy": "LegacyChargeSummary", "modern": "ModernChargeSummary"}}
 
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
+    def __init__(self, *, e_tag: Optional[str] = None, **kwargs):
+        """
+        :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+         used to determine whether the user is updating the latest version or not.
+        :paramtype e_tag: str
+        """
+        super().__init__(e_tag=e_tag, **kwargs)
         self.kind: Optional[str] = None
 
 
@@ -1238,16 +1238,15 @@ class LegacyChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: The full qualified ARM ID of an event.
+    :ivar id: Resource Id.
     :vartype id: str
-    :ivar name: The ID that uniquely identifies an event.
+    :ivar name: Resource name.
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar etag: The etag for the resource.
-    :vartype etag: str
-    :ivar tags: Resource tags.
-    :vartype tags: dict[str, str]
+    :ivar e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+     used to determine whether the user is updating the latest version or not.
+    :vartype e_tag: str
     :ivar kind: Specifies the kind of charge summary. Required. Known values are: "legacy" and
      "modern".
     :vartype kind: str or ~azure.mgmt.consumption.models.ChargeSummaryKind
@@ -1271,8 +1270,6 @@ class LegacyChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
-        "etag": {"readonly": True},
-        "tags": {"readonly": True},
         "kind": {"required": True},
         "billing_period_id": {"readonly": True},
         "usage_start": {"readonly": True},
@@ -1287,8 +1284,7 @@ class LegacyChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
-        "etag": {"key": "etag", "type": "str"},
-        "tags": {"key": "tags", "type": "{str}"},
+        "e_tag": {"key": "eTag", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "billing_period_id": {"key": "properties.billingPeriodId", "type": "str"},
         "usage_start": {"key": "properties.usageStart", "type": "str"},
@@ -1299,9 +1295,13 @@ class LegacyChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "currency": {"key": "properties.currency", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
+    def __init__(self, *, e_tag: Optional[str] = None, **kwargs):
+        """
+        :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+         used to determine whether the user is updating the latest version or not.
+        :paramtype e_tag: str
+        """
+        super().__init__(e_tag=e_tag, **kwargs)
         self.kind: str = "legacy"
         self.billing_period_id = None
         self.usage_start = None
@@ -3049,16 +3049,15 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: The full qualified ARM ID of an event.
+    :ivar id: Resource Id.
     :vartype id: str
-    :ivar name: The ID that uniquely identifies an event.
+    :ivar name: Resource name.
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar etag: The etag for the resource.
-    :vartype etag: str
-    :ivar tags: Resource tags.
-    :vartype tags: dict[str, str]
+    :ivar e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+     used to determine whether the user is updating the latest version or not.
+    :vartype e_tag: str
     :ivar kind: Specifies the kind of charge summary. Required. Known values are: "legacy" and
      "modern".
     :vartype kind: str or ~azure.mgmt.consumption.models.ChargeSummaryKind
@@ -3084,14 +3083,14 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
     :vartype customer_id: str
     :ivar is_invoiced: Is charge Invoiced.
     :vartype is_invoiced: bool
+    :ivar subscription_id: Subscription guid.
+    :vartype subscription_id: str
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
-        "etag": {"readonly": True},
-        "tags": {"readonly": True},
         "kind": {"required": True},
         "billing_period_id": {"readonly": True},
         "usage_start": {"readonly": True},
@@ -3104,14 +3103,14 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "invoice_section_id": {"readonly": True},
         "customer_id": {"readonly": True},
         "is_invoiced": {"readonly": True},
+        "subscription_id": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
-        "etag": {"key": "etag", "type": "str"},
-        "tags": {"key": "tags", "type": "{str}"},
+        "e_tag": {"key": "eTag", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "billing_period_id": {"key": "properties.billingPeriodId", "type": "str"},
         "usage_start": {"key": "properties.usageStart", "type": "str"},
@@ -3124,11 +3123,16 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "invoice_section_id": {"key": "properties.invoiceSectionId", "type": "str"},
         "customer_id": {"key": "properties.customerId", "type": "str"},
         "is_invoiced": {"key": "properties.isInvoiced", "type": "bool"},
+        "subscription_id": {"key": "properties.subscriptionId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
+    def __init__(self, *, e_tag: Optional[str] = None, **kwargs):
+        """
+        :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+         used to determine whether the user is updating the latest version or not.
+        :paramtype e_tag: str
+        """
+        super().__init__(e_tag=e_tag, **kwargs)
         self.kind: str = "modern"
         self.billing_period_id = None
         self.usage_start = None
@@ -3141,6 +3145,7 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         self.invoice_section_id = None
         self.customer_id = None
         self.is_invoiced = None
+        self.subscription_id = None
 
 
 class ModernReservationRecommendation(ReservationRecommendation):  # pylint: disable=too-many-instance-attributes
