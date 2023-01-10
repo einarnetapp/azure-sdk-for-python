@@ -49,9 +49,7 @@ def build_list_by_arc_setting_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-09-01-preview")
-    )
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -90,9 +88,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-09-01-preview")
-    )
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -132,9 +128,7 @@ def build_create_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-09-01-preview")
-    )
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -177,9 +171,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-09-01-preview")
-    )
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -222,9 +214,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-09-01-preview")
-    )
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -294,7 +284,7 @@ class ExtensionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExtensionList] = kwargs.pop("cls", None)
@@ -401,7 +391,7 @@ class ExtensionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Extension] = kwargs.pop("cls", None)
@@ -462,7 +452,7 @@ class ExtensionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -646,7 +636,7 @@ class ExtensionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -705,7 +695,7 @@ class ExtensionsOperations:
         extension_name: str,
         extension: Union[_models.Extension, IO],
         **kwargs: Any
-    ) -> _models.Extension:
+    ) -> Optional[_models.Extension]:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -717,11 +707,11 @@ class ExtensionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.Extension] = kwargs.pop("cls", None)
+        cls: ClsType[Optional[_models.Extension]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -754,12 +744,14 @@ class ExtensionsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [201]:
+        if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Extension", pipeline_response)
+        deserialized = None
+        if response.status_code == 200:
+            deserialized = self._deserialize("Extension", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -897,7 +889,7 @@ class ExtensionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -962,7 +954,7 @@ class ExtensionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1030,7 +1022,7 @@ class ExtensionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
