@@ -24,11 +24,11 @@ class BillingSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SKU gets added or an exiting SKU gets removed.
     """
 
-    #: 100 Mbps, 20 active SIMs plan
+    #: 100 Mbps, 20 active SIMs plan, 2 RANs
     G0 = "G0"
-    #: 1 Gbps, 100 active SIMs plan
+    #: 1 Gbps, 100 active SIMs plan, 5 RANs
     G1 = "G1"
-    #: 2 Gbps, 200 active SIMs plan
+    #: 2 Gbps, 200 active SIMs plan, 10 RANs
     G2 = "G2"
     #: 3 Gbps, 300 active SIMs plan
     G3 = "G3"
