@@ -459,6 +459,7 @@ class DataConnectorKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     OFFICE_ATP = "OfficeATP"
     OFFICE_IRM = "OfficeIRM"
     OFFICE365_PROJECT = "Office365Project"
+    MICROSOFT_PURVIEW_INFORMATION_PROTECTION = "MicrosoftPurviewInformationProtection"
     OFFICE_POWER_BI = "OfficePowerBI"
     AMAZON_WEB_SERVICES_CLOUD_TRAIL = "AmazonWebServicesCloudTrail"
     AMAZON_WEB_SERVICES_S3 = "AmazonWebServicesS3"

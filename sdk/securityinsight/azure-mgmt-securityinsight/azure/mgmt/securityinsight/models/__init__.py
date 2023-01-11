@@ -265,6 +265,12 @@ from ._models_py3 import MetadataModel
 from ._models_py3 import MetadataPatch
 from ._models_py3 import MetadataSource
 from ._models_py3 import MetadataSupport
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirements
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirementsProperties
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypes
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypesLogs
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnector
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnectorProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRule
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleCommonProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleProperties
@@ -765,6 +771,12 @@ __all__ = [
     "MetadataPatch",
     "MetadataSource",
     "MetadataSupport",
+    "MicrosoftPurviewInformationProtectionCheckRequirements",
+    "MicrosoftPurviewInformationProtectionCheckRequirementsProperties",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypes",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypesLogs",
+    "MicrosoftPurviewInformationProtectionDataConnector",
+    "MicrosoftPurviewInformationProtectionDataConnectorProperties",
     "MicrosoftSecurityIncidentCreationAlertRule",
     "MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
     "MicrosoftSecurityIncidentCreationAlertRuleProperties",

@@ -14,7 +14,7 @@ from azure.mgmt.securityinsight import SecurityInsights
     pip install azure-identity
     pip install azure-mgmt-securityinsight
 # USAGE
-    python incident_tasks_get.py
+    python create_microsoft_purview_information_protection_data_connetor.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,15 +29,22 @@ def main():
         subscription_id="d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     )
 
-    response = client.incident_tasks.get(
+    response = client.data_connectors.create_or_update(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
-        incident_id="73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-        incident_task_id="4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+        data_connector_id="73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        data_connector={
+            "etag": '"0300bf09-0000-0000-0000-5c37296e0000"',
+            "kind": "MicrosoftPurviewInformationProtection",
+            "properties": {
+                "dataTypes": {"logs": {"state": "Enabled"}},
+                "tenantId": "2070ecc9-b4d5-4ae4-adaa-936fa1954fa8",
+            },
+        },
     )
     print(response)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-02-01-preview/examples/incidents/IncidentTasks/IncidentTasks_Get.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-02-01-preview/examples/dataConnectors/CreateMicrosoftPurviewInformationProtectionDataConnetor.json
 if __name__ == "__main__":
     main()

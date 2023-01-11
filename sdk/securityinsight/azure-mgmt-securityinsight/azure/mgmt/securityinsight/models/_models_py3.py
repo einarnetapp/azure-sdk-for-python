@@ -34,7 +34,8 @@ class DataConnectorsCheckRequirements(_serialization.Model):
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     AwsCloudTrailCheckRequirements, AwsS3CheckRequirements, AADCheckRequirements,
     AATPCheckRequirements, ASCCheckRequirements, Dynamics365CheckRequirements,
-    IoTCheckRequirements, MCASCheckRequirements, MDATPCheckRequirements, MSTICheckRequirements,
+    IoTCheckRequirements, MCASCheckRequirements, MDATPCheckRequirements,
+    MicrosoftPurviewInformationProtectionCheckRequirements, MSTICheckRequirements,
     MtpCheckRequirements, Office365ProjectCheckRequirements, OfficeATPCheckRequirements,
     OfficeIRMCheckRequirements, OfficePowerBICheckRequirements, TICheckRequirements,
     TiTaxiiCheckRequirements
@@ -44,10 +45,10 @@ class DataConnectorsCheckRequirements(_serialization.Model):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     """
 
@@ -70,6 +71,7 @@ class DataConnectorsCheckRequirements(_serialization.Model):
             "IOT": "IoTCheckRequirements",
             "MicrosoftCloudAppSecurity": "MCASCheckRequirements",
             "MicrosoftDefenderAdvancedThreatProtection": "MDATPCheckRequirements",
+            "MicrosoftPurviewInformationProtection": "MicrosoftPurviewInformationProtectionCheckRequirements",
             "MicrosoftThreatIntelligence": "MSTICheckRequirements",
             "MicrosoftThreatProtection": "MtpCheckRequirements",
             "Office365Project": "Office365ProjectCheckRequirements",
@@ -95,10 +97,10 @@ class AADCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -266,9 +268,9 @@ class DataConnector(ResourceWithEtag):
     CodelessApiPollingDataConnector, AwsCloudTrailDataConnector, AwsS3DataConnector,
     AADDataConnector, AATPDataConnector, ASCDataConnector, Dynamics365DataConnector,
     CodelessUiDataConnector, IoTDataConnector, MCASDataConnector, MDATPDataConnector,
-    MSTIDataConnector, MTPDataConnector, OfficeDataConnector, Office365ProjectDataConnector,
-    OfficeATPDataConnector, OfficeIRMDataConnector, OfficePowerBIDataConnector, TIDataConnector,
-    TiTaxiiDataConnector
+    MicrosoftPurviewInformationProtectionDataConnector, MSTIDataConnector, MTPDataConnector,
+    OfficeDataConnector, Office365ProjectDataConnector, OfficeATPDataConnector,
+    OfficeIRMDataConnector, OfficePowerBIDataConnector, TIDataConnector, TiTaxiiDataConnector
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -290,10 +292,10 @@ class DataConnector(ResourceWithEtag):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     """
 
@@ -327,6 +329,7 @@ class DataConnector(ResourceWithEtag):
             "IOT": "IoTDataConnector",
             "MicrosoftCloudAppSecurity": "MCASDataConnector",
             "MicrosoftDefenderAdvancedThreatProtection": "MDATPDataConnector",
+            "MicrosoftPurviewInformationProtection": "MicrosoftPurviewInformationProtectionDataConnector",
             "MicrosoftThreatIntelligence": "MSTIDataConnector",
             "MicrosoftThreatProtection": "MTPDataConnector",
             "Office365": "OfficeDataConnector",
@@ -371,10 +374,10 @@ class AADDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -485,10 +488,10 @@ class AATPCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -561,10 +564,10 @@ class AATPDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -2964,10 +2967,10 @@ class ASCCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar subscription_id: The subscription id to connect to, and get the data from.
     :vartype subscription_id: str
@@ -3015,10 +3018,10 @@ class ASCDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar data_types: The available data types for the connector.
     :vartype data_types: ~azure.mgmt.securityinsight.models.AlertsDataTypeOfDataConnector
@@ -3789,10 +3792,10 @@ class AwsCloudTrailCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     """
 
@@ -3833,10 +3836,10 @@ class AwsCloudTrailDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar aws_role_arn: The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access
      the Aws account.
@@ -3976,10 +3979,10 @@ class AwsS3CheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     """
 
@@ -4020,10 +4023,10 @@ class AwsS3DataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar destination_table: The logs destination table name in LogAnalytics.
     :vartype destination_table: str
@@ -4941,10 +4944,10 @@ class CodelessApiPollingDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar connector_ui_config: Config to describe the instructions blade.
     :vartype connector_ui_config:
@@ -5940,10 +5943,10 @@ class CodelessUiDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar connector_ui_config: Config to describe the instructions blade.
     :vartype connector_ui_config:
@@ -6588,10 +6591,10 @@ class Dynamics365CheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -6664,10 +6667,10 @@ class Dynamics365DataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -11497,10 +11500,10 @@ class IoTCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar subscription_id: The subscription id to connect to, and get the data from.
     :vartype subscription_id: str
@@ -11548,10 +11551,10 @@ class IoTDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar data_types: The available data types for the connector.
     :vartype data_types: ~azure.mgmt.securityinsight.models.AlertsDataTypeOfDataConnector
@@ -13065,10 +13068,10 @@ class MCASCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -13141,10 +13144,10 @@ class MCASDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -13270,10 +13273,10 @@ class MDATPCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -13346,10 +13349,10 @@ class MDATPDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -14123,6 +14126,238 @@ class MetadataSupport(_serialization.Model):
         self.name = name
         self.email = email
         self.link = link
+
+
+class MicrosoftPurviewInformationProtectionCheckRequirements(DataConnectorsCheckRequirements):
+    """Represents MicrosoftPurviewInformationProtection requirements check request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
+     "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
+     "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
+    :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
+    :ivar tenant_id: The tenant id to connect to, and get the data from.
+    :vartype tenant_id: str
+    """
+
+    _validation = {
+        "kind": {"required": True},
+    }
+
+    _attribute_map = {
+        "kind": {"key": "kind", "type": "str"},
+        "tenant_id": {"key": "properties.tenantId", "type": "str"},
+    }
+
+    def __init__(self, *, tenant_id: Optional[str] = None, **kwargs):
+        """
+        :keyword tenant_id: The tenant id to connect to, and get the data from.
+        :paramtype tenant_id: str
+        """
+        super().__init__(**kwargs)
+        self.kind: str = "MicrosoftPurviewInformationProtection"
+        self.tenant_id = tenant_id
+
+
+class MicrosoftPurviewInformationProtectionCheckRequirementsProperties(DataConnectorTenantId):
+    """MicrosoftPurviewInformationProtection requirements check properties.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar tenant_id: The tenant id to connect to, and get the data from. Required.
+    :vartype tenant_id: str
+    """
+
+    _validation = {
+        "tenant_id": {"required": True},
+    }
+
+    _attribute_map = {
+        "tenant_id": {"key": "tenantId", "type": "str"},
+    }
+
+    def __init__(self, *, tenant_id: str, **kwargs):
+        """
+        :keyword tenant_id: The tenant id to connect to, and get the data from. Required.
+        :paramtype tenant_id: str
+        """
+        super().__init__(tenant_id=tenant_id, **kwargs)
+
+
+class MicrosoftPurviewInformationProtectionConnectorDataTypes(_serialization.Model):
+    """The available data types for Microsoft Purview Information Protection data connector.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar logs: Logs data type. Required.
+    :vartype logs:
+     ~azure.mgmt.securityinsight.models.MicrosoftPurviewInformationProtectionConnectorDataTypesLogs
+    """
+
+    _validation = {
+        "logs": {"required": True},
+    }
+
+    _attribute_map = {
+        "logs": {"key": "logs", "type": "MicrosoftPurviewInformationProtectionConnectorDataTypesLogs"},
+    }
+
+    def __init__(self, *, logs: "_models.MicrosoftPurviewInformationProtectionConnectorDataTypesLogs", **kwargs):
+        """
+        :keyword logs: Logs data type. Required.
+        :paramtype logs:
+         ~azure.mgmt.securityinsight.models.MicrosoftPurviewInformationProtectionConnectorDataTypesLogs
+        """
+        super().__init__(**kwargs)
+        self.logs = logs
+
+
+class MicrosoftPurviewInformationProtectionConnectorDataTypesLogs(DataConnectorDataTypeCommon):
+    """Logs data type.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar state: Describe whether this data type connection is enabled or not. Required. Known
+     values are: "Enabled" and "Disabled".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.DataTypeState
+    """
+
+    _validation = {
+        "state": {"required": True},
+    }
+
+    _attribute_map = {
+        "state": {"key": "state", "type": "str"},
+    }
+
+    def __init__(self, *, state: Union[str, "_models.DataTypeState"], **kwargs):
+        """
+        :keyword state: Describe whether this data type connection is enabled or not. Required. Known
+         values are: "Enabled" and "Disabled".
+        :paramtype state: str or ~azure.mgmt.securityinsight.models.DataTypeState
+        """
+        super().__init__(state=state, **kwargs)
+
+
+class MicrosoftPurviewInformationProtectionDataConnector(DataConnector):
+    """Represents Microsoft Purview Information Protection data connector.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
+    :ivar etag: Etag of the azure resource.
+    :vartype etag: str
+    :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
+     "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
+     "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
+    :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
+    :ivar tenant_id: The tenant id to connect to, and get the data from.
+    :vartype tenant_id: str
+    :ivar data_types: The available data types for the connector.
+    :vartype data_types:
+     ~azure.mgmt.securityinsight.models.MicrosoftPurviewInformationProtectionConnectorDataTypes
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "kind": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "etag": {"key": "etag", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "tenant_id": {"key": "properties.tenantId", "type": "str"},
+        "data_types": {
+            "key": "properties.dataTypes",
+            "type": "MicrosoftPurviewInformationProtectionConnectorDataTypes",
+        },
+    }
+
+    def __init__(
+        self,
+        *,
+        etag: Optional[str] = None,
+        tenant_id: Optional[str] = None,
+        data_types: Optional["_models.MicrosoftPurviewInformationProtectionConnectorDataTypes"] = None,
+        **kwargs
+    ):
+        """
+        :keyword etag: Etag of the azure resource.
+        :paramtype etag: str
+        :keyword tenant_id: The tenant id to connect to, and get the data from.
+        :paramtype tenant_id: str
+        :keyword data_types: The available data types for the connector.
+        :paramtype data_types:
+         ~azure.mgmt.securityinsight.models.MicrosoftPurviewInformationProtectionConnectorDataTypes
+        """
+        super().__init__(etag=etag, **kwargs)
+        self.kind: str = "MicrosoftPurviewInformationProtection"
+        self.tenant_id = tenant_id
+        self.data_types = data_types
+
+
+class MicrosoftPurviewInformationProtectionDataConnectorProperties(DataConnectorTenantId):
+    """Microsoft Purview Information Protection data connector properties.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar tenant_id: The tenant id to connect to, and get the data from. Required.
+    :vartype tenant_id: str
+    :ivar data_types: The available data types for the connector. Required.
+    :vartype data_types:
+     ~azure.mgmt.securityinsight.models.MicrosoftPurviewInformationProtectionConnectorDataTypes
+    """
+
+    _validation = {
+        "tenant_id": {"required": True},
+        "data_types": {"required": True},
+    }
+
+    _attribute_map = {
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "data_types": {"key": "dataTypes", "type": "MicrosoftPurviewInformationProtectionConnectorDataTypes"},
+    }
+
+    def __init__(
+        self, *, tenant_id: str, data_types: "_models.MicrosoftPurviewInformationProtectionConnectorDataTypes", **kwargs
+    ):
+        """
+        :keyword tenant_id: The tenant id to connect to, and get the data from. Required.
+        :paramtype tenant_id: str
+        :keyword data_types: The available data types for the connector. Required.
+        :paramtype data_types:
+         ~azure.mgmt.securityinsight.models.MicrosoftPurviewInformationProtectionConnectorDataTypes
+        """
+        super().__init__(tenant_id=tenant_id, **kwargs)
+        self.data_types = data_types
 
 
 class MicrosoftSecurityIncidentCreationAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
@@ -15015,10 +15250,10 @@ class MSTICheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -15091,10 +15326,10 @@ class MSTIDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -15304,10 +15539,10 @@ class MtpCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -15380,10 +15615,10 @@ class MTPDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -16275,10 +16510,10 @@ class Office365ProjectCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -16404,10 +16639,10 @@ class Office365ProjectDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -16496,10 +16731,10 @@ class OfficeATPCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -16572,10 +16807,10 @@ class OfficeATPDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -16764,10 +16999,10 @@ class OfficeDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -16985,10 +17220,10 @@ class OfficeIRMCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -17061,10 +17296,10 @@ class OfficeIRMDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -17155,10 +17390,10 @@ class OfficePowerBICheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -17284,10 +17519,10 @@ class OfficePowerBIDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -22394,10 +22629,10 @@ class TICheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -22470,10 +22705,10 @@ class TIDataConnector(DataConnector):
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -22764,10 +22999,10 @@ class TiTaxiiCheckRequirements(DataConnectorsCheckRequirements):
     :ivar kind: Describes the kind of connector to be checked. Required. Known values are:
      "AzureActiveDirectory", "AzureSecurityCenter", "MicrosoftCloudAppSecurity",
      "ThreatIntelligence", "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM",
-     "Office365Project", "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "Office365Project", "MicrosoftPurviewInformationProtection", "OfficePowerBI",
+     "AmazonWebServicesCloudTrail", "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
@@ -22840,10 +23075,10 @@ class TiTaxiiDataConnector(DataConnector):  # pylint: disable=too-many-instance-
     :ivar kind: The data connector kind. Required. Known values are: "AzureActiveDirectory",
      "AzureSecurityCenter", "MicrosoftCloudAppSecurity", "ThreatIntelligence",
      "ThreatIntelligenceTaxii", "Office365", "OfficeATP", "OfficeIRM", "Office365Project",
-     "OfficePowerBI", "AmazonWebServicesCloudTrail", "AmazonWebServicesS3",
-     "AzureAdvancedThreatProtection", "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365",
-     "MicrosoftThreatProtection", "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and
-     "IOT".
+     "MicrosoftPurviewInformationProtection", "OfficePowerBI", "AmazonWebServicesCloudTrail",
+     "AmazonWebServicesS3", "AzureAdvancedThreatProtection",
+     "MicrosoftDefenderAdvancedThreatProtection", "Dynamics365", "MicrosoftThreatProtection",
+     "MicrosoftThreatIntelligence", "GenericUI", "APIPolling", and "IOT".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.DataConnectorKind
     :ivar tenant_id: The tenant id to connect to, and get the data from.
     :vartype tenant_id: str
