@@ -43,14 +43,13 @@ def main():
                 "numberOfLinesToSkip": 1,
                 "provider": "Microsoft",
                 "rawContent": "This line will be skipped\nheader1,header2\nvalue1,value2",
-                "source": "watchlist.csv",
-                "sourceType": "Local file",
+                "source": "Local file",
             },
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/watchlists/CreateWatchlistAndWatchlistItems.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/stable/2023-02-01/examples/watchlists/CreateWatchlistAndWatchlistItems.json
 if __name__ == "__main__":
     main()
