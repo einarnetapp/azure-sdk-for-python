@@ -926,6 +926,11 @@ class FarmBeatsSolutionProperties(_serialization.Model):  # pylint: disable=too-
     :ivar access_fb_application_id: Application id of the multi tenant application to be used by
      partner to access FarmBeats data.
     :vartype access_fb_application_id: str
+    :ivar saa_s_application_id: Application id of the SaaS multi tenant application.
+    :vartype saa_s_application_id: str
+    :ivar action_ids: List of ActionIds needed to make the SaaS multi tenant application access
+     relevant fb data.
+    :vartype action_ids: list[str]
     :ivar role_id: Role Id of the SaaS multi tenant application to access relevant fb data.
     :vartype role_id: str
     :ivar role_name: Role Name of the SaaS multi tenant application to access relevant fb data.
@@ -943,6 +948,8 @@ class FarmBeatsSolutionProperties(_serialization.Model):  # pylint: disable=too-
         "open_api_specs_dictionary": {"readonly": True},
         "evaluated_outputs_dictionary": {"readonly": True},
         "access_fb_application_id": {"readonly": True},
+        "saa_s_application_id": {"readonly": True},
+        "action_ids": {"readonly": True},
         "role_id": {"readonly": True},
         "role_name": {"readonly": True},
         "access_fb_application_name": {"readonly": True},
@@ -957,6 +964,8 @@ class FarmBeatsSolutionProperties(_serialization.Model):  # pylint: disable=too-
         "open_api_specs_dictionary": {"key": "openApiSpecsDictionary", "type": "{object}"},
         "evaluated_outputs_dictionary": {"key": "evaluatedOutputsDictionary", "type": "{SolutionEvaluatedOutput}"},
         "access_fb_application_id": {"key": "accessFBApplicationId", "type": "str"},
+        "saa_s_application_id": {"key": "saaSApplicationId", "type": "str"},
+        "action_ids": {"key": "actionIds", "type": "[str]"},
         "role_id": {"key": "roleId", "type": "str"},
         "role_name": {"key": "roleName", "type": "str"},
         "access_fb_application_name": {"key": "accessFBApplicationName", "type": "str"},
@@ -976,6 +985,8 @@ class FarmBeatsSolutionProperties(_serialization.Model):  # pylint: disable=too-
         self.open_api_specs_dictionary = None
         self.evaluated_outputs_dictionary = None
         self.access_fb_application_id = None
+        self.saa_s_application_id = None
+        self.action_ids = None
         self.role_id = None
         self.role_name = None
         self.access_fb_application_name = None

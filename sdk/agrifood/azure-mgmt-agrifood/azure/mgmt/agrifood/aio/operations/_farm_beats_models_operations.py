@@ -256,21 +256,17 @@ class FarmBeatsModelsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 201]:
+        if response.status_code not in [202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if response.status_code == 200:
-            deserialized = self._deserialize("FarmBeats", pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize("FarmBeats", pipeline_response)
+        deserialized = self._deserialize("FarmBeats", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, {})
 
-        return deserialized  # type: ignore
+        return deserialized
 
     create_or_update.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}"
