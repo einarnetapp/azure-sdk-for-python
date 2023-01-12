@@ -1008,6 +1008,13 @@ class SampleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     WIDE_WORLD_IMPORTERS_FULL = "WideWorldImportersFull"
 
 
+class SecondaryInstanceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of the geo-secondary instance. Set 'Standby' if the instance is used as a DR option only."""
+
+    GEO = "Geo"
+    STANDBY = "Standby"
+
+
 class SecondaryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The secondary type of the database if it is a secondary.  Valid values are Geo, Named and
     Standby.
