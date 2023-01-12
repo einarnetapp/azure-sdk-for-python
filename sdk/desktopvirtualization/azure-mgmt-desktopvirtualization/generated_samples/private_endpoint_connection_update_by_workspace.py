@@ -14,7 +14,7 @@ from azure.mgmt.desktopvirtualization import DesktopVirtualizationMgmtClient
     pip install azure-identity
     pip install azure-mgmt-desktopvirtualization
 # USAGE
-    python scaling_plans_list_by_resource_group.py
+    python private_endpoint_connection_update_by_workspace.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,13 +29,23 @@ def main():
         subscription_id="daefabc0-95b4-48b3-b645-8a753a63c4fa",
     )
 
-    response = client.scaling_plans.list_by_resource_group(
+    response = client.private_endpoint_connections.update_by_workspace(
         resource_group_name="resourceGroup1",
+        workspace_name="workspace1",
+        private_endpoint_connection_name="workspace1.377103f1-5179-4bdf-8556-4cdd3207cc5b",
+        connection={
+            "properties": {
+                "privateLinkServiceConnectionState": {
+                    "actionsRequired": "None",
+                    "description": "Approved by admin@consoto.com",
+                    "status": "Approved",
+                }
+            }
+        },
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/desktopvirtualization/resource-manager/Microsoft.DesktopVirtualization/stable/2022-09-09/examples/ScalingPlan_ListByResourceGroup.json
+# x-ms-original-file: specification/desktopvirtualization/resource-manager/Microsoft.DesktopVirtualization/preview/2022-10-14-preview/examples/PrivateEndpointConnection_UpdateByWorkspace.json
 if __name__ == "__main__":
     main()
