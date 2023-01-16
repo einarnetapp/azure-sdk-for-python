@@ -75,7 +75,7 @@ class IncidentRelationsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.Relation"]:
-        """Gets all incident relations.
+        """Gets all relations for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -104,7 +104,7 @@ class IncidentRelationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RelationList] = kwargs.pop("cls", None)
@@ -186,7 +186,7 @@ class IncidentRelationsOperations:
     async def get(
         self, resource_group_name: str, workspace_name: str, incident_id: str, relation_name: str, **kwargs: Any
     ) -> _models.Relation:
-        """Gets an incident relation.
+        """Gets a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -213,7 +213,7 @@ class IncidentRelationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Relation] = kwargs.pop("cls", None)
@@ -265,7 +265,7 @@ class IncidentRelationsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Relation:
-        """Creates or updates the incident relation.
+        """Creates or updates a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -299,7 +299,7 @@ class IncidentRelationsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Relation:
-        """Creates or updates the incident relation.
+        """Creates or updates a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -331,7 +331,7 @@ class IncidentRelationsOperations:
         relation: Union[_models.Relation, IO],
         **kwargs: Any
     ) -> _models.Relation:
-        """Creates or updates the incident relation.
+        """Creates or updates a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -363,7 +363,7 @@ class IncidentRelationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -423,7 +423,7 @@ class IncidentRelationsOperations:
     async def delete(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, workspace_name: str, incident_id: str, relation_name: str, **kwargs: Any
     ) -> None:
-        """Delete the incident relation.
+        """Deletes a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -450,7 +450,7 @@ class IncidentRelationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)

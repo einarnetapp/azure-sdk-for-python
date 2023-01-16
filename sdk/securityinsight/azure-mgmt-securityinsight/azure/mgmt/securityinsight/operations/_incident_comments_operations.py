@@ -56,9 +56,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
-    )
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -112,9 +110,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
-    )
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -161,9 +157,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
-    )
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -213,9 +207,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
-    )
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -282,7 +274,7 @@ class IncidentCommentsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> Iterable["_models.IncidentComment"]:
-        """Gets all incident comments.
+        """Gets all comments for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -311,7 +303,7 @@ class IncidentCommentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IncidentCommentList] = kwargs.pop("cls", None)
@@ -393,7 +385,7 @@ class IncidentCommentsOperations:
     def get(
         self, resource_group_name: str, workspace_name: str, incident_id: str, incident_comment_id: str, **kwargs: Any
     ) -> _models.IncidentComment:
-        """Gets an incident comment.
+        """Gets a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -420,7 +412,7 @@ class IncidentCommentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IncidentComment] = kwargs.pop("cls", None)
@@ -472,7 +464,7 @@ class IncidentCommentsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -506,7 +498,7 @@ class IncidentCommentsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -538,7 +530,7 @@ class IncidentCommentsOperations:
         incident_comment: Union[_models.IncidentComment, IO],
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -570,7 +562,7 @@ class IncidentCommentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -630,7 +622,7 @@ class IncidentCommentsOperations:
     def delete(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, workspace_name: str, incident_id: str, incident_comment_id: str, **kwargs: Any
     ) -> None:
-        """Delete the incident comment.
+        """Deletes a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -657,7 +649,7 @@ class IncidentCommentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
