@@ -76,6 +76,7 @@ from ._models_py3 import SubResource
 from ._models_py3 import SubscriptionId
 from ._models_py3 import SystemData
 from ._models_py3 import TagsObject
+from ._models_py3 import UpdateTagsRequest
 from ._models_py3 import UserRule
 from ._models_py3 import UserRuleListResult
 
@@ -94,6 +95,7 @@ from ._network_management_client_enums import EffectiveUserRuleKind
 from ._network_management_client_enums import GroupConnectivity
 from ._network_management_client_enums import IsGlobal
 from ._network_management_client_enums import MembershipType
+from ._network_management_client_enums import NspLinkProvisioningState
 from ._network_management_client_enums import NspLinkStatus
 from ._network_management_client_enums import NspProvisioningState
 from ._network_management_client_enums import ProvisioningState
@@ -178,6 +180,7 @@ __all__ = [
     "SubscriptionId",
     "SystemData",
     "TagsObject",
+    "UpdateTagsRequest",
     "UserRule",
     "UserRuleListResult",
     "AccessRuleDirection",
@@ -195,6 +198,7 @@ __all__ = [
     "GroupConnectivity",
     "IsGlobal",
     "MembershipType",
+    "NspLinkProvisioningState",
     "NspLinkStatus",
     "NspProvisioningState",
     "ProvisioningState",
