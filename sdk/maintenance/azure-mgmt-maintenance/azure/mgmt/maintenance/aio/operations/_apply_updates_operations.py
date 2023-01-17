@@ -78,7 +78,7 @@ class ApplyUpdatesOperations:
     ) -> _models.ApplyUpdate:
         """Track Updates to resource with parent.
 
-        Track maintenance updates to resource with parent.
+        Track apply maintenance updates to resource with parent.
 
         :param resource_group_name: Resource group name. Required.
         :type resource_group_name: str
@@ -110,10 +110,10 @@ class ApplyUpdatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-07-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ApplyUpdate]
+        )
+        cls: ClsType[_models.ApplyUpdate] = kwargs.pop("cls", None)
 
         request = build_get_parent_request(
             resource_group_name=resource_group_name,
@@ -130,9 +130,9 @@ class ApplyUpdatesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -150,7 +150,9 @@ class ApplyUpdatesOperations:
 
         return deserialized
 
-    get_parent.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}"}  # type: ignore
+    get_parent.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}"
+    }
 
     @distributed_trace_async
     async def get(
@@ -192,10 +194,10 @@ class ApplyUpdatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-07-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ApplyUpdate]
+        )
+        cls: ClsType[_models.ApplyUpdate] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -210,9 +212,9 @@ class ApplyUpdatesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -230,7 +232,9 @@ class ApplyUpdatesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}"
+    }
 
     @distributed_trace_async
     async def create_or_update_parent(
@@ -275,10 +279,10 @@ class ApplyUpdatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-07-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ApplyUpdate]
+        )
+        cls: ClsType[_models.ApplyUpdate] = kwargs.pop("cls", None)
 
         request = build_create_or_update_parent_request(
             resource_group_name=resource_group_name,
@@ -294,9 +298,9 @@ class ApplyUpdatesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -314,7 +318,9 @@ class ApplyUpdatesOperations:
 
         return deserialized
 
-    create_or_update_parent.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default"}  # type: ignore
+    create_or_update_parent.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default"
+    }
 
     @distributed_trace_async
     async def create_or_update(
@@ -348,10 +354,10 @@ class ApplyUpdatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-07-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ApplyUpdate]
+        )
+        cls: ClsType[_models.ApplyUpdate] = kwargs.pop("cls", None)
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
@@ -365,9 +371,9 @@ class ApplyUpdatesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -385,7 +391,9 @@ class ApplyUpdatesOperations:
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default"
+    }
 
     @distributed_trace
     def list(self, **kwargs: Any) -> AsyncIterable["_models.ApplyUpdate"]:
@@ -401,10 +409,10 @@ class ApplyUpdatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-07-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ListApplyUpdate]
+        )
+        cls: ClsType[_models.ListApplyUpdate] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -425,7 +433,7 @@ class ApplyUpdatesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -441,7 +449,7 @@ class ApplyUpdatesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -449,13 +457,13 @@ class ApplyUpdatesOperations:
             deserialized = self._deserialize("ListApplyUpdate", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -469,4 +477,4 @@ class ApplyUpdatesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/applyUpdates"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/applyUpdates"}
