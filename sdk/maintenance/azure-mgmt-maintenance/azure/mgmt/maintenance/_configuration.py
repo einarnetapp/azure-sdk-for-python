@@ -36,14 +36,14 @@ class MaintenanceManagementClientConfiguration(Configuration):  # pylint: disabl
     :param subscription_id: Subscription credentials that uniquely identify a Microsoft Azure
      subscription. The subscription ID forms part of the URI for every service call. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2022-07-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(MaintenanceManagementClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-07-01-preview")  # type: Literal["2022-07-01-preview"]
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop("api_version", "2022-11-01-preview")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
@@ -57,10 +57,7 @@ class MaintenanceManagementClientConfiguration(Configuration):  # pylint: disabl
         kwargs.setdefault("sdk_moniker", "mgmt-maintenance/{}".format(VERSION))
         self._configure(**kwargs)
 
-    def _configure(
-        self, **kwargs  # type: Any
-    ):
-        # type: (...) -> None
+    def _configure(self, **kwargs: Any) -> None:
         self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
         self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
         self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
