@@ -1,0 +1,18 @@
+{
+  "commit": "f09429823b6e9ceb8d2c2b9968a920ca576926aa",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
+  "cadl_src": "specification/contoso/Contoso",
+  "@autorest/python": {
+    "version": "6.2.16",
+    "resolved": "https://registry.npmjs.org/@autorest/python/-/python-6.2.16.tgz"
+  },
+  "@azure-tools/cadl-python": {
+    "version": "0.4.17",
+    "resolved": "https://registry.npmjs.org/@azure-tools/cadl-python/-/cadl-python-0.4.17.tgz",
+    "dependencies": {
+      "@autorest/python": {
+        "version": "6.2.16"
+      }
+    }
+  }
+}
