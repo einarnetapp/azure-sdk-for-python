@@ -36,14 +36,14 @@ class ConfidentialLedgerConfiguration(Configuration):  # pylint: disable=too-man
     :param subscription_id: The Azure subscription ID. This is a GUID-formatted string (e.g.
      00000000-0000-0000-0000-000000000000). Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2020-12-01-preview". Note that overriding
-     this default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2023-01-18". Note that overriding this
+     default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(ConfidentialLedgerConfiguration, self).__init__(**kwargs)
-        api_version: Literal["2020-12-01-preview"] = kwargs.pop("api_version", "2020-12-01-preview")
+        api_version: Literal["2023-01-18"] = kwargs.pop("api_version", "2023-01-18")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")

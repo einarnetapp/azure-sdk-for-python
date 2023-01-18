@@ -8,20 +8,23 @@
 
 from ._models_py3 import AADBasedSecurityPrincipal
 from ._models_py3 import CertBasedSecurityPrincipal
+from ._models_py3 import CheckNameAvailabilityRequest
+from ._models_py3 import CheckNameAvailabilityResponse
 from ._models_py3 import ConfidentialLedger
 from ._models_py3 import ConfidentialLedgerList
 from ._models_py3 import ErrorAdditionalInfo
 from ._models_py3 import ErrorDetail
 from ._models_py3 import ErrorResponse
 from ._models_py3 import LedgerProperties
-from ._models_py3 import Location
 from ._models_py3 import Resource
+from ._models_py3 import ResourceLocation
 from ._models_py3 import ResourceProviderOperationDefinition
 from ._models_py3 import ResourceProviderOperationDisplay
 from ._models_py3 import ResourceProviderOperationList
 from ._models_py3 import SystemData
 from ._models_py3 import Tags
 
+from ._confidential_ledger_enums import CheckNameAvailabilityReason
 from ._confidential_ledger_enums import CreatedByType
 from ._confidential_ledger_enums import LedgerRoleName
 from ._confidential_ledger_enums import LedgerType
@@ -33,19 +36,22 @@ from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     "AADBasedSecurityPrincipal",
     "CertBasedSecurityPrincipal",
+    "CheckNameAvailabilityRequest",
+    "CheckNameAvailabilityResponse",
     "ConfidentialLedger",
     "ConfidentialLedgerList",
     "ErrorAdditionalInfo",
     "ErrorDetail",
     "ErrorResponse",
     "LedgerProperties",
-    "Location",
     "Resource",
+    "ResourceLocation",
     "ResourceProviderOperationDefinition",
     "ResourceProviderOperationDisplay",
     "ResourceProviderOperationList",
     "SystemData",
     "Tags",
+    "CheckNameAvailabilityReason",
     "CreatedByType",
     "LedgerRoleName",
     "LedgerType",
