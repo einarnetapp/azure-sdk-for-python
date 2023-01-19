@@ -12,7 +12,7 @@ from typing import Any, TYPE_CHECKING
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
-from . import models
+from . import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import StorageManagementClientConfiguration
 from .operations import (
@@ -25,6 +25,7 @@ from .operations import (
     FileSharesOperations,
     LocalUsersOperations,
     ManagementPoliciesOperations,
+    NetworkSecurityPerimeterConfigurationsOperations,
     ObjectReplicationPoliciesOperations,
     Operations,
     PrivateEndpointConnectionsOperations,
@@ -92,6 +93,10 @@ class StorageManagementClient:  # pylint: disable=client-accepts-api-version-key
     :vartype table_services: azure.mgmt.storage.v2022_09_01.operations.TableServicesOperations
     :ivar table: TableOperations operations
     :vartype table: azure.mgmt.storage.v2022_09_01.operations.TableOperations
+    :ivar network_security_perimeter_configurations:
+     NetworkSecurityPerimeterConfigurationsOperations operations
+    :vartype network_security_perimeter_configurations:
+     azure.mgmt.storage.v2022_09_01.operations.NetworkSecurityPerimeterConfigurationsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. Required.
@@ -117,7 +122,7 @@ class StorageManagementClient:  # pylint: disable=client-accepts-api-version-key
         )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -157,6 +162,9 @@ class StorageManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.queue = QueueOperations(self._client, self._config, self._serialize, self._deserialize)
         self.table_services = TableServicesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.table = TableOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.network_security_perimeter_configurations = NetworkSecurityPerimeterConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
@@ -180,15 +188,12 @@ class StorageManagementClient:  # pylint: disable=client-accepts-api-version-key
         request_copy.url = self._client.format_url(request_copy.url)
         return self._client.send_request(request_copy, **kwargs)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self._client.close()
 
-    def __enter__(self):
-        # type: () -> StorageManagementClient
+    def __enter__(self) -> "StorageManagementClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details):
-        # type: (Any) -> None
+    def __exit__(self, *exc_details) -> None:
         self._client.__exit__(*exc_details)
