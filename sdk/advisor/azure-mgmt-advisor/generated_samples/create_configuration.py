@@ -14,7 +14,7 @@ from azure.mgmt.advisor import AdvisorManagementClient
     pip install azure-identity
     pip install azure-mgmt-advisor
 # USAGE
-    python get_suppression_detail.py
+    python create_configuration.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,17 +26,32 @@ from azure.mgmt.advisor import AdvisorManagementClient
 def main():
     client = AdvisorManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
+        subscription_id="subscriptionId",
     )
 
-    response = client.suppressions.get(
-        resource_uri="resourceUri",
-        recommendation_id="recommendationId",
-        name="suppressionName1",
+    response = client.configurations.create_in_subscription(
+        configuration_name="default",
+        config_contract={
+            "properties": {
+                "digests": [
+                    {
+                        "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+                        "categories": ["HighAvailability", "Security", "Performance", "Cost", "OperationalExcellence"],
+                        "frequency": 30,
+                        "language": "en",
+                        "name": "digestConfigName",
+                        "state": "Active",
+                    }
+                ],
+                "duration": "7",
+                "exclude": True,
+                "lowCpuThreshold": "5",
+            }
+        },
     )
     print(response)
 
 
-# x-ms-original-file: specification/advisor/resource-manager/Microsoft.Advisor/stable/2022-09-01/examples/GetSuppressionDetail.json
+# x-ms-original-file: specification/advisor/resource-manager/Microsoft.Advisor/stable/2022-09-01/examples/CreateConfiguration.json
 if __name__ == "__main__":
     main()

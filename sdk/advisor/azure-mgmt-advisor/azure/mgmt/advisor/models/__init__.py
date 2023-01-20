@@ -17,6 +17,8 @@ from ._models_py3 import MetadataSupportedValueDetail
 from ._models_py3 import OperationDisplayInfo
 from ._models_py3 import OperationEntity
 from ._models_py3 import OperationEntityListResult
+from ._models_py3 import PredictionRequest
+from ._models_py3 import PredictionResponse
 from ._models_py3 import Resource
 from ._models_py3 import ResourceMetadata
 from ._models_py3 import ResourceRecommendationBase
@@ -29,10 +31,13 @@ from ._advisor_management_client_enums import Category
 from ._advisor_management_client_enums import ConfigurationName
 from ._advisor_management_client_enums import CpuThreshold
 from ._advisor_management_client_enums import DigestConfigState
+from ._advisor_management_client_enums import Duration
 from ._advisor_management_client_enums import Impact
+from ._advisor_management_client_enums import PredictionType
+from ._advisor_management_client_enums import Risk
 from ._advisor_management_client_enums import Scenario
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -47,6 +52,8 @@ __all__ = [
     "OperationDisplayInfo",
     "OperationEntity",
     "OperationEntityListResult",
+    "PredictionRequest",
+    "PredictionResponse",
     "Resource",
     "ResourceMetadata",
     "ResourceRecommendationBase",
@@ -58,7 +65,10 @@ __all__ = [
     "ConfigurationName",
     "CpuThreshold",
     "DigestConfigState",
+    "Duration",
     "Impact",
+    "PredictionType",
+    "Risk",
     "Scenario",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
