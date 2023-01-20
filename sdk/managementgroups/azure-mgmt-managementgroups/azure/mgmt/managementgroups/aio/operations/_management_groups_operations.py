@@ -92,10 +92,10 @@ class ManagementGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagementGroupListResult]
+        )
+        cls: ClsType[_models.ManagementGroupListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -117,7 +117,7 @@ class ManagementGroupsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -133,7 +133,7 @@ class ManagementGroupsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -141,13 +141,13 @@ class ManagementGroupsOperations:
             deserialized = self._deserialize("ManagementGroupListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -161,7 +161,7 @@ class ManagementGroupsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/providers/Microsoft.Management/managementGroups"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.Management/managementGroups"}
 
     @distributed_trace_async
     async def get(
@@ -208,10 +208,10 @@ class ManagementGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagementGroup]
+        )
+        cls: ClsType[_models.ManagementGroup] = kwargs.pop("cls", None)
 
         request = build_get_request(
             group_id=group_id,
@@ -225,9 +225,9 @@ class ManagementGroupsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -245,7 +245,7 @@ class ManagementGroupsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}
 
     async def _create_or_update_initial(
         self,
@@ -265,13 +265,11 @@ class ManagementGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop(
-            "cls", None
-        )  # type: ClsType[Union[_models.ManagementGroup, _models.AzureAsyncOperationResults]]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Union[_models.ManagementGroup, _models.AzureAsyncOperationResults]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -293,9 +291,9 @@ class ManagementGroupsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -319,11 +317,11 @@ class ManagementGroupsOperations:
             deserialized = self._deserialize("AzureAsyncOperationResults", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    _create_or_update_initial.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}  # type: ignore
+    _create_or_update_initial.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}
 
     @overload
     async def begin_create_or_update(
@@ -334,7 +332,7 @@ class ManagementGroupsOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.ManagementGroup], AsyncLROPoller[_models.AzureAsyncOperationResults]]:
+    ) -> AsyncLROPoller[_models.ManagementGroup]:
         """Create or update a management group.
         If a management group is already created and a subsequent create request is issued with
         different properties, the management group properties will be updated.
@@ -375,7 +373,7 @@ class ManagementGroupsOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.ManagementGroup], AsyncLROPoller[_models.AzureAsyncOperationResults]]:
+    ) -> AsyncLROPoller[_models.ManagementGroup]:
         """Create or update a management group.
         If a management group is already created and a subsequent create request is issued with
         different properties, the management group properties will be updated.
@@ -413,7 +411,7 @@ class ManagementGroupsOperations:
         create_management_group_request: Union[_models.CreateManagementGroupRequest, IO],
         cache_control: str = "no-cache",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.ManagementGroup], AsyncLROPoller[_models.AzureAsyncOperationResults]]:
+    ) -> AsyncLROPoller[_models.ManagementGroup]:
         """Create or update a management group.
         If a management group is already created and a subsequent create request is issued with
         different properties, the management group properties will be updated.
@@ -448,16 +446,16 @@ class ManagementGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagementGroup]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ManagementGroup] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._create_or_update_initial(  # type: ignore
+            raw_result = await self._create_or_update_initial(
                 group_id=group_id,
                 create_management_group_request=create_management_group_request,
                 cache_control=cache_control,
@@ -477,10 +475,10 @@ class ManagementGroupsOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod,
                 AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -492,9 +490,9 @@ class ManagementGroupsOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_create_or_update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}  # type: ignore
+    begin_create_or_update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}
 
     @overload
     async def update(
@@ -590,11 +588,11 @@ class ManagementGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagementGroup]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ManagementGroup] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -616,9 +614,9 @@ class ManagementGroupsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -636,7 +634,7 @@ class ManagementGroupsOperations:
 
         return deserialized
 
-    update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}  # type: ignore
+    update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}
 
     async def _delete_initial(
         self, group_id: str, cache_control: str = "no-cache", **kwargs: Any
@@ -652,10 +650,10 @@ class ManagementGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.AzureAsyncOperationResults]]
+        )
+        cls: ClsType[Optional[_models.AzureAsyncOperationResults]] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             group_id=group_id,
@@ -666,9 +664,9 @@ class ManagementGroupsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -694,7 +692,7 @@ class ManagementGroupsOperations:
 
         return deserialized
 
-    _delete_initial.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}  # type: ignore
+    _delete_initial.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}
 
     @distributed_trace_async
     async def begin_delete(
@@ -725,15 +723,15 @@ class ManagementGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AzureAsyncOperationResults]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[_models.AzureAsyncOperationResults] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._delete_initial(  # type: ignore
+            raw_result = await self._delete_initial(
                 group_id=group_id,
                 cache_control=cache_control,
                 api_version=api_version,
@@ -758,10 +756,10 @@ class ManagementGroupsOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod,
                 AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -773,9 +771,9 @@ class ManagementGroupsOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}  # type: ignore
+    begin_delete.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}"}
 
     @distributed_trace
     def get_descendants(
@@ -803,10 +801,10 @@ class ManagementGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DescendantListResult]
+        )
+        cls: ClsType[_models.DescendantListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -829,7 +827,7 @@ class ManagementGroupsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -845,7 +843,7 @@ class ManagementGroupsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -853,13 +851,13 @@ class ManagementGroupsOperations:
             deserialized = self._deserialize("DescendantListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -873,4 +871,4 @@ class ManagementGroupsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    get_descendants.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/descendants"}  # type: ignore
+    get_descendants.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/descendants"}

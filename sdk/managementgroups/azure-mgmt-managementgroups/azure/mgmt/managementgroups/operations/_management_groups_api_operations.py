@@ -43,8 +43,8 @@ def build_check_name_availability_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-04-01"))  # type: Literal["2021-04-01"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2021-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-04-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -65,7 +65,7 @@ def build_start_tenant_backfill_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-04-01"))  # type: Literal["2021-04-01"]
+    api_version: Literal["2021-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -84,7 +84,7 @@ def build_tenant_backfill_status_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-04-01"))  # type: Literal["2021-04-01"]
+    api_version: Literal["2021-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -170,11 +170,11 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CheckNameAvailabilityResult]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.CheckNameAvailabilityResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -194,9 +194,9 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -214,7 +214,7 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
 
         return deserialized
 
-    check_name_availability.metadata = {"url": "/providers/Microsoft.Management/checkNameAvailability"}  # type: ignore
+    check_name_availability.metadata = {"url": "/providers/Microsoft.Management/checkNameAvailability"}
 
     @distributed_trace
     def start_tenant_backfill(self, **kwargs: Any) -> _models.TenantBackfillStatusResult:
@@ -236,10 +236,10 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.TenantBackfillStatusResult]
+        )
+        cls: ClsType[_models.TenantBackfillStatusResult] = kwargs.pop("cls", None)
 
         request = build_start_tenant_backfill_request(
             api_version=api_version,
@@ -248,9 +248,9 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -268,7 +268,7 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
 
         return deserialized
 
-    start_tenant_backfill.metadata = {"url": "/providers/Microsoft.Management/startTenantBackfill"}  # type: ignore
+    start_tenant_backfill.metadata = {"url": "/providers/Microsoft.Management/startTenantBackfill"}
 
     @distributed_trace
     def tenant_backfill_status(self, **kwargs: Any) -> _models.TenantBackfillStatusResult:
@@ -290,10 +290,10 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.TenantBackfillStatusResult]
+        )
+        cls: ClsType[_models.TenantBackfillStatusResult] = kwargs.pop("cls", None)
 
         request = build_tenant_backfill_status_request(
             api_version=api_version,
@@ -302,9 +302,9 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -322,4 +322,4 @@ class ManagementGroupsAPIOperationsMixin(ManagementGroupsAPIMixinABC):
 
         return deserialized
 
-    tenant_backfill_status.metadata = {"url": "/providers/Microsoft.Management/tenantBackfillStatus"}  # type: ignore
+    tenant_backfill_status.metadata = {"url": "/providers/Microsoft.Management/tenantBackfillStatus"}
