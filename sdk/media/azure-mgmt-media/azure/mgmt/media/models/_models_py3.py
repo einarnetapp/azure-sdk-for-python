@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
@@ -49,7 +49,7 @@ class Codec(_serialization.Model):
         }
     }
 
-    def __init__(self, *, label: Optional[str] = None, **kwargs):
+    def __init__(self, *, label: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -101,8 +101,8 @@ class Audio(Codec):
         channels: Optional[int] = None,
         sampling_rate: Optional[int] = None,
         bitrate: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -162,8 +162,8 @@ class AacAudio(Audio):
         sampling_rate: Optional[int] = None,
         bitrate: Optional[int] = None,
         profile: Optional[Union[str, "_models.AacAudioProfile"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -184,7 +184,8 @@ class AacAudio(Audio):
 
 
 class ClipTime(_serialization.Model):
-    """Base class for specifying a clip time. Use sub classes of this class to specify the time position in the media.
+    """Base class for specifying a clip time. Use sub classes of this class to specify the time
+    position in the media.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     AbsoluteClipTime, UtcClipTime
@@ -210,14 +211,16 @@ class ClipTime(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
 
 
 class AbsoluteClipTime(ClipTime):
-    """Specifies the clip time as an absolute time position in the media file.  The absolute time can point to a different position depending on whether the media file starts from a timestamp of zero or not.
+    """Specifies the clip time as an absolute time position in the media file.  The absolute time can
+    point to a different position depending on whether the media file starts from a timestamp of
+    zero or not.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -238,7 +241,7 @@ class AbsoluteClipTime(ClipTime):
         "time": {"key": "time", "type": "duration"},
     }
 
-    def __init__(self, *, time: datetime.timedelta, **kwargs):
+    def __init__(self, *, time: datetime.timedelta, **kwargs: Any) -> None:
         """
         :keyword time: The time position on the timeline of the input media. It is usually specified as
          an ISO8601 period. e.g PT30S for 30 seconds. Required.
@@ -270,8 +273,8 @@ class AccessControl(_serialization.Model):
         *,
         default_action: Optional[Union[str, "_models.DefaultAction"]] = None,
         ip_allow_list: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword default_action: The behavior for IP access control in Key Delivery. Known values are:
          "Allow" and "Deny".
@@ -321,8 +324,8 @@ class AccountEncryption(_serialization.Model):
         type: Union[str, "_models.AccountEncryptionKeyType"],
         key_vault_properties: Optional["_models.KeyVaultProperties"] = None,
         identity: Optional["_models.ResourceIdentity"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword type: The type of key used to encrypt the Account Key. Required. Known values are:
          "SystemKey" and "CustomerKey".
@@ -366,7 +369,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -375,7 +378,8 @@ class Resource(_serialization.Model):
 
 
 class ProxyResource(Resource):
-    """The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location.
+    """The resource model definition for a Azure Resource Manager proxy resource. It will not have
+    tags and a location.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -401,7 +405,7 @@ class ProxyResource(Resource):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
 
@@ -452,8 +456,8 @@ class AccountFilter(ProxyResource):
         presentation_time_range: Optional["_models.PresentationTimeRange"] = None,
         first_quality: Optional["_models.FirstQuality"] = None,
         tracks: Optional[List["_models.FilterTrackSelection"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword presentation_time_range: The presentation time range.
         :paramtype presentation_time_range: ~azure.mgmt.media.models.PresentationTimeRange
@@ -485,8 +489,12 @@ class AccountFilterCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.AccountFilter"]] = None, odata_next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.AccountFilter"]] = None,
+        odata_next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of AccountFilter items.
         :paramtype value: list[~azure.mgmt.media.models.AccountFilter]
@@ -520,8 +528,8 @@ class AkamaiAccessControl(_serialization.Model):
         akamai_signature_header_authentication_key_list: Optional[
             List["_models.AkamaiSignatureHeaderAuthenticationKey"]
         ] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword akamai_signature_header_authentication_key_list: authentication key list.
         :paramtype akamai_signature_header_authentication_key_list:
@@ -554,8 +562,8 @@ class AkamaiSignatureHeaderAuthenticationKey(_serialization.Model):
         identifier: Optional[str] = None,
         base64_key: Optional[str] = None,
         expiration: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identifier: identifier of the key.
         :paramtype identifier: str
@@ -597,8 +605,13 @@ class ArmStreamingEndpointCapacity(_serialization.Model):
     }
 
     def __init__(
-        self, *, default: Optional[int] = None, minimum: Optional[int] = None, maximum: Optional[int] = None, **kwargs
-    ):
+        self,
+        *,
+        default: Optional[int] = None,
+        minimum: Optional[int] = None,
+        maximum: Optional[int] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword default: The streaming endpoint default capacity.
         :paramtype default: int
@@ -634,7 +647,7 @@ class ArmStreamingEndpointCurrentSku(_serialization.Model):
         "capacity": {"key": "capacity", "type": "int"},
     }
 
-    def __init__(self, *, capacity: Optional[int] = None, **kwargs):
+    def __init__(self, *, capacity: Optional[int] = None, **kwargs: Any) -> None:
         """
         :keyword capacity: The streaming endpoint sku capacity.
         :paramtype capacity: int
@@ -661,7 +674,7 @@ class ArmStreamingEndpointSku(_serialization.Model):
         "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -690,8 +703,8 @@ class ArmStreamingEndpointSkuInfo(_serialization.Model):
         resource_type: Optional[str] = None,
         capacity: Optional["_models.ArmStreamingEndpointCapacity"] = None,
         sku: Optional["_models.ArmStreamingEndpointSku"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword resource_type:
         :paramtype resource_type: str
@@ -774,8 +787,8 @@ class Asset(ProxyResource):  # pylint: disable=too-many-instance-attributes
         description: Optional[str] = None,
         container: Optional[str] = None,
         storage_account_name: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword alternate_id: The alternate ID of the Asset.
         :paramtype alternate_id: str
@@ -814,8 +827,8 @@ class AssetCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.Asset"]] = None, odata_next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.Asset"]] = None, odata_next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of Asset items.
         :paramtype value: list[~azure.mgmt.media.models.Asset]
@@ -839,7 +852,7 @@ class AssetContainerSas(_serialization.Model):
         "asset_container_sas_urls": {"key": "assetContainerSasUrls", "type": "[str]"},
     }
 
-    def __init__(self, *, asset_container_sas_urls: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, asset_container_sas_urls: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword asset_container_sas_urls: The list of Asset container SAS URLs.
         :paramtype asset_container_sas_urls: list[str]
@@ -877,8 +890,8 @@ class AssetFileEncryptionMetadata(_serialization.Model):
         asset_file_id: str,
         initialization_vector: Optional[str] = None,
         asset_file_name: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword initialization_vector: The Asset File initialization vector.
         :paramtype initialization_vector: str
@@ -939,8 +952,8 @@ class AssetFilter(ProxyResource):
         presentation_time_range: Optional["_models.PresentationTimeRange"] = None,
         first_quality: Optional["_models.FirstQuality"] = None,
         tracks: Optional[List["_models.FilterTrackSelection"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword presentation_time_range: The presentation time range.
         :paramtype presentation_time_range: ~azure.mgmt.media.models.PresentationTimeRange
@@ -972,8 +985,12 @@ class AssetFilterCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.AssetFilter"]] = None, odata_next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.AssetFilter"]] = None,
+        odata_next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of AssetFilter items.
         :paramtype value: list[~azure.mgmt.media.models.AssetFilter]
@@ -1032,7 +1049,7 @@ class AssetStreamingLocator(_serialization.Model):
         "default_content_key_policy_name": {"key": "defaultContentKeyPolicyName", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -1080,7 +1097,7 @@ class AssetTrack(ProxyResource):
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
 
-    def __init__(self, *, track: Optional["_models.TrackBase"] = None, **kwargs):
+    def __init__(self, *, track: Optional["_models.TrackBase"] = None, **kwargs: Any) -> None:
         """
         :keyword track: Detailed information about a track in the asset.
         :paramtype track: ~azure.mgmt.media.models.TrackBase
@@ -1101,7 +1118,7 @@ class AssetTrackCollection(_serialization.Model):
         "value": {"key": "value", "type": "[AssetTrack]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.AssetTrack"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.AssetTrack"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: A collection of AssetTrack items.
         :paramtype value: list[~azure.mgmt.media.models.AssetTrack]
@@ -1152,8 +1169,8 @@ class AssetTrackOperationStatus(_serialization.Model):
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
         error: Optional["_models.ErrorDetail"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Operation identifier. Required.
         :paramtype name: str
@@ -1201,8 +1218,8 @@ class AsyncOperationResult(_serialization.Model):
         error: Optional["_models.ErrorDetail"] = None,
         name: Optional[str] = None,
         status: Optional[Union[str, "_models.AsyncOperationStatus"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.media.models.ErrorDetail
@@ -1219,7 +1236,8 @@ class AsyncOperationResult(_serialization.Model):
 
 
 class Preset(_serialization.Model):
-    """Base type for all Presets, which define the recipe or instructions on how the input media files should be processed.
+    """Base type for all Presets, which define the recipe or instructions on how the input media files
+    should be processed.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     AudioAnalyzerPreset, BuiltInStandardEncoderPreset, FaceDetectorPreset, StandardEncoderPreset
@@ -1247,14 +1265,16 @@ class Preset(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
 
 
 class AudioAnalyzerPreset(Preset):
-    """The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track.
+    """The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including
+    speech transcription. Currently, the preset supports processing of content with a single audio
+    track.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     VideoAnalyzerPreset
@@ -1302,8 +1322,8 @@ class AudioAnalyzerPreset(Preset):
         audio_language: Optional[str] = None,
         mode: Optional[Union[str, "_models.AudioAnalysisMode"]] = None,
         experimental_options: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword audio_language: The language for the audio payload in the input using the BCP-47
          format of 'language tag-region' (e.g: 'en-US').  If you know the language of your content, it
@@ -1400,8 +1420,8 @@ class Overlay(_serialization.Model):
         fade_in_duration: Optional[datetime.timedelta] = None,
         fade_out_duration: Optional[datetime.timedelta] = None,
         audio_gain_level: Optional[float] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword input_label: The label of the job input which is to be used as an overlay. The Input
          must specify exactly one file. You can specify an image file in JPG, PNG, GIF or BMP format, or
@@ -1505,8 +1525,8 @@ class AudioOverlay(Overlay):
         fade_in_duration: Optional[datetime.timedelta] = None,
         fade_out_duration: Optional[datetime.timedelta] = None,
         audio_gain_level: Optional[float] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword input_label: The label of the job input which is to be used as an overlay. The Input
          must specify exactly one file. You can specify an image file in JPG, PNG, GIF or BMP format, or
@@ -1578,7 +1598,7 @@ class TrackBase(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
@@ -1636,8 +1656,8 @@ class AudioTrack(TrackBase):
         hls_settings: Optional["_models.HlsSettings"] = None,
         dash_settings: Optional["_models.DashSettings"] = None,
         mpeg4_track_id: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword file_name: The file name to the source file. This file is located in the storage
          container of the asset.
@@ -1666,7 +1686,8 @@ class AudioTrack(TrackBase):
 
 
 class TrackDescriptor(_serialization.Model):
-    """Base type for all TrackDescriptor types, which define the metadata and selection for tracks that should be processed by a Job.
+    """Base type for all TrackDescriptor types, which define the metadata and selection for tracks
+    that should be processed by a Job.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     AudioTrackDescriptor, VideoTrackDescriptor
@@ -1692,7 +1713,7 @@ class TrackDescriptor(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
@@ -1731,7 +1752,9 @@ class AudioTrackDescriptor(TrackDescriptor):
         }
     }
 
-    def __init__(self, *, channel_mapping: Optional[Union[str, "_models.ChannelMapping"]] = None, **kwargs):
+    def __init__(
+        self, *, channel_mapping: Optional[Union[str, "_models.ChannelMapping"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword channel_mapping: Optional designation for single channel audio tracks.  Can be used to
          combine the tracks into stereo or multi-channel audio tracks. Known values are: "FrontLeft",
@@ -1780,8 +1803,8 @@ class BuiltInStandardEncoderPreset(Preset):
         *,
         preset_name: Union[str, "_models.EncoderNamedPreset"],
         configurations: Optional["_models.PresetConfigurations"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword configurations: Optional configuration settings for encoder. Configurations is only
          supported for ContentAwareEncoding and H265ContentAwareEncoding BuiltInStandardEncoderPreset.
@@ -1824,8 +1847,8 @@ class CbcsDrmConfiguration(_serialization.Model):
         fair_play: Optional["_models.StreamingPolicyFairPlayConfiguration"] = None,
         play_ready: Optional["_models.StreamingPolicyPlayReadyConfiguration"] = None,
         widevine: Optional["_models.StreamingPolicyWidevineConfiguration"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword fair_play: FairPlay configurations.
         :paramtype fair_play: ~azure.mgmt.media.models.StreamingPolicyFairPlayConfiguration
@@ -1859,8 +1882,8 @@ class CencDrmConfiguration(_serialization.Model):
         *,
         play_ready: Optional["_models.StreamingPolicyPlayReadyConfiguration"] = None,
         widevine: Optional["_models.StreamingPolicyWidevineConfiguration"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword play_ready: PlayReady configurations.
         :paramtype play_ready: ~azure.mgmt.media.models.StreamingPolicyPlayReadyConfiguration
@@ -1886,7 +1909,7 @@ class CheckNameAvailabilityInput(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, name: Optional[str] = None, type: Optional[str] = None, **kwargs):
+    def __init__(self, *, name: Optional[str] = None, type: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword name: The account name.
         :paramtype name: str
@@ -1914,7 +1937,7 @@ class ClearKeyEncryptionConfiguration(_serialization.Model):
         "custom_keys_acquisition_url_template": {"key": "customKeysAcquisitionUrlTemplate", "type": "str"},
     }
 
-    def __init__(self, *, custom_keys_acquisition_url_template: Optional[str] = None, **kwargs):
+    def __init__(self, *, custom_keys_acquisition_url_template: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword custom_keys_acquisition_url_template: Template for the URL of the custom service
          delivering content keys to end user players. Not required when using Azure Media Services for
@@ -1965,8 +1988,8 @@ class CommonEncryptionCbcs(_serialization.Model):
         content_keys: Optional["_models.StreamingPolicyContentKeys"] = None,
         drm: Optional["_models.CbcsDrmConfiguration"] = None,
         clear_key_encryption_configuration: Optional["_models.ClearKeyEncryptionConfiguration"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword enabled_protocols: Representing supported protocols.
         :paramtype enabled_protocols: ~azure.mgmt.media.models.EnabledProtocols
@@ -2027,8 +2050,8 @@ class CommonEncryptionCenc(_serialization.Model):
         content_keys: Optional["_models.StreamingPolicyContentKeys"] = None,
         drm: Optional["_models.CencDrmConfiguration"] = None,
         clear_key_encryption_configuration: Optional["_models.ClearKeyEncryptionConfiguration"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword enabled_protocols: Representing supported protocols.
         :paramtype enabled_protocols: ~azure.mgmt.media.models.EnabledProtocols
@@ -2106,8 +2129,8 @@ class ContentKeyPolicy(ProxyResource):
         *,
         description: Optional[str] = None,
         options: Optional[List["_models.ContentKeyPolicyOption"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword description: A description for the Policy.
         :paramtype description: str
@@ -2124,7 +2147,8 @@ class ContentKeyPolicy(ProxyResource):
 
 
 class ContentKeyPolicyConfiguration(_serialization.Model):
-    """Base class for Content Key Policy configuration. A derived class must be used to create a configuration.
+    """Base class for Content Key Policy configuration. A derived class must be used to create a
+    configuration.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     ContentKeyPolicyClearKeyConfiguration, ContentKeyPolicyFairPlayConfiguration,
@@ -2155,7 +2179,7 @@ class ContentKeyPolicyConfiguration(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
@@ -2178,7 +2202,7 @@ class ContentKeyPolicyClearKeyConfiguration(ContentKeyPolicyConfiguration):
         "odata_type": {"key": "@odata\\.type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: str = "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
@@ -2204,8 +2228,8 @@ class ContentKeyPolicyCollection(_serialization.Model):
         *,
         value: Optional[List["_models.ContentKeyPolicy"]] = None,
         odata_next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of ContentKeyPolicy items.
         :paramtype value: list[~azure.mgmt.media.models.ContentKeyPolicy]
@@ -2276,8 +2300,8 @@ class ContentKeyPolicyFairPlayConfiguration(ContentKeyPolicyConfiguration):
         rental_and_lease_key_type: Union[str, "_models.ContentKeyPolicyFairPlayRentalAndLeaseKeyType"],
         rental_duration: int,
         offline_rental_configuration: Optional["_models.ContentKeyPolicyFairPlayOfflineRentalConfiguration"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword ask: The key that must be used as FairPlay Application Secret key. This needs to be
          base64 encoded. Required.
@@ -2329,7 +2353,7 @@ class ContentKeyPolicyFairPlayOfflineRentalConfiguration(_serialization.Model):
         "storage_duration_seconds": {"key": "storageDurationSeconds", "type": "int"},
     }
 
-    def __init__(self, *, playback_duration_seconds: int, storage_duration_seconds: int, **kwargs):
+    def __init__(self, *, playback_duration_seconds: int, storage_duration_seconds: int, **kwargs: Any) -> None:
         """
         :keyword playback_duration_seconds: Playback duration. Required.
         :paramtype playback_duration_seconds: int
@@ -2342,7 +2366,8 @@ class ContentKeyPolicyFairPlayOfflineRentalConfiguration(_serialization.Model):
 
 
 class ContentKeyPolicyRestriction(_serialization.Model):
-    """Base class for Content Key Policy restrictions. A derived class must be used to create a restriction.
+    """Base class for Content Key Policy restrictions. A derived class must be used to create a
+    restriction.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     ContentKeyPolicyOpenRestriction, ContentKeyPolicyTokenRestriction,
@@ -2370,7 +2395,7 @@ class ContentKeyPolicyRestriction(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
@@ -2393,7 +2418,7 @@ class ContentKeyPolicyOpenRestriction(ContentKeyPolicyRestriction):
         "odata_type": {"key": "@odata\\.type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: str = "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
@@ -2436,8 +2461,8 @@ class ContentKeyPolicyOption(_serialization.Model):
         configuration: "_models.ContentKeyPolicyConfiguration",
         restriction: "_models.ContentKeyPolicyRestriction",
         name: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The Policy Option description.
         :paramtype name: str
@@ -2483,8 +2508,8 @@ class ContentKeyPolicyPlayReadyConfiguration(ContentKeyPolicyConfiguration):
         *,
         licenses: List["_models.ContentKeyPolicyPlayReadyLicense"],
         response_custom_data: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword licenses: The PlayReady licenses. Required.
         :paramtype licenses: list[~azure.mgmt.media.models.ContentKeyPolicyPlayReadyLicense]
@@ -2525,7 +2550,7 @@ class ContentKeyPolicyPlayReadyContentKeyLocation(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
@@ -2548,7 +2573,7 @@ class ContentKeyPolicyPlayReadyContentEncryptionKeyFromHeader(ContentKeyPolicyPl
         "odata_type": {"key": "@odata\\.type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: str = "#Microsoft.Media.ContentKeyPolicyPlayReadyContentEncryptionKeyFromHeader"
@@ -2575,7 +2600,7 @@ class ContentKeyPolicyPlayReadyContentEncryptionKeyFromKeyIdentifier(ContentKeyP
         "key_id": {"key": "keyId", "type": "str"},
     }
 
-    def __init__(self, *, key_id: str, **kwargs):
+    def __init__(self, *, key_id: str, **kwargs: Any) -> None:
         """
         :keyword key_id: The content key ID. Required.
         :paramtype key_id: str
@@ -2586,7 +2611,8 @@ class ContentKeyPolicyPlayReadyContentEncryptionKeyFromKeyIdentifier(ContentKeyP
 
 
 class ContentKeyPolicyPlayReadyExplicitAnalogTelevisionRestriction(_serialization.Model):
-    """Configures the Explicit Analog Television Output Restriction control bits. For further details see the PlayReady Compliance Rules.
+    """Configures the Explicit Analog Television Output Restriction control bits. For further details
+    see the PlayReady Compliance Rules.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -2608,7 +2634,7 @@ class ContentKeyPolicyPlayReadyExplicitAnalogTelevisionRestriction(_serializatio
         "configuration_data": {"key": "configurationData", "type": "int"},
     }
 
-    def __init__(self, *, best_effort: bool, configuration_data: int, **kwargs):
+    def __init__(self, *, best_effort: bool, configuration_data: int, **kwargs: Any) -> None:
         """
         :keyword best_effort: Indicates whether this restriction is enforced on a Best Effort basis.
          Required.
@@ -2690,8 +2716,8 @@ class ContentKeyPolicyPlayReadyLicense(_serialization.Model):  # pylint: disable
         relative_expiration_date: Optional[datetime.timedelta] = None,
         grace_period: Optional[datetime.timedelta] = None,
         play_right: Optional["_models.ContentKeyPolicyPlayReadyPlayRight"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword allow_test_devices: A flag indicating whether test devices can use the license.
          Required.
@@ -2838,8 +2864,8 @@ class ContentKeyPolicyPlayReadyPlayRight(_serialization.Model):  # pylint: disab
         analog_video_opl: Optional[int] = None,
         compressed_digital_audio_opl: Optional[int] = None,
         uncompressed_digital_audio_opl: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword first_play_expiration: The amount of time that the license is valid after the license
          is first used to play content.
@@ -2938,7 +2964,9 @@ class ContentKeyPolicyProperties(_serialization.Model):
         "options": {"key": "options", "type": "[ContentKeyPolicyOption]"},
     }
 
-    def __init__(self, *, options: List["_models.ContentKeyPolicyOption"], description: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, options: List["_models.ContentKeyPolicyOption"], description: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword description: A description for the Policy.
         :paramtype description: str
@@ -2954,7 +2982,8 @@ class ContentKeyPolicyProperties(_serialization.Model):
 
 
 class ContentKeyPolicyRestrictionTokenKey(_serialization.Model):
-    """Base class for Content Key Policy key for token validation. A derived class must be used to create a token key.
+    """Base class for Content Key Policy key for token validation. A derived class must be used to
+    create a token key.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     ContentKeyPolicyRsaTokenKey, ContentKeyPolicySymmetricTokenKey,
@@ -2982,7 +3011,7 @@ class ContentKeyPolicyRestrictionTokenKey(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
@@ -3013,7 +3042,7 @@ class ContentKeyPolicyRsaTokenKey(ContentKeyPolicyRestrictionTokenKey):
         "modulus": {"key": "modulus", "type": "bytearray"},
     }
 
-    def __init__(self, *, exponent: bytes, modulus: bytes, **kwargs):
+    def __init__(self, *, exponent: bytes, modulus: bytes, **kwargs: Any) -> None:
         """
         :keyword exponent: The RSA Parameter exponent. Required.
         :paramtype exponent: bytes
@@ -3047,7 +3076,7 @@ class ContentKeyPolicySymmetricTokenKey(ContentKeyPolicyRestrictionTokenKey):
         "key_value": {"key": "keyValue", "type": "bytearray"},
     }
 
-    def __init__(self, *, key_value: bytes, **kwargs):
+    def __init__(self, *, key_value: bytes, **kwargs: Any) -> None:
         """
         :keyword key_value: The key value of the key. Required.
         :paramtype key_value: bytes
@@ -3071,7 +3100,7 @@ class ContentKeyPolicyTokenClaim(_serialization.Model):
         "claim_value": {"key": "claimValue", "type": "str"},
     }
 
-    def __init__(self, *, claim_type: Optional[str] = None, claim_value: Optional[str] = None, **kwargs):
+    def __init__(self, *, claim_type: Optional[str] = None, claim_value: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword claim_type: Token claim type.
         :paramtype claim_type: str
@@ -3084,7 +3113,8 @@ class ContentKeyPolicyTokenClaim(_serialization.Model):
 
 
 class ContentKeyPolicyTokenRestriction(ContentKeyPolicyRestriction):
-    """Represents a token restriction. Provided token must match these requirements for successful license or key delivery.
+    """Represents a token restriction. Provided token must match these requirements for successful
+    license or key delivery.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -3141,8 +3171,8 @@ class ContentKeyPolicyTokenRestriction(ContentKeyPolicyRestriction):
         alternate_verification_keys: Optional[List["_models.ContentKeyPolicyRestrictionTokenKey"]] = None,
         required_claims: Optional[List["_models.ContentKeyPolicyTokenClaim"]] = None,
         open_id_connect_discovery_document: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword issuer: The token issuer. Required.
         :paramtype issuer: str
@@ -3191,7 +3221,7 @@ class ContentKeyPolicyUnknownConfiguration(ContentKeyPolicyConfiguration):
         "odata_type": {"key": "@odata\\.type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: str = "#Microsoft.Media.ContentKeyPolicyUnknownConfiguration"
@@ -3214,7 +3244,7 @@ class ContentKeyPolicyUnknownRestriction(ContentKeyPolicyRestriction):
         "odata_type": {"key": "@odata\\.type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: str = "#Microsoft.Media.ContentKeyPolicyUnknownRestriction"
@@ -3241,7 +3271,7 @@ class ContentKeyPolicyWidevineConfiguration(ContentKeyPolicyConfiguration):
         "widevine_template": {"key": "widevineTemplate", "type": "str"},
     }
 
-    def __init__(self, *, widevine_template: str, **kwargs):
+    def __init__(self, *, widevine_template: str, **kwargs: Any) -> None:
         """
         :keyword widevine_template: The Widevine template. Required.
         :paramtype widevine_template: str
@@ -3273,7 +3303,7 @@ class ContentKeyPolicyX509CertificateTokenKey(ContentKeyPolicyRestrictionTokenKe
         "raw_body": {"key": "rawBody", "type": "bytearray"},
     }
 
-    def __init__(self, *, raw_body: bytes, **kwargs):
+    def __init__(self, *, raw_body: bytes, **kwargs: Any) -> None:
         """
         :keyword raw_body: The raw data field of a certificate in PKCS 12 format (X509Certificate2 in
          .NET). Required.
@@ -3304,7 +3334,7 @@ class CopyAudio(Codec):
         "label": {"key": "label", "type": "str"},
     }
 
-    def __init__(self, *, label: Optional[str] = None, **kwargs):
+    def __init__(self, *, label: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -3334,7 +3364,7 @@ class CopyVideo(Codec):
         "label": {"key": "label", "type": "str"},
     }
 
-    def __init__(self, *, label: Optional[str] = None, **kwargs):
+    def __init__(self, *, label: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -3359,8 +3389,8 @@ class CrossSiteAccessPolicies(_serialization.Model):
     }
 
     def __init__(
-        self, *, client_access_policy: Optional[str] = None, cross_domain_policy: Optional[str] = None, **kwargs
-    ):
+        self, *, client_access_policy: Optional[str] = None, cross_domain_policy: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword client_access_policy: The content of clientaccesspolicy.xml used by Silverlight.
         :paramtype client_access_policy: str
@@ -3383,7 +3413,7 @@ class DashSettings(_serialization.Model):
         "role": {"key": "role", "type": "str"},
     }
 
-    def __init__(self, *, role: Optional[str] = None, **kwargs):
+    def __init__(self, *, role: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword role: The role for the DASH setting.
         :paramtype role: str
@@ -3393,7 +3423,11 @@ class DashSettings(_serialization.Model):
 
 
 class DDAudio(Audio):
-    """Describes Dolby Digital Audio Codec (AC3) audio encoding settings. The current implementation for Dolby Digital Audio support are: Audio channel numbers at 1((mono), 2(stereo), 6(5.1side); Audio sampling frequency rates at: 32K/44.1K/48K Hz; Audio bitrate values as AC3 specification supports: 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 320000, 384000, 448000, 512000, 576000, 640000 bps.
+    """Describes Dolby Digital Audio Codec (AC3) audio encoding settings. The current implementation
+    for Dolby Digital Audio support are: Audio channel numbers at 1((mono), 2(stereo), 6(5.1side);
+    Audio sampling frequency rates at: 32K/44.1K/48K Hz; Audio bitrate values as AC3 specification
+    supports: 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000,
+    224000, 256000, 320000, 384000, 448000, 512000, 576000, 640000 bps.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -3428,8 +3462,8 @@ class DDAudio(Audio):
         channels: Optional[int] = None,
         sampling_rate: Optional[int] = None,
         bitrate: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -3459,7 +3493,7 @@ class DefaultKey(_serialization.Model):
         "policy_name": {"key": "policyName", "type": "str"},
     }
 
-    def __init__(self, *, label: Optional[str] = None, policy_name: Optional[str] = None, **kwargs):
+    def __init__(self, *, label: Optional[str] = None, policy_name: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword label: Label can be used to specify Content Key when creating a Streaming Locator.
         :paramtype label: str
@@ -3492,8 +3526,8 @@ class Deinterlace(_serialization.Model):
         *,
         parity: Optional[Union[str, "_models.DeinterlaceParity"]] = None,
         mode: Optional[Union[str, "_models.DeinterlaceMode"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword parity: The field parity for de-interlacing, defaults to Auto. Known values are:
          "Auto", "TopFieldFirst", and "BottomFieldFirst".
@@ -3519,8 +3553,8 @@ class EdgePolicies(_serialization.Model):
     }
 
     def __init__(
-        self, *, usage_data_collection_policy: Optional["_models.EdgeUsageDataCollectionPolicy"] = None, **kwargs
-    ):
+        self, *, usage_data_collection_policy: Optional["_models.EdgeUsageDataCollectionPolicy"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword usage_data_collection_policy:
         :paramtype usage_data_collection_policy: ~azure.mgmt.media.models.EdgeUsageDataCollectionPolicy
@@ -3559,8 +3593,8 @@ class EdgeUsageDataCollectionPolicy(_serialization.Model):
         data_reporting_frequency: Optional[str] = None,
         max_allowed_unreported_usage_duration: Optional[str] = None,
         event_hub_details: Optional["_models.EdgeUsageDataEventHub"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword data_collection_frequency: Usage data collection frequency in ISO 8601 duration format
          e.g. PT10M , PT5H.
@@ -3599,8 +3633,8 @@ class EdgeUsageDataEventHub(_serialization.Model):
     }
 
     def __init__(
-        self, *, name: Optional[str] = None, namespace: Optional[str] = None, token: Optional[str] = None, **kwargs
-    ):
+        self, *, name: Optional[str] = None, namespace: Optional[str] = None, token: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword name: Name of the Event Hub where usage will be reported.
         :paramtype name: str
@@ -3644,7 +3678,7 @@ class EnabledProtocols(_serialization.Model):
         "smooth_streaming": {"key": "smoothStreaming", "type": "bool"},
     }
 
-    def __init__(self, *, download: bool, dash: bool, hls: bool, smooth_streaming: bool, **kwargs):
+    def __init__(self, *, download: bool, dash: bool, hls: bool, smooth_streaming: bool, **kwargs: Any) -> None:
         """
         :keyword download: Enable Download protocol or not. Required.
         :paramtype download: bool
@@ -3685,7 +3719,9 @@ class EntityNameAvailabilityCheckOutput(_serialization.Model):
         "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(self, *, name_available: bool, reason: Optional[str] = None, message: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, name_available: bool, reason: Optional[str] = None, message: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword name_available: Specifies if the name is available. Required.
         :paramtype name_available: bool
@@ -3734,8 +3770,8 @@ class EnvelopeEncryption(_serialization.Model):
         clear_tracks: Optional[List["_models.TrackSelection"]] = None,
         content_keys: Optional["_models.StreamingPolicyContentKeys"] = None,
         custom_key_acquisition_url_template: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword enabled_protocols: Representing supported protocols.
         :paramtype enabled_protocols: ~azure.mgmt.media.models.EnabledProtocols
@@ -3781,7 +3817,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -3821,7 +3857,7 @@ class ErrorDetail(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -3832,7 +3868,8 @@ class ErrorDetail(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.media.models.ErrorDetail
@@ -3842,7 +3879,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.media.models.ErrorDetail
@@ -3852,7 +3889,8 @@ class ErrorResponse(_serialization.Model):
 
 
 class FaceDetectorPreset(Preset):
-    """Describes all the settings to be used when analyzing a video in order to detect (and optionally redact) all the faces present.
+    """Describes all the settings to be used when analyzing a video in order to detect (and optionally
+    redact) all the faces present.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -3903,8 +3941,8 @@ class FaceDetectorPreset(Preset):
         mode: Optional[Union[str, "_models.FaceRedactorMode"]] = None,
         blur_type: Optional[Union[str, "_models.BlurType"]] = None,
         experimental_options: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword resolution: Specifies the maximum resolution at which your video is analyzed. The
          default behavior is "SourceResolution," which will keep the input video at its original
@@ -3971,7 +4009,9 @@ class Fade(_serialization.Model):
         "start": {"key": "start", "type": "str"},
     }
 
-    def __init__(self, *, duration: datetime.timedelta, fade_color: str, start: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, duration: datetime.timedelta, fade_color: str, start: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword duration: The Duration of the fade effect in the video. The value can be in ISO 8601
          format (For example, PT05S to fade In/Out a color during 5 seconds), or a frame count (For
@@ -3995,7 +4035,8 @@ class Fade(_serialization.Model):
 
 
 class Filters(_serialization.Model):
-    """Describes all the filtering operations, such as de-interlacing, rotation etc. that are to be applied to the input media before encoding.
+    """Describes all the filtering operations, such as de-interlacing, rotation etc. that are to be
+    applied to the input media before encoding.
 
     :ivar deinterlace: The de-interlacing settings.
     :vartype deinterlace: ~azure.mgmt.media.models.Deinterlace
@@ -4032,8 +4073,8 @@ class Filters(_serialization.Model):
         fade_in: Optional["_models.Fade"] = None,
         fade_out: Optional["_models.Fade"] = None,
         overlays: Optional[List["_models.Overlay"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword deinterlace: The de-interlacing settings.
         :paramtype deinterlace: ~azure.mgmt.media.models.Deinterlace
@@ -4090,11 +4131,11 @@ class FilterTrackPropertyCondition(_serialization.Model):
     def __init__(
         self,
         *,
-        property: Union[str, "_models.FilterTrackPropertyType"],
+        property: Union[str, "_models.FilterTrackPropertyType"],  # pylint: disable=redefined-builtin
         value: str,
         operation: Union[str, "_models.FilterTrackPropertyCompareOperation"],
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword property: The track property type. Required. Known values are: "Unknown", "Type",
          "Name", "Language", "FourCC", and "Bitrate".
@@ -4112,7 +4153,8 @@ class FilterTrackPropertyCondition(_serialization.Model):
 
 
 class FilterTrackSelection(_serialization.Model):
-    """Representing a list of FilterTrackPropertyConditions to select a track.  The filters are combined using a logical AND operation.
+    """Representing a list of FilterTrackPropertyConditions to select a track.  The filters are
+    combined using a logical AND operation.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -4128,7 +4170,7 @@ class FilterTrackSelection(_serialization.Model):
         "track_selections": {"key": "trackSelections", "type": "[FilterTrackPropertyCondition]"},
     }
 
-    def __init__(self, *, track_selections: List["_models.FilterTrackPropertyCondition"], **kwargs):
+    def __init__(self, *, track_selections: List["_models.FilterTrackPropertyCondition"], **kwargs: Any) -> None:
         """
         :keyword track_selections: The track selections. Required.
         :paramtype track_selections: list[~azure.mgmt.media.models.FilterTrackPropertyCondition]
@@ -4154,7 +4196,7 @@ class FirstQuality(_serialization.Model):
         "bitrate": {"key": "bitrate", "type": "int"},
     }
 
-    def __init__(self, *, bitrate: int, **kwargs):
+    def __init__(self, *, bitrate: int, **kwargs: Any) -> None:
         """
         :keyword bitrate: The first quality bitrate. Required.
         :paramtype bitrate: int
@@ -4204,7 +4246,7 @@ class Format(_serialization.Model):
         }
     }
 
-    def __init__(self, *, filename_pattern: str, **kwargs):
+    def __init__(self, *, filename_pattern: str, **kwargs: Any) -> None:
         """
         :keyword filename_pattern: The file naming pattern used for the creation of output files. The
          following macros are supported in the file name: {Basename} - An expansion macro that will use
@@ -4225,7 +4267,8 @@ class Format(_serialization.Model):
 
 
 class InputDefinition(_serialization.Model):
-    """Base class for defining an input. Use sub classes of this class to specify tracks selections and related metadata.
+    """Base class for defining an input. Use sub classes of this class to specify tracks selections
+    and related metadata.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     FromAllInputFile, FromEachInputFile, InputFile
@@ -4256,7 +4299,7 @@ class InputDefinition(_serialization.Model):
         }
     }
 
-    def __init__(self, *, included_tracks: Optional[List["_models.TrackDescriptor"]] = None, **kwargs):
+    def __init__(self, *, included_tracks: Optional[List["_models.TrackDescriptor"]] = None, **kwargs: Any) -> None:
         """
         :keyword included_tracks: The list of TrackDescriptors which define the metadata and selection
          of tracks in the input.
@@ -4268,7 +4311,9 @@ class InputDefinition(_serialization.Model):
 
 
 class FromAllInputFile(InputDefinition):
-    """An InputDefinition that looks across all of the files provided to select tracks specified by the IncludedTracks property. Generally used with the AudioTrackByAttribute and VideoTrackByAttribute to allow selection of a single track across a set of input files.
+    """An InputDefinition that looks across all of the files provided to select tracks specified by
+    the IncludedTracks property. Generally used with the AudioTrackByAttribute and
+    VideoTrackByAttribute to allow selection of a single track across a set of input files.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -4288,7 +4333,7 @@ class FromAllInputFile(InputDefinition):
         "included_tracks": {"key": "includedTracks", "type": "[TrackDescriptor]"},
     }
 
-    def __init__(self, *, included_tracks: Optional[List["_models.TrackDescriptor"]] = None, **kwargs):
+    def __init__(self, *, included_tracks: Optional[List["_models.TrackDescriptor"]] = None, **kwargs: Any) -> None:
         """
         :keyword included_tracks: The list of TrackDescriptors which define the metadata and selection
          of tracks in the input.
@@ -4299,7 +4344,9 @@ class FromAllInputFile(InputDefinition):
 
 
 class FromEachInputFile(InputDefinition):
-    """An InputDefinition that looks at each input file provided to select tracks specified by the IncludedTracks property. Generally used with the AudioTrackByAttribute and VideoTrackByAttribute to select tracks from each file given.
+    """An InputDefinition that looks at each input file provided to select tracks specified by the
+    IncludedTracks property. Generally used with the AudioTrackByAttribute and
+    VideoTrackByAttribute to select tracks from each file given.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -4319,7 +4366,7 @@ class FromEachInputFile(InputDefinition):
         "included_tracks": {"key": "includedTracks", "type": "[TrackDescriptor]"},
     }
 
-    def __init__(self, *, included_tracks: Optional[List["_models.TrackDescriptor"]] = None, **kwargs):
+    def __init__(self, *, included_tracks: Optional[List["_models.TrackDescriptor"]] = None, **kwargs: Any) -> None:
         """
         :keyword included_tracks: The list of TrackDescriptors which define the metadata and selection
          of tracks in the input.
@@ -4330,7 +4377,9 @@ class FromEachInputFile(InputDefinition):
 
 
 class Layer(_serialization.Model):
-    """The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution.
+    """The encoder can be configured to produce video and/or images (thumbnails) at different
+    resolutions, by specifying a layer for each desired resolution. A layer represents the
+    properties for the video or image at a resolution.
 
     :ivar width: The width of the output video for this layer. The value can be absolute (in
      pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -4352,8 +4401,8 @@ class Layer(_serialization.Model):
     }
 
     def __init__(
-        self, *, width: Optional[str] = None, height: Optional[str] = None, label: Optional[str] = None, **kwargs
-    ):
+        self, *, width: Optional[str] = None, height: Optional[str] = None, label: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword width: The width of the output video for this layer. The value can be absolute (in
          pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -4374,7 +4423,8 @@ class Layer(_serialization.Model):
 
 
 class VideoLayer(Layer):
-    """Describes the settings to be used when encoding the input video into a desired output bitrate layer.
+    """Describes the settings to be used when encoding the input video into a desired output bitrate
+    layer.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -4441,8 +4491,8 @@ class VideoLayer(Layer):
         frame_rate: Optional[str] = None,
         slices: Optional[int] = None,
         adaptive_b_frame: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword width: The width of the output video for this layer. The value can be absolute (in
          pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -4488,7 +4538,8 @@ class VideoLayer(Layer):
 
 
 class H264Layer(VideoLayer):  # pylint: disable=too-many-instance-attributes
-    """Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H.264 video codec.
+    """Describes the settings to be used when encoding the input video into a desired output bitrate
+    layer with the H.264 video codec.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -4591,8 +4642,8 @@ class H264Layer(VideoLayer):  # pylint: disable=too-many-instance-attributes
         crf: Optional[float] = None,
         reference_frames: Optional[int] = None,
         entropy_mode: Optional[Union[str, "_models.EntropyMode"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword width: The width of the output video for this layer. The value can be absolute (in
          pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -4725,8 +4776,8 @@ class Video(Codec):
         key_frame_interval: Optional[datetime.timedelta] = None,
         stretch_mode: Optional[Union[str, "_models.StretchMode"]] = None,
         sync_mode: Optional[Union[str, "_models.VideoSyncMode"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -4812,8 +4863,8 @@ class H264Video(Video):
         layers: Optional[List["_models.H264Layer"]] = None,
         rate_control_mode: Optional[Union[str, "_models.H264RateControlMode"]] = None,
         scene_change_detection: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -4854,7 +4905,8 @@ class H264Video(Video):
 
 
 class H265VideoLayer(Layer):
-    """Describes the settings to be used when encoding the input video into a desired output bitrate layer.
+    """Describes the settings to be used when encoding the input video into a desired output bitrate
+    layer.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -4922,8 +4974,8 @@ class H265VideoLayer(Layer):
         frame_rate: Optional[str] = None,
         slices: Optional[int] = None,
         adaptive_b_frame: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword width: The width of the output video for this layer. The value can be absolute (in
          pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -4970,7 +5022,8 @@ class H265VideoLayer(Layer):
 
 
 class H265Layer(H265VideoLayer):  # pylint: disable=too-many-instance-attributes
-    """Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H.265 video codec.
+    """Describes the settings to be used when encoding the input video into a desired output bitrate
+    layer with the H.265 video codec.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -5068,8 +5121,8 @@ class H265Layer(H265VideoLayer):  # pylint: disable=too-many-instance-attributes
         buffer_window: Optional[datetime.timedelta] = None,
         crf: Optional[float] = None,
         reference_frames: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword width: The width of the output video for this layer. The value can be absolute (in
          pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -5204,8 +5257,8 @@ class H265Video(Video):
         scene_change_detection: Optional[bool] = None,
         complexity: Optional[Union[str, "_models.H265Complexity"]] = None,
         layers: Optional[List["_models.H265Layer"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -5256,7 +5309,7 @@ class Hls(_serialization.Model):
         "fragments_per_ts_segment": {"key": "fragmentsPerTsSegment", "type": "int"},
     }
 
-    def __init__(self, *, fragments_per_ts_segment: Optional[int] = None, **kwargs):
+    def __init__(self, *, fragments_per_ts_segment: Optional[int] = None, **kwargs: Any) -> None:
         """
         :keyword fragments_per_ts_segment: The number of fragments in an HTTP Live Streaming (HLS) TS
          segment in the output of the live event. This value does not affect the packing ratio for HLS
@@ -5290,8 +5343,8 @@ class HlsSettings(_serialization.Model):
         default: Optional[bool] = None,
         forced: Optional[bool] = None,
         characteristics: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword default: The default for the HLS setting.
         :paramtype default: bool
@@ -5386,8 +5439,8 @@ class Image(Video):
         sync_mode: Optional[Union[str, "_models.VideoSyncMode"]] = None,
         step: Optional[str] = None,
         range: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -5479,7 +5532,7 @@ class ImageFormat(Format):
         "odata_type": {"#Microsoft.Media.JpgFormat": "JpgFormat", "#Microsoft.Media.PngFormat": "PngFormat"}
     }
 
-    def __init__(self, *, filename_pattern: str, **kwargs):
+    def __init__(self, *, filename_pattern: str, **kwargs: Any) -> None:
         """
         :keyword filename_pattern: The file naming pattern used for the creation of output files. The
          following macros are supported in the file name: {Basename} - An expansion macro that will use
@@ -5527,8 +5580,8 @@ class InputFile(InputDefinition):
         *,
         included_tracks: Optional[List["_models.TrackDescriptor"]] = None,
         filename: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword included_tracks: The list of TrackDescriptors which define the metadata and selection
          of tracks in the input.
@@ -5552,7 +5605,7 @@ class IPAccessControl(_serialization.Model):
         "allow": {"key": "allow", "type": "[IPRange]"},
     }
 
-    def __init__(self, *, allow: Optional[List["_models.IPRange"]] = None, **kwargs):
+    def __init__(self, *, allow: Optional[List["_models.IPRange"]] = None, **kwargs: Any) -> None:
         """
         :keyword allow: The IP allow list.
         :paramtype allow: list[~azure.mgmt.media.models.IPRange]
@@ -5584,8 +5637,8 @@ class IPRange(_serialization.Model):
         name: Optional[str] = None,
         address: Optional[str] = None,
         subnet_prefix_length: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The friendly name for the IP address range.
         :paramtype name: str
@@ -5601,7 +5654,8 @@ class IPRange(_serialization.Model):
 
 
 class Job(ProxyResource):  # pylint: disable=too-many-instance-attributes
-    """A Job resource type. The progress and state can be obtained by polling a Job or subscribing to events using EventGrid.
+    """A Job resource type. The progress and state can be obtained by polling a Job or subscribing to
+    events using EventGrid.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -5680,8 +5734,8 @@ class Job(ProxyResource):  # pylint: disable=too-many-instance-attributes
         outputs: Optional[List["_models.JobOutput"]] = None,
         priority: Optional[Union[str, "_models.Priority"]] = None,
         correlation_data: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword description: Optional customer supplied description of the Job.
         :paramtype description: str
@@ -5726,7 +5780,9 @@ class JobCollection(_serialization.Model):
         "odata_next_link": {"key": "@odata\\.nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Job"]] = None, odata_next_link: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.Job"]] = None, odata_next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of Job items.
         :paramtype value: list[~azure.mgmt.media.models.Job]
@@ -5777,7 +5833,7 @@ class JobError(_serialization.Model):
         "details": {"key": "details", "type": "[JobErrorDetail]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -5808,7 +5864,7 @@ class JobErrorDetail(_serialization.Model):
         "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -5843,7 +5899,7 @@ class JobInput(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: Optional[str] = None
@@ -5907,8 +5963,8 @@ class JobInputClip(JobInput):
         end: Optional["_models.ClipTime"] = None,
         label: Optional[str] = None,
         input_definitions: Optional[List["_models.InputDefinition"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword files: List of files. Required for JobInputHttp. Maximum of 4000 characters each.
          Query strings will not be returned in service responses to prevent sensitive data exposure.
@@ -5991,8 +6047,8 @@ class JobInputAsset(JobInputClip):
         end: Optional["_models.ClipTime"] = None,
         label: Optional[str] = None,
         input_definitions: Optional[List["_models.InputDefinition"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword files: List of files. Required for JobInputHttp. Maximum of 4000 characters each.
          Query strings will not be returned in service responses to prevent sensitive data exposure.
@@ -6075,8 +6131,8 @@ class JobInputHttp(JobInputClip):
         label: Optional[str] = None,
         input_definitions: Optional[List["_models.InputDefinition"]] = None,
         base_uri: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword files: List of files. Required for JobInputHttp. Maximum of 4000 characters each.
          Query strings will not be returned in service responses to prevent sensitive data exposure.
@@ -6127,7 +6183,7 @@ class JobInputs(JobInput):
         "inputs": {"key": "inputs", "type": "[JobInput]"},
     }
 
-    def __init__(self, *, inputs: Optional[List["_models.JobInput"]] = None, **kwargs):
+    def __init__(self, *, inputs: Optional[List["_models.JobInput"]] = None, **kwargs: Any) -> None:
         """
         :keyword inputs: List of inputs to a Job.
         :paramtype inputs: list[~azure.mgmt.media.models.JobInput]
@@ -6138,7 +6194,8 @@ class JobInputs(JobInput):
 
 
 class JobInputSequence(JobInput):
-    """A Sequence contains an ordered list of Clips where each clip is a JobInput.  The Sequence will be treated as a single input.
+    """A Sequence contains an ordered list of Clips where each clip is a JobInput.  The Sequence will
+    be treated as a single input.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -6157,7 +6214,7 @@ class JobInputSequence(JobInput):
         "inputs": {"key": "inputs", "type": "[JobInputClip]"},
     }
 
-    def __init__(self, *, inputs: Optional[List["_models.JobInputClip"]] = None, **kwargs):
+    def __init__(self, *, inputs: Optional[List["_models.JobInputClip"]] = None, **kwargs: Any) -> None:
         """
         :keyword inputs: JobInputs that make up the timeline.
         :paramtype inputs: list[~azure.mgmt.media.models.JobInputClip]
@@ -6230,7 +6287,9 @@ class JobOutput(_serialization.Model):
 
     _subtype_map = {"odata_type": {"#Microsoft.Media.JobOutputAsset": "JobOutputAsset"}}
 
-    def __init__(self, *, preset_override: Optional["_models.Preset"] = None, label: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, preset_override: Optional["_models.Preset"] = None, label: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword preset_override: A preset used to override the preset in the corresponding transform
          output.
@@ -6326,8 +6385,8 @@ class JobOutputAsset(JobOutput):
         asset_name: str,
         preset_override: Optional["_models.Preset"] = None,
         label: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword preset_override: A preset used to override the preset in the corresponding transform
          output.
@@ -6382,7 +6441,7 @@ class JpgFormat(ImageFormat):
         "filename_pattern": {"key": "filenamePattern", "type": "str"},
     }
 
-    def __init__(self, *, filename_pattern: str, **kwargs):
+    def __init__(self, *, filename_pattern: str, **kwargs: Any) -> None:
         """
         :keyword filename_pattern: The file naming pattern used for the creation of output files. The
          following macros are supported in the file name: {Basename} - An expansion macro that will use
@@ -6488,8 +6547,8 @@ class JpgImage(Image):
         range: Optional[str] = None,
         layers: Optional[List["_models.JpgLayer"]] = None,
         sprite_column: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -6590,8 +6649,8 @@ class JpgLayer(Layer):
         height: Optional[str] = None,
         label: Optional[str] = None,
         quality: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword width: The width of the output video for this layer. The value can be absolute (in
          pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -6623,7 +6682,7 @@ class KeyDelivery(_serialization.Model):
         "access_control": {"key": "accessControl", "type": "AccessControl"},
     }
 
-    def __init__(self, *, access_control: Optional["_models.AccessControl"] = None, **kwargs):
+    def __init__(self, *, access_control: Optional["_models.AccessControl"] = None, **kwargs: Any) -> None:
         """
         :keyword access_control: The access control properties for Key Delivery.
         :paramtype access_control: ~azure.mgmt.media.models.AccessControl
@@ -6655,7 +6714,7 @@ class KeyVaultProperties(_serialization.Model):
         "current_key_identifier": {"key": "currentKeyIdentifier", "type": "str"},
     }
 
-    def __init__(self, *, key_identifier: Optional[str] = None, **kwargs):
+    def __init__(self, *, key_identifier: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword key_identifier: The URL of the Key Vault key used to encrypt the account. The key may
          either be versioned (for example https://vault/keys/mykey/version1) or reference a key without
@@ -6688,8 +6747,8 @@ class ListContainerSasInput(_serialization.Model):
         *,
         permissions: Optional[Union[str, "_models.AssetContainerPermission"]] = None,
         expiry_time: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword permissions: The permissions to set on the SAS URL. Known values are: "Read",
          "ReadWrite", and "ReadWriteDelete".
@@ -6714,7 +6773,9 @@ class ListContentKeysResponse(_serialization.Model):
         "content_keys": {"key": "contentKeys", "type": "[StreamingLocatorContentKey]"},
     }
 
-    def __init__(self, *, content_keys: Optional[List["_models.StreamingLocatorContentKey"]] = None, **kwargs):
+    def __init__(
+        self, *, content_keys: Optional[List["_models.StreamingLocatorContentKey"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword content_keys: ContentKeys used by current Streaming Locator.
         :paramtype content_keys: list[~azure.mgmt.media.models.StreamingLocatorContentKey]
@@ -6734,7 +6795,7 @@ class ListEdgePoliciesInput(_serialization.Model):
         "device_id": {"key": "deviceId", "type": "str"},
     }
 
-    def __init__(self, *, device_id: Optional[str] = None, **kwargs):
+    def __init__(self, *, device_id: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword device_id: Unique identifier of the edge device.
         :paramtype device_id: str
@@ -6762,8 +6823,8 @@ class ListPathsResponse(_serialization.Model):
         *,
         streaming_paths: Optional[List["_models.StreamingPath"]] = None,
         download_paths: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword streaming_paths: Streaming Paths supported by current Streaming Locator.
         :paramtype streaming_paths: list[~azure.mgmt.media.models.StreamingPath]
@@ -6792,14 +6853,15 @@ class ListStreamingLocatorsResponse(_serialization.Model):
         "streaming_locators": {"key": "streamingLocators", "type": "[AssetStreamingLocator]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.streaming_locators = None
 
 
 class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+    """The resource model definition for an Azure Resource Manager tracked top level resource which
+    has 'tags' and a 'location'.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -6834,7 +6896,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -6957,8 +7019,8 @@ class LiveEvent(TrackedResource):  # pylint: disable=too-many-instance-attribute
         use_static_hostname: Optional[bool] = None,
         hostname_prefix: Optional[str] = None,
         stream_options: Optional[List[Union[str, "_models.StreamOptionsFlag"]]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -7024,7 +7086,7 @@ class LiveEventActionInput(_serialization.Model):
         "remove_outputs_on_stop": {"key": "removeOutputsOnStop", "type": "bool"},
     }
 
-    def __init__(self, *, remove_outputs_on_stop: Optional[bool] = None, **kwargs):
+    def __init__(self, *, remove_outputs_on_stop: Optional[bool] = None, **kwargs: Any) -> None:
         """
         :keyword remove_outputs_on_stop: The flag indicates whether live outputs are automatically
          deleted when live event is being stopped. Deleting live outputs do not delete the underlying
@@ -7077,8 +7139,8 @@ class LiveEventEncoding(_serialization.Model):
         preset_name: Optional[str] = None,
         stretch_mode: Optional[Union[str, "_models.StretchMode"]] = None,
         key_frame_interval: Optional[datetime.timedelta] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword encoding_type: Live event type. When encodingType is set to PassthroughBasic or
          PassthroughStandard, the service simply passes through the incoming video and audio layer(s) to
@@ -7125,7 +7187,7 @@ class LiveEventEndpoint(_serialization.Model):
         "url": {"key": "url", "type": "str"},
     }
 
-    def __init__(self, *, protocol: Optional[str] = None, url: Optional[str] = None, **kwargs):
+    def __init__(self, *, protocol: Optional[str] = None, url: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword protocol: The endpoint protocol.
         :paramtype protocol: str
@@ -7179,8 +7241,8 @@ class LiveEventInput(_serialization.Model):
         key_frame_interval_duration: Optional[str] = None,
         access_token: Optional[str] = None,
         endpoints: Optional[List["_models.LiveEventEndpoint"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword streaming_protocol: The input protocol for the live event. This is specified at
          creation time and cannot be updated. Required. Known values are: "FragmentedMP4" and "RTMP".
@@ -7217,7 +7279,7 @@ class LiveEventInputAccessControl(_serialization.Model):
         "ip": {"key": "ip", "type": "IPAccessControl"},
     }
 
-    def __init__(self, *, ip: Optional["_models.IPAccessControl"] = None, **kwargs):
+    def __init__(self, *, ip: Optional["_models.IPAccessControl"] = None, **kwargs: Any) -> None:
         """
         :keyword ip: The IP access control properties.
         :paramtype ip: ~azure.mgmt.media.models.IPAccessControl
@@ -7227,7 +7289,8 @@ class LiveEventInputAccessControl(_serialization.Model):
 
 
 class LiveEventInputTrackSelection(_serialization.Model):
-    """A track selection condition. This property is reserved for future use, any value set on this property will be ignored.
+    """A track selection condition. This property is reserved for future use, any value set on this
+    property will be ignored.
 
     :ivar property: Property name to select. This property is reserved for future use, any value
      set on this property will be ignored.
@@ -7247,8 +7310,13 @@ class LiveEventInputTrackSelection(_serialization.Model):
     }
 
     def __init__(
-        self, *, property: Optional[str] = None, operation: Optional[str] = None, value: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        property: Optional[str] = None,  # pylint: disable=redefined-builtin
+        operation: Optional[str] = None,
+        value: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword property: Property name to select. This property is reserved for future use, any value
          set on this property will be ignored.
@@ -7290,8 +7358,8 @@ class LiveEventListResult(_serialization.Model):
         value: Optional[List["_models.LiveEvent"]] = None,
         odata_count: Optional[int] = None,
         odata_next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The result of the List Live Event operation.
         :paramtype value: list[~azure.mgmt.media.models.LiveEvent]
@@ -7308,7 +7376,9 @@ class LiveEventListResult(_serialization.Model):
 
 
 class LiveEventOutputTranscriptionTrack(_serialization.Model):
-    """Describes a transcription track in the output of a live event, generated using speech-to-text transcription. This property is reserved for future use, any value set on this property will be ignored.
+    """Describes a transcription track in the output of a live event, generated using speech-to-text
+    transcription. This property is reserved for future use, any value set on this property will be
+    ignored.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -7325,7 +7395,7 @@ class LiveEventOutputTranscriptionTrack(_serialization.Model):
         "track_name": {"key": "trackName", "type": "str"},
     }
 
-    def __init__(self, *, track_name: str, **kwargs):
+    def __init__(self, *, track_name: str, **kwargs: Any) -> None:
         """
         :keyword track_name: The output track name. This property is reserved for future use, any value
          set on this property will be ignored. Required.
@@ -7375,8 +7445,8 @@ class LiveEventPreview(_serialization.Model):
         preview_locator: Optional[str] = None,
         streaming_policy_name: Optional[str] = None,
         alternative_media_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword endpoints: The endpoints for preview. Do not share the preview URL with the live event
          audience.
@@ -7417,7 +7487,7 @@ class LiveEventPreviewAccessControl(_serialization.Model):
         "ip": {"key": "ip", "type": "IPAccessControl"},
     }
 
-    def __init__(self, *, ip: Optional["_models.IPAccessControl"] = None, **kwargs):
+    def __init__(self, *, ip: Optional["_models.IPAccessControl"] = None, **kwargs: Any) -> None:
         """
         :keyword ip: The IP access control properties.
         :paramtype ip: ~azure.mgmt.media.models.IPAccessControl
@@ -7427,7 +7497,9 @@ class LiveEventPreviewAccessControl(_serialization.Model):
 
 
 class LiveEventTranscription(_serialization.Model):
-    """Describes the transcription tracks in the output of a live event, generated using speech-to-text transcription. This property is reserved for future use, any value set on this property will be ignored.
+    """Describes the transcription tracks in the output of a live event, generated using
+    speech-to-text transcription. This property is reserved for future use, any value set on this
+    property will be ignored.
 
     :ivar language: Specifies the language (locale) to be used for speech-to-text transcription –
      it should match the spoken language in the audio track. The value should be in BCP-47 format
@@ -7456,8 +7528,8 @@ class LiveEventTranscription(_serialization.Model):
         language: Optional[str] = None,
         input_track_selection: Optional[List["_models.LiveEventInputTrackSelection"]] = None,
         output_transcription_track: Optional["_models.LiveEventOutputTranscriptionTrack"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword language: Specifies the language (locale) to be used for speech-to-text transcription
          – it should match the spoken language in the audio track. The value should be in BCP-47 format
@@ -7568,8 +7640,8 @@ class LiveOutput(ProxyResource):  # pylint: disable=too-many-instance-attributes
         manifest_name: Optional[str] = None,
         hls: Optional["_models.Hls"] = None,
         output_snap_time: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword description: The description of the live output.
         :paramtype description: str
@@ -7634,8 +7706,8 @@ class LiveOutputListResult(_serialization.Model):
         value: Optional[List["_models.LiveOutput"]] = None,
         odata_count: Optional[int] = None,
         odata_next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The result of the List LiveOutput operation.
         :paramtype value: list[~azure.mgmt.media.models.LiveOutput]
@@ -7676,7 +7748,7 @@ class LogSpecification(_serialization.Model):
         "blob_duration": {"key": "blobDuration", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -7726,6 +7798,10 @@ class MediaService(TrackedResource):  # pylint: disable=too-many-instance-attrib
     :ivar private_endpoint_connections: The Private Endpoint Connections created for the Media
      Service account.
     :vartype private_endpoint_connections: list[~azure.mgmt.media.models.PrivateEndpointConnection]
+    :ivar minimum_tls_version: The minimum TLS version allowed for this account's requests. This is
+     an optional property. If unspecified, a secure default value will be used. Known values are:
+     "Tls10", "Tls11", "Tls12", and "Tls13".
+    :vartype minimum_tls_version: str or ~azure.mgmt.media.models.MinimumTlsVersion
     """
 
     _validation = {
@@ -7758,6 +7834,7 @@ class MediaService(TrackedResource):  # pylint: disable=too-many-instance-attrib
             "key": "properties.privateEndpointConnections",
             "type": "[PrivateEndpointConnection]",
         },
+        "minimum_tls_version": {"key": "properties.minimumTlsVersion", "type": "str"},
     }
 
     def __init__(
@@ -7771,8 +7848,9 @@ class MediaService(TrackedResource):  # pylint: disable=too-many-instance-attrib
         encryption: Optional["_models.AccountEncryption"] = None,
         key_delivery: Optional["_models.KeyDelivery"] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
-        **kwargs
-    ):
+        minimum_tls_version: Optional[Union[str, "_models.MinimumTlsVersion"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -7791,6 +7869,10 @@ class MediaService(TrackedResource):  # pylint: disable=too-many-instance-attrib
         :keyword public_network_access: Whether or not public network access is allowed for resources
          under the Media Services account. Known values are: "Enabled" and "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.media.models.PublicNetworkAccess
+        :keyword minimum_tls_version: The minimum TLS version allowed for this account's requests. This
+         is an optional property. If unspecified, a secure default value will be used. Known values are:
+         "Tls10", "Tls11", "Tls12", and "Tls13".
+        :paramtype minimum_tls_version: str or ~azure.mgmt.media.models.MinimumTlsVersion
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.system_data = None
@@ -7803,6 +7885,7 @@ class MediaService(TrackedResource):  # pylint: disable=too-many-instance-attrib
         self.public_network_access = public_network_access
         self.provisioning_state = None
         self.private_endpoint_connections = None
+        self.minimum_tls_version = minimum_tls_version
 
 
 class MediaServiceCollection(_serialization.Model):
@@ -7821,8 +7904,12 @@ class MediaServiceCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.MediaService"]] = None, odata_next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.MediaService"]] = None,
+        odata_next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of MediaService items.
         :paramtype value: list[~azure.mgmt.media.models.MediaService]
@@ -7871,8 +7958,8 @@ class MediaServiceIdentity(_serialization.Model):
         *,
         type: str,
         user_assigned_identities: Optional[Dict[str, "_models.UserAssignedManagedIdentity"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword type: The identity type. Required.
         :paramtype type: str
@@ -7929,8 +8016,8 @@ class MediaServiceOperationStatus(_serialization.Model):
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
         error: Optional["_models.ErrorDetail"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Operation identifier. Required.
         :paramtype name: str
@@ -7954,7 +8041,7 @@ class MediaServiceOperationStatus(_serialization.Model):
         self.error = error
 
 
-class MediaServiceUpdate(_serialization.Model):
+class MediaServiceUpdate(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """A Media Services account update.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -7982,6 +8069,10 @@ class MediaServiceUpdate(_serialization.Model):
     :ivar private_endpoint_connections: The Private Endpoint Connections created for the Media
      Service account.
     :vartype private_endpoint_connections: list[~azure.mgmt.media.models.PrivateEndpointConnection]
+    :ivar minimum_tls_version: The minimum TLS version allowed for this account's requests. This is
+     an optional property. If unspecified, a secure default value will be used. Known values are:
+     "Tls10", "Tls11", "Tls12", and "Tls13".
+    :vartype minimum_tls_version: str or ~azure.mgmt.media.models.MinimumTlsVersion
     """
 
     _validation = {
@@ -8004,6 +8095,7 @@ class MediaServiceUpdate(_serialization.Model):
             "key": "properties.privateEndpointConnections",
             "type": "[PrivateEndpointConnection]",
         },
+        "minimum_tls_version": {"key": "properties.minimumTlsVersion", "type": "str"},
     }
 
     def __init__(
@@ -8016,8 +8108,9 @@ class MediaServiceUpdate(_serialization.Model):
         encryption: Optional["_models.AccountEncryption"] = None,
         key_delivery: Optional["_models.KeyDelivery"] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
-        **kwargs
-    ):
+        minimum_tls_version: Optional[Union[str, "_models.MinimumTlsVersion"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -8034,6 +8127,10 @@ class MediaServiceUpdate(_serialization.Model):
         :keyword public_network_access: Whether or not public network access is allowed for resources
          under the Media Services account. Known values are: "Enabled" and "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.media.models.PublicNetworkAccess
+        :keyword minimum_tls_version: The minimum TLS version allowed for this account's requests. This
+         is an optional property. If unspecified, a secure default value will be used. Known values are:
+         "Tls10", "Tls11", "Tls12", and "Tls13".
+        :paramtype minimum_tls_version: str or ~azure.mgmt.media.models.MinimumTlsVersion
         """
         super().__init__(**kwargs)
         self.tags = tags
@@ -8046,6 +8143,7 @@ class MediaServiceUpdate(_serialization.Model):
         self.public_network_access = public_network_access
         self.provisioning_state = None
         self.private_endpoint_connections = None
+        self.minimum_tls_version = minimum_tls_version
 
 
 class MetricDimension(_serialization.Model):
@@ -8073,7 +8171,7 @@ class MetricDimension(_serialization.Model):
         "to_be_exported_for_shoebox": {"key": "toBeExportedForShoebox", "type": "bool"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -8143,7 +8241,7 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
         "supported_time_grain_types": {"key": "supportedTimeGrainTypes", "type": "[str]"},
     }
 
-    def __init__(self, *, supported_aggregation_types: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, supported_aggregation_types: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword supported_aggregation_types: Supported aggregation types.
         :paramtype supported_aggregation_types: list[str]
@@ -8164,7 +8262,10 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
 
 
 class MultiBitrateFormat(Format):
-    """Describes the properties for producing a collection of GOP aligned multi-bitrate files. The default behavior is to produce one output file for each video layer which is muxed together with all the audios. The exact output files produced can be controlled by specifying the outputFiles collection.
+    """Describes the properties for producing a collection of GOP aligned multi-bitrate files. The
+    default behavior is to produce one output file for each video layer which is muxed together
+    with all the audios. The exact output files produced can be controlled by specifying the
+    outputFiles collection.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     Mp4Format, TransportStreamFormat
@@ -8208,7 +8309,9 @@ class MultiBitrateFormat(Format):
         }
     }
 
-    def __init__(self, *, filename_pattern: str, output_files: Optional[List["_models.OutputFile"]] = None, **kwargs):
+    def __init__(
+        self, *, filename_pattern: str, output_files: Optional[List["_models.OutputFile"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword filename_pattern: The file naming pattern used for the creation of output files. The
          following macros are supported in the file name: {Basename} - An expansion macro that will use
@@ -8266,7 +8369,9 @@ class Mp4Format(MultiBitrateFormat):
         "output_files": {"key": "outputFiles", "type": "[OutputFile]"},
     }
 
-    def __init__(self, *, filename_pattern: str, output_files: Optional[List["_models.OutputFile"]] = None, **kwargs):
+    def __init__(
+        self, *, filename_pattern: str, output_files: Optional[List["_models.OutputFile"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword filename_pattern: The file naming pattern used for the creation of output files. The
          following macros are supported in the file name: {Basename} - An expansion macro that will use
@@ -8299,7 +8404,7 @@ class NoEncryption(_serialization.Model):
         "enabled_protocols": {"key": "enabledProtocols", "type": "EnabledProtocols"},
     }
 
-    def __init__(self, *, enabled_protocols: Optional["_models.EnabledProtocols"] = None, **kwargs):
+    def __init__(self, *, enabled_protocols: Optional["_models.EnabledProtocols"] = None, **kwargs: Any) -> None:
         """
         :keyword enabled_protocols: Representing supported protocols.
         :paramtype enabled_protocols: ~azure.mgmt.media.models.EnabledProtocols
@@ -8349,8 +8454,8 @@ class Operation(_serialization.Model):
         properties: Optional["_models.Properties"] = None,
         is_data_action: Optional[bool] = None,
         action_type: Optional[Union[str, "_models.ActionType"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The operation name. Required.
         :paramtype name: str
@@ -8385,7 +8490,7 @@ class OperationCollection(_serialization.Model):
         "value": {"key": "value", "type": "[Operation]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Operation"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Operation"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: A collection of Operation items.
         :paramtype value: list[~azure.mgmt.media.models.Operation]
@@ -8421,8 +8526,8 @@ class OperationDisplay(_serialization.Model):
         resource: Optional[str] = None,
         operation: Optional[str] = None,
         description: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword provider: The service provider.
         :paramtype provider: str
@@ -8461,7 +8566,7 @@ class OutputFile(_serialization.Model):
         "labels": {"key": "labels", "type": "[str]"},
     }
 
-    def __init__(self, *, labels: List[str], **kwargs):
+    def __init__(self, *, labels: List[str], **kwargs: Any) -> None:
         """
         :keyword labels: The list of labels that describe how the encoder should multiplex video and
          audio into an output file. For example, if the encoder is producing two video layers with
@@ -8505,7 +8610,7 @@ class PngFormat(ImageFormat):
         "filename_pattern": {"key": "filenamePattern", "type": "str"},
     }
 
-    def __init__(self, *, filename_pattern: str, **kwargs):
+    def __init__(self, *, filename_pattern: str, **kwargs: Any) -> None:
         """
         :keyword filename_pattern: The file naming pattern used for the creation of output files. The
          following macros are supported in the file name: {Basename} - An expansion macro that will use
@@ -8603,8 +8708,8 @@ class PngImage(Image):
         step: Optional[str] = None,
         range: Optional[str] = None,
         layers: Optional[List["_models.PngLayer"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: An optional label for the codec. The label can be used to control muxing
          behavior.
@@ -8688,8 +8793,8 @@ class PngLayer(Layer):
     }
 
     def __init__(
-        self, *, width: Optional[str] = None, height: Optional[str] = None, label: Optional[str] = None, **kwargs
-    ):
+        self, *, width: Optional[str] = None, height: Optional[str] = None, label: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword width: The width of the output video for this layer. The value can be absolute (in
          pixels) or relative (in percentage). For example 50% means the output video has half as many
@@ -8741,8 +8846,8 @@ class PresentationTimeRange(_serialization.Model):
         live_backoff_duration: Optional[int] = None,
         timescale: Optional[int] = None,
         force_end_timestamp: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword start_timestamp: The absolute start time boundary.
         :paramtype start_timestamp: int
@@ -8822,8 +8927,8 @@ class PresetConfigurations(_serialization.Model):
         max_layers: Optional[int] = None,
         min_bitrate_bps: Optional[int] = None,
         min_height: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword complexity: Allows you to configure the encoder settings to control the balance
          between speed and quality. Example: set Complexity as Speed for faster encoding but less
@@ -8883,7 +8988,7 @@ class PrivateEndpoint(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -8938,8 +9043,8 @@ class PrivateEndpointConnection(Resource):
         *,
         private_endpoint: Optional["_models.PrivateEndpoint"] = None,
         private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword private_endpoint: The resource of private end point.
         :paramtype private_endpoint: ~azure.mgmt.media.models.PrivateEndpoint
@@ -8965,7 +9070,7 @@ class PrivateEndpointConnectionListResult(_serialization.Model):
         "value": {"key": "value", "type": "[PrivateEndpointConnection]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Array of private endpoint connections.
         :paramtype value: list[~azure.mgmt.media.models.PrivateEndpointConnection]
@@ -9012,7 +9117,7 @@ class PrivateLinkResource(Resource):
         "required_zone_names": {"key": "properties.requiredZoneNames", "type": "[str]"},
     }
 
-    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword required_zone_names: The private link resource Private link DNS zone name.
         :paramtype required_zone_names: list[str]
@@ -9034,7 +9139,7 @@ class PrivateLinkResourceListResult(_serialization.Model):
         "value": {"key": "value", "type": "[PrivateLinkResource]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateLinkResource"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.PrivateLinkResource"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Array of private link resources.
         :paramtype value: list[~azure.mgmt.media.models.PrivateLinkResource]
@@ -9044,7 +9149,8 @@ class PrivateLinkResourceListResult(_serialization.Model):
 
 
 class PrivateLinkServiceConnectionState(_serialization.Model):
-    """A collection of information about the state of the connection between service consumer and provider.
+    """A collection of information about the state of the connection between service consumer and
+    provider.
 
     :ivar status: Indicates whether the connection has been Approved/Rejected/Removed by the owner
      of the service. Known values are: "Pending", "Approved", and "Rejected".
@@ -9068,8 +9174,8 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         status: Optional[Union[str, "_models.PrivateEndpointServiceConnectionStatus"]] = None,
         description: Optional[str] = None,
         actions_required: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword status: Indicates whether the connection has been Approved/Rejected/Removed by the
          owner of the service. Known values are: "Pending", "Approved", and "Rejected".
@@ -9103,14 +9209,15 @@ class Properties(_serialization.Model):
         "service_specification": {"key": "serviceSpecification", "type": "ServiceSpecification"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.service_specification = None
 
 
 class Rectangle(_serialization.Model):
-    """Describes the properties of a rectangular window applied to the input media before processing it.
+    """Describes the properties of a rectangular window applied to the input media before processing
+    it.
 
     :ivar left: The number of pixels from the left-margin. This can be absolute pixel value (e.g
      100), or relative to the size of the video (For example, 50%).
@@ -9140,8 +9247,8 @@ class Rectangle(_serialization.Model):
         top: Optional[str] = None,
         width: Optional[str] = None,
         height: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword left: The number of pixels from the left-margin. This can be absolute pixel value (e.g
          100), or relative to the size of the video (For example, 50%).
@@ -9185,7 +9292,9 @@ class ResourceIdentity(_serialization.Model):
         "use_system_assigned_identity": {"key": "useSystemAssignedIdentity", "type": "bool"},
     }
 
-    def __init__(self, *, use_system_assigned_identity: bool, user_assigned_identity: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, use_system_assigned_identity: bool, user_assigned_identity: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword user_assigned_identity: The user assigned managed identity's ARM ID to use when
          accessing a resource.
@@ -9243,8 +9352,8 @@ class SelectAudioTrackByAttribute(AudioTrackDescriptor):
         filter: Union[str, "_models.AttributeFilter"],  # pylint: disable=redefined-builtin
         channel_mapping: Optional[Union[str, "_models.ChannelMapping"]] = None,
         filter_value: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword channel_mapping: Optional designation for single channel audio tracks.  Can be used to
          combine the tracks into stereo or multi-channel audio tracks. Known values are: "FrontLeft",
@@ -9296,8 +9405,8 @@ class SelectAudioTrackById(AudioTrackDescriptor):
     }
 
     def __init__(
-        self, *, track_id: int, channel_mapping: Optional[Union[str, "_models.ChannelMapping"]] = None, **kwargs
-    ):
+        self, *, track_id: int, channel_mapping: Optional[Union[str, "_models.ChannelMapping"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword channel_mapping: Optional designation for single channel audio tracks.  Can be used to
          combine the tracks into stereo or multi-channel audio tracks. Known values are: "FrontLeft",
@@ -9339,7 +9448,7 @@ class VideoTrackDescriptor(TrackDescriptor):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: str = "#Microsoft.Media.VideoTrackDescriptor"
@@ -9384,8 +9493,8 @@ class SelectVideoTrackByAttribute(VideoTrackDescriptor):
         attribute: Union[str, "_models.TrackAttribute"],
         filter: Union[str, "_models.AttributeFilter"],  # pylint: disable=redefined-builtin
         filter_value: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword attribute: The TrackAttribute to filter the tracks by. Required. Known values are:
          "Bitrate" and "Language".
@@ -9427,7 +9536,7 @@ class SelectVideoTrackById(VideoTrackDescriptor):
         "track_id": {"key": "trackId", "type": "int"},
     }
 
-    def __init__(self, *, track_id: int, **kwargs):
+    def __init__(self, *, track_id: int, **kwargs: Any) -> None:
         """
         :keyword track_id: Track identifier to select. Required.
         :paramtype track_id: int
@@ -9458,7 +9567,7 @@ class ServiceSpecification(_serialization.Model):
         "metric_specifications": {"key": "metricSpecifications", "type": "[MetricSpecification]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.log_specifications = None
@@ -9505,8 +9614,8 @@ class StandardEncoderPreset(Preset):
         formats: List["_models.Format"],
         experimental_options: Optional[Dict[str, str]] = None,
         filters: Optional["_models.Filters"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword experimental_options: Dictionary containing key value pairs for parameters not exposed
          in the preset itself.
@@ -9566,8 +9675,8 @@ class StorageAccount(_serialization.Model):
         type: Union[str, "_models.StorageAccountType"],
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         identity: Optional["_models.ResourceIdentity"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: The ID of the storage account resource. Media Services relies on tables and queues
          as well as blobs, so the primary storage account must be a Standard Storage account (either
@@ -9610,8 +9719,8 @@ class StorageEncryptedAssetDecryptionData(_serialization.Model):
         *,
         key: Optional[bytes] = None,
         asset_file_encryption_metadata: Optional[List["_models.AssetFileEncryptionMetadata"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword key: The Asset File storage encryption key.
         :paramtype key: bytes
@@ -9738,8 +9847,8 @@ class StreamingEndpoint(TrackedResource):  # pylint: disable=too-many-instance-a
         cdn_provider: Optional[str] = None,
         cdn_profile: Optional[str] = None,
         cross_site_access_policies: Optional["_models.CrossSiteAccessPolicies"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -9809,8 +9918,8 @@ class StreamingEndpointAccessControl(_serialization.Model):
         *,
         akamai: Optional["_models.AkamaiAccessControl"] = None,
         ip: Optional["_models.IPAccessControl"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword akamai: The access control of Akamai.
         :paramtype akamai: ~azure.mgmt.media.models.AkamaiAccessControl
@@ -9846,8 +9955,8 @@ class StreamingEndpointListResult(_serialization.Model):
         value: Optional[List["_models.StreamingEndpoint"]] = None,
         odata_count: Optional[int] = None,
         odata_next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The result of the List StreamingEndpoint operation.
         :paramtype value: list[~azure.mgmt.media.models.StreamingEndpoint]
@@ -9874,7 +9983,7 @@ class StreamingEndpointSkuInfoListResult(_serialization.Model):
         "value": {"key": "value", "type": "[ArmStreamingEndpointSkuInfo]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.ArmStreamingEndpointSkuInfo"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.ArmStreamingEndpointSkuInfo"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: The result of the List StreamingEndpoint skus.
         :paramtype value: list[~azure.mgmt.media.models.ArmStreamingEndpointSkuInfo]
@@ -9894,7 +10003,7 @@ class StreamingEntityScaleUnit(_serialization.Model):
         "scale_unit": {"key": "scaleUnit", "type": "int"},
     }
 
-    def __init__(self, *, scale_unit: Optional[int] = None, **kwargs):
+    def __init__(self, *, scale_unit: Optional[int] = None, **kwargs: Any) -> None:
         """
         :keyword scale_unit: The scale unit number of the streaming endpoint.
         :paramtype scale_unit: int
@@ -9982,8 +10091,8 @@ class StreamingLocator(ProxyResource):  # pylint: disable=too-many-instance-attr
         content_keys: Optional[List["_models.StreamingLocatorContentKey"]] = None,
         alternative_media_id: Optional[str] = None,
         filters: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword asset_name: Asset Name.
         :paramtype asset_name: str
@@ -10043,8 +10152,8 @@ class StreamingLocatorCollection(_serialization.Model):
         *,
         value: Optional[List["_models.StreamingLocator"]] = None,
         odata_next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of StreamingLocator items.
         :paramtype value: list[~azure.mgmt.media.models.StreamingLocator]
@@ -10102,8 +10211,8 @@ class StreamingLocatorContentKey(_serialization.Model):
         id: str,  # pylint: disable=redefined-builtin
         label_reference_in_streaming_policy: Optional[str] = None,
         value: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: ID of Content Key. Required.
         :paramtype id: str
@@ -10154,8 +10263,8 @@ class StreamingPath(_serialization.Model):
         streaming_protocol: Union[str, "_models.StreamingPolicyStreamingProtocol"],
         encryption_scheme: Union[str, "_models.EncryptionScheme"],
         paths: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword streaming_protocol: Streaming protocol. Required. Known values are: "Hls", "Dash",
          "SmoothStreaming", and "Download".
@@ -10230,8 +10339,8 @@ class StreamingPolicy(ProxyResource):
         common_encryption_cenc: Optional["_models.CommonEncryptionCenc"] = None,
         common_encryption_cbcs: Optional["_models.CommonEncryptionCbcs"] = None,
         no_encryption: Optional["_models.NoEncryption"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword default_content_key_policy_name: Default ContentKey used by current Streaming Policy.
         :paramtype default_content_key_policy_name: str
@@ -10274,8 +10383,8 @@ class StreamingPolicyCollection(_serialization.Model):
         *,
         value: Optional[List["_models.StreamingPolicy"]] = None,
         odata_next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of StreamingPolicy items.
         :paramtype value: list[~azure.mgmt.media.models.StreamingPolicy]
@@ -10311,8 +10420,8 @@ class StreamingPolicyContentKey(_serialization.Model):
         label: Optional[str] = None,
         policy_name: Optional[str] = None,
         tracks: Optional[List["_models.TrackSelection"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword label: Label can be used to specify Content Key when creating a Streaming Locator.
         :paramtype label: str
@@ -10346,8 +10455,8 @@ class StreamingPolicyContentKeys(_serialization.Model):
         *,
         default_key: Optional["_models.DefaultKey"] = None,
         key_to_track_mappings: Optional[List["_models.StreamingPolicyContentKey"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword default_key: Default content key for an encryption scheme.
         :paramtype default_key: ~azure.mgmt.media.models.DefaultKey
@@ -10386,8 +10495,12 @@ class StreamingPolicyFairPlayConfiguration(_serialization.Model):
     }
 
     def __init__(
-        self, *, allow_persistent_license: bool, custom_license_acquisition_url_template: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        allow_persistent_license: bool,
+        custom_license_acquisition_url_template: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword custom_license_acquisition_url_template: Template for the URL of the custom service
          delivering licenses to end user players.  Not required when using Azure Media Services for
@@ -10430,8 +10543,8 @@ class StreamingPolicyPlayReadyConfiguration(_serialization.Model):
         *,
         custom_license_acquisition_url_template: Optional[str] = None,
         play_ready_custom_attributes: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword custom_license_acquisition_url_template: Template for the URL of the custom service
          delivering licenses to end user players.  Not required when using Azure Media Services for
@@ -10466,7 +10579,7 @@ class StreamingPolicyWidevineConfiguration(_serialization.Model):
         "custom_license_acquisition_url_template": {"key": "customLicenseAcquisitionUrlTemplate", "type": "str"},
     }
 
-    def __init__(self, *, custom_license_acquisition_url_template: Optional[str] = None, **kwargs):
+    def __init__(self, *, custom_license_acquisition_url_template: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword custom_license_acquisition_url_template: Template for the URL of the custom service
          delivering licenses to end user players.  Not required when using Azure Media Services for
@@ -10492,7 +10605,7 @@ class SyncStorageKeysInput(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, *, id: Optional[str] = None, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: The ID of the storage account resource.
         :paramtype id: str
@@ -10538,8 +10651,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -10566,7 +10679,8 @@ class SystemData(_serialization.Model):
 
 
 class TextTrack(TrackBase):
-    """Represents a text track in an asset. A text track is usually used for sparse data related to the audio or video tracks.
+    """Represents a text track in an asset. A text track is usually used for sparse data related to
+    the audio or video tracks.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -10612,8 +10726,8 @@ class TextTrack(TrackBase):
         display_name: Optional[str] = None,
         player_visibility: Optional[Union[str, "_models.Visibility"]] = None,
         hls_settings: Optional["_models.HlsSettings"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword file_name: The file name to the source file. This file is located in the storage
          container of the asset.
@@ -10666,11 +10780,11 @@ class TrackPropertyCondition(_serialization.Model):
     def __init__(
         self,
         *,
-        property: Union[str, "_models.TrackPropertyType"],
+        property: Union[str, "_models.TrackPropertyType"],  # pylint: disable=redefined-builtin
         operation: Union[str, "_models.TrackPropertyCompareOperation"],
         value: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword property: Track property type. Required. Known values are: "Unknown" and "FourCC".
         :paramtype property: str or ~azure.mgmt.media.models.TrackPropertyType
@@ -10698,7 +10812,9 @@ class TrackSelection(_serialization.Model):
         "track_selections": {"key": "trackSelections", "type": "[TrackPropertyCondition]"},
     }
 
-    def __init__(self, *, track_selections: Optional[List["_models.TrackPropertyCondition"]] = None, **kwargs):
+    def __init__(
+        self, *, track_selections: Optional[List["_models.TrackPropertyCondition"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword track_selections: TrackSelections is a track property condition list which can specify
          track(s).
@@ -10709,7 +10825,9 @@ class TrackSelection(_serialization.Model):
 
 
 class Transform(ProxyResource):
-    """A Transform encapsulates the rules or instructions for generating desired outputs from input media, such as by transcoding or by extracting insights. After the Transform is created, it can be applied to input media by creating Jobs.
+    """A Transform encapsulates the rules or instructions for generating desired outputs from input
+    media, such as by transcoding or by extracting insights. After the Transform is created, it can
+    be applied to input media by creating Jobs.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -10756,8 +10874,12 @@ class Transform(ProxyResource):
     }
 
     def __init__(
-        self, *, description: Optional[str] = None, outputs: Optional[List["_models.TransformOutput"]] = None, **kwargs
-    ):
+        self,
+        *,
+        description: Optional[str] = None,
+        outputs: Optional[List["_models.TransformOutput"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword description: An optional verbose description of the Transform.
         :paramtype description: str
@@ -10788,8 +10910,8 @@ class TransformCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.Transform"]] = None, odata_next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.Transform"]] = None, odata_next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: A collection of Transform items.
         :paramtype value: list[~azure.mgmt.media.models.Transform]
@@ -10803,7 +10925,8 @@ class TransformCollection(_serialization.Model):
 
 
 class TransformOutput(_serialization.Model):
-    """Describes the properties of a TransformOutput, which are the rules to be applied while generating the desired output.
+    """Describes the properties of a TransformOutput, which are the rules to be applied while
+    generating the desired output.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -10838,8 +10961,8 @@ class TransformOutput(_serialization.Model):
         preset: "_models.Preset",
         on_error: Optional[Union[str, "_models.OnErrorType"]] = None,
         relative_priority: Optional[Union[str, "_models.Priority"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword on_error: A Transform can define more than one outputs. This property defines what the
          service should do when one output fails - either continue to produce other outputs, or, stop
@@ -10862,7 +10985,8 @@ class TransformOutput(_serialization.Model):
 
 
 class TransportStreamFormat(MultiBitrateFormat):
-    """Describes the properties for generating an MPEG-2 Transport Stream (ISO/IEC 13818-1) output video file(s).
+    """Describes the properties for generating an MPEG-2 Transport Stream (ISO/IEC 13818-1) output
+    video file(s).
 
     All required parameters must be populated in order to send to Azure.
 
@@ -10896,7 +11020,9 @@ class TransportStreamFormat(MultiBitrateFormat):
         "output_files": {"key": "outputFiles", "type": "[OutputFile]"},
     }
 
-    def __init__(self, *, filename_pattern: str, output_files: Optional[List["_models.OutputFile"]] = None, **kwargs):
+    def __init__(
+        self, *, filename_pattern: str, output_files: Optional[List["_models.OutputFile"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword filename_pattern: The file naming pattern used for the creation of output files. The
          following macros are supported in the file name: {Basename} - An expansion macro that will use
@@ -10939,7 +11065,7 @@ class UserAssignedManagedIdentity(_serialization.Model):
         "principal_id": {"key": "principalId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.client_id = None
@@ -10947,7 +11073,8 @@ class UserAssignedManagedIdentity(_serialization.Model):
 
 
 class UtcClipTime(ClipTime):
-    """Specifies the clip time as a Utc time position in the media file.  The Utc time can point to a different position depending on whether the media file starts from a timestamp of zero or not.
+    """Specifies the clip time as a Utc time position in the media file.  The Utc time can point to a
+    different position depending on whether the media file starts from a timestamp of zero or not.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -10967,7 +11094,7 @@ class UtcClipTime(ClipTime):
         "time": {"key": "time", "type": "iso-8601"},
     }
 
-    def __init__(self, *, time: datetime.datetime, **kwargs):
+    def __init__(self, *, time: datetime.datetime, **kwargs: Any) -> None:
         """
         :keyword time: The time position on the timeline of the input media based on Utc time.
          Required.
@@ -10979,7 +11106,8 @@ class UtcClipTime(ClipTime):
 
 
 class VideoAnalyzerPreset(AudioAnalyzerPreset):
-    """A video analyzer preset that extracts insights (rich metadata) from both audio and video, and outputs a JSON format file.
+    """A video analyzer preset that extracts insights (rich metadata) from both audio and video, and
+    outputs a JSON format file.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -11033,8 +11161,8 @@ class VideoAnalyzerPreset(AudioAnalyzerPreset):
         mode: Optional[Union[str, "_models.AudioAnalysisMode"]] = None,
         experimental_options: Optional[Dict[str, str]] = None,
         insights_to_extract: Optional[Union[str, "_models.InsightsType"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword audio_language: The language for the audio payload in the input using the BCP-47
          format of 'language tag-region' (e.g: 'en-US').  If you know the language of your content, it
@@ -11144,8 +11272,8 @@ class VideoOverlay(Overlay):
         position: Optional["_models.Rectangle"] = None,
         opacity: Optional[float] = None,
         crop_rectangle: Optional["_models.Rectangle"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword input_label: The label of the job input which is to be used as an overlay. The Input
          must specify exactly one file. You can specify an image file in JPG, PNG, GIF or BMP format, or
@@ -11217,7 +11345,7 @@ class VideoTrack(TrackBase):
         "odata_type": {"key": "@odata\\.type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.odata_type: str = "#Microsoft.Media.VideoTrack"

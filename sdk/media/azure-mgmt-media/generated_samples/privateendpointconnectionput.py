@@ -42,6 +42,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Accounts/stable/2021-11-01/examples/private-endpoint-connection-put.json
+# x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Accounts/stable/2023-01-01/examples/private-endpoint-connection-put.json
 if __name__ == "__main__":
     main()

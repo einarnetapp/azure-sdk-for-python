@@ -266,6 +266,7 @@ from ._azure_media_services_enums import LiveEventResourceState
 from ._azure_media_services_enums import LiveOutputResourceState
 from ._azure_media_services_enums import MetricAggregationType
 from ._azure_media_services_enums import MetricUnit
+from ._azure_media_services_enums import MinimumTlsVersion
 from ._azure_media_services_enums import OnErrorType
 from ._azure_media_services_enums import Priority
 from ._azure_media_services_enums import PrivateEndpointConnectionProvisioningState
@@ -550,6 +551,7 @@ __all__ = [
     "LiveOutputResourceState",
     "MetricAggregationType",
     "MetricUnit",
+    "MinimumTlsVersion",
     "OnErrorType",
     "Priority",
     "PrivateEndpointConnectionProvisioningState",
