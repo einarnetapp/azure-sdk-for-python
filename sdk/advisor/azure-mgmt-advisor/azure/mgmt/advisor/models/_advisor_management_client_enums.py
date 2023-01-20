@@ -44,12 +44,39 @@ class DigestConfigState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DISABLED = "Disabled"
 
 
+class Duration(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Minimum duration for Advisor low CPU utilization evaluation. Valid only for subscriptions.
+    Valid values: 7 (default), 14, 21, 30, 60 or 90.
+    """
+
+    SEVEN = "7"
+    FOURTEEN = "14"
+    TWENTY_ONE = "21"
+    THIRTY = "30"
+    SIXTY = "60"
+    NINETY = "90"
+
+
 class Impact(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The business impact of the recommendation."""
 
     HIGH = "High"
     MEDIUM = "Medium"
     LOW = "Low"
+
+
+class PredictionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of the prediction."""
+
+    PREDICTIVE_RIGHTSIZING = "PredictiveRightsizing"
+
+
+class Risk(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The potential risk of not implementing the recommendation."""
+
+    ERROR = "Error"
+    WARNING = "Warning"
+    NONE = "None"
 
 
 class Scenario(str, Enum, metaclass=CaseInsensitiveEnumMeta):

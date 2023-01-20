@@ -28,7 +28,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
 from .._serialization import Serializer
-from .._vendor import _convert_request, _format_url_section
+from .._vendor import AdvisorManagementClientMixinABC, _convert_request, _format_url_section
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
@@ -45,7 +45,7 @@ def build_get_request(name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: Literal["2020-01-01"]
+    api_version: Literal["2022-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -54,7 +54,7 @@ def build_get_request(name: str, **kwargs: Any) -> HttpRequest:
         "name": _SERIALIZER.url("name", name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -69,7 +69,7 @@ def build_list_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: Literal["2020-01-01"]
+    api_version: Literal["2022-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -131,10 +131,10 @@ class RecommendationMetadataOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.MetadataEntity]
+        )
+        cls: ClsType[_models.MetadataEntity] = kwargs.pop("cls", None)
 
         request = build_get_request(
             name=name,
@@ -144,9 +144,9 @@ class RecommendationMetadataOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -164,7 +164,7 @@ class RecommendationMetadataOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.Advisor/metadata/{name}"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.Advisor/metadata/{name}"}
 
     @distributed_trace
     def list(self, **kwargs: Any) -> Iterable["_models.MetadataEntity"]:
@@ -180,10 +180,10 @@ class RecommendationMetadataOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.MetadataEntityListResult]
+        )
+        cls: ClsType[_models.MetadataEntityListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -203,7 +203,7 @@ class RecommendationMetadataOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -219,7 +219,7 @@ class RecommendationMetadataOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -227,13 +227,13 @@ class RecommendationMetadataOperations:
             deserialized = self._deserialize("MetadataEntityListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -247,4 +247,4 @@ class RecommendationMetadataOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/providers/Microsoft.Advisor/metadata"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.Advisor/metadata"}

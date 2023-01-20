@@ -35,7 +35,7 @@ class ArmErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ARMErrorResponseBody"},
     }
 
-    def __init__(self, *, error: Optional["_models.ARMErrorResponseBody"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ARMErrorResponseBody"] = None, **kwargs: Any) -> None:
         """
         :keyword error: ARM error response body.
         :paramtype error: ~azure.mgmt.advisor.models.ARMErrorResponseBody
@@ -59,7 +59,7 @@ class ARMErrorResponseBody(_serialization.Model):
         "code": {"key": "code", "type": "str"},
     }
 
-    def __init__(self, *, message: Optional[str] = None, code: Optional[str] = None, **kwargs):
+    def __init__(self, *, message: Optional[str] = None, code: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword message: Gets or sets the string that describes the error in detail and provides
          debugging information.
@@ -97,7 +97,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -123,6 +123,10 @@ class ConfigData(Resource):
      evaluation. Valid only for subscriptions. Valid values: 5 (default), 10, 15 or 20. Known values
      are: "5", "10", "15", and "20".
     :vartype low_cpu_threshold: str or ~azure.mgmt.advisor.models.CpuThreshold
+    :ivar duration: Minimum duration for Advisor low CPU utilization evaluation. Valid only for
+     subscriptions. Valid values: 7 (default), 14, 21, 30, 60 or 90. Known values are: "7", "14",
+     "21", "30", "60", and "90".
+    :vartype duration: str or ~azure.mgmt.advisor.models.Duration
     :ivar digests: Advisor digest configuration. Valid only for subscriptions.
     :vartype digests: list[~azure.mgmt.advisor.models.DigestConfig]
     """
@@ -139,6 +143,7 @@ class ConfigData(Resource):
         "type": {"key": "type", "type": "str"},
         "exclude": {"key": "properties.exclude", "type": "bool"},
         "low_cpu_threshold": {"key": "properties.lowCpuThreshold", "type": "str"},
+        "duration": {"key": "properties.duration", "type": "str"},
         "digests": {"key": "properties.digests", "type": "[DigestConfig]"},
     }
 
@@ -147,9 +152,10 @@ class ConfigData(Resource):
         *,
         exclude: Optional[bool] = None,
         low_cpu_threshold: Optional[Union[str, "_models.CpuThreshold"]] = None,
+        duration: Optional[Union[str, "_models.Duration"]] = None,
         digests: Optional[List["_models.DigestConfig"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword exclude: Exclude the resource from Advisor evaluations. Valid values: False (default)
          or True.
@@ -158,12 +164,17 @@ class ConfigData(Resource):
          evaluation. Valid only for subscriptions. Valid values: 5 (default), 10, 15 or 20. Known values
          are: "5", "10", "15", and "20".
         :paramtype low_cpu_threshold: str or ~azure.mgmt.advisor.models.CpuThreshold
+        :keyword duration: Minimum duration for Advisor low CPU utilization evaluation. Valid only for
+         subscriptions. Valid values: 7 (default), 14, 21, 30, 60 or 90. Known values are: "7", "14",
+         "21", "30", "60", and "90".
+        :paramtype duration: str or ~azure.mgmt.advisor.models.Duration
         :keyword digests: Advisor digest configuration. Valid only for subscriptions.
         :paramtype digests: list[~azure.mgmt.advisor.models.DigestConfig]
         """
         super().__init__(**kwargs)
         self.exclude = exclude
         self.low_cpu_threshold = low_cpu_threshold
+        self.duration = duration
         self.digests = digests
 
 
@@ -182,8 +193,8 @@ class ConfigurationListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.ConfigData"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.ConfigData"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of configurations.
         :paramtype value: list[~azure.mgmt.advisor.models.ConfigData]
@@ -235,8 +246,8 @@ class DigestConfig(_serialization.Model):
         categories: Optional[List[Union[str, "_models.Category"]]] = None,
         language: Optional[str] = None,
         state: Optional[Union[str, "_models.DigestConfigState"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Name of digest configuration. Value is case-insensitive and must be unique
          within a subscription.
@@ -304,8 +315,8 @@ class MetadataEntity(_serialization.Model):
         depends_on: Optional[List[str]] = None,
         applicable_scenarios: Optional[List[Union[str, "_models.Scenario"]]] = None,
         supported_values: Optional[List["_models.MetadataSupportedValueDetail"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: The resource Id of the metadata entity.
         :paramtype id: str
@@ -347,8 +358,8 @@ class MetadataEntityListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.MetadataEntity"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.MetadataEntity"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of metadata entities.
         :paramtype value: list[~azure.mgmt.advisor.models.MetadataEntity]
@@ -379,8 +390,8 @@ class MetadataSupportedValueDetail(_serialization.Model):
         *,
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         display_name: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: The id.
         :paramtype id: str
@@ -419,8 +430,8 @@ class OperationDisplayInfo(_serialization.Model):
         operation: Optional[str] = None,
         provider: Optional[str] = None,
         resource: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword description: The description of the operation.
         :paramtype description: str
@@ -453,8 +464,8 @@ class OperationEntity(_serialization.Model):
     }
 
     def __init__(
-        self, *, name: Optional[str] = None, display: Optional["_models.OperationDisplayInfo"] = None, **kwargs
-    ):
+        self, *, name: Optional[str] = None, display: Optional["_models.OperationDisplayInfo"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword name: Operation name: {provider}/{resource}/{operation}.
         :paramtype name: str
@@ -481,8 +492,8 @@ class OperationEntityListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.OperationEntity"]] = None, **kwargs
-    ):
+        self, *, next_link: Optional[str] = None, value: Optional[List["_models.OperationEntity"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of operations.
         :paramtype next_link: str
@@ -492,6 +503,112 @@ class OperationEntityListResult(_serialization.Model):
         super().__init__(**kwargs)
         self.next_link = next_link
         self.value = value
+
+
+class PredictionRequest(_serialization.Model):
+    """Parameters for predict recommendation.
+
+    :ivar prediction_type: Type of the prediction. "PredictiveRightsizing"
+    :vartype prediction_type: str or ~azure.mgmt.advisor.models.PredictionType
+    :ivar extended_properties: Extended properties are arguments specific for each prediction type.
+    :vartype extended_properties: JSON
+    """
+
+    _attribute_map = {
+        "prediction_type": {"key": "properties.predictionType", "type": "str"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "object"},
+    }
+
+    def __init__(
+        self,
+        *,
+        prediction_type: Optional[Union[str, "_models.PredictionType"]] = None,
+        extended_properties: Optional[JSON] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword prediction_type: Type of the prediction. "PredictiveRightsizing"
+        :paramtype prediction_type: str or ~azure.mgmt.advisor.models.PredictionType
+        :keyword extended_properties: Extended properties are arguments specific for each prediction
+         type.
+        :paramtype extended_properties: JSON
+        """
+        super().__init__(**kwargs)
+        self.prediction_type = prediction_type
+        self.extended_properties = extended_properties
+
+
+class PredictionResponse(_serialization.Model):
+    """Response used by predictions.
+
+    :ivar extended_properties: Extended properties.
+    :vartype extended_properties: JSON
+    :ivar prediction_type: Type of the prediction. "PredictiveRightsizing"
+    :vartype prediction_type: str or ~azure.mgmt.advisor.models.PredictionType
+    :ivar category: The category of the recommendation. Known values are: "HighAvailability",
+     "Security", "Performance", "Cost", and "OperationalExcellence".
+    :vartype category: str or ~azure.mgmt.advisor.models.Category
+    :ivar impact: The business impact of the recommendation. Known values are: "High", "Medium",
+     and "Low".
+    :vartype impact: str or ~azure.mgmt.advisor.models.Impact
+    :ivar impacted_field: The resource type identified by Advisor.
+    :vartype impacted_field: str
+    :ivar last_updated: The most recent time that Advisor checked the validity of the
+     recommendation.
+    :vartype last_updated: ~datetime.datetime
+    :ivar short_description: A summary of the recommendation.
+    :vartype short_description: ~azure.mgmt.advisor.models.ShortDescription
+    """
+
+    _attribute_map = {
+        "extended_properties": {"key": "properties.extendedProperties", "type": "object"},
+        "prediction_type": {"key": "properties.predictionType", "type": "str"},
+        "category": {"key": "properties.category", "type": "str"},
+        "impact": {"key": "properties.impact", "type": "str"},
+        "impacted_field": {"key": "properties.impactedField", "type": "str"},
+        "last_updated": {"key": "properties.lastUpdated", "type": "iso-8601"},
+        "short_description": {"key": "properties.shortDescription", "type": "ShortDescription"},
+    }
+
+    def __init__(
+        self,
+        *,
+        extended_properties: Optional[JSON] = None,
+        prediction_type: Optional[Union[str, "_models.PredictionType"]] = None,
+        category: Optional[Union[str, "_models.Category"]] = None,
+        impact: Optional[Union[str, "_models.Impact"]] = None,
+        impacted_field: Optional[str] = None,
+        last_updated: Optional[datetime.datetime] = None,
+        short_description: Optional["_models.ShortDescription"] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword extended_properties: Extended properties.
+        :paramtype extended_properties: JSON
+        :keyword prediction_type: Type of the prediction. "PredictiveRightsizing"
+        :paramtype prediction_type: str or ~azure.mgmt.advisor.models.PredictionType
+        :keyword category: The category of the recommendation. Known values are: "HighAvailability",
+         "Security", "Performance", "Cost", and "OperationalExcellence".
+        :paramtype category: str or ~azure.mgmt.advisor.models.Category
+        :keyword impact: The business impact of the recommendation. Known values are: "High", "Medium",
+         and "Low".
+        :paramtype impact: str or ~azure.mgmt.advisor.models.Impact
+        :keyword impacted_field: The resource type identified by Advisor.
+        :paramtype impacted_field: str
+        :keyword last_updated: The most recent time that Advisor checked the validity of the
+         recommendation.
+        :paramtype last_updated: ~datetime.datetime
+        :keyword short_description: A summary of the recommendation.
+        :paramtype short_description: ~azure.mgmt.advisor.models.ShortDescription
+        """
+        super().__init__(**kwargs)
+        self.extended_properties = extended_properties
+        self.prediction_type = prediction_type
+        self.category = category
+        self.impact = impact
+        self.impacted_field = impacted_field
+        self.last_updated = last_updated
+        self.short_description = short_description
 
 
 class ResourceMetadata(_serialization.Model):
@@ -525,8 +642,8 @@ class ResourceMetadata(_serialization.Model):
         action: Optional[Dict[str, JSON]] = None,
         singular: Optional[str] = None,
         plural: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword resource_id: Azure resource Id of the assessed resource.
         :paramtype resource_id: str
@@ -575,6 +692,9 @@ class ResourceRecommendationBase(Resource):  # pylint: disable=too-many-instance
     :vartype metadata: dict[str, JSON]
     :ivar recommendation_type_id: The recommendation-type GUID.
     :vartype recommendation_type_id: str
+    :ivar risk: The potential risk of not implementing the recommendation. Known values are:
+     "Error", "Warning", and "None".
+    :vartype risk: str or ~azure.mgmt.advisor.models.Risk
     :ivar short_description: A summary of the recommendation.
     :vartype short_description: ~azure.mgmt.advisor.models.ShortDescription
     :ivar suppression_ids: The list of snoozed and dismissed rules for the recommendation.
@@ -617,6 +737,7 @@ class ResourceRecommendationBase(Resource):  # pylint: disable=too-many-instance
         "last_updated": {"key": "properties.lastUpdated", "type": "iso-8601"},
         "metadata": {"key": "properties.metadata", "type": "{object}"},
         "recommendation_type_id": {"key": "properties.recommendationTypeId", "type": "str"},
+        "risk": {"key": "properties.risk", "type": "str"},
         "short_description": {"key": "properties.shortDescription", "type": "ShortDescription"},
         "suppression_ids": {"key": "properties.suppressionIds", "type": "[str]"},
         "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
@@ -640,6 +761,7 @@ class ResourceRecommendationBase(Resource):  # pylint: disable=too-many-instance
         last_updated: Optional[datetime.datetime] = None,
         metadata: Optional[Dict[str, JSON]] = None,
         recommendation_type_id: Optional[str] = None,
+        risk: Optional[Union[str, "_models.Risk"]] = None,
         short_description: Optional["_models.ShortDescription"] = None,
         suppression_ids: Optional[List[str]] = None,
         extended_properties: Optional[Dict[str, str]] = None,
@@ -651,8 +773,8 @@ class ResourceRecommendationBase(Resource):  # pylint: disable=too-many-instance
         actions: Optional[List[Dict[str, JSON]]] = None,
         remediation: Optional[Dict[str, JSON]] = None,
         exposed_metadata_properties: Optional[Dict[str, JSON]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword category: The category of the recommendation. Known values are: "HighAvailability",
          "Security", "Performance", "Cost", and "OperationalExcellence".
@@ -671,6 +793,9 @@ class ResourceRecommendationBase(Resource):  # pylint: disable=too-many-instance
         :paramtype metadata: dict[str, JSON]
         :keyword recommendation_type_id: The recommendation-type GUID.
         :paramtype recommendation_type_id: str
+        :keyword risk: The potential risk of not implementing the recommendation. Known values are:
+         "Error", "Warning", and "None".
+        :paramtype risk: str or ~azure.mgmt.advisor.models.Risk
         :keyword short_description: A summary of the recommendation.
         :paramtype short_description: ~azure.mgmt.advisor.models.ShortDescription
         :keyword suppression_ids: The list of snoozed and dismissed rules for the recommendation.
@@ -703,6 +828,7 @@ class ResourceRecommendationBase(Resource):  # pylint: disable=too-many-instance
         self.last_updated = last_updated
         self.metadata = metadata
         self.recommendation_type_id = recommendation_type_id
+        self.risk = risk
         self.short_description = short_description
         self.suppression_ids = suppression_ids
         self.extended_properties = extended_properties
@@ -735,8 +861,8 @@ class ResourceRecommendationBaseListResult(_serialization.Model):
         *,
         next_link: Optional[str] = None,
         value: Optional[List["_models.ResourceRecommendationBase"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of recommendations.
         :paramtype next_link: str
@@ -763,7 +889,7 @@ class ShortDescription(_serialization.Model):
         "solution": {"key": "solution", "type": "str"},
     }
 
-    def __init__(self, *, problem: Optional[str] = None, solution: Optional[str] = None, **kwargs):
+    def __init__(self, *, problem: Optional[str] = None, solution: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword problem: The issue or opportunity identified by the recommendation and proposed
          solution.
@@ -778,7 +904,8 @@ class ShortDescription(_serialization.Model):
 
 
 class SuppressionContract(Resource):
-    """The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.
+    """The details of the snoozed or dismissed rule; for example, the duration, name, and GUID
+    associated with the rule.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -812,7 +939,7 @@ class SuppressionContract(Resource):
         "expiration_time_stamp": {"key": "properties.expirationTimeStamp", "type": "iso-8601"},
     }
 
-    def __init__(self, *, suppression_id: Optional[str] = None, ttl: Optional[str] = None, **kwargs):
+    def __init__(self, *, suppression_id: Optional[str] = None, ttl: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword suppression_id: The GUID of the suppression.
         :paramtype suppression_id: str
@@ -840,8 +967,12 @@ class SuppressionContractListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.SuppressionContract"]] = None, **kwargs
-    ):
+        self,
+        *,
+        next_link: Optional[str] = None,
+        value: Optional[List["_models.SuppressionContract"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of suppressions.
         :paramtype next_link: str

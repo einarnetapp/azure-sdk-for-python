@@ -12,10 +12,11 @@ from typing import Any, Awaitable, TYPE_CHECKING
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
 
-from .. import models
+from .. import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import AdvisorManagementClientConfiguration
 from .operations import (
+    AdvisorManagementClientOperationsMixin,
     ConfigurationsOperations,
     Operations,
     RecommendationMetadataOperations,
@@ -28,7 +29,9 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class AdvisorManagementClient:  # pylint: disable=client-accepts-api-version-keyword
+class AdvisorManagementClient(
+    AdvisorManagementClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
     """REST APIs for Azure Advisor.
 
     :ivar recommendation_metadata: RecommendationMetadataOperations operations
@@ -48,7 +51,7 @@ class AdvisorManagementClient:  # pylint: disable=client-accepts-api-version-key
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2020-01-01". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2022-09-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     """
@@ -65,7 +68,7 @@ class AdvisorManagementClient:  # pylint: disable=client-accepts-api-version-key
         )
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
