@@ -13,10 +13,10 @@ from azure.core import CaseInsensitiveEnumMeta
 class AuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """How to authenticate users who access local diagnostics APIs."""
 
-    #: Use AAD SSO to authenticate the user (this requires internet access).
     AAD = "AAD"
-    #: Use locally stored passwords to authenticate the user.
+    """Use AAD SSO to authenticate the user (this requires internet access)."""
     PASSWORD = "Password"
+    """Use locally stored passwords to authenticate the user."""
 
 
 class BillingSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -24,40 +24,40 @@ class BillingSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SKU gets added or an exiting SKU gets removed.
     """
 
-    #: 100 Mbps, 20 active SIMs plan
     G0 = "G0"
-    #: 1 Gbps, 100 active SIMs plan
+    """100 Mbps, 20 active SIMs plan, 2 RANs"""
     G1 = "G1"
-    #: 2 Gbps, 200 active SIMs plan
+    """1 Gbps, 100 active SIMs plan, 5 RANs"""
     G2 = "G2"
-    #: 3 Gbps, 300 active SIMs plan
+    """2 Gbps, 200 active SIMs plan, 10 RANs"""
     G3 = "G3"
-    #: 4 Gbps, 400 active SIMs plan
+    """3 Gbps, 300 active SIMs plan"""
     G4 = "G4"
-    #: 5 Gbps, 500 active SIMs plan
+    """4 Gbps, 400 active SIMs plan"""
     G5 = "G5"
-    #: 10 Gbps, 1000 active SIMs plan
+    """5 Gbps, 500 active SIMs plan"""
     G10 = "G10"
+    """10 Gbps, 1000 active SIMs plan"""
 
 
 class CertificateProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The certificate's provisioning state."""
 
-    #: The certificate has not been provisioned.
     NOT_PROVISIONED = "NotProvisioned"
-    #: The certificate has been provisioned.
+    """The certificate has not been provisioned."""
     PROVISIONED = "Provisioned"
-    #: The certificate failed to be provisioned. The "reason" property explains why.
+    """The certificate has been provisioned."""
     FAILED = "Failed"
+    """The certificate failed to be provisioned. The "reason" property explains why."""
 
 
 class CoreNetworkType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The core network technology generation (5G core or EPC / 4G core)."""
 
-    #: 5G core
     FIVE_GC = "5GC"
-    #: EPC / 4G core
+    """5G core"""
     EPC = "EPC"
+    """EPC / 4G core"""
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -72,24 +72,24 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class InstallationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The installation state of the packet core."""
 
-    #: The packet core is uninstalled.
     UNINSTALLED = "Uninstalled"
-    #: The packet core is installing.
+    """The packet core is uninstalled."""
     INSTALLING = "Installing"
-    #: The packet core is installed.
+    """The packet core is installing."""
     INSTALLED = "Installed"
-    #: The packet core is updating its configuration.
+    """The packet core is installed."""
     UPDATING = "Updating"
-    #: The packet core is upgrading to a different software version.
+    """The packet core is updating its configuration."""
     UPGRADING = "Upgrading"
-    #: The packet core is uninstalling.
+    """The packet core is upgrading to a different software version."""
     UNINSTALLING = "Uninstalling"
-    #: The packet core is reinstalling.
+    """The packet core is uninstalling."""
     REINSTALLING = "Reinstalling"
-    #: The packet core is rolling back to its previous version.
+    """The packet core is reinstalling."""
     ROLLING_BACK = "RollingBack"
-    #: The packet core is in failed state.
+    """The packet core is rolling back to its previous version."""
     FAILED = "Failed"
+    """The packet core is in failed state."""
 
 
 class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -106,19 +106,19 @@ class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class NaptEnabled(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether network address and port translation is enabled."""
 
-    #: NAPT is enabled
     ENABLED = "Enabled"
-    #: NAPT is disabled
+    """NAPT is enabled"""
     DISABLED = "Disabled"
+    """NAPT is disabled"""
 
 
 class ObsoleteVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates whether this version is obsolete."""
 
-    #: This version is obsolete for use in new packet core control plane deployments.
     OBSOLETE = "Obsolete"
-    #: This version is not obsolete for use in new packet core control plane deployments.
+    """This version is obsolete for use in new packet core control plane deployments."""
     NOT_OBSOLETE = "NotObsolete"
+    """This version is not obsolete for use in new packet core control plane deployments."""
 
 
 class PduSessionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -131,30 +131,30 @@ class PduSessionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class PlatformType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The platform type where packet core is deployed. The contents of this enum can change."""
 
-    #: If this option is chosen, you must set one of "azureStackEdgeDevice", "connectedCluster" or
-    #: "customLocation". If multiple are set, they must be consistent with each other.
     AKS_HCI = "AKS-HCI"
-    #: If this option is chosen, you must set one of "azureStackHciCluster", "connectedCluster" or
-    #: "customLocation". If multiple are set, they must be consistent with each other.
+    """If this option is chosen, you must set one of "azureStackEdgeDevice", "connectedCluster" or
+    #: "customLocation". If multiple are set, they must be consistent with each other."""
     THREE_P_AZURE_STACK_HCI = "3P-AZURE-STACK-HCI"
+    """If this option is chosen, you must set one of "azureStackHciCluster", "connectedCluster" or
+    #: "customLocation". If multiple are set, they must be consistent with each other."""
 
 
 class PreemptionCapability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Preemption capability."""
 
-    #: Cannot preempt
     NOT_PREEMPT = "NotPreempt"
-    #: May preempt
+    """Cannot preempt"""
     MAY_PREEMPT = "MayPreempt"
+    """May preempt"""
 
 
 class PreemptionVulnerability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Preemption vulnerability."""
 
-    #: Cannot be preempted
     NOT_PREEMPTABLE = "NotPreemptable"
-    #: May be preempted
+    """Cannot be preempted"""
     PREEMPTABLE = "Preemptable"
+    """May be preempted"""
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -174,72 +174,72 @@ class RecommendedVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     deployments.
     """
 
-    #: This is the recommended version to use for new packet core control plane deployments.
     RECOMMENDED = "Recommended"
-    #: This is not the recommended version to use for new packet core control plane deployments.
+    """This is the recommended version to use for new packet core control plane deployments."""
     NOT_RECOMMENDED = "NotRecommended"
+    """This is not the recommended version to use for new packet core control plane deployments."""
 
 
 class SdfDirection(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Service data flow direction."""
 
-    #: Traffic flowing from the UE to the data network.
     UPLINK = "Uplink"
-    #: Traffic flowing from the data network to the UE.
+    """Traffic flowing from the UE to the data network."""
     DOWNLINK = "Downlink"
-    #: Traffic flowing both to and from the UE.
+    """Traffic flowing from the data network to the UE."""
     BIDIRECTIONAL = "Bidirectional"
+    """Traffic flowing both to and from the UE."""
 
 
 class SimState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The state of the SIM resource."""
 
-    #: The SIM is disabled because not all configuration required for enabling is present.
     DISABLED = "Disabled"
-    #: The SIM is enabled.
+    """The SIM is disabled because not all configuration required for enabling is present."""
     ENABLED = "Enabled"
-    #: The SIM cannot be enabled because some of the associated configuration is invalid.
+    """The SIM is enabled."""
     INVALID = "Invalid"
+    """The SIM cannot be enabled because some of the associated configuration is invalid."""
 
 
 class SiteProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state of a resource e.g. SIM/SIM policy on a site."""
 
-    #: The resource should not be provisioned on this site.
     NOT_APPLICABLE = "NotApplicable"
-    #: The resource is being added to this site.
+    """The resource should not be provisioned on this site."""
     ADDING = "Adding"
-    #: The resource is being updated on this site.
+    """The resource is being added to this site."""
     UPDATING = "Updating"
-    #: The resource is being deleted from this site.
+    """The resource is being updated on this site."""
     DELETING = "Deleting"
-    #: The resource is provisioned on this site.
+    """The resource is being deleted from this site."""
     PROVISIONED = "Provisioned"
-    #: The resource failed to be provisioned on this site.
+    """The resource is provisioned on this site."""
     FAILED = "Failed"
+    """The resource failed to be provisioned on this site."""
 
 
 class TrafficControlPermission(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Traffic control permission."""
 
-    #: Traffic matching this rule is allowed to flow.
     ENABLED = "Enabled"
-    #: Traffic matching this rule is not allowed to flow.
+    """Traffic matching this rule is allowed to flow."""
     BLOCKED = "Blocked"
+    """Traffic matching this rule is not allowed to flow."""
 
 
 class VersionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The state of this packet core control plane version."""
 
-    #: The state of this version is unknown.
     UNKNOWN = "Unknown"
-    #: This version is a preview and is not suitable for production use.
+    """The state of this version is unknown."""
     PREVIEW = "Preview"
-    #: This version is currently being validated.
+    """This version is a preview and is not suitable for production use."""
     VALIDATING = "Validating"
-    #: This version failed validation.
+    """This version is currently being validated."""
     VALIDATION_FAILED = "ValidationFailed"
-    #: This version is active and suitable for production use.
+    """This version failed validation."""
     ACTIVE = "Active"
-    #: This version is deprecated and is no longer supported.
+    """This version is active and suitable for production use."""
     DEPRECATED = "Deprecated"
+    """This version is deprecated and is no longer supported."""
