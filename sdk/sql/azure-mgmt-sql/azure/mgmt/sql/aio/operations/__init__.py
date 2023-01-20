@@ -35,7 +35,6 @@ from ._elastic_pool_operations_operations import ElasticPoolOperationsOperations
 from ._encryption_protectors_operations import EncryptionProtectorsOperations
 from ._failover_groups_operations import FailoverGroupsOperations
 from ._firewall_rules_operations import FirewallRulesOperations
-from ._instance_failover_groups_operations import InstanceFailoverGroupsOperations
 from ._instance_pools_operations import InstancePoolsOperations
 from ._job_agents_operations import JobAgentsOperations
 from ._job_credentials_operations import JobCredentialsOperations
@@ -181,6 +180,7 @@ from ._managed_database_move_operations_operations import ManagedDatabaseMoveOpe
 from ._managed_instance_dtcs_operations import ManagedInstanceDtcsOperations
 from ._synapse_link_workspaces_operations import SynapseLinkWorkspacesOperations
 from ._virtual_clusters_operations import VirtualClustersOperations
+from ._instance_failover_groups_operations import InstanceFailoverGroupsOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
@@ -214,7 +214,6 @@ __all__ = [
     "EncryptionProtectorsOperations",
     "FailoverGroupsOperations",
     "FirewallRulesOperations",
-    "InstanceFailoverGroupsOperations",
     "InstancePoolsOperations",
     "JobAgentsOperations",
     "JobCredentialsOperations",
@@ -332,6 +331,7 @@ __all__ = [
     "ManagedInstanceDtcsOperations",
     "SynapseLinkWorkspacesOperations",
     "VirtualClustersOperations",
+    "InstanceFailoverGroupsOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
