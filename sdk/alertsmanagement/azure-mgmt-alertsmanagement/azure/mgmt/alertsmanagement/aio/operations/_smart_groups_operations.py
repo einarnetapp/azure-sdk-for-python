@@ -34,6 +34,7 @@ from ...operations._smart_groups_operations import (
     build_get_by_id_request,
     build_get_history_request,
 )
+from .._vendor import AlertsManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

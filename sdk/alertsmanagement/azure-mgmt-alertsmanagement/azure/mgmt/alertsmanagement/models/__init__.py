@@ -45,11 +45,11 @@ from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationsList
 from ._models_py3 import PatchObject
 from ._models_py3 import PrometheusRule
-from ._models_py3 import PrometheusRuleGroupAction
+from ._models_py3 import PrometheusRuleGroupActions
 from ._models_py3 import PrometheusRuleGroupResource
 from ._models_py3 import PrometheusRuleGroupResourceCollection
-from ._models_py3 import PrometheusRuleGroupResourcePatch
-from ._models_py3 import PrometheusRuleGroupResourcePatchProperties
+from ._models_py3 import PrometheusRuleGroupResourcePatchParameters
+from ._models_py3 import PrometheusRuleGroupResourcePatchParametersProperties
 from ._models_py3 import PrometheusRuleResolveConfiguration
 from ._models_py3 import Recurrence
 from ._models_py3 import RemoveAllActionGroups
@@ -131,11 +131,11 @@ __all__ = [
     "OperationsList",
     "PatchObject",
     "PrometheusRule",
-    "PrometheusRuleGroupAction",
+    "PrometheusRuleGroupActions",
     "PrometheusRuleGroupResource",
     "PrometheusRuleGroupResourceCollection",
-    "PrometheusRuleGroupResourcePatch",
-    "PrometheusRuleGroupResourcePatchProperties",
+    "PrometheusRuleGroupResourcePatchParameters",
+    "PrometheusRuleGroupResourcePatchParametersProperties",
     "PrometheusRuleResolveConfiguration",
     "Recurrence",
     "RemoveAllActionGroups",

@@ -6,8 +6,9 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._alert_processing_rules_operations import AlertProcessingRulesOperations
+from ._alerts_management_client_operations import AlertsManagementClientOperationsMixin
 from ._prometheus_rule_groups_operations import PrometheusRuleGroupsOperations
+from ._alert_processing_rules_operations import AlertProcessingRulesOperations
 from ._operations import Operations
 from ._alerts_operations import AlertsOperations
 from ._smart_groups_operations import SmartGroupsOperations
@@ -17,8 +18,9 @@ from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    "AlertProcessingRulesOperations",
+    "AlertsManagementClientOperationsMixin",
     "PrometheusRuleGroupsOperations",
+    "AlertProcessingRulesOperations",
     "Operations",
     "AlertsOperations",
     "SmartGroupsOperations",

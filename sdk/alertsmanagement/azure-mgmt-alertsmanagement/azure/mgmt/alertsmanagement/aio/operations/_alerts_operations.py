@@ -36,6 +36,7 @@ from ...operations._alerts_operations import (
     build_get_summary_request,
     build_meta_data_request,
 )
+from .._vendor import AlertsManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

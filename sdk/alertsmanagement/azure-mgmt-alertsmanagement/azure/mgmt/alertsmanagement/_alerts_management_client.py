@@ -17,6 +17,7 @@ from ._configuration import AlertsManagementClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
     AlertProcessingRulesOperations,
+    AlertsManagementClientOperationsMixin,
     AlertsOperations,
     Operations,
     PrometheusRuleGroupsOperations,
@@ -28,15 +29,17 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class AlertsManagementClient:  # pylint: disable=client-accepts-api-version-keyword
+class AlertsManagementClient(
+    AlertsManagementClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
     """AlertsManagement Client.
 
-    :ivar alert_processing_rules: AlertProcessingRulesOperations operations
-    :vartype alert_processing_rules:
-     azure.mgmt.alertsmanagement.operations.AlertProcessingRulesOperations
     :ivar prometheus_rule_groups: PrometheusRuleGroupsOperations operations
     :vartype prometheus_rule_groups:
      azure.mgmt.alertsmanagement.operations.PrometheusRuleGroupsOperations
+    :ivar alert_processing_rules: AlertProcessingRulesOperations operations
+    :vartype alert_processing_rules:
+     azure.mgmt.alertsmanagement.operations.AlertProcessingRulesOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.alertsmanagement.operations.Operations
     :ivar alerts: AlertsOperations operations
@@ -67,10 +70,10 @@ class AlertsManagementClient:  # pylint: disable=client-accepts-api-version-keyw
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.alert_processing_rules = AlertProcessingRulesOperations(
+        self.prometheus_rule_groups = PrometheusRuleGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.prometheus_rule_groups = PrometheusRuleGroupsOperations(
+        self.alert_processing_rules = AlertProcessingRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)

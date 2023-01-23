@@ -30,13 +30,13 @@ def main():
     )
 
     response = client.prometheus_rule_groups.update(
-        resource_group_name="giladstest",
+        resource_group_name="promResourceGroup",
         rule_group_name="myPrometheusRuleGroup",
         parameters={"properties": {"enabled": False}, "tags": {"tag1": "value1"}},
     )
     print(response)
 
 
-# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/preview/2021-07-22-preview/examples/patchPrometheusRuleGroup.json
+# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/stable/2023-03-01/examples/patchPrometheusRuleGroup.json
 if __name__ == "__main__":
     main()

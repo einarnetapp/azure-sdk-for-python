@@ -30,12 +30,12 @@ def main():
     )
 
     response = client.prometheus_rule_groups.create_or_update(
-        resource_group_name="giladstest",
+        resource_group_name="promResourceGroup",
         rule_group_name="myPrometheusRuleGroup",
         parameters={
             "location": "East US",
             "properties": {
-                "description": "This is the description of the first rule group",
+                "description": "This is the description of the following rule group",
                 "rules": [
                     {
                         "expression": 'histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service="billing-processing"}[5m])) by (job_type))',
@@ -43,12 +43,14 @@ def main():
                         "record": "job_type:billing_jobs_duration_seconds:99p5m",
                     },
                     {
-                        "actions": [
-                            {
-                                "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/giladstest/providers/microsoft.insights/notificationgroups/group2",
-                                "actionProperties": {"key11": "value11", "key12": "value12"},
-                            }
-                        ],
+                        "actions": {
+                            "actionGroups": [
+                                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/myrg/providers/microsoft.insights/actiongroups/myactiongroup",
+                                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/myrg/providers/microsoft.insights/actiongroups/myotheractiongroup",
+                            ],
+                            "actionProperties": {"ActionType1.Field1": "value11", "ActionType2.Field1": "value12"},
+                            "customProperties": {"key11": "value11", "key12": "value12"},
+                        },
                         "alert": "Billing_Processing_Very_Slow",
                         "annotations": {"annotationName1": "annotationValue1"},
                         "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
@@ -59,7 +61,7 @@ def main():
                     },
                 ],
                 "scopes": [
-                    "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/microsoft.monitor/accounts/myMonitoringAccount"
+                    "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myMonitoringAccount"
                 ],
             },
         },
@@ -67,6 +69,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/preview/2021-07-22-preview/examples/createOrUpdatePrometheusRuleGroup.json
+# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/stable/2023-03-01/examples/createOrUpdatePrometheusRuleGroup.json
 if __name__ == "__main__":
     main()

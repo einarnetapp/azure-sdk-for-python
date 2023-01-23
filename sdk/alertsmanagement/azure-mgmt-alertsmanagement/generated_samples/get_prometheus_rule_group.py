@@ -30,12 +30,12 @@ def main():
     )
 
     response = client.prometheus_rule_groups.get(
-        resource_group_name="giladstest",
+        resource_group_name="promResourceGroup",
         rule_group_name="myPrometheusRuleGroup",
     )
     print(response)
 
 
-# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/preview/2021-07-22-preview/examples/getPrometheusRuleGroup.json
+# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/stable/2023-03-01/examples/getPrometheusRuleGroup.json
 if __name__ == "__main__":
     main()

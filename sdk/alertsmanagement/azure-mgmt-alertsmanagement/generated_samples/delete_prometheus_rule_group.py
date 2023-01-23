@@ -30,12 +30,12 @@ def main():
     )
 
     response = client.prometheus_rule_groups.delete(
-        resource_group_name="giladsteset",
+        resource_group_name="promResourceGroup",
         rule_group_name="myPrometheusRuleGroup",
     )
     print(response)
 
 
-# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/preview/2021-07-22-preview/examples/deletePrometheusRuleGroup.json
+# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/stable/2023-03-01/examples/deletePrometheusRuleGroup.json
 if __name__ == "__main__":
     main()
