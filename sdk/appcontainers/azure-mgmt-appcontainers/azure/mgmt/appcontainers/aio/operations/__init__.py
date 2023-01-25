@@ -22,6 +22,7 @@ from ._managed_environments_diagnostics_operations import ManagedEnvironmentsDia
 from ._operations import Operations
 from ._managed_environments_operations import ManagedEnvironmentsOperations
 from ._certificates_operations import CertificatesOperations
+from ._managed_certificates_operations import ManagedCertificatesOperations
 from ._namespaces_operations import NamespacesOperations
 from ._dapr_components_operations import DaprComponentsOperations
 from ._managed_environments_storages_operations import ManagedEnvironmentsStoragesOperations
@@ -48,6 +49,7 @@ __all__ = [
     "Operations",
     "ManagedEnvironmentsOperations",
     "CertificatesOperations",
+    "ManagedCertificatesOperations",
     "NamespacesOperations",
     "DaprComponentsOperations",
     "ManagedEnvironmentsStoragesOperations",

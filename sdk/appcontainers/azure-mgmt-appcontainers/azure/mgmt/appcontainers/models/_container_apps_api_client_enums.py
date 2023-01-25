@@ -41,6 +41,13 @@ class ActiveRevisionsMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SINGLE = "Single"
 
 
+class Affinity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Sticky Session Affinity."""
+
+    STICKY = "sticky"
+    NONE = "none"
+
+
 class Applicability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """indicates whether the profile is default for the location."""
 
@@ -196,6 +203,14 @@ class LogLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ERROR = "error"
 
 
+class ManagedCertificateDomainControlValidation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Selected type of domain control validation for managed certificates."""
+
+    CNAME = "CNAME"
+    HTTP = "HTTP"
+    TXT = "TXT"
+
+
 class ManagedEnvironmentOutBoundType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Outbound type for the cluster."""
 
@@ -242,10 +257,8 @@ class Scheme(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name of the Sku."""
 
-    #: Consumption SKU of Managed Environment.
     CONSUMPTION = "Consumption"
-    #: Premium SKU of Managed Environment.
-    PREMIUM = "Premium"
+    """Consumption SKU of Managed Environment."""
 
 
 class SourceControlOperationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
