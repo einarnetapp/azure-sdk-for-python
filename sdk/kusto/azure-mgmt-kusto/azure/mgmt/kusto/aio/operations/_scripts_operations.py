@@ -799,7 +799,7 @@ class ScriptsOperations:
     async def begin_delete(
         self, resource_group_name: str, cluster_name: str, database_name: str, script_name: str, **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Deletes a Kusto principalAssignment.
+        """Deletes a Kusto cluster database script.
 
         :param resource_group_name: The name of the resource group containing the Kusto cluster.
          Required.
