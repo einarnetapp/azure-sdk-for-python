@@ -14,7 +14,7 @@ from azure.mgmt.iothubprovisioningservices import IotDpsClient
     pip install azure-identity
     pip install azure-mgmt-iothubprovisioningservices
 # USAGE
-    python dps_create_or_update_certificate.py
+    python dps_list_private_endpoint_connections.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,15 +29,13 @@ def main():
         subscription_id="91d12660-3dec-467a-be2a-213b5544ddc0",
     )
 
-    response = client.dps_certificate.create_or_update(
+    response = client.iot_dps_resource.list_private_endpoint_connections(
         resource_group_name="myResourceGroup",
-        provisioning_service_name="myFirstProvisioningService",
-        certificate_name="cert",
-        certificate_description={"properties": {"certificate": "############################################"}},
+        resource_name="myFirstProvisioningService",
     )
     print(response)
 
 
-# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-02-05/examples/DPSCertificateCreateOrUpdate.json
+# x-ms-original-file: specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-12-12/examples/DPSListPrivateEndpointConnections.json
 if __name__ == "__main__":
     main()
