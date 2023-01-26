@@ -15,14 +15,14 @@ from azure.mgmt.core import ARMPipelineClient
 from . import models as _models
 from ._configuration import ConfidentialLedgerConfiguration
 from ._serialization import Deserializer, Serializer
-from .operations import LedgerOperations, Operations
+from .operations import ConfidentialLedgerOperationsMixin, LedgerOperations, Operations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
 
-class ConfidentialLedger:  # pylint: disable=client-accepts-api-version-keyword
+class ConfidentialLedger(ConfidentialLedgerOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
     """Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-preview.
 
     :ivar operations: Operations operations
@@ -36,7 +36,7 @@ class ConfidentialLedger:  # pylint: disable=client-accepts-api-version-keyword
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2020-12-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-01-26-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
