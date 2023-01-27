@@ -19,6 +19,7 @@ from .operations import (
     AliasOperations,
     BillingAccountOperations,
     Operations,
+    SubscriptionClientOperationsMixin,
     SubscriptionOperations,
     SubscriptionPolicyOperations,
     SubscriptionsOperations,
@@ -30,7 +31,9 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class SubscriptionClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class SubscriptionClient(
+    SubscriptionClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """The subscription client.
 
     :ivar subscriptions: SubscriptionsOperations operations

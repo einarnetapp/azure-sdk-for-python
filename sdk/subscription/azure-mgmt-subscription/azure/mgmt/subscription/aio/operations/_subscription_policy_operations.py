@@ -33,6 +33,7 @@ from ...operations._subscription_policy_operations import (
     build_get_policy_for_tenant_request,
     build_list_policy_for_tenant_request,
 )
+from .._vendor import SubscriptionClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
