@@ -27,6 +27,7 @@ def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+        target_type="TARGET_TYPE",
     )
 
     response = client.prometheus_rule_groups.create_or_update(

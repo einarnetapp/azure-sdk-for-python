@@ -14,7 +14,7 @@ from azure.mgmt.alertsmanagement import AlertsManagementClient
     pip install azure-identity
     pip install azure-mgmt-alertsmanagement
 # USAGE
-    python alert_processing_rules_patch.py
+    python alert_rule_recommendations_get_by_resource_mac.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,18 +26,17 @@ from azure.mgmt.alertsmanagement import AlertsManagementClient
 def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="1e3ff1c0-771a-4119-a03b-be82a51e232d",
+        subscription_id="SUBSCRIPTION_ID",
         target_type="TARGET_TYPE",
     )
 
-    response = client.alert_processing_rules.update(
-        resource_group_name="alertscorrelationrg",
-        alert_processing_rule_name="WeeklySuppression",
-        alert_processing_rule_patch={"properties": {"enabled": False}, "tags": {"key1": "value1", "key2": "value2"}},
+    response = client.alert_rule_recommendations.list_by_resource(
+        resource_uri="subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourceGroups/GenevaAlertRP-RunnerResources-eastus/providers/microsoft.monitor/accounts/alertsrp-eastus-pgms",
     )
-    print(response)
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/stable/2021-08-08/examples/AlertProcessingRules_Patch.json
+# x-ms-original-file: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/preview/2023-01-01-preview/examples/AlertRuleRecommendations_GetByResource_MAC.json
 if __name__ == "__main__":
     main()

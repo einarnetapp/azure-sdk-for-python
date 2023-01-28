@@ -29,17 +29,22 @@ class AlertsManagementClientConfiguration(Configuration):  # pylint: disable=too
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
+    :param target_type: The recommendations target type. Required.
+    :type target_type: str
     """
 
-    def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
+    def __init__(self, credential: "TokenCredential", subscription_id: str, target_type: str, **kwargs: Any) -> None:
         super(AlertsManagementClientConfiguration, self).__init__(**kwargs)
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
+        if target_type is None:
+            raise ValueError("Parameter 'target_type' must not be None.")
 
         self.credential = credential
         self.subscription_id = subscription_id
+        self.target_type = target_type
         self.credential_scopes = kwargs.pop("credential_scopes", ["https://management.azure.com/.default"])
         kwargs.setdefault("sdk_moniker", "mgmt-alertsmanagement/{}".format(VERSION))
         self._configure(**kwargs)
