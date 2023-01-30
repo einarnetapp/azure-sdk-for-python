@@ -42,6 +42,7 @@ from ._models_py3 import AlertRuleTemplateWithMitreProperties
 from ._models_py3 import AlertRuleTemplatesList
 from ._models_py3 import AlertRulesList
 from ._models_py3 import AlertsDataTypeOfDataConnector
+from ._models_py3 import AnalyticsRuleRunTrigger
 from ._models_py3 import Anomalies
 from ._models_py3 import AnomalySecurityMLAnalyticsSettings
 from ._models_py3 import AnomalyTimelineItem
@@ -265,6 +266,12 @@ from ._models_py3 import MetadataModel
 from ._models_py3 import MetadataPatch
 from ._models_py3 import MetadataSource
 from ._models_py3 import MetadataSupport
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirements
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirementsProperties
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypes
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypesLogs
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnector
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnectorProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRule
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleCommonProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleProperties
@@ -397,6 +404,8 @@ from ._models_py3 import TiTaxiiDataConnectorProperties
 from ._models_py3 import TimelineAggregation
 from ._models_py3 import TimelineError
 from ._models_py3 import TimelineResultsMetadata
+from ._models_py3 import TriggeredAnalyticsRuleRun
+from ._models_py3 import TriggeredAnalyticsRuleRuns
 from ._models_py3 import Ueba
 from ._models_py3 import UrlEntity
 from ._models_py3 import UrlEntityProperties
@@ -455,8 +464,8 @@ from ._security_insights_enums import EntityQueryKind
 from ._security_insights_enums import EntityQueryTemplateKind
 from ._security_insights_enums import EntityTimelineKind
 from ._security_insights_enums import EntityType
-from ._security_insights_enums import Enum13
-from ._security_insights_enums import Enum15
+from ._security_insights_enums import Enum14
+from ._security_insights_enums import Enum16
 from ._security_insights_enums import EventGroupingAggregationKind
 from ._security_insights_enums import FileFormat
 from ._security_insights_enums import FileHashAlgorithm
@@ -482,6 +491,7 @@ from ._security_insights_enums import PermissionProviderScope
 from ._security_insights_enums import PollingFrequency
 from ._security_insights_enums import Priority
 from ._security_insights_enums import ProviderName
+from ._security_insights_enums import ProvisioningState
 from ._security_insights_enums import RegistryHive
 from ._security_insights_enums import RegistryValueKind
 from ._security_insights_enums import RepoType
@@ -542,6 +552,7 @@ __all__ = [
     "AlertRuleTemplatesList",
     "AlertRulesList",
     "AlertsDataTypeOfDataConnector",
+    "AnalyticsRuleRunTrigger",
     "Anomalies",
     "AnomalySecurityMLAnalyticsSettings",
     "AnomalyTimelineItem",
@@ -765,6 +776,12 @@ __all__ = [
     "MetadataPatch",
     "MetadataSource",
     "MetadataSupport",
+    "MicrosoftPurviewInformationProtectionCheckRequirements",
+    "MicrosoftPurviewInformationProtectionCheckRequirementsProperties",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypes",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypesLogs",
+    "MicrosoftPurviewInformationProtectionDataConnector",
+    "MicrosoftPurviewInformationProtectionDataConnectorProperties",
     "MicrosoftSecurityIncidentCreationAlertRule",
     "MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
     "MicrosoftSecurityIncidentCreationAlertRuleProperties",
@@ -897,6 +914,8 @@ __all__ = [
     "TimelineAggregation",
     "TimelineError",
     "TimelineResultsMetadata",
+    "TriggeredAnalyticsRuleRun",
+    "TriggeredAnalyticsRuleRuns",
     "Ueba",
     "UrlEntity",
     "UrlEntityProperties",
@@ -954,8 +973,8 @@ __all__ = [
     "EntityQueryTemplateKind",
     "EntityTimelineKind",
     "EntityType",
-    "Enum13",
-    "Enum15",
+    "Enum14",
+    "Enum16",
     "EventGroupingAggregationKind",
     "FileFormat",
     "FileHashAlgorithm",
@@ -981,6 +1000,7 @@ __all__ = [
     "PollingFrequency",
     "Priority",
     "ProviderName",
+    "ProvisioningState",
     "RegistryHive",
     "RegistryValueKind",
     "RepoType",
