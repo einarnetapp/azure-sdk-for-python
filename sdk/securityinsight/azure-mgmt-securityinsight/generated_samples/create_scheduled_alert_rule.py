@@ -70,12 +70,10 @@ def main():
                 "query": "Heartbeat",
                 "queryFrequency": "PT1H",
                 "queryPeriod": "P2DT1H30M",
-                "sentinelEntitiesMappings": [{"columnName": "Entities"}],
                 "severity": "High",
                 "suppressionDuration": "PT1H",
                 "suppressionEnabled": False,
                 "tactics": ["Persistence", "LateralMovement"],
-                "techniques": ["T1037", "T1021"],
                 "triggerOperator": "GreaterThan",
                 "triggerThreshold": 0,
             },
@@ -84,6 +82,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/alertRules/CreateScheduledAlertRule.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/stable/2023-02-01/examples/alertRules/CreateScheduledAlertRule.json
 if __name__ == "__main__":
     main()
