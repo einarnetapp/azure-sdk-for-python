@@ -1039,7 +1039,7 @@ class AgentPoolsOperations:
     @distributed_trace
     def begin_upgrade_node_image_version(
         self, resource_group_name: str, resource_name: str, agent_pool_name: str, **kwargs: Any
-    ) -> LROPoller[None]:
+    ) -> LROPoller[_models.AgentPool]:
         """Upgrade node image version of an agent pool to the latest.
 
         Upgrade node image version of an agent pool to the latest.
