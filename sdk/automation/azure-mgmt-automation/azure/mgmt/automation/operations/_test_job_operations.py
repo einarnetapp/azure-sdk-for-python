@@ -60,7 +60,7 @@ def build_create_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]*-*[a-zA-Z0-9]*$"),
+        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]+[a-zA-Z0-9_-]*$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -96,7 +96,7 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]*-*[a-zA-Z0-9]*$"),
+        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]+[a-zA-Z0-9_-]*$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -130,7 +130,7 @@ def build_resume_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]*-*[a-zA-Z0-9]*$"),
+        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]+[a-zA-Z0-9_-]*$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -164,7 +164,7 @@ def build_stop_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]*-*[a-zA-Z0-9]*$"),
+        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]+[a-zA-Z0-9_-]*$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -198,7 +198,7 @@ def build_suspend_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]*-*[a-zA-Z0-9]*$"),
+        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]+[a-zA-Z0-9_-]*$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore

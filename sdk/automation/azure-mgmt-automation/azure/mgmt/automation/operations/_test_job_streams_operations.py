@@ -65,7 +65,7 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]*-*[a-zA-Z0-9]*$"),
+        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]+[a-zA-Z0-9_-]*$"),
         "jobStreamId": _SERIALIZER.url("job_stream_id", job_stream_id, "str"),
     }
 
@@ -106,7 +106,7 @@ def build_list_by_test_job_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]*-*[a-zA-Z0-9]*$"),
+        "runbookName": _SERIALIZER.url("runbook_name", runbook_name, "str", pattern=r"^[a-zA-Z]+[a-zA-Z0-9_-]*$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
