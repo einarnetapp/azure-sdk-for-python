@@ -63,7 +63,7 @@ def build_list_by_server_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -98,7 +98,7 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "configurationName": _SERIALIZER.url(
             "configuration_name", configuration_name, "str", min_length=1, pattern=r"^[-\w\._]+$"
@@ -137,7 +137,7 @@ def build_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "configurationName": _SERIALIZER.url(
             "configuration_name", configuration_name, "str", min_length=1, pattern=r"^[-\w\._]+$"
@@ -178,7 +178,7 @@ def build_put_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "configurationName": _SERIALIZER.url(
             "configuration_name", configuration_name, "str", min_length=1, pattern=r"^[-\w\._]+$"

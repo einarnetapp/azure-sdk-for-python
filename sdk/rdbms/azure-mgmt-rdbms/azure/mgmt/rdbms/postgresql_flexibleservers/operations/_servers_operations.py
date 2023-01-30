@@ -64,7 +64,7 @@ def build_create_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -102,7 +102,7 @@ def build_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -139,7 +139,7 @@ def build_delete_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -172,7 +172,7 @@ def build_get_request(resource_group_name: str, server_name: str, subscription_i
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -264,7 +264,7 @@ def build_restart_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -299,7 +299,7 @@ def build_start_request(resource_group_name: str, server_name: str, subscription
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -332,7 +332,7 @@ def build_stop_request(resource_group_name: str, server_name: str, subscription_
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
