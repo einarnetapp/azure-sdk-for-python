@@ -41,6 +41,13 @@ class InstanceViewTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     INSTANCE_VIEW = "instanceView"
 
 
+class LastAttemptStatusEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the status of Agent Upgrade."""
+
+    SUCCESS = "Success"
+    FAILED = "Failed"
+
+
 class PatchModeTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Specifies the patch mode."""
 
@@ -55,12 +62,12 @@ class PublicNetworkAccessType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     endpoints. Defaults to disabled (access to Azure Arc services only via private link).
     """
 
-    #: Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and
-    #: private endpoints.
     ENABLED = "Enabled"
-    #: Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet)
-    #: endpoints. The agents must use the private link.
+    """Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and
+    #: private endpoints."""
     DISABLED = "Disabled"
+    """Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet)
+    #: endpoints. The agents must use the private link."""
 
 
 class StatusLevelTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):

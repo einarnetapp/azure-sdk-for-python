@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import AgentConfiguration
+from ._models_py3 import AgentUpgrade
 from ._models_py3 import CloudMetadata
 from ._models_py3 import ConfigurationExtension
 from ._models_py3 import ConnectionDetail
@@ -22,6 +23,7 @@ from ._models_py3 import HybridComputePrivateLinkScope
 from ._models_py3 import HybridComputePrivateLinkScopeListResult
 from ._models_py3 import HybridComputePrivateLinkScopeProperties
 from ._models_py3 import Identity
+from ._models_py3 import IpAddress
 from ._models_py3 import LocationData
 from ._models_py3 import Machine
 from ._models_py3 import MachineExtension
@@ -32,6 +34,8 @@ from ._models_py3 import MachineExtensionUpgrade
 from ._models_py3 import MachineExtensionsListResult
 from ._models_py3 import MachineListResult
 from ._models_py3 import MachineUpdate
+from ._models_py3 import NetworkInterface
+from ._models_py3 import NetworkProfile
 from ._models_py3 import OSProfile
 from ._models_py3 import OSProfileLinuxConfiguration
 from ._models_py3 import OSProfileWindowsConfiguration
@@ -54,6 +58,7 @@ from ._models_py3 import Resource
 from ._models_py3 import ResourceUpdate
 from ._models_py3 import ServiceStatus
 from ._models_py3 import ServiceStatuses
+from ._models_py3 import Subnet
 from ._models_py3 import SystemData
 from ._models_py3 import TagsResource
 from ._models_py3 import TrackedResource
@@ -62,6 +67,7 @@ from ._hybrid_compute_management_client_enums import AgentConfigurationMode
 from ._hybrid_compute_management_client_enums import AssessmentModeTypes
 from ._hybrid_compute_management_client_enums import CreatedByType
 from ._hybrid_compute_management_client_enums import InstanceViewTypes
+from ._hybrid_compute_management_client_enums import LastAttemptStatusEnum
 from ._hybrid_compute_management_client_enums import PatchModeTypes
 from ._hybrid_compute_management_client_enums import PublicNetworkAccessType
 from ._hybrid_compute_management_client_enums import StatusLevelTypes
@@ -72,6 +78,7 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "AgentConfiguration",
+    "AgentUpgrade",
     "CloudMetadata",
     "ConfigurationExtension",
     "ConnectionDetail",
@@ -87,6 +94,7 @@ __all__ = [
     "HybridComputePrivateLinkScopeListResult",
     "HybridComputePrivateLinkScopeProperties",
     "Identity",
+    "IpAddress",
     "LocationData",
     "Machine",
     "MachineExtension",
@@ -97,6 +105,8 @@ __all__ = [
     "MachineExtensionsListResult",
     "MachineListResult",
     "MachineUpdate",
+    "NetworkInterface",
+    "NetworkProfile",
     "OSProfile",
     "OSProfileLinuxConfiguration",
     "OSProfileWindowsConfiguration",
@@ -119,6 +129,7 @@ __all__ = [
     "ResourceUpdate",
     "ServiceStatus",
     "ServiceStatuses",
+    "Subnet",
     "SystemData",
     "TagsResource",
     "TrackedResource",
@@ -126,6 +137,7 @@ __all__ = [
     "AssessmentModeTypes",
     "CreatedByType",
     "InstanceViewTypes",
+    "LastAttemptStatusEnum",
     "PatchModeTypes",
     "PublicNetworkAccessType",
     "StatusLevelTypes",

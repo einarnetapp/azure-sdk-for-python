@@ -24,7 +24,8 @@ if TYPE_CHECKING:
 
 
 class AgentConfiguration(_serialization.Model):
-    """Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM.
+    """Configurable properties that the user can set locally via the azcmagent config command, or
+    remotely via ARM.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -73,7 +74,7 @@ class AgentConfiguration(_serialization.Model):
         "config_mode": {"key": "configMode", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.proxy_url = None
@@ -84,6 +85,66 @@ class AgentConfiguration(_serialization.Model):
         self.extensions_enabled = None
         self.guest_configuration_enabled = None
         self.config_mode = None
+
+
+class AgentUpgrade(_serialization.Model):
+    """The info w.r.t Agent Upgrade.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar desired_version: Specifies the version info w.r.t AgentUpgrade for the machine.
+    :vartype desired_version: str
+    :ivar correlation_id: The correlation ID passed in from RSM per upgrade.
+    :vartype correlation_id: str
+    :ivar enable_automatic_upgrade: Specifies if RSM should try to upgrade this machine.
+    :vartype enable_automatic_upgrade: bool
+    :ivar last_attempt_timestamp: Timestamp of last upgrade attempt.
+    :vartype last_attempt_timestamp: str
+    :ivar last_attempt_status: Specifies the status of Agent Upgrade. Known values are: "Success"
+     and "Failed".
+    :vartype last_attempt_status: str or ~azure.mgmt.hybridcompute.models.LastAttemptStatusEnum
+    :ivar last_attempt_message: Failure message of last upgrade attempt if any.
+    :vartype last_attempt_message: str
+    """
+
+    _validation = {
+        "last_attempt_timestamp": {"readonly": True},
+        "last_attempt_status": {"readonly": True},
+        "last_attempt_message": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "desired_version": {"key": "desiredVersion", "type": "str"},
+        "correlation_id": {"key": "correlationId", "type": "str"},
+        "enable_automatic_upgrade": {"key": "enableAutomaticUpgrade", "type": "bool"},
+        "last_attempt_timestamp": {"key": "lastAttemptTimestamp", "type": "str"},
+        "last_attempt_status": {"key": "lastAttemptStatus", "type": "str"},
+        "last_attempt_message": {"key": "lastAttemptMessage", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        desired_version: Optional[str] = None,
+        correlation_id: Optional[str] = None,
+        enable_automatic_upgrade: Optional[bool] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword desired_version: Specifies the version info w.r.t AgentUpgrade for the machine.
+        :paramtype desired_version: str
+        :keyword correlation_id: The correlation ID passed in from RSM per upgrade.
+        :paramtype correlation_id: str
+        :keyword enable_automatic_upgrade: Specifies if RSM should try to upgrade this machine.
+        :paramtype enable_automatic_upgrade: bool
+        """
+        super().__init__(**kwargs)
+        self.desired_version = desired_version
+        self.correlation_id = correlation_id
+        self.enable_automatic_upgrade = enable_automatic_upgrade
+        self.last_attempt_timestamp = None
+        self.last_attempt_status = None
+        self.last_attempt_message = None
 
 
 class CloudMetadata(_serialization.Model):
@@ -103,7 +164,7 @@ class CloudMetadata(_serialization.Model):
         "provider": {"key": "provider", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -130,7 +191,7 @@ class ConfigurationExtension(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.publisher = None
@@ -170,7 +231,7 @@ class ConnectionDetail(_serialization.Model):
         "member_name": {"key": "memberName", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -201,7 +262,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -241,7 +302,7 @@ class ErrorDetail(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -284,7 +345,7 @@ class ErrorDetailAutoGenerated(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -295,7 +356,8 @@ class ErrorDetailAutoGenerated(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.hybridcompute.models.ErrorDetail
@@ -305,7 +367,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.hybridcompute.models.ErrorDetail
@@ -315,7 +377,8 @@ class ErrorResponse(_serialization.Model):
 
 
 class ErrorResponseAutoGenerated(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.hybridcompute.models.ErrorDetailAutoGenerated
@@ -325,7 +388,7 @@ class ErrorResponseAutoGenerated(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetailAutoGenerated"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetailAutoGenerated"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetailAutoGenerated"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.hybridcompute.models.ErrorDetailAutoGenerated
@@ -345,7 +408,7 @@ class ExtensionTargetProperties(_serialization.Model):
         "target_version": {"key": "targetVersion", "type": "str"},
     }
 
-    def __init__(self, *, target_version: Optional[str] = None, **kwargs):
+    def __init__(self, *, target_version: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword target_version: Properties for the specified Extension to Upgrade.
         :paramtype target_version: str
@@ -386,7 +449,7 @@ class Resource(_serialization.Model):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -396,7 +459,8 @@ class Resource(_serialization.Model):
 
 
 class ProxyResource(Resource):
-    """The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location.
+    """The resource model definition for a Azure Resource Manager proxy resource. It will not have
+    tags and a location.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -427,7 +491,7 @@ class ProxyResource(Resource):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
 
@@ -476,7 +540,7 @@ class ExtensionValue(ProxyResource):
         "publisher": {"key": "properties.publisher", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.version = None
@@ -501,7 +565,7 @@ class ExtensionValueListResult(_serialization.Model):
         "value": {"key": "value", "type": "[ExtensionValue]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -541,7 +605,7 @@ class PrivateLinkScopesResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword location: Resource location. Required.
         :paramtype location: str
@@ -603,8 +667,8 @@ class HybridComputePrivateLinkScope(PrivateLinkScopesResource):
         location: str,
         tags: Optional[Dict[str, str]] = None,
         properties: Optional["_models.HybridComputePrivateLinkScopeProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Resource location. Required.
         :paramtype location: str
@@ -640,8 +704,8 @@ class HybridComputePrivateLinkScopeListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: List["_models.HybridComputePrivateLinkScope"], next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: List["_models.HybridComputePrivateLinkScope"], next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of Azure Arc PrivateLinkScope definitions. Required.
         :paramtype value: list[~azure.mgmt.hybridcompute.models.HybridComputePrivateLinkScope]
@@ -689,7 +753,9 @@ class HybridComputePrivateLinkScopeProperties(_serialization.Model):
         },
     }
 
-    def __init__(self, *, public_network_access: Union[str, "_models.PublicNetworkAccessType"] = "Disabled", **kwargs):
+    def __init__(
+        self, *, public_network_access: Union[str, "_models.PublicNetworkAccessType"] = "Disabled", **kwargs: Any
+    ) -> None:
         """
         :keyword public_network_access: Indicates whether machines associated with the private link
          scope can also use public Azure Arc service endpoints. Known values are: "Enabled" and
@@ -728,7 +794,7 @@ class Identity(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, type: Optional[Literal["SystemAssigned"]] = None, **kwargs):
+    def __init__(self, *, type: Optional[Literal["SystemAssigned"]] = None, **kwargs: Any) -> None:
         """
         :keyword type: The identity type. Default value is "SystemAssigned".
         :paramtype type: str
@@ -737,6 +803,44 @@ class Identity(_serialization.Model):
         self.principal_id = None
         self.tenant_id = None
         self.type = type
+
+
+class IpAddress(_serialization.Model):
+    """Describes properties of the IP address.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar address: Represents the IP Address.
+    :vartype address: str
+    :ivar ip_address_version: Represents the Ip Address Version.
+    :vartype ip_address_version: str
+    :ivar subnet: The subnet to which this IP address belongs.
+    :vartype subnet: ~azure.mgmt.hybridcompute.models.Subnet
+    """
+
+    _validation = {
+        "subnet": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "address": {"key": "address", "type": "str"},
+        "ip_address_version": {"key": "ipAddressVersion", "type": "str"},
+        "subnet": {"key": "subnet", "type": "Subnet"},
+    }
+
+    def __init__(
+        self, *, address: Optional[str] = None, ip_address_version: Optional[str] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword address: Represents the IP Address.
+        :paramtype address: str
+        :keyword ip_address_version: Represents the Ip Address Version.
+        :paramtype ip_address_version: str
+        """
+        super().__init__(**kwargs)
+        self.address = address
+        self.ip_address_version = ip_address_version
+        self.subnet = None
 
 
 class LocationData(_serialization.Model):
@@ -772,8 +876,8 @@ class LocationData(_serialization.Model):
         city: Optional[str] = None,
         district: Optional[str] = None,
         country_or_region: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: A canonical name for the geographic or physical location. Required.
         :paramtype name: str
@@ -792,7 +896,8 @@ class LocationData(_serialization.Model):
 
 
 class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+    """The resource model definition for an Azure Resource Manager tracked top level resource which
+    has 'tags' and a 'location'.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -832,7 +937,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -879,6 +984,8 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
     :vartype service_statuses: ~azure.mgmt.hybridcompute.models.ServiceStatuses
     :ivar cloud_metadata: The metadata of the cloud environment (Azure/GCP/AWS/OCI...).
     :vartype cloud_metadata: ~azure.mgmt.hybridcompute.models.CloudMetadata
+    :ivar agent_upgrade: The info of the machine w.r.t Agent Upgrade.
+    :vartype agent_upgrade: ~azure.mgmt.hybridcompute.models.AgentUpgrade
     :ivar os_profile: Specifies the operating system settings for the hybrid machine.
     :vartype os_profile: ~azure.mgmt.hybridcompute.models.OSProfile
     :ivar provisioning_state: The provisioning state, which only appears in the response.
@@ -909,6 +1016,8 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
     :vartype os_type: str
     :ivar vm_uuid: Specifies the Arc Machine's unique SMBIOS ID.
     :vartype vm_uuid: str
+    :ivar extensions: Machine Extensions information (deprecated field).
+    :vartype extensions: list[~azure.mgmt.hybridcompute.models.MachineExtensionInstanceView]
     :ivar os_sku: Specifies the Operating System product SKU.
     :vartype os_sku: str
     :ivar domain_name: Specifies the Windows domain name.
@@ -967,6 +1076,7 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
         "agent_configuration": {"key": "properties.agentConfiguration", "type": "AgentConfiguration"},
         "service_statuses": {"key": "properties.serviceStatuses", "type": "ServiceStatuses"},
         "cloud_metadata": {"key": "properties.cloudMetadata", "type": "CloudMetadata"},
+        "agent_upgrade": {"key": "properties.agentUpgrade", "type": "AgentUpgrade"},
         "os_profile": {"key": "properties.osProfile", "type": "OSProfile"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "status": {"key": "properties.status", "type": "str"},
@@ -981,6 +1091,7 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
         "os_version": {"key": "properties.osVersion", "type": "str"},
         "os_type": {"key": "properties.osType", "type": "str"},
         "vm_uuid": {"key": "properties.vmUuid", "type": "str"},
+        "extensions": {"key": "properties.extensions", "type": "[MachineExtensionInstanceView]"},
         "os_sku": {"key": "properties.osSku", "type": "str"},
         "domain_name": {"key": "properties.domainName", "type": "str"},
         "ad_fqdn": {"key": "properties.adFqdn", "type": "str"},
@@ -1000,15 +1111,17 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
         location_data: Optional["_models.LocationData"] = None,
         service_statuses: Optional["_models.ServiceStatuses"] = None,
         cloud_metadata: Optional["_models.CloudMetadata"] = None,
+        agent_upgrade: Optional["_models.AgentUpgrade"] = None,
         os_profile: Optional["_models.OSProfile"] = None,
         vm_id: Optional[str] = None,
         client_public_key: Optional[str] = None,
         os_type: Optional[str] = None,
+        extensions: Optional[List["_models.MachineExtensionInstanceView"]] = None,
         private_link_scope_resource_id: Optional[str] = None,
         parent_cluster_resource_id: Optional[str] = None,
         mssql_discovered: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1022,6 +1135,8 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
         :paramtype service_statuses: ~azure.mgmt.hybridcompute.models.ServiceStatuses
         :keyword cloud_metadata: The metadata of the cloud environment (Azure/GCP/AWS/OCI...).
         :paramtype cloud_metadata: ~azure.mgmt.hybridcompute.models.CloudMetadata
+        :keyword agent_upgrade: The info of the machine w.r.t Agent Upgrade.
+        :paramtype agent_upgrade: ~azure.mgmt.hybridcompute.models.AgentUpgrade
         :keyword os_profile: Specifies the operating system settings for the hybrid machine.
         :paramtype os_profile: ~azure.mgmt.hybridcompute.models.OSProfile
         :keyword vm_id: Specifies the hybrid machine unique ID.
@@ -1031,6 +1146,8 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
         :paramtype client_public_key: str
         :keyword os_type: The type of Operating System (windows/linux).
         :paramtype os_type: str
+        :keyword extensions: Machine Extensions information (deprecated field).
+        :paramtype extensions: list[~azure.mgmt.hybridcompute.models.MachineExtensionInstanceView]
         :keyword private_link_scope_resource_id: The resource id of the private link scope this machine
          is assigned to, if any.
         :paramtype private_link_scope_resource_id: str
@@ -1047,6 +1164,7 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
         self.agent_configuration = None
         self.service_statuses = service_statuses
         self.cloud_metadata = cloud_metadata
+        self.agent_upgrade = agent_upgrade
         self.os_profile = os_profile
         self.provisioning_state = None
         self.status = None
@@ -1061,6 +1179,7 @@ class Machine(TrackedResource):  # pylint: disable=too-many-instance-attributes
         self.os_version = None
         self.os_type = os_type
         self.vm_uuid = None
+        self.extensions = extensions
         self.os_sku = None
         self.domain_name = None
         self.ad_fqdn = None
@@ -1163,8 +1282,8 @@ class MachineExtension(TrackedResource):  # pylint: disable=too-many-instance-at
         settings: Optional[Dict[str, Any]] = None,
         protected_settings: Optional[Dict[str, Any]] = None,
         instance_view: Optional["_models.MachineExtensionInstanceView"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1235,8 +1354,8 @@ class MachineExtensionInstanceView(_serialization.Model):
         type: Optional[str] = None,
         type_handler_version: Optional[str] = None,
         status: Optional["_models.MachineExtensionInstanceViewStatus"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The machine extension name.
         :paramtype name: str
@@ -1285,8 +1404,8 @@ class MachineExtensionInstanceViewStatus(_serialization.Model):
         display_status: Optional[str] = None,
         message: Optional[str] = None,
         time: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword code: The status code.
         :paramtype code: str
@@ -1323,8 +1442,12 @@ class MachineExtensionsListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.MachineExtension"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.MachineExtension"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of extensions.
         :paramtype value: list[~azure.mgmt.hybridcompute.models.MachineExtension]
@@ -1348,7 +1471,7 @@ class ResourceUpdate(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1409,8 +1532,8 @@ class MachineExtensionUpdate(ResourceUpdate):
         auto_upgrade_minor_version: Optional[bool] = None,
         settings: Optional[Dict[str, Any]] = None,
         protected_settings: Optional[Dict[str, Any]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1459,7 +1582,9 @@ class MachineExtensionUpgrade(_serialization.Model):
         "extension_targets": {"key": "extensionTargets", "type": "{ExtensionTargetProperties}"},
     }
 
-    def __init__(self, *, extension_targets: Optional[Dict[str, "_models.ExtensionTargetProperties"]] = None, **kwargs):
+    def __init__(
+        self, *, extension_targets: Optional[Dict[str, "_models.ExtensionTargetProperties"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword extension_targets: Describes the Extension Target Properties.
         :paramtype extension_targets: dict[str,
@@ -1490,7 +1615,7 @@ class MachineListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.Machine"], next_link: Optional[str] = None, **kwargs):
+    def __init__(self, *, value: List["_models.Machine"], next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword value: The list of hybrid machines. Required.
         :paramtype value: list[~azure.mgmt.hybridcompute.models.Machine]
@@ -1516,6 +1641,8 @@ class MachineUpdate(ResourceUpdate):
     :vartype os_profile: ~azure.mgmt.hybridcompute.models.OSProfile
     :ivar cloud_metadata: The metadata of the cloud environment (Azure/GCP/AWS/OCI...).
     :vartype cloud_metadata: ~azure.mgmt.hybridcompute.models.CloudMetadata
+    :ivar agent_upgrade: The info of the machine w.r.t Agent Upgrade.
+    :vartype agent_upgrade: ~azure.mgmt.hybridcompute.models.AgentUpgrade
     :ivar parent_cluster_resource_id: The resource id of the parent cluster (Azure HCI) this
      machine is assigned to, if any.
     :vartype parent_cluster_resource_id: str
@@ -1530,6 +1657,7 @@ class MachineUpdate(ResourceUpdate):
         "location_data": {"key": "properties.locationData", "type": "LocationData"},
         "os_profile": {"key": "properties.osProfile", "type": "OSProfile"},
         "cloud_metadata": {"key": "properties.cloudMetadata", "type": "CloudMetadata"},
+        "agent_upgrade": {"key": "properties.agentUpgrade", "type": "AgentUpgrade"},
         "parent_cluster_resource_id": {"key": "properties.parentClusterResourceId", "type": "str"},
         "private_link_scope_resource_id": {"key": "properties.privateLinkScopeResourceId", "type": "str"},
     }
@@ -1542,10 +1670,11 @@ class MachineUpdate(ResourceUpdate):
         location_data: Optional["_models.LocationData"] = None,
         os_profile: Optional["_models.OSProfile"] = None,
         cloud_metadata: Optional["_models.CloudMetadata"] = None,
+        agent_upgrade: Optional["_models.AgentUpgrade"] = None,
         parent_cluster_resource_id: Optional[str] = None,
         private_link_scope_resource_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1557,6 +1686,8 @@ class MachineUpdate(ResourceUpdate):
         :paramtype os_profile: ~azure.mgmt.hybridcompute.models.OSProfile
         :keyword cloud_metadata: The metadata of the cloud environment (Azure/GCP/AWS/OCI...).
         :paramtype cloud_metadata: ~azure.mgmt.hybridcompute.models.CloudMetadata
+        :keyword agent_upgrade: The info of the machine w.r.t Agent Upgrade.
+        :paramtype agent_upgrade: ~azure.mgmt.hybridcompute.models.AgentUpgrade
         :keyword parent_cluster_resource_id: The resource id of the parent cluster (Azure HCI) this
          machine is assigned to, if any.
         :paramtype parent_cluster_resource_id: str
@@ -1569,8 +1700,49 @@ class MachineUpdate(ResourceUpdate):
         self.location_data = location_data
         self.os_profile = os_profile
         self.cloud_metadata = cloud_metadata
+        self.agent_upgrade = agent_upgrade
         self.parent_cluster_resource_id = parent_cluster_resource_id
         self.private_link_scope_resource_id = private_link_scope_resource_id
+
+
+class NetworkInterface(_serialization.Model):
+    """Describes a network interface.
+
+    :ivar ip_addresses: The list of IP addresses in this interface.
+    :vartype ip_addresses: list[~azure.mgmt.hybridcompute.models.IpAddress]
+    """
+
+    _attribute_map = {
+        "ip_addresses": {"key": "ipAddresses", "type": "[IpAddress]"},
+    }
+
+    def __init__(self, *, ip_addresses: Optional[List["_models.IpAddress"]] = None, **kwargs: Any) -> None:
+        """
+        :keyword ip_addresses: The list of IP addresses in this interface.
+        :paramtype ip_addresses: list[~azure.mgmt.hybridcompute.models.IpAddress]
+        """
+        super().__init__(**kwargs)
+        self.ip_addresses = ip_addresses
+
+
+class NetworkProfile(_serialization.Model):
+    """Describes the network information on this machine.
+
+    :ivar network_interfaces: The list of network interfaces.
+    :vartype network_interfaces: list[~azure.mgmt.hybridcompute.models.NetworkInterface]
+    """
+
+    _attribute_map = {
+        "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterface]"},
+    }
+
+    def __init__(self, *, network_interfaces: Optional[List["_models.NetworkInterface"]] = None, **kwargs: Any) -> None:
+        """
+        :keyword network_interfaces: The list of network interfaces.
+        :paramtype network_interfaces: list[~azure.mgmt.hybridcompute.models.NetworkInterface]
+        """
+        super().__init__(**kwargs)
+        self.network_interfaces = network_interfaces
 
 
 class OperationListResult(_serialization.Model):
@@ -1590,7 +1762,7 @@ class OperationListResult(_serialization.Model):
         "value": {"key": "value", "type": "[OperationValue]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1624,7 +1796,7 @@ class OperationValue(_serialization.Model):
         "is_data_action": {"key": "isDataAction", "type": "bool"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationValueDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationValueDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: Display properties.
         :paramtype display: ~azure.mgmt.hybridcompute.models.OperationValueDisplay
@@ -1665,7 +1837,7 @@ class OperationValueDisplay(_serialization.Model):
         "provider": {"key": "provider", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.operation = None
@@ -1702,8 +1874,8 @@ class OSProfile(_serialization.Model):
         *,
         windows_configuration: Optional["_models.OSProfileWindowsConfiguration"] = None,
         linux_configuration: Optional["_models.OSProfileLinuxConfiguration"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword windows_configuration: Specifies the windows configuration for update management.
         :paramtype windows_configuration:
@@ -1738,8 +1910,8 @@ class OSProfileLinuxConfiguration(_serialization.Model):
         *,
         assessment_mode: Optional[Union[str, "_models.AssessmentModeTypes"]] = None,
         patch_mode: Optional[Union[str, "_models.PatchModeTypes"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword assessment_mode: Specifies the assessment mode. Known values are: "ImageDefault" and
          "AutomaticByPlatform".
@@ -1774,8 +1946,8 @@ class OSProfileWindowsConfiguration(_serialization.Model):
         *,
         assessment_mode: Optional[Union[str, "_models.AssessmentModeTypes"]] = None,
         patch_mode: Optional[Union[str, "_models.PatchModeTypes"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword assessment_mode: Specifies the assessment mode. Known values are: "ImageDefault" and
          "AutomaticByPlatform".
@@ -1824,7 +1996,9 @@ class PrivateEndpointConnection(ProxyResource):
         "properties": {"key": "properties", "type": "PrivateEndpointConnectionProperties"},
     }
 
-    def __init__(self, *, properties: Optional["_models.PrivateEndpointConnectionProperties"] = None, **kwargs):
+    def __init__(
+        self, *, properties: Optional["_models.PrivateEndpointConnectionProperties"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword properties: Resource properties.
         :paramtype properties: ~azure.mgmt.hybridcompute.models.PrivateEndpointConnectionProperties
@@ -1861,7 +2035,9 @@ class PrivateEndpointConnectionDataModel(_serialization.Model):
         "properties": {"key": "properties", "type": "PrivateEndpointConnectionProperties"},
     }
 
-    def __init__(self, *, properties: Optional["_models.PrivateEndpointConnectionProperties"] = None, **kwargs):
+    def __init__(
+        self, *, properties: Optional["_models.PrivateEndpointConnectionProperties"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword properties: The Private Endpoint Connection properties.
         :paramtype properties: ~azure.mgmt.hybridcompute.models.PrivateEndpointConnectionProperties
@@ -1894,7 +2070,7 @@ class PrivateEndpointConnectionListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1938,8 +2114,8 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
         *,
         private_endpoint: Optional["_models.PrivateEndpointProperty"] = None,
         private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionStateProperty"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword private_endpoint: Private endpoint which the connection belongs to.
         :paramtype private_endpoint: ~azure.mgmt.hybridcompute.models.PrivateEndpointProperty
@@ -1966,7 +2142,7 @@ class PrivateEndpointProperty(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, *, id: Optional[str] = None, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: Resource id of the private endpoint.
         :paramtype id: str
@@ -2010,7 +2186,7 @@ class PrivateLinkResource(ProxyResource):
         "properties": {"key": "properties", "type": "PrivateLinkResourceProperties"},
     }
 
-    def __init__(self, *, properties: Optional["_models.PrivateLinkResourceProperties"] = None, **kwargs):
+    def __init__(self, *, properties: Optional["_models.PrivateLinkResourceProperties"] = None, **kwargs: Any) -> None:
         """
         :keyword properties: Resource properties.
         :paramtype properties: ~azure.mgmt.hybridcompute.models.PrivateLinkResourceProperties
@@ -2040,7 +2216,7 @@ class PrivateLinkResourceListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -2072,7 +2248,7 @@ class PrivateLinkResourceProperties(_serialization.Model):
         "required_zone_names": {"key": "requiredZoneNames", "type": "[str]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.group_id = None
@@ -2109,8 +2285,8 @@ class PrivateLinkScopeValidationDetails(_serialization.Model):
         *,
         public_network_access: Union[str, "_models.PublicNetworkAccessType"] = "Disabled",
         connection_details: Optional[List["_models.ConnectionDetail"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword public_network_access: Indicates whether machines associated with the private link
          scope can also use public Azure Arc service endpoints. Known values are: "Enabled" and
@@ -2153,7 +2329,7 @@ class PrivateLinkServiceConnectionStateProperty(_serialization.Model):
         "actions_required": {"key": "actionsRequired", "type": "str"},
     }
 
-    def __init__(self, *, status: str, description: str, **kwargs):
+    def __init__(self, *, status: str, description: str, **kwargs: Any) -> None:
         """
         :keyword status: The private link service connection status. Required.
         :paramtype status: str
@@ -2180,7 +2356,7 @@ class ServiceStatus(_serialization.Model):
         "startup_type": {"key": "startupType", "type": "str"},
     }
 
-    def __init__(self, *, status: Optional[str] = None, startup_type: Optional[str] = None, **kwargs):
+    def __init__(self, *, status: Optional[str] = None, startup_type: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword status: The current status of the service.
         :paramtype status: str
@@ -2212,8 +2388,8 @@ class ServiceStatuses(_serialization.Model):
         *,
         extension_service: Optional["_models.ServiceStatus"] = None,
         guest_configuration_service: Optional["_models.ServiceStatus"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword extension_service: The state of the extension service on the Arc-enabled machine.
         :paramtype extension_service: ~azure.mgmt.hybridcompute.models.ServiceStatus
@@ -2224,6 +2400,26 @@ class ServiceStatuses(_serialization.Model):
         super().__init__(**kwargs)
         self.extension_service = extension_service
         self.guest_configuration_service = guest_configuration_service
+
+
+class Subnet(_serialization.Model):
+    """Describes the subnet.
+
+    :ivar address_prefix: Represents address prefix.
+    :vartype address_prefix: str
+    """
+
+    _attribute_map = {
+        "address_prefix": {"key": "addressPrefix", "type": "str"},
+    }
+
+    def __init__(self, *, address_prefix: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword address_prefix: Represents address prefix.
+        :paramtype address_prefix: str
+        """
+        super().__init__(**kwargs)
+        self.address_prefix = address_prefix
 
 
 class SystemData(_serialization.Model):
@@ -2263,8 +2459,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -2291,7 +2487,8 @@ class SystemData(_serialization.Model):
 
 
 class TagsResource(_serialization.Model):
-    """A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance.
+    """A container holding only the Tags for a resource, allowing the user to update the tags on a
+    PrivateLinkScope instance.
 
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
@@ -2301,7 +2498,7 @@ class TagsResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
