@@ -11,17 +11,15 @@
 
 from typing import Any, Optional, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
-
 from azure.mgmt.core import AsyncARMPipelineClient
 from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
 
+from .._serialization import Deserializer, Serializer
 from ._configuration import ManagedServiceIdentityClientConfiguration
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from azure.core.credentials import TokenCredential
     from azure.core.credentials_async import AsyncTokenCredential
 
 class _SDKClient(object):
@@ -42,9 +40,9 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
     The api-version parameter sets the default API version if the operation
     group is not described in the profile.
 
-    :param credential: Credential needed for the client to connect to Azure.
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The Id of the Subscription to which the identity belongs.
+    :param subscription_id: The Id of the Subscription to which the identity belongs. Required.
     :type subscription_id: str
     :param api_version: API version to use if no profile is provided, or if missing in profile.
     :type api_version: str
@@ -70,7 +68,7 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
         api_version: Optional[str] = None,
         base_url: str = "https://management.azure.com",
         profile: KnownProfiles = KnownProfiles.default,
-        **kwargs  # type: Any
+        **kwargs: Any
     ) -> None:
         self._config = ManagedServiceIdentityClientConfiguration(credential, subscription_id, **kwargs)
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
@@ -113,6 +111,7 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_31_preview.aio.operations import FederatedIdentityCredentialsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'federated_identity_credentials'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -132,6 +131,7 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_31_preview.aio.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -151,6 +151,7 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_31_preview.aio.operations import SystemAssignedIdentitiesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'system_assigned_identities'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -170,6 +171,7 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_01_31_preview.aio.operations import UserAssignedIdentitiesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'user_assigned_identities'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     async def close(self):
