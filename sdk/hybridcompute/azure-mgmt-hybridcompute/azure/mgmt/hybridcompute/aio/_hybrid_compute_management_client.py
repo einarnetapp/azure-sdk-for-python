@@ -20,6 +20,7 @@ from .operations import (
     HybridComputeManagementClientOperationsMixin,
     MachineExtensionsOperations,
     MachinesOperations,
+    NetworkProfileOperations,
     Operations,
     PrivateEndpointConnectionsOperations,
     PrivateLinkResourcesOperations,
@@ -46,6 +47,8 @@ class HybridComputeManagementClient(
      azure.mgmt.hybridcompute.aio.operations.ExtensionMetadataOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.hybridcompute.aio.operations.Operations
+    :ivar network_profile: NetworkProfileOperations operations
+    :vartype network_profile: azure.mgmt.hybridcompute.aio.operations.NetworkProfileOperations
     :ivar private_link_scopes: PrivateLinkScopesOperations operations
     :vartype private_link_scopes:
      azure.mgmt.hybridcompute.aio.operations.PrivateLinkScopesOperations
@@ -61,7 +64,7 @@ class HybridComputeManagementClient(
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-08-11-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-12-27-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -92,6 +95,7 @@ class HybridComputeManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
+        self.network_profile = NetworkProfileOperations(self._client, self._config, self._serialize, self._deserialize)
         self.private_link_scopes = PrivateLinkScopesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )

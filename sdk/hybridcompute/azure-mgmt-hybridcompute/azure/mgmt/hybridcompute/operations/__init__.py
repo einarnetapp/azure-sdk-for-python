@@ -11,6 +11,7 @@ from ._machine_extensions_operations import MachineExtensionsOperations
 from ._hybrid_compute_management_client_operations import HybridComputeManagementClientOperationsMixin
 from ._extension_metadata_operations import ExtensionMetadataOperations
 from ._operations import Operations
+from ._network_profile_operations import NetworkProfileOperations
 from ._private_link_scopes_operations import PrivateLinkScopesOperations
 from ._private_link_resources_operations import PrivateLinkResourcesOperations
 from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations
@@ -25,6 +26,7 @@ __all__ = [
     "HybridComputeManagementClientOperationsMixin",
     "ExtensionMetadataOperations",
     "Operations",
+    "NetworkProfileOperations",
     "PrivateLinkScopesOperations",
     "PrivateLinkResourcesOperations",
     "PrivateEndpointConnectionsOperations",
