@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_create_content_type_content_item.py
+    python api_management_portal_settings_put_sign_up.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,26 +29,19 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.content_item.create_or_update(
+    response = client.sign_up_settings.create_or_update(
         resource_group_name="rg1",
         service_name="apimService1",
-        content_type_id="page",
-        content_item_id="4e3cf6a5-574a-ba08-1f23-2e7a38faa6d8",
         parameters={
             "properties": {
-                "en_us": {
-                    "description": "Short story about the company.",
-                    "documentId": "contentTypes/document/contentItems/4e3cf6a5-574a-ba08-1f23-2e7a38faa6d8",
-                    "keywords": "company, about",
-                    "permalink": "/about",
-                    "title": "About",
-                }
+                "enabled": True,
+                "termsOfService": {"consentRequired": True, "enabled": True, "text": "Terms of service text."},
             }
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementCreateContentTypeContentItem.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementPortalSettingsPutSignUp.json
 if __name__ == "__main__":
     main()
