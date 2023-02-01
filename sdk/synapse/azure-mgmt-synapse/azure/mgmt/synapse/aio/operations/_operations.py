@@ -30,6 +30,7 @@ from ...operations._operations import (
     build_check_name_availability_request,
     build_get_azure_async_header_result_request,
     build_get_location_header_result_request,
+    build_get_workspace_per_subscription_quota_request,
     build_list_request,
 )
 
@@ -360,4 +361,66 @@ class Operations:
 
     get_azure_async_header_result.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationStatuses/{operationId}"
+    }
+
+    @distributed_trace_async
+    async def get_workspace_per_subscription_quota(
+        self, location: str, **kwargs: Any
+    ) -> _models.WorkspaceUsageQuotaResponse:
+        """Gets the current usage and quota of workspaces in a subscription/region.
+
+        Gets the current usage and quota of workspaces in a subscription/region.
+
+        :param location: The location on which resource usage is queried. Required.
+        :type location: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: WorkspaceUsageQuotaResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.synapse.models.WorkspaceUsageQuotaResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2021-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))
+        cls: ClsType[_models.WorkspaceUsageQuotaResponse] = kwargs.pop("cls", None)
+
+        request = build_get_workspace_per_subscription_quota_request(
+            location=location,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.get_workspace_per_subscription_quota.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("WorkspaceUsageQuotaResponse", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get_workspace_per_subscription_quota.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/usages"
     }
