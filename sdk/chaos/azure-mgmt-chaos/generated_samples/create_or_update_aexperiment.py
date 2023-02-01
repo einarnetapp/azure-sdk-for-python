@@ -73,6 +73,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/chaos/resource-manager/Microsoft.Chaos/preview/2022-10-01-preview/examples/CreateOrUpdateAExperiment.json
+# x-ms-original-file: specification/chaos/resource-manager/Microsoft.Chaos/preview/2023-01-31-preview/examples/CreateOrUpdateAExperiment.json
 if __name__ == "__main__":
     main()

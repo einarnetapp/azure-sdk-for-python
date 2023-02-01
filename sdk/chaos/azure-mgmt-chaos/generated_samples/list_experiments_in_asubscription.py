@@ -34,6 +34,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/chaos/resource-manager/Microsoft.Chaos/preview/2022-10-01-preview/examples/ListExperimentsInASubscription.json
+# x-ms-original-file: specification/chaos/resource-manager/Microsoft.Chaos/preview/2023-01-31-preview/examples/ListExperimentsInASubscription.json
 if __name__ == "__main__":
     main()

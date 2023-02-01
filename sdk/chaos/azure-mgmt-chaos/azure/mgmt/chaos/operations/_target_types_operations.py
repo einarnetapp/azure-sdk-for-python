@@ -47,8 +47,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -85,8 +85,8 @@ def build_get_request(location_name: str, target_type_name: str, subscription_id
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -155,7 +155,7 @@ class TargetTypesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.TargetTypeListResult] = kwargs.pop("cls", None)
@@ -253,7 +253,7 @@ class TargetTypesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.TargetType] = kwargs.pop("cls", None)

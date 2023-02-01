@@ -51,8 +51,8 @@ def build_list_all_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -95,8 +95,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -140,8 +140,8 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -182,8 +182,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -224,8 +224,8 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -269,8 +269,8 @@ def build_cancel_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -311,8 +311,8 @@ def build_start_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -353,8 +353,8 @@ def build_list_all_statuses_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -395,8 +395,8 @@ def build_get_status_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -443,8 +443,8 @@ def build_list_execution_details_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -485,8 +485,8 @@ def build_get_execution_details_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-10-01-preview")
+    api_version: Literal["2023-01-31-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-01-31-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -567,7 +567,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentListResult] = kwargs.pop("cls", None)
@@ -666,7 +666,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentListResult] = kwargs.pop("cls", None)
@@ -767,7 +767,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -826,7 +826,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Experiment] = kwargs.pop("cls", None)
@@ -951,7 +951,7 @@ class ExperimentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1028,7 +1028,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentCancelOperationResult] = kwargs.pop("cls", None)
@@ -1093,7 +1093,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentStartOperationResult] = kwargs.pop("cls", None)
@@ -1150,7 +1150,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentStatusListResult] = kwargs.pop("cls", None)
@@ -1252,7 +1252,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentStatus] = kwargs.pop("cls", None)
@@ -1311,7 +1311,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentExecutionDetailsListResult] = kwargs.pop("cls", None)
@@ -1413,7 +1413,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentExecutionDetails] = kwargs.pop("cls", None)
