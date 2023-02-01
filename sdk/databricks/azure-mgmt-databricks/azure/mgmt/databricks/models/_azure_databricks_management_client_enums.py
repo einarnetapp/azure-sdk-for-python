@@ -86,18 +86,18 @@ class PrivateLinkServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnu
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Provisioning status of the workspace."""
+    """Provisioning status of the accessConnector."""
 
+    DELETED = "Deleted"
+    FAILED = "Failed"
+    SUCCEEDED = "Succeeded"
     ACCEPTED = "Accepted"
     RUNNING = "Running"
     READY = "Ready"
     CREATING = "Creating"
     CREATED = "Created"
     DELETING = "Deleting"
-    DELETED = "Deleted"
     CANCELED = "Canceled"
-    FAILED = "Failed"
-    SUCCEEDED = "Succeeded"
     UPDATING = "Updating"
 
 

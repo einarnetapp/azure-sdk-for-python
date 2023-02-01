@@ -51,7 +51,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -95,7 +95,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -128,6 +128,8 @@ class AccessConnector(TrackedResource):
     :vartype location: str
     :ivar identity: Identity for the resource.
     :vartype identity: ~azure.mgmt.databricks.models.IdentityData
+    :ivar system_data: The system metadata relating to this resource.
+    :vartype system_data: ~azure.mgmt.databricks.models.SystemData
     :ivar properties: Azure Databricks accessConnector properties.
     :vartype properties: ~azure.mgmt.databricks.models.AccessConnectorProperties
     """
@@ -137,6 +139,7 @@ class AccessConnector(TrackedResource):
         "name": {"readonly": True},
         "type": {"readonly": True},
         "location": {"required": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
@@ -146,6 +149,7 @@ class AccessConnector(TrackedResource):
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
         "identity": {"key": "identity", "type": "IdentityData"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "properties": {"key": "properties", "type": "AccessConnectorProperties"},
     }
 
@@ -156,8 +160,8 @@ class AccessConnector(TrackedResource):
         tags: Optional[Dict[str, str]] = None,
         identity: Optional["_models.IdentityData"] = None,
         properties: Optional["_models.AccessConnectorProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -170,6 +174,7 @@ class AccessConnector(TrackedResource):
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.identity = identity
+        self.system_data = None
         self.properties = properties
 
 
@@ -188,8 +193,8 @@ class AccessConnectorListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.AccessConnector"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.AccessConnector"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: The array of azure databricks accessConnector.
         :paramtype value: list[~azure.mgmt.databricks.models.AccessConnector]
@@ -207,8 +212,8 @@ class AccessConnectorProperties(_serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar provisioning_state: Provisioning status of the accessConnector. Known values are:
-     "Accepted", "Running", "Ready", "Creating", "Created", "Deleting", "Deleted", "Canceled",
-     "Failed", "Succeeded", and "Updating".
+     "Deleted", "Failed", "Succeeded", "Accepted", "Running", "Ready", "Creating", "Created",
+     "Deleting", "Canceled", and "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.databricks.models.ProvisioningState
     """
 
@@ -220,7 +225,7 @@ class AccessConnectorProperties(_serialization.Model):
         "provisioning_state": {"key": "provisioningState", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provisioning_state = None
@@ -241,8 +246,8 @@ class AccessConnectorUpdate(_serialization.Model):
     }
 
     def __init__(
-        self, *, tags: Optional[Dict[str, str]] = None, identity: Optional["_models.IdentityData"] = None, **kwargs
-    ):
+        self, *, tags: Optional[Dict[str, str]] = None, identity: Optional["_models.IdentityData"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -255,7 +260,8 @@ class AccessConnectorUpdate(_serialization.Model):
 
 
 class AddressSpace(_serialization.Model):
-    """AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network.
+    """AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual
+    network.
 
     :ivar address_prefixes: A list of address blocks reserved for this virtual network in CIDR
      notation.
@@ -266,7 +272,7 @@ class AddressSpace(_serialization.Model):
         "address_prefixes": {"key": "addressPrefixes", "type": "[str]"},
     }
 
-    def __init__(self, *, address_prefixes: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, address_prefixes: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword address_prefixes: A list of address blocks reserved for this virtual network in CIDR
          notation.
@@ -302,7 +308,7 @@ class CreatedBy(_serialization.Model):
         "application_id": {"key": "applicationId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.oid = None
@@ -338,8 +344,8 @@ class Encryption(_serialization.Model):
         key_name: Optional[str] = None,
         key_version: Optional[str] = None,
         key_vault_uri: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword key_source: The encryption keySource (provider). Possible values (case-insensitive):
          Default, Microsoft.Keyvault. Known values are: "Default" and "Microsoft.Keyvault".
@@ -377,8 +383,8 @@ class EncryptionEntitiesDefinition(_serialization.Model):
         *,
         managed_services: Optional["_models.EncryptionV2"] = None,
         managed_disk: Optional["_models.ManagedDiskEncryption"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword managed_services: Encryption properties for the databricks managed services.
         :paramtype managed_services: ~azure.mgmt.databricks.models.EncryptionV2
@@ -416,8 +422,8 @@ class EncryptionV2(_serialization.Model):
         *,
         key_source: Union[str, "_models.EncryptionKeySource"],
         key_vault_properties: Optional["_models.EncryptionV2KeyVaultProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword key_source: The encryption keySource (provider). Possible values (case-insensitive):
          Microsoft.Keyvault. Required. "Microsoft.Keyvault"
@@ -455,7 +461,7 @@ class EncryptionV2KeyVaultProperties(_serialization.Model):
         "key_version": {"key": "keyVersion", "type": "str"},
     }
 
-    def __init__(self, *, key_vault_uri: str, key_name: str, key_version: str, **kwargs):
+    def __init__(self, *, key_vault_uri: str, key_name: str, key_version: str, **kwargs: Any) -> None:
         """
         :keyword key_vault_uri: The Uri of KeyVault. Required.
         :paramtype key_vault_uri: str
@@ -489,8 +495,8 @@ class EndpointDependency(_serialization.Model):
         *,
         domain_name: Optional[str] = None,
         endpoint_details: Optional[List["_models.EndpointDetail"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword domain_name: The domain name of the dependency.
         :paramtype domain_name: str
@@ -531,8 +537,8 @@ class EndpointDetail(_serialization.Model):
         port: Optional[int] = None,
         latency: Optional[float] = None,
         is_accessible: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword ip_address: An IP Address that Domain Name currently resolves to.
         :paramtype ip_address: str
@@ -576,7 +582,7 @@ class ErrorDetail(_serialization.Model):
         "target": {"key": "target", "type": "str"},
     }
 
-    def __init__(self, *, code: str, message: str, target: Optional[str] = None, **kwargs):
+    def __init__(self, *, code: str, message: str, target: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword code: The error's code. Required.
         :paramtype code: str
@@ -625,8 +631,8 @@ class ErrorInfo(_serialization.Model):
         message: str,
         details: Optional[List["_models.ErrorDetail"]] = None,
         innererror: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword code: A machine readable error code. Required.
         :paramtype code: str
@@ -661,7 +667,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorInfo"},
     }
 
-    def __init__(self, *, error: "_models.ErrorInfo", **kwargs):
+    def __init__(self, *, error: "_models.ErrorInfo", **kwargs: Any) -> None:
         """
         :keyword error: The error details. Required.
         :paramtype error: ~azure.mgmt.databricks.models.ErrorInfo
@@ -703,7 +709,7 @@ class GroupIdInformation(Resource):
         "properties": {"key": "properties", "type": "GroupIdInformationProperties"},
     }
 
-    def __init__(self, *, properties: "_models.GroupIdInformationProperties", **kwargs):
+    def __init__(self, *, properties: "_models.GroupIdInformationProperties", **kwargs: Any) -> None:
         """
         :keyword properties: The group id properties. Required.
         :paramtype properties: ~azure.mgmt.databricks.models.GroupIdInformationProperties
@@ -735,8 +741,8 @@ class GroupIdInformationProperties(_serialization.Model):
         group_id: Optional[str] = None,
         required_members: Optional[List[str]] = None,
         required_zone_names: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword group_id: The group id.
         :paramtype group_id: str
@@ -778,7 +784,7 @@ class IdentityData(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, type: Union[str, "_models.IdentityType"], **kwargs):
+    def __init__(self, *, type: Union[str, "_models.IdentityType"], **kwargs: Any) -> None:
         """
         :keyword type: The identity type. Required. Known values are: "None" and "SystemAssigned".
         :paramtype type: str or ~azure.mgmt.databricks.models.IdentityType
@@ -822,8 +828,8 @@ class ManagedDiskEncryption(_serialization.Model):
         key_source: Union[str, "_models.EncryptionKeySource"],
         key_vault_properties: "_models.ManagedDiskEncryptionKeyVaultProperties",
         rotation_to_latest_key_version_enabled: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword key_source: The encryption keySource (provider). Possible values (case-insensitive):
          Microsoft.Keyvault. Required. "Microsoft.Keyvault"
@@ -866,7 +872,7 @@ class ManagedDiskEncryptionKeyVaultProperties(_serialization.Model):
         "key_version": {"key": "keyVersion", "type": "str"},
     }
 
-    def __init__(self, *, key_vault_uri: str, key_name: str, key_version: str, **kwargs):
+    def __init__(self, *, key_vault_uri: str, key_name: str, key_version: str, **kwargs: Any) -> None:
         """
         :keyword key_vault_uri: The URI of KeyVault. Required.
         :paramtype key_vault_uri: str
@@ -907,7 +913,7 @@ class ManagedIdentityConfiguration(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.principal_id = None
@@ -929,7 +935,9 @@ class Operation(_serialization.Model):
         "display": {"key": "display", "type": "OperationDisplay"},
     }
 
-    def __init__(self, *, name: Optional[str] = None, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(
+        self, *, name: Optional[str] = None, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword name: Operation name: {provider}/{resource}/{operation}.
         :paramtype name: str
@@ -944,18 +952,21 @@ class Operation(_serialization.Model):
 class OperationDisplay(_serialization.Model):
     """The object that represents the operation.
 
-    :ivar provider: Service provider: Microsoft.ResourceProvider.
+    :ivar provider: Service provider: ex Microsoft.Databricks.
     :vartype provider: str
     :ivar resource: Resource on which the operation is performed.
     :vartype resource: str
     :ivar operation: Operation type: Read, write, delete, etc.
     :vartype operation: str
+    :ivar description: Description for the resource operation.
+    :vartype description: str
     """
 
     _attribute_map = {
         "provider": {"key": "provider", "type": "str"},
         "resource": {"key": "resource", "type": "str"},
         "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
     def __init__(
@@ -964,24 +975,29 @@ class OperationDisplay(_serialization.Model):
         provider: Optional[str] = None,
         resource: Optional[str] = None,
         operation: Optional[str] = None,
-        **kwargs
-    ):
+        description: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
-        :keyword provider: Service provider: Microsoft.ResourceProvider.
+        :keyword provider: Service provider: ex Microsoft.Databricks.
         :paramtype provider: str
         :keyword resource: Resource on which the operation is performed.
         :paramtype resource: str
         :keyword operation: Operation type: Read, write, delete, etc.
         :paramtype operation: str
+        :keyword description: Description for the resource operation.
+        :paramtype description: str
         """
         super().__init__(**kwargs)
         self.provider = provider
         self.resource = resource
         self.operation = operation
+        self.description = description
 
 
 class OperationListResult(_serialization.Model):
-    """Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.
+    """Result of the request to list Resource Provider operations. It contains a list of operations
+    and a URL link to get the next set of results.
 
     :ivar value: List of Resource Provider operations supported by the Resource Provider resource
      provider.
@@ -995,7 +1011,9 @@ class OperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of Resource Provider operations supported by the Resource Provider
          resource provider.
@@ -1028,8 +1046,8 @@ class OutboundEnvironmentEndpoint(_serialization.Model):
         *,
         category: Optional[str] = None,
         endpoints: Optional[List["_models.EndpointDependency"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword category: The category of endpoints accessed by the Workspace, e.g. azure-storage,
          azure-mysql, etc.
@@ -1059,7 +1077,7 @@ class PrivateEndpoint(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -1096,7 +1114,7 @@ class PrivateEndpointConnection(_serialization.Model):
         "properties": {"key": "properties", "type": "PrivateEndpointConnectionProperties"},
     }
 
-    def __init__(self, *, properties: "_models.PrivateEndpointConnectionProperties", **kwargs):
+    def __init__(self, *, properties: "_models.PrivateEndpointConnectionProperties", **kwargs: Any) -> None:
         """
         :keyword properties: The private endpoint connection properties. Required.
         :paramtype properties: ~azure.mgmt.databricks.models.PrivateEndpointConnectionProperties
@@ -1117,6 +1135,8 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
 
     :ivar private_endpoint: Private endpoint.
     :vartype private_endpoint: ~azure.mgmt.databricks.models.PrivateEndpoint
+    :ivar group_ids: GroupIds from the private link service resource.
+    :vartype group_ids: list[str]
     :ivar private_link_service_connection_state: Private endpoint connection state. Required.
     :vartype private_link_service_connection_state:
      ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionState
@@ -1133,6 +1153,7 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
 
     _attribute_map = {
         "private_endpoint": {"key": "privateEndpoint", "type": "PrivateEndpoint"},
+        "group_ids": {"key": "groupIds", "type": "[str]"},
         "private_link_service_connection_state": {
             "key": "privateLinkServiceConnectionState",
             "type": "PrivateLinkServiceConnectionState",
@@ -1145,17 +1166,21 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
         *,
         private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState",
         private_endpoint: Optional["_models.PrivateEndpoint"] = None,
-        **kwargs
-    ):
+        group_ids: Optional[List[str]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword private_endpoint: Private endpoint.
         :paramtype private_endpoint: ~azure.mgmt.databricks.models.PrivateEndpoint
+        :keyword group_ids: GroupIds from the private link service resource.
+        :paramtype group_ids: list[str]
         :keyword private_link_service_connection_state: Private endpoint connection state. Required.
         :paramtype private_link_service_connection_state:
          ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionState
         """
         super().__init__(**kwargs)
         self.private_endpoint = private_endpoint
+        self.group_ids = group_ids
         self.private_link_service_connection_state = private_link_service_connection_state
         self.provisioning_state = None
 
@@ -1179,8 +1204,8 @@ class PrivateEndpointConnectionsList(_serialization.Model):
         *,
         value: Optional[List["_models.PrivateEndpointConnection"]] = None,
         next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of returned private endpoint connection.
         :paramtype value: list[~azure.mgmt.databricks.models.PrivateEndpointConnection]
@@ -1207,8 +1232,12 @@ class PrivateLinkResourcesList(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.GroupIdInformation"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.GroupIdInformation"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of available private link resources for a workspace.
         :paramtype value: list[~azure.mgmt.databricks.models.GroupIdInformation]
@@ -1230,8 +1259,8 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
     :vartype status: str or ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionStatus
     :ivar description: The description for the current state of a private endpoint connection.
     :vartype description: str
-    :ivar action_required: Actions required for a private endpoint connection.
-    :vartype action_required: str
+    :ivar actions_required: Actions required for a private endpoint connection.
+    :vartype actions_required: str
     """
 
     _validation = {
@@ -1241,7 +1270,7 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
     _attribute_map = {
         "status": {"key": "status", "type": "str"},
         "description": {"key": "description", "type": "str"},
-        "action_required": {"key": "actionRequired", "type": "str"},
+        "actions_required": {"key": "actionsRequired", "type": "str"},
     }
 
     def __init__(
@@ -1249,22 +1278,22 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         *,
         status: Union[str, "_models.PrivateLinkServiceConnectionStatus"],
         description: Optional[str] = None,
-        action_required: Optional[str] = None,
-        **kwargs
-    ):
+        actions_required: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword status: The status of a private endpoint connection. Required. Known values are:
          "Pending", "Approved", "Rejected", and "Disconnected".
         :paramtype status: str or ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionStatus
         :keyword description: The description for the current state of a private endpoint connection.
         :paramtype description: str
-        :keyword action_required: Actions required for a private endpoint connection.
-        :paramtype action_required: str
+        :keyword actions_required: Actions required for a private endpoint connection.
+        :paramtype actions_required: str
         """
         super().__init__(**kwargs)
         self.status = status
         self.description = description
-        self.action_required = action_required
+        self.actions_required = actions_required
 
 
 class Sku(_serialization.Model):
@@ -1287,7 +1316,7 @@ class Sku(_serialization.Model):
         "tier": {"key": "tier", "type": "str"},
     }
 
-    def __init__(self, *, name: str, tier: Optional[str] = None, **kwargs):
+    def __init__(self, *, name: str, tier: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword name: The SKU name. Required.
         :paramtype name: str
@@ -1336,8 +1365,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -1457,8 +1486,8 @@ class VirtualNetworkPeering(_serialization.Model):  # pylint: disable=too-many-i
         ] = None,
         databricks_address_space: Optional["_models.AddressSpace"] = None,
         remote_address_space: Optional["_models.AddressSpace"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword allow_virtual_network_access: Whether the VMs in the local virtual network space would
          be able to access the VMs in remote virtual network space.
@@ -1527,8 +1556,8 @@ class VirtualNetworkPeeringList(_serialization.Model):
         *,
         value: Optional[List["_models.VirtualNetworkPeering"]] = None,
         next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of virtual network peerings on workspace.
         :paramtype value: list[~azure.mgmt.databricks.models.VirtualNetworkPeering]
@@ -1542,7 +1571,8 @@ class VirtualNetworkPeeringList(_serialization.Model):
 
 
 class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(_serialization.Model):
-    """The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
+    """The remote virtual network should be in the same region. See here to learn more
+    (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
 
     :ivar id: The Id of the databricks virtual network.
     :vartype id: str
@@ -1552,7 +1582,7 @@ class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(_serializati
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, *, id: Optional[str] = None, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: The Id of the databricks virtual network.
         :paramtype id: str
@@ -1562,7 +1592,8 @@ class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(_serializati
 
 
 class VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork(_serialization.Model):
-    """The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
+    """The remote virtual network should be in the same region. See here to learn more
+    (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
 
     :ivar id: The Id of the remote virtual network.
     :vartype id: str
@@ -1572,7 +1603,7 @@ class VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork(_serialization.M
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, *, id: Optional[str] = None, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: The Id of the remote virtual network.
         :paramtype id: str
@@ -1608,9 +1639,9 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
     :vartype managed_resource_group_id: str
     :ivar parameters: The workspace's custom parameters.
     :vartype parameters: ~azure.mgmt.databricks.models.WorkspaceCustomParameters
-    :ivar provisioning_state: The workspace provisioning state. Known values are: "Accepted",
-     "Running", "Ready", "Creating", "Created", "Deleting", "Deleted", "Canceled", "Failed",
-     "Succeeded", and "Updating".
+    :ivar provisioning_state: The workspace provisioning state. Known values are: "Deleted",
+     "Failed", "Succeeded", "Accepted", "Running", "Ready", "Creating", "Created", "Deleting",
+     "Canceled", and "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.databricks.models.ProvisioningState
     :ivar ui_definition_uri: The blob URI where the UI definition file is located.
     :vartype ui_definition_uri: str
@@ -1663,6 +1694,7 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         "created_date_time": {"readonly": True},
         "workspace_id": {"readonly": True},
         "workspace_url": {"readonly": True},
+        "disk_encryption_set_id": {"readonly": True},
         "private_endpoint_connections": {"readonly": True},
     }
 
@@ -1713,12 +1745,11 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         updated_by: Optional["_models.CreatedBy"] = None,
         storage_account_identity: Optional["_models.ManagedIdentityConfiguration"] = None,
         managed_disk_identity: Optional["_models.ManagedIdentityConfiguration"] = None,
-        disk_encryption_set_id: Optional[str] = None,
         encryption: Optional["_models.WorkspacePropertiesEncryption"] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         required_nsg_rules: Optional[Union[str, "_models.RequiredNsgRules"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1745,8 +1776,6 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         :keyword managed_disk_identity: The details of Managed Identity of Disk Encryption Set used for
          Managed Disk Encryption.
         :paramtype managed_disk_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
-        :keyword disk_encryption_set_id: The resource Id of the managed disk encryption set.
-        :paramtype disk_encryption_set_id: str
         :keyword encryption: Encryption properties for databricks workspace.
         :paramtype encryption: ~azure.mgmt.databricks.models.WorkspacePropertiesEncryption
         :keyword public_network_access: The network access type for accessing workspace. Set value to
@@ -1773,7 +1802,7 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         self.workspace_url = None
         self.storage_account_identity = storage_account_identity
         self.managed_disk_identity = managed_disk_identity
-        self.disk_encryption_set_id = disk_encryption_set_id
+        self.disk_encryption_set_id = None
         self.encryption = encryption
         self.private_endpoint_connections = None
         self.public_network_access = public_network_access
@@ -1804,7 +1833,7 @@ class WorkspaceCustomBooleanParameter(_serialization.Model):
         "value": {"key": "value", "type": "bool"},
     }
 
-    def __init__(self, *, value: bool, **kwargs):
+    def __init__(self, *, value: bool, **kwargs: Any) -> None:
         """
         :keyword value: The value which should be used for this field. Required.
         :paramtype value: bool
@@ -1838,7 +1867,7 @@ class WorkspaceCustomObjectParameter(_serialization.Model):
         "value": {"key": "value", "type": "object"},
     }
 
-    def __init__(self, *, value: JSON, **kwargs):
+    def __init__(self, *, value: JSON, **kwargs: Any) -> None:
         """
         :keyword value: The value which should be used for this field. Required.
         :paramtype value: JSON
@@ -1951,8 +1980,8 @@ class WorkspaceCustomParameters(_serialization.Model):  # pylint: disable=too-ma
         storage_account_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
         storage_account_sku_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
         vnet_address_prefix: Optional["_models.WorkspaceCustomStringParameter"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword aml_workspace_id: The ID of a Azure Machine Learning workspace to link with Databricks
          workspace.
@@ -2045,7 +2074,7 @@ class WorkspaceCustomStringParameter(_serialization.Model):
         "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(self, *, value: str, **kwargs):
+    def __init__(self, *, value: str, **kwargs: Any) -> None:
         """
         :keyword value: The value which should be used for this field. Required.
         :paramtype value: str
@@ -2076,7 +2105,7 @@ class WorkspaceEncryptionParameter(_serialization.Model):
         "value": {"key": "value", "type": "Encryption"},
     }
 
-    def __init__(self, *, value: Optional["_models.Encryption"] = None, **kwargs):
+    def __init__(self, *, value: Optional["_models.Encryption"] = None, **kwargs: Any) -> None:
         """
         :keyword value: The value which should be used for this field.
         :paramtype value: ~azure.mgmt.databricks.models.Encryption
@@ -2100,7 +2129,9 @@ class WorkspaceListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Workspace"]] = None, next_link: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.Workspace"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: The array of workspaces.
         :paramtype value: list[~azure.mgmt.databricks.models.Workspace]
@@ -2129,7 +2160,7 @@ class WorkspacePropertiesEncryption(_serialization.Model):
         "entities": {"key": "entities", "type": "EncryptionEntitiesDefinition"},
     }
 
-    def __init__(self, *, entities: "_models.EncryptionEntitiesDefinition", **kwargs):
+    def __init__(self, *, entities: "_models.EncryptionEntitiesDefinition", **kwargs: Any) -> None:
         """
         :keyword entities: Encryption entities definition for the workspace. Required.
         :paramtype entities: ~azure.mgmt.databricks.models.EncryptionEntitiesDefinition
@@ -2162,7 +2193,7 @@ class WorkspaceProviderAuthorization(_serialization.Model):
         "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
     }
 
-    def __init__(self, *, principal_id: str, role_definition_id: str, **kwargs):
+    def __init__(self, *, principal_id: str, role_definition_id: str, **kwargs: Any) -> None:
         """
         :keyword principal_id: The provider's principal identifier. This is the identity that the
          provider will use to call ARM to manage the workspace resources. Required.
@@ -2188,7 +2219,7 @@ class WorkspaceUpdate(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]

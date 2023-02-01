@@ -31,8 +31,8 @@ if TYPE_CHECKING:
 
 
 class AzureDatabricksManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace
-    resources.
+    """The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace /
+    Access Connector resources.
 
     :ivar workspaces: WorkspacesOperations operations
     :vartype workspaces: azure.mgmt.databricks.aio.operations.WorkspacesOperations
@@ -58,9 +58,6 @@ class AzureDatabricksManagementClient:  # pylint: disable=client-accepts-api-ver
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-04-01-preview". Note that overriding
-     this default value may result in unsupported behavior.
-    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
