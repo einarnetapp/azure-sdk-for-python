@@ -279,8 +279,8 @@ class ScheduleFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     HOUR = "Hour"
     WEEK = "Week"
     MONTH = "Month"
-    #: The minimum allowed interval for Minute schedules is 15 minutes.
     MINUTE = "Minute"
+    """The minimum allowed interval for Minute schedules is 15 minutes."""
 
 
 class SkuNameEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):

@@ -436,7 +436,7 @@ class DscNodeConfigurationOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[None]:
+    ) -> LROPoller[_models.DscNodeConfiguration]:
         """Create the node configuration identified by node configuration name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
@@ -474,7 +474,7 @@ class DscNodeConfigurationOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[None]:
+    ) -> LROPoller[_models.DscNodeConfiguration]:
         """Create the node configuration identified by node configuration name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
@@ -510,7 +510,7 @@ class DscNodeConfigurationOperations:
         node_configuration_name: str,
         parameters: Union[_models.DscNodeConfigurationCreateOrUpdateParameters, IO],
         **kwargs: Any
-    ) -> LROPoller[None]:
+    ) -> LROPoller[_models.DscNodeConfiguration]:
         """Create the node configuration identified by node configuration name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
