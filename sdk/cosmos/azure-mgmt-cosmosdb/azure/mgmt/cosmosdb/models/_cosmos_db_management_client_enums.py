@@ -63,6 +63,13 @@ class BackupStorageRedundancy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ZONE = "Zone"
 
 
+class ClusterType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of the cluster. If set to Production, some operations might not be permitted on cluster."""
+
+    PRODUCTION = "Production"
+    NON_PRODUCTION = "NonProduction"
+
+
 class CompositePathSortOrder(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Sort order for composite paths."""
 

@@ -14,7 +14,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
     pip install azure-identity
     pip install azure-mgmt-cosmosdb
 # USAGE
-    python materialized_views_builder_service_create.py
+    python cosmos_db_private_link_resource_list_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,20 +26,17 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
-    response = client.service.begin_create(
+    response = client.private_link_resources.list_by_database_account(
         resource_group_name="rg1",
         account_name="ddb1",
-        service_name="MaterializedViewsBuilder",
-        create_update_parameters={
-            "properties": {"instanceCount": 1, "instanceSize": "Cosmos.D4s", "serviceType": "MaterializedViewsBuilder"}
-        },
-    ).result()
-    print(response)
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBMaterializedViewsBuilderServiceCreate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBPrivateLinkResourceListGet.json
 if __name__ == "__main__":
     main()

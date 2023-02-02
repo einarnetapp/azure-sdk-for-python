@@ -14,7 +14,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
     pip install azure-identity
     pip install azure-mgmt-cosmosdb
 # USAGE
-    python cosmos_db_managed_cassandra_data_center_update.py
+    python cosmos_db_graph_api_compute_service_create.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,25 +26,20 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="00000000-0000-0000-0000-000000000000",
+        subscription_id="subid",
     )
 
-    response = client.cassandra_data_centers.begin_update(
-        resource_group_name="cassandra-prod-rg",
-        cluster_name="cassandra-prod",
-        data_center_name="dc1",
-        body={
-            "properties": {
-                "base64EncodedCassandraYamlFragment": "Y29tcGFjdGlvbl90aHJvdWdocHV0X21iX3Blcl9zZWM6IDMyCmNvbXBhY3Rpb25fbGFyZ2VfcGFydGl0aW9uX3dhcm5pbmdfdGhyZXNob2xkX21iOiAxMDA=",
-                "dataCenterLocation": "West US 2",
-                "delegatedSubnetId": "/subscriptions/536e130b-d7d6-4ac7-98a5-de20d69588d2/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/dc1-subnet",
-                "nodeCount": 9,
-            }
+    response = client.service.begin_create(
+        resource_group_name="rg1",
+        account_name="ddb1",
+        service_name="GraphAPICompute",
+        create_update_parameters={
+            "properties": {"instanceCount": 1, "instanceSize": "Cosmos.D4s", "serviceType": "GraphAPICompute"}
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBManagedCassandraDataCenterPatch.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBGraphAPIComputeServiceCreate.json
 if __name__ == "__main__":
     main()

@@ -14,7 +14,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
     pip install azure-identity
     pip install azure-mgmt-cosmosdb
 # USAGE
-    python sql_dedicated_gateway_service_create.py
+    python cosmos_db_graph_api_compute_service_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,17 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.service.begin_create(
+    response = client.service.get(
         resource_group_name="rg1",
         account_name="ddb1",
-        service_name="SqlDedicatedGateway",
-        create_update_parameters={
-            "properties": {"instanceCount": 1, "instanceSize": "Cosmos.D4s", "serviceType": "SqlDedicatedGateway"}
-        },
-    ).result()
+        service_name="GraphAPICompute",
+    )
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBSqlDedicatedGatewayServiceCreate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBGraphAPIComputeServiceGet.json
 if __name__ == "__main__":
     main()

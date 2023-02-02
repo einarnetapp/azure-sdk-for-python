@@ -14,7 +14,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
     pip install azure-identity
     pip install azure-mgmt-cosmosdb
 # USAGE
-    python data_transfer_service_create.py
+    python cosmos_db_collection_partition_region_get_metrics.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,17 +29,18 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.service.begin_create(
+    response = client.collection_partition_region.list_metrics(
         resource_group_name="rg1",
         account_name="ddb1",
-        service_name="DataTransfer",
-        create_update_parameters={
-            "properties": {"instanceCount": 1, "instanceSize": "Cosmos.D4s", "serviceType": "DataTransfer"}
-        },
-    ).result()
-    print(response)
+        region="North Europe",
+        database_rid="databaseRid",
+        collection_rid="collectionRid",
+        filter="$filter=(name.value eq 'Max RUs Per Second') and timeGrain eq duration'PT1M' and startTime eq '2017-11-19T23:53:55.2780000Z' and endTime eq '2017-11-20T23:58:55.2780000Z",
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBDataTransferServiceCreate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBCollectionPartitionRegionGetMetrics.json
 if __name__ == "__main__":
     main()

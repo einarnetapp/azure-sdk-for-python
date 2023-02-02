@@ -14,7 +14,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
     pip install azure-identity
     pip install azure-mgmt-cosmosdb
 # USAGE
-    python graph_api_compute_service_delete.py
+    python cosmos_db_sql_client_encryption_keys_list.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,17 +26,18 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="subId",
     )
 
-    response = client.service.begin_delete(
-        resource_group_name="rg1",
-        account_name="ddb1",
-        service_name="GraphAPICompute",
-    ).result()
-    print(response)
+    response = client.sql_resources.list_client_encryption_keys(
+        resource_group_name="rgName",
+        account_name="accountName",
+        database_name="databaseName",
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBGraphAPIComputeServiceDelete.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2022-08-15-preview/examples/CosmosDBSqlClientEncryptionKeysList.json
 if __name__ == "__main__":
     main()
