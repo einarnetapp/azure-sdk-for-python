@@ -7,14 +7,14 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
-from azure.mgmt.rdbms import PostgreSQLManagementClient
+from azure.mgmt.rdbms import MySQLManagementClient
 
 """
 # PREREQUISITES
     pip install azure-identity
     pip install azure-mgmt-rdbms
 # USAGE
-    python server_update_with_aad_auth_enabled.py
+    python log_files_list_by_server.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -24,32 +24,19 @@ from azure.mgmt.rdbms import PostgreSQLManagementClient
 
 
 def main():
-    client = PostgreSQLManagementClient(
+    client = MySQLManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="ffffffff-ffff-ffff-ffff-ffffffffffff",
     )
 
-    response = client.servers.begin_update(
-        resource_group_name="TestGroup",
-        server_name="pgtestsvc4",
-        parameters={
-            "properties": {
-                "administratorLoginPassword": "newpassword",
-                "authConfig": {
-                    "activeDirectoryAuth": "Enabled",
-                    "passwordAuth": "Enabled",
-                    "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt",
-                },
-                "backup": {"backupRetentionDays": 20},
-                "createMode": "Update",
-                "storage": {"storageSizeGB": 1024},
-            },
-            "sku": {"name": "Standard_D8s_v3", "tier": "GeneralPurpose"},
-        },
-    ).result()
-    print(response)
+    response = client.log_files.list_by_server(
+        resource_group_name="testrg",
+        server_name="mysqltestsvc1",
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-12-01/examples/ServerUpdateWithAadAuthEnabled.json
+# x-ms-original-file: specification/mysql/resource-manager/Microsoft.DBforMySQL/preview/2022-09-30-preview/examples/LogFilesListByServer.json
 if __name__ == "__main__":
     main()

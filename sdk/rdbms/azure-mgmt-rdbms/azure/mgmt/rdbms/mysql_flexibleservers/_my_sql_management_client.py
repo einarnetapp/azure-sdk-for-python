@@ -12,7 +12,7 @@ from typing import Any, TYPE_CHECKING
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
-from . import models
+from . import models as _models
 from ._configuration import MySQLManagementClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
@@ -28,6 +28,8 @@ from .operations import (
     LocationBasedCapabilitiesOperations,
     LogFilesOperations,
     Operations,
+    PrivateEndpointConnectionsOperations,
+    PrivateLinkResourcesOperations,
     ReplicasOperations,
     ServersOperations,
 )
@@ -42,6 +44,12 @@ class MySQLManagementClient:  # pylint: disable=client-accepts-api-version-keywo
     Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and
     configurations with new business model.
 
+    :ivar private_endpoint_connections: PrivateEndpointConnectionsOperations operations
+    :vartype private_endpoint_connections:
+     azure.mgmt.rdbms.mysql_flexibleservers.operations.PrivateEndpointConnectionsOperations
+    :ivar private_link_resources: PrivateLinkResourcesOperations operations
+    :vartype private_link_resources:
+     azure.mgmt.rdbms.mysql_flexibleservers.operations.PrivateLinkResourcesOperations
     :ivar backups: BackupsOperations operations
     :vartype backups: azure.mgmt.rdbms.mysql_flexibleservers.operations.BackupsOperations
     :ivar configurations: ConfigurationsOperations operations
@@ -81,11 +89,11 @@ class MySQLManagementClient:  # pylint: disable=client-accepts-api-version-keywo
      azure.mgmt.rdbms.mysql_flexibleservers.operations.AzureADAdministratorsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The ID of the target subscription. Required.
+    :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-09-30-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -104,10 +112,16 @@ class MySQLManagementClient:  # pylint: disable=client-accepts-api-version-keywo
         )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_link_resources = PrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.backups = BackupsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.configurations = ConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.databases = DatabasesOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -157,15 +171,12 @@ class MySQLManagementClient:  # pylint: disable=client-accepts-api-version-keywo
         request_copy.url = self._client.format_url(request_copy.url)
         return self._client.send_request(request_copy, **kwargs)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self._client.close()
 
-    def __enter__(self):
-        # type: () -> MySQLManagementClient
+    def __enter__(self) -> "MySQLManagementClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details):
-        # type: (Any) -> None
+    def __exit__(self, *exc_details) -> None:
         self._client.__exit__(*exc_details)
