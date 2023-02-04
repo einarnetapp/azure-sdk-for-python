@@ -33,15 +33,11 @@ def main():
         resource_group_name="examplerg",
         connected_environment_name="testenv",
         environment_envelope={
-            "extendedLocation": {
-                "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
-                "type": "CustomLocation",
-            },
             "location": "East US",
             "properties": {
                 "customDomainConfiguration": {
                     "certificatePassword": "private key password",
-                    "certificateValue": "Y2VydA==",
+                    "certificateValue": "PFX-or-PEM-blob",
                     "dnsSuffix": "www.my-name.com",
                 },
                 "daprAIConnectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/",
@@ -52,6 +48,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/stable/2022-10-01/examples/ConnectedEnvironments_CreateOrUpdate.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/preview/2022-11-01-preview/examples/ConnectedEnvironments_CreateOrUpdate.json
 if __name__ == "__main__":
     main()
