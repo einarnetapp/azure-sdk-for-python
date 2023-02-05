@@ -11,6 +11,7 @@ from ._prometheus_rule_groups_operations import PrometheusRuleGroupsOperations
 from ._operations import Operations
 from ._alerts_operations import AlertsOperations
 from ._smart_groups_operations import SmartGroupsOperations
+from ._alert_rule_recommendations_operations import AlertRuleRecommendationsOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
@@ -22,6 +23,7 @@ __all__ = [
     "Operations",
     "AlertsOperations",
     "SmartGroupsOperations",
+    "AlertRuleRecommendationsOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

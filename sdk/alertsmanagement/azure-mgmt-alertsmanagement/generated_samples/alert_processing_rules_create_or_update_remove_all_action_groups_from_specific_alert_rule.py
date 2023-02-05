@@ -27,6 +27,7 @@ def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="subId1",
+        target_type="TARGET_TYPE",
     )
 
     response = client.alert_processing_rules.create_or_update(

@@ -27,6 +27,7 @@ def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="dd91de05-d791-4ceb-b6dc-988682dc7d72",
+        target_type="TARGET_TYPE",
     )
 
     response = client.smart_groups.get_all()

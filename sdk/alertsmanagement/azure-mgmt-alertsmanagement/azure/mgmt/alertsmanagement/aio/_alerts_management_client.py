@@ -17,6 +17,7 @@ from .._serialization import Deserializer, Serializer
 from ._configuration import AlertsManagementClientConfiguration
 from .operations import (
     AlertProcessingRulesOperations,
+    AlertRuleRecommendationsOperations,
     AlertsOperations,
     Operations,
     PrometheusRuleGroupsOperations,
@@ -43,10 +44,15 @@ class AlertsManagementClient:  # pylint: disable=client-accepts-api-version-keyw
     :vartype alerts: azure.mgmt.alertsmanagement.aio.operations.AlertsOperations
     :ivar smart_groups: SmartGroupsOperations operations
     :vartype smart_groups: azure.mgmt.alertsmanagement.aio.operations.SmartGroupsOperations
+    :ivar alert_rule_recommendations: AlertRuleRecommendationsOperations operations
+    :vartype alert_rule_recommendations:
+     azure.mgmt.alertsmanagement.aio.operations.AlertRuleRecommendationsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
+    :param target_type: The recommendations target type. Required.
+    :type target_type: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
     """
@@ -55,11 +61,12 @@ class AlertsManagementClient:  # pylint: disable=client-accepts-api-version-keyw
         self,
         credential: "AsyncTokenCredential",
         subscription_id: str,
+        target_type: str,
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
         self._config = AlertsManagementClientConfiguration(
-            credential=credential, subscription_id=subscription_id, **kwargs
+            credential=credential, subscription_id=subscription_id, target_type=target_type, **kwargs
         )
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
@@ -76,6 +83,9 @@ class AlertsManagementClient:  # pylint: disable=client-accepts-api-version-keyw
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.alerts = AlertsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.smart_groups = SmartGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.alert_rule_recommendations = AlertRuleRecommendationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> Awaitable[AsyncHttpResponse]:
         """Runs the network request through the client's chained policies.

@@ -27,6 +27,7 @@ def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
+        target_type="TARGET_TYPE",
     )
 
     response = client.operations.list()
