@@ -9,6 +9,9 @@
 from ._alert_rules_operations import AlertRulesOperations
 from ._actions_operations import ActionsOperations
 from ._alert_rule_templates_operations import AlertRuleTemplatesOperations
+from ._triggered_analytics_rule_run_operations import TriggeredAnalyticsRuleRunOperations
+from ._get_triggered_analytics_rule_runs_operations import GetTriggeredAnalyticsRuleRunsOperations
+from ._alert_rule_operations import AlertRuleOperations
 from ._automation_rules_operations import AutomationRulesOperations
 from ._incidents_operations import IncidentsOperations
 from ._bookmarks_operations import BookmarksOperations
@@ -53,6 +56,9 @@ __all__ = [
     "AlertRulesOperations",
     "ActionsOperations",
     "AlertRuleTemplatesOperations",
+    "TriggeredAnalyticsRuleRunOperations",
+    "GetTriggeredAnalyticsRuleRunsOperations",
+    "AlertRuleOperations",
     "AutomationRulesOperations",
     "IncidentsOperations",
     "BookmarksOperations",
