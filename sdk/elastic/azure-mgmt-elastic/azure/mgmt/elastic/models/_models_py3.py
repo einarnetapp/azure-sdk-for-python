@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
@@ -56,8 +56,8 @@ class CompanyInfo(_serialization.Model):
         employees_number: Optional[str] = None,
         state: Optional[str] = None,
         country: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword domain: Domain of the company.
         :paramtype domain: str
@@ -91,6 +91,8 @@ class DeploymentInfoResponse(_serialization.Model):
     :vartype memory_capacity: str
     :ivar disk_capacity: Disk capacity of the elasticsearch in Elastic cloud deployment.
     :vartype disk_capacity: str
+    :ivar deployment_url: Deployment URL of the elasticsearch in Elastic cloud deployment.
+    :vartype deployment_url: str
     """
 
     _validation = {
@@ -98,6 +100,7 @@ class DeploymentInfoResponse(_serialization.Model):
         "version": {"readonly": True},
         "memory_capacity": {"readonly": True},
         "disk_capacity": {"readonly": True},
+        "deployment_url": {"readonly": True},
     }
 
     _attribute_map = {
@@ -105,15 +108,17 @@ class DeploymentInfoResponse(_serialization.Model):
         "version": {"key": "version", "type": "str"},
         "memory_capacity": {"key": "memoryCapacity", "type": "str"},
         "disk_capacity": {"key": "diskCapacity", "type": "str"},
+        "deployment_url": {"key": "deploymentUrl", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.status = None
         self.version = None
         self.memory_capacity = None
         self.disk_capacity = None
+        self.deployment_url = None
 
 
 class ElasticCloudDeployment(_serialization.Model):
@@ -157,7 +162,7 @@ class ElasticCloudDeployment(_serialization.Model):
         "kibana_sso_url": {"key": "kibanaSsoUrl", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -195,7 +200,7 @@ class ElasticCloudUser(_serialization.Model):
         "elastic_cloud_sso_default_url": {"key": "elasticCloudSsoDefaultUrl", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.email_address = None
@@ -258,8 +263,8 @@ class ElasticMonitorResource(_serialization.Model):
         properties: Optional["_models.MonitorProperties"] = None,
         identity: Optional["_models.IdentityProperties"] = None,
         tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword sku: SKU of the monitor resource.
         :paramtype sku: ~azure.mgmt.elastic.models.ResourceSku
@@ -303,8 +308,8 @@ class ElasticMonitorResourceListResponse(_serialization.Model):
         *,
         value: Optional[List["_models.ElasticMonitorResource"]] = None,
         next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: Results of a list operation.
         :paramtype value: list[~azure.mgmt.elastic.models.ElasticMonitorResource]
@@ -327,7 +332,7 @@ class ElasticMonitorResourceUpdateParameters(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: elastic monitor resource tags.
         :paramtype tags: dict[str, str]
@@ -347,7 +352,7 @@ class ElasticMonitorUpgrade(_serialization.Model):
         "version": {"key": "version", "type": "str"},
     }
 
-    def __init__(self, *, version: Optional[str] = None, **kwargs):
+    def __init__(self, *, version: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword version: Version to which the elastic monitor should be upgraded to.
         :paramtype version: str
@@ -375,8 +380,8 @@ class ElasticProperties(_serialization.Model):
         *,
         elastic_cloud_user: Optional["_models.ElasticCloudUser"] = None,
         elastic_cloud_deployment: Optional["_models.ElasticCloudDeployment"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword elastic_cloud_user: Details of the user's elastic account.
         :paramtype elastic_cloud_user: ~azure.mgmt.elastic.models.ElasticCloudUser
@@ -427,8 +432,8 @@ class ElasticTrafficFilter(_serialization.Model):
         type: Optional[Union[str, "_models.Type"]] = None,
         include_by_default: Optional[bool] = None,
         rules: Optional[List["_models.ElasticTrafficFilterRule"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: Id of the elastic filter.
         :paramtype id: str
@@ -466,7 +471,7 @@ class ElasticTrafficFilterResponse(_serialization.Model):
         "rulesets": {"key": "rulesets", "type": "[ElasticTrafficFilter]"},
     }
 
-    def __init__(self, *, rulesets: Optional[List["_models.ElasticTrafficFilter"]] = None, **kwargs):
+    def __init__(self, *, rulesets: Optional[List["_models.ElasticTrafficFilter"]] = None, **kwargs: Any) -> None:
         """
         :keyword rulesets: List of elastic traffic filters in the account.
         :paramtype rulesets: list[~azure.mgmt.elastic.models.ElasticTrafficFilter]
@@ -506,8 +511,8 @@ class ElasticTrafficFilterRule(_serialization.Model):
         azure_endpoint_guid: Optional[str] = None,
         azure_endpoint_name: Optional[str] = None,
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword source: IP of the elastic filter rule.
         :paramtype source: str
@@ -555,8 +560,8 @@ class ErrorResponseBody(_serialization.Model):
         message: Optional[str] = None,
         target: Optional[str] = None,
         details: Optional[List["_models.ErrorResponseBody"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword code: Error code.
         :paramtype code: str
@@ -591,7 +596,7 @@ class ExternalUserCreationResponse(_serialization.Model):
         "created": {"key": "created", "type": "bool"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.created = None
@@ -628,8 +633,8 @@ class ExternalUserInfo(_serialization.Model):
         password: Optional[str] = None,
         email_id: Optional[str] = None,
         roles: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword user_name: Username of the user to be created or updated.
         :paramtype user_name: str
@@ -651,7 +656,8 @@ class ExternalUserInfo(_serialization.Model):
 
 
 class FilteringTag(_serialization.Model):
-    """The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.
+    """The definition of a filtering tag. Filtering tags are used for capturing resources and
+    include/exclude them from being monitored.
 
     :ivar name: The name (also known as the key) of the tag.
     :vartype name: str
@@ -673,8 +679,8 @@ class FilteringTag(_serialization.Model):
         name: Optional[str] = None,
         value: Optional[str] = None,
         action: Optional[Union[str, "_models.TagAction"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The name (also known as the key) of the tag.
         :paramtype name: str
@@ -713,7 +719,7 @@ class IdentityProperties(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, type: Optional[Union[str, "_models.ManagedIdentityTypes"]] = None, **kwargs):
+    def __init__(self, *, type: Optional[Union[str, "_models.ManagedIdentityTypes"]] = None, **kwargs: Any) -> None:
         """
         :keyword type: Managed identity type. "SystemAssigned"
         :paramtype type: str or ~azure.mgmt.elastic.models.ManagedIdentityTypes
@@ -756,8 +762,8 @@ class LogRules(_serialization.Model):
         send_subscription_logs: Optional[bool] = None,
         send_activity_logs: Optional[bool] = None,
         filtering_tags: Optional[List["_models.FilteringTag"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword send_aad_logs: Flag specifying if AAD logs should be sent for the Monitor resource.
         :paramtype send_aad_logs: bool
@@ -805,8 +811,8 @@ class MonitoredResource(_serialization.Model):
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         sending_logs: Optional[Union[str, "_models.SendingLogs"]] = None,
         reason_for_logs_status: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: The ARM id of the resource.
         :paramtype id: str
@@ -838,8 +844,12 @@ class MonitoredResourceListResponse(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.MonitoredResource"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.MonitoredResource"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: Results of a list operation.
         :paramtype value: list[~azure.mgmt.elastic.models.MonitoredResource]
@@ -883,7 +893,7 @@ class MonitoringTagRules(_serialization.Model):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, *, properties: Optional["_models.MonitoringTagRulesProperties"] = None, **kwargs):
+    def __init__(self, *, properties: Optional["_models.MonitoringTagRulesProperties"] = None, **kwargs: Any) -> None:
         """
         :keyword properties: Properties of the monitoring tag rules.
         :paramtype properties: ~azure.mgmt.elastic.models.MonitoringTagRulesProperties
@@ -911,8 +921,12 @@ class MonitoringTagRulesListResponse(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.MonitoringTagRules"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.MonitoringTagRules"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: Results of a list operation.
         :paramtype value: list[~azure.mgmt.elastic.models.MonitoringTagRules]
@@ -945,8 +959,8 @@ class MonitoringTagRulesProperties(_serialization.Model):
         *,
         provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None,
         log_rules: Optional["_models.LogRules"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword provisioning_state: Provisioning state of the monitoring tag rules. Known values are:
          "Accepted", "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
@@ -1007,8 +1021,8 @@ class MonitorProperties(_serialization.Model):
         elastic_properties: Optional["_models.ElasticProperties"] = None,
         user_info: Optional["_models.UserInfo"] = None,
         version: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword provisioning_state: Provisioning state of the monitor resource. Known values are:
          "Accepted", "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
@@ -1061,8 +1075,8 @@ class OperationDisplay(_serialization.Model):
         resource: Optional[str] = None,
         operation: Optional[str] = None,
         description: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword provider: Service provider, i.e., Microsoft.Elastic.
         :paramtype provider: str
@@ -1095,8 +1109,8 @@ class OperationListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.OperationResult"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.OperationResult"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of operations supported by the Microsoft.Elastic provider.
         :paramtype value: list[~azure.mgmt.elastic.models.OperationResult]
@@ -1135,8 +1149,8 @@ class OperationResult(_serialization.Model):
         is_data_action: Optional[bool] = None,
         display: Optional["_models.OperationDisplay"] = None,
         origin: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Operation name, i.e., {provider}/{resource}/{operation}.
         :paramtype name: str
@@ -1171,7 +1185,7 @@ class ResourceProviderDefaultErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorResponseBody"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.error = None
@@ -1194,7 +1208,7 @@ class ResourceSku(_serialization.Model):
         "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(self, *, name: str, **kwargs):
+    def __init__(self, *, name: str, **kwargs: Any) -> None:
         """
         :keyword name: Name of the SKU. Required.
         :paramtype name: str
@@ -1240,8 +1254,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -1282,8 +1296,8 @@ class UpgradableVersionsList(_serialization.Model):
     }
 
     def __init__(
-        self, *, current_version: Optional[str] = None, upgradable_versions: Optional[List[str]] = None, **kwargs
-    ):
+        self, *, current_version: Optional[str] = None, upgradable_versions: Optional[List[str]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword current_version: Current version of the elastic monitor.
         :paramtype current_version: str
@@ -1335,8 +1349,8 @@ class UserInfo(_serialization.Model):
         company_name: Optional[str] = None,
         email_address: Optional[str] = None,
         company_info: Optional["_models.CompanyInfo"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword first_name: First name of the user.
         :paramtype first_name: str
@@ -1377,8 +1391,8 @@ class VMCollectionUpdate(_serialization.Model):
         *,
         vm_resource_id: Optional[str] = None,
         operation_name: Optional[Union[str, "_models.OperationName"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword vm_resource_id: ARM id of the VM resource.
         :paramtype vm_resource_id: str
@@ -1406,8 +1420,8 @@ class VMHostListResponse(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.VMResources"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.VMResources"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: Results of a list operation.
         :paramtype value: list[~azure.mgmt.elastic.models.VMResources]
@@ -1433,7 +1447,7 @@ class VMIngestionDetailsResponse(_serialization.Model):
         "ingestion_key": {"key": "ingestionKey", "type": "str"},
     }
 
-    def __init__(self, *, cloud_id: Optional[str] = None, ingestion_key: Optional[str] = None, **kwargs):
+    def __init__(self, *, cloud_id: Optional[str] = None, ingestion_key: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword cloud_id: The cloudId of given Elastic monitor resource.
         :paramtype cloud_id: str
@@ -1456,7 +1470,7 @@ class VMResources(_serialization.Model):
         "vm_resource_id": {"key": "vmResourceId", "type": "str"},
     }
 
-    def __init__(self, *, vm_resource_id: Optional[str] = None, **kwargs):
+    def __init__(self, *, vm_resource_id: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword vm_resource_id: The ARM id of the VM resource.
         :paramtype vm_resource_id: str
