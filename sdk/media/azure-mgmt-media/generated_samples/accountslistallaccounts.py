@@ -30,7 +30,7 @@ def main():
     )
 
     response = client.mediaservices.list(
-        resource_group_name="contoso",
+        resource_group_name="contosorg",
     )
     for item in response:
         print(item)

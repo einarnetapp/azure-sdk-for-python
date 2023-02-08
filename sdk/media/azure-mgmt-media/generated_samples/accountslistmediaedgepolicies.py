@@ -30,7 +30,7 @@ def main():
     )
 
     response = client.mediaservices.list_edge_policies(
-        resource_group_name="contoso",
+        resource_group_name="contosorg",
         account_name="contososports",
         parameters={"deviceId": "contosiothubhost_contosoiotdevice"},
     )
