@@ -30,7 +30,7 @@ def main():
     )
 
     response = client.mediaservices.sync_storage_keys(
-        resource_group_name="contoso",
+        resource_group_name="contosorg",
         account_name="contososports",
         parameters={"id": "contososportsstore"},
     )

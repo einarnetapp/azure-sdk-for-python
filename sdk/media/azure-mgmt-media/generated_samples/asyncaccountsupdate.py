@@ -30,7 +30,7 @@ def main():
     )
 
     response = client.mediaservices.begin_update(
-        resource_group_name="contoso",
+        resource_group_name="contosorg",
         account_name="contososports",
         parameters={"tags": {"key1": "value3"}},
     ).result()
