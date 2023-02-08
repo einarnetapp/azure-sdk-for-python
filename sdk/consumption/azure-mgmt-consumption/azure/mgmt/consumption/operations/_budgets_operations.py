@@ -178,7 +178,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -275,7 +275,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
@@ -358,7 +358,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
@@ -394,7 +394,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
@@ -430,7 +430,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
@@ -527,7 +527,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.

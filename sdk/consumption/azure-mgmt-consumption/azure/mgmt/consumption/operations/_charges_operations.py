@@ -122,9 +122,9 @@ class ChargesOperations:
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope, and
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
          specific for partners. Required.
         :type scope: str
         :param start_date: Start date. Default value is None.
