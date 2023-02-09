@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_list_secrets_portal_settings.py
+    python api_management_list_sku.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,13 +29,11 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.delegation_settings.list_secrets(
-        resource_group_name="rg1",
-        service_name="apimService1",
-    )
-    print(response)
+    response = client.api_management_skus.list()
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementListSecretsPortalSettingsValidationKey.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementListSku.json
 if __name__ == "__main__":
     main()

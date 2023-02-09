@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_get_api_revision_contract.py
+    python api_management_list_gateway_certificate_authorities.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,15 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.api.get(
+    response = client.gateway_certificate_authority.list_by_service(
         resource_group_name="rg1",
         service_name="apimService1",
-        api_id="echo-api;rev=3",
+        gateway_id="gw1",
     )
-    print(response)
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementGetApiRevision.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementListGatewayCertificateAuthorities.json
 if __name__ == "__main__":
     main()
