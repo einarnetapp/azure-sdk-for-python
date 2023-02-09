@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python lists_all_available_resource_skus.py
+    python api_management_list_global_schemas.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,11 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.api_management_skus.list()
+    response = client.global_schema.list_by_service(
+        resource_group_name="rg1",
+        service_name="apimService1",
+    )
     for item in response:
         print(item)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementListSku.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementListGlobalSchemas.json
 if __name__ == "__main__":
     main()
