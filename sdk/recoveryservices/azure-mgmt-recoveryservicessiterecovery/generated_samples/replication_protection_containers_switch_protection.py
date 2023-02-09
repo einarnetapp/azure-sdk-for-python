@@ -37,7 +37,7 @@ def main():
         switch_input={
             "properties": {
                 "providerSpecificDetails": {"instanceType": "A2A"},
-                "replicatedProtectedItemName": "a2aSwapOsVm",
+                "replicationProtectedItemName": "a2aSwapOsVm",
             }
         },
     ).result()
