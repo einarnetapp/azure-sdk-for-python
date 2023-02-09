@@ -345,9 +345,10 @@ class TasksOperations:
     ) -> Iterable["_models.ProjectTask"]:
         """Get tasks in a service.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        This method returns a list of tasks owned by a service resource. Some tasks may have a status
-        of Unknown, which indicates that an error occurred while querying the status of that task.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This method returns a list of tasks owned by a service resource. Some tasks
+        may have a status of Unknown, which indicates that an error occurred while querying the status
+        of that task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -456,8 +457,9 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PUT method creates a new task or updates an existing one, although since tasks
-        have no mutable custom properties, there is little reason to update an existing one.
+        (classic) instance. The PUT method creates a new task or updates an existing one, although
+        since tasks have no mutable custom properties, there is little reason to update an existing
+        one.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -493,8 +495,9 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PUT method creates a new task or updates an existing one, although since tasks
-        have no mutable custom properties, there is little reason to update an existing one.
+        (classic) instance. The PUT method creates a new task or updates an existing one, although
+        since tasks have no mutable custom properties, there is little reason to update an existing
+        one.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -528,8 +531,9 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PUT method creates a new task or updates an existing one, although since tasks
-        have no mutable custom properties, there is little reason to update an existing one.
+        (classic) instance. The PUT method creates a new task or updates an existing one, although
+        since tasks have no mutable custom properties, there is little reason to update an existing
+        one.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -630,7 +634,7 @@ class TasksOperations:
         """Get task information.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The GET method retrieves information about a task.
+        (classic) instance. The GET method retrieves information about a task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -713,7 +717,7 @@ class TasksOperations:
         """Delete task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The DELETE method deletes a task, canceling it first if it's running.
+        (classic) instance. The DELETE method deletes a task, canceling it first if it's running.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -795,8 +799,8 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PATCH method updates an existing task, but since tasks have no mutable custom
-        properties, there is little reason to do so.
+        (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable
+        custom properties, there is little reason to do so.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -832,8 +836,8 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PATCH method updates an existing task, but since tasks have no mutable custom
-        properties, there is little reason to do so.
+        (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable
+        custom properties, there is little reason to do so.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -867,8 +871,8 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PATCH method updates an existing task, but since tasks have no mutable custom
-        properties, there is little reason to do so.
+        (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable
+        custom properties, there is little reason to do so.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -959,7 +963,7 @@ class TasksOperations:
         """Cancel a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method cancels a task if it's currently queued or running.
+        (classic) instance. This method cancels a task if it's currently queued or running.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1041,7 +1045,7 @@ class TasksOperations:
         """Execute a command on a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method executes a command on a running task.
+        (classic) instance. This method executes a command on a running task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1077,7 +1081,7 @@ class TasksOperations:
         """Execute a command on a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method executes a command on a running task.
+        (classic) instance. This method executes a command on a running task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1111,7 +1115,7 @@ class TasksOperations:
         """Execute a command on a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method executes a command on a running task.
+        (classic) instance. This method executes a command on a running task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
