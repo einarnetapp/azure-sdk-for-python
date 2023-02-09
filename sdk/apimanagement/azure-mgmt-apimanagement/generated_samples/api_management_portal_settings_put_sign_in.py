@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_restore_service.py
+    python api_management_portal_settings_put_sign_in.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,20 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.api_management_service.begin_restore(
+    response = client.sign_in_settings.create_or_update(
         resource_group_name="rg1",
         service_name="apimService1",
-        parameters={
-            "accessKey": "**************************************************",
-            "accessType": "AccessKey",
-            "backupName": "apimService1backup_2017_03_19",
-            "containerName": "backupContainer",
-            "storageAccount": "teststorageaccount",
-        },
-    ).result()
+        parameters={"properties": {"enabled": True}},
+    )
     print(response)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementRestoreWithAccessKey.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementPortalSettingsPutSignIn.json
 if __name__ == "__main__":
     main()

@@ -6,8 +6,6 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-import isodate
-
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.apimanagement import ApiManagementClient
 
@@ -16,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_get_reports_by_time.py
+    python api_management_portal_settings_put_sign_up.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -31,16 +29,19 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.reports.list_by_time(
+    response = client.sign_up_settings.create_or_update(
         resource_group_name="rg1",
         service_name="apimService1",
-        filter="timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'",
-        interval=isodate.parse_duration("PT15M"),
+        parameters={
+            "properties": {
+                "enabled": True,
+                "termsOfService": {"consentRequired": True, "enabled": True, "text": "Terms of service text."},
+            }
+        },
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementGetReportsByTime.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementPortalSettingsPutSignUp.json
 if __name__ == "__main__":
     main()
