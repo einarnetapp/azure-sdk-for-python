@@ -30,7 +30,7 @@ def main():
     )
 
     response = client.private_endpoint_connections.list(
-        resource_group_name="contoso",
+        resource_group_name="contosorg",
         account_name="contososports",
     )
     print(response)
