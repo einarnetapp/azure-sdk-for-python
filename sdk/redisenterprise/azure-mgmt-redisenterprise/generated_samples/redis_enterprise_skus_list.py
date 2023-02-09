@@ -14,7 +14,7 @@ from azure.mgmt.redisenterprise import RedisEnterpriseManagementClient
     pip install azure-identity
     pip install azure-mgmt-redisenterprise
 # USAGE
-    python redis_enterprise_databases_force_unlink.py
+    python redis_enterprise_skus_list.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,19 +29,13 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.databases.begin_force_unlink(
-        resource_group_name="rg1",
-        cluster_name="cache1",
-        database_name="default",
-        parameters={
-            "ids": [
-                "/subscriptions/subid2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default"
-            ]
-        },
-    ).result()
-    print(response)
+    response = client.skus.list(
+        location="westus2",
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2022-11-01-preview/examples/RedisEnterpriseDatabasesForceUnlink.json
+# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2022-11-01-preview/examples/RedisEnterpriseSkusList.json
 if __name__ == "__main__":
     main()
