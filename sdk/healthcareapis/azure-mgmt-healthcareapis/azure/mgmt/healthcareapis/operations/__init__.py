@@ -17,6 +17,7 @@ from ._iot_connector_fhir_destination_operations import IotConnectorFhirDestinat
 from ._fhir_services_operations import FhirServicesOperations
 from ._workspace_private_endpoint_connections_operations import WorkspacePrivateEndpointConnectionsOperations
 from ._workspace_private_link_resources_operations import WorkspacePrivateLinkResourcesOperations
+from ._analytics_connectors_operations import AnalyticsConnectorsOperations
 from ._operations import Operations
 from ._operation_results_operations import OperationResultsOperations
 
@@ -36,6 +37,7 @@ __all__ = [
     "FhirServicesOperations",
     "WorkspacePrivateEndpointConnectionsOperations",
     "WorkspacePrivateLinkResourcesOperations",
+    "AnalyticsConnectorsOperations",
     "Operations",
     "OperationResultsOperations",
 ]

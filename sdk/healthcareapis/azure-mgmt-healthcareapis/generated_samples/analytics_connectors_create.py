@@ -14,7 +14,7 @@ from azure.mgmt.healthcareapis import HealthcareApisManagementClient
     pip install azure-identity
     pip install azure-mgmt-healthcareapis
 # USAGE
-    python iotconnector_list.py
+    python analytics_connectors_create.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,30 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.iot_connectors.list_by_workspace(
+    response = client.analytics_connectors.begin_create_or_update(
         resource_group_name="testRG",
         workspace_name="workspace1",
-    )
-    for item in response:
-        print(item)
+        analytics_connector_name="exampleconnector",
+        analytics_connector={
+            "location": "westus",
+            "properties": {
+                "dataDestinationConfiguration": {"dataLakeName": "exampledatalake", "type": "datalake"},
+                "dataMappingConfiguration": {
+                    "extensionSchemaReference": "acrexample.azurecr.io/blah@sha256aaa/Extension",
+                    "filterConfigurationReference": "acrexample.azurecr.io/blah@sha256xxx",
+                    "type": "fhirToParquet",
+                },
+                "dataSourceConfiguration": {
+                    "kind": "R4",
+                    "type": "fhirservice",
+                    "url": "https://workspace-examplefhir.fhir.azurehealthcareapis.com",
+                },
+            },
+        },
+    ).result()
+    print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2023-04-01-preview/examples/iotconnectors/iotconnector_List.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2023-04-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Create.json
 if __name__ == "__main__":
     main()

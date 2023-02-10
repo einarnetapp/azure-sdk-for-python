@@ -57,7 +57,7 @@ def build_list_by_workspace_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
@@ -79,7 +79,7 @@ def build_list_by_workspace_request(
 
 
 def build_get_request(
-    resource_group_name: str, workspace_name: str, dicom_service_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, workspace_name: str, analytics_connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -92,7 +92,7 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
@@ -100,8 +100,13 @@ def build_get_request(
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
-        "dicomServiceName": _SERIALIZER.url(
-            "dicom_service_name", dicom_service_name, "str", max_length=24, min_length=3
+        "analyticsConnectorName": _SERIALIZER.url(
+            "analytics_connector_name",
+            analytics_connector_name,
+            "str",
+            max_length=24,
+            min_length=3,
+            pattern=r"^[a-z0-9][a-z0-9\-]*[a-z0-9]$",
         ),
     }
 
@@ -117,7 +122,7 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, workspace_name: str, dicom_service_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, workspace_name: str, analytics_connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -131,7 +136,7 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
@@ -139,8 +144,13 @@ def build_create_or_update_request(
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
-        "dicomServiceName": _SERIALIZER.url(
-            "dicom_service_name", dicom_service_name, "str", max_length=24, min_length=3
+        "analyticsConnectorName": _SERIALIZER.url(
+            "analytics_connector_name",
+            analytics_connector_name,
+            "str",
+            max_length=24,
+            min_length=3,
+            pattern=r"^[a-z0-9][a-z0-9\-]*[a-z0-9]$",
         ),
     }
 
@@ -158,7 +168,7 @@ def build_create_or_update_request(
 
 
 def build_update_request(
-    resource_group_name: str, dicom_service_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, workspace_name: str, analytics_connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -172,17 +182,22 @@ def build_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "dicomServiceName": _SERIALIZER.url(
-            "dicom_service_name", dicom_service_name, "str", max_length=24, min_length=3
-        ),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
+        "analyticsConnectorName": _SERIALIZER.url(
+            "analytics_connector_name",
+            analytics_connector_name,
+            "str",
+            max_length=24,
+            min_length=3,
+            pattern=r"^[a-z0-9][a-z0-9\-]*[a-z0-9]$",
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -199,7 +214,7 @@ def build_update_request(
 
 
 def build_delete_request(
-    resource_group_name: str, dicom_service_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, workspace_name: str, analytics_connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -212,17 +227,22 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "dicomServiceName": _SERIALIZER.url(
-            "dicom_service_name", dicom_service_name, "str", max_length=24, min_length=3
-        ),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
+        "analyticsConnectorName": _SERIALIZER.url(
+            "analytics_connector_name",
+            analytics_connector_name,
+            "str",
+            max_length=24,
+            min_length=3,
+            pattern=r"^[a-z0-9][a-z0-9\-]*[a-z0-9]$",
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -236,14 +256,14 @@ def build_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class DicomServicesOperations:
+class AnalyticsConnectorsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.healthcareapis.HealthcareApisManagementClient`'s
-        :attr:`dicom_services` attribute.
+        :attr:`analytics_connectors` attribute.
     """
 
     models = _models
@@ -258,8 +278,8 @@ class DicomServicesOperations:
     @distributed_trace
     def list_by_workspace(
         self, resource_group_name: str, workspace_name: str, **kwargs: Any
-    ) -> Iterable["_models.DicomService"]:
-        """Lists all DICOM Services for the given workspace.
+    ) -> Iterable["_models.AnalyticsConnector"]:
+        """Lists all Analytics Connectors for the given workspace.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
@@ -267,8 +287,8 @@ class DicomServicesOperations:
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either DicomService or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.healthcareapis.models.DicomService]
+        :return: An iterator like instance of either AnalyticsConnector or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -277,7 +297,7 @@ class DicomServicesOperations:
         api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.DicomServiceCollection] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnectorCollection] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -321,7 +341,7 @@ class DicomServicesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("DicomServiceCollection", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnectorCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -345,25 +365,25 @@ class DicomServicesOperations:
         return ItemPaged(get_next, extract_data)
 
     list_by_workspace.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors"
     }
 
     @distributed_trace
     def get(
-        self, resource_group_name: str, workspace_name: str, dicom_service_name: str, **kwargs: Any
-    ) -> _models.DicomService:
-        """Gets the properties of the specified DICOM Service.
+        self, resource_group_name: str, workspace_name: str, analytics_connector_name: str, **kwargs: Any
+    ) -> _models.AnalyticsConnector:
+        """Gets the properties of the specified Analytics Connector.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DicomService or the result of cls(response)
-        :rtype: ~azure.mgmt.healthcareapis.models.DicomService
+        :return: AnalyticsConnector or the result of cls(response)
+        :rtype: ~azure.mgmt.healthcareapis.models.AnalyticsConnector
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -380,12 +400,12 @@ class DicomServicesOperations:
         api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.DicomService] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            dicom_service_name=dicom_service_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -406,7 +426,7 @@ class DicomServicesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("DicomService", pipeline_response)
+        deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -414,17 +434,17 @@ class DicomServicesOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     def _create_or_update_initial(
         self,
         resource_group_name: str,
         workspace_name: str,
-        dicom_service_name: str,
-        dicomservice: Union[_models.DicomService, IO],
+        analytics_connector_name: str,
+        analytics_connector: Union[_models.AnalyticsConnector, IO],
         **kwargs: Any
-    ) -> _models.DicomService:
+    ) -> _models.AnalyticsConnector:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -440,20 +460,20 @@ class DicomServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.DicomService] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(dicomservice, (IO, bytes)):
-            _content = dicomservice
+        if isinstance(analytics_connector, (IO, bytes)):
+            _content = analytics_connector
         else:
-            _json = self._serialize.body(dicomservice, "DicomService")
+            _json = self._serialize.body(analytics_connector, "AnalyticsConnector")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            dicom_service_name=dicom_service_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -472,19 +492,16 @@ class DicomServicesOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 201, 202]:
+        if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("DicomService", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("DicomService", pipeline_response)
-
-        if response.status_code == 202:
-            deserialized = self._deserialize("DicomService", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -492,7 +509,7 @@ class DicomServicesOperations:
         return deserialized  # type: ignore
 
     _create_or_update_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     @overload
@@ -500,24 +517,24 @@ class DicomServicesOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        dicom_service_name: str,
-        dicomservice: _models.DicomService,
+        analytics_connector_name: str,
+        analytics_connector: _models.AnalyticsConnector,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.DicomService]:
-        """Creates or updates a DICOM Service resource with the specified parameters.
+    ) -> LROPoller[_models.AnalyticsConnector]:
+        """Creates or updates a Analytics Connector resource with the specified parameters.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
-        :param dicomservice: The parameters for creating or updating a Dicom Service resource.
-         Required.
-        :type dicomservice: ~azure.mgmt.healthcareapis.models.DicomService
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector: The parameters for creating or updating a Analytics Connector
+         resource. Required.
+        :type analytics_connector: ~azure.mgmt.healthcareapis.models.AnalyticsConnector
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -529,9 +546,9 @@ class DicomServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DicomService or the result of
+        :return: An instance of LROPoller that returns either AnalyticsConnector or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.DicomService]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -540,24 +557,24 @@ class DicomServicesOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        dicom_service_name: str,
-        dicomservice: IO,
+        analytics_connector_name: str,
+        analytics_connector: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.DicomService]:
-        """Creates or updates a DICOM Service resource with the specified parameters.
+    ) -> LROPoller[_models.AnalyticsConnector]:
+        """Creates or updates a Analytics Connector resource with the specified parameters.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
-        :param dicomservice: The parameters for creating or updating a Dicom Service resource.
-         Required.
-        :type dicomservice: IO
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector: The parameters for creating or updating a Analytics Connector
+         resource. Required.
+        :type analytics_connector: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -569,9 +586,9 @@ class DicomServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DicomService or the result of
+        :return: An instance of LROPoller that returns either AnalyticsConnector or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.DicomService]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -580,22 +597,22 @@ class DicomServicesOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        dicom_service_name: str,
-        dicomservice: Union[_models.DicomService, IO],
+        analytics_connector_name: str,
+        analytics_connector: Union[_models.AnalyticsConnector, IO],
         **kwargs: Any
-    ) -> LROPoller[_models.DicomService]:
-        """Creates or updates a DICOM Service resource with the specified parameters.
+    ) -> LROPoller[_models.AnalyticsConnector]:
+        """Creates or updates a Analytics Connector resource with the specified parameters.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
-        :param dicomservice: The parameters for creating or updating a Dicom Service resource. Is
-         either a DicomService type or a IO type. Required.
-        :type dicomservice: ~azure.mgmt.healthcareapis.models.DicomService or IO
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector: The parameters for creating or updating a Analytics Connector
+         resource. Is either a AnalyticsConnector type or a IO type. Required.
+        :type analytics_connector: ~azure.mgmt.healthcareapis.models.AnalyticsConnector or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -607,9 +624,9 @@ class DicomServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DicomService or the result of
+        :return: An instance of LROPoller that returns either AnalyticsConnector or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.DicomService]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -619,7 +636,7 @@ class DicomServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.DicomService] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
@@ -627,8 +644,8 @@ class DicomServicesOperations:
             raw_result = self._create_or_update_initial(
                 resource_group_name=resource_group_name,
                 workspace_name=workspace_name,
-                dicom_service_name=dicom_service_name,
-                dicomservice=dicomservice,
+                analytics_connector_name=analytics_connector_name,
+                analytics_connector=analytics_connector,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -639,13 +656,15 @@ class DicomServicesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("DicomService", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -660,17 +679,17 @@ class DicomServicesOperations:
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     def _update_initial(
         self,
         resource_group_name: str,
-        dicom_service_name: str,
         workspace_name: str,
-        dicomservice_patch_resource: Union[_models.DicomServicePatchResource, IO],
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: Union[_models.AnalyticsConnectorPatchResource, IO],
         **kwargs: Any
-    ) -> _models.DicomService:
+    ) -> _models.AnalyticsConnector:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -686,20 +705,20 @@ class DicomServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.DicomService] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(dicomservice_patch_resource, (IO, bytes)):
-            _content = dicomservice_patch_resource
+        if isinstance(analytics_connector_patch_resource, (IO, bytes)):
+            _content = analytics_connector_patch_resource
         else:
-            _json = self._serialize.body(dicomservice_patch_resource, "DicomServicePatchResource")
+            _json = self._serialize.body(analytics_connector_patch_resource, "AnalyticsConnectorPatchResource")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
-            dicom_service_name=dicom_service_name,
             workspace_name=workspace_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -724,10 +743,10 @@ class DicomServicesOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("DicomService", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if response.status_code == 202:
-            deserialized = self._deserialize("DicomService", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -735,31 +754,33 @@ class DicomServicesOperations:
         return deserialized  # type: ignore
 
     _update_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     @overload
     def begin_update(
         self,
         resource_group_name: str,
-        dicom_service_name: str,
         workspace_name: str,
-        dicomservice_patch_resource: _models.DicomServicePatchResource,
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: _models.AnalyticsConnectorPatchResource,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.DicomService]:
-        """Patch DICOM Service details.
+    ) -> LROPoller[_models.AnalyticsConnector]:
+        """Patch Analytics Connector Service details.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
-        :param dicomservice_patch_resource: The parameters for updating a Dicom Service. Required.
-        :type dicomservice_patch_resource: ~azure.mgmt.healthcareapis.models.DicomServicePatchResource
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector_patch_resource: The parameters for updating a Analytics Connector.
+         Required.
+        :type analytics_connector_patch_resource:
+         ~azure.mgmt.healthcareapis.models.AnalyticsConnectorPatchResource
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -771,9 +792,9 @@ class DicomServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DicomService or the result of
+        :return: An instance of LROPoller that returns either AnalyticsConnector or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.DicomService]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -781,24 +802,25 @@ class DicomServicesOperations:
     def begin_update(
         self,
         resource_group_name: str,
-        dicom_service_name: str,
         workspace_name: str,
-        dicomservice_patch_resource: IO,
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.DicomService]:
-        """Patch DICOM Service details.
+    ) -> LROPoller[_models.AnalyticsConnector]:
+        """Patch Analytics Connector Service details.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
-        :param dicomservice_patch_resource: The parameters for updating a Dicom Service. Required.
-        :type dicomservice_patch_resource: IO
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector_patch_resource: The parameters for updating a Analytics Connector.
+         Required.
+        :type analytics_connector_patch_resource: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -810,9 +832,9 @@ class DicomServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DicomService or the result of
+        :return: An instance of LROPoller that returns either AnalyticsConnector or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.DicomService]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -820,24 +842,24 @@ class DicomServicesOperations:
     def begin_update(
         self,
         resource_group_name: str,
-        dicom_service_name: str,
         workspace_name: str,
-        dicomservice_patch_resource: Union[_models.DicomServicePatchResource, IO],
+        analytics_connector_name: str,
+        analytics_connector_patch_resource: Union[_models.AnalyticsConnectorPatchResource, IO],
         **kwargs: Any
-    ) -> LROPoller[_models.DicomService]:
-        """Patch DICOM Service details.
+    ) -> LROPoller[_models.AnalyticsConnector]:
+        """Patch Analytics Connector Service details.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
-        :param dicomservice_patch_resource: The parameters for updating a Dicom Service. Is either a
-         DicomServicePatchResource type or a IO type. Required.
-        :type dicomservice_patch_resource: ~azure.mgmt.healthcareapis.models.DicomServicePatchResource
-         or IO
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
+        :param analytics_connector_patch_resource: The parameters for updating a Analytics Connector.
+         Is either a AnalyticsConnectorPatchResource type or a IO type. Required.
+        :type analytics_connector_patch_resource:
+         ~azure.mgmt.healthcareapis.models.AnalyticsConnectorPatchResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -849,9 +871,9 @@ class DicomServicesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DicomService or the result of
+        :return: An instance of LROPoller that returns either AnalyticsConnector or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.DicomService]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -861,16 +883,16 @@ class DicomServicesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.DicomService] = kwargs.pop("cls", None)
+        cls: ClsType[_models.AnalyticsConnector] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = self._update_initial(
                 resource_group_name=resource_group_name,
-                dicom_service_name=dicom_service_name,
                 workspace_name=workspace_name,
-                dicomservice_patch_resource=dicomservice_patch_resource,
+                analytics_connector_name=analytics_connector_name,
+                analytics_connector_patch_resource=analytics_connector_patch_resource,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -881,13 +903,15 @@ class DicomServicesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("DicomService", pipeline_response)
+            deserialized = self._deserialize("AnalyticsConnector", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -902,11 +926,11 @@ class DicomServicesOperations:
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, dicom_service_name: str, workspace_name: str, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, analytics_connector_name: str, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -926,8 +950,8 @@ class DicomServicesOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            dicom_service_name=dicom_service_name,
             workspace_name=workspace_name,
+            analytics_connector_name=analytics_connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -952,22 +976,22 @@ class DicomServicesOperations:
             return cls(pipeline_response, None, {})
 
     _delete_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
 
     @distributed_trace
     def begin_delete(
-        self, resource_group_name: str, dicom_service_name: str, workspace_name: str, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, analytics_connector_name: str, **kwargs: Any
     ) -> LROPoller[None]:
-        """Deletes a DICOM Service.
+        """Deletes a Analytics Connector.
 
         :param resource_group_name: The name of the resource group that contains the service instance.
          Required.
         :type resource_group_name: str
-        :param dicom_service_name: The name of DICOM Service resource. Required.
-        :type dicom_service_name: str
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
+        :param analytics_connector_name: The name of Analytics Connector resource. Required.
+        :type analytics_connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -993,8 +1017,8 @@ class DicomServicesOperations:
         if cont_token is None:
             raw_result = self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                dicom_service_name=dicom_service_name,
                 workspace_name=workspace_name,
+                analytics_connector_name=analytics_connector_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -1008,7 +1032,9 @@ class DicomServicesOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -1023,5 +1049,5 @@ class DicomServicesOperations:
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/analyticsconnectors/{analyticsConnectorName}"
     }
