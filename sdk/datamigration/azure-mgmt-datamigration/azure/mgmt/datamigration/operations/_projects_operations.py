@@ -420,7 +420,7 @@ class ProjectsOperations:
         :type service_name: str
         :param project_name: Name of the project. Required.
         :type project_name: str
-        :param parameters: Information about the project. Is either a model type or a IO type.
+        :param parameters: Information about the project. Is either a Project type or a IO type.
          Required.
         :type parameters: ~azure.mgmt.datamigration.models.Project or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -729,7 +729,7 @@ class ProjectsOperations:
         :type service_name: str
         :param project_name: Name of the project. Required.
         :type project_name: str
-        :param parameters: Information about the project. Is either a model type or a IO type.
+        :param parameters: Information about the project. Is either a Project type or a IO type.
          Required.
         :type parameters: ~azure.mgmt.datamigration.models.Project or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

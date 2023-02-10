@@ -330,7 +330,8 @@ class FilesOperations:
         :type project_name: str
         :param file_name: Name of the File. Required.
         :type file_name: str
-        :param parameters: Information about the file. Is either a model type or a IO type. Required.
+        :param parameters: Information about the file. Is either a ProjectFile type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectFile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -569,7 +570,8 @@ class FilesOperations:
         :type project_name: str
         :param file_name: Name of the File. Required.
         :type file_name: str
-        :param parameters: Information about the file. Is either a model type or a IO type. Required.
+        :param parameters: Information about the file. Is either a ProjectFile type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectFile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

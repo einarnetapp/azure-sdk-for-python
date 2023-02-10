@@ -462,8 +462,8 @@ class DatabaseMigrationsSqlMiOperations:
         :type managed_instance_name: str
         :param target_db_name: The name of the target database. Required.
         :type target_db_name: str
-        :param parameters: Details of SqlMigrationService resource. Is either a model type or a IO
-         type. Required.
+        :param parameters: Details of SqlMigrationService resource. Is either a DatabaseMigrationSqlMi
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.DatabaseMigrationSqlMi or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -695,7 +695,7 @@ class DatabaseMigrationsSqlMiOperations:
         :param target_db_name: The name of the target database. Required.
         :type target_db_name: str
         :param parameters: Required migration operation ID for which cancel will be initiated. Is
-         either a model type or a IO type. Required.
+         either a MigrationOperationInput type or a IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.MigrationOperationInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -924,7 +924,7 @@ class DatabaseMigrationsSqlMiOperations:
         :param target_db_name: The name of the target database. Required.
         :type target_db_name: str
         :param parameters: Required migration operation ID for which cutover will be initiated. Is
-         either a model type or a IO type. Required.
+         either a MigrationOperationInput type or a IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.MigrationOperationInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

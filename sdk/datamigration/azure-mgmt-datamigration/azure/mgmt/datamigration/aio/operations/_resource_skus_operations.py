@@ -61,7 +61,7 @@ class ResourceSkusOperations:
     def list_skus(self, **kwargs: Any) -> AsyncIterable["_models.ResourceSku"]:
         """Get supported SKUs.
 
-        The skus action returns the list of SKUs that DMS supports.
+        The skus action returns the list of SKUs that DMS (classic) supports.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ResourceSku or the result of cls(response)
