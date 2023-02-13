@@ -89,7 +89,7 @@ class FilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.FileList] = kwargs.pop("cls", None)
@@ -197,7 +197,7 @@ class FilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProjectFile] = kwargs.pop("cls", None)
@@ -330,7 +330,8 @@ class FilesOperations:
         :type project_name: str
         :param file_name: Name of the File. Required.
         :type file_name: str
-        :param parameters: Information about the file. Is either a model type or a IO type. Required.
+        :param parameters: Information about the file. Is either a ProjectFile type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectFile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -351,7 +352,7 @@ class FilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -440,7 +441,7 @@ class FilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -569,7 +570,8 @@ class FilesOperations:
         :type project_name: str
         :param file_name: Name of the File. Required.
         :type file_name: str
-        :param parameters: Information about the file. Is either a model type or a IO type. Required.
+        :param parameters: Information about the file. Is either a ProjectFile type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectFile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -590,7 +592,7 @@ class FilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -676,7 +678,7 @@ class FilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.FileStorageInfo] = kwargs.pop("cls", None)
@@ -749,7 +751,7 @@ class FilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.FileStorageInfo] = kwargs.pop("cls", None)

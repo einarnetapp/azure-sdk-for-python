@@ -103,7 +103,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DatabaseMigrationSqlDb] = kwargs.pop("cls", None)
@@ -163,7 +163,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -316,8 +316,8 @@ class DatabaseMigrationsSqlDbOperations:
         :type sql_db_instance_name: str
         :param target_db_name: The name of the target database. Required.
         :type target_db_name: str
-        :param parameters: Details of Sql Db migration resource. Is either a model type or a IO type.
-         Required.
+        :param parameters: Details of Sql Db migration resource. Is either a DatabaseMigrationSqlDb
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.DatabaseMigrationSqlDb or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -339,7 +339,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -406,7 +406,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -478,7 +478,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -541,7 +541,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -685,7 +685,7 @@ class DatabaseMigrationsSqlDbOperations:
         :param target_db_name: The name of the target database. Required.
         :type target_db_name: str
         :param parameters: Required migration operation ID for which cancel will be initiated. Is
-         either a model type or a IO type. Required.
+         either a MigrationOperationInput type or a IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.MigrationOperationInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -705,7 +705,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

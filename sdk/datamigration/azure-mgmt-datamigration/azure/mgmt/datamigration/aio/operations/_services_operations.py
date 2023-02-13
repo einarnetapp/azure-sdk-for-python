@@ -87,7 +87,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -252,8 +252,8 @@ class ServicesOperations:
         :type group_name: str
         :param service_name: Name of the service. Required.
         :type service_name: str
-        :param parameters: Information about the service. Is either a model type or a IO type.
-         Required.
+        :param parameters: Information about the service. Is either a DataMigrationService type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.DataMigrationService or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -275,7 +275,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -349,7 +349,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataMigrationService] = kwargs.pop("cls", None)
@@ -402,7 +402,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -469,7 +469,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -526,7 +526,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -676,8 +676,8 @@ class ServicesOperations:
         :type group_name: str
         :param service_name: Name of the service. Required.
         :type service_name: str
-        :param parameters: Information about the service. Is either a model type or a IO type.
-         Required.
+        :param parameters: Information about the service. Is either a DataMigrationService type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.DataMigrationService or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -699,7 +699,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -776,7 +776,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataMigrationServiceStatusResponse] = kwargs.pop("cls", None)
@@ -829,7 +829,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -890,7 +890,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -946,7 +946,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1008,7 +1008,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1072,7 +1072,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServiceSkuList] = kwargs.pop("cls", None)
@@ -1216,7 +1216,8 @@ class ServicesOperations:
         :type group_name: str
         :param service_name: Name of the service. Required.
         :type service_name: str
-        :param parameters: Requested name to validate. Is either a model type or a IO type. Required.
+        :param parameters: Requested name to validate. Is either a NameAvailabilityRequest type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.NameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1237,7 +1238,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1307,7 +1308,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataMigrationServiceList] = kwargs.pop("cls", None)
@@ -1397,7 +1398,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataMigrationServiceList] = kwargs.pop("cls", None)
@@ -1524,7 +1525,8 @@ class ServicesOperations:
 
         :param location: The Azure region of the operation. Required.
         :type location: str
-        :param parameters: Requested name to validate. Is either a model type or a IO type. Required.
+        :param parameters: Requested name to validate. Is either a NameAvailabilityRequest type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.NameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1545,7 +1547,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-11-30-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
