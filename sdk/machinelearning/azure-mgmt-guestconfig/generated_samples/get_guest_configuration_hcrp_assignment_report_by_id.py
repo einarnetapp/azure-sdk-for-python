@@ -14,7 +14,7 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
     pip install azure-identity
     pip install azure-mgmt-guestconfig
 # USAGE
-    python get_a_guest_configuration_assignment.py
+    python get_guest_configuration_hcrp_assignment_report_by_id.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,17 +26,18 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
 def main():
     client = GuestConfigurationClient(
         credential=DefaultAzureCredential(),
-        subscription_id="mySubscriptionId",
+        subscription_id="mySubscriptionid",
     )
 
-    response = client.guest_configuration_assignments.get(
+    response = client.guest_configuration_hcrp_assignment_reports.get(
         resource_group_name="myResourceGroupName",
-        guest_configuration_assignment_name="SecureProtocol",
-        vm_name="myVMName",
+        guest_configuration_assignment_name="AuditSecureProtocol",
+        report_id="7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+        machine_name="myMachineName",
     )
     print(response)
 
 
-# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/getGuestConfigurationAssignment.json
+# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/getGuestConfigurationHCRPAssignmentReportById.json
 if __name__ == "__main__":
     main()

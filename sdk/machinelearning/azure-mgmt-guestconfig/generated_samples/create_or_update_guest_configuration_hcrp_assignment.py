@@ -14,7 +14,7 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
     pip install azure-identity
     pip install azure-mgmt-guestconfig
 # USAGE
-    python list_all_guest_configuration_assignments_for_a_resource_group.py
+    python create_or_update_guest_configuration_hcrp_assignment.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,13 +29,31 @@ def main():
         subscription_id="mySubscriptionId",
     )
 
-    response = client.guest_configuration_assignments.rg_list(
+    response = client.guest_configuration_hcrp_assignments.create_or_update(
+        guest_configuration_assignment_name="NotInstalledApplicationForWindows",
         resource_group_name="myResourceGroupName",
+        machine_name="myMachineName",
+        parameters={
+            "location": "westcentralus",
+            "name": "NotInstalledApplicationForWindows",
+            "properties": {
+                "context": "Azure policy",
+                "guestConfiguration": {
+                    "assignmentType": "ApplyAndAutoCorrect",
+                    "configurationParameter": [
+                        {"name": "[InstalledApplication]NotInstalledApplicationResource1;Name", "value": "NotePad,sql"}
+                    ],
+                    "contentHash": "123contenthash",
+                    "contentUri": "https://thisisfake/pacakge",
+                    "name": "NotInstalledApplicationForWindows",
+                    "version": "1.*",
+                },
+            },
+        },
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/listRGGuestConfigurationAssignments.json
+# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/createOrUpdateGuestConfigurationHCRPAssignment.json
 if __name__ == "__main__":
     main()

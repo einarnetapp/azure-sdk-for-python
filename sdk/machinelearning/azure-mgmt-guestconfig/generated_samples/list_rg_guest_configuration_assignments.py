@@ -14,7 +14,7 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
     pip install azure-identity
     pip install azure-mgmt-guestconfig
 # USAGE
-    python get_a_vmss_guest_configuration_assignment.py
+    python list_rg_guest_configuration_assignments.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,13 @@ def main():
         subscription_id="mySubscriptionId",
     )
 
-    response = client.guest_configuration_assignments_vmss.get(
+    response = client.guest_configuration_assignments.rg_list(
         resource_group_name="myResourceGroupName",
-        vmss_name="myVMSSName",
-        name="SecureProtocol",
     )
-    print(response)
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/getVMSSGuestConfigurationAssignment.json
+# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/listRGGuestConfigurationAssignments.json
 if __name__ == "__main__":
     main()
