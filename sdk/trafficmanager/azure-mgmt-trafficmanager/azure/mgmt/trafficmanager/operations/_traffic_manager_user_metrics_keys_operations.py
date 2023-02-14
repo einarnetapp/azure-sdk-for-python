@@ -43,9 +43,7 @@ def build_get_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-04-01-preview")
-    )
+    api_version: Literal["2022-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -72,9 +70,7 @@ def build_create_or_update_request(subscription_id: str, **kwargs: Any) -> HttpR
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-04-01-preview")
-    )
+    api_version: Literal["2022-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -101,9 +97,7 @@ def build_delete_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-04-01-preview")
-    )
+    api_version: Literal["2022-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -165,7 +159,7 @@ class TrafficManagerUserMetricsKeysOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.UserMetricsModel] = kwargs.pop("cls", None)
@@ -221,7 +215,7 @@ class TrafficManagerUserMetricsKeysOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.UserMetricsModel] = kwargs.pop("cls", None)
@@ -277,7 +271,7 @@ class TrafficManagerUserMetricsKeysOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DeleteOperationResult] = kwargs.pop("cls", None)

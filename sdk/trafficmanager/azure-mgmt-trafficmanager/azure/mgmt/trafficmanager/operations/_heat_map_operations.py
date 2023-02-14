@@ -52,9 +52,7 @@ def build_get_request(
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     heat_map_type: Literal["default"] = kwargs.pop("heat_map_type", "default")
-    api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-04-01-preview")
-    )
+    api_version: Literal["2022-04-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -147,7 +145,7 @@ class HeatMapOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         heat_map_type: Literal["default"] = kwargs.pop("heat_map_type", "default")
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.HeatMapModel] = kwargs.pop("cls", None)

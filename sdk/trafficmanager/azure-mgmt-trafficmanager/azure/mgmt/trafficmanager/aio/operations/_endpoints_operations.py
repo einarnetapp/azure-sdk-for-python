@@ -155,7 +155,7 @@ class EndpointsOperations:
         :param endpoint_name: The name of the Traffic Manager endpoint to be updated. Required.
         :type endpoint_name: str
         :param parameters: The Traffic Manager endpoint parameters supplied to the Update operation. Is
-         either a model type or a IO type. Required.
+         either a Endpoint type or a IO type. Required.
         :type parameters: ~azure.mgmt.trafficmanager.models.Endpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -176,7 +176,7 @@ class EndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -265,7 +265,7 @@ class EndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Endpoint] = kwargs.pop("cls", None)
@@ -403,7 +403,7 @@ class EndpointsOperations:
          Required.
         :type endpoint_name: str
         :param parameters: The Traffic Manager endpoint parameters supplied to the CreateOrUpdate
-         operation. Is either a model type or a IO type. Required.
+         operation. Is either a Endpoint type or a IO type. Required.
         :type parameters: ~azure.mgmt.trafficmanager.models.Endpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -424,7 +424,7 @@ class EndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -517,7 +517,7 @@ class EndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.DeleteOperationResult]] = kwargs.pop("cls", None)

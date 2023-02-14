@@ -30,6 +30,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._profiles_operations import (
+    build_check_traffic_manager_name_availability_v2_request,
     build_check_traffic_manager_relative_dns_name_availability_request,
     build_create_or_update_request,
     build_delete_request,
@@ -114,7 +115,8 @@ class ProfilesOperations:
         """Checks the availability of a Traffic Manager Relative DNS name.
 
         :param parameters: The Traffic Manager name parameters supplied to the
-         CheckTrafficManagerNameAvailability operation. Is either a model type or a IO type. Required.
+         CheckTrafficManagerNameAvailability operation. Is either a
+         CheckTrafficManagerRelativeDnsNameAvailabilityParameters type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.trafficmanager.models.CheckTrafficManagerRelativeDnsNameAvailabilityParameters or
          IO
@@ -137,7 +139,7 @@ class ProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -184,6 +186,126 @@ class ProfilesOperations:
         "url": "/providers/Microsoft.Network/checkTrafficManagerNameAvailability"
     }
 
+    @overload
+    async def check_traffic_manager_name_availability_v2(
+        self,
+        parameters: _models.CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.TrafficManagerNameAvailability:
+        """Checks the availability of a Traffic Manager Relative DNS name.
+
+        :param parameters: The Traffic Manager name parameters supplied to the
+         CheckTrafficManagerNameAvailability operation. Required.
+        :type parameters:
+         ~azure.mgmt.trafficmanager.models.CheckTrafficManagerRelativeDnsNameAvailabilityParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: TrafficManagerNameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.trafficmanager.models.TrafficManagerNameAvailability
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def check_traffic_manager_name_availability_v2(
+        self, parameters: IO, *, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.TrafficManagerNameAvailability:
+        """Checks the availability of a Traffic Manager Relative DNS name.
+
+        :param parameters: The Traffic Manager name parameters supplied to the
+         CheckTrafficManagerNameAvailability operation. Required.
+        :type parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: TrafficManagerNameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.trafficmanager.models.TrafficManagerNameAvailability
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def check_traffic_manager_name_availability_v2(
+        self, parameters: Union[_models.CheckTrafficManagerRelativeDnsNameAvailabilityParameters, IO], **kwargs: Any
+    ) -> _models.TrafficManagerNameAvailability:
+        """Checks the availability of a Traffic Manager Relative DNS name.
+
+        :param parameters: The Traffic Manager name parameters supplied to the
+         CheckTrafficManagerNameAvailability operation. Is either a
+         CheckTrafficManagerRelativeDnsNameAvailabilityParameters type or a IO type. Required.
+        :type parameters:
+         ~azure.mgmt.trafficmanager.models.CheckTrafficManagerRelativeDnsNameAvailabilityParameters or
+         IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: TrafficManagerNameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.trafficmanager.models.TrafficManagerNameAvailability
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-04-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.TrafficManagerNameAvailability] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
+        else:
+            _json = self._serialize.body(parameters, "CheckTrafficManagerRelativeDnsNameAvailabilityParameters")
+
+        request = build_check_traffic_manager_name_availability_v2_request(
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.check_traffic_manager_name_availability_v2.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("TrafficManagerNameAvailability", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    check_traffic_manager_name_availability_v2.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/checkTrafficManagerNameAvailabilityV2"
+    }
+
     @distributed_trace
     def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> AsyncIterable["_models.Profile"]:
         """Lists all Traffic Manager profiles within a resource group.
@@ -199,7 +321,7 @@ class ProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProfileListResult] = kwargs.pop("cls", None)
@@ -283,7 +405,7 @@ class ProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProfileListResult] = kwargs.pop("cls", None)
@@ -379,7 +501,7 @@ class ProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Profile] = kwargs.pop("cls", None)
@@ -487,7 +609,7 @@ class ProfilesOperations:
         :param profile_name: The name of the Traffic Manager profile. Required.
         :type profile_name: str
         :param parameters: The Traffic Manager profile parameters supplied to the CreateOrUpdate
-         operation. Is either a model type or a IO type. Required.
+         operation. Is either a Profile type or a IO type. Required.
         :type parameters: ~azure.mgmt.trafficmanager.models.Profile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -508,7 +630,7 @@ class ProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -589,7 +711,7 @@ class ProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.DeleteOperationResult]] = kwargs.pop("cls", None)
@@ -699,7 +821,7 @@ class ProfilesOperations:
         :param profile_name: The name of the Traffic Manager profile. Required.
         :type profile_name: str
         :param parameters: The Traffic Manager profile parameters supplied to the Update operation. Is
-         either a model type or a IO type. Required.
+         either a Profile type or a IO type. Required.
         :type parameters: ~azure.mgmt.trafficmanager.models.Profile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -720,7 +842,7 @@ class ProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
