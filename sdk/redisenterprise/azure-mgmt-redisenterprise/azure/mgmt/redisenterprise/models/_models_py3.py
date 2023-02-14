@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
@@ -37,7 +37,7 @@ class AccessKeys(_serialization.Model):
         "secondary_key": {"key": "secondaryKey", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.primary_key = None
@@ -71,7 +71,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -80,7 +80,8 @@ class Resource(_serialization.Model):
 
 
 class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+    """The resource model definition for an Azure Resource Manager tracked top level resource which
+    has 'tags' and a 'location'.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -115,7 +116,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -210,8 +211,8 @@ class Cluster(TrackedResource):  # pylint: disable=too-many-instance-attributes
         tags: Optional[Dict[str, str]] = None,
         zones: Optional[List[str]] = None,
         minimum_tls_version: Optional[Union[str, "_models.TlsVersion"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -256,7 +257,7 @@ class ClusterList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Cluster"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Cluster"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: List of clusters.
         :paramtype value: list[~azure.mgmt.redisenterprise.models.Cluster]
@@ -323,8 +324,8 @@ class ClusterUpdate(_serialization.Model):
         sku: Optional["_models.Sku"] = None,
         tags: Optional[Dict[str, str]] = None,
         minimum_tls_version: Optional[Union[str, "_models.TlsVersion"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword sku: The SKU to create, which affects price, performance, and features.
         :paramtype sku: ~azure.mgmt.redisenterprise.models.Sku
@@ -346,7 +347,8 @@ class ClusterUpdate(_serialization.Model):
 
 
 class ProxyResource(Resource):
-    """The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location.
+    """The resource model definition for a Azure Resource Manager proxy resource. It will not have
+    tags and a location.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -372,7 +374,7 @@ class ProxyResource(Resource):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
 
@@ -454,8 +456,8 @@ class Database(ProxyResource):  # pylint: disable=too-many-instance-attributes
         persistence: Optional["_models.Persistence"] = None,
         modules: Optional[List["_models.Module"]] = None,
         geo_replication: Optional["_models.DatabasePropertiesGeoReplication"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword client_protocol: Specifies whether redis clients can connect using TLS-encrypted or
          plaintext redis protocols. Default is TLS-encrypted. Known values are: "Encrypted" and
@@ -512,7 +514,7 @@ class DatabaseList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Database"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Database"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: List of databases.
         :paramtype value: list[~azure.mgmt.redisenterprise.models.Database]
@@ -541,8 +543,8 @@ class DatabasePropertiesGeoReplication(_serialization.Model):
         *,
         group_nickname: Optional[str] = None,
         linked_databases: Optional[List["_models.LinkedDatabase"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword group_nickname: Name for the group of linked database resources.
         :paramtype group_nickname: str
@@ -617,8 +619,8 @@ class DatabaseUpdate(_serialization.Model):
         persistence: Optional["_models.Persistence"] = None,
         modules: Optional[List["_models.Module"]] = None,
         geo_replication: Optional["_models.DatabasePropertiesGeoReplication"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword client_protocol: Specifies whether redis clients can connect using TLS-encrypted or
          plaintext redis protocols. Default is TLS-encrypted. Known values are: "Encrypted" and
@@ -676,7 +678,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -716,7 +718,7 @@ class ErrorDetail(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -727,7 +729,8 @@ class ErrorDetail(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.redisenterprise.models.ErrorDetail
@@ -737,7 +740,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.redisenterprise.models.ErrorDetail
@@ -763,7 +766,7 @@ class ExportClusterParameters(_serialization.Model):
         "sas_uri": {"key": "sasUri", "type": "str"},
     }
 
-    def __init__(self, *, sas_uri: str, **kwargs):
+    def __init__(self, *, sas_uri: str, **kwargs: Any) -> None:
         """
         :keyword sas_uri: SAS URI for the target directory to export to. Required.
         :paramtype sas_uri: str
@@ -789,7 +792,7 @@ class ForceUnlinkParameters(_serialization.Model):
         "ids": {"key": "ids", "type": "[str]"},
     }
 
-    def __init__(self, *, ids: List[str], **kwargs):
+    def __init__(self, *, ids: List[str], **kwargs: Any) -> None:
         """
         :keyword ids: The resource IDs of the database resources to be unlinked. Required.
         :paramtype ids: list[str]
@@ -815,7 +818,7 @@ class ImportClusterParameters(_serialization.Model):
         "sas_uris": {"key": "sasUris", "type": "[str]"},
     }
 
-    def __init__(self, *, sas_uris: List[str], **kwargs):
+    def __init__(self, *, sas_uris: List[str], **kwargs: Any) -> None:
         """
         :keyword sas_uris: SAS URIs for the target blobs to import from. Required.
         :paramtype sas_uris: list[str]
@@ -845,7 +848,7 @@ class LinkedDatabase(_serialization.Model):
         "state": {"key": "state", "type": "str"},
     }
 
-    def __init__(self, *, id: Optional[str] = None, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: Resource ID of a database resource to link with this database.
         :paramtype id: str
@@ -882,7 +885,7 @@ class Module(_serialization.Model):
         "version": {"key": "version", "type": "str"},
     }
 
-    def __init__(self, *, name: str, args: Optional[str] = None, **kwargs):
+    def __init__(self, *, name: str, args: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword name: The name of the module, e.g. 'RedisBloom', 'RediSearch', 'RedisTimeSeries'.
          Required.
@@ -933,7 +936,7 @@ class Operation(_serialization.Model):
         "action_type": {"key": "actionType", "type": "str"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: Localized display information for this particular operation.
         :paramtype display: ~azure.mgmt.redisenterprise.models.OperationDisplay
@@ -979,7 +982,7 @@ class OperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -989,7 +992,8 @@ class OperationDisplay(_serialization.Model):
 
 
 class OperationListResult(_serialization.Model):
-    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link
+    to get the next set of results.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -1009,7 +1013,7 @@ class OperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1051,8 +1055,8 @@ class OperationStatus(_serialization.Model):
         end_time: Optional[str] = None,
         status: Optional[str] = None,
         error: Optional["_models.ErrorResponse"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: The operation's unique id.
         :paramtype id: str
@@ -1105,8 +1109,8 @@ class Persistence(_serialization.Model):
         rdb_enabled: Optional[bool] = None,
         aof_frequency: Optional[Union[str, "_models.AofFrequency"]] = None,
         rdb_frequency: Optional[Union[str, "_models.RdbFrequency"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword aof_enabled: Sets whether AOF is enabled.
         :paramtype aof_enabled: bool
@@ -1143,7 +1147,7 @@ class PrivateEndpoint(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -1198,8 +1202,8 @@ class PrivateEndpointConnection(Resource):
         *,
         private_endpoint: Optional["_models.PrivateEndpoint"] = None,
         private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword private_endpoint: The resource of private end point.
         :paramtype private_endpoint: ~azure.mgmt.redisenterprise.models.PrivateEndpoint
@@ -1225,7 +1229,7 @@ class PrivateEndpointConnectionListResult(_serialization.Model):
         "value": {"key": "value", "type": "[PrivateEndpointConnection]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Array of private endpoint connections.
         :paramtype value: list[~azure.mgmt.redisenterprise.models.PrivateEndpointConnection]
@@ -1272,7 +1276,7 @@ class PrivateLinkResource(Resource):
         "required_zone_names": {"key": "properties.requiredZoneNames", "type": "[str]"},
     }
 
-    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword required_zone_names: The private link resource Private link DNS zone name.
         :paramtype required_zone_names: list[str]
@@ -1294,7 +1298,7 @@ class PrivateLinkResourceListResult(_serialization.Model):
         "value": {"key": "value", "type": "[PrivateLinkResource]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateLinkResource"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.PrivateLinkResource"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Array of private link resources.
         :paramtype value: list[~azure.mgmt.redisenterprise.models.PrivateLinkResource]
@@ -1304,7 +1308,8 @@ class PrivateLinkResourceListResult(_serialization.Model):
 
 
 class PrivateLinkServiceConnectionState(_serialization.Model):
-    """A collection of information about the state of the connection between service consumer and provider.
+    """A collection of information about the state of the connection between service consumer and
+    provider.
 
     :ivar status: Indicates whether the connection has been Approved/Rejected/Removed by the owner
      of the service. Known values are: "Pending", "Approved", and "Rejected".
@@ -1329,8 +1334,8 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         status: Optional[Union[str, "_models.PrivateEndpointServiceConnectionStatus"]] = None,
         description: Optional[str] = None,
         actions_required: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword status: Indicates whether the connection has been Approved/Rejected/Removed by the
          owner of the service. Known values are: "Pending", "Approved", and "Rejected".
@@ -1366,7 +1371,7 @@ class RegenerateKeyParameters(_serialization.Model):
         "key_type": {"key": "keyType", "type": "str"},
     }
 
-    def __init__(self, *, key_type: Union[str, "_models.AccessKeyType"], **kwargs):
+    def __init__(self, *, key_type: Union[str, "_models.AccessKeyType"], **kwargs: Any) -> None:
         """
         :keyword key_type: Which access key to regenerate. Required. Known values are: "Primary" and
          "Secondary".
@@ -1400,7 +1405,7 @@ class Sku(_serialization.Model):
         "capacity": {"key": "capacity", "type": "int"},
     }
 
-    def __init__(self, *, name: Union[str, "_models.SkuName"], capacity: Optional[int] = None, **kwargs):
+    def __init__(self, *, name: Union[str, "_models.SkuName"], capacity: Optional[int] = None, **kwargs: Any) -> None:
         """
         :keyword name: The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10,
          EnterpriseFlash_F300 etc.). Required. Known values are: "Enterprise_E10", "Enterprise_E20",
