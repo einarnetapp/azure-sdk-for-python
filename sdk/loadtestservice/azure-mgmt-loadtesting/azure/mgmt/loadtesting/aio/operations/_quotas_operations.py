@@ -276,8 +276,8 @@ class QuotasOperations:
         :type location: str
         :param quota_bucket_name: Quota Bucket name. Required.
         :type quota_bucket_name: str
-        :param quota_bucket_request: Quota Bucket Request data. Is either a model type or a IO type.
-         Required.
+        :param quota_bucket_request: Quota Bucket Request data. Is either a QuotaBucketRequest type or
+         a IO type. Required.
         :type quota_bucket_request: ~azure.mgmt.loadtesting.models.QuotaBucketRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
