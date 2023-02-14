@@ -20,6 +20,7 @@ from ._models_py3 import Database
 from ._models_py3 import DatabaseListResult
 from ._models_py3 import DelegatedSubnetUsage
 from ._models_py3 import ErrorAdditionalInfo
+from ._models_py3 import ErrorDetail
 from ._models_py3 import ErrorResponse
 from ._models_py3 import FirewallRule
 from ._models_py3 import FirewallRuleListResult
@@ -35,6 +36,12 @@ from ._models_py3 import Network
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
+from ._models_py3 import PrivateEndpoint
+from ._models_py3 import PrivateEndpointConnection
+from ._models_py3 import PrivateEndpointConnectionListResult
+from ._models_py3 import PrivateLinkResource
+from ._models_py3 import PrivateLinkResourceListResult
+from ._models_py3 import PrivateLinkServiceConnectionState
 from ._models_py3 import ProxyResource
 from ._models_py3 import Resource
 from ._models_py3 import Server
@@ -50,6 +57,7 @@ from ._models_py3 import SkuCapability
 from ._models_py3 import Storage
 from ._models_py3 import StorageEditionCapability
 from ._models_py3 import SystemData
+from ._models_py3 import TagsObject
 from ._models_py3 import TrackedResource
 from ._models_py3 import UserAssignedIdentity
 from ._models_py3 import VirtualNetworkSubnetUsageParameter
@@ -67,13 +75,15 @@ from ._my_sql_management_client_enums import HighAvailabilityState
 from ._my_sql_management_client_enums import IsConfigPendingRestart
 from ._my_sql_management_client_enums import IsDynamicConfig
 from ._my_sql_management_client_enums import IsReadOnly
+from ._my_sql_management_client_enums import PrivateEndpointConnectionProvisioningState
+from ._my_sql_management_client_enums import PrivateEndpointServiceConnectionStatus
 from ._my_sql_management_client_enums import ReplicationRole
 from ._my_sql_management_client_enums import ResetAllToDefault
 from ._my_sql_management_client_enums import ServerState
 from ._my_sql_management_client_enums import ServerVersion
 from ._my_sql_management_client_enums import SkuTier
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -91,6 +101,7 @@ __all__ = [
     "DatabaseListResult",
     "DelegatedSubnetUsage",
     "ErrorAdditionalInfo",
+    "ErrorDetail",
     "ErrorResponse",
     "FirewallRule",
     "FirewallRuleListResult",
@@ -106,6 +117,12 @@ __all__ = [
     "Operation",
     "OperationDisplay",
     "OperationListResult",
+    "PrivateEndpoint",
+    "PrivateEndpointConnection",
+    "PrivateEndpointConnectionListResult",
+    "PrivateLinkResource",
+    "PrivateLinkResourceListResult",
+    "PrivateLinkServiceConnectionState",
     "ProxyResource",
     "Resource",
     "Server",
@@ -121,6 +138,7 @@ __all__ = [
     "Storage",
     "StorageEditionCapability",
     "SystemData",
+    "TagsObject",
     "TrackedResource",
     "UserAssignedIdentity",
     "VirtualNetworkSubnetUsageParameter",
@@ -137,6 +155,8 @@ __all__ = [
     "IsConfigPendingRestart",
     "IsDynamicConfig",
     "IsReadOnly",
+    "PrivateEndpointConnectionProvisioningState",
+    "PrivateEndpointServiceConnectionStatus",
     "ReplicationRole",
     "ResetAllToDefault",
     "ServerState",

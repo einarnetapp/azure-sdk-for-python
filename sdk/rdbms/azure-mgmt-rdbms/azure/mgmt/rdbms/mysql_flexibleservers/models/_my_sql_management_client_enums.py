@@ -100,6 +100,23 @@ class IsReadOnly(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     FALSE = "False"
 
 
+class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The current provisioning state."""
+
+    SUCCEEDED = "Succeeded"
+    CREATING = "Creating"
+    DELETING = "Deleting"
+    FAILED = "Failed"
+
+
+class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The private endpoint connection status."""
+
+    PENDING = "Pending"
+    APPROVED = "Approved"
+    REJECTED = "Rejected"
+
+
 class ReplicationRole(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The replication role."""
 
