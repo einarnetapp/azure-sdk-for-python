@@ -78,8 +78,8 @@ class RestorableDroppedDatabasesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-08-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-08-01-preview")
         )
         cls: ClsType[_models.RestorableDroppedDatabaseListResult] = kwargs.pop("cls", None)
 
@@ -169,8 +169,8 @@ class RestorableDroppedDatabasesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-08-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-08-01-preview")
         )
         cls: ClsType[_models.RestorableDroppedDatabase] = kwargs.pop("cls", None)
 

@@ -26,6 +26,7 @@ from .operations import (
     DatabaseAutomaticTuningOperations,
     DatabaseBlobAuditingPoliciesOperations,
     DatabaseColumnsOperations,
+    DatabaseEncryptionProtectorsOperations,
     DatabaseExtensionsOperations,
     DatabaseOperationsOperations,
     DatabaseRecommendedActionsOperations,
@@ -104,6 +105,7 @@ from .operations import (
     ManagedInstanceTdeCertificatesOperations,
     ManagedInstanceVulnerabilityAssessmentsOperations,
     ManagedInstancesOperations,
+    ManagedLedgerDigestUploadsOperations,
     ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations,
     ManagedServerDnsAliasesOperations,
     ManagedServerSecurityAlertPoliciesOperations,
@@ -126,6 +128,7 @@ from .operations import (
     ServerAzureADOnlyAuthenticationsOperations,
     ServerBlobAuditingPoliciesOperations,
     ServerCommunicationLinksOperations,
+    ServerConfigurationOptionsOperations,
     ServerConnectionPoliciesOperations,
     ServerDevOpsAuditSettingsOperations,
     ServerDnsAliasesOperations,
@@ -148,6 +151,7 @@ from .operations import (
     SqlVulnerabilityAssessmentScansOperations,
     SqlVulnerabilityAssessmentsOperations,
     SqlVulnerabilityAssessmentsSettingsOperations,
+    StartStopManagedInstanceSchedulesOperations,
     SubscriptionUsagesOperations,
     SynapseLinkWorkspacesOperations,
     SyncAgentsOperations,
@@ -173,8 +177,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
     Azure SQL Database services to manage your databases. The API enables you to create, retrieve,
     update, and delete databases.
 
-    :ivar recoverable_databases: RecoverableDatabasesOperations operations
-    :vartype recoverable_databases: azure.mgmt.sql.operations.RecoverableDatabasesOperations
     :ivar data_masking_policies: DataMaskingPoliciesOperations operations
     :vartype data_masking_policies: azure.mgmt.sql.operations.DataMaskingPoliciesOperations
     :ivar data_masking_rules: DataMaskingRulesOperations operations
@@ -433,8 +435,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      LongTermRetentionManagedInstanceBackupsOperations operations
     :vartype long_term_retention_managed_instance_backups:
      azure.mgmt.sql.operations.LongTermRetentionManagedInstanceBackupsOperations
-    :ivar managed_instances: ManagedInstancesOperations operations
-    :vartype managed_instances: azure.mgmt.sql.operations.ManagedInstancesOperations
     :ivar restorable_dropped_databases: RestorableDroppedDatabasesOperations operations
     :vartype restorable_dropped_databases:
      azure.mgmt.sql.operations.RestorableDroppedDatabasesOperations
@@ -516,6 +516,13 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
      DatabaseSqlVulnerabilityAssessmentsSettingsOperations operations
     :vartype database_sql_vulnerability_assessments_settings:
      azure.mgmt.sql.operations.DatabaseSqlVulnerabilityAssessmentsSettingsOperations
+    :ivar instance_failover_groups: InstanceFailoverGroupsOperations operations
+    :vartype instance_failover_groups: azure.mgmt.sql.operations.InstanceFailoverGroupsOperations
+    :ivar managed_database_restore_details: ManagedDatabaseRestoreDetailsOperations operations
+    :vartype managed_database_restore_details:
+     azure.mgmt.sql.operations.ManagedDatabaseRestoreDetailsOperations
+    :ivar managed_databases: ManagedDatabasesOperations operations
+    :vartype managed_databases: azure.mgmt.sql.operations.ManagedDatabasesOperations
     :ivar managed_database_advanced_threat_protection_settings:
      ManagedDatabaseAdvancedThreatProtectionSettingsOperations operations
     :vartype managed_database_advanced_threat_protection_settings:
@@ -569,13 +576,23 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
     :vartype synapse_link_workspaces: azure.mgmt.sql.operations.SynapseLinkWorkspacesOperations
     :ivar virtual_clusters: VirtualClustersOperations operations
     :vartype virtual_clusters: azure.mgmt.sql.operations.VirtualClustersOperations
-    :ivar instance_failover_groups: InstanceFailoverGroupsOperations operations
-    :vartype instance_failover_groups: azure.mgmt.sql.operations.InstanceFailoverGroupsOperations
-    :ivar managed_database_restore_details: ManagedDatabaseRestoreDetailsOperations operations
-    :vartype managed_database_restore_details:
-     azure.mgmt.sql.operations.ManagedDatabaseRestoreDetailsOperations
-    :ivar managed_databases: ManagedDatabasesOperations operations
-    :vartype managed_databases: azure.mgmt.sql.operations.ManagedDatabasesOperations
+    :ivar managed_instances: ManagedInstancesOperations operations
+    :vartype managed_instances: azure.mgmt.sql.operations.ManagedInstancesOperations
+    :ivar server_configuration_options: ServerConfigurationOptionsOperations operations
+    :vartype server_configuration_options:
+     azure.mgmt.sql.operations.ServerConfigurationOptionsOperations
+    :ivar database_encryption_protectors: DatabaseEncryptionProtectorsOperations operations
+    :vartype database_encryption_protectors:
+     azure.mgmt.sql.operations.DatabaseEncryptionProtectorsOperations
+    :ivar managed_ledger_digest_uploads: ManagedLedgerDigestUploadsOperations operations
+    :vartype managed_ledger_digest_uploads:
+     azure.mgmt.sql.operations.ManagedLedgerDigestUploadsOperations
+    :ivar start_stop_managed_instance_schedules: StartStopManagedInstanceSchedulesOperations
+     operations
+    :vartype start_stop_managed_instance_schedules:
+     azure.mgmt.sql.operations.StartStopManagedInstanceSchedulesOperations
+    :ivar recoverable_databases: RecoverableDatabasesOperations operations
+    :vartype recoverable_databases: azure.mgmt.sql.operations.RecoverableDatabasesOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The subscription ID that identifies an Azure subscription. Required.
@@ -602,9 +619,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.recoverable_databases = RecoverableDatabasesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.data_masking_policies = DataMaskingPoliciesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -853,9 +867,6 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self.long_term_retention_managed_instance_backups = LongTermRetentionManagedInstanceBackupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_instances = ManagedInstancesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.restorable_dropped_databases = RestorableDroppedDatabasesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -932,6 +943,15 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self.database_sql_vulnerability_assessments_settings = DatabaseSqlVulnerabilityAssessmentsSettingsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.instance_failover_groups = InstanceFailoverGroupsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_database_restore_details = ManagedDatabaseRestoreDetailsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_databases = ManagedDatabasesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.managed_database_advanced_threat_protection_settings = (
             ManagedDatabaseAdvancedThreatProtectionSettingsOperations(
                 self._client, self._config, self._serialize, self._deserialize
@@ -984,13 +1004,22 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self.virtual_clusters = VirtualClustersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.instance_failover_groups = InstanceFailoverGroupsOperations(
+        self.managed_instances = ManagedInstancesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_database_restore_details = ManagedDatabaseRestoreDetailsOperations(
+        self.server_configuration_options = ServerConfigurationOptionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_databases = ManagedDatabasesOperations(
+        self.database_encryption_protectors = DatabaseEncryptionProtectorsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_ledger_digest_uploads = ManagedLedgerDigestUploadsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.start_stop_managed_instance_schedules = StartStopManagedInstanceSchedulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.recoverable_databases = RecoverableDatabasesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 
@@ -1023,5 +1052,5 @@ class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details) -> None:
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)

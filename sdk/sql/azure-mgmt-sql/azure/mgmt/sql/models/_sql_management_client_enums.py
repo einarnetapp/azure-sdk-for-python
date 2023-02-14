@@ -148,6 +148,15 @@ class AutomaticTuningServerReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     AUTO_CONFIGURED = "AutoConfigured"
 
 
+class AvailabilityZoneType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the availability zone the database is pinned to."""
+
+    NO_PREFERENCE = "NoPreference"
+    ONE = "1"
+    TWO = "2"
+    THREE = "3"
+
+
 class BackupStorageRedundancy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The storage redundancy type of the copied backup."""
 
@@ -310,6 +319,12 @@ class DatabaseIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     NONE = "None"
     USER_ASSIGNED = "UserAssigned"
+
+
+class DatabaseKeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The database key type. Only supported value is 'AzureKeyVault'."""
+
+    AZURE_KEY_VAULT = "AzureKeyVault"
 
 
 class DatabaseLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -711,6 +726,19 @@ class ManagedInstanceProxyOverride(str, Enum, metaclass=CaseInsensitiveEnumMeta)
     DEFAULT = "Default"
 
 
+class ManagedLedgerDigestUploadsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ManagedLedgerDigestUploadsName."""
+
+    CURRENT = "current"
+
+
+class ManagedLedgerDigestUploadsState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the state of ledger digest upload."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
 class ManagedServerCreateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Specifies the mode of database creation.
 
@@ -761,7 +789,7 @@ class MetricType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class MoveOperationMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Operation mode."""
+    """The move operation mode."""
 
     MOVE = "Move"
     COPY = "Copy"
@@ -1087,6 +1115,12 @@ class SensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOVE = "remove"
 
 
+class ServerConfigurationOptionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ServerConfigurationOptionName."""
+
+    ALLOW_POLYBASE_EXPORT = "allowPolybaseExport"
+
+
 class ServerConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The server connection type."""
 
@@ -1236,6 +1270,12 @@ class SqlVulnerabilityAssessmentState(str, Enum, metaclass=CaseInsensitiveEnumMe
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+
+class StartStopScheduleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """StartStopScheduleName."""
+
+    DEFAULT = "default"
 
 
 class StorageCapabilityStorageAccountType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

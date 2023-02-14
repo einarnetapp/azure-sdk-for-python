@@ -369,7 +369,7 @@ class ServersOperations:
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param parameters: The requested server resource state. Is either a model type or a IO type.
+        :param parameters: The requested server resource state. Is either a Server type or a IO type.
          Required.
         :type parameters: ~azure.mgmt.sql.models.Server or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -701,8 +701,8 @@ class ServersOperations:
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param parameters: The requested server resource state. Is either a model type or a IO type.
-         Required.
+        :param parameters: The requested server resource state. Is either a ServerUpdate type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.sql.models.ServerUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1000,8 +1000,8 @@ class ServersOperations:
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param parameters: The database import request parameters. Is either a model type or a IO type.
-         Required.
+        :param parameters: The database import request parameters. Is either a
+         ImportNewDatabaseDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ImportNewDatabaseDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1109,8 +1109,8 @@ class ServersOperations:
     ) -> _models.CheckNameAvailabilityResponse:
         """Determines whether a resource can be created with the specified name.
 
-        :param parameters: The name availability request parameters. Is either a model type or a IO
-         type. Required.
+        :param parameters: The name availability request parameters. Is either a
+         CheckNameAvailabilityRequest type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
