@@ -65,7 +65,7 @@ def build_get_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -104,7 +104,7 @@ def build_create_or_update_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -144,7 +144,7 @@ def build_delete_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -183,7 +183,7 @@ def build_update_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -224,7 +224,7 @@ def build_list_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
     }
 
@@ -263,7 +263,7 @@ def build_list_for_cluster_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -301,7 +301,7 @@ def build_start_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -339,7 +339,7 @@ def build_stop_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -377,7 +377,7 @@ def build_restart_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -416,7 +416,7 @@ def build_enable_remote_debugging_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -456,7 +456,7 @@ def build_disable_remote_debugging_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -494,7 +494,7 @@ def build_get_remote_debugging_config_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -532,7 +532,7 @@ def build_get_log_file_url_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -571,7 +571,7 @@ def build_generate_heap_dump_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -612,7 +612,7 @@ def build_generate_thread_dump_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
@@ -653,7 +653,7 @@ def build_start_jfr_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serviceName": _SERIALIZER.url("service_name", service_name, "str"),
+        "serviceName": _SERIALIZER.url("service_name", service_name, "str", pattern=r"^[a-z][a-z0-9-]*[a-z0-9]$"),
         "appName": _SERIALIZER.url("app_name", app_name, "str"),
         "deploymentName": _SERIALIZER.url("deployment_name", deployment_name, "str"),
     }
