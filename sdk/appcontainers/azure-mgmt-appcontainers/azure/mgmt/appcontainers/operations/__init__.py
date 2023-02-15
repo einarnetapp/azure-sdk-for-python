@@ -12,8 +12,19 @@ from ._billing_meters_operations import BillingMetersOperations
 from ._connected_environments_operations import ConnectedEnvironmentsOperations
 from ._connected_environments_certificates_operations import ConnectedEnvironmentsCertificatesOperations
 from ._connected_environments_dapr_components_operations import ConnectedEnvironmentsDaprComponentsOperations
+from ._connected_environments_dapr_resiliency_circuit_breaker_policies_operations import (
+    ConnectedEnvironmentsDaprResiliencyCircuitBreakerPoliciesOperations,
+)
+from ._connected_environments_dapr_resiliency_timeout_policies_operations import (
+    ConnectedEnvironmentsDaprResiliencyTimeoutPoliciesOperations,
+)
+from ._connected_environments_dapr_resiliency_retry_policies_operations import (
+    ConnectedEnvironmentsDaprResiliencyRetryPoliciesOperations,
+)
 from ._connected_environments_storages_operations import ConnectedEnvironmentsStoragesOperations
 from ._container_apps_operations import ContainerAppsOperations
+from ._jobs_operations import JobsOperations
+from ._job_operations import JobOperations
 from ._container_apps_revisions_operations import ContainerAppsRevisionsOperations
 from ._container_apps_revision_replicas_operations import ContainerAppsRevisionReplicasOperations
 from ._container_apps_diagnostics_operations import ContainerAppsDiagnosticsOperations
@@ -22,7 +33,11 @@ from ._managed_environments_diagnostics_operations import ManagedEnvironmentsDia
 from ._operations import Operations
 from ._managed_environments_operations import ManagedEnvironmentsOperations
 from ._certificates_operations import CertificatesOperations
+from ._managed_certificates_operations import ManagedCertificatesOperations
 from ._namespaces_operations import NamespacesOperations
+from ._dapr_resiliency_circuit_breaker_policies_operations import DaprResiliencyCircuitBreakerPoliciesOperations
+from ._dapr_resiliency_timeout_policies_operations import DaprResiliencyTimeoutPoliciesOperations
+from ._dapr_resiliency_retry_policies_operations import DaprResiliencyRetryPoliciesOperations
 from ._dapr_components_operations import DaprComponentsOperations
 from ._managed_environments_storages_operations import ManagedEnvironmentsStoragesOperations
 from ._container_apps_source_controls_operations import ContainerAppsSourceControlsOperations
@@ -38,8 +53,13 @@ __all__ = [
     "ConnectedEnvironmentsOperations",
     "ConnectedEnvironmentsCertificatesOperations",
     "ConnectedEnvironmentsDaprComponentsOperations",
+    "ConnectedEnvironmentsDaprResiliencyCircuitBreakerPoliciesOperations",
+    "ConnectedEnvironmentsDaprResiliencyTimeoutPoliciesOperations",
+    "ConnectedEnvironmentsDaprResiliencyRetryPoliciesOperations",
     "ConnectedEnvironmentsStoragesOperations",
     "ContainerAppsOperations",
+    "JobsOperations",
+    "JobOperations",
     "ContainerAppsRevisionsOperations",
     "ContainerAppsRevisionReplicasOperations",
     "ContainerAppsDiagnosticsOperations",
@@ -48,7 +68,11 @@ __all__ = [
     "Operations",
     "ManagedEnvironmentsOperations",
     "CertificatesOperations",
+    "ManagedCertificatesOperations",
     "NamespacesOperations",
+    "DaprResiliencyCircuitBreakerPoliciesOperations",
+    "DaprResiliencyTimeoutPoliciesOperations",
+    "DaprResiliencyRetryPoliciesOperations",
     "DaprComponentsOperations",
     "ManagedEnvironmentsStoragesOperations",
     "ContainerAppsSourceControlsOperations",

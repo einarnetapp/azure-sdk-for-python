@@ -21,6 +21,9 @@ from .operations import (
     CertificatesOperations,
     ConnectedEnvironmentsCertificatesOperations,
     ConnectedEnvironmentsDaprComponentsOperations,
+    ConnectedEnvironmentsDaprResiliencyCircuitBreakerPoliciesOperations,
+    ConnectedEnvironmentsDaprResiliencyRetryPoliciesOperations,
+    ConnectedEnvironmentsDaprResiliencyTimeoutPoliciesOperations,
     ConnectedEnvironmentsOperations,
     ConnectedEnvironmentsStoragesOperations,
     ContainerAppsAuthConfigsOperations,
@@ -30,6 +33,12 @@ from .operations import (
     ContainerAppsRevisionsOperations,
     ContainerAppsSourceControlsOperations,
     DaprComponentsOperations,
+    DaprResiliencyCircuitBreakerPoliciesOperations,
+    DaprResiliencyRetryPoliciesOperations,
+    DaprResiliencyTimeoutPoliciesOperations,
+    JobOperations,
+    JobsOperations,
+    ManagedCertificatesOperations,
     ManagedEnvironmentDiagnosticsOperations,
     ManagedEnvironmentsDiagnosticsOperations,
     ManagedEnvironmentsOperations,
@@ -65,11 +74,27 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
      operations
     :vartype connected_environments_dapr_components:
      azure.mgmt.appcontainers.operations.ConnectedEnvironmentsDaprComponentsOperations
+    :ivar connected_environments_dapr_resiliency_circuit_breaker_policies:
+     ConnectedEnvironmentsDaprResiliencyCircuitBreakerPoliciesOperations operations
+    :vartype connected_environments_dapr_resiliency_circuit_breaker_policies:
+     azure.mgmt.appcontainers.operations.ConnectedEnvironmentsDaprResiliencyCircuitBreakerPoliciesOperations
+    :ivar connected_environments_dapr_resiliency_timeout_policies:
+     ConnectedEnvironmentsDaprResiliencyTimeoutPoliciesOperations operations
+    :vartype connected_environments_dapr_resiliency_timeout_policies:
+     azure.mgmt.appcontainers.operations.ConnectedEnvironmentsDaprResiliencyTimeoutPoliciesOperations
+    :ivar connected_environments_dapr_resiliency_retry_policies:
+     ConnectedEnvironmentsDaprResiliencyRetryPoliciesOperations operations
+    :vartype connected_environments_dapr_resiliency_retry_policies:
+     azure.mgmt.appcontainers.operations.ConnectedEnvironmentsDaprResiliencyRetryPoliciesOperations
     :ivar connected_environments_storages: ConnectedEnvironmentsStoragesOperations operations
     :vartype connected_environments_storages:
      azure.mgmt.appcontainers.operations.ConnectedEnvironmentsStoragesOperations
     :ivar container_apps: ContainerAppsOperations operations
     :vartype container_apps: azure.mgmt.appcontainers.operations.ContainerAppsOperations
+    :ivar jobs: JobsOperations operations
+    :vartype jobs: azure.mgmt.appcontainers.operations.JobsOperations
+    :ivar job: JobOperations operations
+    :vartype job: azure.mgmt.appcontainers.operations.JobOperations
     :ivar container_apps_revisions: ContainerAppsRevisionsOperations operations
     :vartype container_apps_revisions:
      azure.mgmt.appcontainers.operations.ContainerAppsRevisionsOperations
@@ -92,8 +117,21 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
      azure.mgmt.appcontainers.operations.ManagedEnvironmentsOperations
     :ivar certificates: CertificatesOperations operations
     :vartype certificates: azure.mgmt.appcontainers.operations.CertificatesOperations
+    :ivar managed_certificates: ManagedCertificatesOperations operations
+    :vartype managed_certificates:
+     azure.mgmt.appcontainers.operations.ManagedCertificatesOperations
     :ivar namespaces: NamespacesOperations operations
     :vartype namespaces: azure.mgmt.appcontainers.operations.NamespacesOperations
+    :ivar dapr_resiliency_circuit_breaker_policies: DaprResiliencyCircuitBreakerPoliciesOperations
+     operations
+    :vartype dapr_resiliency_circuit_breaker_policies:
+     azure.mgmt.appcontainers.operations.DaprResiliencyCircuitBreakerPoliciesOperations
+    :ivar dapr_resiliency_timeout_policies: DaprResiliencyTimeoutPoliciesOperations operations
+    :vartype dapr_resiliency_timeout_policies:
+     azure.mgmt.appcontainers.operations.DaprResiliencyTimeoutPoliciesOperations
+    :ivar dapr_resiliency_retry_policies: DaprResiliencyRetryPoliciesOperations operations
+    :vartype dapr_resiliency_retry_policies:
+     azure.mgmt.appcontainers.operations.DaprResiliencyRetryPoliciesOperations
     :ivar dapr_components: DaprComponentsOperations operations
     :vartype dapr_components: azure.mgmt.appcontainers.operations.DaprComponentsOperations
     :ivar managed_environments_storages: ManagedEnvironmentsStoragesOperations operations
@@ -108,8 +146,8 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -147,10 +185,27 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
         self.connected_environments_dapr_components = ConnectedEnvironmentsDaprComponentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.connected_environments_dapr_resiliency_circuit_breaker_policies = (
+            ConnectedEnvironmentsDaprResiliencyCircuitBreakerPoliciesOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
+        self.connected_environments_dapr_resiliency_timeout_policies = (
+            ConnectedEnvironmentsDaprResiliencyTimeoutPoliciesOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
+        self.connected_environments_dapr_resiliency_retry_policies = (
+            ConnectedEnvironmentsDaprResiliencyRetryPoliciesOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
         self.connected_environments_storages = ConnectedEnvironmentsStoragesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.container_apps = ContainerAppsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.jobs = JobsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.job = JobOperations(self._client, self._config, self._serialize, self._deserialize)
         self.container_apps_revisions = ContainerAppsRevisionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -171,7 +226,19 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
             self._client, self._config, self._serialize, self._deserialize
         )
         self.certificates = CertificatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.managed_certificates = ManagedCertificatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.namespaces = NamespacesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dapr_resiliency_circuit_breaker_policies = DaprResiliencyCircuitBreakerPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dapr_resiliency_timeout_policies = DaprResiliencyTimeoutPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dapr_resiliency_retry_policies = DaprResiliencyRetryPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.dapr_components = DaprComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.managed_environments_storages = ManagedEnvironmentsStoragesOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -209,5 +276,5 @@ class ContainerAppsAPIClient:  # pylint: disable=client-accepts-api-version-keyw
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details) -> None:
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)
