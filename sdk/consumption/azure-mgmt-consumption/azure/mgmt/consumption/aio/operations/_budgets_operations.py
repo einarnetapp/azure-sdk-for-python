@@ -67,6 +67,9 @@ class BudgetsOperations:
     def list(self, scope: str, **kwargs: Any) -> AsyncIterable["_models.Budget"]:
         """Lists all budgets for the defined scope.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -90,7 +93,7 @@ class BudgetsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.BudgetsListResult] = kwargs.pop("cls", None)
@@ -164,6 +167,9 @@ class BudgetsOperations:
     async def get(self, scope: str, budget_name: str, **kwargs: Any) -> _models.Budget:
         """Gets the budget for the scope by budget name.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -197,7 +203,7 @@ class BudgetsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Budget] = kwargs.pop("cls", None)
@@ -247,6 +253,9 @@ class BudgetsOperations:
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -282,6 +291,9 @@ class BudgetsOperations:
         """The operation to create or update a budget. You can optionally provide an eTag if desired as a
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -319,6 +331,9 @@ class BudgetsOperations:
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -336,7 +351,7 @@ class BudgetsOperations:
         :type scope: str
         :param budget_name: Budget Name. Required.
         :type budget_name: str
-        :param parameters: Parameters supplied to the Create Budget operation. Is either a model type
+        :param parameters: Parameters supplied to the Create Budget operation. Is either a Budget type
          or a IO type. Required.
         :type parameters: ~azure.mgmt.consumption.models.Budget or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -358,7 +373,7 @@ class BudgetsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -416,6 +431,9 @@ class BudgetsOperations:
     ) -> None:
         """The operation to delete a budget.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -449,7 +467,7 @@ class BudgetsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
