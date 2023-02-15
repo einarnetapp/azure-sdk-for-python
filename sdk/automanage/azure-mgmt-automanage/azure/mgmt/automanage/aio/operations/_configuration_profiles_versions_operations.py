@@ -144,7 +144,7 @@ class ConfigurationProfilesVersionsOperations:
          Required.
         :type resource_group_name: str
         :param parameters: Parameters supplied to create or update configuration profile. Is either a
-         model type or a IO type. Required.
+         ConfigurationProfile type or a IO type. Required.
         :type parameters: ~azure.mgmt.automanage.models.ConfigurationProfile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

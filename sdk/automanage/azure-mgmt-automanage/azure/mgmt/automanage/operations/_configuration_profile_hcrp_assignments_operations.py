@@ -267,7 +267,7 @@ class ConfigurationProfileHCRPAssignmentsOperations:
          Only default is supported. Required.
         :type configuration_profile_assignment_name: str
         :param parameters: Parameters supplied to the create or update configuration profile
-         assignment. Is either a model type or a IO type. Required.
+         assignment. Is either a ConfigurationProfileAssignment type or a IO type. Required.
         :type parameters: ~azure.mgmt.automanage.models.ConfigurationProfileAssignment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

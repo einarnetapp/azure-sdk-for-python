@@ -35,6 +35,7 @@ from ._models_py3 import TrackedResource
 from ._models_py3 import UpdateResource
 
 from ._automanage_client_enums import ActionType
+from ._automanage_client_enums import AssignmentMode
 from ._automanage_client_enums import CreatedByType
 from ._automanage_client_enums import Origin
 from ._patch import __all__ as _patch_all
@@ -70,6 +71,7 @@ __all__ = [
     "TrackedResource",
     "UpdateResource",
     "ActionType",
+    "AssignmentMode",
     "CreatedByType",
     "Origin",
 ]

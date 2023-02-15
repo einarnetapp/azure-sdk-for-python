@@ -16,6 +16,13 @@ class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     INTERNAL = "Internal"
 
 
+class AssignmentMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The mode in which to apply the assigned configuration profile."""
+
+    AUDIT_ONLY = "AuditOnly"
+    REMEDIATE = "Remediate"
+
+
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource."""
 

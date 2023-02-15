@@ -77,7 +77,7 @@ class AssignmentReportProperties(_serialization.Model):
         "report_format_version": {"key": "reportFormatVersion", "type": "str"},
     }
 
-    def __init__(self, *, start_time: Optional[str] = None, end_time: Optional[str] = None, **kwargs):
+    def __init__(self, *, start_time: Optional[str] = None, end_time: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword start_time: Start time of the configuration profile assignment processing.
         :paramtype start_time: str
@@ -131,7 +131,7 @@ class BestPractice(_serialization.Model):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, *, properties: Optional["_models.ConfigurationProfileProperties"] = None, **kwargs):
+    def __init__(self, *, properties: Optional["_models.ConfigurationProfileProperties"] = None, **kwargs: Any) -> None:
         """
         :keyword properties: Properties of the best practice.
         :paramtype properties: ~azure.mgmt.automanage.models.ConfigurationProfileProperties
@@ -155,7 +155,7 @@ class BestPracticeList(_serialization.Model):
         "value": {"key": "value", "type": "[BestPractice]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.BestPractice"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.BestPractice"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Result of the list best practice operation.
         :paramtype value: list[~azure.mgmt.automanage.models.BestPractice]
@@ -191,7 +191,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -200,7 +200,8 @@ class Resource(_serialization.Model):
 
 
 class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+    """The resource model definition for an Azure Resource Manager tracked top level resource which
+    has 'tags' and a 'location'.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -235,7 +236,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -297,8 +298,8 @@ class ConfigurationProfile(TrackedResource):
         location: str,
         tags: Optional[Dict[str, str]] = None,
         properties: Optional["_models.ConfigurationProfileProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -313,7 +314,8 @@ class ConfigurationProfile(TrackedResource):
 
 
 class ProxyResource(Resource):
-    """The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location.
+    """The resource model definition for a Azure Resource Manager proxy resource. It will not have
+    tags and a location.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -339,13 +341,14 @@ class ProxyResource(Resource):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
 
 
 class ConfigurationProfileAssignment(ProxyResource):
-    """Configuration profile assignment is an association between a VM and automanage profile configuration.
+    """Configuration profile assignment is an association between a VM and automanage profile
+    configuration.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -384,7 +387,9 @@ class ConfigurationProfileAssignment(ProxyResource):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, *, properties: Optional["_models.ConfigurationProfileAssignmentProperties"] = None, **kwargs):
+    def __init__(
+        self, *, properties: Optional["_models.ConfigurationProfileAssignmentProperties"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword properties: Properties of the configuration profile assignment.
         :paramtype properties: ~azure.mgmt.automanage.models.ConfigurationProfileAssignmentProperties
@@ -406,7 +411,9 @@ class ConfigurationProfileAssignmentList(_serialization.Model):
         "value": {"key": "value", "type": "[ConfigurationProfileAssignment]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.ConfigurationProfileAssignment"]] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.ConfigurationProfileAssignment"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: Result of the list configuration profile assignment operation.
         :paramtype value: list[~azure.mgmt.automanage.models.ConfigurationProfileAssignment]
@@ -422,32 +429,46 @@ class ConfigurationProfileAssignmentProperties(_serialization.Model):
 
     :ivar configuration_profile: The Automanage configurationProfile ARM Resource URI.
     :vartype configuration_profile: str
-    :ivar target_id: The target VM resource URI.
-    :vartype target_id: str
+    :ivar mode: The mode in which to apply the assigned configuration profile. Known values are:
+     "AuditOnly" and "Remediate".
+    :vartype mode: str or ~azure.mgmt.automanage.models.AssignmentMode
     :ivar status: The status of onboarding, which only appears in the response.
     :vartype status: str
+    :ivar target_id: The target VM resource URI.
+    :vartype target_id: str
     """
 
     _validation = {
-        "target_id": {"readonly": True},
         "status": {"readonly": True},
+        "target_id": {"readonly": True},
     }
 
     _attribute_map = {
         "configuration_profile": {"key": "configurationProfile", "type": "str"},
-        "target_id": {"key": "targetId", "type": "str"},
+        "mode": {"key": "mode", "type": "str"},
         "status": {"key": "status", "type": "str"},
+        "target_id": {"key": "targetId", "type": "str"},
     }
 
-    def __init__(self, *, configuration_profile: Optional[str] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        configuration_profile: Optional[str] = None,
+        mode: Optional[Union[str, "_models.AssignmentMode"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword configuration_profile: The Automanage configurationProfile ARM Resource URI.
         :paramtype configuration_profile: str
+        :keyword mode: The mode in which to apply the assigned configuration profile. Known values are:
+         "AuditOnly" and "Remediate".
+        :paramtype mode: str or ~azure.mgmt.automanage.models.AssignmentMode
         """
         super().__init__(**kwargs)
         self.configuration_profile = configuration_profile
-        self.target_id = None
+        self.mode = mode
         self.status = None
+        self.target_id = None
 
 
 class ConfigurationProfileList(_serialization.Model):
@@ -461,7 +482,7 @@ class ConfigurationProfileList(_serialization.Model):
         "value": {"key": "value", "type": "[ConfigurationProfile]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.ConfigurationProfile"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.ConfigurationProfile"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Result of the list ConfigurationProfile operation.
         :paramtype value: list[~azure.mgmt.automanage.models.ConfigurationProfile]
@@ -481,7 +502,7 @@ class ConfigurationProfileProperties(_serialization.Model):
         "configuration": {"key": "configuration", "type": "object"},
     }
 
-    def __init__(self, *, configuration: Optional[JSON] = None, **kwargs):
+    def __init__(self, *, configuration: Optional[JSON] = None, **kwargs: Any) -> None:
         """
         :keyword configuration: configuration dictionary of the configuration profile.
         :paramtype configuration: JSON
@@ -501,7 +522,7 @@ class UpdateResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: The tags of the resource.
         :paramtype tags: dict[str, str]
@@ -529,8 +550,8 @@ class ConfigurationProfileUpdate(UpdateResource):
         *,
         tags: Optional[Dict[str, str]] = None,
         properties: Optional["_models.ConfigurationProfileProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: The tags of the resource.
         :paramtype tags: dict[str, str]
@@ -562,7 +583,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -602,7 +623,7 @@ class ErrorDetail(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -613,7 +634,8 @@ class ErrorDetail(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.automanage.models.ErrorDetail
@@ -623,7 +645,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.automanage.models.ErrorDetail
@@ -669,7 +691,7 @@ class Operation(_serialization.Model):
         "action_type": {"key": "actionType", "type": "str"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: Localized display information for this particular operation.
         :paramtype display: ~azure.mgmt.automanage.models.OperationDisplay
@@ -715,7 +737,7 @@ class OperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -725,7 +747,8 @@ class OperationDisplay(_serialization.Model):
 
 
 class OperationListResult(_serialization.Model):
-    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link
+    to get the next set of results.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -745,7 +768,7 @@ class OperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -787,7 +810,7 @@ class Report(ProxyResource):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, *, properties: Optional["_models.AssignmentReportProperties"] = None, **kwargs):
+    def __init__(self, *, properties: Optional["_models.AssignmentReportProperties"] = None, **kwargs: Any) -> None:
         """
         :keyword properties: The properties for the report.
         :paramtype properties: ~azure.mgmt.automanage.models.AssignmentReportProperties
@@ -808,7 +831,7 @@ class ReportList(_serialization.Model):
         "value": {"key": "value", "type": "[Report]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Report"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Report"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Result of the list report operation.
         :paramtype value: list[~azure.mgmt.automanage.models.Report]
@@ -850,7 +873,7 @@ class ReportResource(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -895,7 +918,7 @@ class ServicePrincipal(ProxyResource):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, *, properties: Optional["_models.ServicePrincipalProperties"] = None, **kwargs):
+    def __init__(self, *, properties: Optional["_models.ServicePrincipalProperties"] = None, **kwargs: Any) -> None:
         """
         :keyword properties: The Service Principal properties for the subscription.
         :paramtype properties: ~azure.mgmt.automanage.models.ServicePrincipalProperties
@@ -916,7 +939,7 @@ class ServicePrincipalListResult(_serialization.Model):
         "value": {"key": "value", "type": "[ServicePrincipal]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.ServicePrincipal"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.ServicePrincipal"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: The list of servicePrincipals.
         :paramtype value: list[~azure.mgmt.automanage.models.ServicePrincipal]
@@ -947,7 +970,7 @@ class ServicePrincipalProperties(_serialization.Model):
         "authorization_set": {"key": "authorizationSet", "type": "bool"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.service_principal_id = None
@@ -991,8 +1014,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str

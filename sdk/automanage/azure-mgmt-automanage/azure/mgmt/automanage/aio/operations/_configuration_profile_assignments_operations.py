@@ -153,7 +153,7 @@ class ConfigurationProfileAssignmentsOperations:
         :param vm_name: The name of the virtual machine. Required.
         :type vm_name: str
         :param parameters: Parameters supplied to the create or update configuration profile
-         assignment. Is either a model type or a IO type. Required.
+         assignment. Is either a ConfigurationProfileAssignment type or a IO type. Required.
         :type parameters: ~azure.mgmt.automanage.models.ConfigurationProfileAssignment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
