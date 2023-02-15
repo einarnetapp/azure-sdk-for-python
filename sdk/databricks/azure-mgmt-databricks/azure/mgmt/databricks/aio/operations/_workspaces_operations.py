@@ -8,7 +8,6 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
-import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -92,9 +91,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         cls: ClsType[_models.Workspace] = kwargs.pop("cls", None)
 
         request = build_get_request(
@@ -145,9 +142,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
@@ -204,9 +199,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -260,9 +253,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.Workspace] = kwargs.pop("cls", None)
 
@@ -398,8 +389,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param parameters: Parameters supplied to the create or update a workspace. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameters supplied to the create or update a workspace. Is either a
+         Workspace type or a IO type. Required.
         :type parameters: ~azure.mgmt.databricks.models.Workspace or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -420,9 +411,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.Workspace] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
@@ -485,9 +474,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.Workspace]] = kwargs.pop("cls", None)
 
@@ -625,7 +612,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param parameters: The update to the workspace. Is either a model type or a IO type. Required.
+        :param parameters: The update to the workspace. Is either a WorkspaceUpdate type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.databricks.models.WorkspaceUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -646,9 +634,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.Workspace] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
@@ -708,9 +694,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         cls: ClsType[_models.WorkspaceListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -736,18 +720,7 @@ class WorkspacesOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -793,9 +766,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
         cls: ClsType[_models.WorkspaceListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -820,18 +791,7 @@ class WorkspacesOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"

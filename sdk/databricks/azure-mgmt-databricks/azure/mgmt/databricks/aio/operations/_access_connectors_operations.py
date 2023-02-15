@@ -8,7 +8,6 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
-import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -92,8 +91,8 @@ class AccessConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         cls: ClsType[_models.AccessConnector] = kwargs.pop("cls", None)
 
@@ -145,8 +144,8 @@ class AccessConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
 
@@ -204,8 +203,8 @@ class AccessConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
@@ -264,8 +263,8 @@ class AccessConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.AccessConnector] = kwargs.pop("cls", None)
@@ -409,7 +408,7 @@ class AccessConnectorsOperations:
         :param connector_name: The name of the azure databricks accessConnector. Required.
         :type connector_name: str
         :param parameters: Parameters supplied to the create or update an azure databricks
-         accessConnector. Is either a model type or a IO type. Required.
+         accessConnector. Is either a AccessConnector type or a IO type. Required.
         :type parameters: ~azure.mgmt.databricks.models.AccessConnector or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -430,8 +429,8 @@ class AccessConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.AccessConnector] = kwargs.pop("cls", None)
@@ -495,8 +494,8 @@ class AccessConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.AccessConnector]] = kwargs.pop("cls", None)
@@ -635,8 +634,8 @@ class AccessConnectorsOperations:
         :type resource_group_name: str
         :param connector_name: The name of the azure databricks accessConnector. Required.
         :type connector_name: str
-        :param parameters: The update to the azure databricks accessConnector. Is either a model type
-         or a IO type. Required.
+        :param parameters: The update to the azure databricks accessConnector. Is either a
+         AccessConnectorUpdate type or a IO type. Required.
         :type parameters: ~azure.mgmt.databricks.models.AccessConnectorUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -657,8 +656,8 @@ class AccessConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.AccessConnector] = kwargs.pop("cls", None)
@@ -721,8 +720,8 @@ class AccessConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         cls: ClsType[_models.AccessConnectorListResult] = kwargs.pop("cls", None)
 
@@ -749,18 +748,7 @@ class AccessConnectorsOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -806,8 +794,8 @@ class AccessConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-04-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-10-01-preview")
         )
         cls: ClsType[_models.AccessConnectorListResult] = kwargs.pop("cls", None)
 
@@ -833,18 +821,7 @@ class AccessConnectorsOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
