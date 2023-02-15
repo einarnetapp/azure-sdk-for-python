@@ -35,14 +35,14 @@ class AzureDigitalTwinsManagementClientConfiguration(Configuration):  # pylint: 
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The subscription identifier. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2022-10-31". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2023-01-31". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(AzureDigitalTwinsManagementClientConfiguration, self).__init__(**kwargs)
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", "2022-10-31")
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", "2023-01-31")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")

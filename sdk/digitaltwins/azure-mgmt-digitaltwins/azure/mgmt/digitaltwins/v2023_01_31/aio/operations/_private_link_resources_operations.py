@@ -18,106 +18,22 @@ from azure.core.exceptions import (
     map_error,
 )
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import HttpResponse
+from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
-from azure.core.tracing.decorator import distributed_trace
+from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
-from .. import models as _models
-from ..._serialization import Serializer
-from .._vendor import _convert_request, _format_url_section
+from ... import models as _models
+from ..._vendor import _convert_request
+from ...operations._private_link_resources_operations import build_get_request, build_list_request
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
 else:
     from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
-
-_SERIALIZER = Serializer()
-_SERIALIZER.client_side_validation = False
-
-
-def build_list_request(
-    resource_group_name: str, resource_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/privateLinkResources",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "resourceName": _SERIALIZER.url(
-            "resource_name",
-            resource_name,
-            "str",
-            max_length=63,
-            min_length=3,
-            pattern=r"^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
-        ),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_get_request(
-    resource_group_name: str, resource_name: str, resource_id: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/privateLinkResources/{resourceId}",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "resourceName": _SERIALIZER.url(
-            "resource_name",
-            resource_name,
-            "str",
-            max_length=63,
-            min_length=3,
-            pattern=r"^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
-        ),
-        "resourceId": _SERIALIZER.url("resource_id", resource_id, "str"),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
 class PrivateLinkResourcesOperations:
@@ -126,21 +42,23 @@ class PrivateLinkResourcesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.digitaltwins.v2022_10_31.AzureDigitalTwinsManagementClient`'s
+        :class:`~azure.mgmt.digitaltwins.v2023_01_31.aio.AzureDigitalTwinsManagementClient`'s
         :attr:`private_link_resources` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    @distributed_trace
-    def list(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> _models.GroupIdInformationResponse:
+    @distributed_trace_async
+    async def list(
+        self, resource_group_name: str, resource_name: str, **kwargs: Any
+    ) -> _models.GroupIdInformationResponse:
         """List private link resources for given Digital Twin.
 
         :param resource_group_name: The name of the resource group that contains the
@@ -150,7 +68,7 @@ class PrivateLinkResourcesOperations:
         :type resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GroupIdInformationResponse or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.GroupIdInformationResponse
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.GroupIdInformationResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -164,7 +82,7 @@ class PrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.GroupIdInformationResponse] = kwargs.pop("cls", None)
 
         request = build_list_request(
@@ -179,7 +97,7 @@ class PrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -201,8 +119,8 @@ class PrivateLinkResourcesOperations:
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/privateLinkResources"
     }
 
-    @distributed_trace
-    def get(
+    @distributed_trace_async
+    async def get(
         self, resource_group_name: str, resource_name: str, resource_id: str, **kwargs: Any
     ) -> _models.GroupIdInformation:
         """Get the specified private link resource for the given Digital Twin.
@@ -216,7 +134,7 @@ class PrivateLinkResourcesOperations:
         :type resource_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GroupIdInformation or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.GroupIdInformation
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.GroupIdInformation
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -230,7 +148,7 @@ class PrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.GroupIdInformation] = kwargs.pop("cls", None)
 
         request = build_get_request(
@@ -246,7 +164,7 @@ class PrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 

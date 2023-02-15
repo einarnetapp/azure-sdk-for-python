@@ -47,7 +47,7 @@ def build_get_request(resource_group_name: str, resource_name: str, subscription
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+    api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -87,7 +87,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+    api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -130,7 +130,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+    api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -173,7 +173,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+    api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -211,7 +211,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+    api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -237,7 +237,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+    api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -267,7 +267,7 @@ def build_check_name_availability_request(location: str, subscription_id: str, *
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+    api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -300,7 +300,7 @@ class DigitalTwinsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.digitaltwins.v2022_10_31.AzureDigitalTwinsManagementClient`'s
+        :class:`~azure.mgmt.digitaltwins.v2023_01_31.AzureDigitalTwinsManagementClient`'s
         :attr:`digital_twins` attribute.
     """
 
@@ -324,7 +324,7 @@ class DigitalTwinsOperations:
         :type resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DigitalTwinsDescription or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -338,7 +338,7 @@ class DigitalTwinsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.DigitalTwinsDescription] = kwargs.pop("cls", None)
 
         request = build_get_request(
@@ -393,7 +393,7 @@ class DigitalTwinsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DigitalTwinsDescription] = kwargs.pop("cls", None)
 
@@ -466,7 +466,7 @@ class DigitalTwinsOperations:
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
         :param digital_twins_create: The DigitalTwinsInstance and security metadata. Required.
-        :type digital_twins_create: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription
+        :type digital_twins_create: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -481,7 +481,7 @@ class DigitalTwinsOperations:
         :return: An instance of LROPoller that returns either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -520,7 +520,7 @@ class DigitalTwinsOperations:
         :return: An instance of LROPoller that returns either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -541,9 +541,9 @@ class DigitalTwinsOperations:
         :type resource_group_name: str
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
-        :param digital_twins_create: The DigitalTwinsInstance and security metadata. Is either a model
-         type or a IO type. Required.
-        :type digital_twins_create: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription
+        :param digital_twins_create: The DigitalTwinsInstance and security metadata. Is either a
+         DigitalTwinsDescription type or a IO type. Required.
+        :type digital_twins_create: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -559,13 +559,13 @@ class DigitalTwinsOperations:
         :return: An instance of LROPoller that returns either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DigitalTwinsDescription] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
@@ -628,7 +628,7 @@ class DigitalTwinsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DigitalTwinsDescription] = kwargs.pop("cls", None)
 
@@ -701,7 +701,7 @@ class DigitalTwinsOperations:
         :param digital_twins_patch_description: The DigitalTwinsInstance and security metadata.
          Required.
         :type digital_twins_patch_description:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsPatchDescription
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsPatchDescription
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -716,7 +716,7 @@ class DigitalTwinsOperations:
         :return: An instance of LROPoller that returns either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -754,7 +754,7 @@ class DigitalTwinsOperations:
         :return: An instance of LROPoller that returns either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -774,9 +774,9 @@ class DigitalTwinsOperations:
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
         :param digital_twins_patch_description: The DigitalTwinsInstance and security metadata. Is
-         either a model type or a IO type. Required.
+         either a DigitalTwinsPatchDescription type or a IO type. Required.
         :type digital_twins_patch_description:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsPatchDescription or IO
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsPatchDescription or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -791,13 +791,13 @@ class DigitalTwinsOperations:
         :return: An instance of LROPoller that returns either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DigitalTwinsDescription] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
@@ -856,7 +856,7 @@ class DigitalTwinsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[Optional[_models.DigitalTwinsDescription]] = kwargs.pop("cls", None)
 
         request = build_delete_request(
@@ -920,13 +920,13 @@ class DigitalTwinsOperations:
         :return: An instance of LROPoller that returns either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.DigitalTwinsDescription] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -976,13 +976,13 @@ class DigitalTwinsOperations:
         :return: An iterator like instance of either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.DigitalTwinsDescriptionListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -1063,13 +1063,13 @@ class DigitalTwinsOperations:
         :return: An iterator like instance of either DigitalTwinsDescription or the result of
          cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.DigitalTwinsDescriptionListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -1157,13 +1157,13 @@ class DigitalTwinsOperations:
          DigitalTwinsInstanceCheckName structure to the name of the DigitalTwinsInstance to check.
          Required.
         :type digital_twins_instance_check_name:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.CheckNameRequest
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.CheckNameRequest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CheckNameResult or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.CheckNameResult
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.CheckNameResult
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -1189,7 +1189,7 @@ class DigitalTwinsOperations:
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CheckNameResult or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.CheckNameResult
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.CheckNameResult
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -1203,15 +1203,15 @@ class DigitalTwinsOperations:
         :type location: str
         :param digital_twins_instance_check_name: Set the name parameter in the
          DigitalTwinsInstanceCheckName structure to the name of the DigitalTwinsInstance to check. Is
-         either a model type or a IO type. Required.
+         either a CheckNameRequest type or a IO type. Required.
         :type digital_twins_instance_check_name:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.CheckNameRequest or IO
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.CheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CheckNameResult or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.CheckNameResult
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.CheckNameResult
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -1225,7 +1225,7 @@ class DigitalTwinsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.CheckNameResult] = kwargs.pop("cls", None)
 

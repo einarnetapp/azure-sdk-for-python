@@ -31,7 +31,7 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._digital_twins_endpoint_operations import (
+from ...operations._time_series_database_connections_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
@@ -46,14 +46,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class DigitalTwinsEndpointOperations:
+class TimeSeriesDatabaseConnectionsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.digitaltwins.v2022_10_31.aio.AzureDigitalTwinsManagementClient`'s
-        :attr:`digital_twins_endpoint` attribute.
+        :class:`~azure.mgmt.digitaltwins.v2023_01_31.aio.AzureDigitalTwinsManagementClient`'s
+        :attr:`time_series_database_connections` attribute.
     """
 
     models = _models
@@ -68,8 +68,8 @@ class DigitalTwinsEndpointOperations:
     @distributed_trace
     def list(
         self, resource_group_name: str, resource_name: str, **kwargs: Any
-    ) -> AsyncIterable["_models.DigitalTwinsEndpointResource"]:
-        """Get DigitalTwinsInstance Endpoints.
+    ) -> AsyncIterable["_models.TimeSeriesDatabaseConnection"]:
+        """Get all existing time series database connections for this DigitalTwins instance.
 
         :param resource_group_name: The name of the resource group that contains the
          DigitalTwinsInstance. Required.
@@ -77,17 +77,17 @@ class DigitalTwinsEndpointOperations:
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either DigitalTwinsEndpointResource or the result of
+        :return: An iterator like instance of either TimeSeriesDatabaseConnection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
-        cls: ClsType[_models.DigitalTwinsEndpointResourceListResult] = kwargs.pop("cls", None)
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
+        cls: ClsType[_models.TimeSeriesDatabaseConnectionListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -131,7 +131,7 @@ class DigitalTwinsEndpointOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("DigitalTwinsEndpointResourceListResult", pipeline_response)
+            deserialized = self._deserialize("TimeSeriesDatabaseConnectionListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -155,25 +155,25 @@ class DigitalTwinsEndpointOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     list.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/timeSeriesDatabaseConnections"
     }
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, resource_name: str, endpoint_name: str, **kwargs: Any
-    ) -> _models.DigitalTwinsEndpointResource:
-        """Get DigitalTwinsInstances Endpoint.
+        self, resource_group_name: str, resource_name: str, time_series_database_connection_name: str, **kwargs: Any
+    ) -> _models.TimeSeriesDatabaseConnection:
+        """Get the description of an existing time series database connection.
 
         :param resource_group_name: The name of the resource group that contains the
          DigitalTwinsInstance. Required.
         :type resource_group_name: str
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
-        :param endpoint_name: Name of Endpoint Resource. Required.
-        :type endpoint_name: str
+        :param time_series_database_connection_name: Name of time series database connection. Required.
+        :type time_series_database_connection_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DigitalTwinsEndpointResource or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource
+        :return: TimeSeriesDatabaseConnection or the result of cls(response)
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -187,13 +187,13 @@ class DigitalTwinsEndpointOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
-        cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
+        cls: ClsType[_models.TimeSeriesDatabaseConnection] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             resource_name=resource_name,
-            endpoint_name=endpoint_name,
+            time_series_database_connection_name=time_series_database_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -214,7 +214,7 @@ class DigitalTwinsEndpointOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("DigitalTwinsEndpointResource", pipeline_response)
+        deserialized = self._deserialize("TimeSeriesDatabaseConnection", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -222,17 +222,17 @@ class DigitalTwinsEndpointOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/timeSeriesDatabaseConnections/{timeSeriesDatabaseConnectionName}"
     }
 
     async def _create_or_update_initial(
         self,
         resource_group_name: str,
         resource_name: str,
-        endpoint_name: str,
-        endpoint_description: Union[_models.DigitalTwinsEndpointResource, IO],
+        time_series_database_connection_name: str,
+        time_series_database_connection_description: Union[_models.TimeSeriesDatabaseConnection, IO],
         **kwargs: Any
-    ) -> _models.DigitalTwinsEndpointResource:
+    ) -> _models.TimeSeriesDatabaseConnection:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -244,22 +244,22 @@ class DigitalTwinsEndpointOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
+        cls: ClsType[_models.TimeSeriesDatabaseConnection] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(endpoint_description, (IO, bytes)):
-            _content = endpoint_description
+        if isinstance(time_series_database_connection_description, (IO, bytes)):
+            _content = time_series_database_connection_description
         else:
-            _json = self._serialize.body(endpoint_description, "DigitalTwinsEndpointResource")
+            _json = self._serialize.body(time_series_database_connection_description, "TimeSeriesDatabaseConnection")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             resource_name=resource_name,
-            endpoint_name=endpoint_name,
+            time_series_database_connection_name=time_series_database_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -284,10 +284,10 @@ class DigitalTwinsEndpointOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("DigitalTwinsEndpointResource", pipeline_response)
+            deserialized = self._deserialize("TimeSeriesDatabaseConnection", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("DigitalTwinsEndpointResource", pipeline_response)
+            deserialized = self._deserialize("TimeSeriesDatabaseConnection", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -295,7 +295,7 @@ class DigitalTwinsEndpointOperations:
         return deserialized  # type: ignore
 
     _create_or_update_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/timeSeriesDatabaseConnections/{timeSeriesDatabaseConnectionName}"
     }
 
     @overload
@@ -303,25 +303,25 @@ class DigitalTwinsEndpointOperations:
         self,
         resource_group_name: str,
         resource_name: str,
-        endpoint_name: str,
-        endpoint_description: _models.DigitalTwinsEndpointResource,
+        time_series_database_connection_name: str,
+        time_series_database_connection_description: _models.TimeSeriesDatabaseConnection,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
-        """Create or update DigitalTwinsInstance endpoint.
+    ) -> AsyncLROPoller[_models.TimeSeriesDatabaseConnection]:
+        """Create or update a time series database connection.
 
         :param resource_group_name: The name of the resource group that contains the
          DigitalTwinsInstance. Required.
         :type resource_group_name: str
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
-        :param endpoint_name: Name of Endpoint Resource. Required.
-        :type endpoint_name: str
-        :param endpoint_description: The DigitalTwinsInstance endpoint metadata and security metadata.
-         Required.
-        :type endpoint_description:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource
+        :param time_series_database_connection_name: Name of time series database connection. Required.
+        :type time_series_database_connection_name: str
+        :param time_series_database_connection_description: The time series database connection
+         description. Required.
+        :type time_series_database_connection_description:
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -333,10 +333,10 @@ class DigitalTwinsEndpointOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either TimeSeriesDatabaseConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -345,24 +345,24 @@ class DigitalTwinsEndpointOperations:
         self,
         resource_group_name: str,
         resource_name: str,
-        endpoint_name: str,
-        endpoint_description: IO,
+        time_series_database_connection_name: str,
+        time_series_database_connection_description: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
-        """Create or update DigitalTwinsInstance endpoint.
+    ) -> AsyncLROPoller[_models.TimeSeriesDatabaseConnection]:
+        """Create or update a time series database connection.
 
         :param resource_group_name: The name of the resource group that contains the
          DigitalTwinsInstance. Required.
         :type resource_group_name: str
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
-        :param endpoint_name: Name of Endpoint Resource. Required.
-        :type endpoint_name: str
-        :param endpoint_description: The DigitalTwinsInstance endpoint metadata and security metadata.
-         Required.
-        :type endpoint_description: IO
+        :param time_series_database_connection_name: Name of time series database connection. Required.
+        :type time_series_database_connection_name: str
+        :param time_series_database_connection_description: The time series database connection
+         description. Required.
+        :type time_series_database_connection_description: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -374,10 +374,10 @@ class DigitalTwinsEndpointOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either TimeSeriesDatabaseConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -386,23 +386,23 @@ class DigitalTwinsEndpointOperations:
         self,
         resource_group_name: str,
         resource_name: str,
-        endpoint_name: str,
-        endpoint_description: Union[_models.DigitalTwinsEndpointResource, IO],
+        time_series_database_connection_name: str,
+        time_series_database_connection_description: Union[_models.TimeSeriesDatabaseConnection, IO],
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
-        """Create or update DigitalTwinsInstance endpoint.
+    ) -> AsyncLROPoller[_models.TimeSeriesDatabaseConnection]:
+        """Create or update a time series database connection.
 
         :param resource_group_name: The name of the resource group that contains the
          DigitalTwinsInstance. Required.
         :type resource_group_name: str
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
-        :param endpoint_name: Name of Endpoint Resource. Required.
-        :type endpoint_name: str
-        :param endpoint_description: The DigitalTwinsInstance endpoint metadata and security metadata.
-         Is either a model type or a IO type. Required.
-        :type endpoint_description:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource or IO
+        :param time_series_database_connection_name: Name of time series database connection. Required.
+        :type time_series_database_connection_name: str
+        :param time_series_database_connection_description: The time series database connection
+         description. Is either a TimeSeriesDatabaseConnection type or a IO type. Required.
+        :type time_series_database_connection_description:
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -414,18 +414,18 @@ class DigitalTwinsEndpointOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either TimeSeriesDatabaseConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
+        cls: ClsType[_models.TimeSeriesDatabaseConnection] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
@@ -433,8 +433,8 @@ class DigitalTwinsEndpointOperations:
             raw_result = await self._create_or_update_initial(
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
-                endpoint_name=endpoint_name,
-                endpoint_description=endpoint_description,
+                time_series_database_connection_name=time_series_database_connection_name,
+                time_series_database_connection_description=time_series_database_connection_description,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -445,7 +445,7 @@ class DigitalTwinsEndpointOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("DigitalTwinsEndpointResource", pipeline_response)
+            deserialized = self._deserialize("TimeSeriesDatabaseConnection", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -466,12 +466,17 @@ class DigitalTwinsEndpointOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/timeSeriesDatabaseConnections/{timeSeriesDatabaseConnectionName}"
     }
 
     async def _delete_initial(
-        self, resource_group_name: str, resource_name: str, endpoint_name: str, **kwargs: Any
-    ) -> Optional[_models.DigitalTwinsEndpointResource]:
+        self,
+        resource_group_name: str,
+        resource_name: str,
+        time_series_database_connection_name: str,
+        cleanup_connection_artifacts: Optional[Union[str, _models.CleanupConnectionArtifacts]] = None,
+        **kwargs: Any
+    ) -> Optional[_models.TimeSeriesDatabaseConnection]:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -483,14 +488,15 @@ class DigitalTwinsEndpointOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
-        cls: ClsType[Optional[_models.DigitalTwinsEndpointResource]] = kwargs.pop("cls", None)
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
+        cls: ClsType[Optional[_models.TimeSeriesDatabaseConnection]] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
             resource_name=resource_name,
-            endpoint_name=endpoint_name,
+            time_series_database_connection_name=time_series_database_connection_name,
             subscription_id=self._config.subscription_id,
+            cleanup_connection_artifacts=cleanup_connection_artifacts,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
             headers=_headers,
@@ -512,10 +518,10 @@ class DigitalTwinsEndpointOperations:
 
         deserialized = None
         if response.status_code == 200:
-            deserialized = self._deserialize("DigitalTwinsEndpointResource", pipeline_response)
+            deserialized = self._deserialize("TimeSeriesDatabaseConnection", pipeline_response)
 
         if response.status_code == 202:
-            deserialized = self._deserialize("DigitalTwinsEndpointResource", pipeline_response)
+            deserialized = self._deserialize("TimeSeriesDatabaseConnection", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -523,22 +529,34 @@ class DigitalTwinsEndpointOperations:
         return deserialized
 
     _delete_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/timeSeriesDatabaseConnections/{timeSeriesDatabaseConnectionName}"
     }
 
     @distributed_trace_async
     async def begin_delete(
-        self, resource_group_name: str, resource_name: str, endpoint_name: str, **kwargs: Any
-    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
-        """Delete a DigitalTwinsInstance endpoint.
+        self,
+        resource_group_name: str,
+        resource_name: str,
+        time_series_database_connection_name: str,
+        cleanup_connection_artifacts: Optional[Union[str, _models.CleanupConnectionArtifacts]] = None,
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.TimeSeriesDatabaseConnection]:
+        """Delete a time series database connection.
 
         :param resource_group_name: The name of the resource group that contains the
          DigitalTwinsInstance. Required.
         :type resource_group_name: str
         :param resource_name: The name of the DigitalTwinsInstance. Required.
         :type resource_name: str
-        :param endpoint_name: Name of Endpoint Resource. Required.
-        :type endpoint_name: str
+        :param time_series_database_connection_name: Name of time series database connection. Required.
+        :type time_series_database_connection_name: str
+        :param cleanup_connection_artifacts: Specifies whether or not to attempt to clean up artifacts
+         that were created in order to establish a connection to the time series database. This is a
+         best-effort attempt that will fail if appropriate permissions are not in place. Setting this to
+         'true' does not delete any recorded data. Known values are: "true" and "false". Default value
+         is None.
+        :type cleanup_connection_artifacts: str or
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.CleanupConnectionArtifacts
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -547,17 +565,17 @@ class DigitalTwinsEndpointOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either TimeSeriesDatabaseConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
-        cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
+        cls: ClsType[_models.TimeSeriesDatabaseConnection] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
@@ -565,7 +583,8 @@ class DigitalTwinsEndpointOperations:
             raw_result = await self._delete_initial(
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
-                endpoint_name=endpoint_name,
+                time_series_database_connection_name=time_series_database_connection_name,
+                cleanup_connection_artifacts=cleanup_connection_artifacts,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -575,7 +594,7 @@ class DigitalTwinsEndpointOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("DigitalTwinsEndpointResource", pipeline_response)
+            deserialized = self._deserialize("TimeSeriesDatabaseConnection", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -596,5 +615,5 @@ class DigitalTwinsEndpointOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/timeSeriesDatabaseConnections/{timeSeriesDatabaseConnectionName}"
     }

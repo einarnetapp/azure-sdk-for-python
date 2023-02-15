@@ -21,6 +21,13 @@ class AuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     IDENTITY_BASED = "IdentityBased"
 
 
+class CleanupConnectionArtifacts(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """CleanupConnectionArtifacts."""
+
+    TRUE = "true"
+    FALSE = "false"
+
+
 class ConnectionPropertiesProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state."""
 
@@ -123,6 +130,17 @@ class Reason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     INVALID = "Invalid"
     ALREADY_EXISTS = "AlreadyExists"
+
+
+class RecordPropertyAndItemRemovals(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies whether or not to record twin / relationship property and item removals, including
+    removals of indexed or keyed values (such as map entries, array elements, etc.). This feature
+    is de-activated unless explicitly set to 'true'. Setting this property to 'true' will generate
+    an additional column in the property events table in ADX.
+    """
+
+    TRUE = "true"
+    FALSE = "false"
 
 
 class TimeSeriesDatabaseConnectionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):

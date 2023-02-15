@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from ... import _serialization
 
@@ -29,14 +29,14 @@ class TimeSeriesDatabaseConnectionProperties(_serialization.Model):
 
     :ivar connection_type: The type of time series connection resource. Required.
      "AzureDataExplorer"
-    :vartype connection_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.ConnectionType
+    :vartype connection_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.ConnectionType
     :ivar provisioning_state: The provisioning state. Known values are: "Provisioning", "Deleting",
      "Updating", "Succeeded", "Failed", "Canceled", "Deleted", "Warning", "Suspending", "Restoring",
      "Moving", and "Disabled".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.TimeSeriesDatabaseConnectionState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnectionState
     :ivar identity: Managed identity properties for the time series database connection resource.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
     """
 
     _validation = {
@@ -52,11 +52,11 @@ class TimeSeriesDatabaseConnectionProperties(_serialization.Model):
 
     _subtype_map = {"connection_type": {"AzureDataExplorer": "AzureDataExplorerConnectionProperties"}}
 
-    def __init__(self, *, identity: Optional["_models.ManagedIdentityReference"] = None, **kwargs):
+    def __init__(self, *, identity: Optional["_models.ManagedIdentityReference"] = None, **kwargs: Any) -> None:
         """
         :keyword identity: Managed identity properties for the time series database connection
          resource.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
         """
         super().__init__(**kwargs)
         self.connection_type: Optional[str] = None
@@ -67,7 +67,8 @@ class TimeSeriesDatabaseConnectionProperties(_serialization.Model):
 class AzureDataExplorerConnectionProperties(
     TimeSeriesDatabaseConnectionProperties
 ):  # pylint: disable=too-many-instance-attributes
-    """Properties of a time series database connection to Azure Data Explorer with data being sent via an EventHub.
+    """Properties of a time series database connection to Azure Data Explorer with data being sent via
+    an EventHub.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -75,22 +76,31 @@ class AzureDataExplorerConnectionProperties(
 
     :ivar connection_type: The type of time series connection resource. Required.
      "AzureDataExplorer"
-    :vartype connection_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.ConnectionType
+    :vartype connection_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.ConnectionType
     :ivar provisioning_state: The provisioning state. Known values are: "Provisioning", "Deleting",
      "Updating", "Succeeded", "Failed", "Canceled", "Deleted", "Warning", "Suspending", "Restoring",
      "Moving", and "Disabled".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.TimeSeriesDatabaseConnectionState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnectionState
     :ivar identity: Managed identity properties for the time series database connection resource.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
     :ivar adx_resource_id: The resource ID of the Azure Data Explorer cluster. Required.
     :vartype adx_resource_id: str
     :ivar adx_endpoint_uri: The URI of the Azure Data Explorer endpoint. Required.
     :vartype adx_endpoint_uri: str
     :ivar adx_database_name: The name of the Azure Data Explorer database. Required.
     :vartype adx_database_name: str
-    :ivar adx_table_name: The name of the Azure Data Explorer table. Defaults to AdtPropertyEvents.
+    :ivar adx_table_name: The name of the Azure Data Explorer table used for storing updates to
+     properties of twins and relationships. Defaults to AdtPropertyEvents.
     :vartype adx_table_name: str
+    :ivar adx_twin_lifecycle_events_table_name: The name of the Azure Data Explorer table used for
+     recording twin lifecycle events. The table will not be created if this property is left
+     unspecified.
+    :vartype adx_twin_lifecycle_events_table_name: str
+    :ivar adx_relationship_lifecycle_events_table_name: The name of the Azure Data Explorer table
+     used for recording relationship lifecycle events. The table will not be created if this
+     property is left unspecified.
+    :vartype adx_relationship_lifecycle_events_table_name: str
     :ivar event_hub_endpoint_uri: The URL of the EventHub namespace for identity-based
      authentication. It must include the protocol sb://. Required.
     :vartype event_hub_endpoint_uri: str
@@ -102,6 +112,13 @@ class AzureDataExplorerConnectionProperties(
     :ivar event_hub_consumer_group: The EventHub consumer group to use when ADX reads from
      EventHub. Defaults to $Default.
     :vartype event_hub_consumer_group: str
+    :ivar record_property_and_item_removals: Specifies whether or not to record twin / relationship
+     property and item removals, including removals of indexed or keyed values (such as map entries,
+     array elements, etc.). This feature is de-activated unless explicitly set to 'true'. Setting
+     this property to 'true' will generate an additional column in the property events table in ADX.
+     Known values are: "true" and "false".
+    :vartype record_property_and_item_removals: str or
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.RecordPropertyAndItemRemovals
     """
 
     _validation = {
@@ -123,10 +140,16 @@ class AzureDataExplorerConnectionProperties(
         "adx_endpoint_uri": {"key": "adxEndpointUri", "type": "str"},
         "adx_database_name": {"key": "adxDatabaseName", "type": "str"},
         "adx_table_name": {"key": "adxTableName", "type": "str"},
+        "adx_twin_lifecycle_events_table_name": {"key": "adxTwinLifecycleEventsTableName", "type": "str"},
+        "adx_relationship_lifecycle_events_table_name": {
+            "key": "adxRelationshipLifecycleEventsTableName",
+            "type": "str",
+        },
         "event_hub_endpoint_uri": {"key": "eventHubEndpointUri", "type": "str"},
         "event_hub_entity_path": {"key": "eventHubEntityPath", "type": "str"},
         "event_hub_namespace_resource_id": {"key": "eventHubNamespaceResourceId", "type": "str"},
         "event_hub_consumer_group": {"key": "eventHubConsumerGroup", "type": "str"},
+        "record_property_and_item_removals": {"key": "recordPropertyAndItemRemovals", "type": "str"},
     }
 
     def __init__(
@@ -140,22 +163,33 @@ class AzureDataExplorerConnectionProperties(
         event_hub_namespace_resource_id: str,
         identity: Optional["_models.ManagedIdentityReference"] = None,
         adx_table_name: str = "AdtPropertyEvents",
+        adx_twin_lifecycle_events_table_name: Optional[str] = None,
+        adx_relationship_lifecycle_events_table_name: Optional[str] = None,
         event_hub_consumer_group: str = "$Default",
-        **kwargs
-    ):
+        record_property_and_item_removals: Union[str, "_models.RecordPropertyAndItemRemovals"] = "false",
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identity: Managed identity properties for the time series database connection
          resource.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
         :keyword adx_resource_id: The resource ID of the Azure Data Explorer cluster. Required.
         :paramtype adx_resource_id: str
         :keyword adx_endpoint_uri: The URI of the Azure Data Explorer endpoint. Required.
         :paramtype adx_endpoint_uri: str
         :keyword adx_database_name: The name of the Azure Data Explorer database. Required.
         :paramtype adx_database_name: str
-        :keyword adx_table_name: The name of the Azure Data Explorer table. Defaults to
-         AdtPropertyEvents.
+        :keyword adx_table_name: The name of the Azure Data Explorer table used for storing updates to
+         properties of twins and relationships. Defaults to AdtPropertyEvents.
         :paramtype adx_table_name: str
+        :keyword adx_twin_lifecycle_events_table_name: The name of the Azure Data Explorer table used
+         for recording twin lifecycle events. The table will not be created if this property is left
+         unspecified.
+        :paramtype adx_twin_lifecycle_events_table_name: str
+        :keyword adx_relationship_lifecycle_events_table_name: The name of the Azure Data Explorer
+         table used for recording relationship lifecycle events. The table will not be created if this
+         property is left unspecified.
+        :paramtype adx_relationship_lifecycle_events_table_name: str
         :keyword event_hub_endpoint_uri: The URL of the EventHub namespace for identity-based
          authentication. It must include the protocol sb://. Required.
         :paramtype event_hub_endpoint_uri: str
@@ -167,6 +201,13 @@ class AzureDataExplorerConnectionProperties(
         :keyword event_hub_consumer_group: The EventHub consumer group to use when ADX reads from
          EventHub. Defaults to $Default.
         :paramtype event_hub_consumer_group: str
+        :keyword record_property_and_item_removals: Specifies whether or not to record twin /
+         relationship property and item removals, including removals of indexed or keyed values (such as
+         map entries, array elements, etc.). This feature is de-activated unless explicitly set to
+         'true'. Setting this property to 'true' will generate an additional column in the property
+         events table in ADX. Known values are: "true" and "false".
+        :paramtype record_property_and_item_removals: str or
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.RecordPropertyAndItemRemovals
         """
         super().__init__(identity=identity, **kwargs)
         self.connection_type: str = "AzureDataExplorer"
@@ -174,10 +215,13 @@ class AzureDataExplorerConnectionProperties(
         self.adx_endpoint_uri = adx_endpoint_uri
         self.adx_database_name = adx_database_name
         self.adx_table_name = adx_table_name
+        self.adx_twin_lifecycle_events_table_name = adx_twin_lifecycle_events_table_name
+        self.adx_relationship_lifecycle_events_table_name = adx_relationship_lifecycle_events_table_name
         self.event_hub_endpoint_uri = event_hub_endpoint_uri
         self.event_hub_entity_path = event_hub_entity_path
         self.event_hub_namespace_resource_id = event_hub_namespace_resource_id
         self.event_hub_consumer_group = event_hub_consumer_group
+        self.record_property_and_item_removals = record_property_and_item_removals
 
 
 class CheckNameRequest(_serialization.Model):
@@ -206,7 +250,7 @@ class CheckNameRequest(_serialization.Model):
 
     type = "Microsoft.DigitalTwins/digitalTwinsInstances"
 
-    def __init__(self, *, name: str, **kwargs):
+    def __init__(self, *, name: str, **kwargs: Any) -> None:
         """
         :keyword name: Resource name. Required.
         :paramtype name: str
@@ -225,7 +269,7 @@ class CheckNameResult(_serialization.Model):
     :vartype message: str
     :ivar reason: Message providing the reason why the given name is invalid. Known values are:
      "Invalid" and "AlreadyExists".
-    :vartype reason: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.Reason
+    :vartype reason: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.Reason
     """
 
     _attribute_map = {
@@ -240,8 +284,8 @@ class CheckNameResult(_serialization.Model):
         name_available: Optional[bool] = None,
         message: Optional[str] = None,
         reason: Optional[Union[str, "_models.Reason"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name_available: Specifies a Boolean value that indicates if the name is available.
         :paramtype name_available: bool
@@ -250,7 +294,7 @@ class CheckNameResult(_serialization.Model):
         :paramtype message: str
         :keyword reason: Message providing the reason why the given name is invalid. Known values are:
          "Invalid" and "AlreadyExists".
-        :paramtype reason: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.Reason
+        :paramtype reason: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.Reason
         """
         super().__init__(**kwargs)
         self.name_available = name_available
@@ -266,14 +310,14 @@ class ConnectionProperties(_serialization.Model):
     :ivar provisioning_state: The provisioning state. Known values are: "Pending", "Approved",
      "Rejected", and "Disconnected".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.ConnectionPropertiesProvisioningState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.ConnectionPropertiesProvisioningState
     :ivar private_endpoint: The private endpoint.
-    :vartype private_endpoint: ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpoint
+    :vartype private_endpoint: ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpoint
     :ivar group_ids: The list of group ids for the private endpoint connection.
     :vartype group_ids: list[str]
     :ivar private_link_service_connection_state: The connection state.
     :vartype private_link_service_connection_state:
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.ConnectionPropertiesPrivateLinkServiceConnectionState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.ConnectionPropertiesPrivateLinkServiceConnectionState
     """
 
     _validation = {
@@ -298,16 +342,16 @@ class ConnectionProperties(_serialization.Model):
         private_link_service_connection_state: Optional[
             "_models.ConnectionPropertiesPrivateLinkServiceConnectionState"
         ] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword private_endpoint: The private endpoint.
-        :paramtype private_endpoint: ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpoint
+        :paramtype private_endpoint: ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpoint
         :keyword group_ids: The list of group ids for the private endpoint connection.
         :paramtype group_ids: list[str]
         :keyword private_link_service_connection_state: The connection state.
         :paramtype private_link_service_connection_state:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.ConnectionPropertiesPrivateLinkServiceConnectionState
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.ConnectionPropertiesPrivateLinkServiceConnectionState
         """
         super().__init__(**kwargs)
         self.provisioning_state = None
@@ -324,7 +368,7 @@ class ConnectionState(_serialization.Model):
     :ivar status: The status of a private endpoint connection. Required. Known values are:
      "Pending", "Approved", "Rejected", and "Disconnected".
     :vartype status: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateLinkServiceConnectionStatus
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateLinkServiceConnectionStatus
     :ivar description: The description for the current state of a private endpoint connection.
      Required.
     :vartype description: str
@@ -349,13 +393,13 @@ class ConnectionState(_serialization.Model):
         status: Union[str, "_models.PrivateLinkServiceConnectionStatus"],
         description: str,
         actions_required: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword status: The status of a private endpoint connection. Required. Known values are:
          "Pending", "Approved", "Rejected", and "Disconnected".
         :paramtype status: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateLinkServiceConnectionStatus
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateLinkServiceConnectionStatus
         :keyword description: The description for the current state of a private endpoint connection.
          Required.
         :paramtype description: str
@@ -376,7 +420,7 @@ class ConnectionPropertiesPrivateLinkServiceConnectionState(ConnectionState):
     :ivar status: The status of a private endpoint connection. Required. Known values are:
      "Pending", "Approved", "Rejected", and "Disconnected".
     :vartype status: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateLinkServiceConnectionStatus
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateLinkServiceConnectionStatus
     :ivar description: The description for the current state of a private endpoint connection.
      Required.
     :vartype description: str
@@ -401,13 +445,13 @@ class ConnectionPropertiesPrivateLinkServiceConnectionState(ConnectionState):
         status: Union[str, "_models.PrivateLinkServiceConnectionStatus"],
         description: str,
         actions_required: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword status: The status of a private endpoint connection. Required. Known values are:
          "Pending", "Approved", "Rejected", and "Disconnected".
         :paramtype status: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateLinkServiceConnectionStatus
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateLinkServiceConnectionStatus
         :keyword description: The description for the current state of a private endpoint connection.
          Required.
         :paramtype description: str
@@ -435,10 +479,10 @@ class DigitalTwinsResource(_serialization.Model):
     :ivar tags: The resource tags.
     :vartype tags: dict[str, str]
     :ivar identity: The managed identity for the DigitalTwinsInstance.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentity
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentity
     :ivar system_data: Metadata pertaining to creation and last modification of the
      DigitalTwinsInstance.
-    :vartype system_data: ~azure.mgmt.digitaltwins.v2022_10_31.models.SystemData
+    :vartype system_data: ~azure.mgmt.digitaltwins.v2023_01_31.models.SystemData
     """
 
     _validation = {
@@ -465,15 +509,15 @@ class DigitalTwinsResource(_serialization.Model):
         location: str,
         tags: Optional[Dict[str, str]] = None,
         identity: Optional["_models.DigitalTwinsIdentity"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: The resource location. Required.
         :paramtype location: str
         :keyword tags: The resource tags.
         :paramtype tags: dict[str, str]
         :keyword identity: The managed identity for the DigitalTwinsInstance.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentity
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentity
         """
         super().__init__(**kwargs)
         self.id = None
@@ -503,10 +547,10 @@ class DigitalTwinsDescription(DigitalTwinsResource):  # pylint: disable=too-many
     :ivar tags: The resource tags.
     :vartype tags: dict[str, str]
     :ivar identity: The managed identity for the DigitalTwinsInstance.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentity
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentity
     :ivar system_data: Metadata pertaining to creation and last modification of the
      DigitalTwinsInstance.
-    :vartype system_data: ~azure.mgmt.digitaltwins.v2022_10_31.models.SystemData
+    :vartype system_data: ~azure.mgmt.digitaltwins.v2023_01_31.models.SystemData
     :ivar created_time: Time when DigitalTwinsInstance was created.
     :vartype created_time: ~datetime.datetime
     :ivar last_updated_time: Time when DigitalTwinsInstance was updated.
@@ -515,16 +559,16 @@ class DigitalTwinsDescription(DigitalTwinsResource):  # pylint: disable=too-many
      "Updating", "Succeeded", "Failed", "Canceled", "Deleted", "Warning", "Suspending", "Restoring",
      and "Moving".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.ProvisioningState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.ProvisioningState
     :ivar host_name: Api endpoint to work with DigitalTwinsInstance.
     :vartype host_name: str
     :ivar private_endpoint_connections: The private endpoint connections.
     :vartype private_endpoint_connections:
-     list[~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection]
+     list[~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection]
     :ivar public_network_access: Public network access for the DigitalTwinsInstance. Known values
      are: "Enabled" and "Disabled".
     :vartype public_network_access: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.PublicNetworkAccess
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.PublicNetworkAccess
     """
 
     _validation = {
@@ -566,22 +610,22 @@ class DigitalTwinsDescription(DigitalTwinsResource):  # pylint: disable=too-many
         identity: Optional["_models.DigitalTwinsIdentity"] = None,
         private_endpoint_connections: Optional[List["_models.PrivateEndpointConnection"]] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: The resource location. Required.
         :paramtype location: str
         :keyword tags: The resource tags.
         :paramtype tags: dict[str, str]
         :keyword identity: The managed identity for the DigitalTwinsInstance.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentity
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentity
         :keyword private_endpoint_connections: The private endpoint connections.
         :paramtype private_endpoint_connections:
-         list[~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection]
+         list[~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection]
         :keyword public_network_access: Public network access for the DigitalTwinsInstance. Known
          values are: "Enabled" and "Disabled".
         :paramtype public_network_access: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.PublicNetworkAccess
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.PublicNetworkAccess
         """
         super().__init__(location=location, tags=tags, identity=identity, **kwargs)
         self.created_time = None
@@ -598,7 +642,7 @@ class DigitalTwinsDescriptionListResult(_serialization.Model):
     :ivar next_link: The link used to get the next page of DigitalTwins description objects.
     :vartype next_link: str
     :ivar value: A list of DigitalTwins description objects.
-    :vartype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+    :vartype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
     """
 
     _attribute_map = {
@@ -611,13 +655,13 @@ class DigitalTwinsDescriptionListResult(_serialization.Model):
         *,
         next_link: Optional[str] = None,
         value: Optional[List["_models.DigitalTwinsDescription"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of DigitalTwins description objects.
         :paramtype next_link: str
         :keyword value: A list of DigitalTwins description objects.
-        :paramtype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsDescription]
+        :paramtype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsDescription]
         """
         super().__init__(**kwargs)
         self.next_link = next_link
@@ -636,7 +680,7 @@ class ExternalResource(_serialization.Model):
     :ivar type: The resource type.
     :vartype type: str
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
-    :vartype system_data: ~azure.mgmt.digitaltwins.v2022_10_31.models.SystemData
+    :vartype system_data: ~azure.mgmt.digitaltwins.v2023_01_31.models.SystemData
     """
 
     _validation = {
@@ -653,7 +697,7 @@ class ExternalResource(_serialization.Model):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -676,10 +720,10 @@ class DigitalTwinsEndpointResource(ExternalResource):
     :ivar type: The resource type.
     :vartype type: str
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
-    :vartype system_data: ~azure.mgmt.digitaltwins.v2022_10_31.models.SystemData
+    :vartype system_data: ~azure.mgmt.digitaltwins.v2023_01_31.models.SystemData
     :ivar properties: DigitalTwinsInstance endpoint resource properties. Required.
     :vartype properties:
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResourceProperties
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResourceProperties
     """
 
     _validation = {
@@ -698,11 +742,11 @@ class DigitalTwinsEndpointResource(ExternalResource):
         "properties": {"key": "properties", "type": "DigitalTwinsEndpointResourceProperties"},
     }
 
-    def __init__(self, *, properties: "_models.DigitalTwinsEndpointResourceProperties", **kwargs):
+    def __init__(self, *, properties: "_models.DigitalTwinsEndpointResourceProperties", **kwargs: Any) -> None:
         """
         :keyword properties: DigitalTwinsInstance endpoint resource properties. Required.
         :paramtype properties:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResourceProperties
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResourceProperties
         """
         super().__init__(**kwargs)
         self.properties = properties
@@ -714,7 +758,7 @@ class DigitalTwinsEndpointResourceListResult(_serialization.Model):
     :ivar next_link: The link used to get the next page of DigitalTwinsInstance Endpoints.
     :vartype next_link: str
     :ivar value: A list of DigitalTwinsInstance Endpoints.
-    :vartype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource]
+    :vartype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource]
     """
 
     _attribute_map = {
@@ -727,14 +771,14 @@ class DigitalTwinsEndpointResourceListResult(_serialization.Model):
         *,
         next_link: Optional[str] = None,
         value: Optional[List["_models.DigitalTwinsEndpointResource"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of DigitalTwinsInstance Endpoints.
         :paramtype next_link: str
         :keyword value: A list of DigitalTwinsInstance Endpoints.
         :paramtype value:
-         list[~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsEndpointResource]
+         list[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource]
         """
         super().__init__(**kwargs)
         self.next_link = next_link
@@ -753,12 +797,12 @@ class DigitalTwinsEndpointResourceProperties(_serialization.Model):
 
     :ivar endpoint_type: The type of Digital Twins endpoint. Required. Known values are:
      "EventHub", "EventGrid", and "ServiceBus".
-    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointType
+    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointType
     :ivar provisioning_state: The provisioning state. Known values are: "Provisioning", "Deleting",
      "Updating", "Succeeded", "Failed", "Canceled", "Deleted", "Warning", "Suspending", "Restoring",
      "Moving", and "Disabled".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointProvisioningState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointProvisioningState
     :ivar created_time: Time when the Endpoint was added to DigitalTwinsInstance.
     :vartype created_time: ~datetime.datetime
     :ivar authentication_type: Specifies the authentication type being used for connecting to the
@@ -767,14 +811,14 @@ class DigitalTwinsEndpointResourceProperties(_serialization.Model):
      endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
      "IdentityBased".
     :vartype authentication_type: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
     :ivar dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
      obfuscated during read.
     :vartype dead_letter_secret: str
     :ivar dead_letter_uri: Dead letter storage URL for identity-based authentication.
     :vartype dead_letter_uri: str
     :ivar identity: Managed identity properties for the endpoint.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
     """
 
     _validation = {
@@ -802,8 +846,8 @@ class DigitalTwinsEndpointResourceProperties(_serialization.Model):
         dead_letter_secret: Optional[str] = None,
         dead_letter_uri: Optional[str] = None,
         identity: Optional["_models.ManagedIdentityReference"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword authentication_type: Specifies the authentication type being used for connecting to
          the endpoint. Defaults to 'KeyBased'. If 'KeyBased' is selected, a connection string must be
@@ -811,14 +855,14 @@ class DigitalTwinsEndpointResourceProperties(_serialization.Model):
          endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
          "IdentityBased".
         :paramtype authentication_type: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
         :keyword dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
          obfuscated during read.
         :paramtype dead_letter_secret: str
         :keyword dead_letter_uri: Dead letter storage URL for identity-based authentication.
         :paramtype dead_letter_uri: str
         :keyword identity: Managed identity properties for the endpoint.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
         """
         super().__init__(**kwargs)
         self.endpoint_type: Optional[str] = None
@@ -837,7 +881,7 @@ class DigitalTwinsIdentity(_serialization.Model):
 
     :ivar type: The type of Managed Identity used by the DigitalTwinsInstance. Known values are:
      "None", "SystemAssigned", "UserAssigned", and "SystemAssigned,UserAssigned".
-    :vartype type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentityType
+    :vartype type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentityType
     :ivar principal_id: The object id of the Managed Identity Resource. This will be sent to the RP
      from ARM via the x-ms-identity-principal-id header in the PUT request if the resource has a
      systemAssigned(implicit) identity.
@@ -851,7 +895,7 @@ class DigitalTwinsIdentity(_serialization.Model):
     '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
      .
     :vartype user_assigned_identities: dict[str,
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.UserAssignedIdentity]
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.UserAssignedIdentity]
     """
 
     _validation = {
@@ -871,18 +915,18 @@ class DigitalTwinsIdentity(_serialization.Model):
         *,
         type: Optional[Union[str, "_models.DigitalTwinsIdentityType"]] = None,
         user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword type: The type of Managed Identity used by the DigitalTwinsInstance. Known values are:
          "None", "SystemAssigned", "UserAssigned", and "SystemAssigned,UserAssigned".
-        :paramtype type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentityType
+        :paramtype type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentityType
         :keyword user_assigned_identities: The list of user identities associated with the resource.
          The user identity dictionary key references will be ARM resource ids in the form:
         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
          .
         :paramtype user_assigned_identities: dict[str,
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.UserAssignedIdentity]
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.UserAssignedIdentity]
         """
         super().__init__(**kwargs)
         self.type = type
@@ -897,9 +941,9 @@ class DigitalTwinsPatchDescription(_serialization.Model):
     :ivar tags: Instance patch properties.
     :vartype tags: dict[str, str]
     :ivar identity: The managed identity for the DigitalTwinsInstance.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentity
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentity
     :ivar properties: Properties for the DigitalTwinsInstance.
-    :vartype properties: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsPatchProperties
+    :vartype properties: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsPatchProperties
     """
 
     _attribute_map = {
@@ -914,15 +958,15 @@ class DigitalTwinsPatchDescription(_serialization.Model):
         tags: Optional[Dict[str, str]] = None,
         identity: Optional["_models.DigitalTwinsIdentity"] = None,
         properties: Optional["_models.DigitalTwinsPatchProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Instance patch properties.
         :paramtype tags: dict[str, str]
         :keyword identity: The managed identity for the DigitalTwinsInstance.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsIdentity
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsIdentity
         :keyword properties: Properties for the DigitalTwinsInstance.
-        :paramtype properties: ~azure.mgmt.digitaltwins.v2022_10_31.models.DigitalTwinsPatchProperties
+        :paramtype properties: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsPatchProperties
         """
         super().__init__(**kwargs)
         self.tags = tags
@@ -936,19 +980,21 @@ class DigitalTwinsPatchProperties(_serialization.Model):
     :ivar public_network_access: Public network access for the DigitalTwinsInstance. Known values
      are: "Enabled" and "Disabled".
     :vartype public_network_access: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.PublicNetworkAccess
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.PublicNetworkAccess
     """
 
     _attribute_map = {
         "public_network_access": {"key": "publicNetworkAccess", "type": "str"},
     }
 
-    def __init__(self, *, public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None, **kwargs):
+    def __init__(
+        self, *, public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword public_network_access: Public network access for the DigitalTwinsInstance. Known
          values are: "Enabled" and "Disabled".
         :paramtype public_network_access: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.PublicNetworkAccess
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.PublicNetworkAccess
         """
         super().__init__(**kwargs)
         self.public_network_access = public_network_access
@@ -964,7 +1010,7 @@ class ErrorDefinition(_serialization.Model):
     :ivar message: Description of the error.
     :vartype message: str
     :ivar details: Internal error details.
-    :vartype details: list[~azure.mgmt.digitaltwins.v2022_10_31.models.ErrorDefinition]
+    :vartype details: list[~azure.mgmt.digitaltwins.v2023_01_31.models.ErrorDefinition]
     """
 
     _validation = {
@@ -979,7 +1025,7 @@ class ErrorDefinition(_serialization.Model):
         "details": {"key": "details", "type": "[ErrorDefinition]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -991,17 +1037,17 @@ class ErrorResponse(_serialization.Model):
     """Error response.
 
     :ivar error: Error description.
-    :vartype error: ~azure.mgmt.digitaltwins.v2022_10_31.models.ErrorDefinition
+    :vartype error: ~azure.mgmt.digitaltwins.v2023_01_31.models.ErrorDefinition
     """
 
     _attribute_map = {
         "error": {"key": "error", "type": "ErrorDefinition"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDefinition"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDefinition"] = None, **kwargs: Any) -> None:
         """
         :keyword error: Error description.
-        :paramtype error: ~azure.mgmt.digitaltwins.v2022_10_31.models.ErrorDefinition
+        :paramtype error: ~azure.mgmt.digitaltwins.v2023_01_31.models.ErrorDefinition
         """
         super().__init__(**kwargs)
         self.error = error
@@ -1016,12 +1062,12 @@ class EventGrid(DigitalTwinsEndpointResourceProperties):
 
     :ivar endpoint_type: The type of Digital Twins endpoint. Required. Known values are:
      "EventHub", "EventGrid", and "ServiceBus".
-    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointType
+    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointType
     :ivar provisioning_state: The provisioning state. Known values are: "Provisioning", "Deleting",
      "Updating", "Succeeded", "Failed", "Canceled", "Deleted", "Warning", "Suspending", "Restoring",
      "Moving", and "Disabled".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointProvisioningState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointProvisioningState
     :ivar created_time: Time when the Endpoint was added to DigitalTwinsInstance.
     :vartype created_time: ~datetime.datetime
     :ivar authentication_type: Specifies the authentication type being used for connecting to the
@@ -1030,14 +1076,14 @@ class EventGrid(DigitalTwinsEndpointResourceProperties):
      endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
      "IdentityBased".
     :vartype authentication_type: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
     :ivar dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
      obfuscated during read.
     :vartype dead_letter_secret: str
     :ivar dead_letter_uri: Dead letter storage URL for identity-based authentication.
     :vartype dead_letter_uri: str
     :ivar identity: Managed identity properties for the endpoint.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
     :ivar topic_endpoint: EventGrid Topic Endpoint. Required.
     :vartype topic_endpoint: str
     :ivar access_key1: EventGrid secondary accesskey. Will be obfuscated during read. Required.
@@ -1077,8 +1123,8 @@ class EventGrid(DigitalTwinsEndpointResourceProperties):
         dead_letter_uri: Optional[str] = None,
         identity: Optional["_models.ManagedIdentityReference"] = None,
         access_key2: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword authentication_type: Specifies the authentication type being used for connecting to
          the endpoint. Defaults to 'KeyBased'. If 'KeyBased' is selected, a connection string must be
@@ -1086,14 +1132,14 @@ class EventGrid(DigitalTwinsEndpointResourceProperties):
          endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
          "IdentityBased".
         :paramtype authentication_type: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
         :keyword dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
          obfuscated during read.
         :paramtype dead_letter_secret: str
         :keyword dead_letter_uri: Dead letter storage URL for identity-based authentication.
         :paramtype dead_letter_uri: str
         :keyword identity: Managed identity properties for the endpoint.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
         :keyword topic_endpoint: EventGrid Topic Endpoint. Required.
         :paramtype topic_endpoint: str
         :keyword access_key1: EventGrid secondary accesskey. Will be obfuscated during read. Required.
@@ -1123,12 +1169,12 @@ class EventHub(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too-m
 
     :ivar endpoint_type: The type of Digital Twins endpoint. Required. Known values are:
      "EventHub", "EventGrid", and "ServiceBus".
-    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointType
+    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointType
     :ivar provisioning_state: The provisioning state. Known values are: "Provisioning", "Deleting",
      "Updating", "Succeeded", "Failed", "Canceled", "Deleted", "Warning", "Suspending", "Restoring",
      "Moving", and "Disabled".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointProvisioningState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointProvisioningState
     :ivar created_time: Time when the Endpoint was added to DigitalTwinsInstance.
     :vartype created_time: ~datetime.datetime
     :ivar authentication_type: Specifies the authentication type being used for connecting to the
@@ -1137,14 +1183,14 @@ class EventHub(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too-m
      endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
      "IdentityBased".
     :vartype authentication_type: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
     :ivar dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
      obfuscated during read.
     :vartype dead_letter_secret: str
     :ivar dead_letter_uri: Dead letter storage URL for identity-based authentication.
     :vartype dead_letter_uri: str
     :ivar identity: Managed identity properties for the endpoint.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
     :ivar connection_string_primary_key: PrimaryConnectionString of the endpoint for key-based
      authentication. Will be obfuscated during read.
     :vartype connection_string_primary_key: str
@@ -1190,8 +1236,8 @@ class EventHub(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too-m
         connection_string_secondary_key: Optional[str] = None,
         endpoint_uri: Optional[str] = None,
         entity_path: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword authentication_type: Specifies the authentication type being used for connecting to
          the endpoint. Defaults to 'KeyBased'. If 'KeyBased' is selected, a connection string must be
@@ -1199,14 +1245,14 @@ class EventHub(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too-m
          endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
          "IdentityBased".
         :paramtype authentication_type: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
         :keyword dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
          obfuscated during read.
         :paramtype dead_letter_secret: str
         :keyword dead_letter_uri: Dead letter storage URL for identity-based authentication.
         :paramtype dead_letter_uri: str
         :keyword identity: Managed identity properties for the endpoint.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
         :keyword connection_string_primary_key: PrimaryConnectionString of the endpoint for key-based
          authentication. Will be obfuscated during read.
         :paramtype connection_string_primary_key: str
@@ -1242,7 +1288,7 @@ class GroupIdInformation(_serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar properties: The group information properties. Required.
-    :vartype properties: ~azure.mgmt.digitaltwins.v2022_10_31.models.GroupIdInformationProperties
+    :vartype properties: ~azure.mgmt.digitaltwins.v2023_01_31.models.GroupIdInformationProperties
     :ivar id: The resource identifier.
     :vartype id: str
     :ivar name: The resource name.
@@ -1269,11 +1315,11 @@ class GroupIdInformation(_serialization.Model):
         *,
         properties: "_models.GroupIdInformationProperties",
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword properties: The group information properties. Required.
-        :paramtype properties: ~azure.mgmt.digitaltwins.v2022_10_31.models.GroupIdInformationProperties
+        :paramtype properties: ~azure.mgmt.digitaltwins.v2023_01_31.models.GroupIdInformationProperties
         :keyword id: The resource identifier.
         :paramtype id: str
         """
@@ -1307,8 +1353,8 @@ class GroupIdInformationProperties(_serialization.Model):
         group_id: Optional[str] = None,
         required_members: Optional[List[str]] = None,
         required_zone_names: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword group_id: The group id.
         :paramtype group_id: str
@@ -1327,17 +1373,17 @@ class GroupIdInformationResponse(_serialization.Model):
     """The available private link resources for a Digital Twin.
 
     :ivar value: The list of available private link resources for a Digital Twin.
-    :vartype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.GroupIdInformation]
+    :vartype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.GroupIdInformation]
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[GroupIdInformation]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.GroupIdInformation"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.GroupIdInformation"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: The list of available private link resources for a Digital Twin.
-        :paramtype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.GroupIdInformation]
+        :paramtype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.GroupIdInformation]
         """
         super().__init__(**kwargs)
         self.value = value
@@ -1348,7 +1394,7 @@ class ManagedIdentityReference(_serialization.Model):
 
     :ivar type: The type of managed identity used. Known values are: "SystemAssigned" and
      "UserAssigned".
-    :vartype type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.IdentityType
+    :vartype type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.IdentityType
     :ivar user_assigned_identity: The user identity ARM resource id if the managed identity type is
      'UserAssigned'.
     :vartype user_assigned_identity: str
@@ -1364,12 +1410,12 @@ class ManagedIdentityReference(_serialization.Model):
         *,
         type: Optional[Union[str, "_models.IdentityType"]] = None,
         user_assigned_identity: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword type: The type of managed identity used. Known values are: "SystemAssigned" and
          "UserAssigned".
-        :paramtype type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.IdentityType
+        :paramtype type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.IdentityType
         :keyword user_assigned_identity: The user identity ARM resource id if the managed identity type
          is 'UserAssigned'.
         :paramtype user_assigned_identity: str
@@ -1387,7 +1433,7 @@ class Operation(_serialization.Model):
     :ivar name: Operation name: {provider}/{resource}/{read | write | action | delete}.
     :vartype name: str
     :ivar display: Operation properties display.
-    :vartype display: ~azure.mgmt.digitaltwins.v2022_10_31.models.OperationDisplay
+    :vartype display: ~azure.mgmt.digitaltwins.v2023_01_31.models.OperationDisplay
     :ivar origin: The intended executor of the operation.
     :vartype origin: str
     :ivar is_data_action: If the operation is a data action (for data plane rbac).
@@ -1411,10 +1457,10 @@ class Operation(_serialization.Model):
         "properties": {"key": "properties", "type": "{object}"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: Operation properties display.
-        :paramtype display: ~azure.mgmt.digitaltwins.v2022_10_31.models.OperationDisplay
+        :paramtype display: ~azure.mgmt.digitaltwins.v2023_01_31.models.OperationDisplay
         """
         super().__init__(**kwargs)
         self.name = None
@@ -1453,7 +1499,7 @@ class OperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -1463,7 +1509,8 @@ class OperationDisplay(_serialization.Model):
 
 
 class OperationListResult(_serialization.Model):
-    """A list of DigitalTwins service operations. It contains a list of operations and a URL link to get the next set of results.
+    """A list of DigitalTwins service operations. It contains a list of operations and a URL link to
+    get the next set of results.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -1471,7 +1518,7 @@ class OperationListResult(_serialization.Model):
     :vartype next_link: str
     :ivar value: A list of DigitalTwins operations supported by the Microsoft.DigitalTwins resource
      provider.
-    :vartype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.Operation]
+    :vartype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.Operation]
     """
 
     _validation = {
@@ -1483,7 +1530,7 @@ class OperationListResult(_serialization.Model):
         "value": {"key": "value", "type": "[Operation]"},
     }
 
-    def __init__(self, *, next_link: Optional[str] = None, **kwargs):
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword next_link: The link used to get the next page of DigitalTwins description objects.
         :paramtype next_link: str
@@ -1510,7 +1557,7 @@ class PrivateEndpoint(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -1530,10 +1577,10 @@ class PrivateEndpointConnection(_serialization.Model):
     :ivar type: The resource type.
     :vartype type: str
     :ivar properties: The connection properties. Required.
-    :vartype properties: ~azure.mgmt.digitaltwins.v2022_10_31.models.ConnectionProperties
+    :vartype properties: ~azure.mgmt.digitaltwins.v2023_01_31.models.ConnectionProperties
     :ivar system_data: Metadata pertaining to creation and last modification of the private
      endpoint connection.
-    :vartype system_data: ~azure.mgmt.digitaltwins.v2022_10_31.models.SystemData
+    :vartype system_data: ~azure.mgmt.digitaltwins.v2023_01_31.models.SystemData
     """
 
     _validation = {
@@ -1552,10 +1599,10 @@ class PrivateEndpointConnection(_serialization.Model):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, *, properties: "_models.ConnectionProperties", **kwargs):
+    def __init__(self, *, properties: "_models.ConnectionProperties", **kwargs: Any) -> None:
         """
         :keyword properties: The connection properties. Required.
-        :paramtype properties: ~azure.mgmt.digitaltwins.v2022_10_31.models.ConnectionProperties
+        :paramtype properties: ~azure.mgmt.digitaltwins.v2023_01_31.models.ConnectionProperties
         """
         super().__init__(**kwargs)
         self.id = None
@@ -1569,17 +1616,17 @@ class PrivateEndpointConnectionsResponse(_serialization.Model):
     """The available private link connections for a Digital Twin.
 
     :ivar value: The list of available private link connections for a Digital Twin.
-    :vartype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection]
+    :vartype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection]
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[PrivateEndpointConnection]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: The list of available private link connections for a Digital Twin.
-        :paramtype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection]
+        :paramtype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection]
         """
         super().__init__(**kwargs)
         self.value = value
@@ -1594,12 +1641,12 @@ class ServiceBus(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too
 
     :ivar endpoint_type: The type of Digital Twins endpoint. Required. Known values are:
      "EventHub", "EventGrid", and "ServiceBus".
-    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointType
+    :vartype endpoint_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointType
     :ivar provisioning_state: The provisioning state. Known values are: "Provisioning", "Deleting",
      "Updating", "Succeeded", "Failed", "Canceled", "Deleted", "Warning", "Suspending", "Restoring",
      "Moving", and "Disabled".
     :vartype provisioning_state: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.EndpointProvisioningState
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.EndpointProvisioningState
     :ivar created_time: Time when the Endpoint was added to DigitalTwinsInstance.
     :vartype created_time: ~datetime.datetime
     :ivar authentication_type: Specifies the authentication type being used for connecting to the
@@ -1608,14 +1655,14 @@ class ServiceBus(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too
      endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
      "IdentityBased".
     :vartype authentication_type: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
     :ivar dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
      obfuscated during read.
     :vartype dead_letter_secret: str
     :ivar dead_letter_uri: Dead letter storage URL for identity-based authentication.
     :vartype dead_letter_uri: str
     :ivar identity: Managed identity properties for the endpoint.
-    :vartype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+    :vartype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
     :ivar primary_connection_string: PrimaryConnectionString of the endpoint for key-based
      authentication. Will be obfuscated during read.
     :vartype primary_connection_string: str
@@ -1660,8 +1707,8 @@ class ServiceBus(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too
         secondary_connection_string: Optional[str] = None,
         endpoint_uri: Optional[str] = None,
         entity_path: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword authentication_type: Specifies the authentication type being used for connecting to
          the endpoint. Defaults to 'KeyBased'. If 'KeyBased' is selected, a connection string must be
@@ -1669,14 +1716,14 @@ class ServiceBus(DigitalTwinsEndpointResourceProperties):  # pylint: disable=too
          endpointUri and entityPath properties must be specified. Known values are: "KeyBased" and
          "IdentityBased".
         :paramtype authentication_type: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.AuthenticationType
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.AuthenticationType
         :keyword dead_letter_secret: Dead letter storage secret for key-based authentication. Will be
          obfuscated during read.
         :paramtype dead_letter_secret: str
         :keyword dead_letter_uri: Dead letter storage URL for identity-based authentication.
         :paramtype dead_letter_uri: str
         :keyword identity: Managed identity properties for the endpoint.
-        :paramtype identity: ~azure.mgmt.digitaltwins.v2022_10_31.models.ManagedIdentityReference
+        :paramtype identity: ~azure.mgmt.digitaltwins.v2023_01_31.models.ManagedIdentityReference
         :keyword primary_connection_string: PrimaryConnectionString of the endpoint for key-based
          authentication. Will be obfuscated during read.
         :paramtype primary_connection_string: str
@@ -1710,7 +1757,7 @@ class SystemData(_serialization.Model):
     :vartype created_by: str
     :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", and "Key".
-    :vartype created_by_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.CreatedByType
+    :vartype created_by_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
@@ -1718,7 +1765,7 @@ class SystemData(_serialization.Model):
     :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
      are: "User", "Application", "ManagedIdentity", and "Key".
     :vartype last_modified_by_type: str or
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.CreatedByType
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
     """
@@ -1741,14 +1788,14 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
         :keyword created_by_type: The type of identity that created the resource. Known values are:
          "User", "Application", "ManagedIdentity", and "Key".
-        :paramtype created_by_type: str or ~azure.mgmt.digitaltwins.v2022_10_31.models.CreatedByType
+        :paramtype created_by_type: str or ~azure.mgmt.digitaltwins.v2023_01_31.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
@@ -1756,7 +1803,7 @@ class SystemData(_serialization.Model):
         :keyword last_modified_by_type: The type of identity that last modified the resource. Known
          values are: "User", "Application", "ManagedIdentity", and "Key".
         :paramtype last_modified_by_type: str or
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.CreatedByType
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
         """
@@ -1781,10 +1828,10 @@ class TimeSeriesDatabaseConnection(ExternalResource):
     :ivar type: The resource type.
     :vartype type: str
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
-    :vartype system_data: ~azure.mgmt.digitaltwins.v2022_10_31.models.SystemData
+    :vartype system_data: ~azure.mgmt.digitaltwins.v2023_01_31.models.SystemData
     :ivar properties: Properties of a specific time series database connection.
     :vartype properties:
-     ~azure.mgmt.digitaltwins.v2022_10_31.models.TimeSeriesDatabaseConnectionProperties
+     ~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnectionProperties
     """
 
     _validation = {
@@ -1802,11 +1849,13 @@ class TimeSeriesDatabaseConnection(ExternalResource):
         "properties": {"key": "properties", "type": "TimeSeriesDatabaseConnectionProperties"},
     }
 
-    def __init__(self, *, properties: Optional["_models.TimeSeriesDatabaseConnectionProperties"] = None, **kwargs):
+    def __init__(
+        self, *, properties: Optional["_models.TimeSeriesDatabaseConnectionProperties"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword properties: Properties of a specific time series database connection.
         :paramtype properties:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.TimeSeriesDatabaseConnectionProperties
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnectionProperties
         """
         super().__init__(**kwargs)
         self.properties = properties
@@ -1818,7 +1867,7 @@ class TimeSeriesDatabaseConnectionListResult(_serialization.Model):
     :ivar next_link: The link used to get the next page of results.
     :vartype next_link: str
     :ivar value: A list of time series database connection resources.
-    :vartype value: list[~azure.mgmt.digitaltwins.v2022_10_31.models.TimeSeriesDatabaseConnection]
+    :vartype value: list[~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection]
     """
 
     _attribute_map = {
@@ -1831,14 +1880,14 @@ class TimeSeriesDatabaseConnectionListResult(_serialization.Model):
         *,
         next_link: Optional[str] = None,
         value: Optional[List["_models.TimeSeriesDatabaseConnection"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of results.
         :paramtype next_link: str
         :keyword value: A list of time series database connection resources.
         :paramtype value:
-         list[~azure.mgmt.digitaltwins.v2022_10_31.models.TimeSeriesDatabaseConnection]
+         list[~azure.mgmt.digitaltwins.v2023_01_31.models.TimeSeriesDatabaseConnection]
         """
         super().__init__(**kwargs)
         self.next_link = next_link
@@ -1866,7 +1915,7 @@ class UserAssignedIdentity(_serialization.Model):
         "principal_id": {"key": "principalId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.client_id = None

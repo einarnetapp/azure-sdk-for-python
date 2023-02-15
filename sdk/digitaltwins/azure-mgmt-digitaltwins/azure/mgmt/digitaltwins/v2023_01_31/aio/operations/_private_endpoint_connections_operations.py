@@ -49,7 +49,7 @@ class PrivateEndpointConnectionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.digitaltwins.v2022_10_31.aio.AzureDigitalTwinsManagementClient`'s
+        :class:`~azure.mgmt.digitaltwins.v2023_01_31.aio.AzureDigitalTwinsManagementClient`'s
         :attr:`private_endpoint_connections` attribute.
     """
 
@@ -75,7 +75,7 @@ class PrivateEndpointConnectionsOperations:
         :type resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpointConnectionsResponse or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnectionsResponse
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnectionsResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -89,7 +89,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.PrivateEndpointConnectionsResponse] = kwargs.pop("cls", None)
 
         request = build_list_request(
@@ -141,7 +141,7 @@ class PrivateEndpointConnectionsOperations:
         :type private_endpoint_connection_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpointConnection or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -155,7 +155,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
 
         request = build_get_request(
@@ -207,7 +207,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
@@ -269,7 +269,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -329,7 +329,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
 
@@ -406,7 +406,7 @@ class PrivateEndpointConnectionsOperations:
         :param private_endpoint_connection: The private endpoint connection with updated properties.
          Required.
         :type private_endpoint_connection:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -421,7 +421,7 @@ class PrivateEndpointConnectionsOperations:
         :return: An instance of AsyncLROPoller that returns either PrivateEndpointConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -462,7 +462,7 @@ class PrivateEndpointConnectionsOperations:
         :return: An instance of AsyncLROPoller that returns either PrivateEndpointConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -485,9 +485,9 @@ class PrivateEndpointConnectionsOperations:
         :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
         :type private_endpoint_connection_name: str
         :param private_endpoint_connection: The private endpoint connection with updated properties. Is
-         either a model type or a IO type. Required.
+         either a PrivateEndpointConnection type or a IO type. Required.
         :type private_endpoint_connection:
-         ~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection or IO
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -502,13 +502,13 @@ class PrivateEndpointConnectionsOperations:
         :return: An instance of AsyncLROPoller that returns either PrivateEndpointConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2022_10_31.models.PrivateEndpointConnection]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.PrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)

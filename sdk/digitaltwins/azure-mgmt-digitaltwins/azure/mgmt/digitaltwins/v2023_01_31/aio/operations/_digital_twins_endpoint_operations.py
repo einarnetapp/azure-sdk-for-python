@@ -7,9 +7,10 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, IO, Iterable, Optional, TypeVar, Union, cast, overload
+from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
 import urllib.parse
 
+from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
     ClientAuthenticationError,
     HttpResponseError,
@@ -18,216 +19,31 @@ from azure.core.exceptions import (
     ResourceNotModifiedError,
     map_error,
 )
-from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import HttpResponse
-from azure.core.polling import LROPoller, NoPolling, PollingMethod
+from azure.core.pipeline.transport import AsyncHttpResponse
+from azure.core.polling import AsyncLROPoller, AsyncNoPolling, AsyncPollingMethod
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
+from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
-from azure.mgmt.core.polling.arm_polling import ARMPolling
+from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
-from .. import models as _models
-from ..._serialization import Serializer
-from .._vendor import _convert_request, _format_url_section
+from ... import models as _models
+from ..._vendor import _convert_request
+from ...operations._digital_twins_endpoint_operations import (
+    build_create_or_update_request,
+    build_delete_request,
+    build_get_request,
+    build_list_request,
+)
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
 else:
     from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
-
-_SERIALIZER = Serializer()
-_SERIALIZER.client_side_validation = False
-
-
-def build_list_request(
-    resource_group_name: str, resource_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "resourceName": _SERIALIZER.url(
-            "resource_name",
-            resource_name,
-            "str",
-            max_length=63,
-            min_length=3,
-            pattern=r"^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
-        ),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_get_request(
-    resource_group_name: str, resource_name: str, endpoint_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "resourceName": _SERIALIZER.url(
-            "resource_name",
-            resource_name,
-            "str",
-            max_length=63,
-            min_length=3,
-            pattern=r"^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
-        ),
-        "endpointName": _SERIALIZER.url(
-            "endpoint_name",
-            endpoint_name,
-            "str",
-            max_length=49,
-            min_length=2,
-            pattern=r"^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
-        ),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_create_or_update_request(
-    resource_group_name: str, resource_name: str, endpoint_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "resourceName": _SERIALIZER.url(
-            "resource_name",
-            resource_name,
-            "str",
-            max_length=63,
-            min_length=3,
-            pattern=r"^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
-        ),
-        "endpointName": _SERIALIZER.url(
-            "endpoint_name",
-            endpoint_name,
-            "str",
-            max_length=49,
-            min_length=2,
-            pattern=r"^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
-        ),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_delete_request(
-    resource_group_name: str, resource_name: str, endpoint_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "resourceName": _SERIALIZER.url(
-            "resource_name",
-            resource_name,
-            "str",
-            max_length=63,
-            min_length=3,
-            pattern=r"^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
-        ),
-        "endpointName": _SERIALIZER.url(
-            "endpoint_name",
-            endpoint_name,
-            "str",
-            max_length=49,
-            min_length=2,
-            pattern=r"^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
-        ),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
 class DigitalTwinsEndpointOperations:
@@ -236,13 +52,13 @@ class DigitalTwinsEndpointOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.digitaltwins.v2022_05_31.AzureDigitalTwinsManagementClient`'s
+        :class:`~azure.mgmt.digitaltwins.v2023_01_31.aio.AzureDigitalTwinsManagementClient`'s
         :attr:`digital_twins_endpoint` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -252,7 +68,7 @@ class DigitalTwinsEndpointOperations:
     @distributed_trace
     def list(
         self, resource_group_name: str, resource_name: str, **kwargs: Any
-    ) -> Iterable["_models.DigitalTwinsEndpointResource"]:
+    ) -> AsyncIterable["_models.DigitalTwinsEndpointResource"]:
         """Get DigitalTwinsInstance Endpoints.
 
         :param resource_group_name: The name of the resource group that contains the
@@ -264,13 +80,13 @@ class DigitalTwinsEndpointOperations:
         :return: An iterator like instance of either DigitalTwinsEndpointResource or the result of
          cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.DigitalTwinsEndpointResourceListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -314,17 +130,17 @@ class DigitalTwinsEndpointOperations:
                 request.method = "GET"
             return request
 
-        def extract_data(pipeline_response):
+        async def extract_data(pipeline_response):
             deserialized = self._deserialize("DigitalTwinsEndpointResourceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, iter(list_of_elem)
+            return deserialized.next_link or None, AsyncList(list_of_elem)
 
-        def get_next(next_link=None):
+        async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -336,14 +152,14 @@ class DigitalTwinsEndpointOperations:
 
             return pipeline_response
 
-        return ItemPaged(get_next, extract_data)
+        return AsyncItemPaged(get_next, extract_data)
 
     list.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints"
     }
 
-    @distributed_trace
-    def get(
+    @distributed_trace_async
+    async def get(
         self, resource_group_name: str, resource_name: str, endpoint_name: str, **kwargs: Any
     ) -> _models.DigitalTwinsEndpointResource:
         """Get DigitalTwinsInstances Endpoint.
@@ -357,7 +173,7 @@ class DigitalTwinsEndpointOperations:
         :type endpoint_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DigitalTwinsEndpointResource or the result of cls(response)
-        :rtype: ~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource
+        :rtype: ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -371,7 +187,7 @@ class DigitalTwinsEndpointOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
 
         request = build_get_request(
@@ -387,7 +203,7 @@ class DigitalTwinsEndpointOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -409,7 +225,7 @@ class DigitalTwinsEndpointOperations:
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
     }
 
-    def _create_or_update_initial(
+    async def _create_or_update_initial(
         self,
         resource_group_name: str,
         resource_name: str,
@@ -428,7 +244,7 @@ class DigitalTwinsEndpointOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
 
@@ -456,7 +272,7 @@ class DigitalTwinsEndpointOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -483,7 +299,7 @@ class DigitalTwinsEndpointOperations:
     }
 
     @overload
-    def begin_create_or_update(
+    async def begin_create_or_update(
         self,
         resource_group_name: str,
         resource_name: str,
@@ -492,7 +308,7 @@ class DigitalTwinsEndpointOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.DigitalTwinsEndpointResource]:
+    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
         """Create or update DigitalTwinsInstance endpoint.
 
         :param resource_group_name: The name of the resource group that contains the
@@ -505,27 +321,27 @@ class DigitalTwinsEndpointOperations:
         :param endpoint_description: The DigitalTwinsInstance endpoint metadata and security metadata.
          Required.
         :type endpoint_description:
-         ~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    def begin_create_or_update(
+    async def begin_create_or_update(
         self,
         resource_group_name: str,
         resource_name: str,
@@ -534,7 +350,7 @@ class DigitalTwinsEndpointOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.DigitalTwinsEndpointResource]:
+    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
         """Create or update DigitalTwinsInstance endpoint.
 
         :param resource_group_name: The name of the resource group that contains the
@@ -552,28 +368,28 @@ class DigitalTwinsEndpointOperations:
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
-    @distributed_trace
-    def begin_create_or_update(
+    @distributed_trace_async
+    async def begin_create_or_update(
         self,
         resource_group_name: str,
         resource_name: str,
         endpoint_name: str,
         endpoint_description: Union[_models.DigitalTwinsEndpointResource, IO],
         **kwargs: Any
-    ) -> LROPoller[_models.DigitalTwinsEndpointResource]:
+    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
         """Create or update DigitalTwinsInstance endpoint.
 
         :param resource_group_name: The name of the resource group that contains the
@@ -586,35 +402,35 @@ class DigitalTwinsEndpointOperations:
         :param endpoint_description: The DigitalTwinsInstance endpoint metadata and security metadata.
          Is either a DigitalTwinsEndpointResource type or a IO type. Required.
         :type endpoint_description:
-         ~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource or IO
+         ~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._create_or_update_initial(
+            raw_result = await self._create_or_update_initial(
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
                 endpoint_name=endpoint_name,
@@ -635,25 +451,25 @@ class DigitalTwinsEndpointOperations:
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
         elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
             polling_method = polling
         if cont_token:
-            return LROPoller.from_continuation_token(
+            return AsyncLROPoller.from_continuation_token(
                 polling_method=polling_method,
                 continuation_token=cont_token,
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_create_or_update.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
     }
 
-    def _delete_initial(
+    async def _delete_initial(
         self, resource_group_name: str, resource_name: str, endpoint_name: str, **kwargs: Any
     ) -> Optional[_models.DigitalTwinsEndpointResource]:
         error_map = {
@@ -667,7 +483,7 @@ class DigitalTwinsEndpointOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[Optional[_models.DigitalTwinsEndpointResource]] = kwargs.pop("cls", None)
 
         request = build_delete_request(
@@ -683,7 +499,7 @@ class DigitalTwinsEndpointOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -710,10 +526,10 @@ class DigitalTwinsEndpointOperations:
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
     }
 
-    @distributed_trace
-    def begin_delete(
+    @distributed_trace_async
+    async def begin_delete(
         self, resource_group_name: str, resource_name: str, endpoint_name: str, **kwargs: Any
-    ) -> LROPoller[_models.DigitalTwinsEndpointResource]:
+    ) -> AsyncLROPoller[_models.DigitalTwinsEndpointResource]:
         """Delete a DigitalTwinsInstance endpoint.
 
         :param resource_group_name: The name of the resource group that contains the
@@ -725,28 +541,28 @@ class DigitalTwinsEndpointOperations:
         :type endpoint_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either DigitalTwinsEndpointResource or the
+        :return: An instance of AsyncLROPoller that returns either DigitalTwinsEndpointResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~azure.mgmt.digitaltwins.v2022_05_31.models.DigitalTwinsEndpointResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.digitaltwins.v2023_01_31.models.DigitalTwinsEndpointResource]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-31"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-31"))
+        api_version: Literal["2023-01-31"] = kwargs.pop("api_version", _params.pop("api-version", "2023-01-31"))
         cls: ClsType[_models.DigitalTwinsEndpointResource] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._delete_initial(
+            raw_result = await self._delete_initial(
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
                 endpoint_name=endpoint_name,
@@ -765,19 +581,19 @@ class DigitalTwinsEndpointOperations:
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
         elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
             polling_method = polling
         if cont_token:
-            return LROPoller.from_continuation_token(
+            return AsyncLROPoller.from_continuation_token(
                 polling_method=polling_method,
                 continuation_token=cont_token,
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_delete.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}"
