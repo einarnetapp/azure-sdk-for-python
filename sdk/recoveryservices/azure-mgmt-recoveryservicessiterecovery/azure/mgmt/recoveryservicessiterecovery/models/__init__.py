@@ -494,6 +494,7 @@ from ._models_py3 import VMwareCbtProtectedDiskDetails
 from ._models_py3 import VMwareCbtProtectionContainerMappingDetails
 from ._models_py3 import VMwareCbtResumeReplicationInput
 from ._models_py3 import VMwareCbtResyncInput
+from ._models_py3 import VMwareCbtSecurityProfileProperties
 from ._models_py3 import VMwareCbtTestMigrateInput
 from ._models_py3 import VMwareCbtUpdateDiskInput
 from ._models_py3 import VMwareCbtUpdateMigrationItemInput
@@ -562,6 +563,7 @@ from ._site_recovery_management_client_enums import RecoveryPointType
 from ._site_recovery_management_client_enums import ReplicationProtectedItemOperation
 from ._site_recovery_management_client_enums import ResyncState
 from ._site_recovery_management_client_enums import RpInMageRecoveryPointType
+from ._site_recovery_management_client_enums import SecurityType
 from ._site_recovery_management_client_enums import SetMultiVmSyncStatus
 from ._site_recovery_management_client_enums import Severity
 from ._site_recovery_management_client_enums import SourceSiteOperations
@@ -1062,6 +1064,7 @@ __all__ = [
     "VMwareCbtProtectionContainerMappingDetails",
     "VMwareCbtResumeReplicationInput",
     "VMwareCbtResyncInput",
+    "VMwareCbtSecurityProfileProperties",
     "VMwareCbtTestMigrateInput",
     "VMwareCbtUpdateDiskInput",
     "VMwareCbtUpdateMigrationItemInput",
@@ -1129,6 +1132,7 @@ __all__ = [
     "ReplicationProtectedItemOperation",
     "ResyncState",
     "RpInMageRecoveryPointType",
+    "SecurityType",
     "SetMultiVmSyncStatus",
     "Severity",
     "SourceSiteOperations",

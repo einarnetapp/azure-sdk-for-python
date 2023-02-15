@@ -106,7 +106,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.MigrationItemCollection] = kwargs.pop("cls", None)
@@ -214,7 +214,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.MigrationItem] = kwargs.pop("cls", None)
@@ -274,7 +274,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -430,7 +430,8 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param input: Enable migration input. Is either a model type or a IO type. Required.
+        :param input: Enable migration input. Is either a EnableMigrationInput type or a IO type.
+         Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.EnableMigrationInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -452,7 +453,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -519,7 +520,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -593,7 +594,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -656,7 +657,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -812,7 +813,8 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param input: Update migration item input. Is either a model type or a IO type. Required.
+        :param input: Update migration item input. Is either a UpdateMigrationItemInput type or a IO
+         type. Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.UpdateMigrationItemInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -834,7 +836,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -901,7 +903,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1057,7 +1059,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param migrate_input: Migrate input. Is either a model type or a IO type. Required.
+        :param migrate_input: Migrate input. Is either a MigrateInput type or a IO type. Required.
         :type migrate_input: ~azure.mgmt.recoveryservicessiterecovery.models.MigrateInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1079,7 +1081,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1146,7 +1148,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1303,8 +1305,8 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param pause_replication_input: Pause replication input. Is either a model type or a IO type.
-         Required.
+        :param pause_replication_input: Pause replication input. Is either a PauseReplicationInput type
+         or a IO type. Required.
         :type pause_replication_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.PauseReplicationInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1327,7 +1329,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1394,7 +1396,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1551,8 +1553,8 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param resume_replication_input: Resume replication input. Is either a model type or a IO type.
-         Required.
+        :param resume_replication_input: Resume replication input. Is either a ResumeReplicationInput
+         type or a IO type. Required.
         :type resume_replication_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.ResumeReplicationInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1575,7 +1577,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1642,7 +1644,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1798,7 +1800,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param input: Resync input. Is either a model type or a IO type. Required.
+        :param input: Resync input. Is either a ResyncInput type or a IO type. Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.ResyncInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1820,7 +1822,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1887,7 +1889,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2043,7 +2045,8 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param test_migrate_input: Test migrate input. Is either a model type or a IO type. Required.
+        :param test_migrate_input: Test migrate input. Is either a TestMigrateInput type or a IO type.
+         Required.
         :type test_migrate_input: ~azure.mgmt.recoveryservicessiterecovery.models.TestMigrateInput or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -2066,7 +2069,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2133,7 +2136,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2290,8 +2293,8 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param migration_item_name: Migration item name. Required.
         :type migration_item_name: str
-        :param test_migrate_cleanup_input: Test migrate cleanup input. Is either a model type or a IO
-         type. Required.
+        :param test_migrate_cleanup_input: Test migrate cleanup input. Is either a
+         TestMigrateCleanupInput type or a IO type. Required.
         :type test_migrate_cleanup_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.TestMigrateCleanupInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -2314,7 +2317,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2389,7 +2392,7 @@ class ReplicationMigrationItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.MigrationItemCollection] = kwargs.pop("cls", None)

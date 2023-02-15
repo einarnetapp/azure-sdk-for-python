@@ -105,7 +105,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReplicationProtectedItemCollection] = kwargs.pop("cls", None)
@@ -210,7 +210,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReplicationProtectedItem] = kwargs.pop("cls", None)
@@ -270,7 +270,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -426,7 +426,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: A name for the replication protected item. Required.
         :type replicated_protected_item_name: str
-        :param input: Enable Protection Input. Is either a model type or a IO type. Required.
+        :param input: Enable Protection Input. Is either a EnableProtectionInput type or a IO type.
+         Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.EnableProtectionInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -448,7 +449,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -510,7 +511,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -578,7 +579,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -640,7 +641,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -797,8 +798,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param update_protection_input: Update protection input. Is either a model type or a IO type.
-         Required.
+        :param update_protection_input: Update protection input. Is either a
+         UpdateReplicationProtectedItemInput type or a IO type. Required.
         :type update_protection_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.UpdateReplicationProtectedItemInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -821,7 +822,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -888,7 +889,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1044,7 +1045,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param add_disks_input: Add disks input. Is either a model type or a IO type. Required.
+        :param add_disks_input: Add disks input. Is either a AddDisksInput type or a IO type. Required.
         :type add_disks_input: ~azure.mgmt.recoveryservicessiterecovery.models.AddDisksInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1066,7 +1067,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1133,7 +1134,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1290,8 +1291,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: The replicated protected item name. Required.
         :type replicated_protected_item_name: str
-        :param apply_recovery_point_input: The ApplyRecoveryPointInput. Is either a model type or a IO
-         type. Required.
+        :param apply_recovery_point_input: The ApplyRecoveryPointInput. Is either a
+         ApplyRecoveryPointInput type or a IO type. Required.
         :type apply_recovery_point_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.ApplyRecoveryPointInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1314,7 +1315,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1376,7 +1377,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.ReplicationProtectedItem]] = kwargs.pop("cls", None)
@@ -1450,7 +1451,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReplicationProtectedItem] = kwargs.pop("cls", None)
@@ -1509,7 +1510,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.ReplicationProtectedItem]] = kwargs.pop("cls", None)
@@ -1583,7 +1584,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReplicationProtectedItem] = kwargs.pop("cls", None)
@@ -1647,7 +1648,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1803,7 +1804,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param failover_input: Planned failover input. Is either a model type or a IO type. Required.
+        :param failover_input: Planned failover input. Is either a PlannedFailoverInput type or a IO
+         type. Required.
         :type failover_input: ~azure.mgmt.recoveryservicessiterecovery.models.PlannedFailoverInput or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1826,7 +1828,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1893,7 +1895,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2043,8 +2045,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param disable_protection_input: Disable protection input. Is either a model type or a IO type.
-         Required.
+        :param disable_protection_input: Disable protection input. Is either a DisableProtectionInput
+         type or a IO type. Required.
         :type disable_protection_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.DisableProtectionInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -2065,7 +2067,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2130,7 +2132,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2286,7 +2288,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param remove_disks_input: Remove disks input. Is either a model type or a IO type. Required.
+        :param remove_disks_input: Remove disks input. Is either a RemoveDisksInput type or a IO type.
+         Required.
         :type remove_disks_input: ~azure.mgmt.recoveryservicessiterecovery.models.RemoveDisksInput or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -2309,7 +2312,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2371,7 +2374,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.ReplicationProtectedItem]] = kwargs.pop("cls", None)
@@ -2446,7 +2449,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReplicationProtectedItem] = kwargs.pop("cls", None)
@@ -2510,7 +2513,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2666,8 +2669,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param reprotect_input: Reverse replication input. Is either a model type or a IO type.
-         Required.
+        :param reprotect_input: Reverse replication input. Is either a ReverseReplicationInput type or
+         a IO type. Required.
         :type reprotect_input: ~azure.mgmt.recoveryservicessiterecovery.models.ReverseReplicationInput
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -2690,7 +2693,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2757,7 +2760,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -2913,8 +2916,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param resolve_health_input: Health issue input object. Is either a model type or a IO type.
-         Required.
+        :param resolve_health_input: Health issue input object. Is either a ResolveHealthInput type or
+         a IO type. Required.
         :type resolve_health_input: ~azure.mgmt.recoveryservicessiterecovery.models.ResolveHealthInput
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -2937,7 +2940,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3004,7 +3007,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3161,8 +3164,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param switch_provider_input: Switch provider input. Is either a model type or a IO type.
-         Required.
+        :param switch_provider_input: Switch provider input. Is either a SwitchProviderInput type or a
+         IO type. Required.
         :type switch_provider_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.SwitchProviderInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -3185,7 +3188,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3255,7 +3258,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3411,7 +3414,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param testfailover_input: Test failover input. Is either a model type or a IO type. Required.
+        :param testfailover_input: Test failover input. Is either a TestFailoverInput type or a IO
+         type. Required.
         :type testfailover_input: ~azure.mgmt.recoveryservicessiterecovery.models.TestFailoverInput or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -3434,7 +3438,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3501,7 +3505,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3657,8 +3661,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param cleanup_input: Test failover cleanup input. Is either a model type or a IO type.
-         Required.
+        :param cleanup_input: Test failover cleanup input. Is either a TestFailoverCleanupInput type or
+         a IO type. Required.
         :type cleanup_input: ~azure.mgmt.recoveryservicessiterecovery.models.TestFailoverCleanupInput
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -3681,7 +3685,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3748,7 +3752,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3904,7 +3908,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param failover_input: Failover input. Is either a model type or a IO type. Required.
+        :param failover_input: Failover input. Is either a UnplannedFailoverInput type or a IO type.
+         Required.
         :type failover_input: ~azure.mgmt.recoveryservicessiterecovery.models.UnplannedFailoverInput or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -3927,7 +3932,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -3994,7 +3999,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -4151,8 +4156,8 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         :type protection_container_name: str
         :param replicated_protected_item_name: Replication protected item name. Required.
         :type replicated_protected_item_name: str
-        :param appliance_update_input: Appliance update protection input. Is either a model type or a
-         IO type. Required.
+        :param appliance_update_input: Appliance update protection input. Is either a
+         UpdateApplianceForReplicationProtectedItemInput type or a IO type. Required.
         :type appliance_update_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.UpdateApplianceForReplicationProtectedItemInput
          or IO
@@ -4176,7 +4181,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -4243,7 +4248,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -4416,7 +4421,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
          be updated. Required.
         :type replicated_protected_item_name: str
         :param update_mobility_service_request: Request to update the mobility service on the protected
-         item. Is either a model type or a IO type. Required.
+         item. Is either a UpdateMobilityServiceRequest type or a IO type. Required.
         :type update_mobility_service_request:
          ~azure.mgmt.recoveryservicessiterecovery.models.UpdateMobilityServiceRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -4439,7 +4444,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -4512,7 +4517,7 @@ class ReplicationProtectedItemsOperations:  # pylint: disable=too-many-public-me
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReplicationProtectedItemCollection] = kwargs.pop("cls", None)
