@@ -51,7 +51,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -60,7 +60,8 @@ class Resource(_serialization.Model):
 
 
 class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+    """The resource model definition for an Azure Resource Manager tracked top level resource which
+    has 'tags' and a 'location'.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -95,7 +96,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -215,8 +216,8 @@ class ConnectedCluster(TrackedResource):  # pylint: disable=too-many-instance-at
         provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None,
         distribution: Optional[str] = None,
         infrastructure: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -284,7 +285,7 @@ class ConnectedClusterIdentity(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, type: Union[str, "_models.ResourceIdentityType"] = "SystemAssigned", **kwargs):
+    def __init__(self, *, type: Union[str, "_models.ResourceIdentityType"] = "SystemAssigned", **kwargs: Any) -> None:
         """
         :keyword type: The type of identity used for the connected cluster. The type 'SystemAssigned,
          includes a system created identity. The type 'None' means no identity is assigned to the
@@ -312,8 +313,12 @@ class ConnectedClusterList(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.ConnectedCluster"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.ConnectedCluster"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of connected clusters.
         :paramtype value: list[~azure.mgmt.hybridkubernetes.models.ConnectedCluster]
@@ -340,7 +345,9 @@ class ConnectedClusterPatch(_serialization.Model):
         "properties": {"key": "properties", "type": "object"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, properties: Optional[JSON] = None, **kwargs):
+    def __init__(
+        self, *, tags: Optional[Dict[str, str]] = None, properties: Optional[JSON] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -374,7 +381,7 @@ class CredentialResult(_serialization.Model):
         "value": {"key": "value", "type": "bytearray"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -403,7 +410,7 @@ class CredentialResults(_serialization.Model):
         "kubeconfigs": {"key": "kubeconfigs", "type": "[CredentialResult]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.hybrid_connection_config = None
@@ -431,7 +438,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -471,7 +478,7 @@ class ErrorDetail(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -482,7 +489,8 @@ class ErrorDetail(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.hybridkubernetes.models.ErrorDetail
@@ -492,7 +500,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.hybridkubernetes.models.ErrorDetail
@@ -530,7 +538,7 @@ class HybridConnectionConfig(_serialization.Model):
         "token": {"key": "token", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.expiration_time = None
@@ -563,8 +571,8 @@ class ListClusterUserCredentialProperties(_serialization.Model):
     }
 
     def __init__(
-        self, *, authentication_method: Union[str, "_models.AuthenticationMethod"], client_proxy: bool, **kwargs
-    ):
+        self, *, authentication_method: Union[str, "_models.AuthenticationMethod"], client_proxy: bool, **kwargs: Any
+    ) -> None:
         """
         :keyword authentication_method: The mode of client authentication. Required. Known values are:
          "Token" and "AAD".
@@ -600,7 +608,7 @@ class Operation(_serialization.Model):
         "display": {"key": "display", "type": "OperationDisplay"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -634,8 +642,8 @@ class OperationDisplay(_serialization.Model):
         resource: Optional[str] = None,
         operation: Optional[str] = None,
         description: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword provider: Service provider: Microsoft.connectedClusters.
         :paramtype provider: str
@@ -673,7 +681,7 @@ class OperationList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, next_link: Optional[str] = None, **kwargs):
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword next_link: The link to fetch the next page of connected cluster API operations.
         :paramtype next_link: str
@@ -720,8 +728,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.LastModifiedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
