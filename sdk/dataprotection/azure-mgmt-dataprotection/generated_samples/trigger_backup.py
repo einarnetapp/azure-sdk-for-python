@@ -40,6 +40,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/dataprotection/resource-manager/Microsoft.DataProtection/preview/2022-11-01-preview/examples/BackupInstanceOperations/TriggerBackup.json
+# x-ms-original-file: specification/dataprotection/resource-manager/Microsoft.DataProtection/preview/2023-02-01-preview/examples/BackupInstanceOperations/TriggerBackup.json
 if __name__ == "__main__":
     main()

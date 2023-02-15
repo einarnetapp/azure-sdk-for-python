@@ -14,7 +14,7 @@ from azure.mgmt.dataprotection import DataProtectionClient
     pip install azure-identity
     pip install azure-mgmt-dataprotection
 # USAGE
-    python list_resource_guard_proxy.py
+    python get_backup_vault_with_cmk.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,17 +26,16 @@ from azure.mgmt.dataprotection import DataProtectionClient
 def main():
     client = DataProtectionClient(
         credential=DefaultAzureCredential(),
-        subscription_id="5e13b949-1218-4d18-8b99-7e12155ec4f7",
+        subscription_id="0b352192-dcac-4cc7-992e-a96190ccc68c",
     )
 
-    response = client.dpp_resource_guard_proxy.list(
+    response = client.backup_vaults.get(
         resource_group_name="SampleResourceGroup",
-        vault_name="sampleVault",
+        vault_name="swaggerExample",
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/dataprotection/resource-manager/Microsoft.DataProtection/preview/2022-11-01-preview/examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json
+# x-ms-original-file: specification/dataprotection/resource-manager/Microsoft.DataProtection/preview/2023-02-01-preview/examples/VaultCRUD/GetBackupVaultWithCMK.json
 if __name__ == "__main__":
     main()

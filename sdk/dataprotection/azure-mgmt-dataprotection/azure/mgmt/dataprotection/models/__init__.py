@@ -57,8 +57,11 @@ from ._models_py3 import ClientDiscoveryForProperties
 from ._models_py3 import ClientDiscoveryForServiceSpecification
 from ._models_py3 import ClientDiscoveryResponse
 from ._models_py3 import ClientDiscoveryValueForSingleApi
+from ._models_py3 import CmkKekIdentity
+from ._models_py3 import CmkKeyVaultProperties
 from ._models_py3 import CopyOnExpiryOption
 from ._models_py3 import CopyOption
+from ._models_py3 import CrossSubscriptionRestoreSettings
 from ._models_py3 import CustomCopyOption
 from ._models_py3 import DataStoreInfoBase
 from ._models_py3 import DataStoreParameters
@@ -72,6 +75,7 @@ from ._models_py3 import DeletedBackupInstanceResourceList
 from ._models_py3 import DeletionInfo
 from ._models_py3 import DppBaseResource
 from ._models_py3 import DppBaseResourceList
+from ._models_py3 import DppBaseTrackedResource
 from ._models_py3 import DppIdentityDetails
 from ._models_py3 import DppProxyResource
 from ._models_py3 import DppResource
@@ -79,9 +83,11 @@ from ._models_py3 import DppResourceList
 from ._models_py3 import DppTrackedResource
 from ._models_py3 import DppTrackedResourceList
 from ._models_py3 import DppWorkerRequest
+from ._models_py3 import EncryptionSettings
 from ._models_py3 import Error
 from ._models_py3 import ErrorAdditionalInfo
 from ._models_py3 import ExportJobsResult
+from ._models_py3 import FeatureSettings
 from ._models_py3 import FeatureValidationRequest
 from ._models_py3 import FeatureValidationRequestBase
 from ._models_py3 import FeatureValidationResponse
@@ -103,6 +109,7 @@ from ._models_py3 import OperationExtendedInfo
 from ._models_py3 import OperationJobExtendedInfo
 from ._models_py3 import OperationResource
 from ._models_py3 import PatchBackupVaultInput
+from ._models_py3 import PatchResourceGuardInput
 from ._models_py3 import PatchResourceRequestInput
 from ._models_py3 import PolicyInfo
 from ._models_py3 import PolicyParameters
@@ -112,10 +119,6 @@ from ._models_py3 import RecoveryPointDataStoreDetails
 from ._models_py3 import RecoveryPointsFilters
 from ._models_py3 import ResourceGuard
 from ._models_py3 import ResourceGuardOperation
-from ._models_py3 import ResourceGuardOperationDetail
-from ._models_py3 import ResourceGuardProxyBase
-from ._models_py3 import ResourceGuardProxyBaseResource
-from ._models_py3 import ResourceGuardProxyBaseResourceList
 from ._models_py3 import ResourceGuardResource
 from ._models_py3 import ResourceGuardResourceList
 from ._models_py3 import ResourceMoveDetails
@@ -141,8 +144,6 @@ from ._models_py3 import TargetCopySetting
 from ._models_py3 import TargetDetails
 from ._models_py3 import TriggerBackupRequest
 from ._models_py3 import TriggerContext
-from ._models_py3 import UnlockDeleteRequest
-from ._models_py3 import UnlockDeleteResponse
 from ._models_py3 import UserFacingError
 from ._models_py3 import ValidateForBackupRequest
 from ._models_py3 import ValidateRestoreRequestObject
@@ -150,20 +151,23 @@ from ._models_py3 import ValidateRestoreRequestObject
 from ._data_protection_client_enums import AbsoluteMarker
 from ._data_protection_client_enums import AlertsState
 from ._data_protection_client_enums import CreatedByType
+from ._data_protection_client_enums import CrossSubscriptionRestoreState
 from ._data_protection_client_enums import CurrentProtectionState
 from ._data_protection_client_enums import DataStoreTypes
 from ._data_protection_client_enums import DayOfWeek
+from ._data_protection_client_enums import EncryptionState
 from ._data_protection_client_enums import ExistingResourcePolicy
 from ._data_protection_client_enums import FeatureSupportStatus
 from ._data_protection_client_enums import FeatureType
+from ._data_protection_client_enums import IdentityType
 from ._data_protection_client_enums import ImmutabilityState
+from ._data_protection_client_enums import InfrastructureEncryptionState
 from ._data_protection_client_enums import Month
 from ._data_protection_client_enums import PersistentVolumeRestoreMode
 from ._data_protection_client_enums import ProvisioningState
 from ._data_protection_client_enums import RecoveryOption
 from ._data_protection_client_enums import RehydrationPriority
 from ._data_protection_client_enums import RehydrationStatus
-from ._data_protection_client_enums import ResourceGuardProvisioningState
 from ._data_protection_client_enums import ResourceMoveState
 from ._data_protection_client_enums import RestoreSourceDataStoreType
 from ._data_protection_client_enums import RestoreTargetLocationType
@@ -232,8 +236,11 @@ __all__ = [
     "ClientDiscoveryForServiceSpecification",
     "ClientDiscoveryResponse",
     "ClientDiscoveryValueForSingleApi",
+    "CmkKekIdentity",
+    "CmkKeyVaultProperties",
     "CopyOnExpiryOption",
     "CopyOption",
+    "CrossSubscriptionRestoreSettings",
     "CustomCopyOption",
     "DataStoreInfoBase",
     "DataStoreParameters",
@@ -247,6 +254,7 @@ __all__ = [
     "DeletionInfo",
     "DppBaseResource",
     "DppBaseResourceList",
+    "DppBaseTrackedResource",
     "DppIdentityDetails",
     "DppProxyResource",
     "DppResource",
@@ -254,9 +262,11 @@ __all__ = [
     "DppTrackedResource",
     "DppTrackedResourceList",
     "DppWorkerRequest",
+    "EncryptionSettings",
     "Error",
     "ErrorAdditionalInfo",
     "ExportJobsResult",
+    "FeatureSettings",
     "FeatureValidationRequest",
     "FeatureValidationRequestBase",
     "FeatureValidationResponse",
@@ -278,6 +288,7 @@ __all__ = [
     "OperationJobExtendedInfo",
     "OperationResource",
     "PatchBackupVaultInput",
+    "PatchResourceGuardInput",
     "PatchResourceRequestInput",
     "PolicyInfo",
     "PolicyParameters",
@@ -287,10 +298,6 @@ __all__ = [
     "RecoveryPointsFilters",
     "ResourceGuard",
     "ResourceGuardOperation",
-    "ResourceGuardOperationDetail",
-    "ResourceGuardProxyBase",
-    "ResourceGuardProxyBaseResource",
-    "ResourceGuardProxyBaseResourceList",
     "ResourceGuardResource",
     "ResourceGuardResourceList",
     "ResourceMoveDetails",
@@ -316,28 +323,29 @@ __all__ = [
     "TargetDetails",
     "TriggerBackupRequest",
     "TriggerContext",
-    "UnlockDeleteRequest",
-    "UnlockDeleteResponse",
     "UserFacingError",
     "ValidateForBackupRequest",
     "ValidateRestoreRequestObject",
     "AbsoluteMarker",
     "AlertsState",
     "CreatedByType",
+    "CrossSubscriptionRestoreState",
     "CurrentProtectionState",
     "DataStoreTypes",
     "DayOfWeek",
+    "EncryptionState",
     "ExistingResourcePolicy",
     "FeatureSupportStatus",
     "FeatureType",
+    "IdentityType",
     "ImmutabilityState",
+    "InfrastructureEncryptionState",
     "Month",
     "PersistentVolumeRestoreMode",
     "ProvisioningState",
     "RecoveryOption",
     "RehydrationPriority",
     "RehydrationStatus",
-    "ResourceGuardProvisioningState",
     "ResourceMoveState",
     "RestoreSourceDataStoreType",
     "RestoreTargetLocationType",
