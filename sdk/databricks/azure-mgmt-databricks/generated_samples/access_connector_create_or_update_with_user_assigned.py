@@ -14,7 +14,7 @@ from azure.mgmt.databricks import AzureDatabricksManagementClient
     pip install azure-identity
     pip install azure-mgmt-databricks
 # USAGE
-    python workspace_managed_disk_encryption_update.py
+    python access_connector_create_or_update_with_user_assigned.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,33 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.workspaces.begin_create_or_update(
+    response = client.access_connectors.begin_create_or_update(
         resource_group_name="rg",
-        workspace_name="myWorkspace",
-        parameters={
-            "location": "westus",
-            "properties": {
-                "encryption": {
-                    "entities": {
-                        "managedDisk": {
-                            "keySource": "Microsoft.Keyvault",
-                            "keyVaultProperties": {
-                                "keyName": "test-cmk-key",
-                                "keyVaultUri": "https://test-vault-name.vault.azure.net/",
-                                "keyVersion": "00000000000000000000000000000000",
-                            },
-                            "rotationToLatestKeyVersionEnabled": True,
-                        }
-                    }
-                },
-                "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
-            },
-            "tags": {"mytag1": "myvalue1"},
-        },
+        connector_name="myAccessConnector",
+        parameters={"location": "westus"},
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/stable/2023-02-01/examples/WorkspaceManagedDiskEncryptionUpdate.json
+# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/preview/2022-10-01-preview/examples/AccessConnectorCreateOrUpdateWithUserAssigned.json
 if __name__ == "__main__":
     main()
