@@ -281,7 +281,8 @@ class PrivateEndpointConnectionsOperations:
         :type account_name: str
         :param name: Required.
         :type name: str
-        :param parameters: The request parameters. Is either a model type or a IO type. Required.
+        :param parameters: The request parameters. Is either a PrivateEndpointConnection type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.media.models.PrivateEndpointConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

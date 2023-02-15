@@ -30,7 +30,7 @@ def main():
     )
 
     response = client.mediaservices.delete(
-        resource_group_name="contoso",
+        resource_group_name="contosorg",
         account_name="contososports",
     )
     print(response)

@@ -31,7 +31,7 @@ def main():
 
     response = client.locations.check_name_availability(
         location_name="japanwest",
-        parameters={"name": "contosotv", "type": "videoAnalyzers"},
+        parameters={"name": "contosotv", "type": "Microsoft.Media/mediaservices"},
     )
     print(response)
 

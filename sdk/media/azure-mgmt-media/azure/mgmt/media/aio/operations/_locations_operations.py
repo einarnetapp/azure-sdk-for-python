@@ -112,7 +112,8 @@ class LocationsOperations:
 
         :param location_name: Location name. Required.
         :type location_name: str
-        :param parameters: The request parameters. Is either a model type or a IO type. Required.
+        :param parameters: The request parameters. Is either a CheckNameAvailabilityInput type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.media.models.CheckNameAvailabilityInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
