@@ -8,6 +8,7 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -89,8 +90,8 @@ class ManagedDatabasesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ManagedDatabaseListResult] = kwargs.pop("cls", None)
 
@@ -118,7 +119,18 @@ class ManagedDatabasesOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -180,8 +192,8 @@ class ManagedDatabasesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ManagedDatabase] = kwargs.pop("cls", None)
 
@@ -238,8 +250,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.ManagedDatabase]] = kwargs.pop("cls", None)
@@ -390,8 +402,8 @@ class ManagedDatabasesOperations:
         :type managed_instance_name: str
         :param database_name: The name of the database. Required.
         :type database_name: str
-        :param parameters: The requested database resource state. Is either a model type or a IO type.
-         Required.
+        :param parameters: The requested database resource state. Is either a ManagedDatabase type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ManagedDatabase or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -412,8 +424,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ManagedDatabase] = kwargs.pop("cls", None)
@@ -474,8 +486,8 @@ class ManagedDatabasesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
 
@@ -537,8 +549,8 @@ class ManagedDatabasesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
@@ -599,8 +611,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.ManagedDatabase]] = kwargs.pop("cls", None)
@@ -748,8 +760,8 @@ class ManagedDatabasesOperations:
         :type managed_instance_name: str
         :param database_name: The name of the database. Required.
         :type database_name: str
-        :param parameters: The requested database resource state. Is either a model type or a IO type.
-         Required.
+        :param parameters: The requested database resource state. Is either a ManagedDatabaseUpdate
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ManagedDatabaseUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -770,8 +782,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ManagedDatabase] = kwargs.pop("cls", None)
@@ -837,8 +849,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -978,8 +990,8 @@ class ManagedDatabasesOperations:
         :type managed_instance_name: str
         :param database_name: The name of the database. Required.
         :type database_name: str
-        :param parameters: Parameters of the cancel managed database move operation. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameters of the cancel managed database move operation. Is either a
+         ManagedDatabaseMoveDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ManagedDatabaseMoveDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -999,8 +1011,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1064,8 +1076,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1206,7 +1218,7 @@ class ManagedDatabasesOperations:
         :param database_name: The name of the database. Required.
         :type database_name: str
         :param parameters: Parameters of the complete managed database move operation. Is either a
-         model type or a IO type. Required.
+         ManagedDatabaseMoveDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ManagedDatabaseMoveDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1226,8 +1238,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1291,8 +1303,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1435,7 +1447,7 @@ class ManagedDatabasesOperations:
         :param database_name: The name of the database. Required.
         :type database_name: str
         :param parameters: The definition for completing the restore of this managed database. Is
-         either a model type or a IO type. Required.
+         either a CompleteDatabaseRestoreDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.CompleteDatabaseRestoreDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1455,8 +1467,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1520,8 +1532,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1661,8 +1673,8 @@ class ManagedDatabasesOperations:
         :type managed_instance_name: str
         :param database_name: The name of the database. Required.
         :type database_name: str
-        :param parameters: Parameters of the start managed database move operation. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameters of the start managed database move operation. Is either a
+         ManagedDatabaseStartMoveDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ManagedDatabaseStartMoveDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1682,8 +1694,8 @@ class ManagedDatabasesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1747,8 +1759,8 @@ class ManagedDatabasesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ManagedDatabaseListResult] = kwargs.pop("cls", None)
 
@@ -1776,7 +1788,18 @@ class ManagedDatabasesOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"

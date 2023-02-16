@@ -43,8 +43,8 @@ def build_get_request(resource_group_name: str, server_name: str, subscription_i
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2020-11-01-preview")
+    api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -76,8 +76,8 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2020-11-01-preview")
+    api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -150,8 +150,8 @@ class ServerAutomaticTuningOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServerAutomaticTuning] = kwargs.pop("cls", None)
 
@@ -259,8 +259,8 @@ class ServerAutomaticTuningOperations:
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param parameters: The requested automatic tuning resource state. Is either a model type or a
-         IO type. Required.
+        :param parameters: The requested automatic tuning resource state. Is either a
+         ServerAutomaticTuning type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ServerAutomaticTuning or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -281,8 +281,8 @@ class ServerAutomaticTuningOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ServerAutomaticTuning] = kwargs.pop("cls", None)

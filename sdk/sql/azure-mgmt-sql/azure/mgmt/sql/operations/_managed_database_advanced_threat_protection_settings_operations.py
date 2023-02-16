@@ -8,6 +8,7 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, Callable, Dict, IO, Iterable, Optional, TypeVar, Union, overload
+import urllib.parse
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -46,8 +47,8 @@ def build_list_by_database_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-02-01-preview")
+    api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -85,8 +86,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-02-01-preview")
+    api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -127,8 +128,8 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-02-01-preview")
+    api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -203,8 +204,8 @@ class ManagedDatabaseAdvancedThreatProtectionSettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-02-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ManagedDatabaseAdvancedThreatProtectionListResult] = kwargs.pop("cls", None)
 
@@ -233,7 +234,18 @@ class ManagedDatabaseAdvancedThreatProtectionSettingsOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -304,8 +316,8 @@ class ManagedDatabaseAdvancedThreatProtectionSettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-02-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ManagedDatabaseAdvancedThreatProtection] = kwargs.pop("cls", None)
 
@@ -439,8 +451,8 @@ class ManagedDatabaseAdvancedThreatProtectionSettingsOperations:
          "Default" Required.
         :type advanced_threat_protection_name: str or
          ~azure.mgmt.sql.models.AdvancedThreatProtectionName
-        :param parameters: The managed database Advanced Threat Protection state. Is either a model
-         type or a IO type. Required.
+        :param parameters: The managed database Advanced Threat Protection state. Is either a
+         ManagedDatabaseAdvancedThreatProtection type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.ManagedDatabaseAdvancedThreatProtection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -461,8 +473,8 @@ class ManagedDatabaseAdvancedThreatProtectionSettingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-02-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ManagedDatabaseAdvancedThreatProtection] = kwargs.pop("cls", None)

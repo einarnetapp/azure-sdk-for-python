@@ -8,6 +8,7 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -74,6 +75,529 @@ class LongTermRetentionBackupsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
+    @distributed_trace
+    def list_by_location(
+        self,
+        location_name: str,
+        only_latest_per_database: Optional[bool] = None,
+        database_state: Optional[Union[str, _models.DatabaseState]] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
+        """Lists the long term retention backups for a given location.
+
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param only_latest_per_database: Whether or not to only get the latest backup for each
+         database. Default value is None.
+        :type only_latest_per_database: bool
+        :param database_state: Whether to query against just live databases, just deleted databases, or
+         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
+        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either LongTermRetentionBackup or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_location_request(
+                    location_name=location_name,
+                    subscription_id=self._config.subscription_id,
+                    only_latest_per_database=only_latest_per_database,
+                    database_state=database_state,
+                    api_version=api_version,
+                    template_url=self.list_by_location.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_location.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups"
+    }
+
+    @distributed_trace
+    def list_by_server(
+        self,
+        location_name: str,
+        long_term_retention_server_name: str,
+        only_latest_per_database: Optional[bool] = None,
+        database_state: Optional[Union[str, _models.DatabaseState]] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
+        """Lists the long term retention backups for a given server.
+
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param long_term_retention_server_name: The name of the server. Required.
+        :type long_term_retention_server_name: str
+        :param only_latest_per_database: Whether or not to only get the latest backup for each
+         database. Default value is None.
+        :type only_latest_per_database: bool
+        :param database_state: Whether to query against just live databases, just deleted databases, or
+         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
+        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either LongTermRetentionBackup or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_server_request(
+                    location_name=location_name,
+                    long_term_retention_server_name=long_term_retention_server_name,
+                    subscription_id=self._config.subscription_id,
+                    only_latest_per_database=only_latest_per_database,
+                    database_state=database_state,
+                    api_version=api_version,
+                    template_url=self.list_by_server.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_server.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"
+    }
+
+    @distributed_trace
+    def list_by_database(
+        self,
+        location_name: str,
+        long_term_retention_server_name: str,
+        long_term_retention_database_name: str,
+        only_latest_per_database: Optional[bool] = None,
+        database_state: Optional[Union[str, _models.DatabaseState]] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
+        """Lists all long term retention backups for a database.
+
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param long_term_retention_server_name: The name of the server. Required.
+        :type long_term_retention_server_name: str
+        :param long_term_retention_database_name: The name of the database. Required.
+        :type long_term_retention_database_name: str
+        :param only_latest_per_database: Whether or not to only get the latest backup for each
+         database. Default value is None.
+        :type only_latest_per_database: bool
+        :param database_state: Whether to query against just live databases, just deleted databases, or
+         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
+        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either LongTermRetentionBackup or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_database_request(
+                    location_name=location_name,
+                    long_term_retention_server_name=long_term_retention_server_name,
+                    long_term_retention_database_name=long_term_retention_database_name,
+                    subscription_id=self._config.subscription_id,
+                    only_latest_per_database=only_latest_per_database,
+                    database_state=database_state,
+                    api_version=api_version,
+                    template_url=self.list_by_database.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_database.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"
+    }
+
+    @distributed_trace_async
+    async def get(
+        self,
+        location_name: str,
+        long_term_retention_server_name: str,
+        long_term_retention_database_name: str,
+        backup_name: str,
+        **kwargs: Any
+    ) -> _models.LongTermRetentionBackup:
+        """Gets a long term retention backup.
+
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param long_term_retention_server_name: The name of the server. Required.
+        :type long_term_retention_server_name: str
+        :param long_term_retention_database_name: The name of the database. Required.
+        :type long_term_retention_database_name: str
+        :param backup_name: The backup name. Required.
+        :type backup_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: LongTermRetentionBackup or the result of cls(response)
+        :rtype: ~azure.mgmt.sql.models.LongTermRetentionBackup
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.LongTermRetentionBackup] = kwargs.pop("cls", None)
+
+        request = build_get_request(
+            location_name=location_name,
+            long_term_retention_server_name=long_term_retention_server_name,
+            long_term_retention_database_name=long_term_retention_database_name,
+            backup_name=backup_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.get.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("LongTermRetentionBackup", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
+    }
+
+    async def _delete_initial(  # pylint: disable=inconsistent-return-statements
+        self,
+        location_name: str,
+        long_term_retention_server_name: str,
+        long_term_retention_database_name: str,
+        backup_name: str,
+        **kwargs: Any
+    ) -> None:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        request = build_delete_request(
+            location_name=location_name,
+            long_term_retention_server_name=long_term_retention_server_name,
+            long_term_retention_database_name=long_term_retention_database_name,
+            backup_name=backup_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self._delete_initial.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
+    }
+
+    @distributed_trace_async
+    async def begin_delete(
+        self,
+        location_name: str,
+        long_term_retention_server_name: str,
+        long_term_retention_database_name: str,
+        backup_name: str,
+        **kwargs: Any
+    ) -> AsyncLROPoller[None]:
+        """Deletes a long term retention backup.
+
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param long_term_retention_server_name: The name of the server. Required.
+        :type long_term_retention_server_name: str
+        :param long_term_retention_database_name: The name of the database. Required.
+        :type long_term_retention_database_name: str
+        :param backup_name: The backup name. Required.
+        :type backup_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._delete_initial(  # type: ignore
+                location_name=location_name,
+                long_term_retention_server_name=long_term_retention_server_name,
+                long_term_retention_database_name=long_term_retention_database_name,
+                backup_name=backup_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
+    }
+
     async def _copy_initial(
         self,
         location_name: str,
@@ -94,8 +618,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.LongTermRetentionBackupOperationResult]] = kwargs.pop("cls", None)
@@ -253,7 +777,7 @@ class LongTermRetentionBackupsOperations:
         :param backup_name: The backup name. Required.
         :type backup_name: str
         :param parameters: The parameters needed for long term retention copy request. Is either a
-         model type or a IO type. Required.
+         CopyLongTermRetentionBackupParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.CopyLongTermRetentionBackupParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -275,8 +799,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.LongTermRetentionBackupOperationResult] = kwargs.pop("cls", None)
@@ -344,8 +868,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.LongTermRetentionBackupOperationResult]] = kwargs.pop("cls", None)
@@ -502,8 +1026,8 @@ class LongTermRetentionBackupsOperations:
         :type long_term_retention_database_name: str
         :param backup_name: The backup name. Required.
         :type backup_name: str
-        :param parameters: The requested backup resource state. Is either a model type or a IO type.
-         Required.
+        :param parameters: The requested backup resource state. Is either a
+         UpdateLongTermRetentionBackupParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.UpdateLongTermRetentionBackupParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -525,8 +1049,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.LongTermRetentionBackupOperationResult] = kwargs.pop("cls", None)
@@ -574,9 +1098,340 @@ class LongTermRetentionBackupsOperations:
         "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"
     }
 
-    @distributed_trace_async
-    async def get(
+    @distributed_trace
+    def list_by_resource_group_location(
         self,
+        resource_group_name: str,
+        location_name: str,
+        only_latest_per_database: Optional[bool] = None,
+        database_state: Optional[Union[str, _models.DatabaseState]] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
+        """Lists the long term retention backups for a given location.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param only_latest_per_database: Whether or not to only get the latest backup for each
+         database. Default value is None.
+        :type only_latest_per_database: bool
+        :param database_state: Whether to query against just live databases, just deleted databases, or
+         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
+        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either LongTermRetentionBackup or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_resource_group_location_request(
+                    resource_group_name=resource_group_name,
+                    location_name=location_name,
+                    subscription_id=self._config.subscription_id,
+                    only_latest_per_database=only_latest_per_database,
+                    database_state=database_state,
+                    api_version=api_version,
+                    template_url=self.list_by_resource_group_location.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_resource_group_location.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups"
+    }
+
+    @distributed_trace
+    def list_by_resource_group_server(
+        self,
+        resource_group_name: str,
+        location_name: str,
+        long_term_retention_server_name: str,
+        only_latest_per_database: Optional[bool] = None,
+        database_state: Optional[Union[str, _models.DatabaseState]] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
+        """Lists the long term retention backups for a given server.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param long_term_retention_server_name: The name of the server. Required.
+        :type long_term_retention_server_name: str
+        :param only_latest_per_database: Whether or not to only get the latest backup for each
+         database. Default value is None.
+        :type only_latest_per_database: bool
+        :param database_state: Whether to query against just live databases, just deleted databases, or
+         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
+        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either LongTermRetentionBackup or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_resource_group_server_request(
+                    resource_group_name=resource_group_name,
+                    location_name=location_name,
+                    long_term_retention_server_name=long_term_retention_server_name,
+                    subscription_id=self._config.subscription_id,
+                    only_latest_per_database=only_latest_per_database,
+                    database_state=database_state,
+                    api_version=api_version,
+                    template_url=self.list_by_resource_group_server.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_resource_group_server.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"
+    }
+
+    @distributed_trace
+    def list_by_resource_group_database(
+        self,
+        resource_group_name: str,
+        location_name: str,
+        long_term_retention_server_name: str,
+        long_term_retention_database_name: str,
+        only_latest_per_database: Optional[bool] = None,
+        database_state: Optional[Union[str, _models.DatabaseState]] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
+        """Lists all long term retention backups for a database.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param location_name: The location of the database. Required.
+        :type location_name: str
+        :param long_term_retention_server_name: The name of the server. Required.
+        :type long_term_retention_server_name: str
+        :param long_term_retention_database_name: The name of the database. Required.
+        :type long_term_retention_database_name: str
+        :param only_latest_per_database: Whether or not to only get the latest backup for each
+         database. Default value is None.
+        :type only_latest_per_database: bool
+        :param database_state: Whether to query against just live databases, just deleted databases, or
+         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
+        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either LongTermRetentionBackup or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_resource_group_database_request(
+                    resource_group_name=resource_group_name,
+                    location_name=location_name,
+                    long_term_retention_server_name=long_term_retention_server_name,
+                    long_term_retention_database_name=long_term_retention_database_name,
+                    subscription_id=self._config.subscription_id,
+                    only_latest_per_database=only_latest_per_database,
+                    database_state=database_state,
+                    api_version=api_version,
+                    template_url=self.list_by_resource_group_database.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_resource_group_database.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"
+    }
+
+    @distributed_trace_async
+    async def get_by_resource_group(
+        self,
+        resource_group_name: str,
         location_name: str,
         long_term_retention_server_name: str,
         long_term_retention_database_name: str,
@@ -585,6 +1440,9 @@ class LongTermRetentionBackupsOperations:
     ) -> _models.LongTermRetentionBackup:
         """Gets a long term retention backup.
 
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
         :param location_name: The location of the database. Required.
         :type location_name: str
         :param long_term_retention_server_name: The name of the server. Required.
@@ -609,19 +1467,20 @@ class LongTermRetentionBackupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.LongTermRetentionBackup] = kwargs.pop("cls", None)
 
-        request = build_get_request(
+        request = build_get_by_resource_group_request(
+            resource_group_name=resource_group_name,
             location_name=location_name,
             long_term_retention_server_name=long_term_retention_server_name,
             long_term_retention_database_name=long_term_retention_database_name,
             backup_name=backup_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get.metadata["url"],
+            template_url=self.get_by_resource_group.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -645,12 +1504,13 @@ class LongTermRetentionBackupsOperations:
 
         return deserialized
 
-    get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
+    get_by_resource_group.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
     }
 
-    async def _delete_initial(  # pylint: disable=inconsistent-return-statements
+    async def _delete_by_resource_group_initial(  # pylint: disable=inconsistent-return-statements
         self,
+        resource_group_name: str,
         location_name: str,
         long_term_retention_server_name: str,
         long_term_retention_database_name: str,
@@ -668,19 +1528,20 @@ class LongTermRetentionBackupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        request = build_delete_request(
+        request = build_delete_by_resource_group_request(
+            resource_group_name=resource_group_name,
             location_name=location_name,
             long_term_retention_server_name=long_term_retention_server_name,
             long_term_retention_database_name=long_term_retention_database_name,
             backup_name=backup_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self._delete_initial.metadata["url"],
+            template_url=self._delete_by_resource_group_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -700,13 +1561,14 @@ class LongTermRetentionBackupsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
+    _delete_by_resource_group_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
     }
 
     @distributed_trace_async
-    async def begin_delete(
+    async def begin_delete_by_resource_group(
         self,
+        resource_group_name: str,
         location_name: str,
         long_term_retention_server_name: str,
         long_term_retention_database_name: str,
@@ -715,6 +1577,9 @@ class LongTermRetentionBackupsOperations:
     ) -> AsyncLROPoller[None]:
         """Deletes a long term retention backup.
 
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
         :param location_name: The location of the database. Required.
         :type location_name: str
         :param long_term_retention_server_name: The name of the server. Required.
@@ -738,15 +1603,16 @@ class LongTermRetentionBackupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._delete_initial(  # type: ignore
+            raw_result = await self._delete_by_resource_group_initial(  # type: ignore
+                resource_group_name=resource_group_name,
                 location_name=location_name,
                 long_term_retention_server_name=long_term_retention_server_name,
                 long_term_retention_database_name=long_term_retention_database_name,
@@ -778,290 +1644,8 @@ class LongTermRetentionBackupsOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
-    }
-
-    @distributed_trace
-    def list_by_database(
-        self,
-        location_name: str,
-        long_term_retention_server_name: str,
-        long_term_retention_database_name: str,
-        only_latest_per_database: Optional[bool] = None,
-        database_state: Optional[Union[str, _models.DatabaseState]] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
-        """Lists all long term retention backups for a database.
-
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param long_term_retention_server_name: The name of the server. Required.
-        :type long_term_retention_server_name: str
-        :param long_term_retention_database_name: The name of the database. Required.
-        :type long_term_retention_database_name: str
-        :param only_latest_per_database: Whether or not to only get the latest backup for each
-         database. Default value is None.
-        :type only_latest_per_database: bool
-        :param database_state: Whether to query against just live databases, just deleted databases, or
-         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
-        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either LongTermRetentionBackup or the result of
-         cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_database_request(
-                    location_name=location_name,
-                    long_term_retention_server_name=long_term_retention_server_name,
-                    long_term_retention_database_name=long_term_retention_database_name,
-                    subscription_id=self._config.subscription_id,
-                    only_latest_per_database=only_latest_per_database,
-                    database_state=database_state,
-                    api_version=api_version,
-                    template_url=self.list_by_database.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_database.metadata = {
-        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"
-    }
-
-    @distributed_trace
-    def list_by_location(
-        self,
-        location_name: str,
-        only_latest_per_database: Optional[bool] = None,
-        database_state: Optional[Union[str, _models.DatabaseState]] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
-        """Lists the long term retention backups for a given location.
-
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param only_latest_per_database: Whether or not to only get the latest backup for each
-         database. Default value is None.
-        :type only_latest_per_database: bool
-        :param database_state: Whether to query against just live databases, just deleted databases, or
-         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
-        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either LongTermRetentionBackup or the result of
-         cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_location_request(
-                    location_name=location_name,
-                    subscription_id=self._config.subscription_id,
-                    only_latest_per_database=only_latest_per_database,
-                    database_state=database_state,
-                    api_version=api_version,
-                    template_url=self.list_by_location.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_location.metadata = {
-        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups"
-    }
-
-    @distributed_trace
-    def list_by_server(
-        self,
-        location_name: str,
-        long_term_retention_server_name: str,
-        only_latest_per_database: Optional[bool] = None,
-        database_state: Optional[Union[str, _models.DatabaseState]] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
-        """Lists the long term retention backups for a given server.
-
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param long_term_retention_server_name: The name of the server. Required.
-        :type long_term_retention_server_name: str
-        :param only_latest_per_database: Whether or not to only get the latest backup for each
-         database. Default value is None.
-        :type only_latest_per_database: bool
-        :param database_state: Whether to query against just live databases, just deleted databases, or
-         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
-        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either LongTermRetentionBackup or the result of
-         cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_server_request(
-                    location_name=location_name,
-                    long_term_retention_server_name=long_term_retention_server_name,
-                    subscription_id=self._config.subscription_id,
-                    only_latest_per_database=only_latest_per_database,
-                    database_state=database_state,
-                    api_version=api_version,
-                    template_url=self.list_by_server.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_server.metadata = {
-        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"
+    begin_delete_by_resource_group.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
     }
 
     async def _copy_by_resource_group_initial(
@@ -1085,8 +1669,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.LongTermRetentionBackupOperationResult]] = kwargs.pop("cls", None)
@@ -1257,7 +1841,7 @@ class LongTermRetentionBackupsOperations:
         :param backup_name: The backup name. Required.
         :type backup_name: str
         :param parameters: The parameters needed for long term retention copy request. Is either a
-         model type or a IO type. Required.
+         CopyLongTermRetentionBackupParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.CopyLongTermRetentionBackupParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1279,8 +1863,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.LongTermRetentionBackupOperationResult] = kwargs.pop("cls", None)
@@ -1350,8 +1934,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[Optional[_models.LongTermRetentionBackupOperationResult]] = kwargs.pop("cls", None)
@@ -1521,8 +2105,8 @@ class LongTermRetentionBackupsOperations:
         :type long_term_retention_database_name: str
         :param backup_name: The backup name. Required.
         :type backup_name: str
-        :param parameters: The requested backup resource state. Is either a model type or a IO type.
-         Required.
+        :param parameters: The requested backup resource state. Is either a
+         UpdateLongTermRetentionBackupParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.UpdateLongTermRetentionBackupParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1544,8 +2128,8 @@ class LongTermRetentionBackupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.LongTermRetentionBackupOperationResult] = kwargs.pop("cls", None)
@@ -1592,521 +2176,4 @@ class LongTermRetentionBackupsOperations:
 
     begin_update_by_resource_group.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"
-    }
-
-    @distributed_trace_async
-    async def get_by_resource_group(
-        self,
-        resource_group_name: str,
-        location_name: str,
-        long_term_retention_server_name: str,
-        long_term_retention_database_name: str,
-        backup_name: str,
-        **kwargs: Any
-    ) -> _models.LongTermRetentionBackup:
-        """Gets a long term retention backup.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param long_term_retention_server_name: The name of the server. Required.
-        :type long_term_retention_server_name: str
-        :param long_term_retention_database_name: The name of the database. Required.
-        :type long_term_retention_database_name: str
-        :param backup_name: The backup name. Required.
-        :type backup_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: LongTermRetentionBackup or the result of cls(response)
-        :rtype: ~azure.mgmt.sql.models.LongTermRetentionBackup
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[_models.LongTermRetentionBackup] = kwargs.pop("cls", None)
-
-        request = build_get_by_resource_group_request(
-            resource_group_name=resource_group_name,
-            location_name=location_name,
-            long_term_retention_server_name=long_term_retention_server_name,
-            long_term_retention_database_name=long_term_retention_database_name,
-            backup_name=backup_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.get_by_resource_group.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("LongTermRetentionBackup", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get_by_resource_group.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
-    }
-
-    async def _delete_by_resource_group_initial(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_group_name: str,
-        location_name: str,
-        long_term_retention_server_name: str,
-        long_term_retention_database_name: str,
-        backup_name: str,
-        **kwargs: Any
-    ) -> None:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        request = build_delete_by_resource_group_request(
-            resource_group_name=resource_group_name,
-            location_name=location_name,
-            long_term_retention_server_name=long_term_retention_server_name,
-            long_term_retention_database_name=long_term_retention_database_name,
-            backup_name=backup_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self._delete_by_resource_group_initial.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    _delete_by_resource_group_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
-    }
-
-    @distributed_trace_async
-    async def begin_delete_by_resource_group(
-        self,
-        resource_group_name: str,
-        location_name: str,
-        long_term_retention_server_name: str,
-        long_term_retention_database_name: str,
-        backup_name: str,
-        **kwargs: Any
-    ) -> AsyncLROPoller[None]:
-        """Deletes a long term retention backup.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param long_term_retention_server_name: The name of the server. Required.
-        :type long_term_retention_server_name: str
-        :param long_term_retention_database_name: The name of the database. Required.
-        :type long_term_retention_database_name: str
-        :param backup_name: The backup name. Required.
-        :type backup_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[None] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._delete_by_resource_group_initial(  # type: ignore
-                resource_group_name=resource_group_name,
-                location_name=location_name,
-                long_term_retention_server_name=long_term_retention_server_name,
-                long_term_retention_database_name=long_term_retention_database_name,
-                backup_name=backup_name,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    begin_delete_by_resource_group.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"
-    }
-
-    @distributed_trace
-    def list_by_resource_group_database(
-        self,
-        resource_group_name: str,
-        location_name: str,
-        long_term_retention_server_name: str,
-        long_term_retention_database_name: str,
-        only_latest_per_database: Optional[bool] = None,
-        database_state: Optional[Union[str, _models.DatabaseState]] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
-        """Lists all long term retention backups for a database.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param long_term_retention_server_name: The name of the server. Required.
-        :type long_term_retention_server_name: str
-        :param long_term_retention_database_name: The name of the database. Required.
-        :type long_term_retention_database_name: str
-        :param only_latest_per_database: Whether or not to only get the latest backup for each
-         database. Default value is None.
-        :type only_latest_per_database: bool
-        :param database_state: Whether to query against just live databases, just deleted databases, or
-         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
-        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either LongTermRetentionBackup or the result of
-         cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_resource_group_database_request(
-                    resource_group_name=resource_group_name,
-                    location_name=location_name,
-                    long_term_retention_server_name=long_term_retention_server_name,
-                    long_term_retention_database_name=long_term_retention_database_name,
-                    subscription_id=self._config.subscription_id,
-                    only_latest_per_database=only_latest_per_database,
-                    database_state=database_state,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group_database.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_resource_group_database.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"
-    }
-
-    @distributed_trace
-    def list_by_resource_group_location(
-        self,
-        resource_group_name: str,
-        location_name: str,
-        only_latest_per_database: Optional[bool] = None,
-        database_state: Optional[Union[str, _models.DatabaseState]] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
-        """Lists the long term retention backups for a given location.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param only_latest_per_database: Whether or not to only get the latest backup for each
-         database. Default value is None.
-        :type only_latest_per_database: bool
-        :param database_state: Whether to query against just live databases, just deleted databases, or
-         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
-        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either LongTermRetentionBackup or the result of
-         cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_resource_group_location_request(
-                    resource_group_name=resource_group_name,
-                    location_name=location_name,
-                    subscription_id=self._config.subscription_id,
-                    only_latest_per_database=only_latest_per_database,
-                    database_state=database_state,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group_location.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_resource_group_location.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups"
-    }
-
-    @distributed_trace
-    def list_by_resource_group_server(
-        self,
-        resource_group_name: str,
-        location_name: str,
-        long_term_retention_server_name: str,
-        only_latest_per_database: Optional[bool] = None,
-        database_state: Optional[Union[str, _models.DatabaseState]] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.LongTermRetentionBackup"]:
-        """Lists the long term retention backups for a given server.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param location_name: The location of the database. Required.
-        :type location_name: str
-        :param long_term_retention_server_name: The name of the server. Required.
-        :type long_term_retention_server_name: str
-        :param only_latest_per_database: Whether or not to only get the latest backup for each
-         database. Default value is None.
-        :type only_latest_per_database: bool
-        :param database_state: Whether to query against just live databases, just deleted databases, or
-         all databases. Known values are: "All", "Live", and "Deleted". Default value is None.
-        :type database_state: str or ~azure.mgmt.sql.models.DatabaseState
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either LongTermRetentionBackup or the result of
-         cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.LongTermRetentionBackup]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-05-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-05-01-preview")
-        )
-        cls: ClsType[_models.LongTermRetentionBackupListResult] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_resource_group_server_request(
-                    resource_group_name=resource_group_name,
-                    location_name=location_name,
-                    long_term_retention_server_name=long_term_retention_server_name,
-                    subscription_id=self._config.subscription_id,
-                    only_latest_per_database=only_latest_per_database,
-                    database_state=database_state,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group_server.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("LongTermRetentionBackupListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_resource_group_server.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"
     }

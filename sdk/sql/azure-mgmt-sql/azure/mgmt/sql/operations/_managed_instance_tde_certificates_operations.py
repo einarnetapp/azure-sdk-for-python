@@ -47,8 +47,8 @@ def build_create_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2020-11-01-preview")
+    api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     # Construct URL
@@ -111,8 +111,8 @@ class ManagedInstanceTdeCertificatesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -242,8 +242,8 @@ class ManagedInstanceTdeCertificatesOperations:
         :type resource_group_name: str
         :param managed_instance_name: The name of the managed instance. Required.
         :type managed_instance_name: str
-        :param parameters: The requested TDE certificate to be created or updated. Is either a model
-         type or a IO type. Required.
+        :param parameters: The requested TDE certificate to be created or updated. Is either a
+         TdeCertificate type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.TdeCertificate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -263,8 +263,8 @@ class ManagedInstanceTdeCertificatesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)

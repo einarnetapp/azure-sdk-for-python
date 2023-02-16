@@ -84,8 +84,8 @@ class DatabaseAutomaticTuningOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DatabaseAutomaticTuning] = kwargs.pop("cls", None)
 
@@ -203,8 +203,8 @@ class DatabaseAutomaticTuningOperations:
         :type server_name: str
         :param database_name: The name of the database. Required.
         :type database_name: str
-        :param parameters: The requested automatic tuning resource state. Is either a model type or a
-         IO type. Required.
+        :param parameters: The requested automatic tuning resource state. Is either a
+         DatabaseAutomaticTuning type or a IO type. Required.
         :type parameters: ~azure.mgmt.sql.models.DatabaseAutomaticTuning or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -225,8 +225,8 @@ class DatabaseAutomaticTuningOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2020-11-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DatabaseAutomaticTuning] = kwargs.pop("cls", None)
