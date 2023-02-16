@@ -41,6 +41,13 @@ class ActiveRevisionsMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SINGLE = "Single"
 
 
+class Affinity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Sticky Session Affinity."""
+
+    STICKY = "sticky"
+    NONE = "none"
+
+
 class Applicability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """indicates whether the profile is default for the location."""
 
@@ -185,6 +192,16 @@ class IngressTransportMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     TCP = "tcp"
 
 
+class JobProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Provisioning state of the Container Apps Job."""
+
+    IN_PROGRESS = "InProgress"
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
+    DELETING = "Deleting"
+
+
 class LogLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default
     is info.
@@ -196,11 +213,12 @@ class LogLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ERROR = "error"
 
 
-class ManagedEnvironmentOutBoundType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Outbound type for the cluster."""
+class ManagedCertificateDomainControlValidation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Selected type of domain control validation for managed certificates."""
 
-    LOAD_BALANCER = "LoadBalancer"
-    USER_DEFINED_ROUTING = "UserDefinedRouting"
+    CNAME = "CNAME"
+    HTTP = "HTTP"
+    TXT = "TXT"
 
 
 class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -239,15 +257,6 @@ class Scheme(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     HTTPS = "HTTPS"
 
 
-class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Name of the Sku."""
-
-    #: Consumption SKU of Managed Environment.
-    CONSUMPTION = "Consumption"
-    #: Premium SKU of Managed Environment.
-    PREMIUM = "Premium"
-
-
 class SourceControlOperationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Current provisioning State of the operation."""
 
@@ -262,6 +271,14 @@ class StorageType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     AZURE_FILE = "AzureFile"
     EMPTY_DIR = "EmptyDir"
+
+
+class TriggerType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Trigger type of the job."""
+
+    SCHEDULED = "Scheduled"
+    EVENT = "Event"
+    MANUAL = "Manual"
 
 
 class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):

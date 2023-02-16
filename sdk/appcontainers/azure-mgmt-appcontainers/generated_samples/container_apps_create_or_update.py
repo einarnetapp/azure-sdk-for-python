@@ -82,6 +82,7 @@ def main():
                                 "name": "Allow work IP B subnet",
                             },
                         ],
+                        "stickySessions": {"affinity": "sticky"},
                         "targetPort": 3000,
                         "traffic": [{"label": "production", "revisionName": "testcontainerApp0-ab1234", "weight": 100}],
                     },
@@ -134,6 +135,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/stable/2022-10-01/examples/ContainerApps_CreateOrUpdate.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/preview/2022-11-01-preview/examples/ContainerApps_CreateOrUpdate.json
 if __name__ == "__main__":
     main()
