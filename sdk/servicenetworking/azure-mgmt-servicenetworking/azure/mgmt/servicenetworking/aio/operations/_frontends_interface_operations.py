@@ -402,7 +402,7 @@ class FrontendsInterfaceOperations:
         :type traffic_controller_name: str
         :param frontend_name: Frontends. Required.
         :type frontend_name: str
-        :param resource: Resource create parameters. Is either a model type or a IO type. Required.
+        :param resource: Resource create parameters. Is either a Frontend type or a IO type. Required.
         :type resource: ~azure.mgmt.servicenetworking.models.Frontend or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -554,8 +554,8 @@ class FrontendsInterfaceOperations:
         :type traffic_controller_name: str
         :param frontend_name: Frontends. Required.
         :type frontend_name: str
-        :param properties: The resource properties to be updated. Is either a model type or a IO type.
-         Required.
+        :param properties: The resource properties to be updated. Is either a FrontendUpdate type or a
+         IO type. Required.
         :type properties: ~azure.mgmt.servicenetworking.models.FrontendUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

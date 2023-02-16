@@ -31,13 +31,15 @@ def main():
 
     response = client.frontends_interface.update(
         resource_group_name="rg1",
-        traffic_controller_name="TC1",
-        frontend_name="publicIp1",
+        traffic_controller_name="tc1",
+        frontend_name="fe1",
         properties={
             "properties": {
                 "ipAddressVersion": "IPv4",
                 "mode": "public",
-                "publicIPAddress": {"id": "resourceUriAsString"},
+                "publicIPAddress": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/PublicIP-fe1"
+                },
             }
         },
     )
