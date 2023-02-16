@@ -63,6 +63,9 @@ class BalancesOperations:
         """Gets the balances for a scope by billingAccountId. Balances are available via this API only for
         May 1, 2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -81,9 +84,7 @@ class BalancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.Balance] = kwargs.pop("cls", None)
 
         request = build_get_by_billing_account_request(
@@ -125,6 +126,9 @@ class BalancesOperations:
         """Gets the balances for a scope by billing period and billingAccountId. Balances are available
         via this API only for May 1, 2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :param billing_period_name: Billing Period Name. Required.
@@ -145,9 +149,7 @@ class BalancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.Balance] = kwargs.pop("cls", None)
 
         request = build_get_for_billing_period_by_billing_account_request(

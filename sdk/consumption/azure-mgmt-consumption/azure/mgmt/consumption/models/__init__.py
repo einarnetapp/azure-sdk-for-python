@@ -44,6 +44,7 @@ from ._models_py3 import Marketplace
 from ._models_py3 import MarketplacesListResult
 from ._models_py3 import MeterDetails
 from ._models_py3 import MeterDetailsResponse
+from ._models_py3 import MeterDetailsV2
 from ._models_py3 import ModernChargeSummary
 from ._models_py3 import ModernReservationRecommendation
 from ._models_py3 import ModernReservationRecommendationProperties
@@ -56,8 +57,13 @@ from ._models_py3 import Notification
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
+from ._models_py3 import OperationListResultV2
+from ._models_py3 import OperationV2
+from ._models_py3 import OperationV2Display
 from ._models_py3 import PriceSheetProperties
+from ._models_py3 import PriceSheetPropertiesV2
 from ._models_py3 import PriceSheetResult
+from ._models_py3 import PriceSheetResultV2
 from ._models_py3 import ProxyResource
 from ._models_py3 import Reseller
 from ._models_py3 import ReservationDetail
@@ -144,6 +150,7 @@ __all__ = [
     "MarketplacesListResult",
     "MeterDetails",
     "MeterDetailsResponse",
+    "MeterDetailsV2",
     "ModernChargeSummary",
     "ModernReservationRecommendation",
     "ModernReservationRecommendationProperties",
@@ -156,8 +163,13 @@ __all__ = [
     "Operation",
     "OperationDisplay",
     "OperationListResult",
+    "OperationListResultV2",
+    "OperationV2",
+    "OperationV2Display",
     "PriceSheetProperties",
+    "PriceSheetPropertiesV2",
     "PriceSheetResult",
+    "PriceSheetResultV2",
     "ProxyResource",
     "Reseller",
     "ReservationDetail",

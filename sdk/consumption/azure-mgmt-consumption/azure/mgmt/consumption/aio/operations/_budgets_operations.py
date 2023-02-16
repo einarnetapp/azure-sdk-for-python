@@ -8,7 +8,6 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, overload
-import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -67,6 +66,9 @@ class BudgetsOperations:
     def list(self, scope: str, **kwargs: Any) -> AsyncIterable["_models.Budget"]:
         """Lists all budgets for the defined scope.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -90,9 +92,7 @@ class BudgetsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.BudgetsListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -117,18 +117,7 @@ class BudgetsOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -164,6 +153,9 @@ class BudgetsOperations:
     async def get(self, scope: str, budget_name: str, **kwargs: Any) -> _models.Budget:
         """Gets the budget for the scope by budget name.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -197,9 +189,7 @@ class BudgetsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.Budget] = kwargs.pop("cls", None)
 
         request = build_get_request(
@@ -247,6 +237,9 @@ class BudgetsOperations:
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -282,6 +275,9 @@ class BudgetsOperations:
         """The operation to create or update a budget. You can optionally provide an eTag if desired as a
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -319,6 +315,9 @@ class BudgetsOperations:
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -336,7 +335,7 @@ class BudgetsOperations:
         :type scope: str
         :param budget_name: Budget Name. Required.
         :type budget_name: str
-        :param parameters: Parameters supplied to the Create Budget operation. Is either a model type
+        :param parameters: Parameters supplied to the Create Budget operation. Is either a Budget type
          or a IO type. Required.
         :type parameters: ~azure.mgmt.consumption.models.Budget or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -358,9 +357,7 @@ class BudgetsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.Budget] = kwargs.pop("cls", None)
 
@@ -416,6 +413,9 @@ class BudgetsOperations:
     ) -> None:
         """The operation to delete a budget.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -449,9 +449,7 @@ class BudgetsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(

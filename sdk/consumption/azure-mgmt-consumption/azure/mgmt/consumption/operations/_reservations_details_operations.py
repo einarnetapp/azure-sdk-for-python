@@ -8,7 +8,6 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
-import urllib.parse
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -167,8 +166,11 @@ class ReservationsDetailsOperations:
         self, reservation_order_id: str, filter: str, **kwargs: Any
     ) -> Iterable["_models.ReservationDetail"]:
         """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
-        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
+        12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases,
         API call should be made with smaller date ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
@@ -183,9 +185,7 @@ class ReservationsDetailsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.ReservationDetailsListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -211,18 +211,7 @@ class ReservationsDetailsOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -261,8 +250,11 @@ class ReservationsDetailsOperations:
         self, reservation_order_id: str, reservation_id: str, filter: str, **kwargs: Any
     ) -> Iterable["_models.ReservationDetail"]:
         """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
-        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
+        12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases,
         API call should be made with smaller date ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
@@ -279,9 +271,7 @@ class ReservationsDetailsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.ReservationDetailsListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -308,18 +298,7 @@ class ReservationsDetailsOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -365,8 +344,11 @@ class ReservationsDetailsOperations:
         **kwargs: Any
     ) -> Iterable["_models.ReservationDetail"]:
         """Lists the reservations details for the defined scope and provided date range. Note: ARM has a
-        payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM
+        payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM
         limit. In such cases, API call should be made with smaller date ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param resource_scope: The scope associated with reservations details operations. This includes
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope
@@ -398,9 +380,7 @@ class ReservationsDetailsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.ReservationDetailsListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -430,18 +410,7 @@ class ReservationsDetailsOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"

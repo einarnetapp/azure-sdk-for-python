@@ -25,7 +25,9 @@ from .operations import (
     LotsOperations,
     MarketplacesOperations,
     Operations,
+    OperationsResultOperations,
     PriceSheetOperations,
+    PriceSheetsOperations,
     ReservationRecommendationDetailsOperations,
     ReservationRecommendationsOperations,
     ReservationTransactionsOperations,
@@ -82,15 +84,16 @@ class ConsumptionManagementClient:  # pylint: disable=client-accepts-api-version
     :vartype lots: azure.mgmt.consumption.operations.LotsOperations
     :ivar credits: CreditsOperations operations
     :vartype credits: azure.mgmt.consumption.operations.CreditsOperations
+    :ivar price_sheets: PriceSheetsOperations operations
+    :vartype price_sheets: azure.mgmt.consumption.operations.PriceSheetsOperations
+    :ivar operations_result: OperationsResultOperations operations
+    :vartype operations_result: azure.mgmt.consumption.operations.OperationsResultOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: Azure Subscription ID. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2021-10-01". Note that overriding this
-     default value may result in unsupported behavior.
-    :paramtype api_version: str
     """
 
     def __init__(
@@ -136,6 +139,10 @@ class ConsumptionManagementClient:  # pylint: disable=client-accepts-api-version
         self.events = EventsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.lots = LotsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.credits = CreditsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.price_sheets = PriceSheetsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations_result = OperationsResultOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
@@ -166,5 +173,5 @@ class ConsumptionManagementClient:  # pylint: disable=client-accepts-api-version
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details) -> None:
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)

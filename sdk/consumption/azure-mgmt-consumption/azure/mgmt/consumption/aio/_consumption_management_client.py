@@ -25,7 +25,9 @@ from .operations import (
     LotsOperations,
     MarketplacesOperations,
     Operations,
+    OperationsResultOperations,
     PriceSheetOperations,
+    PriceSheetsOperations,
     ReservationRecommendationDetailsOperations,
     ReservationRecommendationsOperations,
     ReservationTransactionsOperations,
@@ -83,15 +85,16 @@ class ConsumptionManagementClient:  # pylint: disable=client-accepts-api-version
     :vartype lots: azure.mgmt.consumption.aio.operations.LotsOperations
     :ivar credits: CreditsOperations operations
     :vartype credits: azure.mgmt.consumption.aio.operations.CreditsOperations
+    :ivar price_sheets: PriceSheetsOperations operations
+    :vartype price_sheets: azure.mgmt.consumption.aio.operations.PriceSheetsOperations
+    :ivar operations_result: OperationsResultOperations operations
+    :vartype operations_result: azure.mgmt.consumption.aio.operations.OperationsResultOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: Azure Subscription ID. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2021-10-01". Note that overriding this
-     default value may result in unsupported behavior.
-    :paramtype api_version: str
     """
 
     def __init__(
@@ -137,6 +140,10 @@ class ConsumptionManagementClient:  # pylint: disable=client-accepts-api-version
         self.events = EventsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.lots = LotsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.credits = CreditsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.price_sheets = PriceSheetsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations_result = OperationsResultOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> Awaitable[AsyncHttpResponse]:
         """Runs the network request through the client's chained policies.
@@ -167,5 +174,5 @@ class ConsumptionManagementClient:  # pylint: disable=client-accepts-api-version
         await self._client.__aenter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
+    async def __aexit__(self, *exc_details: Any) -> None:
         await self._client.__aexit__(*exc_details)

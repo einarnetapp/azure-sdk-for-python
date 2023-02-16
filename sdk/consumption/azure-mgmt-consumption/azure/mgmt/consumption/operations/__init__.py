@@ -23,6 +23,8 @@ from ._aggregated_cost_operations import AggregatedCostOperations
 from ._events_operations import EventsOperations
 from ._lots_operations import LotsOperations
 from ._credits_operations import CreditsOperations
+from ._price_sheets_operations import PriceSheetsOperations
+from ._operations_result_operations import OperationsResultOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
@@ -46,6 +48,8 @@ __all__ = [
     "EventsOperations",
     "LotsOperations",
     "CreditsOperations",
+    "PriceSheetsOperations",
+    "OperationsResultOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

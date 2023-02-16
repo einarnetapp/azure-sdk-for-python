@@ -8,7 +8,6 @@
 # --------------------------------------------------------------------------
 import sys
 from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar, Union
-import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -71,6 +70,9 @@ class ReservationsSummariesOperations:
     ) -> AsyncIterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param grain: Can be daily or monthly. Known values are: "daily" and "monthly". Required.
@@ -87,9 +89,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -116,18 +116,7 @@ class ReservationsSummariesOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -172,6 +161,9 @@ class ReservationsSummariesOperations:
     ) -> AsyncIterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param reservation_id: Id of the reservation. Required.
@@ -190,9 +182,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -220,18 +210,7 @@ class ReservationsSummariesOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
@@ -279,6 +258,9 @@ class ReservationsSummariesOperations:
     ) -> AsyncIterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for the defined scope daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param resource_scope: The scope associated with reservations summaries operations. This
          includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount
          scope (legacy), and
@@ -312,9 +294,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
+        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -345,18 +325,7 @@ class ReservationsSummariesOperations:
                 request.url = self._client.format_url(request.url)
 
             else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
                 request.method = "GET"
