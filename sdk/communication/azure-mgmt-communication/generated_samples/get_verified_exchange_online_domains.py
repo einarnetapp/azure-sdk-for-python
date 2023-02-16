@@ -33,6 +33,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-07-01-preview/examples/emailServices/getVerifiedExchangeOnlineDomains.json
+# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-10-01-preview/examples/emailServices/getVerifiedExchangeOnlineDomains.json
 if __name__ == "__main__":
     main()

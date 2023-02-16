@@ -30,11 +30,20 @@ from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
 from ._models_py3 import RegenerateKeyParameters
+from ._models_py3 import RemoveValidSenderUsernameParameters
 from ._models_py3 import Resource
+from ._models_py3 import SuppressionListAddRequest
+from ._models_py3 import SuppressionListAddressInfo
+from ._models_py3 import SuppressionListRecordDto
+from ._models_py3 import SuppressionListRemoveRequest
+from ._models_py3 import SuppressionListRequest
+from ._models_py3 import SuppressionListResponse
 from ._models_py3 import SystemData
 from ._models_py3 import TaggedResource
 from ._models_py3 import TrackedResource
 from ._models_py3 import UpdateDomainRequestParameters
+from ._models_py3 import ValidSenderUsername
+from ._models_py3 import ValidSenderUsernameCollection
 from ._models_py3 import VerificationParameter
 from ._models_py3 import VerificationStatusRecord
 
@@ -79,11 +88,20 @@ __all__ = [
     "OperationDisplay",
     "OperationListResult",
     "RegenerateKeyParameters",
+    "RemoveValidSenderUsernameParameters",
     "Resource",
+    "SuppressionListAddRequest",
+    "SuppressionListAddressInfo",
+    "SuppressionListRecordDto",
+    "SuppressionListRemoveRequest",
+    "SuppressionListRequest",
+    "SuppressionListResponse",
     "SystemData",
     "TaggedResource",
     "TrackedResource",
     "UpdateDomainRequestParameters",
+    "ValidSenderUsername",
+    "ValidSenderUsernameCollection",
     "VerificationParameter",
     "VerificationStatusRecord",
     "ActionType",

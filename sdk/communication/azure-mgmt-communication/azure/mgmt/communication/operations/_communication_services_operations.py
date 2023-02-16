@@ -47,8 +47,8 @@ def build_check_name_availability_request(subscription_id: str, **kwargs: Any) -
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -80,8 +80,8 @@ def build_link_notification_hub_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -123,8 +123,8 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -151,8 +151,8 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -185,8 +185,8 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -230,8 +230,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -272,8 +272,8 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -317,8 +317,8 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -359,8 +359,8 @@ def build_list_keys_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -401,8 +401,8 @@ def build_regenerate_key_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-07-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-07-01-preview")
+    api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-10-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -509,8 +509,8 @@ class CommunicationServicesOperations:
 
         Checks that the CommunicationService name is valid and is not already in use.
 
-        :param name_availability_parameters: Parameters supplied to the operation. Is either a model
-         type or a IO type. Required.
+        :param name_availability_parameters: Parameters supplied to the operation. Is either a
+         NameAvailabilityParameters type or a IO type. Required.
         :type name_availability_parameters: ~azure.mgmt.communication.models.NameAvailabilityParameters
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -532,7 +532,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -662,7 +662,7 @@ class CommunicationServicesOperations:
         :param communication_service_name: The name of the CommunicationService resource. Required.
         :type communication_service_name: str
         :param link_notification_hub_parameters: Parameters supplied to the operation. Is either a
-         model type or a IO type. Default value is None.
+         LinkNotificationHubParameters type or a IO type. Default value is None.
         :type link_notification_hub_parameters:
          ~azure.mgmt.communication.models.LinkNotificationHubParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -684,7 +684,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -754,7 +754,7 @@ class CommunicationServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.CommunicationServiceResourceList] = kwargs.pop("cls", None)
@@ -847,7 +847,7 @@ class CommunicationServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.CommunicationServiceResourceList] = kwargs.pop("cls", None)
@@ -938,7 +938,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1093,8 +1093,8 @@ class CommunicationServicesOperations:
         :type resource_group_name: str
         :param communication_service_name: The name of the CommunicationService resource. Required.
         :type communication_service_name: str
-        :param parameters: Parameters for the update operation. Is either a model type or a IO type.
-         Required.
+        :param parameters: Parameters for the update operation. Is either a
+         CommunicationServiceResourceUpdate type or a IO type. Required.
         :type parameters: ~azure.mgmt.communication.models.CommunicationServiceResourceUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1116,7 +1116,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1194,7 +1194,7 @@ class CommunicationServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.CommunicationServiceResource] = kwargs.pop("cls", None)
@@ -1251,7 +1251,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1406,8 +1406,8 @@ class CommunicationServicesOperations:
         :type resource_group_name: str
         :param communication_service_name: The name of the CommunicationService resource. Required.
         :type communication_service_name: str
-        :param parameters: Parameters for the create or update operation. Is either a model type or a
-         IO type. Required.
+        :param parameters: Parameters for the create or update operation. Is either a
+         CommunicationServiceResource type or a IO type. Required.
         :type parameters: ~azure.mgmt.communication.models.CommunicationServiceResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1429,7 +1429,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1492,7 +1492,7 @@ class CommunicationServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1557,7 +1557,7 @@ class CommunicationServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1630,7 +1630,7 @@ class CommunicationServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.CommunicationServiceKeys] = kwargs.pop("cls", None)
@@ -1687,7 +1687,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1836,8 +1836,8 @@ class CommunicationServicesOperations:
         :type resource_group_name: str
         :param communication_service_name: The name of the CommunicationService resource. Required.
         :type communication_service_name: str
-        :param parameters: Parameter that describes the Regenerate Key Operation. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameter that describes the Regenerate Key Operation. Is either a
+         RegenerateKeyParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.communication.models.RegenerateKeyParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1859,7 +1859,7 @@ class CommunicationServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

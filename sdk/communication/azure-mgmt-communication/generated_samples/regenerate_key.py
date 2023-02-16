@@ -37,6 +37,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-07-01-preview/examples/communicationServices/regenerateKey.json
+# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-10-01-preview/examples/communicationServices/regenerateKey.json
 if __name__ == "__main__":
     main()

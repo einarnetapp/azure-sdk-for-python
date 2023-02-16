@@ -36,6 +36,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-07-01-preview/examples/communicationServices/delete.json
+# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-10-01-preview/examples/communicationServices/delete.json
 if __name__ == "__main__":
     main()

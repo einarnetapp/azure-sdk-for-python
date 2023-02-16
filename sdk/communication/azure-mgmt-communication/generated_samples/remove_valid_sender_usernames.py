@@ -14,7 +14,7 @@ from azure.mgmt.communication import CommunicationServiceManagementClient
     pip install azure-identity
     pip install azure-mgmt-communication
 # USAGE
-    python list_keys.py
+    python remove_valid_sender_usernames.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,13 +29,15 @@ def main():
         subscription_id="12345",
     )
 
-    response = client.communication_services.list_keys(
+    response = client.domains.remove_valid_sender_usernames(
         resource_group_name="MyResourceGroup",
-        communication_service_name="MyCommunicationResource",
+        email_service_name="MyEmailServiceResource",
+        domain_name="mydomain.com",
+        remove_valid_sender_username_parameters={"validSenderUsernameList": ["username1", "username2", "username3"]},
     )
     print(response)
 
 
-# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-10-01-preview/examples/communicationServices/listKeys.json
+# x-ms-original-file: specification/communication/resource-manager/Microsoft.Communication/preview/2022-10-01-preview/examples/domains/removeValidSenderUsernames.json
 if __name__ == "__main__":
     main()

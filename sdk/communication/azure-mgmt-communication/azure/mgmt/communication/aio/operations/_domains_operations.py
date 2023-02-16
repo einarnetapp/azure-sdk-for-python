@@ -32,12 +32,18 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._domains_operations import (
+    build_add_suppressed_email_addresses_request,
+    build_add_valid_sender_usernames_request,
     build_cancel_verification_request,
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
     build_initiate_verification_request,
     build_list_by_email_service_resource_request,
+    build_list_suppressed_email_addresses_request,
+    build_list_valid_sender_usernames_request,
+    build_remove_suppressed_email_addresses_request,
+    build_remove_valid_sender_usernames_request,
     build_update_request,
 )
 
@@ -99,7 +105,7 @@ class DomainsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DomainResource] = kwargs.pop("cls", None)
@@ -158,7 +164,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -324,8 +330,8 @@ class DomainsOperations:
         :type email_service_name: str
         :param domain_name: The name of the Domains resource. Required.
         :type domain_name: str
-        :param parameters: Parameters for the create or update operation. Is either a model type or a
-         IO type. Required.
+        :param parameters: Parameters for the create or update operation. Is either a DomainResource
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.communication.models.DomainResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -346,7 +352,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -411,7 +417,7 @@ class DomainsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -481,7 +487,7 @@ class DomainsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -545,7 +551,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -708,8 +714,8 @@ class DomainsOperations:
         :type email_service_name: str
         :param domain_name: The name of the Domains resource. Required.
         :type domain_name: str
-        :param parameters: Parameters for the update operation. Is either a model type or a IO type.
-         Required.
+        :param parameters: Parameters for the update operation. Is either a
+         UpdateDomainRequestParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.communication.models.UpdateDomainRequestParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -730,7 +736,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -803,7 +809,7 @@ class DomainsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DomainResourceList] = kwargs.pop("cls", None)
@@ -896,7 +902,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1047,8 +1053,8 @@ class DomainsOperations:
         :type email_service_name: str
         :param domain_name: The name of the Domains resource. Required.
         :type domain_name: str
-        :param parameters: Type of verification to be initiated. Is either a model type or a IO type.
-         Required.
+        :param parameters: Type of verification to be initiated. Is either a VerificationParameter type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.communication.models.VerificationParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1068,7 +1074,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1135,7 +1141,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1286,8 +1292,8 @@ class DomainsOperations:
         :type email_service_name: str
         :param domain_name: The name of the Domains resource. Required.
         :type domain_name: str
-        :param parameters: Type of verification to be canceled. Is either a model type or a IO type.
-         Required.
+        :param parameters: Type of verification to be canceled. Is either a VerificationParameter type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.communication.models.VerificationParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1307,7 +1313,7 @@ class DomainsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-07-01-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1353,4 +1359,941 @@ class DomainsOperations:
 
     begin_cancel_verification.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/cancelVerification"
+    }
+
+    @distributed_trace_async
+    async def list_valid_sender_usernames(
+        self, resource_group_name: str, email_service_name: str, domain_name: str, **kwargs: Any
+    ) -> _models.ValidSenderUsernameCollection:
+        """List Valid Sender User Names.
+
+        Get a list of valid sender user names.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ValidSenderUsernameCollection or the result of cls(response)
+        :rtype: ~azure.mgmt.communication.models.ValidSenderUsernameCollection
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.ValidSenderUsernameCollection] = kwargs.pop("cls", None)
+
+        request = build_list_valid_sender_usernames_request(
+            resource_group_name=resource_group_name,
+            email_service_name=email_service_name,
+            domain_name=domain_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.list_valid_sender_usernames.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ValidSenderUsernameCollection", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    list_valid_sender_usernames.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/listValidSenderUsernames"
+    }
+
+    @overload
+    async def add_valid_sender_usernames(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        valid_sender_collection: _models.ValidSenderUsernameCollection,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Add Valid Sender User Names.
+
+        Add to the list of valid sender user names.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param valid_sender_collection: Collection of valid sender user names. Required.
+        :type valid_sender_collection: ~azure.mgmt.communication.models.ValidSenderUsernameCollection
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def add_valid_sender_usernames(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        valid_sender_collection: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Add Valid Sender User Names.
+
+        Add to the list of valid sender user names.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param valid_sender_collection: Collection of valid sender user names. Required.
+        :type valid_sender_collection: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def add_valid_sender_usernames(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        valid_sender_collection: Union[_models.ValidSenderUsernameCollection, IO],
+        **kwargs: Any
+    ) -> None:
+        """Add Valid Sender User Names.
+
+        Add to the list of valid sender user names.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param valid_sender_collection: Collection of valid sender user names. Is either a
+         ValidSenderUsernameCollection type or a IO type. Required.
+        :type valid_sender_collection: ~azure.mgmt.communication.models.ValidSenderUsernameCollection
+         or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(valid_sender_collection, (IO, bytes)):
+            _content = valid_sender_collection
+        else:
+            _json = self._serialize.body(valid_sender_collection, "ValidSenderUsernameCollection")
+
+        request = build_add_valid_sender_usernames_request(
+            resource_group_name=resource_group_name,
+            email_service_name=email_service_name,
+            domain_name=domain_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.add_valid_sender_usernames.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    add_valid_sender_usernames.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/addValidSenderUsernames"
+    }
+
+    @overload
+    async def remove_valid_sender_usernames(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        remove_valid_sender_username_parameters: _models.RemoveValidSenderUsernameParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Remove Valid Sender User Names.
+
+        Remove from the list of valid sender user names.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param remove_valid_sender_username_parameters: Input parameters to remove valid sender user
+         name. Required.
+        :type remove_valid_sender_username_parameters:
+         ~azure.mgmt.communication.models.RemoveValidSenderUsernameParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def remove_valid_sender_usernames(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        remove_valid_sender_username_parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Remove Valid Sender User Names.
+
+        Remove from the list of valid sender user names.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param remove_valid_sender_username_parameters: Input parameters to remove valid sender user
+         name. Required.
+        :type remove_valid_sender_username_parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def remove_valid_sender_usernames(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        remove_valid_sender_username_parameters: Union[_models.RemoveValidSenderUsernameParameters, IO],
+        **kwargs: Any
+    ) -> None:
+        """Remove Valid Sender User Names.
+
+        Remove from the list of valid sender user names.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param remove_valid_sender_username_parameters: Input parameters to remove valid sender user
+         name. Is either a RemoveValidSenderUsernameParameters type or a IO type. Required.
+        :type remove_valid_sender_username_parameters:
+         ~azure.mgmt.communication.models.RemoveValidSenderUsernameParameters or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(remove_valid_sender_username_parameters, (IO, bytes)):
+            _content = remove_valid_sender_username_parameters
+        else:
+            _json = self._serialize.body(remove_valid_sender_username_parameters, "RemoveValidSenderUsernameParameters")
+
+        request = build_remove_valid_sender_usernames_request(
+            resource_group_name=resource_group_name,
+            email_service_name=email_service_name,
+            domain_name=domain_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.remove_valid_sender_usernames.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    remove_valid_sender_usernames.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/removeValidSenderUsernames"
+    }
+
+    @overload
+    def list_suppressed_email_addresses(
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        top: Optional[int] = None,
+        skip_token: Optional[str] = None,
+        parameters: Optional[_models.SuppressionListRequest] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncIterable["_models.SuppressionListRecordDto"]:
+        """List Suppressed Email Addresses.
+
+        Get a list of suppressed email addresses.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param top: The maximum number of records to include in a single response. This value is
+         honored if the specified value is smaller than server's default page size. Default value is
+         None.
+        :type top: int
+        :param skip_token: SkipToken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skipToken parameter that specifies a starting point for subsequent calls. Default value is
+         None.
+        :type skip_token: str
+        :param parameters: Optional parameter to fetch suppression list associated with a valid sender
+         user name. When this parameter is not present, by default the domain level suppression list
+         will be returned. Default value is None.
+        :type parameters: ~azure.mgmt.communication.models.SuppressionListRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either SuppressionListRecordDto or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.communication.models.SuppressionListRecordDto]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_suppressed_email_addresses(
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        top: Optional[int] = None,
+        skip_token: Optional[str] = None,
+        parameters: Optional[IO] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncIterable["_models.SuppressionListRecordDto"]:
+        """List Suppressed Email Addresses.
+
+        Get a list of suppressed email addresses.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param top: The maximum number of records to include in a single response. This value is
+         honored if the specified value is smaller than server's default page size. Default value is
+         None.
+        :type top: int
+        :param skip_token: SkipToken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skipToken parameter that specifies a starting point for subsequent calls. Default value is
+         None.
+        :type skip_token: str
+        :param parameters: Optional parameter to fetch suppression list associated with a valid sender
+         user name. When this parameter is not present, by default the domain level suppression list
+         will be returned. Default value is None.
+        :type parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either SuppressionListRecordDto or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.communication.models.SuppressionListRecordDto]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def list_suppressed_email_addresses(
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        top: Optional[int] = None,
+        skip_token: Optional[str] = None,
+        parameters: Optional[Union[_models.SuppressionListRequest, IO]] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.SuppressionListRecordDto"]:
+        """List Suppressed Email Addresses.
+
+        Get a list of suppressed email addresses.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param top: The maximum number of records to include in a single response. This value is
+         honored if the specified value is smaller than server's default page size. Default value is
+         None.
+        :type top: int
+        :param skip_token: SkipToken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skipToken parameter that specifies a starting point for subsequent calls. Default value is
+         None.
+        :type skip_token: str
+        :param parameters: Optional parameter to fetch suppression list associated with a valid sender
+         user name. When this parameter is not present, by default the domain level suppression list
+         will be returned. Is either a SuppressionListRequest type or a IO type. Default value is None.
+        :type parameters: ~azure.mgmt.communication.models.SuppressionListRequest or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either SuppressionListRecordDto or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.communication.models.SuppressionListRecordDto]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.SuppressionListResponse] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
+        else:
+            if parameters is not None:
+                _json = self._serialize.body(parameters, "SuppressionListRequest")
+            else:
+                _json = None
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_suppressed_email_addresses_request(
+                    resource_group_name=resource_group_name,
+                    email_service_name=email_service_name,
+                    domain_name=domain_name,
+                    subscription_id=self._config.subscription_id,
+                    top=top,
+                    skip_token=skip_token,
+                    api_version=api_version,
+                    content_type=content_type,
+                    json=_json,
+                    content=_content,
+                    template_url=self.list_suppressed_email_addresses.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("SuppressionListResponse", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_suppressed_email_addresses.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/listSuppressedEmailAddresses"
+    }
+
+    @overload
+    async def add_suppressed_email_addresses(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        parameters: _models.SuppressionListAddRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Add Suppressed Email Addresses.
+
+        Add email addresses to the suppression list.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param parameters: Input parameters for adding email addresses to a suppression list. Required.
+        :type parameters: ~azure.mgmt.communication.models.SuppressionListAddRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def add_suppressed_email_addresses(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Add Suppressed Email Addresses.
+
+        Add email addresses to the suppression list.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param parameters: Input parameters for adding email addresses to a suppression list. Required.
+        :type parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def add_suppressed_email_addresses(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        parameters: Union[_models.SuppressionListAddRequest, IO],
+        **kwargs: Any
+    ) -> None:
+        """Add Suppressed Email Addresses.
+
+        Add email addresses to the suppression list.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param parameters: Input parameters for adding email addresses to a suppression list. Is either
+         a SuppressionListAddRequest type or a IO type. Required.
+        :type parameters: ~azure.mgmt.communication.models.SuppressionListAddRequest or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
+        else:
+            _json = self._serialize.body(parameters, "SuppressionListAddRequest")
+
+        request = build_add_suppressed_email_addresses_request(
+            resource_group_name=resource_group_name,
+            email_service_name=email_service_name,
+            domain_name=domain_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.add_suppressed_email_addresses.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    add_suppressed_email_addresses.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/addSuppressedEmailAddresses"
+    }
+
+    @overload
+    async def remove_suppressed_email_addresses(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        parameters: _models.SuppressionListRemoveRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Remove Suppressed Email Addresses.
+
+        Remove email addresses from the suppression list.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param parameters: Input parameters for removing email addresses from a suppression list.
+         Required.
+        :type parameters: ~azure.mgmt.communication.models.SuppressionListRemoveRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def remove_suppressed_email_addresses(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Remove Suppressed Email Addresses.
+
+        Remove email addresses from the suppression list.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param parameters: Input parameters for removing email addresses from a suppression list.
+         Required.
+        :type parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def remove_suppressed_email_addresses(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        email_service_name: str,
+        domain_name: str,
+        parameters: Union[_models.SuppressionListRemoveRequest, IO],
+        **kwargs: Any
+    ) -> None:
+        """Remove Suppressed Email Addresses.
+
+        Remove email addresses from the suppression list.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param email_service_name: The name of the EmailService resource. Required.
+        :type email_service_name: str
+        :param domain_name: The name of the Domains resource. Required.
+        :type domain_name: str
+        :param parameters: Input parameters for removing email addresses from a suppression list. Is
+         either a SuppressionListRemoveRequest type or a IO type. Required.
+        :type parameters: ~azure.mgmt.communication.models.SuppressionListRemoveRequest or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
+        else:
+            _json = self._serialize.body(parameters, "SuppressionListRemoveRequest")
+
+        request = build_remove_suppressed_email_addresses_request(
+            resource_group_name=resource_group_name,
+            email_service_name=email_service_name,
+            domain_name=domain_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.remove_suppressed_email_addresses.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    remove_suppressed_email_addresses.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/emailServices/{emailServiceName}/domains/{domainName}/removeSuppressedEmailAddresses"
     }

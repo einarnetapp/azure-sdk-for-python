@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
@@ -31,7 +31,7 @@ class CheckNameAvailabilityRequest(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, name: Optional[str] = None, type: Optional[str] = None, **kwargs):
+    def __init__(self, *, name: Optional[str] = None, type: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword name: The name of the resource for which availability needs to be checked.
         :paramtype name: str
@@ -67,8 +67,8 @@ class CheckNameAvailabilityResponse(_serialization.Model):
         name_available: Optional[bool] = None,
         reason: Optional[Union[str, "_models.CheckNameAvailabilityReason"]] = None,
         message: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name_available: Indicates if the resource name is available.
         :paramtype name_available: bool
@@ -113,8 +113,8 @@ class CommunicationServiceKeys(_serialization.Model):
         secondary_key: Optional[str] = None,
         primary_connection_string: Optional[str] = None,
         secondary_connection_string: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword primary_key: The primary access key.
         :paramtype primary_key: str
@@ -166,7 +166,7 @@ class Resource(_serialization.Model):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -176,7 +176,8 @@ class Resource(_serialization.Model):
 
 
 class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+    """The resource model definition for an Azure Resource Manager tracked top level resource which
+    has 'tags' and a 'location'.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -216,7 +217,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -305,8 +306,8 @@ class CommunicationServiceResource(TrackedResource):  # pylint: disable=too-many
         tags: Optional[Dict[str, str]] = None,
         data_location: Optional[str] = None,
         linked_domains: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -347,8 +348,8 @@ class CommunicationServiceResourceList(_serialization.Model):
         *,
         value: Optional[List["_models.CommunicationServiceResource"]] = None,
         next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of CommunicationService.
         :paramtype value: list[~azure.mgmt.communication.models.CommunicationServiceResource]
@@ -373,7 +374,7 @@ class TaggedResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Tags of the service which is a list of key value pairs that describe the
          resource.
@@ -397,7 +398,9 @@ class CommunicationServiceResourceUpdate(TaggedResource):
         "linked_domains": {"key": "properties.linkedDomains", "type": "[str]"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, linked_domains: Optional[List[str]] = None, **kwargs):
+    def __init__(
+        self, *, tags: Optional[Dict[str, str]] = None, linked_domains: Optional[List[str]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Tags of the service which is a list of key value pairs that describe the
          resource.
@@ -439,7 +442,7 @@ class DnsRecord(_serialization.Model):
         "ttl": {"key": "ttl", "type": "int"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -479,8 +482,8 @@ class DomainPropertiesVerificationRecords(_serialization.Model):
         dkim: Optional["_models.DnsRecord"] = None,
         dkim2: Optional["_models.DnsRecord"] = None,
         dmarc: Optional["_models.DnsRecord"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword domain: A class that represents a VerificationStatus record.
         :paramtype domain: ~azure.mgmt.communication.models.DnsRecord
@@ -532,8 +535,8 @@ class DomainPropertiesVerificationStates(_serialization.Model):
         dkim: Optional["_models.VerificationStatusRecord"] = None,
         dkim2: Optional["_models.VerificationStatusRecord"] = None,
         dmarc: Optional["_models.VerificationStatusRecord"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword domain: A class that represents a VerificationStatus record.
         :paramtype domain: ~azure.mgmt.communication.models.VerificationStatusRecord
@@ -596,9 +599,6 @@ class DomainResource(TrackedResource):  # pylint: disable=too-many-instance-attr
     :ivar verification_records: List of DnsRecord.
     :vartype verification_records:
      ~azure.mgmt.communication.models.DomainPropertiesVerificationRecords
-    :ivar valid_sender_usernames: Collection of valid sender usernames. This is a key-value pair
-     where key=username and value=display name.
-    :vartype valid_sender_usernames: dict[str, str]
     :ivar user_engagement_tracking: Describes whether user engagement tracking is enabled or
      disabled. Known values are: "Disabled" and "Enabled".
     :vartype user_engagement_tracking: str or
@@ -636,7 +636,6 @@ class DomainResource(TrackedResource):  # pylint: disable=too-many-instance-attr
             "key": "properties.verificationRecords",
             "type": "DomainPropertiesVerificationRecords",
         },
-        "valid_sender_usernames": {"key": "properties.validSenderUsernames", "type": "{str}"},
         "user_engagement_tracking": {"key": "properties.userEngagementTracking", "type": "str"},
     }
 
@@ -646,10 +645,9 @@ class DomainResource(TrackedResource):  # pylint: disable=too-many-instance-attr
         location: str,
         tags: Optional[Dict[str, str]] = None,
         domain_management: Optional[Union[str, "_models.DomainManagement"]] = None,
-        valid_sender_usernames: Optional[Dict[str, str]] = None,
         user_engagement_tracking: Optional[Union[str, "_models.UserEngagementTracking"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -658,9 +656,6 @@ class DomainResource(TrackedResource):  # pylint: disable=too-many-instance-attr
         :keyword domain_management: Describes how a Domains resource is being managed. Known values
          are: "AzureManaged", "CustomerManaged", and "CustomerManagedInExchangeOnline".
         :paramtype domain_management: str or ~azure.mgmt.communication.models.DomainManagement
-        :keyword valid_sender_usernames: Collection of valid sender usernames. This is a key-value pair
-         where key=username and value=display name.
-        :paramtype valid_sender_usernames: dict[str, str]
         :keyword user_engagement_tracking: Describes whether user engagement tracking is enabled or
          disabled. Known values are: "Disabled" and "Enabled".
         :paramtype user_engagement_tracking: str or
@@ -674,7 +669,6 @@ class DomainResource(TrackedResource):  # pylint: disable=too-many-instance-attr
         self.domain_management = domain_management
         self.verification_states = None
         self.verification_records = None
-        self.valid_sender_usernames = valid_sender_usernames
         self.user_engagement_tracking = user_engagement_tracking
 
 
@@ -694,8 +688,8 @@ class DomainResourceList(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.DomainResource"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.DomainResource"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of Domains resource.
         :paramtype value: list[~azure.mgmt.communication.models.DomainResource]
@@ -760,8 +754,13 @@ class EmailServiceResource(TrackedResource):
     }
 
     def __init__(
-        self, *, location: str, tags: Optional[Dict[str, str]] = None, data_location: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        location: str,
+        tags: Optional[Dict[str, str]] = None,
+        data_location: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -791,8 +790,12 @@ class EmailServiceResourceList(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.EmailServiceResource"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.EmailServiceResource"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of EmailService.
         :paramtype value: list[~azure.mgmt.communication.models.EmailServiceResource]
@@ -817,7 +820,7 @@ class EmailServiceResourceUpdate(TaggedResource):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Tags of the service which is a list of key value pairs that describe the
          resource.
@@ -847,7 +850,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -887,7 +890,7 @@ class ErrorDetail(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -898,7 +901,8 @@ class ErrorDetail(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.communication.models.ErrorDetail
@@ -908,7 +912,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.communication.models.ErrorDetail
@@ -928,7 +932,7 @@ class LinkedNotificationHub(_serialization.Model):
         "resource_id": {"key": "resourceId", "type": "str"},
     }
 
-    def __init__(self, *, resource_id: Optional[str] = None, **kwargs):
+    def __init__(self, *, resource_id: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword resource_id: The resource ID of the notification hub.
         :paramtype resource_id: str
@@ -958,7 +962,7 @@ class LinkNotificationHubParameters(_serialization.Model):
         "connection_string": {"key": "connectionString", "type": "str"},
     }
 
-    def __init__(self, *, resource_id: str, connection_string: str, **kwargs):
+    def __init__(self, *, resource_id: str, connection_string: str, **kwargs: Any) -> None:
         """
         :keyword resource_id: The resource ID of the notification hub. Required.
         :paramtype resource_id: str
@@ -984,7 +988,7 @@ class NameAvailabilityParameters(CheckNameAvailabilityRequest):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, name: Optional[str] = None, type: Optional[str] = None, **kwargs):
+    def __init__(self, *, name: Optional[str] = None, type: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword name: The name of the resource for which availability needs to be checked.
         :paramtype name: str
@@ -1031,7 +1035,7 @@ class Operation(_serialization.Model):
         "action_type": {"key": "actionType", "type": "str"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: Localized display information for this particular operation.
         :paramtype display: ~azure.mgmt.communication.models.OperationDisplay
@@ -1077,7 +1081,7 @@ class OperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -1087,7 +1091,8 @@ class OperationDisplay(_serialization.Model):
 
 
 class OperationListResult(_serialization.Model):
-    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link
+    to get the next set of results.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -1107,7 +1112,7 @@ class OperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1126,7 +1131,7 @@ class RegenerateKeyParameters(_serialization.Model):
         "key_type": {"key": "keyType", "type": "str"},
     }
 
-    def __init__(self, *, key_type: Optional[Union[str, "_models.KeyType"]] = None, **kwargs):
+    def __init__(self, *, key_type: Optional[Union[str, "_models.KeyType"]] = None, **kwargs: Any) -> None:
         """
         :keyword key_type: The keyType to regenerate. Must be either 'primary' or
          'secondary'(case-insensitive). Known values are: "Primary" and "Secondary".
@@ -1134,6 +1139,294 @@ class RegenerateKeyParameters(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.key_type = key_type
+
+
+class RemoveValidSenderUsernameParameters(_serialization.Model):
+    """Input parameters for remove valid sender user name.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar valid_sender_username_list: List of valid sender user names. Required.
+    :vartype valid_sender_username_list: list[str]
+    """
+
+    _validation = {
+        "valid_sender_username_list": {"required": True, "min_items": 1},
+    }
+
+    _attribute_map = {
+        "valid_sender_username_list": {"key": "validSenderUsernameList", "type": "[str]"},
+    }
+
+    def __init__(self, *, valid_sender_username_list: List[str], **kwargs: Any) -> None:
+        """
+        :keyword valid_sender_username_list: List of valid sender user names. Required.
+        :paramtype valid_sender_username_list: list[str]
+        """
+        super().__init__(**kwargs)
+        self.valid_sender_username_list = valid_sender_username_list
+
+
+class SuppressionListAddRequest(_serialization.Model):
+    """Object that describes what address will be added to the suppression list.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar valid_sender_username: Optional parameter to operate on suppression list associated with
+     a valid sender user name. When this parameter is not present, by default the domain level
+     suppression list will be operated on.
+    :vartype valid_sender_username: str
+    :ivar address_info_list: List of objects for each address to add to the suppression list.
+     Required.
+    :vartype address_info_list: list[~azure.mgmt.communication.models.SuppressionListAddressInfo]
+    """
+
+    _validation = {
+        "address_info_list": {"required": True, "min_items": 1},
+    }
+
+    _attribute_map = {
+        "valid_sender_username": {"key": "validSenderUsername", "type": "str"},
+        "address_info_list": {"key": "addressInfoList", "type": "[SuppressionListAddressInfo]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        address_info_list: List["_models.SuppressionListAddressInfo"],
+        valid_sender_username: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword valid_sender_username: Optional parameter to operate on suppression list associated
+         with a valid sender user name. When this parameter is not present, by default the domain level
+         suppression list will be operated on.
+        :paramtype valid_sender_username: str
+        :keyword address_info_list: List of objects for each address to add to the suppression list.
+         Required.
+        :paramtype address_info_list: list[~azure.mgmt.communication.models.SuppressionListAddressInfo]
+        """
+        super().__init__(**kwargs)
+        self.valid_sender_username = valid_sender_username
+        self.address_info_list = address_info_list
+
+
+class SuppressionListAddressInfo(_serialization.Model):
+    """Object that describes new email recipient being added to a suppression list.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar email: Email address of the recipient. Required.
+    :vartype email: str
+    :ivar first_name: The first name of the email recipient.
+    :vartype first_name: str
+    :ivar last_name: The last name of the email recipient.
+    :vartype last_name: str
+    :ivar notes: An optional property to provide contextual notes or a description for an address.
+    :vartype notes: str
+    """
+
+    _validation = {
+        "email": {"required": True},
+    }
+
+    _attribute_map = {
+        "email": {"key": "email", "type": "str"},
+        "first_name": {"key": "firstName", "type": "str"},
+        "last_name": {"key": "lastName", "type": "str"},
+        "notes": {"key": "notes", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        email: str,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
+        notes: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword email: Email address of the recipient. Required.
+        :paramtype email: str
+        :keyword first_name: The first name of the email recipient.
+        :paramtype first_name: str
+        :keyword last_name: The last name of the email recipient.
+        :paramtype last_name: str
+        :keyword notes: An optional property to provide contextual notes or a description for an
+         address.
+        :paramtype notes: str
+        """
+        super().__init__(**kwargs)
+        self.email = email
+        self.first_name = first_name
+        self.last_name = last_name
+        self.notes = notes
+
+
+class SuppressionListRecordDto(_serialization.Model):
+    """A object that represents a SuppressionList record.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar email: Email address of the recipient. Required.
+    :vartype email: str
+    :ivar list_id: The list id which this address is unsubscribed from (maps to the mail from field
+     in the portal).
+    :vartype list_id: str
+    :ivar first_name: The first name of the email recipient.
+    :vartype first_name: str
+    :ivar last_name: The last name of the email recipient.
+    :vartype last_name: str
+    :ivar notes: An optional property to provide contextual notes or a description for an address.
+    :vartype notes: str
+    :ivar last_updated: The date the address was last updated in a suppression list.
+    :vartype last_updated: str
+    """
+
+    _validation = {
+        "email": {"required": True},
+        "list_id": {"readonly": True},
+        "last_updated": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "email": {"key": "email", "type": "str"},
+        "list_id": {"key": "listId", "type": "str"},
+        "first_name": {"key": "firstName", "type": "str"},
+        "last_name": {"key": "lastName", "type": "str"},
+        "notes": {"key": "notes", "type": "str"},
+        "last_updated": {"key": "lastUpdated", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        email: str,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
+        notes: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword email: Email address of the recipient. Required.
+        :paramtype email: str
+        :keyword first_name: The first name of the email recipient.
+        :paramtype first_name: str
+        :keyword last_name: The last name of the email recipient.
+        :paramtype last_name: str
+        :keyword notes: An optional property to provide contextual notes or a description for an
+         address.
+        :paramtype notes: str
+        """
+        super().__init__(**kwargs)
+        self.email = email
+        self.list_id = None
+        self.first_name = first_name
+        self.last_name = last_name
+        self.notes = notes
+        self.last_updated = None
+
+
+class SuppressionListRemoveRequest(_serialization.Model):
+    """Object that describes what address will be removed from the suppression list.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar valid_sender_username: Optional parameter to operate on suppression list associated with
+     a valid sender user name. When this parameter is not present, by default the domain level
+     suppression list will be operated on.
+    :vartype valid_sender_username: str
+    :ivar addresses: List of email addresses to remove. Required.
+    :vartype addresses: list[str]
+    """
+
+    _validation = {
+        "addresses": {"required": True, "min_items": 1},
+    }
+
+    _attribute_map = {
+        "valid_sender_username": {"key": "validSenderUsername", "type": "str"},
+        "addresses": {"key": "addresses", "type": "[str]"},
+    }
+
+    def __init__(self, *, addresses: List[str], valid_sender_username: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword valid_sender_username: Optional parameter to operate on suppression list associated
+         with a valid sender user name. When this parameter is not present, by default the domain level
+         suppression list will be operated on.
+        :paramtype valid_sender_username: str
+        :keyword addresses: List of email addresses to remove. Required.
+        :paramtype addresses: list[str]
+        """
+        super().__init__(**kwargs)
+        self.valid_sender_username = valid_sender_username
+        self.addresses = addresses
+
+
+class SuppressionListRequest(_serialization.Model):
+    """Object that describes the request parameter to list suppressed emails.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar valid_sender_username: Optional parameter to operate on suppression list associated with
+     a valid sender user name. When this parameter is not present, by default the domain level
+     suppression list will be operated on. Required.
+    :vartype valid_sender_username: str
+    """
+
+    _validation = {
+        "valid_sender_username": {"required": True},
+    }
+
+    _attribute_map = {
+        "valid_sender_username": {"key": "validSenderUsername", "type": "str"},
+    }
+
+    def __init__(self, *, valid_sender_username: str, **kwargs: Any) -> None:
+        """
+        :keyword valid_sender_username: Optional parameter to operate on suppression list associated
+         with a valid sender user name. When this parameter is not present, by default the domain level
+         suppression list will be operated on. Required.
+        :paramtype valid_sender_username: str
+        """
+        super().__init__(**kwargs)
+        self.valid_sender_username = valid_sender_username
+
+
+class SuppressionListResponse(_serialization.Model):
+    """Object that includes an array of suppressed email addresses and a possible link for next set.
+
+    :ivar value: List of suppressed email addresses.
+    :vartype value: list[~azure.mgmt.communication.models.SuppressionListRecordDto]
+    :ivar next_link: The URL the client should use to fetch the next page (per server side paging).
+    :vartype next_link: str
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[SuppressionListRecordDto]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.SuppressionListRecordDto"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword value: List of suppressed email addresses.
+        :paramtype value: list[~azure.mgmt.communication.models.SuppressionListRecordDto]
+        :keyword next_link: The URL the client should use to fetch the next page (per server side
+         paging).
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = next_link
 
 
 class SystemData(_serialization.Model):
@@ -1173,8 +1466,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -1205,9 +1498,6 @@ class UpdateDomainRequestParameters(TaggedResource):
 
     :ivar tags: Tags of the service which is a list of key value pairs that describe the resource.
     :vartype tags: dict[str, str]
-    :ivar valid_sender_usernames: Collection of valid sender usernames. This is a key-value pair
-     where key=username and value=display name.
-    :vartype valid_sender_usernames: dict[str, str]
     :ivar user_engagement_tracking: Describes whether user engagement tracking is enabled or
      disabled. Known values are: "Disabled" and "Enabled".
     :vartype user_engagement_tracking: str or
@@ -1216,7 +1506,6 @@ class UpdateDomainRequestParameters(TaggedResource):
 
     _attribute_map = {
         "tags": {"key": "tags", "type": "{str}"},
-        "valid_sender_usernames": {"key": "properties.validSenderUsernames", "type": "{str}"},
         "user_engagement_tracking": {"key": "properties.userEngagementTracking", "type": "str"},
     }
 
@@ -1224,25 +1513,79 @@ class UpdateDomainRequestParameters(TaggedResource):
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        valid_sender_usernames: Optional[Dict[str, str]] = None,
         user_engagement_tracking: Optional[Union[str, "_models.UserEngagementTracking"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Tags of the service which is a list of key value pairs that describe the
          resource.
         :paramtype tags: dict[str, str]
-        :keyword valid_sender_usernames: Collection of valid sender usernames. This is a key-value pair
-         where key=username and value=display name.
-        :paramtype valid_sender_usernames: dict[str, str]
         :keyword user_engagement_tracking: Describes whether user engagement tracking is enabled or
          disabled. Known values are: "Disabled" and "Enabled".
         :paramtype user_engagement_tracking: str or
          ~azure.mgmt.communication.models.UserEngagementTracking
         """
         super().__init__(tags=tags, **kwargs)
-        self.valid_sender_usernames = valid_sender_usernames
         self.user_engagement_tracking = user_engagement_tracking
+
+
+class ValidSenderUsername(_serialization.Model):
+    """Input parameters for add valid sender user name.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar name: Name of sender. Required.
+    :vartype name: str
+    :ivar display_name: The friendly display name of the sender. Required.
+    :vartype display_name: str
+    """
+
+    _validation = {
+        "name": {"required": True},
+        "display_name": {"required": True},
+    }
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+    }
+
+    def __init__(self, *, name: str, display_name: str, **kwargs: Any) -> None:
+        """
+        :keyword name: Name of sender. Required.
+        :paramtype name: str
+        :keyword display_name: The friendly display name of the sender. Required.
+        :paramtype display_name: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.display_name = display_name
+
+
+class ValidSenderUsernameCollection(_serialization.Model):
+    """List of valid sender user names.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: List of valid sender user names. Required.
+    :vartype value: list[~azure.mgmt.communication.models.ValidSenderUsername]
+    """
+
+    _validation = {
+        "value": {"required": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ValidSenderUsername]"},
+    }
+
+    def __init__(self, *, value: List["_models.ValidSenderUsername"], **kwargs: Any) -> None:
+        """
+        :keyword value: List of valid sender user names. Required.
+        :paramtype value: list[~azure.mgmt.communication.models.ValidSenderUsername]
+        """
+        super().__init__(**kwargs)
+        self.value = value
 
 
 class VerificationParameter(_serialization.Model):
@@ -1263,7 +1606,7 @@ class VerificationParameter(_serialization.Model):
         "verification_type": {"key": "verificationType", "type": "str"},
     }
 
-    def __init__(self, *, verification_type: Union[str, "_models.VerificationType"], **kwargs):
+    def __init__(self, *, verification_type: Union[str, "_models.VerificationType"], **kwargs: Any) -> None:
         """
         :keyword verification_type: Type of verification. Required. Known values are: "Domain", "SPF",
          "DKIM", "DKIM2", and "DMARC".
@@ -1297,7 +1640,7 @@ class VerificationStatusRecord(_serialization.Model):
         "error_code": {"key": "errorCode", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.status = None
