@@ -167,8 +167,8 @@ class TransformationsOperations:
         :param transformation_name: The name of the transformation. Required.
         :type transformation_name: str
         :param transformation: The definition of the transformation that will be used to create a new
-         transformation or replace the existing one under the streaming job. Is either a model type or a
-         IO type. Required.
+         transformation or replace the existing one under the streaming job. Is either a Transformation
+         type or a IO type. Required.
         :type transformation: ~azure.mgmt.streamanalytics.models.Transformation or IO
         :param if_match: The ETag of the transformation. Omit this value to always overwrite the
          current transformation. Specify the last-seen ETag value to prevent accidentally overwriting
@@ -197,11 +197,11 @@ class TransformationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-10-01-preview")
-        )  # type: Literal["2021-10-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Transformation]
+        api_version: Literal["2020-03-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.Transformation] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -227,9 +227,9 @@ class TransformationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -252,11 +252,13 @@ class TransformationsOperations:
             deserialized = self._deserialize("Transformation", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_replace.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/transformations/{transformationName}"}  # type: ignore
+    create_or_replace.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/transformations/{transformationName}"
+    }
 
     @overload
     async def update(
@@ -367,7 +369,7 @@ class TransformationsOperations:
          the corresponding properties in the existing transformation (ie. Those properties will be
          updated). Any properties that are set to null here will mean that the corresponding property in
          the existing transformation will remain the same and not change as a result of this PATCH
-         operation. Is either a model type or a IO type. Required.
+         operation. Is either a Transformation type or a IO type. Required.
         :type transformation: ~azure.mgmt.streamanalytics.models.Transformation or IO
         :param if_match: The ETag of the transformation. Omit this value to always overwrite the
          current transformation. Specify the last-seen ETag value to prevent accidentally overwriting
@@ -392,11 +394,11 @@ class TransformationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-10-01-preview")
-        )  # type: Literal["2021-10-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Transformation]
+        api_version: Literal["2020-03-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.Transformation] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -421,9 +423,9 @@ class TransformationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -444,7 +446,9 @@ class TransformationsOperations:
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/transformations/{transformationName}"}  # type: ignore
+    update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/transformations/{transformationName}"
+    }
 
     @distributed_trace_async
     async def get(
@@ -475,10 +479,10 @@ class TransformationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-10-01-preview")
-        )  # type: Literal["2021-10-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Transformation]
+        api_version: Literal["2020-03-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.Transformation] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -491,9 +495,9 @@ class TransformationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -514,4 +518,6 @@ class TransformationsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/transformations/{transformationName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/transformations/{transformationName}"
+    }
