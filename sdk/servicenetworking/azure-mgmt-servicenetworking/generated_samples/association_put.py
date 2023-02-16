@@ -35,7 +35,7 @@ def main():
         association_name="associatedvnet-1",
         resource={
             "location": "West US",
-            "properties": {"associationType": "subnets", "subnet": {"id": "subnetFullRef"}},
+            "properties": {"associationType": "Subnet", "subnet": {"id": "subnetFullRef"}},
         },
     ).result()
     print(response)

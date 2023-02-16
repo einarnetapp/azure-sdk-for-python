@@ -145,7 +145,7 @@ class Association(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
-    :ivar association_type: Association Type. Default value is "subnets".
+    :ivar association_type: Association Type. Default value is "Subnet".
     :vartype association_type: str
     :ivar subnet: Association Subnet.
     :vartype subnet: ~azure.mgmt.servicenetworking.models.AssociationSubnet
@@ -180,7 +180,7 @@ class Association(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        association_type: Optional[Literal["subnets"]] = None,
+        association_type: Optional[Literal["Subnet"]] = None,
         subnet: Optional["_models.AssociationSubnet"] = None,
         **kwargs: Any
     ) -> None:
@@ -189,7 +189,7 @@ class Association(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword association_type: Association Type. Default value is "subnets".
+        :keyword association_type: Association Type. Default value is "Subnet".
         :paramtype association_type: str
         :keyword subnet: Association Subnet.
         :paramtype subnet: ~azure.mgmt.servicenetworking.models.AssociationSubnet
@@ -293,7 +293,7 @@ class AssociationUpdate(_serialization.Model):
 class AssociationUpdateProperties(_serialization.Model):
     """The updatable properties of the Association.
 
-    :ivar association_type: Association Type. Default value is "subnets".
+    :ivar association_type: Association Type. Default value is "Subnet".
     :vartype association_type: str
     :ivar subnet: Association Subnet.
     :vartype subnet: ~azure.mgmt.servicenetworking.models.AssociationSubnet
@@ -307,12 +307,12 @@ class AssociationUpdateProperties(_serialization.Model):
     def __init__(
         self,
         *,
-        association_type: Optional[Literal["subnets"]] = None,
+        association_type: Optional[Literal["Subnet"]] = None,
         subnet: Optional["_models.AssociationSubnet"] = None,
         **kwargs: Any
     ) -> None:
         """
-        :keyword association_type: Association Type. Default value is "subnets".
+        :keyword association_type: Association Type. Default value is "Subnet".
         :paramtype association_type: str
         :keyword subnet: Association Subnet.
         :paramtype subnet: ~azure.mgmt.servicenetworking.models.AssociationSubnet
@@ -436,12 +436,10 @@ class Frontend(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
-    :ivar mode: Frontend Mode (Optional). Default value is "public".
+    :ivar mode: Frontend Mode (Optional). Default value is "Public".
     :vartype mode: str
-    :ivar ip_address_version: Frontend IP Address Version (Optional). Known values are: "IPv4" and
-     "IPv6".
-    :vartype ip_address_version: str or
-     ~azure.mgmt.servicenetworking.models.FrontendIPAddressVersion
+    :ivar ip_version: Frontend IP Address Version (Optional). Known values are: "IPv4" and "IPv6".
+    :vartype ip_version: str or ~azure.mgmt.servicenetworking.models.FrontendIPVersion
     :ivar public_ip_address: Frontend Public IP Address (Optional).
     :vartype public_ip_address: ~azure.mgmt.servicenetworking.models.FrontendPropertiesIPAddress
     :ivar provisioning_state: test doc. Known values are: "Succeeded", "Failed", "Canceled",
@@ -466,7 +464,7 @@ class Frontend(TrackedResource):
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
         "mode": {"key": "properties.mode", "type": "str"},
-        "ip_address_version": {"key": "properties.ipAddressVersion", "type": "str"},
+        "ip_version": {"key": "properties.ipVersion", "type": "str"},
         "public_ip_address": {"key": "properties.publicIPAddress", "type": "FrontendPropertiesIPAddress"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
@@ -476,8 +474,8 @@ class Frontend(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        mode: Optional[Literal["public"]] = None,
-        ip_address_version: Optional[Union[str, "_models.FrontendIPAddressVersion"]] = None,
+        mode: Optional[Literal["Public"]] = None,
+        ip_version: Optional[Union[str, "_models.FrontendIPVersion"]] = None,
         public_ip_address: Optional["_models.FrontendPropertiesIPAddress"] = None,
         **kwargs: Any
     ) -> None:
@@ -486,18 +484,17 @@ class Frontend(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword mode: Frontend Mode (Optional). Default value is "public".
+        :keyword mode: Frontend Mode (Optional). Default value is "Public".
         :paramtype mode: str
-        :keyword ip_address_version: Frontend IP Address Version (Optional). Known values are: "IPv4"
-         and "IPv6".
-        :paramtype ip_address_version: str or
-         ~azure.mgmt.servicenetworking.models.FrontendIPAddressVersion
+        :keyword ip_version: Frontend IP Address Version (Optional). Known values are: "IPv4" and
+         "IPv6".
+        :paramtype ip_version: str or ~azure.mgmt.servicenetworking.models.FrontendIPVersion
         :keyword public_ip_address: Frontend Public IP Address (Optional).
         :paramtype public_ip_address: ~azure.mgmt.servicenetworking.models.FrontendPropertiesIPAddress
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.mode = mode
-        self.ip_address_version = ip_address_version
+        self.ip_version = ip_version
         self.public_ip_address = public_ip_address
         self.provisioning_state = None
 
@@ -595,43 +592,39 @@ class FrontendUpdate(_serialization.Model):
 class FrontendUpdateProperties(_serialization.Model):
     """The updatable properties of the Frontend.
 
-    :ivar mode: Frontend Mode (Optional). Default value is "public".
+    :ivar mode: Frontend Mode (Optional). Default value is "Public".
     :vartype mode: str
-    :ivar ip_address_version: Frontend IP Address Type (Optional). Known values are: "IPv4" and
-     "IPv6".
-    :vartype ip_address_version: str or
-     ~azure.mgmt.servicenetworking.models.FrontendIPAddressVersion
+    :ivar ip_version: Frontend IP Address Type (Optional). Known values are: "IPv4" and "IPv6".
+    :vartype ip_version: str or ~azure.mgmt.servicenetworking.models.FrontendIPVersion
     :ivar public_ip_address: Frontend Public IP Address (Optional).
     :vartype public_ip_address: ~azure.mgmt.servicenetworking.models.FrontendPropertiesIPAddress
     """
 
     _attribute_map = {
         "mode": {"key": "mode", "type": "str"},
-        "ip_address_version": {"key": "ipAddressVersion", "type": "str"},
+        "ip_version": {"key": "ipVersion", "type": "str"},
         "public_ip_address": {"key": "publicIPAddress", "type": "FrontendPropertiesIPAddress"},
     }
 
     def __init__(
         self,
         *,
-        mode: Optional[Literal["public"]] = None,
-        ip_address_version: Optional[Union[str, "_models.FrontendIPAddressVersion"]] = None,
+        mode: Optional[Literal["Public"]] = None,
+        ip_version: Optional[Union[str, "_models.FrontendIPVersion"]] = None,
         public_ip_address: Optional["_models.FrontendPropertiesIPAddress"] = None,
         **kwargs: Any
     ) -> None:
         """
-        :keyword mode: Frontend Mode (Optional). Default value is "public".
+        :keyword mode: Frontend Mode (Optional). Default value is "Public".
         :paramtype mode: str
-        :keyword ip_address_version: Frontend IP Address Type (Optional). Known values are: "IPv4" and
-         "IPv6".
-        :paramtype ip_address_version: str or
-         ~azure.mgmt.servicenetworking.models.FrontendIPAddressVersion
+        :keyword ip_version: Frontend IP Address Type (Optional). Known values are: "IPv4" and "IPv6".
+        :paramtype ip_version: str or ~azure.mgmt.servicenetworking.models.FrontendIPVersion
         :keyword public_ip_address: Frontend Public IP Address (Optional).
         :paramtype public_ip_address: ~azure.mgmt.servicenetworking.models.FrontendPropertiesIPAddress
         """
         super().__init__(**kwargs)
         self.mode = mode
-        self.ip_address_version = ip_address_version
+        self.ip_version = ip_version
         self.public_ip_address = public_ip_address
 
 

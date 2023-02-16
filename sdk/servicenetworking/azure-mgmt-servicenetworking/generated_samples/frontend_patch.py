@@ -34,11 +34,7 @@ def main():
         traffic_controller_name="TC1",
         frontend_name="publicIp1",
         properties={
-            "properties": {
-                "ipAddressVersion": "IPv4",
-                "mode": "public",
-                "publicIPAddress": {"id": "resourceUriAsString"},
-            }
+            "properties": {"ipVersion": "IPv4", "mode": "Public", "publicIPAddress": {"id": "resourceUriAsString"}}
         },
     )
     print(response)

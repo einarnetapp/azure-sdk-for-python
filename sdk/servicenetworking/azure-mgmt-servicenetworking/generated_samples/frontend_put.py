@@ -35,11 +35,7 @@ def main():
         frontend_name="publicIp1",
         resource={
             "location": "West US",
-            "properties": {
-                "ipAddressVersion": "IPv4",
-                "mode": "public",
-                "publicIPAddress": {"id": "resourceUriAsString"},
-            },
+            "properties": {"ipVersion": "IPv4", "mode": "Public", "publicIPAddress": {"id": "resourceUriAsString"}},
         },
     ).result()
     print(response)

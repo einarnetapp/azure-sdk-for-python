@@ -85,7 +85,7 @@ class FrontendsInterfaceOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.FrontendListResult] = kwargs.pop("cls", None)
@@ -188,7 +188,7 @@ class FrontendsInterfaceOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Frontend] = kwargs.pop("cls", None)
@@ -247,7 +247,7 @@ class FrontendsInterfaceOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -402,7 +402,7 @@ class FrontendsInterfaceOperations:
         :type traffic_controller_name: str
         :param frontend_name: Frontends. Required.
         :type frontend_name: str
-        :param resource: Resource create parameters. Is either a model type or a IO type. Required.
+        :param resource: Resource create parameters. Is either a Frontend type or a IO type. Required.
         :type resource: ~azure.mgmt.servicenetworking.models.Frontend or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -423,7 +423,7 @@ class FrontendsInterfaceOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -554,8 +554,8 @@ class FrontendsInterfaceOperations:
         :type traffic_controller_name: str
         :param frontend_name: Frontends. Required.
         :type frontend_name: str
-        :param properties: The resource properties to be updated. Is either a model type or a IO type.
-         Required.
+        :param properties: The resource properties to be updated. Is either a FrontendUpdate type or a
+         IO type. Required.
         :type properties: ~azure.mgmt.servicenetworking.models.FrontendUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -576,7 +576,7 @@ class FrontendsInterfaceOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -642,7 +642,7 @@ class FrontendsInterfaceOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -711,7 +711,7 @@ class FrontendsInterfaceOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)

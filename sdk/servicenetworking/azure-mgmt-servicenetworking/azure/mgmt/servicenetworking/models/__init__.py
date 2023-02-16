@@ -32,7 +32,7 @@ from ._models_py3 import TrafficControllerUpdate
 
 from ._service_networking_mgmt_client_enums import ActionType
 from ._service_networking_mgmt_client_enums import CreatedByType
-from ._service_networking_mgmt_client_enums import FrontendIPAddressVersion
+from ._service_networking_mgmt_client_enums import FrontendIPVersion
 from ._service_networking_mgmt_client_enums import Origin
 from ._service_networking_mgmt_client_enums import ProvisioningState
 from ._patch import __all__ as _patch_all
@@ -65,7 +65,7 @@ __all__ = [
     "TrafficControllerUpdate",
     "ActionType",
     "CreatedByType",
-    "FrontendIPAddressVersion",
+    "FrontendIPVersion",
     "Origin",
     "ProvisioningState",
 ]

@@ -25,8 +25,8 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     KEY = "Key"
 
 
-class FrontendIPAddressVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """FrontendIPAddressVersion."""
+class FrontendIPVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """FrontendIPVersion."""
 
     I_PV4 = "IPv4"
     I_PV6 = "IPv6"

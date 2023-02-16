@@ -33,7 +33,7 @@ def main():
         resource_group_name="rg1",
         traffic_controller_name="TC1",
         association_name="associatedvnet-1",
-        properties={"properties": {"associationType": "subnets", "subnet": {"id": "subnetFullRef"}}},
+        properties={"properties": {"associationType": "Subnet", "subnet": {"id": "subnetFullRef"}}},
     )
     print(response)
 
