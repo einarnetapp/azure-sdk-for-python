@@ -360,8 +360,8 @@ class SavedSearchesOperations:
         :type workspace_name: str
         :param saved_search_id: The id of the saved search. Required.
         :type saved_search_id: str
-        :param parameters: The parameters required to save a search. Is either a model type or a IO
-         type. Required.
+        :param parameters: The parameters required to save a search. Is either a SavedSearch type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.SavedSearch or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

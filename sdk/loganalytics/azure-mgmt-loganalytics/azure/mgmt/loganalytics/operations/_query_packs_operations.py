@@ -504,7 +504,8 @@ class QueryPacksOperations:
          Required.
         :type resource_group_name: str
         :param log_analytics_query_pack_payload: Properties that need to be specified to create or
-         update a Log Analytics QueryPack. Is either a model type or a IO type. Required.
+         update a Log Analytics QueryPack. Is either a LogAnalyticsQueryPack type or a IO type.
+         Required.
         :type log_analytics_query_pack_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPack
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -773,7 +774,8 @@ class QueryPacksOperations:
         :param query_pack_name: The name of the Log Analytics QueryPack resource. Required.
         :type query_pack_name: str
         :param log_analytics_query_pack_payload: Properties that need to be specified to create or
-         update a Log Analytics QueryPack. Is either a model type or a IO type. Required.
+         update a Log Analytics QueryPack. Is either a LogAnalyticsQueryPack type or a IO type.
+         Required.
         :type log_analytics_query_pack_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPack
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -916,7 +918,7 @@ class QueryPacksOperations:
         :param query_pack_name: The name of the Log Analytics QueryPack resource. Required.
         :type query_pack_name: str
         :param query_pack_tags: Updated tag information to set into the QueryPack instance. Is either a
-         model type or a IO type. Required.
+         TagsResource type or a IO type. Required.
         :type query_pack_tags: ~azure.mgmt.loganalytics.models.TagsResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

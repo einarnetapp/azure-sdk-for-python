@@ -143,7 +143,7 @@ class StorageInsightConfigsOperations:
         :param storage_insight_name: Name of the storageInsightsConfigs resource. Required.
         :type storage_insight_name: str
         :param parameters: The parameters required to create or update a storage insight. Is either a
-         model type or a IO type. Required.
+         StorageInsight type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.StorageInsight or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
