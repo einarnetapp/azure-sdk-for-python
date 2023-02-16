@@ -270,7 +270,8 @@ class QueriesOperations:
         :param query_pack_name: The name of the Log Analytics QueryPack resource. Required.
         :type query_pack_name: str
         :param query_search_properties: Properties by which to search queries in the given Log
-         Analytics QueryPack. Is either a model type or a IO type. Required.
+         Analytics QueryPack. Is either a LogAnalyticsQueryPackQuerySearchProperties type or a IO type.
+         Required.
         :type query_search_properties:
          ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPackQuerySearchProperties or IO
         :param top: Maximum items returned in page. Default value is None.
@@ -519,7 +520,7 @@ class QueriesOperations:
         :param id: The id of a specific query defined in the Log Analytics QueryPack. Required.
         :type id: str
         :param query_payload: Properties that need to be specified to create a new query and add it to
-         a Log Analytics QueryPack. Is either a model type or a IO type. Required.
+         a Log Analytics QueryPack. Is either a LogAnalyticsQueryPackQuery type or a IO type. Required.
         :type query_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPackQuery or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -673,7 +674,7 @@ class QueriesOperations:
         :param id: The id of a specific query defined in the Log Analytics QueryPack. Required.
         :type id: str
         :param query_payload: Properties that need to be specified to create a new query and add it to
-         a Log Analytics QueryPack. Is either a model type or a IO type. Required.
+         a Log Analytics QueryPack. Is either a LogAnalyticsQueryPackQuery type or a IO type. Required.
         :type query_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPackQuery or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

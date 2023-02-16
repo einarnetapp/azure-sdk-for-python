@@ -234,7 +234,7 @@ class LinkedServicesOperations:
         :param linked_service_name: Name of the linkedServices resource. Required.
         :type linked_service_name: str
         :param parameters: The parameters required to create or update a linked service. Is either a
-         model type or a IO type. Required.
+         LinkedService type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.LinkedService or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

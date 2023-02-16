@@ -578,8 +578,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param parameters: The parameters required to create or update a workspace. Is either a model
-         type or a IO type. Required.
+        :param parameters: The parameters required to create or update a workspace. Is either a
+         Workspace type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.Workspace or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -898,8 +898,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param parameters: The parameters required to patch a workspace. Is either a model type or a IO
-         type. Required.
+        :param parameters: The parameters required to patch a workspace. Is either a WorkspacePatch
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.WorkspacePatch or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

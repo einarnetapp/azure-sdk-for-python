@@ -151,7 +151,7 @@ class LinkedStorageAccountsOperations:
          "AzureWatson", "Query", "Ingestion", and "Alerts". Required.
         :type data_source_type: str or ~azure.mgmt.loganalytics.models.DataSourceType
         :param parameters: The parameters required to create or update linked storage accounts. Is
-         either a model type or a IO type. Required.
+         either a LinkedStorageAccountsResource type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.LinkedStorageAccountsResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

@@ -222,8 +222,8 @@ class DataExportsOperations:
         :type workspace_name: str
         :param data_export_name: The data export rule name. Required.
         :type data_export_name: str
-        :param parameters: The parameters required to create or update a data export. Is either a model
-         type or a IO type. Required.
+        :param parameters: The parameters required to create or update a data export. Is either a
+         DataExport type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.DataExport or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

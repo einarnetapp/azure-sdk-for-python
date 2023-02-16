@@ -152,7 +152,7 @@ class WorkspacePurgeOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :param body: Describes the body of a request to purge data in a single table of an Log
-         Analytics Workspace. Is either a model type or a IO type. Required.
+         Analytics Workspace. Is either a WorkspacePurgeBody type or a IO type. Required.
         :type body: ~azure.mgmt.loganalytics.models.WorkspacePurgeBody or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
