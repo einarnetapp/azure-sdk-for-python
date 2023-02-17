@@ -3190,39 +3190,6 @@ class AlertListResult(_serialization.Model):
         self.next_link = next_link
 
 
-class AlertOperationListResult(_serialization.Model):
-    """Alert operation list operation result.
-
-    :ivar value: Alert operation list.
-    :vartype value: list[~azure.mgmt.authorization.v2021_12_01_preview.models.AlertOperationResult]
-    :ivar next_link: The URL to use for getting the next set of results.
-    :vartype next_link: str
-    """
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[AlertOperationResult]"},
-        "next_link": {"key": "nextLink", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.AlertOperationResult"]] = None,
-        next_link: Optional[str] = None,
-        **kwargs: Any
-    ) -> None:
-        """
-        :keyword value: Alert operation list.
-        :paramtype value:
-         list[~azure.mgmt.authorization.v2021_12_01_preview.models.AlertOperationResult]
-        :keyword next_link: The URL to use for getting the next set of results.
-        :paramtype next_link: str
-        """
-        super().__init__(**kwargs)
-        self.value = value
-        self.next_link = next_link
-
-
 class AlertOperationResult(_serialization.Model):
     """Alert operation result.
 
@@ -3232,16 +3199,32 @@ class AlertOperationResult(_serialization.Model):
     :vartype id: str
     :ivar status: The status of the alert operation.
     :vartype status: str
+    :ivar status_detail: The status detail of the alert operation.
+    :vartype status_detail: str
+    :ivar created_date_time: The created date of the alert operation.
+    :vartype created_date_time: ~datetime.datetime
+    :ivar last_action_date_time: The last action date of the alert operation.
+    :vartype last_action_date_time: ~datetime.datetime
+    :ivar resource_location: The location of the alert associated with the operation.
+    :vartype resource_location: str
     """
 
     _validation = {
         "id": {"readonly": True},
         "status": {"readonly": True},
+        "status_detail": {"readonly": True},
+        "created_date_time": {"readonly": True},
+        "last_action_date_time": {"readonly": True},
+        "resource_location": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "status": {"key": "status", "type": "str"},
+        "status_detail": {"key": "statusDetail", "type": "str"},
+        "created_date_time": {"key": "createdDateTime", "type": "iso-8601"},
+        "last_action_date_time": {"key": "lastActionDateTime", "type": "iso-8601"},
+        "resource_location": {"key": "resourceLocation", "type": "str"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -3249,6 +3232,10 @@ class AlertOperationResult(_serialization.Model):
         super().__init__(**kwargs)
         self.id = None
         self.status = None
+        self.status_detail = None
+        self.created_date_time = None
+        self.last_action_date_time = None
+        self.resource_location = None
 
 
 class AzureRolesAssignedOutsidePimAlertConfigurationProperties(AlertConfigurationProperties):

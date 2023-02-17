@@ -26,7 +26,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._alert_operation_operations import build_get_request, build_list_for_scope_request
+from ...operations._alert_operation_operations import build_get_request
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
@@ -113,59 +113,3 @@ class AlertOperationOperations:
         return deserialized
 
     get.metadata = {"url": "/{scope}/providers/Microsoft.Authorization/roleManagementAlertOperations/{operationId}"}
-
-    @distributed_trace_async
-    async def list_for_scope(self, scope: str, **kwargs: Any) -> _models.AlertOperationListResult:
-        """Gets alert operations for a resource scope.
-
-        :param scope: The scope of the alert operation. Required.
-        :type scope: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertOperationListResult or the result of cls(response)
-        :rtype: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertOperationListResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2022-08-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2022-08-01-preview")
-        )
-        cls: ClsType[_models.AlertOperationListResult] = kwargs.pop("cls", None)
-
-        request = build_list_for_scope_request(
-            scope=scope,
-            api_version=api_version,
-            template_url=self.list_for_scope.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("AlertOperationListResult", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    list_for_scope.metadata = {"url": "/{scope}/providers/Microsoft.Authorization/roleManagementAlertOperations"}

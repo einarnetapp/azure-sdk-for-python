@@ -42,7 +42,6 @@ from ._models_py3 import AlertIncident
 from ._models_py3 import AlertIncidentListResult
 from ._models_py3 import AlertIncidentProperties
 from ._models_py3 import AlertListResult
-from ._models_py3 import AlertOperationListResult
 from ._models_py3 import AlertOperationResult
 from ._models_py3 import AzureRolesAssignedOutsidePimAlertConfigurationProperties
 from ._models_py3 import AzureRolesAssignedOutsidePimAlertIncidentProperties
@@ -122,7 +121,6 @@ __all__ = [
     "AlertIncidentListResult",
     "AlertIncidentProperties",
     "AlertListResult",
-    "AlertOperationListResult",
     "AlertOperationResult",
     "AzureRolesAssignedOutsidePimAlertConfigurationProperties",
     "AzureRolesAssignedOutsidePimAlertIncidentProperties",
