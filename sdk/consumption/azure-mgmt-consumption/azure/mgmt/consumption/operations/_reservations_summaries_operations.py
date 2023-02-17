@@ -47,7 +47,7 @@ def build_list_by_reservation_order_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -84,7 +84,7 @@ def build_list_by_reservation_order_and_reservation_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -125,7 +125,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -185,6 +185,9 @@ class ReservationsSummariesOperations:
     ) -> Iterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param grain: Can be daily or monthly. Known values are: "daily" and "monthly". Required.
@@ -200,7 +203,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
@@ -285,6 +288,9 @@ class ReservationsSummariesOperations:
     ) -> Iterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param reservation_id: Id of the reservation. Required.
@@ -302,7 +308,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
@@ -391,6 +397,9 @@ class ReservationsSummariesOperations:
     ) -> Iterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for the defined scope daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param resource_scope: The scope associated with reservations summaries operations. This
          includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount
          scope (legacy), and
@@ -423,7 +432,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)

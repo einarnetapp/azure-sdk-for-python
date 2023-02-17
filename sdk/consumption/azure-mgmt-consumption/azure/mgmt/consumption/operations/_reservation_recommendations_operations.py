@@ -45,7 +45,7 @@ def build_list_request(resource_scope: str, *, filter: Optional[str] = None, **k
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -92,6 +92,9 @@ class ReservationRecommendationsOperations:
     ) -> Iterable["_models.ReservationRecommendation"]:
         """List of recommendations for purchasing reserved instances.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param resource_scope: The scope associated with reservation recommendations operations. This
          includes '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope,
@@ -116,7 +119,7 @@ class ReservationRecommendationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationRecommendationsListResult] = kwargs.pop("cls", None)
