@@ -14,7 +14,7 @@ from azure.mgmt.healthcareapis import HealthcareApisManagementClient
     pip install azure-identity
     pip install azure-mgmt-healthcareapis
 # USAGE
-    python iotconnector_list.py
+    python analytics_connectors_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.iot_connectors.list_by_workspace(
+    response = client.analytics_connectors.get(
         resource_group_name="testRG",
         workspace_name="workspace1",
+        analytics_connector_name="exampleconnector",
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2023-04-01-preview/examples/iotconnectors/iotconnector_List.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2023-04-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Get.json
 if __name__ == "__main__":
     main()

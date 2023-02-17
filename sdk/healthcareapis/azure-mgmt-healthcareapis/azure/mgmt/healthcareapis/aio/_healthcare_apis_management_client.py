@@ -16,6 +16,7 @@ from .. import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import HealthcareApisManagementClientConfiguration
 from .operations import (
+    AnalyticsConnectorsOperations,
     DicomServicesOperations,
     FhirDestinationsOperations,
     FhirServicesOperations,
@@ -67,18 +68,21 @@ class HealthcareApisManagementClient:  # pylint: disable=client-accepts-api-vers
     :ivar workspace_private_link_resources: WorkspacePrivateLinkResourcesOperations operations
     :vartype workspace_private_link_resources:
      azure.mgmt.healthcareapis.aio.operations.WorkspacePrivateLinkResourcesOperations
+    :ivar analytics_connectors: AnalyticsConnectorsOperations operations
+    :vartype analytics_connectors:
+     azure.mgmt.healthcareapis.aio.operations.AnalyticsConnectorsOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.healthcareapis.aio.operations.Operations
     :ivar operation_results: OperationResultsOperations operations
     :vartype operation_results: azure.mgmt.healthcareapis.aio.operations.OperationResultsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The subscription identifier. Required.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2023-04-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -123,6 +127,9 @@ class HealthcareApisManagementClient:  # pylint: disable=client-accepts-api-vers
         self.workspace_private_link_resources = WorkspacePrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.analytics_connectors = AnalyticsConnectorsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.operation_results = OperationResultsOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -157,5 +164,5 @@ class HealthcareApisManagementClient:  # pylint: disable=client-accepts-api-vers
         await self._client.__aenter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
+    async def __aexit__(self, *exc_details: Any) -> None:
         await self._client.__aexit__(*exc_details)

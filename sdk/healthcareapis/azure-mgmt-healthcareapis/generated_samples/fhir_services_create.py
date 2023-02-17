@@ -56,6 +56,7 @@ def main():
                     "origins": ["*"],
                 },
                 "exportConfiguration": {"storageAccountName": "existingStorageAccount"},
+                "implementationGuidesConfiguration": {"usCoreMissingData": False},
                 "importConfiguration": {
                     "enabled": False,
                     "initialImportMode": False,
@@ -68,6 +69,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2022-06-01/examples/fhirservices/FhirServices_Create.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2023-04-01-preview/examples/fhirservices/FhirServices_Create.json
 if __name__ == "__main__":
     main()

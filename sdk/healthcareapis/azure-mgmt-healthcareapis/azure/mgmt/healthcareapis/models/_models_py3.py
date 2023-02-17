@@ -24,96 +24,6 @@ if TYPE_CHECKING:
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
-class CheckNameAvailabilityParameters(_serialization.Model):
-    """Input values.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar name: The name of the service instance to check. Required.
-    :vartype name: str
-    :ivar type: The fully qualified resource type which includes provider namespace. Required.
-    :vartype type: str
-    """
-
-    _validation = {
-        "name": {"required": True},
-        "type": {"required": True},
-    }
-
-    _attribute_map = {
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-    }
-
-    def __init__(self, *, name: str, type: str, **kwargs):
-        """
-        :keyword name: The name of the service instance to check. Required.
-        :paramtype name: str
-        :keyword type: The fully qualified resource type which includes provider namespace. Required.
-        :paramtype type: str
-        """
-        super().__init__(**kwargs)
-        self.name = name
-        self.type = type
-
-
-class CorsConfiguration(_serialization.Model):
-    """The settings for the CORS configuration of the service instance.
-
-    :ivar origins: The origins to be allowed via CORS.
-    :vartype origins: list[str]
-    :ivar headers: The headers to be allowed via CORS.
-    :vartype headers: list[str]
-    :ivar methods: The methods to be allowed via CORS.
-    :vartype methods: list[str]
-    :ivar max_age: The max age to be allowed via CORS.
-    :vartype max_age: int
-    :ivar allow_credentials: If credentials are allowed via CORS.
-    :vartype allow_credentials: bool
-    """
-
-    _validation = {
-        "max_age": {"maximum": 99999, "minimum": 0},
-    }
-
-    _attribute_map = {
-        "origins": {"key": "origins", "type": "[str]"},
-        "headers": {"key": "headers", "type": "[str]"},
-        "methods": {"key": "methods", "type": "[str]"},
-        "max_age": {"key": "maxAge", "type": "int"},
-        "allow_credentials": {"key": "allowCredentials", "type": "bool"},
-    }
-
-    def __init__(
-        self,
-        *,
-        origins: Optional[List[str]] = None,
-        headers: Optional[List[str]] = None,
-        methods: Optional[List[str]] = None,
-        max_age: Optional[int] = None,
-        allow_credentials: Optional[bool] = None,
-        **kwargs
-    ):
-        """
-        :keyword origins: The origins to be allowed via CORS.
-        :paramtype origins: list[str]
-        :keyword headers: The headers to be allowed via CORS.
-        :paramtype headers: list[str]
-        :keyword methods: The methods to be allowed via CORS.
-        :paramtype methods: list[str]
-        :keyword max_age: The max age to be allowed via CORS.
-        :paramtype max_age: int
-        :keyword allow_credentials: If credentials are allowed via CORS.
-        :paramtype allow_credentials: bool
-        """
-        super().__init__(**kwargs)
-        self.origins = origins
-        self.headers = headers
-        self.methods = methods
-        self.max_age = max_age
-        self.allow_credentials = allow_credentials
-
-
 class ServiceManagedIdentity(_serialization.Model):
     """Managed service identity (system assigned and/or user assigned identities).
 
@@ -126,7 +36,7 @@ class ServiceManagedIdentity(_serialization.Model):
         "identity": {"key": "identity", "type": "ServiceManagedIdentityIdentity"},
     }
 
-    def __init__(self, *, identity: Optional["_models.ServiceManagedIdentityIdentity"] = None, **kwargs):
+    def __init__(self, *, identity: Optional["_models.ServiceManagedIdentityIdentity"] = None, **kwargs: Any) -> None:
         """
         :keyword identity: Setting indicating whether the service has a managed identity associated
          with it.
@@ -165,7 +75,7 @@ class ResourceCore(_serialization.Model):
         "etag": {"key": "etag", "type": "str"},
     }
 
-    def __init__(self, *, etag: Optional[str] = None, **kwargs):
+    def __init__(self, *, etag: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword etag: An etag associated with the resource, used for optimistic concurrency when
          editing it.
@@ -210,7 +120,7 @@ class LocationBasedResource(ResourceCore):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, etag: Optional[str] = None, location: Optional[str] = None, **kwargs):
+    def __init__(self, *, etag: Optional[str] = None, location: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword etag: An etag associated with the resource, used for optimistic concurrency when
          editing it.
@@ -233,7 +143,7 @@ class ResourceTags(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -283,8 +193,8 @@ class TaggedResource(ResourceTags, LocationBasedResource):
         etag: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword etag: An etag associated with the resource, used for optimistic concurrency when
          editing it.
@@ -301,6 +211,663 @@ class TaggedResource(ResourceTags, LocationBasedResource):
         self.etag = etag
         self.location = location
         self.tags = tags
+
+
+class AnalyticsConnector(TaggedResource, ServiceManagedIdentity):  # pylint: disable=too-many-instance-attributes
+    """Analytics Connector definition.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar identity: Setting indicating whether the service has a managed identity associated with
+     it.
+    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityIdentity
+    :ivar id: The resource identifier.
+    :vartype id: str
+    :ivar name: The resource name.
+    :vartype name: str
+    :ivar type: The resource type.
+    :vartype type: str
+    :ivar etag: An etag associated with the resource, used for optimistic concurrency when editing
+     it.
+    :vartype etag: str
+    :ivar location: The resource location.
+    :vartype location: str
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :vartype system_data: ~azure.mgmt.healthcareapis.models.SystemData
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", and "SystemMaintenance".
+    :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
+    :ivar data_source_configuration: Data source for Analytics Connector.
+    :vartype data_source_configuration:
+     ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataSource
+    :ivar data_mapping_configuration: Data mapping configuration for Analytics Connector.
+    :vartype data_mapping_configuration:
+     ~azure.mgmt.healthcareapis.models.AnalyticsConnectorMapping
+    :ivar data_destination_configuration: Data destination configuration for Analytics Connector.
+    :vartype data_destination_configuration:
+     ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataDestination
+    :ivar scheduler_cron_expression: Scheduler cron expression for Analytics Connector.
+    :vartype scheduler_cron_expression: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True, "pattern": r"^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "identity": {"key": "identity", "type": "ServiceManagedIdentityIdentity"},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "data_source_configuration": {
+            "key": "properties.dataSourceConfiguration",
+            "type": "AnalyticsConnectorDataSource",
+        },
+        "data_mapping_configuration": {
+            "key": "properties.dataMappingConfiguration",
+            "type": "AnalyticsConnectorMapping",
+        },
+        "data_destination_configuration": {
+            "key": "properties.dataDestinationConfiguration",
+            "type": "AnalyticsConnectorDataDestination",
+        },
+        "scheduler_cron_expression": {"key": "properties.schedulerCronExpression", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
+        etag: Optional[str] = None,
+        location: Optional[str] = None,
+        tags: Optional[Dict[str, str]] = None,
+        data_source_configuration: Optional["_models.AnalyticsConnectorDataSource"] = None,
+        data_mapping_configuration: Optional["_models.AnalyticsConnectorMapping"] = None,
+        data_destination_configuration: Optional["_models.AnalyticsConnectorDataDestination"] = None,
+        scheduler_cron_expression: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword identity: Setting indicating whether the service has a managed identity associated
+         with it.
+        :paramtype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityIdentity
+        :keyword etag: An etag associated with the resource, used for optimistic concurrency when
+         editing it.
+        :paramtype etag: str
+        :keyword location: The resource location.
+        :paramtype location: str
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword data_source_configuration: Data source for Analytics Connector.
+        :paramtype data_source_configuration:
+         ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataSource
+        :keyword data_mapping_configuration: Data mapping configuration for Analytics Connector.
+        :paramtype data_mapping_configuration:
+         ~azure.mgmt.healthcareapis.models.AnalyticsConnectorMapping
+        :keyword data_destination_configuration: Data destination configuration for Analytics
+         Connector.
+        :paramtype data_destination_configuration:
+         ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataDestination
+        :keyword scheduler_cron_expression: Scheduler cron expression for Analytics Connector.
+        :paramtype scheduler_cron_expression: str
+        """
+        super().__init__(etag=etag, location=location, tags=tags, identity=identity, **kwargs)
+        self.identity = identity
+        self.system_data = None
+        self.provisioning_state = None
+        self.data_source_configuration = data_source_configuration
+        self.data_mapping_configuration = data_mapping_configuration
+        self.data_destination_configuration = data_destination_configuration
+        self.scheduler_cron_expression = scheduler_cron_expression
+        self.id = None
+        self.name = None
+        self.type = None
+        self.etag = etag
+        self.location = location
+        self.tags = tags
+
+
+class AnalyticsConnectorCollection(_serialization.Model):
+    """A collection of Analytics Connectors.
+
+    :ivar next_link: The link used to get the next page of AnalyticsConnectors.
+    :vartype next_link: str
+    :ivar value: The list of Analytics Connectors.
+    :vartype value: list[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
+    """
+
+    _attribute_map = {
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[AnalyticsConnector]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        next_link: Optional[str] = None,
+        value: Optional[List["_models.AnalyticsConnector"]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword next_link: The link used to get the next page of AnalyticsConnectors.
+        :paramtype next_link: str
+        :keyword value: The list of Analytics Connectors.
+        :paramtype value: list[~azure.mgmt.healthcareapis.models.AnalyticsConnector]
+        """
+        super().__init__(**kwargs)
+        self.next_link = next_link
+        self.value = value
+
+
+class AnalyticsConnectorDataDestination(_serialization.Model):
+    """Data destination configuration for Analytics Connector.
+
+    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
+    AnalyticsConnectorDataLakeDataDestination
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data destination. Required. "datalake"
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataDestinationType
+    :ivar name: Name of data destination.
+    :vartype name: str
+    """
+
+    _validation = {
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+    }
+
+    _subtype_map = {"type": {"datalake": "AnalyticsConnectorDataLakeDataDestination"}}
+
+    def __init__(
+        self, *, additional_properties: Optional[Dict[str, Any]] = None, name: Optional[str] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword name: Name of data destination.
+        :paramtype name: str
+        """
+        super().__init__(**kwargs)
+        self.additional_properties = additional_properties
+        self.type: Optional[str] = None
+        self.name = name
+
+
+class AnalyticsConnectorDataLakeDataDestination(AnalyticsConnectorDataDestination):
+    """The Data Lake data destination for Analytics Connector.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data destination. Required. "datalake"
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataDestinationType
+    :ivar name: Name of data destination.
+    :vartype name: str
+    :ivar data_lake_name: The name for the Data Lake. Required.
+    :vartype data_lake_name: str
+    """
+
+    _validation = {
+        "type": {"required": True},
+        "data_lake_name": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "data_lake_name": {"key": "dataLakeName", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        data_lake_name: str,
+        additional_properties: Optional[Dict[str, Any]] = None,
+        name: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword name: Name of data destination.
+        :paramtype name: str
+        :keyword data_lake_name: The name for the Data Lake. Required.
+        :paramtype data_lake_name: str
+        """
+        super().__init__(additional_properties=additional_properties, name=name, **kwargs)
+        self.type: str = "datalake"
+        self.data_lake_name = data_lake_name
+
+
+class AnalyticsConnectorDataSource(_serialization.Model):
+    """Data source for Analytics Connector. The target resource must be in the same workspace with the
+    Analytics Connector.
+
+    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
+    AnalyticsConnectorDicomServiceDataSource, AnalyticsConnectorFhirServiceDataSource
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data source. Required. Known values are: "fhirservice" and "dicomservice".
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataSourceType
+    """
+
+    _validation = {
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+    }
+
+    _subtype_map = {
+        "type": {
+            "dicomservice": "AnalyticsConnectorDicomServiceDataSource",
+            "fhirservice": "AnalyticsConnectorFhirServiceDataSource",
+        }
+    }
+
+    def __init__(self, *, additional_properties: Optional[Dict[str, Any]] = None, **kwargs: Any) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        """
+        super().__init__(**kwargs)
+        self.additional_properties = additional_properties
+        self.type: Optional[str] = None
+
+
+class AnalyticsConnectorDicomServiceDataSource(AnalyticsConnectorDataSource):
+    """The DICOM service data source for Analytics Connector.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data source. Required. Known values are: "fhirservice" and "dicomservice".
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataSourceType
+    :ivar url: The URL of DICOM service. Required.
+    :vartype url: str
+    :ivar api_version: The API version of DICOM service. Required.
+    :vartype api_version: str
+    """
+
+    _validation = {
+        "type": {"required": True},
+        "url": {"required": True},
+        "api_version": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+        "url": {"key": "url", "type": "str"},
+        "api_version": {"key": "apiVersion", "type": "str"},
+    }
+
+    def __init__(
+        self, *, url: str, api_version: str, additional_properties: Optional[Dict[str, Any]] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword url: The URL of DICOM service. Required.
+        :paramtype url: str
+        :keyword api_version: The API version of DICOM service. Required.
+        :paramtype api_version: str
+        """
+        super().__init__(additional_properties=additional_properties, **kwargs)
+        self.type: str = "dicomservice"
+        self.url = url
+        self.api_version = api_version
+
+
+class AnalyticsConnectorMapping(_serialization.Model):
+    """Data mapping configuration for Analytics Connector.
+
+    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
+    AnalyticsConnectorDicomToParquetMapping, AnalyticsConnectorFhirToParquetMapping
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data mapping. Required. Known values are: "fhirToParquet" and
+     "dicomToParquet".
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorMappingType
+    """
+
+    _validation = {
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+    }
+
+    _subtype_map = {
+        "type": {
+            "dicomToParquet": "AnalyticsConnectorDicomToParquetMapping",
+            "fhirToParquet": "AnalyticsConnectorFhirToParquetMapping",
+        }
+    }
+
+    def __init__(self, *, additional_properties: Optional[Dict[str, Any]] = None, **kwargs: Any) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        """
+        super().__init__(**kwargs)
+        self.additional_properties = additional_properties
+        self.type: Optional[str] = None
+
+
+class AnalyticsConnectorDicomToParquetMapping(AnalyticsConnectorMapping):
+    """DICOM Service data mapping configuration for Analytics Connector.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data mapping. Required. Known values are: "fhirToParquet" and
+     "dicomToParquet".
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorMappingType
+    :ivar extension_schema_reference: Artifact reference for extension schema.
+    :vartype extension_schema_reference: str
+    """
+
+    _validation = {
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+        "extension_schema_reference": {"key": "extensionSchemaReference", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        additional_properties: Optional[Dict[str, Any]] = None,
+        extension_schema_reference: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword extension_schema_reference: Artifact reference for extension schema.
+        :paramtype extension_schema_reference: str
+        """
+        super().__init__(additional_properties=additional_properties, **kwargs)
+        self.type: str = "dicomToParquet"
+        self.extension_schema_reference = extension_schema_reference
+
+
+class AnalyticsConnectorFhirServiceDataSource(AnalyticsConnectorDataSource):
+    """The FHIR service data source for Analytics Connector.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data source. Required. Known values are: "fhirservice" and "dicomservice".
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorDataSourceType
+    :ivar url: The URL of FHIR service. Required.
+    :vartype url: str
+    :ivar kind: The kind of FHIR Service. Required. Known values are: "STU3" and "R4".
+    :vartype kind: str or ~azure.mgmt.healthcareapis.models.FhirServiceVersion
+    """
+
+    _validation = {
+        "type": {"required": True},
+        "url": {"required": True},
+        "kind": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+        "url": {"key": "url", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        url: str,
+        kind: Union[str, "_models.FhirServiceVersion"],
+        additional_properties: Optional[Dict[str, Any]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword url: The URL of FHIR service. Required.
+        :paramtype url: str
+        :keyword kind: The kind of FHIR Service. Required. Known values are: "STU3" and "R4".
+        :paramtype kind: str or ~azure.mgmt.healthcareapis.models.FhirServiceVersion
+        """
+        super().__init__(additional_properties=additional_properties, **kwargs)
+        self.type: str = "fhirservice"
+        self.url = url
+        self.kind = kind
+
+
+class AnalyticsConnectorFhirToParquetMapping(AnalyticsConnectorMapping):
+    """FHIR Service data mapping configuration for Analytics Connector.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Type of data mapping. Required. Known values are: "fhirToParquet" and
+     "dicomToParquet".
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.AnalyticsConnectorMappingType
+    :ivar filter_configuration_reference: Artifact reference for filter configurations.
+    :vartype filter_configuration_reference: str
+    :ivar extension_schema_reference: Artifact reference for extension schema.
+    :vartype extension_schema_reference: str
+    """
+
+    _validation = {
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "additional_properties": {"key": "", "type": "{object}"},
+        "type": {"key": "type", "type": "str"},
+        "filter_configuration_reference": {"key": "filterConfigurationReference", "type": "str"},
+        "extension_schema_reference": {"key": "extensionSchemaReference", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        additional_properties: Optional[Dict[str, Any]] = None,
+        filter_configuration_reference: Optional[str] = None,
+        extension_schema_reference: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword filter_configuration_reference: Artifact reference for filter configurations.
+        :paramtype filter_configuration_reference: str
+        :keyword extension_schema_reference: Artifact reference for extension schema.
+        :paramtype extension_schema_reference: str
+        """
+        super().__init__(additional_properties=additional_properties, **kwargs)
+        self.type: str = "fhirToParquet"
+        self.filter_configuration_reference = filter_configuration_reference
+        self.extension_schema_reference = extension_schema_reference
+
+
+class AnalyticsConnectorPatchResource(ResourceTags, ServiceManagedIdentity):
+    """AnalyticsConnector patch properties.
+
+    :ivar identity: Setting indicating whether the service has a managed identity associated with
+     it.
+    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityIdentity
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    """
+
+    _attribute_map = {
+        "identity": {"key": "identity", "type": "ServiceManagedIdentityIdentity"},
+        "tags": {"key": "tags", "type": "{str}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
+        tags: Optional[Dict[str, str]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword identity: Setting indicating whether the service has a managed identity associated
+         with it.
+        :paramtype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityIdentity
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        """
+        super().__init__(tags=tags, identity=identity, **kwargs)
+        self.identity = identity
+        self.tags = tags
+
+
+class CheckNameAvailabilityParameters(_serialization.Model):
+    """Input values.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar name: The name of the service instance to check. Required.
+    :vartype name: str
+    :ivar type: The fully qualified resource type which includes provider namespace. Required.
+    :vartype type: str
+    """
+
+    _validation = {
+        "name": {"required": True},
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+    }
+
+    def __init__(self, *, name: str, type: str, **kwargs: Any) -> None:
+        """
+        :keyword name: The name of the service instance to check. Required.
+        :paramtype name: str
+        :keyword type: The fully qualified resource type which includes provider namespace. Required.
+        :paramtype type: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.type = type
+
+
+class CorsConfiguration(_serialization.Model):
+    """The settings for the CORS configuration of the service instance.
+
+    :ivar origins: The origins to be allowed via CORS.
+    :vartype origins: list[str]
+    :ivar headers: The headers to be allowed via CORS.
+    :vartype headers: list[str]
+    :ivar methods: The methods to be allowed via CORS.
+    :vartype methods: list[str]
+    :ivar max_age: The max age to be allowed via CORS.
+    :vartype max_age: int
+    :ivar allow_credentials: If credentials are allowed via CORS.
+    :vartype allow_credentials: bool
+    """
+
+    _validation = {
+        "max_age": {"maximum": 99999, "minimum": 0},
+    }
+
+    _attribute_map = {
+        "origins": {"key": "origins", "type": "[str]"},
+        "headers": {"key": "headers", "type": "[str]"},
+        "methods": {"key": "methods", "type": "[str]"},
+        "max_age": {"key": "maxAge", "type": "int"},
+        "allow_credentials": {"key": "allowCredentials", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        origins: Optional[List[str]] = None,
+        headers: Optional[List[str]] = None,
+        methods: Optional[List[str]] = None,
+        max_age: Optional[int] = None,
+        allow_credentials: Optional[bool] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword origins: The origins to be allowed via CORS.
+        :paramtype origins: list[str]
+        :keyword headers: The headers to be allowed via CORS.
+        :paramtype headers: list[str]
+        :keyword methods: The methods to be allowed via CORS.
+        :paramtype methods: list[str]
+        :keyword max_age: The max age to be allowed via CORS.
+        :paramtype max_age: int
+        :keyword allow_credentials: If credentials are allowed via CORS.
+        :paramtype allow_credentials: bool
+        """
+        super().__init__(**kwargs)
+        self.origins = origins
+        self.headers = headers
+        self.methods = methods
+        self.max_age = max_age
+        self.allow_credentials = allow_credentials
 
 
 class DicomService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=too-many-instance-attributes
@@ -344,6 +911,9 @@ class DicomService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=t
     :ivar public_network_access: Control permission for data plane traffic coming from public
      networks while private endpoint is enabled. Known values are: "Enabled" and "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
+    :ivar event_state: DICOM Service event support status. Known values are: "Disabled", "Enabled",
+     and "Updating".
+    :vartype event_state: str or ~azure.mgmt.healthcareapis.models.ServiceEventState
     """
 
     _validation = {
@@ -354,6 +924,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=t
         "provisioning_state": {"readonly": True},
         "service_url": {"readonly": True},
         "private_endpoint_connections": {"readonly": True},
+        "event_state": {"readonly": True},
     }
 
     _attribute_map = {
@@ -377,6 +948,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=t
             "type": "[PrivateEndpointConnection]",
         },
         "public_network_access": {"key": "properties.publicNetworkAccess", "type": "str"},
+        "event_state": {"key": "properties.eventState", "type": "str"},
     }
 
     def __init__(
@@ -389,8 +961,8 @@ class DicomService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=t
         authentication_configuration: Optional["_models.DicomServiceAuthenticationConfiguration"] = None,
         cors_configuration: Optional["_models.CorsConfiguration"] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identity: Setting indicating whether the service has a managed identity associated
          with it.
@@ -420,6 +992,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=t
         self.service_url = None
         self.private_endpoint_connections = None
         self.public_network_access = public_network_access
+        self.event_state = None
         self.id = None
         self.name = None
         self.type = None
@@ -449,7 +1022,7 @@ class DicomServiceAuthenticationConfiguration(_serialization.Model):
         "audiences": {"key": "audiences", "type": "[str]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.authority = None
@@ -471,8 +1044,8 @@ class DicomServiceCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.DicomService"]] = None, **kwargs
-    ):
+        self, *, next_link: Optional[str] = None, value: Optional[List["_models.DicomService"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of Dicom Services.
         :paramtype next_link: str
@@ -504,8 +1077,8 @@ class DicomServicePatchResource(ResourceTags, ServiceManagedIdentity):
         *,
         identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identity: Setting indicating whether the service has a managed identity associated
          with it.
@@ -529,7 +1102,7 @@ class Error(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetailsInternal"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetailsInternal"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetailsInternal"] = None, **kwargs: Any) -> None:
         """
         :keyword error: Error details.
         :paramtype error: ~azure.mgmt.healthcareapis.models.ErrorDetailsInternal
@@ -549,7 +1122,7 @@ class ErrorDetails(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetailsInternal"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetailsInternal"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetailsInternal"] = None, **kwargs: Any) -> None:
         """
         :keyword error: Error details.
         :paramtype error: ~azure.mgmt.healthcareapis.models.ErrorDetailsInternal
@@ -583,7 +1156,7 @@ class ErrorDetailsInternal(_serialization.Model):
         "target": {"key": "target", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -646,6 +1219,9 @@ class FhirService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=to
      ~azure.mgmt.healthcareapis.models.ResourceVersionPolicyConfiguration
     :ivar import_configuration: Fhir Service import configuration.
     :vartype import_configuration: ~azure.mgmt.healthcareapis.models.FhirServiceImportConfiguration
+    :ivar implementation_guides_configuration: Implementation Guides configuration.
+    :vartype implementation_guides_configuration:
+     ~azure.mgmt.healthcareapis.models.ImplementationGuidesConfiguration
     """
 
     _validation = {
@@ -688,6 +1264,10 @@ class FhirService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=to
             "type": "ResourceVersionPolicyConfiguration",
         },
         "import_configuration": {"key": "properties.importConfiguration", "type": "FhirServiceImportConfiguration"},
+        "implementation_guides_configuration": {
+            "key": "properties.implementationGuidesConfiguration",
+            "type": "ImplementationGuidesConfiguration",
+        },
     }
 
     def __init__(
@@ -706,8 +1286,9 @@ class FhirService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=to
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         resource_version_policy_configuration: Optional["_models.ResourceVersionPolicyConfiguration"] = None,
         import_configuration: Optional["_models.FhirServiceImportConfiguration"] = None,
-        **kwargs
-    ):
+        implementation_guides_configuration: Optional["_models.ImplementationGuidesConfiguration"] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identity: Setting indicating whether the service has a managed identity associated
          with it.
@@ -743,6 +1324,9 @@ class FhirService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=to
         :keyword import_configuration: Fhir Service import configuration.
         :paramtype import_configuration:
          ~azure.mgmt.healthcareapis.models.FhirServiceImportConfiguration
+        :keyword implementation_guides_configuration: Implementation Guides configuration.
+        :paramtype implementation_guides_configuration:
+         ~azure.mgmt.healthcareapis.models.ImplementationGuidesConfiguration
         """
         super().__init__(etag=etag, location=location, tags=tags, identity=identity, **kwargs)
         self.identity = identity
@@ -759,6 +1343,7 @@ class FhirService(TaggedResource, ServiceManagedIdentity):  # pylint: disable=to
         self.event_state = None
         self.resource_version_policy_configuration = resource_version_policy_configuration
         self.import_configuration = import_configuration
+        self.implementation_guides_configuration = implementation_guides_configuration
         self.id = None
         self.name = None
         self.type = None
@@ -788,7 +1373,7 @@ class FhirServiceAccessPolicyEntry(_serialization.Model):
         "object_id": {"key": "objectId", "type": "str"},
     }
 
-    def __init__(self, *, object_id: str, **kwargs):
+    def __init__(self, *, object_id: str, **kwargs: Any) -> None:
         """
         :keyword object_id: An Azure AD object ID (User or Apps) that is allowed access to the FHIR
          service. Required.
@@ -817,8 +1402,8 @@ class FhirServiceAcrConfiguration(_serialization.Model):
         *,
         login_servers: Optional[List[str]] = None,
         oci_artifacts: Optional[List["_models.ServiceOciArtifactEntry"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword login_servers: The list of the Azure container registry login servers.
         :paramtype login_servers: list[str]
@@ -853,8 +1438,8 @@ class FhirServiceAuthenticationConfiguration(_serialization.Model):
         authority: Optional[str] = None,
         audience: Optional[str] = None,
         smart_proxy_enabled: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword authority: The authority url for the service.
         :paramtype authority: str
@@ -884,8 +1469,8 @@ class FhirServiceCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.FhirService"]] = None, **kwargs
-    ):
+        self, *, next_link: Optional[str] = None, value: Optional[List["_models.FhirService"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of Fhir Services.
         :paramtype next_link: str
@@ -932,8 +1517,8 @@ class FhirServiceCorsConfiguration(_serialization.Model):
         methods: Optional[List[str]] = None,
         max_age: Optional[int] = None,
         allow_credentials: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword origins: The origins to be allowed via CORS.
         :paramtype origins: list[str]
@@ -965,7 +1550,7 @@ class FhirServiceExportConfiguration(_serialization.Model):
         "storage_account_name": {"key": "storageAccountName", "type": "str"},
     }
 
-    def __init__(self, *, storage_account_name: Optional[str] = None, **kwargs):
+    def __init__(self, *, storage_account_name: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword storage_account_name: The name of the default export storage account.
         :paramtype storage_account_name: str
@@ -997,8 +1582,8 @@ class FhirServiceImportConfiguration(_serialization.Model):
         integration_data_store: Optional[str] = None,
         initial_import_mode: Optional[bool] = None,
         enabled: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword integration_data_store: The name of the default integration storage account.
         :paramtype integration_data_store: str
@@ -1033,8 +1618,8 @@ class FhirServicePatchResource(ResourceTags, ServiceManagedIdentity):
         *,
         identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identity: Setting indicating whether the service has a managed identity associated
          with it.
@@ -1045,6 +1630,27 @@ class FhirServicePatchResource(ResourceTags, ServiceManagedIdentity):
         super().__init__(tags=tags, identity=identity, **kwargs)
         self.identity = identity
         self.tags = tags
+
+
+class ImplementationGuidesConfiguration(_serialization.Model):
+    """The settings for Implementation Guides - defining capabilities for national standards, vendor
+    consortiums, clinical societies, etc.
+
+    :ivar us_core_missing_data: If US Core Missing Data requirement is enabled.
+    :vartype us_core_missing_data: bool
+    """
+
+    _attribute_map = {
+        "us_core_missing_data": {"key": "usCoreMissingData", "type": "bool"},
+    }
+
+    def __init__(self, *, us_core_missing_data: Optional[bool] = None, **kwargs: Any) -> None:
+        """
+        :keyword us_core_missing_data: If US Core Missing Data requirement is enabled.
+        :paramtype us_core_missing_data: bool
+        """
+        super().__init__(**kwargs)
+        self.us_core_missing_data = us_core_missing_data
 
 
 class IotConnector(TaggedResource, ServiceManagedIdentity):  # pylint: disable=too-many-instance-attributes
@@ -1115,8 +1721,8 @@ class IotConnector(TaggedResource, ServiceManagedIdentity):  # pylint: disable=t
         tags: Optional[Dict[str, str]] = None,
         ingestion_endpoint_configuration: Optional["_models.IotEventHubIngestionEndpointConfiguration"] = None,
         device_mapping: Optional["_models.IotMappingProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identity: Setting indicating whether the service has a managed identity associated
          with it.
@@ -1163,8 +1769,8 @@ class IotConnectorCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.IotConnector"]] = None, **kwargs
-    ):
+        self, *, next_link: Optional[str] = None, value: Optional[List["_models.IotConnector"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of IoT Connectors.
         :paramtype next_link: str
@@ -1196,8 +1802,8 @@ class IotConnectorPatchResource(ResourceTags, ServiceManagedIdentity):
         *,
         identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword identity: Setting indicating whether the service has a managed identity associated
          with it.
@@ -1229,7 +1835,7 @@ class IotDestinationProperties(_serialization.Model):
         "provisioning_state": {"key": "provisioningState", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provisioning_state = None
@@ -1259,8 +1865,8 @@ class IotEventHubIngestionEndpointConfiguration(_serialization.Model):
         event_hub_name: Optional[str] = None,
         consumer_group: Optional[str] = None,
         fully_qualified_event_hub_namespace: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword event_hub_name: Event Hub name to connect to.
         :paramtype event_hub_name: str
@@ -1343,8 +1949,8 @@ class IotFhirDestination(LocationBasedResource):
         fhir_mapping: "_models.IotMappingProperties",
         etag: Optional[str] = None,
         location: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword etag: An etag associated with the resource, used for optimistic concurrency when
          editing it.
@@ -1384,8 +1990,12 @@ class IotFhirDestinationCollection(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.IotFhirDestination"]] = None, **kwargs
-    ):
+        self,
+        *,
+        next_link: Optional[str] = None,
+        value: Optional[List["_models.IotFhirDestination"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of IoT FHIR destinations.
         :paramtype next_link: str
@@ -1439,8 +2049,8 @@ class IotFhirDestinationProperties(IotDestinationProperties):
         resource_identity_resolution_type: Union[str, "_models.IotIdentityResolutionType"],
         fhir_service_resource_id: str,
         fhir_mapping: "_models.IotMappingProperties",
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword resource_identity_resolution_type: Determines how resource identity is resolved on the
          destination. Required. Known values are: "Create" and "Lookup".
@@ -1469,7 +2079,7 @@ class IotMappingProperties(_serialization.Model):
         "content": {"key": "content", "type": "object"},
     }
 
-    def __init__(self, *, content: Optional[JSON] = None, **kwargs):
+    def __init__(self, *, content: Optional[JSON] = None, **kwargs: Any) -> None:
         """
         :keyword content: The mapping.
         :paramtype content: JSON
@@ -1499,7 +2109,7 @@ class ListOperations(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, next_link: Optional[str] = None, **kwargs):
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword next_link: URL client should use to fetch the next page (per server side paging).
          It's null for now, added for future use.
@@ -1533,8 +2143,8 @@ class LogSpecification(_serialization.Model):
         name: Optional[str] = None,
         display_name: Optional[str] = None,
         blob_duration: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Name of the log.
         :paramtype name: str
@@ -1573,8 +2183,8 @@ class MetricDimension(_serialization.Model):
         name: Optional[str] = None,
         display_name: Optional[str] = None,
         to_be_exported_for_shoebox: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Name of the dimension.
         :paramtype name: str
@@ -1668,8 +2278,8 @@ class MetricSpecification(_serialization.Model):  # pylint: disable=too-many-ins
         source_mdm_namespace: Optional[str] = None,
         enable_regional_mdm_account: Optional[bool] = None,
         resource_id_dimension_name_override: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Name of the metric.
         :paramtype name: str
@@ -1768,8 +2378,8 @@ class OperationDetail(_serialization.Model):
         *,
         display: Optional["_models.OperationDisplay"] = None,
         properties: Optional["_models.OperationProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword display: Display of the operation.
         :paramtype display: ~azure.mgmt.healthcareapis.models.OperationDisplay
@@ -1814,7 +2424,7 @@ class OperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -1834,7 +2444,9 @@ class OperationProperties(_serialization.Model):
         "service_specification": {"key": "serviceSpecification", "type": "ServiceSpecification"},
     }
 
-    def __init__(self, *, service_specification: Optional["_models.ServiceSpecification"] = None, **kwargs):
+    def __init__(
+        self, *, service_specification: Optional["_models.ServiceSpecification"] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword service_specification: Service specifications of the operation.
         :paramtype service_specification: ~azure.mgmt.healthcareapis.models.ServiceSpecification
@@ -1880,7 +2492,7 @@ class OperationResultsDescription(_serialization.Model):
         "properties": {"key": "properties", "type": "object"},
     }
 
-    def __init__(self, *, properties: Optional[JSON] = None, **kwargs):
+    def __init__(self, *, properties: Optional[JSON] = None, **kwargs: Any) -> None:
         """
         :keyword properties: Additional properties of the operation result.
         :paramtype properties: JSON
@@ -1911,7 +2523,7 @@ class PrivateEndpoint(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -1944,7 +2556,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -2001,8 +2613,8 @@ class PrivateEndpointConnection(Resource):
         *,
         private_endpoint: Optional["_models.PrivateEndpoint"] = None,
         private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword private_endpoint: The resource of private end point.
         :paramtype private_endpoint: ~azure.mgmt.healthcareapis.models.PrivateEndpoint
@@ -2070,8 +2682,8 @@ class PrivateEndpointConnectionDescription(PrivateEndpointConnection):
         *,
         private_endpoint: Optional["_models.PrivateEndpoint"] = None,
         private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword private_endpoint: The resource of private end point.
         :paramtype private_endpoint: ~azure.mgmt.healthcareapis.models.PrivateEndpoint
@@ -2099,7 +2711,7 @@ class PrivateEndpointConnectionListResult(_serialization.Model):
         "value": {"key": "value", "type": "[PrivateEndpointConnection]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Array of private endpoint connections.
         :paramtype value: list[~azure.mgmt.healthcareapis.models.PrivateEndpointConnection]
@@ -2119,7 +2731,9 @@ class PrivateEndpointConnectionListResultDescription(_serialization.Model):
         "value": {"key": "value", "type": "[PrivateEndpointConnectionDescription]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnectionDescription"]] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.PrivateEndpointConnectionDescription"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: Array of private endpoint connections.
         :paramtype value: list[~azure.mgmt.healthcareapis.models.PrivateEndpointConnectionDescription]
@@ -2166,7 +2780,7 @@ class PrivateLinkResource(Resource):
         "required_zone_names": {"key": "properties.requiredZoneNames", "type": "[str]"},
     }
 
-    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword required_zone_names: The private link resource Private link DNS zone name.
         :paramtype required_zone_names: list[str]
@@ -2219,7 +2833,7 @@ class PrivateLinkResourceDescription(PrivateLinkResource):
         "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword required_zone_names: The private link resource Private link DNS zone name.
         :paramtype required_zone_names: list[str]
@@ -2239,7 +2853,9 @@ class PrivateLinkResourceListResultDescription(_serialization.Model):
         "value": {"key": "value", "type": "[PrivateLinkResourceDescription]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateLinkResourceDescription"]] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.PrivateLinkResourceDescription"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: Array of private link resources.
         :paramtype value: list[~azure.mgmt.healthcareapis.models.PrivateLinkResourceDescription]
@@ -2249,7 +2865,8 @@ class PrivateLinkResourceListResultDescription(_serialization.Model):
 
 
 class PrivateLinkServiceConnectionState(_serialization.Model):
-    """A collection of information about the state of the connection between service consumer and provider.
+    """A collection of information about the state of the connection between service consumer and
+    provider.
 
     :ivar status: Indicates whether the connection has been Approved/Rejected/Removed by the owner
      of the service. Known values are: "Pending", "Approved", and "Rejected".
@@ -2274,8 +2891,8 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         status: Optional[Union[str, "_models.PrivateEndpointServiceConnectionStatus"]] = None,
         description: Optional[str] = None,
         actions_required: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword status: Indicates whether the connection has been Approved/Rejected/Removed by the
          owner of the service. Known values are: "Pending", "Approved", and "Rejected".
@@ -2314,8 +2931,8 @@ class ResourceVersionPolicyConfiguration(_serialization.Model):
         *,
         default: Optional[Union[str, "_models.FhirResourceVersionPolicy"]] = None,
         resource_type_overrides: Optional[Dict[str, Union[str, "_models.FhirResourceVersionPolicy"]]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword default: The default value for tracking history across all resources. Known values
          are: "no-version", "versioned", and "versioned-update".
@@ -2350,7 +2967,7 @@ class ServiceAccessPolicyEntry(_serialization.Model):
         "object_id": {"key": "objectId", "type": "str"},
     }
 
-    def __init__(self, *, object_id: str, **kwargs):
+    def __init__(self, *, object_id: str, **kwargs: Any) -> None:
         """
         :keyword object_id: An Azure AD object ID (User or Apps) that is allowed access to the FHIR
          service. Required.
@@ -2379,8 +2996,8 @@ class ServiceAcrConfigurationInfo(_serialization.Model):
         *,
         login_servers: Optional[List[str]] = None,
         oci_artifacts: Optional[List["_models.ServiceOciArtifactEntry"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword login_servers: The list of the ACR login servers.
         :paramtype login_servers: list[str]
@@ -2415,8 +3032,8 @@ class ServiceAuthenticationConfigurationInfo(_serialization.Model):
         authority: Optional[str] = None,
         audience: Optional[str] = None,
         smart_proxy_enabled: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword authority: The authority url for the service.
         :paramtype authority: str
@@ -2466,8 +3083,8 @@ class ServiceCorsConfigurationInfo(_serialization.Model):
         methods: Optional[List[str]] = None,
         max_age: Optional[int] = None,
         allow_credentials: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword origins: The origins to be allowed via CORS.
         :paramtype origins: list[str]
@@ -2498,7 +3115,7 @@ class ServiceCosmosDbConfigurationInfo(_serialization.Model):
     """
 
     _validation = {
-        "offer_throughput": {"maximum": 10000, "minimum": 400},
+        "offer_throughput": {"minimum": 400},
     }
 
     _attribute_map = {
@@ -2506,7 +3123,9 @@ class ServiceCosmosDbConfigurationInfo(_serialization.Model):
         "key_vault_key_uri": {"key": "keyVaultKeyUri", "type": "str"},
     }
 
-    def __init__(self, *, offer_throughput: Optional[int] = None, key_vault_key_uri: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, offer_throughput: Optional[int] = None, key_vault_key_uri: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword offer_throughput: The provisioned throughput for the backing database.
         :paramtype offer_throughput: int
@@ -2529,7 +3148,7 @@ class ServiceExportConfigurationInfo(_serialization.Model):
         "storage_account_name": {"key": "storageAccountName", "type": "str"},
     }
 
-    def __init__(self, *, storage_account_name: Optional[str] = None, **kwargs):
+    def __init__(self, *, storage_account_name: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword storage_account_name: The name of the default export storage account.
         :paramtype storage_account_name: str
@@ -2561,8 +3180,8 @@ class ServiceImportConfigurationInfo(_serialization.Model):
         integration_data_store: Optional[str] = None,
         initial_import_mode: Optional[bool] = None,
         enabled: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword integration_data_store: The name of the default integration storage account.
         :paramtype integration_data_store: str
@@ -2620,8 +3239,8 @@ class ServiceManagedIdentityIdentity(_serialization.Model):
         *,
         type: Union[str, "_models.ServiceManagedIdentityType"],
         user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword type: Type of identity being specified, currently SystemAssigned and None are allowed.
          Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
@@ -2664,8 +3283,8 @@ class ServiceOciArtifactEntry(_serialization.Model):
         login_server: Optional[str] = None,
         image_name: Optional[str] = None,
         digest: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword login_server: The Azure Container Registry login server.
         :paramtype login_server: str
@@ -2735,8 +3354,8 @@ class ServicesResource(_serialization.Model):
         tags: Optional[Dict[str, str]] = None,
         etag: Optional[str] = None,
         identity: Optional["_models.ServicesResourceIdentity"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword kind: The kind of the service. Required. Known values are: "fhir", "fhir-Stu3", and
          "fhir-R4".
@@ -2826,8 +3445,8 @@ class ServicesDescription(ServicesResource):
         etag: Optional[str] = None,
         identity: Optional["_models.ServicesResourceIdentity"] = None,
         properties: Optional["_models.ServicesProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword kind: The kind of the service. Required. Known values are: "fhir", "fhir-Stu3", and
          "fhir-R4".
@@ -2865,8 +3484,12 @@ class ServicesDescriptionListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.ServicesDescription"]] = None, **kwargs
-    ):
+        self,
+        *,
+        next_link: Optional[str] = None,
+        value: Optional[List["_models.ServicesDescription"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page of service description objects.
         :paramtype next_link: str
@@ -2902,7 +3525,7 @@ class ServicesNameAvailabilityInfo(_serialization.Model):
         "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(self, *, message: Optional[str] = None, **kwargs):
+    def __init__(self, *, message: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword message: The detailed reason message.
         :paramtype message: str
@@ -2933,8 +3556,8 @@ class ServicesPatchDescription(_serialization.Model):
         *,
         tags: Optional[Dict[str, str]] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Instance tags.
         :paramtype tags: dict[str, str]
@@ -2966,8 +3589,8 @@ class ServiceSpecification(_serialization.Model):
         *,
         log_specifications: Optional[List["_models.LogSpecification"]] = None,
         metric_specifications: Optional[List["_models.MetricSpecification"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword log_specifications: Specifications of the Log for Azure Monitoring.
         :paramtype log_specifications: list[~azure.mgmt.healthcareapis.models.LogSpecification]
@@ -3046,8 +3669,8 @@ class ServicesProperties(_serialization.Model):
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         acr_configuration: Optional["_models.ServiceAcrConfigurationInfo"] = None,
         import_configuration: Optional["_models.ServiceImportConfigurationInfo"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword access_policies: The access policies of the service instance.
         :paramtype access_policies: list[~azure.mgmt.healthcareapis.models.ServiceAccessPolicyEntry]
@@ -3115,7 +3738,9 @@ class ServicesResourceIdentity(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, type: Optional[Union[str, "_models.ManagedServiceIdentityType"]] = None, **kwargs):
+    def __init__(
+        self, *, type: Optional[Union[str, "_models.ManagedServiceIdentityType"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword type: Type of identity being specified, currently SystemAssigned and None are allowed.
          Known values are: "SystemAssigned" and "None".
@@ -3164,8 +3789,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -3212,7 +3837,7 @@ class UserAssignedIdentity(_serialization.Model):
         "client_id": {"key": "clientId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.principal_id = None
@@ -3268,8 +3893,8 @@ class Workspace(TaggedResource):
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
         properties: Optional["_models.WorkspaceProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword etag: An etag associated with the resource, used for optimistic concurrency when
          editing it.
@@ -3300,7 +3925,9 @@ class WorkspaceList(_serialization.Model):
         "value": {"key": "value", "type": "[Workspace]"},
     }
 
-    def __init__(self, *, next_link: Optional[str] = None, value: Optional[List["_models.Workspace"]] = None, **kwargs):
+    def __init__(
+        self, *, next_link: Optional[str] = None, value: Optional[List["_models.Workspace"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: The link used to get the next page.
         :paramtype next_link: str
@@ -3323,7 +3950,7 @@ class WorkspacePatchResource(ResourceTags):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -3360,7 +3987,9 @@ class WorkspaceProperties(_serialization.Model):
         "public_network_access": {"key": "publicNetworkAccess", "type": "str"},
     }
 
-    def __init__(self, *, public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None, **kwargs):
+    def __init__(
+        self, *, public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword public_network_access: Control permission for data plane traffic coming from public
          networks while private endpoint is enabled. Known values are: "Enabled" and "Disabled".

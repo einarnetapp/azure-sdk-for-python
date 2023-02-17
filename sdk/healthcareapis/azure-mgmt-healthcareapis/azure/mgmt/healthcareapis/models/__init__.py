@@ -6,6 +6,17 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import AnalyticsConnector
+from ._models_py3 import AnalyticsConnectorCollection
+from ._models_py3 import AnalyticsConnectorDataDestination
+from ._models_py3 import AnalyticsConnectorDataLakeDataDestination
+from ._models_py3 import AnalyticsConnectorDataSource
+from ._models_py3 import AnalyticsConnectorDicomServiceDataSource
+from ._models_py3 import AnalyticsConnectorDicomToParquetMapping
+from ._models_py3 import AnalyticsConnectorFhirServiceDataSource
+from ._models_py3 import AnalyticsConnectorFhirToParquetMapping
+from ._models_py3 import AnalyticsConnectorMapping
+from ._models_py3 import AnalyticsConnectorPatchResource
 from ._models_py3 import CheckNameAvailabilityParameters
 from ._models_py3 import CorsConfiguration
 from ._models_py3 import DicomService
@@ -24,6 +35,7 @@ from ._models_py3 import FhirServiceCorsConfiguration
 from ._models_py3 import FhirServiceExportConfiguration
 from ._models_py3 import FhirServiceImportConfiguration
 from ._models_py3 import FhirServicePatchResource
+from ._models_py3 import ImplementationGuidesConfiguration
 from ._models_py3 import IotConnector
 from ._models_py3 import IotConnectorCollection
 from ._models_py3 import IotConnectorPatchResource
@@ -82,9 +94,13 @@ from ._models_py3 import WorkspacePatchResource
 from ._models_py3 import WorkspaceProperties
 
 from ._healthcare_apis_management_client_enums import ActionType
+from ._healthcare_apis_management_client_enums import AnalyticsConnectorDataDestinationType
+from ._healthcare_apis_management_client_enums import AnalyticsConnectorDataSourceType
+from ._healthcare_apis_management_client_enums import AnalyticsConnectorMappingType
 from ._healthcare_apis_management_client_enums import CreatedByType
 from ._healthcare_apis_management_client_enums import FhirResourceVersionPolicy
 from ._healthcare_apis_management_client_enums import FhirServiceKind
+from ._healthcare_apis_management_client_enums import FhirServiceVersion
 from ._healthcare_apis_management_client_enums import IotIdentityResolutionType
 from ._healthcare_apis_management_client_enums import Kind
 from ._healthcare_apis_management_client_enums import ManagedServiceIdentityType
@@ -101,6 +117,17 @@ from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "AnalyticsConnector",
+    "AnalyticsConnectorCollection",
+    "AnalyticsConnectorDataDestination",
+    "AnalyticsConnectorDataLakeDataDestination",
+    "AnalyticsConnectorDataSource",
+    "AnalyticsConnectorDicomServiceDataSource",
+    "AnalyticsConnectorDicomToParquetMapping",
+    "AnalyticsConnectorFhirServiceDataSource",
+    "AnalyticsConnectorFhirToParquetMapping",
+    "AnalyticsConnectorMapping",
+    "AnalyticsConnectorPatchResource",
     "CheckNameAvailabilityParameters",
     "CorsConfiguration",
     "DicomService",
@@ -119,6 +146,7 @@ __all__ = [
     "FhirServiceExportConfiguration",
     "FhirServiceImportConfiguration",
     "FhirServicePatchResource",
+    "ImplementationGuidesConfiguration",
     "IotConnector",
     "IotConnectorCollection",
     "IotConnectorPatchResource",
@@ -176,9 +204,13 @@ __all__ = [
     "WorkspacePatchResource",
     "WorkspaceProperties",
     "ActionType",
+    "AnalyticsConnectorDataDestinationType",
+    "AnalyticsConnectorDataSourceType",
+    "AnalyticsConnectorMappingType",
     "CreatedByType",
     "FhirResourceVersionPolicy",
     "FhirServiceKind",
+    "FhirServiceVersion",
     "IotIdentityResolutionType",
     "Kind",
     "ManagedServiceIdentityType",
