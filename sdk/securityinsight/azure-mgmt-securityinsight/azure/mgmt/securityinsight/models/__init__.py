@@ -42,6 +42,7 @@ from ._models_py3 import AlertRuleTemplateWithMitreProperties
 from ._models_py3 import AlertRuleTemplatesList
 from ._models_py3 import AlertRulesList
 from ._models_py3 import AlertsDataTypeOfDataConnector
+from ._models_py3 import AnalyticsRuleRunTrigger
 from ._models_py3 import Anomalies
 from ._models_py3 import AnomalySecurityMLAnalyticsSettings
 from ._models_py3 import AnomalyTimelineItem
@@ -240,12 +241,12 @@ from ._models_py3 import MSTICheckRequirements
 from ._models_py3 import MSTICheckRequirementsProperties
 from ._models_py3 import MSTIDataConnector
 from ._models_py3 import MSTIDataConnectorDataTypes
-from ._models_py3 import MSTIDataConnectorDataTypesBingSafetyPhishingURL
 from ._models_py3 import MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed
 from ._models_py3 import MSTIDataConnectorProperties
 from ._models_py3 import MTPCheckRequirementsProperties
 from ._models_py3 import MTPDataConnector
 from ._models_py3 import MTPDataConnectorDataTypes
+from ._models_py3 import MTPDataConnectorDataTypesAlerts
 from ._models_py3 import MTPDataConnectorDataTypesIncidents
 from ._models_py3 import MTPDataConnectorProperties
 from ._models_py3 import MailClusterEntity
@@ -265,12 +266,19 @@ from ._models_py3 import MetadataModel
 from ._models_py3 import MetadataPatch
 from ._models_py3 import MetadataSource
 from ._models_py3 import MetadataSupport
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirements
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirementsProperties
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypes
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypesLogs
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnector
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnectorProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRule
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleCommonProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleTemplate
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties
 from ._models_py3 import MtpCheckRequirements
+from ._models_py3 import MtpFilteredProviders
 from ._models_py3 import NicEntity
 from ._models_py3 import NicEntityProperties
 from ._models_py3 import NrtAlertRule
@@ -397,6 +405,8 @@ from ._models_py3 import TiTaxiiDataConnectorProperties
 from ._models_py3 import TimelineAggregation
 from ._models_py3 import TimelineError
 from ._models_py3 import TimelineResultsMetadata
+from ._models_py3 import TriggeredAnalyticsRuleRun
+from ._models_py3 import TriggeredAnalyticsRuleRuns
 from ._models_py3 import Ueba
 from ._models_py3 import UrlEntity
 from ._models_py3 import UrlEntityProperties
@@ -474,6 +484,7 @@ from ._security_insights_enums import KillChainIntent
 from ._security_insights_enums import Kind
 from ._security_insights_enums import MatchingMethod
 from ._security_insights_enums import MicrosoftSecurityProductName
+from ._security_insights_enums import MtpProvider
 from ._security_insights_enums import OSFamily
 from ._security_insights_enums import Operator
 from ._security_insights_enums import OutputType
@@ -482,6 +493,7 @@ from ._security_insights_enums import PermissionProviderScope
 from ._security_insights_enums import PollingFrequency
 from ._security_insights_enums import Priority
 from ._security_insights_enums import ProviderName
+from ._security_insights_enums import ProvisioningState
 from ._security_insights_enums import RegistryHive
 from ._security_insights_enums import RegistryValueKind
 from ._security_insights_enums import RepoType
@@ -542,6 +554,7 @@ __all__ = [
     "AlertRuleTemplatesList",
     "AlertRulesList",
     "AlertsDataTypeOfDataConnector",
+    "AnalyticsRuleRunTrigger",
     "Anomalies",
     "AnomalySecurityMLAnalyticsSettings",
     "AnomalyTimelineItem",
@@ -740,12 +753,12 @@ __all__ = [
     "MSTICheckRequirementsProperties",
     "MSTIDataConnector",
     "MSTIDataConnectorDataTypes",
-    "MSTIDataConnectorDataTypesBingSafetyPhishingURL",
     "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
     "MSTIDataConnectorProperties",
     "MTPCheckRequirementsProperties",
     "MTPDataConnector",
     "MTPDataConnectorDataTypes",
+    "MTPDataConnectorDataTypesAlerts",
     "MTPDataConnectorDataTypesIncidents",
     "MTPDataConnectorProperties",
     "MailClusterEntity",
@@ -765,12 +778,19 @@ __all__ = [
     "MetadataPatch",
     "MetadataSource",
     "MetadataSupport",
+    "MicrosoftPurviewInformationProtectionCheckRequirements",
+    "MicrosoftPurviewInformationProtectionCheckRequirementsProperties",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypes",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypesLogs",
+    "MicrosoftPurviewInformationProtectionDataConnector",
+    "MicrosoftPurviewInformationProtectionDataConnectorProperties",
     "MicrosoftSecurityIncidentCreationAlertRule",
     "MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
     "MicrosoftSecurityIncidentCreationAlertRuleProperties",
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate",
     "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
     "MtpCheckRequirements",
+    "MtpFilteredProviders",
     "NicEntity",
     "NicEntityProperties",
     "NrtAlertRule",
@@ -897,6 +917,8 @@ __all__ = [
     "TimelineAggregation",
     "TimelineError",
     "TimelineResultsMetadata",
+    "TriggeredAnalyticsRuleRun",
+    "TriggeredAnalyticsRuleRuns",
     "Ueba",
     "UrlEntity",
     "UrlEntityProperties",
@@ -973,6 +995,7 @@ __all__ = [
     "Kind",
     "MatchingMethod",
     "MicrosoftSecurityProductName",
+    "MtpProvider",
     "OSFamily",
     "Operator",
     "OutputType",
@@ -981,6 +1004,7 @@ __all__ = [
     "PollingFrequency",
     "Priority",
     "ProviderName",
+    "ProvisioningState",
     "RegistryHive",
     "RegistryValueKind",
     "RepoType",
