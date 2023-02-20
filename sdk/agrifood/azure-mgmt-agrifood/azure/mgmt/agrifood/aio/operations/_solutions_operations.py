@@ -69,6 +69,7 @@ class SolutionsOperations:
         self,
         resource_group_name: str,
         farm_beats_resource_name: str,
+        solution_id: str,
         body: Optional[_models.SolutionInstallationRequest] = None,
         *,
         content_type: str = "application/json",
@@ -81,6 +82,8 @@ class SolutionsOperations:
         :type resource_group_name: str
         :param farm_beats_resource_name: FarmBeats resource name. Required.
         :type farm_beats_resource_name: str
+        :param solution_id: Solution Id of the solution. Required.
+        :type solution_id: str
         :param body: Solution resource request body. Default value is None.
         :type body: ~azure.mgmt.agrifood.models.SolutionInstallationRequest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -97,6 +100,7 @@ class SolutionsOperations:
         self,
         resource_group_name: str,
         farm_beats_resource_name: str,
+        solution_id: str,
         body: Optional[IO] = None,
         *,
         content_type: str = "application/json",
@@ -109,6 +113,8 @@ class SolutionsOperations:
         :type resource_group_name: str
         :param farm_beats_resource_name: FarmBeats resource name. Required.
         :type farm_beats_resource_name: str
+        :param solution_id: Solution Id of the solution. Required.
+        :type solution_id: str
         :param body: Solution resource request body. Default value is None.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -125,6 +131,7 @@ class SolutionsOperations:
         self,
         resource_group_name: str,
         farm_beats_resource_name: str,
+        solution_id: str,
         body: Optional[Union[_models.SolutionInstallationRequest, IO]] = None,
         **kwargs: Any
     ) -> _models.Solution:
@@ -135,8 +142,10 @@ class SolutionsOperations:
         :type resource_group_name: str
         :param farm_beats_resource_name: FarmBeats resource name. Required.
         :type farm_beats_resource_name: str
-        :param body: Solution resource request body. Is either a model type or a IO type. Default value
-         is None.
+        :param solution_id: Solution Id of the solution. Required.
+        :type solution_id: str
+        :param body: Solution resource request body. Is either a SolutionInstallationRequest type or a
+         IO type. Default value is None.
         :type body: ~azure.mgmt.agrifood.models.SolutionInstallationRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -177,8 +186,8 @@ class SolutionsOperations:
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             farm_beats_resource_name=farm_beats_resource_name,
+            solution_id=solution_id,
             subscription_id=self._config.subscription_id,
-            solution_id=self._config.solution_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -217,7 +226,9 @@ class SolutionsOperations:
     }
 
     @distributed_trace_async
-    async def get(self, resource_group_name: str, farm_beats_resource_name: str, **kwargs: Any) -> _models.Solution:
+    async def get(
+        self, resource_group_name: str, farm_beats_resource_name: str, solution_id: str, **kwargs: Any
+    ) -> _models.Solution:
         """Get installed Solution details by Solution id.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -225,6 +236,8 @@ class SolutionsOperations:
         :type resource_group_name: str
         :param farm_beats_resource_name: FarmBeats resource name. Required.
         :type farm_beats_resource_name: str
+        :param solution_id: Solution Id of the solution. Required.
+        :type solution_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Solution or the result of cls(response)
         :rtype: ~azure.mgmt.agrifood.models.Solution
@@ -249,8 +262,8 @@ class SolutionsOperations:
         request = build_get_request(
             resource_group_name=resource_group_name,
             farm_beats_resource_name=farm_beats_resource_name,
+            solution_id=solution_id,
             subscription_id=self._config.subscription_id,
-            solution_id=self._config.solution_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
             headers=_headers,
@@ -283,7 +296,7 @@ class SolutionsOperations:
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, farm_beats_resource_name: str, **kwargs: Any
+        self, resource_group_name: str, farm_beats_resource_name: str, solution_id: str, **kwargs: Any
     ) -> None:
         """Uninstall Solution.
 
@@ -292,6 +305,8 @@ class SolutionsOperations:
         :type resource_group_name: str
         :param farm_beats_resource_name: FarmBeats resource name. Required.
         :type farm_beats_resource_name: str
+        :param solution_id: Solution Id of the solution. Required.
+        :type solution_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -316,8 +331,8 @@ class SolutionsOperations:
         request = build_delete_request(
             resource_group_name=resource_group_name,
             farm_beats_resource_name=farm_beats_resource_name,
+            solution_id=solution_id,
             subscription_id=self._config.subscription_id,
-            solution_id=self._config.solution_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
             headers=_headers,

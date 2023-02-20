@@ -312,8 +312,8 @@ class ExtensionsOperations:
         :type farm_beats_resource_name: str
         :param extension_id: Id of extension resource. Required.
         :type extension_id: str
-        :param request_body: Extension resource request body. Is either a model type or a IO type.
-         Default value is None.
+        :param request_body: Extension resource request body. Is either a ExtensionInstallationRequest
+         type or a IO type. Default value is None.
         :type request_body: ~azure.mgmt.agrifood.models.ExtensionInstallationRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

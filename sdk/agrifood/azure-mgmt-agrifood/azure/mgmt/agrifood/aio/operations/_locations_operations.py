@@ -95,7 +95,8 @@ class LocationsOperations:
     ) -> _models.CheckNameAvailabilityResponse:
         """Checks the name availability of the resource with requested resource name.
 
-        :param body: NameAvailabilityRequest object. Is either a model type or a IO type. Required.
+        :param body: NameAvailabilityRequest object. Is either a CheckNameAvailabilityRequest type or a
+         IO type. Required.
         :type body: ~azure.mgmt.agrifood.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
