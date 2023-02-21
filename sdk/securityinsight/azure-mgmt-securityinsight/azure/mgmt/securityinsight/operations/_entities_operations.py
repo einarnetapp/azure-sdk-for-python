@@ -47,8 +47,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -89,8 +89,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -132,8 +132,8 @@ def build_expand_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -184,8 +184,8 @@ def build_queries_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -228,8 +228,8 @@ def build_get_insights_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -304,7 +304,7 @@ class EntitiesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.EntityList] = kwargs.pop("cls", None)
@@ -404,7 +404,7 @@ class EntitiesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Entity] = kwargs.pop("cls", None)
@@ -526,7 +526,7 @@ class EntitiesOperations:
         :param entity_id: entity ID. Required.
         :type entity_id: str
         :param parameters: The parameters required to execute an expand operation on the given entity.
-         Is either a model type or a IO type. Required.
+         Is either a EntityExpandParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.securityinsight.models.EntityExpandParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -547,7 +547,7 @@ class EntitiesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -634,7 +634,7 @@ class EntitiesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.GetQueriesResponse] = kwargs.pop("cls", None)
@@ -755,7 +755,7 @@ class EntitiesOperations:
         :param entity_id: entity ID. Required.
         :type entity_id: str
         :param parameters: The parameters required to execute insights on the given entity. Is either a
-         model type or a IO type. Required.
+         EntityGetInsightsParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.securityinsight.models.EntityGetInsightsParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -776,7 +776,7 @@ class EntitiesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

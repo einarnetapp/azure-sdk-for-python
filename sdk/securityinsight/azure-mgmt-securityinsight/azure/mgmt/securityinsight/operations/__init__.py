@@ -14,6 +14,14 @@ from ._incidents_operations import IncidentsOperations
 from ._bookmarks_operations import BookmarksOperations
 from ._bookmark_relations_operations import BookmarkRelationsOperations
 from ._bookmark_operations import BookmarkOperations
+from ._content_packages_operations import ContentPackagesOperations
+from ._content_package_operations import ContentPackageOperations
+from ._product_packages_operations import ProductPackagesOperations
+from ._product_package_operations import ProductPackageOperations
+from ._product_templates_operations import ProductTemplatesOperations
+from ._product_template_operations import ProductTemplateOperations
+from ._content_templates_operations import ContentTemplatesOperations
+from ._content_template_operations import ContentTemplateOperations
 from ._ip_geodata_operations import IPGeodataOperations
 from ._domain_whois_operations import DomainWhoisOperations
 from ._entities_operations import EntitiesOperations
@@ -39,6 +47,9 @@ from ._source_controls_operations import SourceControlsOperations
 from ._threat_intelligence_indicator_operations import ThreatIntelligenceIndicatorOperations
 from ._threat_intelligence_indicators_operations import ThreatIntelligenceIndicatorsOperations
 from ._threat_intelligence_indicator_metrics_operations import ThreatIntelligenceIndicatorMetricsOperations
+from ._triggered_analytics_rule_run_operations import TriggeredAnalyticsRuleRunOperations
+from ._get_triggered_analytics_rule_runs_operations import GetTriggeredAnalyticsRuleRunsOperations
+from ._alert_rule_operations import AlertRuleOperations
 from ._watchlists_operations import WatchlistsOperations
 from ._watchlist_items_operations import WatchlistItemsOperations
 from ._data_connectors_operations import DataConnectorsOperations
@@ -58,6 +69,14 @@ __all__ = [
     "BookmarksOperations",
     "BookmarkRelationsOperations",
     "BookmarkOperations",
+    "ContentPackagesOperations",
+    "ContentPackageOperations",
+    "ProductPackagesOperations",
+    "ProductPackageOperations",
+    "ProductTemplatesOperations",
+    "ProductTemplateOperations",
+    "ContentTemplatesOperations",
+    "ContentTemplateOperations",
     "IPGeodataOperations",
     "DomainWhoisOperations",
     "EntitiesOperations",
@@ -83,6 +102,9 @@ __all__ = [
     "ThreatIntelligenceIndicatorOperations",
     "ThreatIntelligenceIndicatorsOperations",
     "ThreatIntelligenceIndicatorMetricsOperations",
+    "TriggeredAnalyticsRuleRunOperations",
+    "GetTriggeredAnalyticsRuleRunsOperations",
+    "AlertRuleOperations",
     "WatchlistsOperations",
     "WatchlistItemsOperations",
     "DataConnectorsOperations",
