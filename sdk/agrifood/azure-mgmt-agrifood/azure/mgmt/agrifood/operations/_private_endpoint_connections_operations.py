@@ -306,7 +306,7 @@ class PrivateEndpointConnectionsOperations:
         :type farm_beats_resource_name: str
         :param private_endpoint_connection_name: Private endpoint connection name. Required.
         :type private_endpoint_connection_name: str
-        :param body: Request object. Is either a model type or a IO type. Required.
+        :param body: Request object. Is either a PrivateEndpointConnection type or a IO type. Required.
         :type body: ~azure.mgmt.agrifood.models.PrivateEndpointConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
