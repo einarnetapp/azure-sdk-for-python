@@ -60,7 +60,9 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -107,7 +109,9 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -141,7 +145,9 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -175,7 +181,9 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -212,7 +220,9 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -251,7 +261,9 @@ def build_list_keys_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -285,7 +297,9 @@ def build_regenerate_keys_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -322,7 +336,9 @@ def build_get_token_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -420,7 +436,7 @@ class OnlineEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.OnlineEndpointTrackedResourceArmPaginatedResult] = kwargs.pop("cls", None)
@@ -515,7 +531,7 @@ class OnlineEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -589,7 +605,7 @@ class OnlineEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -614,7 +630,9 @@ class OnlineEndpointsOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -663,7 +681,7 @@ class OnlineEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.OnlineEndpoint] = kwargs.pop("cls", None)
@@ -722,7 +740,7 @@ class OnlineEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -889,8 +907,8 @@ class OnlineEndpointsOperations:
         :type workspace_name: str
         :param endpoint_name: Online Endpoint name. Required.
         :type endpoint_name: str
-        :param body: Online Endpoint entity to apply during operation. Is either a model type or a IO
-         type. Required.
+        :param body: Online Endpoint entity to apply during operation. Is either a
+         PartialMinimalTrackedResourceWithIdentity type or a IO type. Required.
         :type body:
          ~azure.mgmt.machinelearningservices.models.PartialMinimalTrackedResourceWithIdentity or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -913,7 +931,7 @@ class OnlineEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -980,7 +998,7 @@ class OnlineEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1148,8 +1166,8 @@ class OnlineEndpointsOperations:
         :type workspace_name: str
         :param endpoint_name: Online Endpoint name. Required.
         :type endpoint_name: str
-        :param body: Online Endpoint entity to apply during operation. Is either a model type or a IO
-         type. Required.
+        :param body: Online Endpoint entity to apply during operation. Is either a OnlineEndpoint type
+         or a IO type. Required.
         :type body: ~azure.mgmt.machinelearningservices.models.OnlineEndpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1171,7 +1189,7 @@ class OnlineEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1201,7 +1219,9 @@ class OnlineEndpointsOperations:
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "original-uri"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -1250,7 +1270,7 @@ class OnlineEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.EndpointAuthKeys] = kwargs.pop("cls", None)
@@ -1309,7 +1329,7 @@ class OnlineEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1462,7 +1482,8 @@ class OnlineEndpointsOperations:
         :type workspace_name: str
         :param endpoint_name: Online Endpoint name. Required.
         :type endpoint_name: str
-        :param body: RegenerateKeys request . Is either a model type or a IO type. Required.
+        :param body: RegenerateKeys request . Is either a RegenerateEndpointKeysRequest type or a IO
+         type. Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RegenerateEndpointKeysRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1482,7 +1503,7 @@ class OnlineEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1561,7 +1582,7 @@ class OnlineEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.EndpointAuthToken] = kwargs.pop("cls", None)
