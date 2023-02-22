@@ -93,7 +93,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServicesDescription] = kwargs.pop("cls", None)
@@ -150,7 +150,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -294,8 +294,8 @@ class ServicesOperations:
         :type resource_group_name: str
         :param resource_name: The name of the service instance. Required.
         :type resource_name: str
-        :param service_description: The service instance metadata. Is either a model type or a IO type.
-         Required.
+        :param service_description: The service instance metadata. Is either a ServicesDescription type
+         or a IO type. Required.
         :type service_description: ~azure.mgmt.healthcareapis.models.ServicesDescription or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -317,7 +317,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -382,7 +382,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -525,7 +525,7 @@ class ServicesOperations:
         :param resource_name: The name of the service instance. Required.
         :type resource_name: str
         :param service_patch_description: The service instance metadata and security metadata. Is
-         either a model type or a IO type. Required.
+         either a ServicesPatchDescription type or a IO type. Required.
         :type service_patch_description: ~azure.mgmt.healthcareapis.models.ServicesPatchDescription or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -548,7 +548,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -609,7 +609,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -668,7 +668,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -723,7 +723,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServicesDescriptionListResult] = kwargs.pop("cls", None)
@@ -811,7 +811,7 @@ class ServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ServicesDescriptionListResult] = kwargs.pop("cls", None)
@@ -935,7 +935,7 @@ class ServicesOperations:
 
         :param check_name_availability_inputs: Set the name parameter in the
          CheckNameAvailabilityParameters structure to the name of the service instance to check. Is
-         either a model type or a IO type. Required.
+         either a CheckNameAvailabilityParameters type or a IO type. Required.
         :type check_name_availability_inputs:
          ~azure.mgmt.healthcareapis.models.CheckNameAvailabilityParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -957,7 +957,7 @@ class ServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

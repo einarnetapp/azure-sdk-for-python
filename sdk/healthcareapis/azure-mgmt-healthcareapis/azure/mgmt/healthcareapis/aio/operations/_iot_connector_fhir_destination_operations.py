@@ -97,7 +97,7 @@ class IotConnectorFhirDestinationOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IotFhirDestination] = kwargs.pop("cls", None)
@@ -158,7 +158,7 @@ class IotConnectorFhirDestinationOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -328,7 +328,7 @@ class IotConnectorFhirDestinationOperations:
         :param fhir_destination_name: The name of IoT Connector FHIR destination resource. Required.
         :type fhir_destination_name: str
         :param iot_fhir_destination: The parameters for creating or updating an IoT Connector FHIR
-         destination resource. Is either a model type or a IO type. Required.
+         destination resource. Is either a IotFhirDestination type or a IO type. Required.
         :type iot_fhir_destination: ~azure.mgmt.healthcareapis.models.IotFhirDestination or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -350,7 +350,7 @@ class IotConnectorFhirDestinationOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -418,7 +418,7 @@ class IotConnectorFhirDestinationOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -490,7 +490,7 @@ class IotConnectorFhirDestinationOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)

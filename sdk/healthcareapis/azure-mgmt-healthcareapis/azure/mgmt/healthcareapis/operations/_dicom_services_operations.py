@@ -49,7 +49,7 @@ def build_list_by_workspace_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -61,7 +61,7 @@ def build_list_by_workspace_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
     }
 
@@ -82,7 +82,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -94,7 +94,7 @@ def build_get_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
         "dicomServiceName": _SERIALIZER.url(
             "dicom_service_name", dicom_service_name, "str", max_length=24, min_length=3
@@ -118,7 +118,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -131,7 +131,7 @@ def build_create_or_update_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
         "dicomServiceName": _SERIALIZER.url(
             "dicom_service_name", dicom_service_name, "str", max_length=24, min_length=3
@@ -157,7 +157,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -170,7 +170,7 @@ def build_update_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "dicomServiceName": _SERIALIZER.url(
             "dicom_service_name", dicom_service_name, "str", max_length=24, min_length=3
         ),
@@ -196,7 +196,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))
+    api_version: Literal["2022-12-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -205,7 +205,7 @@ def build_delete_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
@@ -264,7 +264,7 @@ class DicomServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DicomServiceCollection] = kwargs.pop("cls", None)
@@ -367,7 +367,7 @@ class DicomServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DicomService] = kwargs.pop("cls", None)
@@ -426,7 +426,7 @@ class DicomServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -584,7 +584,7 @@ class DicomServicesOperations:
         :param dicom_service_name: The name of DICOM Service resource. Required.
         :type dicom_service_name: str
         :param dicomservice: The parameters for creating or updating a Dicom Service resource. Is
-         either a model type or a IO type. Required.
+         either a DicomService type or a IO type. Required.
         :type dicomservice: ~azure.mgmt.healthcareapis.models.DicomService or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -605,7 +605,7 @@ class DicomServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -672,7 +672,7 @@ class DicomServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -825,7 +825,7 @@ class DicomServicesOperations:
         :param workspace_name: The name of workspace resource. Required.
         :type workspace_name: str
         :param dicomservice_patch_resource: The parameters for updating a Dicom Service. Is either a
-         model type or a IO type. Required.
+         DicomServicePatchResource type or a IO type. Required.
         :type dicomservice_patch_resource: ~azure.mgmt.healthcareapis.models.DicomServicePatchResource
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -847,7 +847,7 @@ class DicomServicesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -909,7 +909,7 @@ class DicomServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -973,7 +973,7 @@ class DicomServicesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2022-12-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
