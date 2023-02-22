@@ -17,6 +17,7 @@ from ._configuration import SecurityInsightsConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
     ActionsOperations,
+    AlertRuleOperations,
     AlertRuleTemplatesOperations,
     AlertRulesOperations,
     AutomationRulesOperations,
@@ -35,6 +36,10 @@ from .operations import (
     FileImportsOperations,
     GetOperations,
     GetRecommendationsOperations,
+    GetTriggeredAnalyticsRuleRunsOperations,
+    HuntCommentsOperations,
+    HuntRelationsOperations,
+    HuntsOperations,
     IPGeodataOperations,
     IncidentCommentsOperations,
     IncidentRelationsOperations,
@@ -51,6 +56,7 @@ from .operations import (
     ThreatIntelligenceIndicatorMetricsOperations,
     ThreatIntelligenceIndicatorOperations,
     ThreatIntelligenceIndicatorsOperations,
+    TriggeredAnalyticsRuleRunOperations,
     UpdateOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
@@ -101,6 +107,12 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
      azure.mgmt.securityinsight.operations.EntityQueryTemplatesOperations
     :ivar file_imports: FileImportsOperations operations
     :vartype file_imports: azure.mgmt.securityinsight.operations.FileImportsOperations
+    :ivar hunts: HuntsOperations operations
+    :vartype hunts: azure.mgmt.securityinsight.operations.HuntsOperations
+    :ivar hunt_relations: HuntRelationsOperations operations
+    :vartype hunt_relations: azure.mgmt.securityinsight.operations.HuntRelationsOperations
+    :ivar hunt_comments: HuntCommentsOperations operations
+    :vartype hunt_comments: azure.mgmt.securityinsight.operations.HuntCommentsOperations
     :ivar incident_comments: IncidentCommentsOperations operations
     :vartype incident_comments: azure.mgmt.securityinsight.operations.IncidentCommentsOperations
     :ivar incident_relations: IncidentRelationsOperations operations
@@ -140,6 +152,14 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
      operations
     :vartype threat_intelligence_indicator_metrics:
      azure.mgmt.securityinsight.operations.ThreatIntelligenceIndicatorMetricsOperations
+    :ivar triggered_analytics_rule_run: TriggeredAnalyticsRuleRunOperations operations
+    :vartype triggered_analytics_rule_run:
+     azure.mgmt.securityinsight.operations.TriggeredAnalyticsRuleRunOperations
+    :ivar get_triggered_analytics_rule_runs: GetTriggeredAnalyticsRuleRunsOperations operations
+    :vartype get_triggered_analytics_rule_runs:
+     azure.mgmt.securityinsight.operations.GetTriggeredAnalyticsRuleRunsOperations
+    :ivar alert_rule: AlertRuleOperations operations
+    :vartype alert_rule: azure.mgmt.securityinsight.operations.AlertRuleOperations
     :ivar watchlists: WatchlistsOperations operations
     :vartype watchlists: azure.mgmt.securityinsight.operations.WatchlistsOperations
     :ivar watchlist_items: WatchlistItemsOperations operations
@@ -157,7 +177,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-12-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-04-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -209,6 +229,9 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
             self._client, self._config, self._serialize, self._deserialize
         )
         self.file_imports = FileImportsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.hunts = HuntsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.hunt_relations = HuntRelationsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.hunt_comments = HuntCommentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.incident_comments = IncidentCommentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -243,6 +266,13 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self.threat_intelligence_indicator_metrics = ThreatIntelligenceIndicatorMetricsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.triggered_analytics_rule_run = TriggeredAnalyticsRuleRunOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.get_triggered_analytics_rule_runs = GetTriggeredAnalyticsRuleRunsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.alert_rule = AlertRuleOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlists = WatchlistsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlist_items = WatchlistItemsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connectors = DataConnectorsOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -280,5 +310,5 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details) -> None:
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)

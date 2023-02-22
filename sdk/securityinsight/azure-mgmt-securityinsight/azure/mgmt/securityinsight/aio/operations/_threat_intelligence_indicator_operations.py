@@ -141,7 +141,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :param threat_intelligence_properties: Properties of threat intelligence indicators to create
-         and update. Is either a model type or a IO type. Required.
+         and update. Is either a ThreatIntelligenceIndicatorModel type or a IO type. Required.
         :type threat_intelligence_properties:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceIndicatorModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -163,7 +163,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -246,7 +246,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ThreatIntelligenceInformation] = kwargs.pop("cls", None)
@@ -369,7 +369,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param name: Threat intelligence indicator name field. Required.
         :type name: str
         :param threat_intelligence_properties: Properties of threat intelligence indicators to create
-         and update. Is either a model type or a IO type. Required.
+         and update. Is either a ThreatIntelligenceIndicatorModel type or a IO type. Required.
         :type threat_intelligence_properties:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceIndicatorModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -391,7 +391,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -475,7 +475,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -589,7 +589,8 @@ class ThreatIntelligenceIndicatorOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :param threat_intelligence_filtering_criteria: Filtering criteria for querying threat
-         intelligence indicators. Is either a model type or a IO type. Required.
+         intelligence indicators. Is either a ThreatIntelligenceFilteringCriteria type or a IO type.
+         Required.
         :type threat_intelligence_filtering_criteria:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceFilteringCriteria or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -605,7 +606,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -773,7 +774,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param name: Threat intelligence indicator name field. Required.
         :type name: str
         :param threat_intelligence_append_tags: The threat intelligence append tags request body. Is
-         either a model type or a IO type. Required.
+         either a ThreatIntelligenceAppendTags type or a IO type. Required.
         :type threat_intelligence_append_tags:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceAppendTags or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -795,7 +796,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -926,7 +927,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param name: Threat intelligence indicator name field. Required.
         :type name: str
         :param threat_intelligence_replace_tags: Tags in the threat intelligence indicator to be
-         replaced. Is either a model type or a IO type. Required.
+         replaced. Is either a ThreatIntelligenceIndicatorModel type or a IO type. Required.
         :type threat_intelligence_replace_tags:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceIndicatorModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -948,7 +949,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

@@ -95,7 +95,7 @@ class WatchlistItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.WatchlistItemList] = kwargs.pop("cls", None)
@@ -201,7 +201,7 @@ class WatchlistItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.WatchlistItem] = kwargs.pop("cls", None)
@@ -272,7 +272,7 @@ class WatchlistItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -397,7 +397,8 @@ class WatchlistItemsOperations:
         :type watchlist_alias: str
         :param watchlist_item_id: Watchlist Item Id (GUID). Required.
         :type watchlist_item_id: str
-        :param watchlist_item: The watchlist item. Is either a model type or a IO type. Required.
+        :param watchlist_item: The watchlist item. Is either a WatchlistItem type or a IO type.
+         Required.
         :type watchlist_item: ~azure.mgmt.securityinsight.models.WatchlistItem or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -418,7 +419,7 @@ class WatchlistItemsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

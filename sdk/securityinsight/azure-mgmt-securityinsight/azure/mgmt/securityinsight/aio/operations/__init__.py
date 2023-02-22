@@ -23,6 +23,9 @@ from ._entity_relations_operations import EntityRelationsOperations
 from ._entity_queries_operations import EntityQueriesOperations
 from ._entity_query_templates_operations import EntityQueryTemplatesOperations
 from ._file_imports_operations import FileImportsOperations
+from ._hunts_operations import HuntsOperations
+from ._hunt_relations_operations import HuntRelationsOperations
+from ._hunt_comments_operations import HuntCommentsOperations
 from ._incident_comments_operations import IncidentCommentsOperations
 from ._incident_relations_operations import IncidentRelationsOperations
 from ._incident_tasks_operations import IncidentTasksOperations
@@ -39,6 +42,9 @@ from ._source_controls_operations import SourceControlsOperations
 from ._threat_intelligence_indicator_operations import ThreatIntelligenceIndicatorOperations
 from ._threat_intelligence_indicators_operations import ThreatIntelligenceIndicatorsOperations
 from ._threat_intelligence_indicator_metrics_operations import ThreatIntelligenceIndicatorMetricsOperations
+from ._triggered_analytics_rule_run_operations import TriggeredAnalyticsRuleRunOperations
+from ._get_triggered_analytics_rule_runs_operations import GetTriggeredAnalyticsRuleRunsOperations
+from ._alert_rule_operations import AlertRuleOperations
 from ._watchlists_operations import WatchlistsOperations
 from ._watchlist_items_operations import WatchlistItemsOperations
 from ._data_connectors_operations import DataConnectorsOperations
@@ -67,6 +73,9 @@ __all__ = [
     "EntityQueriesOperations",
     "EntityQueryTemplatesOperations",
     "FileImportsOperations",
+    "HuntsOperations",
+    "HuntRelationsOperations",
+    "HuntCommentsOperations",
     "IncidentCommentsOperations",
     "IncidentRelationsOperations",
     "IncidentTasksOperations",
@@ -83,6 +92,9 @@ __all__ = [
     "ThreatIntelligenceIndicatorOperations",
     "ThreatIntelligenceIndicatorsOperations",
     "ThreatIntelligenceIndicatorMetricsOperations",
+    "TriggeredAnalyticsRuleRunOperations",
+    "GetTriggeredAnalyticsRuleRunsOperations",
+    "AlertRuleOperations",
     "WatchlistsOperations",
     "WatchlistItemsOperations",
     "DataConnectorsOperations",
