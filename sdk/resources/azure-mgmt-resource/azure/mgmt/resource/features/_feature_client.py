@@ -86,13 +86,9 @@ class FeatureClient(FeatureClientOperationsMixin, MultiApiClientMixin, _SDKClien
     def models(cls, api_version=DEFAULT_API_VERSION):
         """Module depends on the API version:
 
-           * 2015-12-01: :mod:`v2015_12_01.models<azure.mgmt.resource.features.v2015_12_01.models>`
            * 2021-07-01: :mod:`v2021_07_01.models<azure.mgmt.resource.features.v2021_07_01.models>`
         """
-        if api_version == '2015-12-01':
-            from .v2015_12_01 import models
-            return models
-        elif api_version == '2021-07-01':
+        if api_version == '2021-07-01':
             from .v2021_07_01 import models
             return models
         raise ValueError("API version {} is not available".format(api_version))
@@ -101,13 +97,10 @@ class FeatureClient(FeatureClientOperationsMixin, MultiApiClientMixin, _SDKClien
     def features(self):
         """Instance depends on the API version:
 
-           * 2015-12-01: :class:`FeaturesOperations<azure.mgmt.resource.features.v2015_12_01.operations.FeaturesOperations>`
            * 2021-07-01: :class:`FeaturesOperations<azure.mgmt.resource.features.v2021_07_01.operations.FeaturesOperations>`
         """
         api_version = self._get_api_version('features')
-        if api_version == '2015-12-01':
-            from .v2015_12_01.operations import FeaturesOperations as OperationClass
-        elif api_version == '2021-07-01':
+        if api_version == '2021-07-01':
             from .v2021_07_01.operations import FeaturesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'features'".format(api_version))

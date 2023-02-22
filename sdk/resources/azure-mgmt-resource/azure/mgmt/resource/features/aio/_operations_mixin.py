@@ -31,9 +31,7 @@ class FeatureClientOperationsMixin(object):
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         api_version = self._get_api_version('list_operations')
-        if api_version == '2015-12-01':
-            from ..v2015_12_01.aio.operations import FeatureClientOperationsMixin as OperationClass
-        elif api_version == '2021-07-01':
+        if api_version == '2021-07-01':
             from ..v2021_07_01.aio.operations import FeatureClientOperationsMixin as OperationClass
         else:
             raise ValueError("API version {} does not have operation 'list_operations'".format(api_version))

@@ -85,21 +85,9 @@ class TemplateSpecsClient(MultiApiClientMixin, _SDKClient):
     def models(cls, api_version=DEFAULT_API_VERSION):
         """Module depends on the API version:
 
-           * 2019-06-01-preview: :mod:`v2019_06_01_preview.models<azure.mgmt.resource.templatespecs.v2019_06_01_preview.models>`
-           * 2021-03-01-preview: :mod:`v2021_03_01_preview.models<azure.mgmt.resource.templatespecs.v2021_03_01_preview.models>`
-           * 2021-05-01: :mod:`v2021_05_01.models<azure.mgmt.resource.templatespecs.v2021_05_01.models>`
            * 2022-02-01: :mod:`v2022_02_01.models<azure.mgmt.resource.templatespecs.v2022_02_01.models>`
         """
-        if api_version == '2019-06-01-preview':
-            from .v2019_06_01_preview import models
-            return models
-        elif api_version == '2021-03-01-preview':
-            from .v2021_03_01_preview import models
-            return models
-        elif api_version == '2021-05-01':
-            from .v2021_05_01 import models
-            return models
-        elif api_version == '2022-02-01':
+        if api_version == '2022-02-01':
             from .v2022_02_01 import models
             return models
         raise ValueError("API version {} is not available".format(api_version))
@@ -108,19 +96,10 @@ class TemplateSpecsClient(MultiApiClientMixin, _SDKClient):
     def template_spec_versions(self):
         """Instance depends on the API version:
 
-           * 2019-06-01-preview: :class:`TemplateSpecVersionsOperations<azure.mgmt.resource.templatespecs.v2019_06_01_preview.operations.TemplateSpecVersionsOperations>`
-           * 2021-03-01-preview: :class:`TemplateSpecVersionsOperations<azure.mgmt.resource.templatespecs.v2021_03_01_preview.operations.TemplateSpecVersionsOperations>`
-           * 2021-05-01: :class:`TemplateSpecVersionsOperations<azure.mgmt.resource.templatespecs.v2021_05_01.operations.TemplateSpecVersionsOperations>`
            * 2022-02-01: :class:`TemplateSpecVersionsOperations<azure.mgmt.resource.templatespecs.v2022_02_01.operations.TemplateSpecVersionsOperations>`
         """
         api_version = self._get_api_version('template_spec_versions')
-        if api_version == '2019-06-01-preview':
-            from .v2019_06_01_preview.operations import TemplateSpecVersionsOperations as OperationClass
-        elif api_version == '2021-03-01-preview':
-            from .v2021_03_01_preview.operations import TemplateSpecVersionsOperations as OperationClass
-        elif api_version == '2021-05-01':
-            from .v2021_05_01.operations import TemplateSpecVersionsOperations as OperationClass
-        elif api_version == '2022-02-01':
+        if api_version == '2022-02-01':
             from .v2022_02_01.operations import TemplateSpecVersionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'template_spec_versions'".format(api_version))
@@ -131,19 +110,10 @@ class TemplateSpecsClient(MultiApiClientMixin, _SDKClient):
     def template_specs(self):
         """Instance depends on the API version:
 
-           * 2019-06-01-preview: :class:`TemplateSpecsOperations<azure.mgmt.resource.templatespecs.v2019_06_01_preview.operations.TemplateSpecsOperations>`
-           * 2021-03-01-preview: :class:`TemplateSpecsOperations<azure.mgmt.resource.templatespecs.v2021_03_01_preview.operations.TemplateSpecsOperations>`
-           * 2021-05-01: :class:`TemplateSpecsOperations<azure.mgmt.resource.templatespecs.v2021_05_01.operations.TemplateSpecsOperations>`
            * 2022-02-01: :class:`TemplateSpecsOperations<azure.mgmt.resource.templatespecs.v2022_02_01.operations.TemplateSpecsOperations>`
         """
         api_version = self._get_api_version('template_specs')
-        if api_version == '2019-06-01-preview':
-            from .v2019_06_01_preview.operations import TemplateSpecsOperations as OperationClass
-        elif api_version == '2021-03-01-preview':
-            from .v2021_03_01_preview.operations import TemplateSpecsOperations as OperationClass
-        elif api_version == '2021-05-01':
-            from .v2021_05_01.operations import TemplateSpecsOperations as OperationClass
-        elif api_version == '2022-02-01':
+        if api_version == '2022-02-01':
             from .v2022_02_01.operations import TemplateSpecsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'template_specs'".format(api_version))

@@ -39,15 +39,7 @@ class SubscriptionClientOperationsMixin(object):
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         api_version = self._get_api_version('check_resource_name')
-        if api_version == '2016-06-01':
-            from .v2016_06_01.operations import SubscriptionClientOperationsMixin as OperationClass
-        elif api_version == '2018-06-01':
-            from .v2018_06_01.operations import SubscriptionClientOperationsMixin as OperationClass
-        elif api_version == '2019-06-01':
-            from .v2019_06_01.operations import SubscriptionClientOperationsMixin as OperationClass
-        elif api_version == '2019-11-01':
-            from .v2019_11_01.operations import SubscriptionClientOperationsMixin as OperationClass
-        elif api_version == '2021-01-01':
+        if api_version == '2021-01-01':
             from .v2021_01_01.operations import SubscriptionClientOperationsMixin as OperationClass
         else:
             raise ValueError("API version {} does not have operation 'check_resource_name'".format(api_version))

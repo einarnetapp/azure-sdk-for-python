@@ -85,13 +85,9 @@ class ManagementLockClient(MultiApiClientMixin, _SDKClient):
     def models(cls, api_version=DEFAULT_API_VERSION):
         """Module depends on the API version:
 
-           * 2015-01-01: :mod:`v2015_01_01.models<azure.mgmt.resource.locks.v2015_01_01.models>`
            * 2016-09-01: :mod:`v2016_09_01.models<azure.mgmt.resource.locks.v2016_09_01.models>`
         """
-        if api_version == '2015-01-01':
-            from ..v2015_01_01 import models
-            return models
-        elif api_version == '2016-09-01':
+        if api_version == '2016-09-01':
             from ..v2016_09_01 import models
             return models
         raise ValueError("API version {} is not available".format(api_version))
@@ -114,13 +110,10 @@ class ManagementLockClient(MultiApiClientMixin, _SDKClient):
     def management_locks(self):
         """Instance depends on the API version:
 
-           * 2015-01-01: :class:`ManagementLocksOperations<azure.mgmt.resource.locks.v2015_01_01.aio.operations.ManagementLocksOperations>`
            * 2016-09-01: :class:`ManagementLocksOperations<azure.mgmt.resource.locks.v2016_09_01.aio.operations.ManagementLocksOperations>`
         """
         api_version = self._get_api_version('management_locks')
-        if api_version == '2015-01-01':
-            from ..v2015_01_01.aio.operations import ManagementLocksOperations as OperationClass
-        elif api_version == '2016-09-01':
+        if api_version == '2016-09-01':
             from ..v2016_09_01.aio.operations import ManagementLocksOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'management_locks'".format(api_version))

@@ -86,13 +86,9 @@ class DeploymentScriptsClient(MultiApiClientMixin, _SDKClient):
     def models(cls, api_version=DEFAULT_API_VERSION):
         """Module depends on the API version:
 
-           * 2019-10-01-preview: :mod:`v2019_10_01_preview.models<azure.mgmt.resource.deploymentscripts.v2019_10_01_preview.models>`
            * 2020-10-01: :mod:`v2020_10_01.models<azure.mgmt.resource.deploymentscripts.v2020_10_01.models>`
         """
-        if api_version == '2019-10-01-preview':
-            from ..v2019_10_01_preview import models
-            return models
-        elif api_version == '2020-10-01':
+        if api_version == '2020-10-01':
             from ..v2020_10_01 import models
             return models
         raise ValueError("API version {} is not available".format(api_version))
@@ -101,13 +97,10 @@ class DeploymentScriptsClient(MultiApiClientMixin, _SDKClient):
     def deployment_scripts(self):
         """Instance depends on the API version:
 
-           * 2019-10-01-preview: :class:`DeploymentScriptsOperations<azure.mgmt.resource.deploymentscripts.v2019_10_01_preview.aio.operations.DeploymentScriptsOperations>`
            * 2020-10-01: :class:`DeploymentScriptsOperations<azure.mgmt.resource.deploymentscripts.v2020_10_01.aio.operations.DeploymentScriptsOperations>`
         """
         api_version = self._get_api_version('deployment_scripts')
-        if api_version == '2019-10-01-preview':
-            from ..v2019_10_01_preview.aio.operations import DeploymentScriptsOperations as OperationClass
-        elif api_version == '2020-10-01':
+        if api_version == '2020-10-01':
             from ..v2020_10_01.aio.operations import DeploymentScriptsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'deployment_scripts'".format(api_version))
