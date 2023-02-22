@@ -389,7 +389,7 @@ class ExperimentsOperations:
         :type profile_name: str
         :param experiment_name: The Experiment identifier associated with the Experiment. Required.
         :type experiment_name: str
-        :param parameters: The Experiment resource. Is either a model type or a IO type. Required.
+        :param parameters: The Experiment resource. Is either a Experiment type or a IO type. Required.
         :type parameters: ~azure.mgmt.frontdoor.models.Experiment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -628,7 +628,8 @@ class ExperimentsOperations:
         :type profile_name: str
         :param experiment_name: The Experiment identifier associated with the Experiment. Required.
         :type experiment_name: str
-        :param parameters: The Experiment Update Model. Is either a model type or a IO type. Required.
+        :param parameters: The Experiment Update Model. Is either a ExperimentUpdateModel type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.frontdoor.models.ExperimentUpdateModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

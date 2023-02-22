@@ -208,8 +208,8 @@ class EndpointsOperations:
         :type front_door_name: str
         :param content_file_paths: The path to the content to be purged. Path can be a full URL, e.g.
          '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g.
-         '/pictures/*' which removes all folders and files in the directory. Is either a model type or a
-         IO type. Required.
+         '/pictures/*' which removes all folders and files in the directory. Is either a PurgeParameters
+         type or a IO type. Required.
         :type content_file_paths: ~azure.mgmt.frontdoor.models.PurgeParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

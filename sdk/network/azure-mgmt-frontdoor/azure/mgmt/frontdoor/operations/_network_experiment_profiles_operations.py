@@ -642,7 +642,7 @@ class NetworkExperimentProfilesOperations:
         :type profile_name: str
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str
-        :param parameters: An Network Experiment Profile. Is either a model type or a IO type.
+        :param parameters: An Network Experiment Profile. Is either a Profile type or a IO type.
          Required.
         :type parameters: ~azure.mgmt.frontdoor.models.Profile or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -867,7 +867,8 @@ class NetworkExperimentProfilesOperations:
         :type resource_group_name: str
         :param profile_name: The Profile identifier associated with the Tenant and Partner. Required.
         :type profile_name: str
-        :param parameters: The Profile Update Model. Is either a model type or a IO type. Required.
+        :param parameters: The Profile Update Model. Is either a ProfileUpdateModel type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.frontdoor.models.ProfileUpdateModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

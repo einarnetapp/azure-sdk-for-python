@@ -370,7 +370,7 @@ class FrontendEndpointsOperations:
          Door. Required.
         :type frontend_endpoint_name: str
         :param custom_https_configuration: The configuration specifying how to enable HTTPS. Is either
-         a model type or a IO type. Required.
+         a CustomHttpsConfiguration type or a IO type. Required.
         :type custom_https_configuration: ~azure.mgmt.frontdoor.models.CustomHttpsConfiguration or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

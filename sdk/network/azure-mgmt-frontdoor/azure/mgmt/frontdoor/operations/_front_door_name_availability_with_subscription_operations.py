@@ -132,8 +132,8 @@ class FrontDoorNameAvailabilityWithSubscriptionOperations:
     ) -> _models.CheckNameAvailabilityOutput:
         """Check the availability of a Front Door subdomain.
 
-        :param check_front_door_name_availability_input: Input to check. Is either a model type or a IO
-         type. Required.
+        :param check_front_door_name_availability_input: Input to check. Is either a
+         CheckNameAvailabilityInput type or a IO type. Required.
         :type check_front_door_name_availability_input:
          ~azure.mgmt.frontdoor.models.CheckNameAvailabilityInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

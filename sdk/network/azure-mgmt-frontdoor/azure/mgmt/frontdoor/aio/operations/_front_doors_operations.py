@@ -435,7 +435,7 @@ class FrontDoorsOperations:
         :param front_door_name: Name of the Front Door which is globally unique. Required.
         :type front_door_name: str
         :param front_door_parameters: Front Door properties needed to create a new Front Door. Is
-         either a model type or a IO type. Required.
+         either a FrontDoor type or a IO type. Required.
         :type front_door_parameters: ~azure.mgmt.frontdoor.models.FrontDoor or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -688,8 +688,8 @@ class FrontDoorsOperations:
         :type resource_group_name: str
         :param front_door_name: Name of the Front Door which is globally unique. Required.
         :type front_door_name: str
-        :param custom_domain_properties: Custom domain to be validated. Is either a model type or a IO
-         type. Required.
+        :param custom_domain_properties: Custom domain to be validated. Is either a
+         ValidateCustomDomainInput type or a IO type. Required.
         :type custom_domain_properties: ~azure.mgmt.frontdoor.models.ValidateCustomDomainInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

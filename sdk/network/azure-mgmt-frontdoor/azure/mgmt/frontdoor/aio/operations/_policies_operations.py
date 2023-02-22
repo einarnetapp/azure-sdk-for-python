@@ -34,6 +34,7 @@ from ...operations._policies_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
+    build_list_by_subscription_request,
     build_list_request,
     build_update_request,
 )
@@ -139,6 +140,79 @@ class PoliciesOperations:
 
     list.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies"
+    }
+
+    @distributed_trace
+    def list_by_subscription(self, **kwargs: Any) -> AsyncIterable["_models.WebApplicationFirewallPolicy"]:
+        """Lists all of the protection policies within a subscription.
+
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either WebApplicationFirewallPolicy or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.frontdoor.models.WebApplicationFirewallPolicy]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-05-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-05-01"))
+        cls: ClsType[_models.WebApplicationFirewallPolicyList] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_subscription_request(
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    template_url=self.list_by_subscription.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                request = HttpRequest("GET", next_link)
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("WebApplicationFirewallPolicyList", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies"
     }
 
     @distributed_trace_async
@@ -364,7 +438,8 @@ class PoliciesOperations:
         :type resource_group_name: str
         :param policy_name: The name of the Web Application Firewall Policy. Required.
         :type policy_name: str
-        :param parameters: Policy to be created. Is either a model type or a IO type. Required.
+        :param parameters: Policy to be created. Is either a WebApplicationFirewallPolicy type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.frontdoor.models.WebApplicationFirewallPolicy or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -580,7 +655,7 @@ class PoliciesOperations:
         :param policy_name: The name of the Web Application Firewall Policy. Required.
         :type policy_name: str
         :param parameters: FrontdoorWebApplicationFirewallPolicy parameters to be patched. Is either a
-         model type or a IO type. Required.
+         TagsObject type or a IO type. Required.
         :type parameters: ~azure.mgmt.frontdoor.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

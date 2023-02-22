@@ -592,7 +592,7 @@ class RulesEnginesOperations:
          Required.
         :type rules_engine_name: str
         :param rules_engine_parameters: Rules Engine Configuration properties needed to create a new
-         Rules Engine Configuration. Is either a model type or a IO type. Required.
+         Rules Engine Configuration. Is either a RulesEngine type or a IO type. Required.
         :type rules_engine_parameters: ~azure.mgmt.frontdoor.models.RulesEngine or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
