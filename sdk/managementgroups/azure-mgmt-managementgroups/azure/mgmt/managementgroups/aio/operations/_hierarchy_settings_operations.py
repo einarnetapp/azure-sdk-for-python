@@ -85,10 +85,10 @@ class HierarchySettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.HierarchySettingsList]
+        )
+        cls: ClsType[_models.HierarchySettingsList] = kwargs.pop("cls", None)
 
         request = build_list_request(
             group_id=group_id,
@@ -98,9 +98,9 @@ class HierarchySettingsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -118,7 +118,7 @@ class HierarchySettingsOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings"}
 
     @distributed_trace_async
     async def get(self, group_id: str, **kwargs: Any) -> _models.HierarchySettings:
@@ -143,10 +143,10 @@ class HierarchySettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.HierarchySettings]
+        )
+        cls: ClsType[_models.HierarchySettings] = kwargs.pop("cls", None)
 
         request = build_get_request(
             group_id=group_id,
@@ -156,9 +156,9 @@ class HierarchySettingsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -176,7 +176,7 @@ class HierarchySettingsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}
 
     @overload
     async def create_or_update(
@@ -239,7 +239,7 @@ class HierarchySettingsOperations:
         :param group_id: Management Group ID. Required.
         :type group_id: str
         :param create_tenant_settings_request: Tenant level settings request parameter. Is either a
-         model type or a IO type. Required.
+         CreateOrUpdateSettingsRequest type or a IO type. Required.
         :type create_tenant_settings_request:
          ~azure.mgmt.managementgroups.models.CreateOrUpdateSettingsRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -261,11 +261,11 @@ class HierarchySettingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.HierarchySettings]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.HierarchySettings] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -286,9 +286,9 @@ class HierarchySettingsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -306,7 +306,7 @@ class HierarchySettingsOperations:
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}  # type: ignore
+    create_or_update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}
 
     @overload
     async def update(
@@ -369,7 +369,7 @@ class HierarchySettingsOperations:
         :param group_id: Management Group ID. Required.
         :type group_id: str
         :param create_tenant_settings_request: Tenant level settings request parameter. Is either a
-         model type or a IO type. Required.
+         CreateOrUpdateSettingsRequest type or a IO type. Required.
         :type create_tenant_settings_request:
          ~azure.mgmt.managementgroups.models.CreateOrUpdateSettingsRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -391,11 +391,11 @@ class HierarchySettingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.HierarchySettings]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.HierarchySettings] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -416,9 +416,9 @@ class HierarchySettingsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -436,7 +436,7 @@ class HierarchySettingsOperations:
 
         return deserialized
 
-    update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}  # type: ignore
+    update.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}
 
     @distributed_trace_async
     async def delete(self, group_id: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
@@ -460,10 +460,10 @@ class HierarchySettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-04-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-04-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             group_id=group_id,
@@ -473,9 +473,9 @@ class HierarchySettingsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -489,4 +489,4 @@ class HierarchySettingsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}  # type: ignore
+    delete.metadata = {"url": "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default"}

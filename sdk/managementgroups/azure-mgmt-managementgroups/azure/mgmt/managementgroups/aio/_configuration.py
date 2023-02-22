@@ -40,7 +40,7 @@ class ManagementGroupsAPIConfiguration(Configuration):  # pylint: disable=too-ma
 
     def __init__(self, credential: "AsyncTokenCredential", **kwargs: Any) -> None:
         super(ManagementGroupsAPIConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2021-04-01")  # type: Literal["2021-04-01"]
+        api_version: Literal["2021-04-01"] = kwargs.pop("api_version", "2021-04-01")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
