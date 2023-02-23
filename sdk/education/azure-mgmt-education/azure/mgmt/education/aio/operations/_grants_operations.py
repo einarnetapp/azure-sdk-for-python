@@ -156,9 +156,9 @@ class GrantsOperations:
     ) -> AsyncIterable["_models.GrantDetails"]:
         """Get details for a specific grant linked to the provided billing account and billing profile.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
         :param include_allocated_budget: May be used to include information about budget that has been
          allocated. Default value is None.
@@ -255,9 +255,9 @@ class GrantsOperations:
     ) -> _models.GrantDetails:
         """Get details for a specific grant linked to the provided billing account and billing profile.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
         :param include_allocated_budget: May be used to include information about budget that has been
          allocated. Default value is None.

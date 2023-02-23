@@ -75,11 +75,11 @@ class StudentsOperations:
     ) -> AsyncIterable["_models.StudentDetails"]:
         """Get a list of details about students that are associated with the specified lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param include_deleted: May be used to show deleted items. Default value is None.
         :type include_deleted: bool
@@ -177,11 +177,11 @@ class StudentsOperations:
     ) -> _models.StudentDetails:
         """Get the details for a specific student in the specified lab by student alias.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param student_alias: Student alias. Required.
         :type student_alias: str
@@ -252,11 +252,11 @@ class StudentsOperations:
     ) -> None:
         """Delete the specified student based on the student alias.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param student_alias: Student alias. Required.
         :type student_alias: str
@@ -328,11 +328,11 @@ class StudentsOperations:
         in a lab. Note the student must have a valid tenant to accept the lab after they have been
         added to lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param student_alias: Student alias. Required.
         :type student_alias: str
@@ -363,11 +363,11 @@ class StudentsOperations:
         in a lab. Note the student must have a valid tenant to accept the lab after they have been
         added to lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param student_alias: Student alias. Required.
         :type student_alias: str
@@ -396,16 +396,16 @@ class StudentsOperations:
         in a lab. Note the student must have a valid tenant to accept the lab after they have been
         added to lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param student_alias: Student alias. Required.
         :type student_alias: str
         :param parameters: Request parameters that are provided to update student properties. Is either
-         a model type or a IO type. Required.
+         a StudentDetails type or a IO type. Required.
         :type parameters: ~azure.mgmt.education.models.StudentDetails or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
