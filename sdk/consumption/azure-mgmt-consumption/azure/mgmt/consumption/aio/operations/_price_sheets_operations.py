@@ -26,7 +26,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._price_sheet_operations import build_get_by_billing_period_request, build_get_request
+from ...operations._price_sheets_operations import build_get_by_billing_period_request, build_get_request
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
@@ -36,14 +36,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class PriceSheetOperations:
+class PriceSheetsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.consumption.aio.ConsumptionManagementClient`'s
-        :attr:`price_sheet` attribute.
+        :attr:`price_sheets` attribute.
     """
 
     models = _models
@@ -57,11 +57,21 @@ class PriceSheetOperations:
 
     @distributed_trace_async
     async def get(
-        self, expand: Optional[str] = None, skiptoken: Optional[str] = None, top: Optional[int] = None, **kwargs: Any
-    ) -> _models.PriceSheetResult:
-        """Gets the price sheet for a subscription. Price sheet is available via this API only for May 1,
+        self,
+        subscription_id: str,
+        expand: Optional[str] = None,
+        skiptoken: Optional[str] = None,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> _models.PriceSheetResultV2:
+        """List the price sheet for a subscription. Price sheet is available via this API only for May 1,
         2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
+        :param subscription_id: Azure Subscription ID. Required.
+        :type subscription_id: str
         :param expand: May be used to expand the properties/meterDetails within a price sheet. By
          default, these fields are not included when returning price sheet. Default value is None.
         :type expand: str
@@ -74,8 +84,8 @@ class PriceSheetOperations:
          None.
         :type top: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PriceSheetResult or the result of cls(response)
-        :rtype: ~azure.mgmt.consumption.models.PriceSheetResult
+        :return: PriceSheetResultV2 or the result of cls(response)
+        :rtype: ~azure.mgmt.consumption.models.PriceSheetResultV2
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -89,13 +99,13 @@ class PriceSheetOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.PriceSheetResult] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PriceSheetResultV2] = kwargs.pop("cls", None)
 
         request = build_get_request(
-            subscription_id=self._config.subscription_id,
+            subscription_id=subscription_id,
             expand=expand,
             skiptoken=skiptoken,
             top=top,
@@ -118,7 +128,7 @@ class PriceSheetOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("PriceSheetResult", pipeline_response)
+        deserialized = self._deserialize("PriceSheetResultV2", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -130,15 +140,21 @@ class PriceSheetOperations:
     @distributed_trace_async
     async def get_by_billing_period(
         self,
+        subscription_id: str,
         billing_period_name: str,
         expand: Optional[str] = None,
         skiptoken: Optional[str] = None,
         top: Optional[int] = None,
         **kwargs: Any
-    ) -> _models.PriceSheetResult:
+    ) -> _models.PriceSheetResultV2:
         """Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available
         via this API only for May 1, 2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
+        :param subscription_id: Azure Subscription ID. Required.
+        :type subscription_id: str
         :param billing_period_name: Billing Period Name. Required.
         :type billing_period_name: str
         :param expand: May be used to expand the properties/meterDetails within a price sheet. By
@@ -153,8 +169,8 @@ class PriceSheetOperations:
          None.
         :type top: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PriceSheetResult or the result of cls(response)
-        :rtype: ~azure.mgmt.consumption.models.PriceSheetResult
+        :return: PriceSheetResultV2 or the result of cls(response)
+        :rtype: ~azure.mgmt.consumption.models.PriceSheetResultV2
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -168,14 +184,14 @@ class PriceSheetOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.PriceSheetResult] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PriceSheetResultV2] = kwargs.pop("cls", None)
 
         request = build_get_by_billing_period_request(
+            subscription_id=subscription_id,
             billing_period_name=billing_period_name,
-            subscription_id=self._config.subscription_id,
             expand=expand,
             skiptoken=skiptoken,
             top=top,
@@ -198,7 +214,7 @@ class PriceSheetOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("PriceSheetResult", pipeline_response)
+        deserialized = self._deserialize("PriceSheetResultV2", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})

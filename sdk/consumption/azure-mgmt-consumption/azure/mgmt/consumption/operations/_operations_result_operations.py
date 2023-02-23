@@ -28,7 +28,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
 from .._serialization import Serializer
-from .._vendor import _convert_request, _format_url_section
+from .._vendor import _convert_request
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
@@ -41,35 +41,17 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_request(
-    scope: str,
-    *,
-    filter: Optional[str] = None,
-    top: Optional[int] = None,
-    skiptoken: Optional[str] = None,
-    **kwargs: Any
-) -> HttpRequest:
+def build_list_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/{scope}/providers/Microsoft.Consumption/marketplaces")
-    path_format_arguments = {
-        "scope": _SERIALIZER.url("scope", scope, "str", skip_quote=True),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
+    _url = kwargs.pop("template_url", "/providers/Microsoft.Consumption/operations")
 
     # Construct parameters
-    if filter is not None:
-        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
-    if top is not None:
-        _params["$top"] = _SERIALIZER.query("top", top, "int", maximum=1000, minimum=1)
-    if skiptoken is not None:
-        _params["$skiptoken"] = _SERIALIZER.query("skiptoken", skiptoken, "str")
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
@@ -78,14 +60,14 @@ def build_list_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class MarketplacesOperations:
+class OperationsResultOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.consumption.ConsumptionManagementClient`'s
-        :attr:`marketplaces` attribute.
+        :attr:`operations_result` attribute.
     """
 
     models = _models
@@ -98,55 +80,21 @@ class MarketplacesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
-        self,
-        scope: str,
-        filter: Optional[str] = None,
-        top: Optional[int] = None,
-        skiptoken: Optional[str] = None,
-        **kwargs: Any
-    ) -> Iterable["_models.Marketplace"]:
-        """Lists the marketplaces for a scope at the defined scope. Marketplaces are available via this
-        API only for May 1, 2014 or later.
+    def list(self, **kwargs: Any) -> Iterable["_models.OperationV2"]:
+        """Lists all of the available consumption REST API operations.
 
-        :param scope: The scope associated with marketplace operations. This includes
-         '/subscriptions/{subscriptionId}/' for subscription scope,
-         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,
-         '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope,
-         '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount
-         scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management
-         Group scope. For subscription, billing account, department, enrollment account and
-         ManagementGroup, you can also add billing period to the scope using
-         '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing
-         period at department scope use
-         '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'.
-         Required.
-        :type scope: str
-        :param filter: May be used to filter marketplaces by properties/usageEnd (Utc time),
-         properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or
-         properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not
-         currently support 'ne', 'or', or 'not'. Default value is None.
-        :type filter: str
-        :param top: May be used to limit the number of results to the most recent N marketplaces.
-         Default value is None.
-        :type top: int
-        :param skiptoken: Skiptoken is only used if a previous operation returned a partial result. If
-         a previous response contains a nextLink element, the value of the nextLink element will include
-         a skiptoken parameter that specifies a starting point to use for subsequent calls. Default
-         value is None.
-        :type skiptoken: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Marketplace or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.Marketplace]
+        :return: An iterator like instance of either OperationV2 or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.OperationV2]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.MarketplacesListResult] = kwargs.pop("cls", None)
+        cls: ClsType[_models.OperationListResultV2] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -160,10 +108,6 @@ class MarketplacesOperations:
             if not next_link:
 
                 request = build_list_request(
-                    scope=scope,
-                    filter=filter,
-                    top=top,
-                    skiptoken=skiptoken,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -191,7 +135,7 @@ class MarketplacesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("MarketplacesListResult", pipeline_response)
+            deserialized = self._deserialize("OperationListResultV2", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -205,7 +149,7 @@ class MarketplacesOperations:
             )
             response = pipeline_response.http_response
 
-            if response.status_code not in [200, 204]:
+            if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
                 error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
@@ -214,4 +158,4 @@ class MarketplacesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/{scope}/providers/Microsoft.Consumption/marketplaces"}
+    list.metadata = {"url": "/providers/Microsoft.Consumption/operations"}

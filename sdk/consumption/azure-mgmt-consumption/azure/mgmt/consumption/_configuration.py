@@ -33,24 +33,19 @@ class ConsumptionManagementClientConfiguration(Configuration):  # pylint: disabl
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: Azure Subscription ID. Required.
-    :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2021-10-01". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2023-03-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
-    def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
+    def __init__(self, credential: "TokenCredential", **kwargs: Any) -> None:
         super(ConsumptionManagementClientConfiguration, self).__init__(**kwargs)
-        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", "2021-10-01")
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", "2023-03-01")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
-        if subscription_id is None:
-            raise ValueError("Parameter 'subscription_id' must not be None.")
 
         self.credential = credential
-        self.subscription_id = subscription_id
         self.api_version = api_version
         self.credential_scopes = kwargs.pop("credential_scopes", ["https://management.azure.com/.default"])
         kwargs.setdefault("sdk_moniker", "mgmt-consumption/{}".format(VERSION))

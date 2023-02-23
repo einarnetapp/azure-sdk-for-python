@@ -39,55 +39,37 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_get_by_billing_account_request(billing_account_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/balances",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "billingAccountId": _SERIALIZER.url("billing_account_id", billing_account_id, "str"),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_get_for_billing_period_by_billing_account_request(
-    billing_account_id: str, billing_period_name: str, **kwargs: Any
+def build_get_request(
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    skiptoken: Optional[str] = None,
+    top: Optional[int] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
-        "template_url",
-        "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances",
-    )  # pylint: disable=line-too-long
+        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default"
+    )
     path_format_arguments = {
-        "billingAccountId": _SERIALIZER.url("billing_account_id", billing_account_id, "str"),
-        "billingPeriodName": _SERIALIZER.url("billing_period_name", billing_period_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+    if skiptoken is not None:
+        _params["$skiptoken"] = _SERIALIZER.query("skiptoken", skiptoken, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int", maximum=1000, minimum=1)
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
@@ -96,14 +78,56 @@ def build_get_for_billing_period_by_billing_account_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class BalancesOperations:
+def build_get_by_billing_period_request(
+    subscription_id: str,
+    billing_period_name: str,
+    *,
+    expand: Optional[str] = None,
+    skiptoken: Optional[str] = None,
+    top: Optional[int] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/default",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "billingPeriodName": _SERIALIZER.url("billing_period_name", billing_period_name, "str", pattern=r"[0-9]+"),
+    }
+
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+    if skiptoken is not None:
+        _params["$skiptoken"] = _SERIALIZER.query("skiptoken", skiptoken, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int", maximum=1000, minimum=1)
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+class PriceSheetsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.consumption.ConsumptionManagementClient`'s
-        :attr:`balances` attribute.
+        :attr:`price_sheets` attribute.
     """
 
     models = _models
@@ -116,15 +140,36 @@ class BalancesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def get_by_billing_account(self, billing_account_id: str, **kwargs: Any) -> _models.Balance:
-        """Gets the balances for a scope by billingAccountId. Balances are available via this API only for
-        May 1, 2014 or later.
+    def get(
+        self,
+        subscription_id: str,
+        expand: Optional[str] = None,
+        skiptoken: Optional[str] = None,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> _models.PriceSheetResultV2:
+        """List the price sheet for a subscription. Price sheet is available via this API only for May 1,
+        2014 or later.
 
-        :param billing_account_id: BillingAccount ID. Required.
-        :type billing_account_id: str
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
+        :param subscription_id: Azure Subscription ID. Required.
+        :type subscription_id: str
+        :param expand: May be used to expand the properties/meterDetails within a price sheet. By
+         default, these fields are not included when returning price sheet. Default value is None.
+        :type expand: str
+        :param skiptoken: Skiptoken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skiptoken parameter that specifies a starting point to use for subsequent calls. Default
+         value is None.
+        :type skiptoken: str
+        :param top: May be used to limit the number of results to the top N results. Default value is
+         None.
+        :type top: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Balance or the result of cls(response)
-        :rtype: ~azure.mgmt.consumption.models.Balance
+        :return: PriceSheetResultV2 or the result of cls(response)
+        :rtype: ~azure.mgmt.consumption.models.PriceSheetResultV2
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -138,15 +183,18 @@ class BalancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.Balance] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PriceSheetResultV2] = kwargs.pop("cls", None)
 
-        request = build_get_by_billing_account_request(
-            billing_account_id=billing_account_id,
+        request = build_get_request(
+            subscription_id=subscription_id,
+            expand=expand,
+            skiptoken=skiptoken,
+            top=top,
             api_version=api_version,
-            template_url=self.get_by_billing_account.metadata["url"],
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -164,31 +212,49 @@ class BalancesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Balance", pipeline_response)
+        deserialized = self._deserialize("PriceSheetResultV2", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_by_billing_account.metadata = {
-        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/balances"
-    }
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default"}
 
     @distributed_trace
-    def get_for_billing_period_by_billing_account(
-        self, billing_account_id: str, billing_period_name: str, **kwargs: Any
-    ) -> _models.Balance:
-        """Gets the balances for a scope by billing period and billingAccountId. Balances are available
+    def get_by_billing_period(
+        self,
+        subscription_id: str,
+        billing_period_name: str,
+        expand: Optional[str] = None,
+        skiptoken: Optional[str] = None,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> _models.PriceSheetResultV2:
+        """Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available
         via this API only for May 1, 2014 or later.
 
-        :param billing_account_id: BillingAccount ID. Required.
-        :type billing_account_id: str
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
+        :param subscription_id: Azure Subscription ID. Required.
+        :type subscription_id: str
         :param billing_period_name: Billing Period Name. Required.
         :type billing_period_name: str
+        :param expand: May be used to expand the properties/meterDetails within a price sheet. By
+         default, these fields are not included when returning price sheet. Default value is None.
+        :type expand: str
+        :param skiptoken: Skiptoken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skiptoken parameter that specifies a starting point to use for subsequent calls. Default
+         value is None.
+        :type skiptoken: str
+        :param top: May be used to limit the number of results to the top N results. Default value is
+         None.
+        :type top: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Balance or the result of cls(response)
-        :rtype: ~azure.mgmt.consumption.models.Balance
+        :return: PriceSheetResultV2 or the result of cls(response)
+        :rtype: ~azure.mgmt.consumption.models.PriceSheetResultV2
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -202,16 +268,19 @@ class BalancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.Balance] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PriceSheetResultV2] = kwargs.pop("cls", None)
 
-        request = build_get_for_billing_period_by_billing_account_request(
-            billing_account_id=billing_account_id,
+        request = build_get_by_billing_period_request(
+            subscription_id=subscription_id,
             billing_period_name=billing_period_name,
+            expand=expand,
+            skiptoken=skiptoken,
+            top=top,
             api_version=api_version,
-            template_url=self.get_for_billing_period_by_billing_account.metadata["url"],
+            template_url=self.get_by_billing_period.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -229,13 +298,13 @@ class BalancesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Balance", pipeline_response)
+        deserialized = self._deserialize("PriceSheetResultV2", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_for_billing_period_by_billing_account.metadata = {
-        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances"
+    get_by_billing_period.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/default"
     }

@@ -26,13 +26,14 @@ from azure.mgmt.consumption import ConsumptionManagementClient
 def main():
     client = ConsumptionManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
-    response = client.price_sheet.get()
+    response = client.price_sheets.get(
+        subscription_id="00000000-0000-0000-0000-000000000000",
+    )
     print(response)
 
 
-# x-ms-original-file: specification/consumption/resource-manager/Microsoft.Consumption/stable/2021-10-01/examples/PriceSheet.json
+# x-ms-original-file: specification/consumption/resource-manager/Microsoft.Consumption/stable/2023-03-01/examples/PriceSheet.json
 if __name__ == "__main__":
     main()

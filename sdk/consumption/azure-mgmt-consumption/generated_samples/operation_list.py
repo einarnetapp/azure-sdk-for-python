@@ -26,14 +26,13 @@ from azure.mgmt.consumption import ConsumptionManagementClient
 def main():
     client = ConsumptionManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.operations.list()
+    response = client.operations_result.list()
     for item in response:
         print(item)
 
 
-# x-ms-original-file: specification/consumption/resource-manager/Microsoft.Consumption/stable/2021-10-01/examples/OperationList.json
+# x-ms-original-file: specification/consumption/resource-manager/Microsoft.Consumption/stable/2023-03-01/examples/OperationList.json
 if __name__ == "__main__":
     main()
