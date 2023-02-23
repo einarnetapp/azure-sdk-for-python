@@ -63,6 +63,9 @@ class BalancesOperations:
         """Gets the balances for a scope by billingAccountId. Balances are available via this API only for
         May 1, 2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -124,6 +127,9 @@ class BalancesOperations:
     ) -> _models.Balance:
         """Gets the balances for a scope by billing period and billingAccountId. Balances are available
         via this API only for May 1, 2014 or later.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str

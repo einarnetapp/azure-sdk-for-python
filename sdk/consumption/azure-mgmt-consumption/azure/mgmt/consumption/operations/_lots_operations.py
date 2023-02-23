@@ -160,6 +160,9 @@ class LotsOperations:
         """Lists all Azure credits for a billing account or a billing profile. The API is only supported
         for Microsoft Customer Agreements (MCA) billing accounts.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :param billing_profile_id: Azure Billing Profile ID. Required.
@@ -252,6 +255,9 @@ class LotsOperations:
         """Lists all Microsoft Azure consumption commitments for a billing account. The API is only
         supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing
         accounts.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
@@ -347,6 +353,9 @@ class LotsOperations:
     ) -> Iterable["_models.LotSummary"]:
         """Lists all Azure credits for a customer. The API is only supported for Microsoft Partner
         Agreements (MPA) billing accounts.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str

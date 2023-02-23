@@ -61,6 +61,9 @@ class CreditsOperations:
     ) -> Optional[_models.CreditSummary]:
         """The credit summary by billingAccountId and billingProfileId.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :param billing_profile_id: Azure Billing Profile ID. Required.

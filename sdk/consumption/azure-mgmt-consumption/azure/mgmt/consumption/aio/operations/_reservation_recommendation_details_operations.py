@@ -68,6 +68,9 @@ class ReservationRecommendationDetailsOperations:
     ) -> Optional[_models.ReservationRecommendationDetailsModel]:
         """Details of a reservation recommendation for what-if analysis of reserved instances.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param resource_scope: The scope associated with reservation recommendation details operations.
          This includes '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope,

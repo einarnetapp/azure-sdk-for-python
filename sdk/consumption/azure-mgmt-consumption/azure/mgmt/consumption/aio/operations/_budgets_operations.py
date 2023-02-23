@@ -67,6 +67,9 @@ class BudgetsOperations:
     def list(self, scope: str, **kwargs: Any) -> AsyncIterable["_models.Budget"]:
         """Lists all budgets for the defined scope.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -79,7 +82,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -164,6 +167,9 @@ class BudgetsOperations:
     async def get(self, scope: str, budget_name: str, **kwargs: Any) -> _models.Budget:
         """Gets the budget for the scope by budget name.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -176,7 +182,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
@@ -247,6 +253,9 @@ class BudgetsOperations:
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -259,7 +268,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
@@ -283,6 +292,9 @@ class BudgetsOperations:
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -295,7 +307,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
@@ -319,6 +331,9 @@ class BudgetsOperations:
         form of concurrency control. To obtain the latest eTag for a given budget, perform a get
         operation prior to your put operation.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -331,12 +346,12 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.
         :type budget_name: str
-        :param parameters: Parameters supplied to the Create Budget operation. Is either a model type
+        :param parameters: Parameters supplied to the Create Budget operation. Is either a Budget type
          or a IO type. Required.
         :type parameters: ~azure.mgmt.consumption.models.Budget or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -416,6 +431,9 @@ class BudgetsOperations:
     ) -> None:
         """The operation to delete a budget.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with budget operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -428,7 +446,7 @@ class BudgetsOperations:
          scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope. Required.
         :type scope: str
         :param budget_name: Budget Name. Required.

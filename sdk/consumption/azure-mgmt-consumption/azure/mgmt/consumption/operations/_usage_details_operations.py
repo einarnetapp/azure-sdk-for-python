@@ -117,6 +117,9 @@ class UsageDetailsOperations:
         """Lists the usage details for the defined scope. Usage details are available via this API only
         for May 1, 2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with usage details operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,
@@ -132,9 +135,9 @@ class UsageDetailsOperations:
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope, and
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
          specific for partners. Required.
         :type scope: str
         :param expand: May be used to expand the properties/additionalInfo or properties/meterDetails
