@@ -67,6 +67,9 @@ class ChargesOperations:
     ) -> _models.ChargesListResult:
         """Lists the charges based for the defined scope.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with charges operations. This includes
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'
          for Department scope, and
@@ -114,7 +117,7 @@ class ChargesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ChargesListResult] = kwargs.pop("cls", None)
