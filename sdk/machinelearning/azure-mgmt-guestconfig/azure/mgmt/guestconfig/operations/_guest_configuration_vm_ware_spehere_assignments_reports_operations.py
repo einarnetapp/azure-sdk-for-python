@@ -18,55 +18,136 @@ from azure.core.exceptions import (
     map_error,
 )
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import AsyncHttpResponse
+from azure.core.pipeline.transport import HttpResponse
 from azure.core.rest import HttpRequest
-from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.tracing.decorator import distributed_trace
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
-from ... import models as _models
-from ..._vendor import _convert_request
-from ...operations._guest_configuration_assignment_reports_operations import build_get_request, build_list_request
+from .. import models as _models
+from .._serialization import Serializer
+from .._vendor import _convert_request, _format_url_section
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
 else:
     from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+
+_SERIALIZER = Serializer()
+_SERIALIZER.client_side_validation = False
 
 
-class GuestConfigurationAssignmentReportsOperations:
+def build_list_request(
+    resource_group_name: str,
+    vm_name: str,
+    guest_configuration_assignment_name: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: Literal["2022-01-25"] = kwargs.pop("api_version", _params.pop("api-version", "2022-01-25"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str", pattern=r"^[-\w\._]+$"),
+        "vmName": _SERIALIZER.url("vm_name", vm_name, "str", pattern=r"^[-\w\._]+$"),
+        "guestConfigurationAssignmentName": _SERIALIZER.url(
+            "guest_configuration_assignment_name", guest_configuration_assignment_name, "str", pattern=r"^[-\w\._]+$"
+        ),
+    }
+
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_get_request(
+    resource_group_name: str,
+    vm_name: str,
+    guest_configuration_assignment_name: str,
+    report_id: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: Literal["2022-01-25"] = kwargs.pop("api_version", _params.pop("api-version", "2022-01-25"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str", pattern=r"^[-\w\._]+$"),
+        "vmName": _SERIALIZER.url("vm_name", vm_name, "str", pattern=r"^[-\w\._]+$"),
+        "guestConfigurationAssignmentName": _SERIALIZER.url(
+            "guest_configuration_assignment_name", guest_configuration_assignment_name, "str", pattern=r"^[-\w\._]+$"
+        ),
+        "reportId": _SERIALIZER.url("report_id", report_id, "str"),
+    }
+
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+class GuestConfigurationVMWareSpehereAssignmentsReportsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.guestconfig.aio.GuestConfigurationClient`'s
-        :attr:`guest_configuration_assignment_reports` attribute.
+        :class:`~azure.mgmt.guestconfig.GuestConfigurationClient`'s
+        :attr:`guest_configuration_vm_ware_spehere_assignments_reports` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    @distributed_trace_async
-    async def list(
-        self, resource_group_name: str, guest_configuration_assignment_name: str, vm_name: str, **kwargs: Any
+    @distributed_trace
+    def list(
+        self, resource_group_name: str, vm_name: str, guest_configuration_assignment_name: str, **kwargs: Any
     ) -> _models.GuestConfigurationAssignmentReportList:
         """List all reports for the guest configuration assignment, latest report first.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param guest_configuration_assignment_name: The guest configuration assignment name. Required.
-        :type guest_configuration_assignment_name: str
         :param vm_name: The name of the virtual machine. Required.
         :type vm_name: str
+        :param guest_configuration_assignment_name: The guest configuration assignment name. Required.
+        :type guest_configuration_assignment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GuestConfigurationAssignmentReportList or the result of cls(response)
         :rtype: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReportList
@@ -90,8 +171,8 @@ class GuestConfigurationAssignmentReportsOperations:
 
         request = build_list_request(
             resource_group_name=resource_group_name,
-            guest_configuration_assignment_name=guest_configuration_assignment_name,
             vm_name=vm_name,
+            guest_configuration_assignment_name=guest_configuration_assignment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.list.metadata["url"],
@@ -101,7 +182,7 @@ class GuestConfigurationAssignmentReportsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -120,28 +201,28 @@ class GuestConfigurationAssignmentReportsOperations:
         return deserialized
 
     list.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports"
     }
 
-    @distributed_trace_async
-    async def get(
+    @distributed_trace
+    def get(
         self,
         resource_group_name: str,
+        vm_name: str,
         guest_configuration_assignment_name: str,
         report_id: str,
-        vm_name: str,
         **kwargs: Any
     ) -> _models.GuestConfigurationAssignmentReport:
         """Get a report for the guest configuration assignment, by reportId.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
         :param guest_configuration_assignment_name: The guest configuration assignment name. Required.
         :type guest_configuration_assignment_name: str
         :param report_id: The GUID for the guest configuration assignment report. Required.
         :type report_id: str
-        :param vm_name: The name of the virtual machine. Required.
-        :type vm_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GuestConfigurationAssignmentReport or the result of cls(response)
         :rtype: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReport
@@ -165,9 +246,9 @@ class GuestConfigurationAssignmentReportsOperations:
 
         request = build_get_request(
             resource_group_name=resource_group_name,
+            vm_name=vm_name,
             guest_configuration_assignment_name=guest_configuration_assignment_name,
             report_id=report_id,
-            vm_name=vm_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -177,7 +258,7 @@ class GuestConfigurationAssignmentReportsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -196,5 +277,5 @@ class GuestConfigurationAssignmentReportsOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}"
     }

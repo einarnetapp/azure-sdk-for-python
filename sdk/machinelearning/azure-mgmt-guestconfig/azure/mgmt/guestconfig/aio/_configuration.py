@@ -43,7 +43,7 @@ class GuestConfigurationClientConfiguration(Configuration):  # pylint: disable=t
 
     def __init__(self, credential: "AsyncTokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(GuestConfigurationClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-01-25")  # type: Literal["2022-01-25"]
+        api_version: Literal["2022-01-25"] = kwargs.pop("api_version", "2022-01-25")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")

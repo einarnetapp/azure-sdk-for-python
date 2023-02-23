@@ -12,7 +12,7 @@ from typing import Any, TYPE_CHECKING
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
-from . import models
+from . import models as _models
 from ._configuration import GuestConfigurationClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
@@ -22,6 +22,8 @@ from .operations import (
     GuestConfigurationAssignmentsVMSSOperations,
     GuestConfigurationHCRPAssignmentReportsOperations,
     GuestConfigurationHCRPAssignmentsOperations,
+    GuestConfigurationVMWareSpehereAssignmentsOperations,
+    GuestConfigurationVMWareSpehereAssignmentsReportsOperations,
     Operations,
 )
 
@@ -56,6 +58,14 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
      GuestConfigurationAssignmentReportsVMSSOperations operations
     :vartype guest_configuration_assignment_reports_vmss:
      azure.mgmt.guestconfig.operations.GuestConfigurationAssignmentReportsVMSSOperations
+    :ivar guest_configuration_vm_ware_spehere_assignments:
+     GuestConfigurationVMWareSpehereAssignmentsOperations operations
+    :vartype guest_configuration_vm_ware_spehere_assignments:
+     azure.mgmt.guestconfig.operations.GuestConfigurationVMWareSpehereAssignmentsOperations
+    :ivar guest_configuration_vm_ware_spehere_assignments_reports:
+     GuestConfigurationVMWareSpehereAssignmentsReportsOperations operations
+    :vartype guest_configuration_vm_ware_spehere_assignments_reports:
+     azure.mgmt.guestconfig.operations.GuestConfigurationVMWareSpehereAssignmentsReportsOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.guestconfig.operations.Operations
     :param credential: Credential needed for the client to connect to Azure. Required.
@@ -82,7 +92,7 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
         )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -103,6 +113,14 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
         )
         self.guest_configuration_assignment_reports_vmss = GuestConfigurationAssignmentReportsVMSSOperations(
             self._client, self._config, self._serialize, self._deserialize
+        )
+        self.guest_configuration_vm_ware_spehere_assignments = GuestConfigurationVMWareSpehereAssignmentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.guest_configuration_vm_ware_spehere_assignments_reports = (
+            GuestConfigurationVMWareSpehereAssignmentsReportsOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
         )
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
 
@@ -128,15 +146,12 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
         request_copy.url = self._client.format_url(request_copy.url)
         return self._client.send_request(request_copy, **kwargs)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self._client.close()
 
-    def __enter__(self):
-        # type: () -> GuestConfigurationClient
+    def __enter__(self) -> "GuestConfigurationClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details):
-        # type: (Any) -> None
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)
