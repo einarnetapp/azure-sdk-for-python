@@ -14,7 +14,7 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
     pip install azure-identity
     pip install azure-mgmt-guestconfig
 # USAGE
-    python list_all_reports_for_the_vmss_guest_configuration_assignment_with_latest_report_first.py
+    python list_all_vmss_guest_configuration_assignment_reports.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
