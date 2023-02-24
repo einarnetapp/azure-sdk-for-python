@@ -23,6 +23,7 @@ from .operations import (
     DataProtectionOperations,
     DataProtectionOperationsOperations,
     DeletedBackupInstancesOperations,
+    DppResourceGuardProxyOperations,
     ExportJobsOperationResultOperations,
     ExportJobsOperations,
     JobsOperations,
@@ -86,6 +87,9 @@ class DataProtectionMgmtClient:  # pylint: disable=client-accepts-api-version-ke
      azure.mgmt.dataprotection.operations.DeletedBackupInstancesOperations
     :ivar resource_guards: ResourceGuardsOperations operations
     :vartype resource_guards: azure.mgmt.dataprotection.operations.ResourceGuardsOperations
+    :ivar dpp_resource_guard_proxy: DppResourceGuardProxyOperations operations
+    :vartype dpp_resource_guard_proxy:
+     azure.mgmt.dataprotection.operations.DppResourceGuardProxyOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
@@ -152,6 +156,9 @@ class DataProtectionMgmtClient:  # pylint: disable=client-accepts-api-version-ke
             self._client, self._config, self._serialize, self._deserialize
         )
         self.resource_guards = ResourceGuardsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dpp_resource_guard_proxy = DppResourceGuardProxyOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
