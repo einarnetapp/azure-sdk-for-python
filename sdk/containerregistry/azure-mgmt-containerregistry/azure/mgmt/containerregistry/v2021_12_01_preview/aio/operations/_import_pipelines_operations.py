@@ -405,7 +405,7 @@ class ImportPipelinesOperations:
         :param import_pipeline_name: The name of the import pipeline. Required.
         :type import_pipeline_name: str
         :param import_pipeline_create_parameters: The parameters for creating an import pipeline. Is
-         either a model type or a IO type. Required.
+         either a ImportPipeline type or a IO type. Required.
         :type import_pipeline_create_parameters:
          ~azure.mgmt.containerregistry.v2021_12_01_preview.models.ImportPipeline or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

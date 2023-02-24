@@ -608,7 +608,7 @@ class CredentialSetsOperations:
         :param credential_set_name: The name of the credential set. Required.
         :type credential_set_name: str
         :param credential_set_create_parameters: The parameters for creating a credential set. Is
-         either a model type or a IO type. Required.
+         either a CredentialSet type or a IO type. Required.
         :type credential_set_create_parameters:
          ~azure.mgmt.containerregistry.v2023_01_01_preview.models.CredentialSet or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -990,7 +990,7 @@ class CredentialSetsOperations:
         :param credential_set_name: The name of the credential set. Required.
         :type credential_set_name: str
         :param credential_set_update_parameters: The parameters for updating a credential set. Is
-         either a model type or a IO type. Required.
+         either a CredentialSetUpdateParameters type or a IO type. Required.
         :type credential_set_update_parameters:
          ~azure.mgmt.containerregistry.v2023_01_01_preview.models.CredentialSetUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

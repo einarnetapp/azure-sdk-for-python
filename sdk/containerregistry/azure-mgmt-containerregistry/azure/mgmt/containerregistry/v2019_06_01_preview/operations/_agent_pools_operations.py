@@ -533,8 +533,8 @@ class AgentPoolsOperations:
         :type registry_name: str
         :param agent_pool_name: The name of the agent pool. Required.
         :type agent_pool_name: str
-        :param agent_pool: The parameters of an agent pool that needs to scheduled. Is either a model
-         type or a IO type. Required.
+        :param agent_pool: The parameters of an agent pool that needs to scheduled. Is either a
+         AgentPool type or a IO type. Required.
         :type agent_pool: ~azure.mgmt.containerregistry.v2019_06_01_preview.models.AgentPool or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -896,8 +896,8 @@ class AgentPoolsOperations:
         :type registry_name: str
         :param agent_pool_name: The name of the agent pool. Required.
         :type agent_pool_name: str
-        :param update_parameters: The parameters for updating an agent pool. Is either a model type or
-         a IO type. Required.
+        :param update_parameters: The parameters for updating an agent pool. Is either a
+         AgentPoolUpdateParameters type or a IO type. Required.
         :type update_parameters:
          ~azure.mgmt.containerregistry.v2019_06_01_preview.models.AgentPoolUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

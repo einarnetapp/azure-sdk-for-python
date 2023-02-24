@@ -552,7 +552,7 @@ class ExportPipelinesOperations:
         :param export_pipeline_name: The name of the export pipeline. Required.
         :type export_pipeline_name: str
         :param export_pipeline_create_parameters: The parameters for creating an export pipeline. Is
-         either a model type or a IO type. Required.
+         either a ExportPipeline type or a IO type. Required.
         :type export_pipeline_create_parameters:
          ~azure.mgmt.containerregistry.v2022_02_01_preview.models.ExportPipeline or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

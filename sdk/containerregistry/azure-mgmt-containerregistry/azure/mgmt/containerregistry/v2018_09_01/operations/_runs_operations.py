@@ -573,8 +573,8 @@ class RunsOperations:
         :type registry_name: str
         :param run_id: The run ID. Required.
         :type run_id: str
-        :param run_update_parameters: The run update properties. Is either a model type or a IO type.
-         Required.
+        :param run_update_parameters: The run update properties. Is either a RunUpdateParameters type
+         or a IO type. Required.
         :type run_update_parameters:
          ~azure.mgmt.containerregistry.v2018_09_01.models.RunUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

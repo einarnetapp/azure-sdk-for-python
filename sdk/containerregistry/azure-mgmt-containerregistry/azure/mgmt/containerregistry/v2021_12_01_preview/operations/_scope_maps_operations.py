@@ -586,8 +586,8 @@ class ScopeMapsOperations:
         :type registry_name: str
         :param scope_map_name: The name of the scope map. Required.
         :type scope_map_name: str
-        :param scope_map_create_parameters: The parameters for creating a scope map. Is either a model
-         type or a IO type. Required.
+        :param scope_map_create_parameters: The parameters for creating a scope map. Is either a
+         ScopeMap type or a IO type. Required.
         :type scope_map_create_parameters:
          ~azure.mgmt.containerregistry.v2021_12_01_preview.models.ScopeMap or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -950,8 +950,8 @@ class ScopeMapsOperations:
         :type registry_name: str
         :param scope_map_name: The name of the scope map. Required.
         :type scope_map_name: str
-        :param scope_map_update_parameters: The parameters for updating a scope map. Is either a model
-         type or a IO type. Required.
+        :param scope_map_update_parameters: The parameters for updating a scope map. Is either a
+         ScopeMapUpdateParameters type or a IO type. Required.
         :type scope_map_update_parameters:
          ~azure.mgmt.containerregistry.v2021_12_01_preview.models.ScopeMapUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

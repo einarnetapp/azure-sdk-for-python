@@ -290,8 +290,8 @@ class RegistriesOperations:
         :type resource_group_name: str
         :param registry_name: The name of the container registry. Required.
         :type registry_name: str
-        :param build_request: The parameters of a build that needs to queued. Is either a model type or
-         a IO type. Required.
+        :param build_request: The parameters of a build that needs to queued. Is either a
+         QueueBuildRequest type or a IO type. Required.
         :type build_request: ~azure.mgmt.containerregistry.v2018_02_01_preview.models.QueueBuildRequest
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

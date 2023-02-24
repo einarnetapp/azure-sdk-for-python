@@ -531,7 +531,7 @@ class TaskRunsOperations:
         :type registry_name: str
         :param task_run_name: The name of the task run. Required.
         :type task_run_name: str
-        :param task_run: The parameters of a run that needs to scheduled. Is either a model type or a
+        :param task_run: The parameters of a run that needs to scheduled. Is either a TaskRun type or a
          IO type. Required.
         :type task_run: ~azure.mgmt.containerregistry.v2019_06_01_preview.models.TaskRun or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -894,8 +894,8 @@ class TaskRunsOperations:
         :type registry_name: str
         :param task_run_name: The name of the task run. Required.
         :type task_run_name: str
-        :param update_parameters: The parameters for updating a task run. Is either a model type or a
-         IO type. Required.
+        :param update_parameters: The parameters for updating a task run. Is either a
+         TaskRunUpdateParameters type or a IO type. Required.
         :type update_parameters:
          ~azure.mgmt.containerregistry.v2019_06_01_preview.models.TaskRunUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

@@ -395,7 +395,7 @@ class RegistriesOperations:
         alphanumeric characters, be globally unique, and between 5 and 50 characters in length.
 
         :param registry_name_check_request: The object containing information for the availability
-         request. Is either a model type or a IO type. Required.
+         request. Is either a RegistryNameCheckRequest type or a IO type. Required.
         :type registry_name_check_request:
          ~azure.mgmt.containerregistry.v2017_03_01.models.RegistryNameCheckRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -681,7 +681,7 @@ class RegistriesOperations:
         :param registry_name: The name of the container registry. Required.
         :type registry_name: str
         :param registry_create_parameters: The parameters for creating a container registry. Is either
-         a model type or a IO type. Required.
+         a RegistryCreateParameters type or a IO type. Required.
         :type registry_create_parameters:
          ~azure.mgmt.containerregistry.v2017_03_01.models.RegistryCreateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -880,7 +880,7 @@ class RegistriesOperations:
         :param registry_name: The name of the container registry. Required.
         :type registry_name: str
         :param registry_update_parameters: The parameters for updating a container registry. Is either
-         a model type or a IO type. Required.
+         a RegistryUpdateParameters type or a IO type. Required.
         :type registry_update_parameters:
          ~azure.mgmt.containerregistry.v2017_03_01.models.RegistryUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1252,7 +1252,8 @@ class RegistriesOperations:
         :param registry_name: The name of the container registry. Required.
         :type registry_name: str
         :param regenerate_credential_parameters: Specifies name of the password which should be
-         regenerated -- password or password2. Is either a model type or a IO type. Required.
+         regenerated -- password or password2. Is either a RegenerateCredentialParameters type or a IO
+         type. Required.
         :type regenerate_credential_parameters:
          ~azure.mgmt.containerregistry.v2017_03_01.models.RegenerateCredentialParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

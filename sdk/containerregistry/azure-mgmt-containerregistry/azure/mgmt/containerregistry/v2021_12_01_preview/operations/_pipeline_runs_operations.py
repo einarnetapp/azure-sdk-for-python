@@ -550,7 +550,7 @@ class PipelineRunsOperations:
         :param pipeline_run_name: The name of the pipeline run. Required.
         :type pipeline_run_name: str
         :param pipeline_run_create_parameters: The parameters for creating a pipeline run. Is either a
-         model type or a IO type. Required.
+         PipelineRun type or a IO type. Required.
         :type pipeline_run_create_parameters:
          ~azure.mgmt.containerregistry.v2021_12_01_preview.models.PipelineRun or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

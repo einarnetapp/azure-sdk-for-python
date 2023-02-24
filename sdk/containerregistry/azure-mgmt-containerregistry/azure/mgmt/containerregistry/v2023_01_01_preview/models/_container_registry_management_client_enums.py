@@ -197,7 +197,7 @@ class PolicyStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Provisioning state of the resource."""
+    """The provisioning state of the archive at the time the operation was called."""
 
     CREATING = "Creating"
     UPDATING = "Updating"

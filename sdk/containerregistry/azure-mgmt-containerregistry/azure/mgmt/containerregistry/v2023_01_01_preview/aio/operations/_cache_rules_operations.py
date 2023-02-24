@@ -407,7 +407,7 @@ class CacheRulesOperations:
         :param cache_rule_name: The name of the cache rule. Required.
         :type cache_rule_name: str
         :param cache_rule_create_parameters: The parameters for creating a cache rule. Is either a
-         model type or a IO type. Required.
+         CacheRule type or a IO type. Required.
         :type cache_rule_create_parameters:
          ~azure.mgmt.containerregistry.v2023_01_01_preview.models.CacheRule or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -788,7 +788,7 @@ class CacheRulesOperations:
         :param cache_rule_name: The name of the cache rule. Required.
         :type cache_rule_name: str
         :param cache_rule_update_parameters: The parameters for updating a cache rule. Is either a
-         model type or a IO type. Required.
+         CacheRuleUpdateParameters type or a IO type. Required.
         :type cache_rule_update_parameters:
          ~azure.mgmt.containerregistry.v2023_01_01_preview.models.CacheRuleUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

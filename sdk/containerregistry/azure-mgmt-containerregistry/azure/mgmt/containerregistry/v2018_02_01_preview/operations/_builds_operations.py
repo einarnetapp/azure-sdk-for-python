@@ -598,8 +598,8 @@ class BuildsOperations:
         :type registry_name: str
         :param build_id: The build ID. Required.
         :type build_id: str
-        :param build_update_parameters: The build update properties. Is either a model type or a IO
-         type. Required.
+        :param build_update_parameters: The build update properties. Is either a BuildUpdateParameters
+         type or a IO type. Required.
         :type build_update_parameters:
          ~azure.mgmt.containerregistry.v2018_02_01_preview.models.BuildUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

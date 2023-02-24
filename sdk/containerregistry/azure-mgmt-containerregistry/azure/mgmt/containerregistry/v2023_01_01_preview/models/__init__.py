@@ -9,6 +9,12 @@
 from ._models_py3 import ActivationProperties
 from ._models_py3 import ActiveDirectoryObject
 from ._models_py3 import Actor
+from ._models_py3 import Archive
+from ._models_py3 import ArchiveListResult
+from ._models_py3 import ArchivePackageSourceProperties
+from ._models_py3 import ArchiveUpdateParameters
+from ._models_py3 import ArchiveVersion
+from ._models_py3 import ArchiveVersionListResult
 from ._models_py3 import AuthCredential
 from ._models_py3 import AzureADAuthenticationAsArmPolicy
 from ._models_py3 import CacheRule
@@ -170,6 +176,12 @@ __all__ = [
     "ActivationProperties",
     "ActiveDirectoryObject",
     "Actor",
+    "Archive",
+    "ArchiveListResult",
+    "ArchivePackageSourceProperties",
+    "ArchiveUpdateParameters",
+    "ArchiveVersion",
+    "ArchiveVersionListResult",
     "AuthCredential",
     "AzureADAuthenticationAsArmPolicy",
     "CacheRule",

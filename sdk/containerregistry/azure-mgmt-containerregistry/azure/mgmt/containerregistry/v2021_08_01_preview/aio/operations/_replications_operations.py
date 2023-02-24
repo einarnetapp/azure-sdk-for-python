@@ -397,8 +397,8 @@ class ReplicationsOperations:
         :type registry_name: str
         :param replication_name: The name of the replication. Required.
         :type replication_name: str
-        :param replication: The parameters for creating a replication. Is either a model type or a IO
-         type. Required.
+        :param replication: The parameters for creating a replication. Is either a Replication type or
+         a IO type. Required.
         :type replication: ~azure.mgmt.containerregistry.v2021_08_01_preview.models.Replication or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -762,7 +762,7 @@ class ReplicationsOperations:
         :param replication_name: The name of the replication. Required.
         :type replication_name: str
         :param replication_update_parameters: The parameters for updating a replication. Is either a
-         model type or a IO type. Required.
+         ReplicationUpdateParameters type or a IO type. Required.
         :type replication_update_parameters:
          ~azure.mgmt.containerregistry.v2021_08_01_preview.models.ReplicationUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

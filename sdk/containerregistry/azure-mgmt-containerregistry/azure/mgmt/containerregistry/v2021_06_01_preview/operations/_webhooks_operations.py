@@ -600,8 +600,8 @@ class WebhooksOperations:
         :type registry_name: str
         :param webhook_name: The name of the webhook. Required.
         :type webhook_name: str
-        :param webhook_create_parameters: The parameters for creating a webhook. Is either a model type
-         or a IO type. Required.
+        :param webhook_create_parameters: The parameters for creating a webhook. Is either a
+         WebhookCreateParameters type or a IO type. Required.
         :type webhook_create_parameters:
          ~azure.mgmt.containerregistry.v2021_06_01_preview.models.WebhookCreateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -962,8 +962,8 @@ class WebhooksOperations:
         :type registry_name: str
         :param webhook_name: The name of the webhook. Required.
         :type webhook_name: str
-        :param webhook_update_parameters: The parameters for updating a webhook. Is either a model type
-         or a IO type. Required.
+        :param webhook_update_parameters: The parameters for updating a webhook. Is either a
+         WebhookUpdateParameters type or a IO type. Required.
         :type webhook_update_parameters:
          ~azure.mgmt.containerregistry.v2021_06_01_preview.models.WebhookUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

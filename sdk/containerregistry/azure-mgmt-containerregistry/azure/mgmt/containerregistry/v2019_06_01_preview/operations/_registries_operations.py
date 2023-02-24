@@ -283,8 +283,8 @@ class RegistriesOperations:
         :type resource_group_name: str
         :param registry_name: The name of the container registry. Required.
         :type registry_name: str
-        :param run_request: The parameters of a run that needs to scheduled. Is either a model type or
-         a IO type. Required.
+        :param run_request: The parameters of a run that needs to scheduled. Is either a RunRequest
+         type or a IO type. Required.
         :type run_request: ~azure.mgmt.containerregistry.v2019_06_01_preview.models.RunRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
