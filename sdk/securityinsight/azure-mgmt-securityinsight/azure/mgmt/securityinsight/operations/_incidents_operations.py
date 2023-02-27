@@ -52,8 +52,8 @@ def build_run_playbook_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -106,8 +106,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -140,7 +140,7 @@ def build_list_request(
     if orderby is not None:
         _params["$orderby"] = _SERIALIZER.query("orderby", orderby, "str")
     if top is not None:
-        _params["$top"] = _SERIALIZER.query("top", top, "int")
+        _params["$top"] = _SERIALIZER.query("top", top, "int", maximum=1000)
     if skip_token is not None:
         _params["$skipToken"] = _SERIALIZER.query("skip_token", skip_token, "str")
 
@@ -156,8 +156,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -199,8 +199,8 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -245,8 +245,8 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -288,8 +288,8 @@ def build_create_team_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -334,8 +334,8 @@ def build_list_alerts_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -377,8 +377,8 @@ def build_list_bookmarks_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -420,8 +420,8 @@ def build_list_entities_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -556,7 +556,8 @@ class IncidentsOperations:
         :type workspace_name: str
         :param incident_identifier: Required.
         :type incident_identifier: str
-        :param request_body: Is either a model type or a IO type. Default value is None.
+        :param request_body: Is either a ManualTriggerRequestBody type or a IO type. Default value is
+         None.
         :type request_body: ~azure.mgmt.securityinsight.models.ManualTriggerRequestBody or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -577,7 +578,7 @@ class IncidentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -669,7 +670,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IncidentList] = kwargs.pop("cls", None)
@@ -773,7 +774,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Incident] = kwargs.pop("cls", None)
@@ -892,7 +893,7 @@ class IncidentsOperations:
         :type workspace_name: str
         :param incident_id: Incident ID. Required.
         :type incident_id: str
-        :param incident: The incident. Is either a model type or a IO type. Required.
+        :param incident: The incident. Is either a Incident type or a IO type. Required.
         :type incident: ~azure.mgmt.securityinsight.models.Incident or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -913,7 +914,7 @@ class IncidentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -997,7 +998,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1115,7 +1116,8 @@ class IncidentsOperations:
         :type workspace_name: str
         :param incident_id: Incident ID. Required.
         :type incident_id: str
-        :param team_properties: Team properties. Is either a model type or a IO type. Required.
+        :param team_properties: Team properties. Is either a TeamInformation type or a IO type.
+         Required.
         :type team_properties: ~azure.mgmt.securityinsight.models.TeamInformation or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1136,7 +1138,7 @@ class IncidentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1216,7 +1218,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IncidentAlertList] = kwargs.pop("cls", None)
@@ -1284,7 +1286,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IncidentBookmarkList] = kwargs.pop("cls", None)
@@ -1352,7 +1354,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IncidentEntitiesResponse] = kwargs.pop("cls", None)

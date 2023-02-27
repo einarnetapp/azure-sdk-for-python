@@ -47,8 +47,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -89,8 +89,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -132,8 +132,8 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -175,8 +175,8 @@ def build_create_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -251,7 +251,7 @@ class SourceControlsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SourceControlList] = kwargs.pop("cls", None)
@@ -353,7 +353,7 @@ class SourceControlsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SourceControl] = kwargs.pop("cls", None)
@@ -421,7 +421,7 @@ class SourceControlsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -536,7 +536,8 @@ class SourceControlsOperations:
         :type workspace_name: str
         :param source_control_id: Source control Id. Required.
         :type source_control_id: str
-        :param source_control: The SourceControl. Is either a model type or a IO type. Required.
+        :param source_control: The SourceControl. Is either a SourceControl type or a IO type.
+         Required.
         :type source_control: ~azure.mgmt.securityinsight.models.SourceControl or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -557,7 +558,7 @@ class SourceControlsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

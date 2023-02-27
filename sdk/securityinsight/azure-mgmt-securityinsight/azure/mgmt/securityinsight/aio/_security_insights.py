@@ -17,6 +17,7 @@ from .._serialization import Deserializer, Serializer
 from ._configuration import SecurityInsightsConfiguration
 from .operations import (
     ActionsOperations,
+    AlertRuleOperations,
     AlertRuleTemplatesOperations,
     AlertRulesOperations,
     AutomationRulesOperations,
@@ -35,6 +36,7 @@ from .operations import (
     FileImportsOperations,
     GetOperations,
     GetRecommendationsOperations,
+    GetTriggeredAnalyticsRuleRunsOperations,
     IPGeodataOperations,
     IncidentCommentsOperations,
     IncidentRelationsOperations,
@@ -51,6 +53,7 @@ from .operations import (
     ThreatIntelligenceIndicatorMetricsOperations,
     ThreatIntelligenceIndicatorOperations,
     ThreatIntelligenceIndicatorsOperations,
+    TriggeredAnalyticsRuleRunOperations,
     UpdateOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
@@ -71,6 +74,14 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :ivar alert_rule_templates: AlertRuleTemplatesOperations operations
     :vartype alert_rule_templates:
      azure.mgmt.securityinsight.aio.operations.AlertRuleTemplatesOperations
+    :ivar triggered_analytics_rule_run: TriggeredAnalyticsRuleRunOperations operations
+    :vartype triggered_analytics_rule_run:
+     azure.mgmt.securityinsight.aio.operations.TriggeredAnalyticsRuleRunOperations
+    :ivar get_triggered_analytics_rule_runs: GetTriggeredAnalyticsRuleRunsOperations operations
+    :vartype get_triggered_analytics_rule_runs:
+     azure.mgmt.securityinsight.aio.operations.GetTriggeredAnalyticsRuleRunsOperations
+    :ivar alert_rule: AlertRuleOperations operations
+    :vartype alert_rule: azure.mgmt.securityinsight.aio.operations.AlertRuleOperations
     :ivar automation_rules: AutomationRulesOperations operations
     :vartype automation_rules: azure.mgmt.securityinsight.aio.operations.AutomationRulesOperations
     :ivar incidents: IncidentsOperations operations
@@ -161,7 +172,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-12-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-02-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -187,6 +198,13 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self.alert_rule_templates = AlertRuleTemplatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.triggered_analytics_rule_run = TriggeredAnalyticsRuleRunOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.get_triggered_analytics_rule_runs = GetTriggeredAnalyticsRuleRunsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.alert_rule = AlertRuleOperations(self._client, self._config, self._serialize, self._deserialize)
         self.automation_rules = AutomationRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -284,5 +302,5 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         await self._client.__aenter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
+    async def __aexit__(self, *exc_details: Any) -> None:
         await self._client.__aexit__(*exc_details)
