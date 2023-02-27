@@ -225,11 +225,11 @@ class JoinRequestsOperations:
     ) -> Iterable["_models.JoinRequestDetails"]:
         """get student join requests.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param include_denied: Include denied. Default value is None.
         :type include_denied: bool
@@ -327,13 +327,13 @@ class JoinRequestsOperations:
     ) -> _models.JoinRequestDetails:
         """get student join requests.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
-        :param join_request_name: Join name. Required.
+        :param join_request_name: The ID that uniquely identifies a join request. Required.
         :type join_request_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: JoinRequestDetails or the result of cls(response)
@@ -402,13 +402,13 @@ class JoinRequestsOperations:
     ) -> None:
         """Approve student joining the redeemable lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
-        :param join_request_name: Join name. Required.
+        :param join_request_name: The ID that uniquely identifies a join request. Required.
         :type join_request_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
@@ -473,13 +473,13 @@ class JoinRequestsOperations:
     ) -> None:
         """Deny student joining the redeemable lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
-        :param join_request_name: Join name. Required.
+        :param join_request_name: The ID that uniquely identifies a join request. Required.
         :type join_request_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)

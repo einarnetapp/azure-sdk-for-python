@@ -78,8 +78,8 @@ class EducationManagementClientOperationsMixin(EducationManagementClientMixinABC
     ) -> None:
         """Redeem invite code to join a redeemable lab.
 
-        :param parameters: Request parameters to provide redeem code. Is either a model type or a IO
-         type. Required.
+        :param parameters: Request parameters to provide redeem code. Is either a RedeemRequest type or
+         a IO type. Required.
         :type parameters: ~azure.mgmt.education.models.RedeemRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

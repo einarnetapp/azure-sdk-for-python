@@ -144,7 +144,7 @@ class StudentLabsOperations:
     async def get(self, student_lab_name: str, **kwargs: Any) -> _models.StudentLabDetails:
         """Get the details for a specified lab associated with the student lab.
 
-        :param student_lab_name: Student lab name. Required.
+        :param student_lab_name: The ID that uniquely identifies a student lab. Required.
         :type student_lab_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StudentLabDetails or the result of cls(response)

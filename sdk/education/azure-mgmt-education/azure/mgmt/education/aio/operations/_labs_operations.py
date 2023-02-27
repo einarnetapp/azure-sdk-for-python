@@ -77,9 +77,9 @@ class LabsOperations:
     ) -> AsyncIterable["_models.LabDetails"]:
         """Get a list of labs associated with the provided billing account name and billing profile name.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
         :param include_budget: May be used to include budget information. Default value is None.
         :type include_budget: bool
@@ -180,11 +180,11 @@ class LabsOperations:
         """Get the details for a specific lab associated with the provided billing account name, billing
         profile name, and invoice section name.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param include_budget: May be used to include budget information. Default value is None.
         :type include_budget: bool
@@ -283,11 +283,11 @@ class LabsOperations:
         """Get the details for a specific lab associated with the provided billing account name, billing
         profile name, and invoice section name.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param include_budget: May be used to include budget information. Default value is None.
         :type include_budget: bool
@@ -355,11 +355,11 @@ class LabsOperations:
         and invoice section name. Note all students must be removed from the lab in order to delete the
         lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
@@ -425,11 +425,11 @@ class LabsOperations:
     ) -> _models.LabDetails:
         """Create a new lab or update a previously created lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param parameters: Request parameters that are provided to create lab resource. Required.
         :type parameters: ~azure.mgmt.education.models.LabDetails
@@ -455,11 +455,11 @@ class LabsOperations:
     ) -> _models.LabDetails:
         """Create a new lab or update a previously created lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param parameters: Request parameters that are provided to create lab resource. Required.
         :type parameters: IO
@@ -483,14 +483,14 @@ class LabsOperations:
     ) -> _models.LabDetails:
         """Create a new lab or update a previously created lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param parameters: Request parameters that are provided to create lab resource. Is either a
-         model type or a IO type. Required.
+         LabDetails type or a IO type. Required.
         :type parameters: ~azure.mgmt.education.models.LabDetails or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -580,11 +580,11 @@ class LabsOperations:
     ) -> _models.LabDetails:
         """Generate invite code for a lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param parameters: Request parameters that are provided to generate invite code. Required.
         :type parameters: ~azure.mgmt.education.models.InviteCodeGenerateRequest
@@ -614,11 +614,11 @@ class LabsOperations:
     ) -> _models.LabDetails:
         """Generate invite code for a lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param parameters: Request parameters that are provided to generate invite code. Required.
         :type parameters: IO
@@ -646,14 +646,14 @@ class LabsOperations:
     ) -> _models.LabDetails:
         """Generate invite code for a lab.
 
-        :param billing_account_name: Billing account name. Required.
+        :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name. Required.
+        :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :param invoice_section_name: Invoice section name. Required.
+        :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :param parameters: Request parameters that are provided to generate invite code. Is either a
-         model type or a IO type. Required.
+         InviteCodeGenerateRequest type or a IO type. Required.
         :type parameters: ~azure.mgmt.education.models.InviteCodeGenerateRequest or IO
         :param only_update_student_count_parameter: set this flag to true if you want to update student
          count without generating a new invite code. Default value is None.
