@@ -14,7 +14,7 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
     pip install azure-identity
     pip install azure-mgmt-guestconfig
 # USAGE
-    python get_a_guest_configuration_assignment_report_by_id_for_a_virtual_machine.py
+    python create_or_update_guest_configuration_hcrp_assignment.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,18 +26,34 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
 def main():
     client = GuestConfigurationClient(
         credential=DefaultAzureCredential(),
-        subscription_id="mySubscriptionid",
+        subscription_id="mySubscriptionId",
     )
 
-    response = client.guest_configuration_assignment_reports.get(
+    response = client.guest_configuration_hcrp_assignments.create_or_update(
+        guest_configuration_assignment_name="NotInstalledApplicationForWindows",
         resource_group_name="myResourceGroupName",
-        guest_configuration_assignment_name="AuditSecureProtocol",
-        report_id="7367cbb8-ae99-47d0-a33b-a283564d2cb1",
-        vm_name="myvm",
+        machine_name="myMachineName",
+        parameters={
+            "location": "westcentralus",
+            "name": "NotInstalledApplicationForWindows",
+            "properties": {
+                "context": "Azure policy",
+                "guestConfiguration": {
+                    "assignmentType": "ApplyAndAutoCorrect",
+                    "configurationParameter": [
+                        {"name": "[InstalledApplication]NotInstalledApplicationResource1;Name", "value": "NotePad,sql"}
+                    ],
+                    "contentHash": "123contenthash",
+                    "contentUri": "https://thisisfake/pacakge",
+                    "name": "NotInstalledApplicationForWindows",
+                    "version": "1.*",
+                },
+            },
+        },
     )
     print(response)
 
 
-# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/getGuestConfigurationAssignmentReportById.json
+# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/createOrUpdateGuestConfigurationHCRPAssignment.json
 if __name__ == "__main__":
     main()

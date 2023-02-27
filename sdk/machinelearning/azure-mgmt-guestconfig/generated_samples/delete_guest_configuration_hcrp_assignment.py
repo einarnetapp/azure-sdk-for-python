@@ -14,7 +14,7 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
     pip install azure-identity
     pip install azure-mgmt-guestconfig
 # USAGE
-    python get_a_vmss_guest_configuration_assignment.py
+    python delete_guest_configuration_hcrp_assignment.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,14 @@ def main():
         subscription_id="mySubscriptionId",
     )
 
-    response = client.guest_configuration_assignments_vmss.get(
+    response = client.guest_configuration_hcrp_assignments.delete(
         resource_group_name="myResourceGroupName",
-        vmss_name="myVMSSName",
-        name="SecureProtocol",
+        guest_configuration_assignment_name="SecureProtocol",
+        machine_name="myMachineName",
     )
     print(response)
 
 
-# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/getVMSSGuestConfigurationAssignment.json
+# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/deleteGuestConfigurationHCRPAssignment.json
 if __name__ == "__main__":
     main()
