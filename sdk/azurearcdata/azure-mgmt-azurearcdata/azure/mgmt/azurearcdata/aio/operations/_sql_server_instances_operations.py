@@ -82,7 +82,7 @@ class SqlServerInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SqlServerInstanceListResult] = kwargs.pop("cls", None)
@@ -171,7 +171,7 @@ class SqlServerInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SqlServerInstanceListResult] = kwargs.pop("cls", None)
@@ -270,7 +270,7 @@ class SqlServerInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SqlServerInstance] = kwargs.pop("cls", None)
@@ -327,7 +327,7 @@ class SqlServerInstancesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -466,8 +466,8 @@ class SqlServerInstancesOperations:
         :type resource_group_name: str
         :param sql_server_instance_name: Name of SQL Server Instance. Required.
         :type sql_server_instance_name: str
-        :param sql_server_instance: The SQL Server Instance to be created or updated. Is either a model
-         type or a IO type. Required.
+        :param sql_server_instance: The SQL Server Instance to be created or updated. Is either a
+         SqlServerInstance type or a IO type. Required.
         :type sql_server_instance: ~azure.mgmt.azurearcdata.models.SqlServerInstance or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -488,7 +488,7 @@ class SqlServerInstancesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -552,7 +552,7 @@ class SqlServerInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -612,7 +612,7 @@ class SqlServerInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -722,7 +722,8 @@ class SqlServerInstancesOperations:
         :type resource_group_name: str
         :param sql_server_instance_name: Name of SQL Server Instance. Required.
         :type sql_server_instance_name: str
-        :param parameters: The SQL Server Instance. Is either a model type or a IO type. Required.
+        :param parameters: The SQL Server Instance. Is either a SqlServerInstanceUpdate type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.azurearcdata.models.SqlServerInstanceUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -743,7 +744,7 @@ class SqlServerInstancesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-01-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
