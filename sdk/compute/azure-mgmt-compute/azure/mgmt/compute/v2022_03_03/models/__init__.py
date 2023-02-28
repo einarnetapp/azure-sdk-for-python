@@ -100,6 +100,7 @@ from ._models_py3 import UserAssignedIdentitiesValue
 from ._compute_management_client_enums import AggregatedReplicationState
 from ._compute_management_client_enums import Architecture
 from ._compute_management_client_enums import ConfidentialVMEncryptionType
+from ._compute_management_client_enums import EdgeZoneStorageAccountType
 from ._compute_management_client_enums import ExtendedLocationTypes
 from ._compute_management_client_enums import GalleryApplicationCustomActionParameterType
 from ._compute_management_client_enums import GalleryExpandParams
@@ -219,6 +220,7 @@ __all__ = [
     "AggregatedReplicationState",
     "Architecture",
     "ConfidentialVMEncryptionType",
+    "EdgeZoneStorageAccountType",
     "ExtendedLocationTypes",
     "GalleryApplicationCustomActionParameterType",
     "GalleryExpandParams",
