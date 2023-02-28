@@ -390,7 +390,7 @@ class ApplicationsOperations:
         :type cluster_name: str
         :param application_name: The constant value for the application name. Required.
         :type application_name: str
-        :param parameters: The application create request. Is either a model type or a IO type.
+        :param parameters: The application create request. Is either a Application type or a IO type.
          Required.
         :type parameters: ~azure.mgmt.hdinsight.models.Application or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

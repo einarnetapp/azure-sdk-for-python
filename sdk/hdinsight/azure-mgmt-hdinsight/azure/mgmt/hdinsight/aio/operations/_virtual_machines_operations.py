@@ -263,7 +263,7 @@ class VirtualMachinesOperations:
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param hosts: The list of hosts to restart. Is either a list type or a IO type. Required.
+        :param hosts: The list of hosts to restart. Is either a [str] type or a IO type. Required.
         :type hosts: list[str] or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
