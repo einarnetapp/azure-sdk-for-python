@@ -417,7 +417,7 @@ class ScriptsOperations:
         :type database_name: str
         :param script_name: The name of the Kusto database script. Required.
         :type script_name: str
-        :param parameters: The Kusto Script parameters contains the KQL to run. Is either a model type
+        :param parameters: The Kusto Script parameters contains the KQL to run. Is either a Script type
          or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.Script or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -674,7 +674,7 @@ class ScriptsOperations:
         :type database_name: str
         :param script_name: The name of the Kusto database script. Required.
         :type script_name: str
-        :param parameters: The Kusto Script parameters contains to the KQL to run. Is either a model
+        :param parameters: The Kusto Script parameters contains to the KQL to run. Is either a Script
          type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.Script or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -799,7 +799,7 @@ class ScriptsOperations:
     async def begin_delete(
         self, resource_group_name: str, cluster_name: str, database_name: str, script_name: str, **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Deletes a Kusto principalAssignment.
+        """Deletes a Kusto database script.
 
         :param resource_group_name: The name of the resource group containing the Kusto cluster.
          Required.
@@ -949,7 +949,8 @@ class ScriptsOperations:
         :type cluster_name: str
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
-        :param script_name: The name of the script. Is either a model type or a IO type. Required.
+        :param script_name: The name of the script. Is either a ScriptCheckNameRequest type or a IO
+         type. Required.
         :type script_name: ~azure.mgmt.kusto.models.ScriptCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

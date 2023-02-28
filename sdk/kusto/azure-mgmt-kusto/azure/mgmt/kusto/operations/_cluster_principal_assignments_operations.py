@@ -296,8 +296,8 @@ class ClusterPrincipalAssignmentsOperations:
         :type resource_group_name: str
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
-        :param principal_assignment_name: The name of the principal assignment. Is either a model type
-         or a IO type. Required.
+        :param principal_assignment_name: The name of the principal assignment. Is either a
+         ClusterPrincipalAssignmentCheckNameRequest type or a IO type. Required.
         :type principal_assignment_name:
          ~azure.mgmt.kusto.models.ClusterPrincipalAssignmentCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -610,7 +610,7 @@ class ClusterPrincipalAssignmentsOperations:
         :param principal_assignment_name: The name of the Kusto principalAssignment. Required.
         :type principal_assignment_name: str
         :param parameters: The Kusto cluster principalAssignment's parameters supplied for the
-         operation. Is either a model type or a IO type. Required.
+         operation. Is either a ClusterPrincipalAssignment type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.ClusterPrincipalAssignment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

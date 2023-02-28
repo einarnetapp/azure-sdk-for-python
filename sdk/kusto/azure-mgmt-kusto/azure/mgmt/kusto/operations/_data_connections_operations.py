@@ -590,7 +590,7 @@ class DataConnectionsOperations:
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
         :param parameters: The data connection parameters supplied to the CreateOrUpdate operation. Is
-         either a model type or a IO type. Required.
+         either a DataConnectionValidation type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.DataConnectionValidation or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -742,8 +742,8 @@ class DataConnectionsOperations:
         :type cluster_name: str
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
-        :param data_connection_name: The name of the data connection. Is either a model type or a IO
-         type. Required.
+        :param data_connection_name: The name of the data connection. Is either a
+         DataConnectionCheckNameRequest type or a IO type. Required.
         :type data_connection_name: ~azure.mgmt.kusto.models.DataConnectionCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1073,7 +1073,7 @@ class DataConnectionsOperations:
         :param data_connection_name: The name of the data connection. Required.
         :type data_connection_name: str
         :param parameters: The data connection parameters supplied to the CreateOrUpdate operation. Is
-         either a model type or a IO type. Required.
+         either a DataConnection type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.DataConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1337,7 +1337,7 @@ class DataConnectionsOperations:
         :param data_connection_name: The name of the data connection. Required.
         :type data_connection_name: str
         :param parameters: The data connection parameters supplied to the Update operation. Is either a
-         model type or a IO type. Required.
+         DataConnection type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.DataConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

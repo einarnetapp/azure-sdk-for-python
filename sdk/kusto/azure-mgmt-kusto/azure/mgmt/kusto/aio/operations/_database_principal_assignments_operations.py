@@ -147,8 +147,8 @@ class DatabasePrincipalAssignmentsOperations:
         :type cluster_name: str
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
-        :param principal_assignment_name: The name of the resource. Is either a model type or a IO
-         type. Required.
+        :param principal_assignment_name: The name of the resource. Is either a
+         DatabasePrincipalAssignmentCheckNameRequest type or a IO type. Required.
         :type principal_assignment_name:
          ~azure.mgmt.kusto.models.DatabasePrincipalAssignmentCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -483,7 +483,7 @@ class DatabasePrincipalAssignmentsOperations:
         :param principal_assignment_name: The name of the Kusto principalAssignment. Required.
         :type principal_assignment_name: str
         :param parameters: The Kusto principalAssignments parameters supplied for the operation. Is
-         either a model type or a IO type. Required.
+         either a DatabasePrincipalAssignment type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.DatabasePrincipalAssignment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

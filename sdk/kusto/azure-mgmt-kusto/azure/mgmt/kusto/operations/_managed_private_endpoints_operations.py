@@ -338,7 +338,8 @@ class ManagedPrivateEndpointsOperations:
         :type resource_group_name: str
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
-        :param resource_name: The name of the resource. Is either a model type or a IO type. Required.
+        :param resource_name: The name of the resource. Is either a
+         ManagedPrivateEndpointsCheckNameRequest type or a IO type. Required.
         :type resource_name: ~azure.mgmt.kusto.models.ManagedPrivateEndpointsCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -743,8 +744,8 @@ class ManagedPrivateEndpointsOperations:
         :type cluster_name: str
         :param managed_private_endpoint_name: The name of the managed private endpoint. Required.
         :type managed_private_endpoint_name: str
-        :param parameters: The managed private endpoint parameters. Is either a model type or a IO
-         type. Required.
+        :param parameters: The managed private endpoint parameters. Is either a ManagedPrivateEndpoint
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.ManagedPrivateEndpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -988,8 +989,8 @@ class ManagedPrivateEndpointsOperations:
         :type cluster_name: str
         :param managed_private_endpoint_name: The name of the managed private endpoint. Required.
         :type managed_private_endpoint_name: str
-        :param parameters: The managed private endpoint parameters. Is either a model type or a IO
-         type. Required.
+        :param parameters: The managed private endpoint parameters. Is either a ManagedPrivateEndpoint
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.ManagedPrivateEndpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

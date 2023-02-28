@@ -141,7 +141,8 @@ class DatabasesOperations:
         :type resource_group_name: str
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
-        :param resource_name: The name of the resource. Is either a model type or a IO type. Required.
+        :param resource_name: The name of the resource. Is either a CheckNameRequest type or a IO type.
+         Required.
         :type resource_name: ~azure.mgmt.kusto.models.CheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -559,7 +560,7 @@ class DatabasesOperations:
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
         :param parameters: The database parameters supplied to the CreateOrUpdate operation. Is either
-         a model type or a IO type. Required.
+         a Database type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.Database or IO
         :param caller_role: By default, any user who run operation on a database become an Admin on it.
          This property allows the caller to exclude the caller from Admins list. Known values are:
@@ -828,8 +829,8 @@ class DatabasesOperations:
         :type cluster_name: str
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
-        :param parameters: The database parameters supplied to the Update operation. Is either a model
-         type or a IO type. Required.
+        :param parameters: The database parameters supplied to the Update operation. Is either a
+         Database type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.Database or IO
         :param caller_role: By default, any user who run operation on a database become an Admin on it.
          This property allows the caller to exclude the caller from Admins list. Known values are:
@@ -1198,8 +1199,8 @@ class DatabasesOperations:
         :type cluster_name: str
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
-        :param database_principals_to_add: List of database principals to add. Is either a model type
-         or a IO type. Required.
+        :param database_principals_to_add: List of database principals to add. Is either a
+         DatabasePrincipalListRequest type or a IO type. Required.
         :type database_principals_to_add: ~azure.mgmt.kusto.models.DatabasePrincipalListRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1351,8 +1352,8 @@ class DatabasesOperations:
         :type cluster_name: str
         :param database_name: The name of the database in the Kusto cluster. Required.
         :type database_name: str
-        :param database_principals_to_remove: List of database principals to remove. Is either a model
-         type or a IO type. Required.
+        :param database_principals_to_remove: List of database principals to remove. Is either a
+         DatabasePrincipalListRequest type or a IO type. Required.
         :type database_principals_to_remove: ~azure.mgmt.kusto.models.DatabasePrincipalListRequest or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
