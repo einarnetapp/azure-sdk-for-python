@@ -494,8 +494,8 @@ class SqlVirtualMachineGroupsOperations:
         :type resource_group_name: str
         :param sql_virtual_machine_group_name: Name of the SQL virtual machine group. Required.
         :type sql_virtual_machine_group_name: str
-        :param parameters: The SQL virtual machine group. Is either a model type or a IO type.
-         Required.
+        :param parameters: The SQL virtual machine group. Is either a SqlVirtualMachineGroup type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineGroup or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -847,8 +847,8 @@ class SqlVirtualMachineGroupsOperations:
         :type resource_group_name: str
         :param sql_virtual_machine_group_name: Name of the SQL virtual machine group. Required.
         :type sql_virtual_machine_group_name: str
-        :param parameters: The SQL virtual machine group. Is either a model type or a IO type.
-         Required.
+        :param parameters: The SQL virtual machine group. Is either a SqlVirtualMachineGroupUpdate type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineGroupUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
