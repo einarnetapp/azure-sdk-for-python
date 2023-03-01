@@ -244,7 +244,7 @@ class DatabasesOperations:
         :param database_name: The name of the database. Required.
         :type database_name: str
         :param parameters: The required parameters for creating or updating a database. Is either a
-         model type or a IO type. Required.
+         Database type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.Database or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

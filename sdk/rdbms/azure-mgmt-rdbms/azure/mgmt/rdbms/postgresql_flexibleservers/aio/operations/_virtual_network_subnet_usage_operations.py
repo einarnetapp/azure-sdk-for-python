@@ -107,8 +107,8 @@ class VirtualNetworkSubnetUsageOperations:
 
         :param location_name: The name of the location. Required.
         :type location_name: str
-        :param parameters: The required parameters for creating or updating a server. Is either a model
-         type or a IO type. Required.
+        :param parameters: The required parameters for creating or updating a server. Is either a
+         VirtualNetworkSubnetUsageParameter type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.rdbms.postgresql_flexibleservers.models.VirtualNetworkSubnetUsageParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

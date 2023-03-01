@@ -292,7 +292,7 @@ class ServerAdministratorsOperations:
         :param server_name: The name of the server. Required.
         :type server_name: str
         :param properties: The required parameters for creating or updating an AAD server
-         administrator. Is either a model type or a IO type. Required.
+         administrator. Is either a ServerAdministratorResource type or a IO type. Required.
         :type properties: ~azure.mgmt.rdbms.postgresql.models.ServerAdministratorResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

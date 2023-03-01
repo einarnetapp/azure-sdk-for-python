@@ -407,7 +407,7 @@ class ConfigurationsOperations:
         :param configuration_name: The name of the server configuration. Required.
         :type configuration_name: str
         :param parameters: The required parameters for updating a server configuration. Is either a
-         model type or a IO type. Required.
+         ConfigurationForUpdate type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ConfigurationForUpdate or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -660,7 +660,7 @@ class ConfigurationsOperations:
         :param configuration_name: The name of the server configuration. Required.
         :type configuration_name: str
         :param parameters: The required parameters for updating a server configuration. Is either a
-         model type or a IO type. Required.
+         Configuration type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.Configuration or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

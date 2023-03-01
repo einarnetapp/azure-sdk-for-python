@@ -305,8 +305,8 @@ class ServerSecurityAlertPoliciesOperations:
         :param security_alert_policy_name: The name of the threat detection policy. "Default" Required.
         :type security_alert_policy_name: str or
          ~azure.mgmt.rdbms.postgresql.models.SecurityAlertPolicyName
-        :param parameters: The server security alert policy. Is either a model type or a IO type.
-         Required.
+        :param parameters: The server security alert policy. Is either a ServerSecurityAlertPolicy type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql.models.ServerSecurityAlertPolicy or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
