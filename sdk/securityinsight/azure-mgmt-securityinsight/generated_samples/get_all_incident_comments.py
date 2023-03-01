@@ -14,7 +14,7 @@ from azure.mgmt.securityinsight import SecurityInsights
     pip install azure-identity
     pip install azure-mgmt-securityinsight
 # USAGE
-    python incident_comments_delete.py
+    python get_all_incident_comments.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,15 +29,15 @@ def main():
         subscription_id="d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     )
 
-    response = client.incident_comments.delete(
+    response = client.incident_comments.list(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
         incident_id="73e01a99-5cd7-4139-a149-9f2736ff2ab5",
-        incident_comment_id="4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
     )
-    print(response)
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/incidents/IncidentComments/IncidentComments_Delete.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-03-01-preview/examples/incidents/comments/GetAllIncidentComments.json
 if __name__ == "__main__":
     main()

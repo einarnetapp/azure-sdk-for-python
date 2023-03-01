@@ -14,7 +14,7 @@ from azure.mgmt.securityinsight import SecurityInsights
     pip install azure-identity
     pip install azure-mgmt-securityinsight
 # USAGE
-    python incidents_list.py
+    python get_all_incident_bookmarks.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,14 @@ def main():
         subscription_id="d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     )
 
-    response = client.incidents.list(
+    response = client.incidents.list_bookmarks(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
+        incident_id="afbd324f-6c48-459c-8710-8d1e1cd03812",
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/incidents/Incidents_List.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-03-01-preview/examples/incidents/GetAllIncidentBookmarks.json
 if __name__ == "__main__":
     main()

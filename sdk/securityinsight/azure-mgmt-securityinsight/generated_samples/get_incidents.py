@@ -14,7 +14,7 @@ from azure.mgmt.securityinsight import SecurityInsights
     pip install azure-identity
     pip install azure-mgmt-securityinsight
 # USAGE
-    python patch_recommendation.py
+    python get_incidents.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,15 +29,14 @@ def main():
         subscription_id="d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     )
 
-    response = client.update.begin_recommendation(
+    response = client.incidents.list(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
-        recommendation_id="6d4b54eb-8684-4aa3-a156-3aa37b8014bc",
-        recommendation_patch=[{"state": "Active"}],
-    ).result()
-    print(response)
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/recommendations/PatchRecommendation.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-03-01-preview/examples/incidents/GetIncidents.json
 if __name__ == "__main__":
     main()

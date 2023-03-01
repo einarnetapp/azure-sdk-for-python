@@ -33,12 +33,9 @@ from .operations import (
     EntityQueryTemplatesOperations,
     EntityRelationsOperations,
     FileImportsOperations,
-    GetOperations,
-    GetRecommendationsOperations,
     IPGeodataOperations,
     IncidentCommentsOperations,
     IncidentRelationsOperations,
-    IncidentTasksOperations,
     IncidentsOperations,
     MetadataOperations,
     OfficeConsentsOperations,
@@ -51,9 +48,10 @@ from .operations import (
     ThreatIntelligenceIndicatorMetricsOperations,
     ThreatIntelligenceIndicatorOperations,
     ThreatIntelligenceIndicatorsOperations,
-    UpdateOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
+    WorkspaceManagerAssignmentJobsOperations,
+    WorkspaceManagerAssignmentsOperations,
 )
 
 if TYPE_CHECKING:
@@ -105,8 +103,6 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :vartype incident_comments: azure.mgmt.securityinsight.operations.IncidentCommentsOperations
     :ivar incident_relations: IncidentRelationsOperations operations
     :vartype incident_relations: azure.mgmt.securityinsight.operations.IncidentRelationsOperations
-    :ivar incident_tasks: IncidentTasksOperations operations
-    :vartype incident_tasks: azure.mgmt.securityinsight.operations.IncidentTasksOperations
     :ivar metadata: MetadataOperations operations
     :vartype metadata: azure.mgmt.securityinsight.operations.MetadataOperations
     :ivar office_consents: OfficeConsentsOperations operations
@@ -114,13 +110,6 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :ivar sentinel_onboarding_states: SentinelOnboardingStatesOperations operations
     :vartype sentinel_onboarding_states:
      azure.mgmt.securityinsight.operations.SentinelOnboardingStatesOperations
-    :ivar get_recommendations: GetRecommendationsOperations operations
-    :vartype get_recommendations:
-     azure.mgmt.securityinsight.operations.GetRecommendationsOperations
-    :ivar get: GetOperations operations
-    :vartype get: azure.mgmt.securityinsight.operations.GetOperations
-    :ivar update: UpdateOperations operations
-    :vartype update: azure.mgmt.securityinsight.operations.UpdateOperations
     :ivar security_ml_analytics_settings: SecurityMLAnalyticsSettingsOperations operations
     :vartype security_ml_analytics_settings:
      azure.mgmt.securityinsight.operations.SecurityMLAnalyticsSettingsOperations
@@ -144,6 +133,12 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :vartype watchlists: azure.mgmt.securityinsight.operations.WatchlistsOperations
     :ivar watchlist_items: WatchlistItemsOperations operations
     :vartype watchlist_items: azure.mgmt.securityinsight.operations.WatchlistItemsOperations
+    :ivar workspace_manager_assignments: WorkspaceManagerAssignmentsOperations operations
+    :vartype workspace_manager_assignments:
+     azure.mgmt.securityinsight.operations.WorkspaceManagerAssignmentsOperations
+    :ivar workspace_manager_assignment_jobs: WorkspaceManagerAssignmentJobsOperations operations
+    :vartype workspace_manager_assignment_jobs:
+     azure.mgmt.securityinsight.operations.WorkspaceManagerAssignmentJobsOperations
     :ivar data_connectors: DataConnectorsOperations operations
     :vartype data_connectors: azure.mgmt.securityinsight.operations.DataConnectorsOperations
     :ivar data_connectors_check_requirements: DataConnectorsCheckRequirementsOperations operations
@@ -157,7 +152,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-12-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-03-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -215,17 +210,11 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self.incident_relations = IncidentRelationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.incident_tasks = IncidentTasksOperations(self._client, self._config, self._serialize, self._deserialize)
         self.metadata = MetadataOperations(self._client, self._config, self._serialize, self._deserialize)
         self.office_consents = OfficeConsentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.sentinel_onboarding_states = SentinelOnboardingStatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.get_recommendations = GetRecommendationsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.get = GetOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.update = UpdateOperations(self._client, self._config, self._serialize, self._deserialize)
         self.security_ml_analytics_settings = SecurityMLAnalyticsSettingsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -245,6 +234,12 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         )
         self.watchlists = WatchlistsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlist_items = WatchlistItemsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.workspace_manager_assignments = WorkspaceManagerAssignmentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_manager_assignment_jobs = WorkspaceManagerAssignmentJobsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.data_connectors = DataConnectorsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connectors_check_requirements = DataConnectorsCheckRequirementsOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -280,5 +275,5 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details) -> None:
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)

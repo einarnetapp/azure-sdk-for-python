@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, IO, Iterable, Optional, TypeVar, Union, overload
+from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
 import urllib.parse
 
 from azure.core.exceptions import (
@@ -42,20 +42,28 @@ _SERIALIZER.client_side_validation = False
 
 
 def build_list_request(
-    resource_group_name: str, workspace_name: str, incident_id: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    workspace_name: str,
+    workspace_manager_assignment_name: str,
+    subscription_id: str,
+    *,
+    orderby: Optional[str] = None,
+    top: Optional[int] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -70,7 +78,70 @@ def build_list_request(
             min_length=1,
             pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
         ),
-        "incidentId": _SERIALIZER.url("incident_id", incident_id, "str"),
+        "workspaceManagerAssignmentName": _SERIALIZER.url(
+            "workspace_manager_assignment_name",
+            workspace_manager_assignment_name,
+            "str",
+            pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+        ),
+    }
+
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if orderby is not None:
+        _params["$orderby"] = _SERIALIZER.query("orderby", orderby, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int")
+    if skip_token is not None:
+        _params["$skipToken"] = _SERIALIZER.query("skip_token", skip_token, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_create_request(
+    resource_group_name: str,
+    workspace_name: str,
+    workspace_manager_assignment_name: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
+    )
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name",
+            workspace_name,
+            "str",
+            max_length=90,
+            min_length=1,
+            pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+        ),
+        "workspaceManagerAssignmentName": _SERIALIZER.url(
+            "workspace_manager_assignment_name",
+            workspace_manager_assignment_name,
+            "str",
+            pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -81,29 +152,29 @@ def build_list_request(
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_get_request(
     resource_group_name: str,
     workspace_name: str,
-    incident_id: str,
-    incident_task_id: str,
+    workspace_manager_assignment_name: str,
+    job_name: str,
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs/{jobName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -118,8 +189,13 @@ def build_get_request(
             min_length=1,
             pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
         ),
-        "incidentId": _SERIALIZER.url("incident_id", incident_id, "str"),
-        "incidentTaskId": _SERIALIZER.url("incident_task_id", incident_task_id, "str"),
+        "workspaceManagerAssignmentName": _SERIALIZER.url(
+            "workspace_manager_assignment_name",
+            workspace_manager_assignment_name,
+            "str",
+            pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+        ),
+        "jobName": _SERIALIZER.url("job_name", job_name, "str", pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -133,78 +209,26 @@ def build_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_create_or_update_request(
-    resource_group_name: str,
-    workspace_name: str,
-    incident_id: str,
-    incident_task_id: str,
-    subscription_id: str,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
-    )
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "workspaceName": _SERIALIZER.url(
-            "workspace_name",
-            workspace_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
-        ),
-        "incidentId": _SERIALIZER.url("incident_id", incident_id, "str"),
-        "incidentTaskId": _SERIALIZER.url("incident_task_id", incident_task_id, "str"),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_delete_request(
     resource_group_name: str,
     workspace_name: str,
-    incident_id: str,
-    incident_task_id: str,
+    workspace_manager_assignment_name: str,
+    job_name: str,
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs/{jobName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -219,8 +243,13 @@ def build_delete_request(
             min_length=1,
             pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
         ),
-        "incidentId": _SERIALIZER.url("incident_id", incident_id, "str"),
-        "incidentTaskId": _SERIALIZER.url("incident_task_id", incident_task_id, "str"),
+        "workspaceManagerAssignmentName": _SERIALIZER.url(
+            "workspace_manager_assignment_name",
+            workspace_manager_assignment_name,
+            "str",
+            pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+        ),
+        "jobName": _SERIALIZER.url("job_name", job_name, "str", pattern=r"^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -234,14 +263,14 @@ def build_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class IncidentTasksOperations:
+class WorkspaceManagerAssignmentJobsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.SecurityInsights`'s
-        :attr:`incident_tasks` attribute.
+        :attr:`workspace_manager_assignment_jobs` attribute.
     """
 
     models = _models
@@ -255,29 +284,46 @@ class IncidentTasksOperations:
 
     @distributed_trace
     def list(
-        self, resource_group_name: str, workspace_name: str, incident_id: str, **kwargs: Any
-    ) -> Iterable["_models.IncidentTask"]:
-        """Gets all incident tasks.
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_assignment_name: str,
+        orderby: Optional[str] = None,
+        top: Optional[int] = None,
+        skip_token: Optional[str] = None,
+        **kwargs: Any
+    ) -> Iterable["_models.Job"]:
+        """Get all jobs for the specified workspace manager assignment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param incident_id: Incident ID. Required.
-        :type incident_id: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
+        :param orderby: Sorts the results. Optional. Default value is None.
+        :type orderby: str
+        :param top: Returns only the first n results. Optional. Default value is None.
+        :type top: int
+        :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
+         Default value is None.
+        :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either IncidentTask or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.IncidentTask]
+        :return: An iterator like instance of either Job or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.Job]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.IncidentTaskList] = kwargs.pop("cls", None)
+        cls: ClsType[_models.JobList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -293,8 +339,11 @@ class IncidentTasksOperations:
                 request = build_list_request(
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
-                    incident_id=incident_id,
+                    workspace_manager_assignment_name=workspace_manager_assignment_name,
                     subscription_id=self._config.subscription_id,
+                    orderby=orderby,
+                    top=top,
+                    skip_token=skip_token,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -322,7 +371,7 @@ class IncidentTasksOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("IncidentTaskList", pipeline_response)
+            deserialized = self._deserialize("JobList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -338,34 +387,34 @@ class IncidentTasksOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
 
     list.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs"
     }
 
     @distributed_trace
-    def get(
-        self, resource_group_name: str, workspace_name: str, incident_id: str, incident_task_id: str, **kwargs: Any
-    ) -> _models.IncidentTask:
-        """Gets an incident task.
+    def create(
+        self, resource_group_name: str, workspace_name: str, workspace_manager_assignment_name: str, **kwargs: Any
+    ) -> _models.Job:
+        """Create a job for the specified workspace manager assignment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param incident_id: Incident ID. Required.
-        :type incident_id: str
-        :param incident_task_id: Incident task ID. Required.
-        :type incident_task_id: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: IncidentTask or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.IncidentTask
+        :return: Job or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Job
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -379,16 +428,93 @@ class IncidentTasksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.IncidentTask] = kwargs.pop("cls", None)
+        cls: ClsType[_models.Job] = kwargs.pop("cls", None)
+
+        request = build_create_request(
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            workspace_manager_assignment_name=workspace_manager_assignment_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.create.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("Job", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs"
+    }
+
+    @distributed_trace
+    def get(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_assignment_name: str,
+        job_name: str,
+        **kwargs: Any
+    ) -> _models.Job:
+        """Gets a job.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
+        :param job_name: The job name. Required.
+        :type job_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Job or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Job
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.Job] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            incident_id=incident_id,
-            incident_task_id=incident_task_id,
+            workspace_manager_assignment_name=workspace_manager_assignment_name,
+            job_name=job_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -406,9 +532,10 @@ class IncidentTasksOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("IncidentTask", pipeline_response)
+        deserialized = self._deserialize("Job", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -416,190 +543,30 @@ class IncidentTasksOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}"
-    }
-
-    @overload
-    def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        incident_id: str,
-        incident_task_id: str,
-        incident_task: _models.IncidentTask,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.IncidentTask:
-        """Creates or updates the incident task.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param incident_id: Incident ID. Required.
-        :type incident_id: str
-        :param incident_task_id: Incident task ID. Required.
-        :type incident_task_id: str
-        :param incident_task: The incident task. Required.
-        :type incident_task: ~azure.mgmt.securityinsight.models.IncidentTask
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: IncidentTask or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.IncidentTask
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        incident_id: str,
-        incident_task_id: str,
-        incident_task: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.IncidentTask:
-        """Creates or updates the incident task.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param incident_id: Incident ID. Required.
-        :type incident_id: str
-        :param incident_task_id: Incident task ID. Required.
-        :type incident_task_id: str
-        :param incident_task: The incident task. Required.
-        :type incident_task: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: IncidentTask or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.IncidentTask
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        incident_id: str,
-        incident_task_id: str,
-        incident_task: Union[_models.IncidentTask, IO],
-        **kwargs: Any
-    ) -> _models.IncidentTask:
-        """Creates or updates the incident task.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param incident_id: Incident ID. Required.
-        :type incident_id: str
-        :param incident_task_id: Incident task ID. Required.
-        :type incident_task_id: str
-        :param incident_task: The incident task. Is either a model type or a IO type. Required.
-        :type incident_task: ~azure.mgmt.securityinsight.models.IncidentTask or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: IncidentTask or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.IncidentTask
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.IncidentTask] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(incident_task, (IO, bytes)):
-            _content = incident_task
-        else:
-            _json = self._serialize.body(incident_task, "IncidentTask")
-
-        request = build_create_or_update_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            incident_id=incident_id,
-            incident_task_id=incident_task_id,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.create_or_update.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if response.status_code == 200:
-            deserialized = self._deserialize("IncidentTask", pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize("IncidentTask", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs/{jobName}"
     }
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, workspace_name: str, incident_id: str, incident_task_id: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_assignment_name: str,
+        job_name: str,
+        **kwargs: Any
     ) -> None:
-        """Delete the incident task.
+        """Deletes the specified job from the specified workspace manager assignment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param incident_id: Incident ID. Required.
-        :type incident_id: str
-        :param incident_task_id: Incident task ID. Required.
-        :type incident_task_id: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
+        :param job_name: The job name. Required.
+        :type job_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -616,7 +583,7 @@ class IncidentTasksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -624,8 +591,8 @@ class IncidentTasksOperations:
         request = build_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            incident_id=incident_id,
-            incident_task_id=incident_task_id,
+            workspace_manager_assignment_name=workspace_manager_assignment_name,
+            job_name=job_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -643,11 +610,12 @@ class IncidentTasksOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
     delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}/jobs/{jobName}"
     }

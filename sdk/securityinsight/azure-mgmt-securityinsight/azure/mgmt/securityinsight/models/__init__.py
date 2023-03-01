@@ -31,7 +31,6 @@ from ._models_py3 import ActivityEntityQuery
 from ._models_py3 import ActivityEntityQueryTemplate
 from ._models_py3 import ActivityEntityQueryTemplatePropertiesQueryDefinitions
 from ._models_py3 import ActivityTimelineItem
-from ._models_py3 import AddIncidentTaskActionProperties
 from ._models_py3 import AlertDetailsOverride
 from ._models_py3 import AlertPropertyMapping
 from ._models_py3 import AlertRule
@@ -45,9 +44,9 @@ from ._models_py3 import AlertsDataTypeOfDataConnector
 from ._models_py3 import Anomalies
 from ._models_py3 import AnomalySecurityMLAnalyticsSettings
 from ._models_py3 import AnomalyTimelineItem
+from ._models_py3 import AssignmentItem
 from ._models_py3 import AutomationRule
 from ._models_py3 import AutomationRuleAction
-from ._models_py3 import AutomationRuleAddIncidentTaskAction
 from ._models_py3 import AutomationRuleBooleanCondition
 from ._models_py3 import AutomationRuleCondition
 from ._models_py3 import AutomationRuleModifyPropertiesAction
@@ -68,6 +67,7 @@ from ._models_py3 import AwsS3DataConnector
 from ._models_py3 import AwsS3DataConnectorDataTypes
 from ._models_py3 import AwsS3DataConnectorDataTypesLogs
 from ._models_py3 import AzureDevOpsResourceInfo
+from ._models_py3 import AzureEntityResource
 from ._models_py3 import AzureResourceEntity
 from ._models_py3 import AzureResourceEntityProperties
 from ._models_py3 import Bookmark
@@ -98,7 +98,6 @@ from ._models_py3 import CodelessUiDataConnector
 from ._models_py3 import ConnectedEntity
 from ._models_py3 import ConnectivityCriteria
 from ._models_py3 import ConnectorInstructionModelBase
-from ._models_py3 import Content
 from ._models_py3 import ContentPathMap
 from ._models_py3 import CustomEntityQuery
 from ._models_py3 import Customs
@@ -152,6 +151,10 @@ from ._models_py3 import EntityQueryTemplateList
 from ._models_py3 import EntityTimelineItem
 from ._models_py3 import EntityTimelineParameters
 from ._models_py3 import EntityTimelineResponse
+from ._models_py3 import Error
+from ._models_py3 import ErrorAdditionalInfo
+from ._models_py3 import ErrorDetail
+from ._models_py3 import ErrorResponse
 from ._models_py3 import EventGroupingSettings
 from ._models_py3 import ExpansionEntityQuery
 from ._models_py3 import ExpansionResultAggregation
@@ -200,8 +203,6 @@ from ._models_py3 import IncidentLabel
 from ._models_py3 import IncidentList
 from ._models_py3 import IncidentOwnerInfo
 from ._models_py3 import IncidentPropertiesAction
-from ._models_py3 import IncidentTask
-from ._models_py3 import IncidentTaskList
 from ._models_py3 import InsightQueryItem
 from ._models_py3 import InsightQueryItemProperties
 from ._models_py3 import InsightQueryItemPropertiesAdditionalQuery
@@ -215,7 +216,6 @@ from ._models_py3 import InsightsTableResult
 from ._models_py3 import InsightsTableResultColumnsItem
 from ._models_py3 import InstructionSteps
 from ._models_py3 import InstructionStepsInstructionsItem
-from ._models_py3 import Instructions
 from ._models_py3 import IoTCheckRequirements
 from ._models_py3 import IoTDataConnector
 from ._models_py3 import IoTDataConnectorProperties
@@ -223,6 +223,9 @@ from ._models_py3 import IoTDeviceEntity
 from ._models_py3 import IoTDeviceEntityProperties
 from ._models_py3 import IpEntity
 from ._models_py3 import IpEntityProperties
+from ._models_py3 import Job
+from ._models_py3 import JobItem
+from ._models_py3 import JobList
 from ._models_py3 import LastDataReceivedDataType
 from ._models_py3 import MCASCheckRequirements
 from ._models_py3 import MCASCheckRequirementsProperties
@@ -318,10 +321,6 @@ from ._models_py3 import PropertyArrayConditionProperties
 from ._models_py3 import PropertyChangedConditionProperties
 from ._models_py3 import PropertyConditionProperties
 from ._models_py3 import QueryBasedAlertRuleTemplateProperties
-from ._models_py3 import Recommendation
-from ._models_py3 import RecommendationList
-from ._models_py3 import RecommendationPatch
-from ._models_py3 import RecommendedAction
 from ._models_py3 import RegistryKeyEntity
 from ._models_py3 import RegistryKeyEntityProperties
 from ._models_py3 import RegistryValueEntity
@@ -407,6 +406,8 @@ from ._models_py3 import WatchlistItem
 from ._models_py3 import WatchlistItemList
 from ._models_py3 import WatchlistList
 from ._models_py3 import Webhook
+from ._models_py3 import WorkspaceManagerAssignment
+from ._models_py3 import WorkspaceManagerAssignmentList
 
 from ._security_insights_enums import ActionType
 from ._security_insights_enums import AlertDetail
@@ -425,14 +426,12 @@ from ._security_insights_enums import AutomationRulePropertyChangedConditionSupp
 from ._security_insights_enums import AutomationRulePropertyChangedConditionSupportedPropertyType
 from ._security_insights_enums import AutomationRulePropertyConditionSupportedOperator
 from ._security_insights_enums import AutomationRulePropertyConditionSupportedProperty
-from ._security_insights_enums import Category
 from ._security_insights_enums import ConditionType
 from ._security_insights_enums import ConfidenceLevel
 from ._security_insights_enums import ConfidenceScoreStatus
 from ._security_insights_enums import ConnectAuthKind
 from ._security_insights_enums import ConnectivityType
 from ._security_insights_enums import ContentType
-from ._security_insights_enums import Context
 from ._security_insights_enums import CreatedByType
 from ._security_insights_enums import CustomEntityQueryKind
 from ._security_insights_enums import DataConnectorAuthorizationState
@@ -468,7 +467,6 @@ from ._security_insights_enums import IncidentClassificationReason
 from ._security_insights_enums import IncidentLabelType
 from ._security_insights_enums import IncidentSeverity
 from ._security_insights_enums import IncidentStatus
-from ._security_insights_enums import IncidentTaskStatus
 from ._security_insights_enums import IngestionMode
 from ._security_insights_enums import KillChainIntent
 from ._security_insights_enums import Kind
@@ -480,8 +478,8 @@ from ._security_insights_enums import OutputType
 from ._security_insights_enums import OwnerType
 from ._security_insights_enums import PermissionProviderScope
 from ._security_insights_enums import PollingFrequency
-from ._security_insights_enums import Priority
 from ._security_insights_enums import ProviderName
+from ._security_insights_enums import ProvisioningState
 from ._security_insights_enums import RegistryHive
 from ._security_insights_enums import RegistryValueKind
 from ._security_insights_enums import RepoType
@@ -491,7 +489,7 @@ from ._security_insights_enums import SettingType
 from ._security_insights_enums import SettingsStatus
 from ._security_insights_enums import SourceKind
 from ._security_insights_enums import SourceType
-from ._security_insights_enums import State
+from ._security_insights_enums import Status
 from ._security_insights_enums import SupportTier
 from ._security_insights_enums import TemplateStatus
 from ._security_insights_enums import ThreatIntelligenceResourceKindEnum
@@ -531,7 +529,6 @@ __all__ = [
     "ActivityEntityQueryTemplate",
     "ActivityEntityQueryTemplatePropertiesQueryDefinitions",
     "ActivityTimelineItem",
-    "AddIncidentTaskActionProperties",
     "AlertDetailsOverride",
     "AlertPropertyMapping",
     "AlertRule",
@@ -545,9 +542,9 @@ __all__ = [
     "Anomalies",
     "AnomalySecurityMLAnalyticsSettings",
     "AnomalyTimelineItem",
+    "AssignmentItem",
     "AutomationRule",
     "AutomationRuleAction",
-    "AutomationRuleAddIncidentTaskAction",
     "AutomationRuleBooleanCondition",
     "AutomationRuleCondition",
     "AutomationRuleModifyPropertiesAction",
@@ -568,6 +565,7 @@ __all__ = [
     "AwsS3DataConnectorDataTypes",
     "AwsS3DataConnectorDataTypesLogs",
     "AzureDevOpsResourceInfo",
+    "AzureEntityResource",
     "AzureResourceEntity",
     "AzureResourceEntityProperties",
     "Bookmark",
@@ -598,7 +596,6 @@ __all__ = [
     "ConnectedEntity",
     "ConnectivityCriteria",
     "ConnectorInstructionModelBase",
-    "Content",
     "ContentPathMap",
     "CustomEntityQuery",
     "Customs",
@@ -652,6 +649,10 @@ __all__ = [
     "EntityTimelineItem",
     "EntityTimelineParameters",
     "EntityTimelineResponse",
+    "Error",
+    "ErrorAdditionalInfo",
+    "ErrorDetail",
+    "ErrorResponse",
     "EventGroupingSettings",
     "ExpansionEntityQuery",
     "ExpansionResultAggregation",
@@ -700,8 +701,6 @@ __all__ = [
     "IncidentList",
     "IncidentOwnerInfo",
     "IncidentPropertiesAction",
-    "IncidentTask",
-    "IncidentTaskList",
     "InsightQueryItem",
     "InsightQueryItemProperties",
     "InsightQueryItemPropertiesAdditionalQuery",
@@ -715,7 +714,6 @@ __all__ = [
     "InsightsTableResultColumnsItem",
     "InstructionSteps",
     "InstructionStepsInstructionsItem",
-    "Instructions",
     "IoTCheckRequirements",
     "IoTDataConnector",
     "IoTDataConnectorProperties",
@@ -723,6 +721,9 @@ __all__ = [
     "IoTDeviceEntityProperties",
     "IpEntity",
     "IpEntityProperties",
+    "Job",
+    "JobItem",
+    "JobList",
     "LastDataReceivedDataType",
     "MCASCheckRequirements",
     "MCASCheckRequirementsProperties",
@@ -818,10 +819,6 @@ __all__ = [
     "PropertyChangedConditionProperties",
     "PropertyConditionProperties",
     "QueryBasedAlertRuleTemplateProperties",
-    "Recommendation",
-    "RecommendationList",
-    "RecommendationPatch",
-    "RecommendedAction",
     "RegistryKeyEntity",
     "RegistryKeyEntityProperties",
     "RegistryValueEntity",
@@ -907,6 +904,8 @@ __all__ = [
     "WatchlistItemList",
     "WatchlistList",
     "Webhook",
+    "WorkspaceManagerAssignment",
+    "WorkspaceManagerAssignmentList",
     "ActionType",
     "AlertDetail",
     "AlertProperty",
@@ -924,14 +923,12 @@ __all__ = [
     "AutomationRulePropertyChangedConditionSupportedPropertyType",
     "AutomationRulePropertyConditionSupportedOperator",
     "AutomationRulePropertyConditionSupportedProperty",
-    "Category",
     "ConditionType",
     "ConfidenceLevel",
     "ConfidenceScoreStatus",
     "ConnectAuthKind",
     "ConnectivityType",
     "ContentType",
-    "Context",
     "CreatedByType",
     "CustomEntityQueryKind",
     "DataConnectorAuthorizationState",
@@ -967,7 +964,6 @@ __all__ = [
     "IncidentLabelType",
     "IncidentSeverity",
     "IncidentStatus",
-    "IncidentTaskStatus",
     "IngestionMode",
     "KillChainIntent",
     "Kind",
@@ -979,8 +975,8 @@ __all__ = [
     "OwnerType",
     "PermissionProviderScope",
     "PollingFrequency",
-    "Priority",
     "ProviderName",
+    "ProvisioningState",
     "RegistryHive",
     "RegistryValueKind",
     "RepoType",
@@ -990,7 +986,7 @@ __all__ = [
     "SettingsStatus",
     "SourceKind",
     "SourceType",
-    "State",
+    "Status",
     "SupportTier",
     "TemplateStatus",
     "ThreatIntelligenceResourceKindEnum",

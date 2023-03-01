@@ -29,12 +29,11 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._metadata_operations import (
-    build_create_request,
+from ...operations._workspace_manager_assignments_operations import (
+    build_create_or_update_request,
     build_delete_request,
     build_get_request,
     build_list_request,
-    build_update_request,
 )
 
 if sys.version_info >= (3, 8):
@@ -45,14 +44,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class MetadataOperations:
+class WorkspaceManagerAssignmentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.aio.SecurityInsights`'s
-        :attr:`metadata` attribute.
+        :attr:`workspace_manager_assignments` attribute.
     """
 
     models = _models
@@ -69,33 +68,32 @@ class MetadataOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        filter: Optional[str] = None,
         orderby: Optional[str] = None,
         top: Optional[int] = None,
-        skip: Optional[int] = None,
+        skip_token: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.MetadataModel"]:
-        """List of all metadata.
+    ) -> AsyncIterable["_models.WorkspaceManagerAssignment"]:
+        """Get all workspace manager assignments for the Sentinel workspace manager.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param filter: Filters the results, based on a Boolean condition. Optional. Default value is
-         None.
-        :type filter: str
         :param orderby: Sorts the results. Optional. Default value is None.
         :type orderby: str
         :param top: Returns only the first n results. Optional. Default value is None.
         :type top: int
-        :param skip: Used to skip n elements in the OData query (offset). Returns a nextLink to the
-         next page of results if there are any left. Default value is None.
-        :type skip: int
+        :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
+         Default value is None.
+        :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either MetadataModel or the result of cls(response)
+        :return: An iterator like instance of either WorkspaceManagerAssignment or the result of
+         cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.MetadataModel]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.WorkspaceManagerAssignment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -104,7 +102,7 @@ class MetadataOperations:
         api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.MetadataList] = kwargs.pop("cls", None)
+        cls: ClsType[_models.WorkspaceManagerAssignmentList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -121,10 +119,9 @@ class MetadataOperations:
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
-                    filter=filter,
                     orderby=orderby,
                     top=top,
-                    skip=skip,
+                    skip_token=skip_token,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -152,7 +149,7 @@ class MetadataOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("MetadataList", pipeline_response)
+            deserialized = self._deserialize("WorkspaceManagerAssignmentList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -168,32 +165,34 @@ class MetadataOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
 
     list.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments"
     }
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, workspace_name: str, metadata_name: str, **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Get a Metadata.
+        self, resource_group_name: str, workspace_name: str, workspace_manager_assignment_name: str, **kwargs: Any
+    ) -> _models.WorkspaceManagerAssignment:
+        """Gets a workspace manager assignment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
+        :return: WorkspaceManagerAssignment or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerAssignment
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -210,12 +209,12 @@ class MetadataOperations:
         api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.MetadataModel] = kwargs.pop("cls", None)
+        cls: ClsType[_models.WorkspaceManagerAssignment] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            metadata_name=metadata_name,
+            workspace_manager_assignment_name=workspace_manager_assignment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -233,9 +232,10 @@ class MetadataOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("MetadataModel", pipeline_response)
+        deserialized = self._deserialize("WorkspaceManagerAssignment", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -243,22 +243,186 @@ class MetadataOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}"
     }
 
-    @distributed_trace_async
-    async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, workspace_name: str, metadata_name: str, **kwargs: Any
-    ) -> None:
-        """Delete a Metadata.
+    @overload
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_assignment_name: str,
+        workspace_manager_assignment: _models.WorkspaceManagerAssignment,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.WorkspaceManagerAssignment:
+        """Creates or updates a workspace manager assignment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
+        :param workspace_manager_assignment: The workspace manager assignment. Required.
+        :type workspace_manager_assignment:
+         ~azure.mgmt.securityinsight.models.WorkspaceManagerAssignment
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: WorkspaceManagerAssignment or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerAssignment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_assignment_name: str,
+        workspace_manager_assignment: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.WorkspaceManagerAssignment:
+        """Creates or updates a workspace manager assignment.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
+        :param workspace_manager_assignment: The workspace manager assignment. Required.
+        :type workspace_manager_assignment: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: WorkspaceManagerAssignment or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerAssignment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_assignment_name: str,
+        workspace_manager_assignment: Union[_models.WorkspaceManagerAssignment, IO],
+        **kwargs: Any
+    ) -> _models.WorkspaceManagerAssignment:
+        """Creates or updates a workspace manager assignment.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
+        :param workspace_manager_assignment: The workspace manager assignment. Is either a
+         WorkspaceManagerAssignment type or a IO type. Required.
+        :type workspace_manager_assignment:
+         ~azure.mgmt.securityinsight.models.WorkspaceManagerAssignment or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: WorkspaceManagerAssignment or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerAssignment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.WorkspaceManagerAssignment] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(workspace_manager_assignment, (IO, bytes)):
+            _content = workspace_manager_assignment
+        else:
+            _json = self._serialize.body(workspace_manager_assignment, "WorkspaceManagerAssignment")
+
+        request = build_create_or_update_request(
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            workspace_manager_assignment_name=workspace_manager_assignment_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.create_or_update.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if response.status_code == 200:
+            deserialized = self._deserialize("WorkspaceManagerAssignment", pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize("WorkspaceManagerAssignment", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}"
+    }
+
+    @distributed_trace_async
+    async def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, workspace_name: str, workspace_manager_assignment_name: str, **kwargs: Any
+    ) -> None:
+        """Deletes a workspace manager assignment.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param workspace_manager_assignment_name: The name of the workspace manager assignment.
+         Required.
+        :type workspace_manager_assignment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -283,7 +447,7 @@ class MetadataOperations:
         request = build_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            metadata_name=metadata_name,
+            workspace_manager_assignment_name=workspace_manager_assignment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -301,320 +465,12 @@ class MetadataOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
     delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"
-    }
-
-    @overload
-    async def create(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata: _models.MetadataModel,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Create a Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
-        :param metadata: Metadata resource. Required.
-        :type metadata: ~azure.mgmt.securityinsight.models.MetadataModel
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def create(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Create a Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
-        :param metadata: Metadata resource. Required.
-        :type metadata: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def create(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata: Union[_models.MetadataModel, IO],
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Create a Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
-        :param metadata: Metadata resource. Is either a MetadataModel type or a IO type. Required.
-        :type metadata: ~azure.mgmt.securityinsight.models.MetadataModel or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.MetadataModel] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(metadata, (IO, bytes)):
-            _content = metadata
-        else:
-            _json = self._serialize.body(metadata, "MetadataModel")
-
-        request = build_create_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            metadata_name=metadata_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.create.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if response.status_code == 200:
-            deserialized = self._deserialize("MetadataModel", pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize("MetadataModel", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    create.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"
-    }
-
-    @overload
-    async def update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata_patch: _models.MetadataPatch,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Update an existing Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
-        :param metadata_patch: Partial metadata request. Required.
-        :type metadata_patch: ~azure.mgmt.securityinsight.models.MetadataPatch
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata_patch: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Update an existing Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
-        :param metadata_patch: Partial metadata request. Required.
-        :type metadata_patch: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata_patch: Union[_models.MetadataPatch, IO],
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Update an existing Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name. Required.
-        :type metadata_name: str
-        :param metadata_patch: Partial metadata request. Is either a MetadataPatch type or a IO type.
-         Required.
-        :type metadata_patch: ~azure.mgmt.securityinsight.models.MetadataPatch or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.MetadataModel] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(metadata_patch, (IO, bytes)):
-            _content = metadata_patch
-        else:
-            _json = self._serialize.body(metadata_patch, "MetadataPatch")
-
-        request = build_update_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            metadata_name=metadata_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.update.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("MetadataModel", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerAssignments/{workspaceManagerAssignmentName}"
     }

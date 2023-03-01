@@ -25,13 +25,9 @@ from ._entity_query_templates_operations import EntityQueryTemplatesOperations
 from ._file_imports_operations import FileImportsOperations
 from ._incident_comments_operations import IncidentCommentsOperations
 from ._incident_relations_operations import IncidentRelationsOperations
-from ._incident_tasks_operations import IncidentTasksOperations
 from ._metadata_operations import MetadataOperations
 from ._office_consents_operations import OfficeConsentsOperations
 from ._sentinel_onboarding_states_operations import SentinelOnboardingStatesOperations
-from ._get_recommendations_operations import GetRecommendationsOperations
-from ._get_operations import GetOperations
-from ._update_operations import UpdateOperations
 from ._security_ml_analytics_settings_operations import SecurityMLAnalyticsSettingsOperations
 from ._product_settings_operations import ProductSettingsOperations
 from ._source_control_operations import SourceControlOperations
@@ -41,6 +37,8 @@ from ._threat_intelligence_indicators_operations import ThreatIntelligenceIndica
 from ._threat_intelligence_indicator_metrics_operations import ThreatIntelligenceIndicatorMetricsOperations
 from ._watchlists_operations import WatchlistsOperations
 from ._watchlist_items_operations import WatchlistItemsOperations
+from ._workspace_manager_assignments_operations import WorkspaceManagerAssignmentsOperations
+from ._workspace_manager_assignment_jobs_operations import WorkspaceManagerAssignmentJobsOperations
 from ._data_connectors_operations import DataConnectorsOperations
 from ._data_connectors_check_requirements_operations import DataConnectorsCheckRequirementsOperations
 from ._operations import Operations
@@ -69,13 +67,9 @@ __all__ = [
     "FileImportsOperations",
     "IncidentCommentsOperations",
     "IncidentRelationsOperations",
-    "IncidentTasksOperations",
     "MetadataOperations",
     "OfficeConsentsOperations",
     "SentinelOnboardingStatesOperations",
-    "GetRecommendationsOperations",
-    "GetOperations",
-    "UpdateOperations",
     "SecurityMLAnalyticsSettingsOperations",
     "ProductSettingsOperations",
     "SourceControlOperations",
@@ -85,6 +79,8 @@ __all__ = [
     "ThreatIntelligenceIndicatorMetricsOperations",
     "WatchlistsOperations",
     "WatchlistItemsOperations",
+    "WorkspaceManagerAssignmentsOperations",
+    "WorkspaceManagerAssignmentJobsOperations",
     "DataConnectorsOperations",
     "DataConnectorsCheckRequirementsOperations",
     "Operations",

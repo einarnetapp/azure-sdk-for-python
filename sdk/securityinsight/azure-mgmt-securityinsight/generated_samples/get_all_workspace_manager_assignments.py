@@ -14,7 +14,7 @@ from azure.mgmt.securityinsight import SecurityInsights
     pip install azure-identity
     pip install azure-mgmt-securityinsight
 # USAGE
-    python incidents_create_team.py
+    python get_all_workspace_manager_assignments.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,20 +29,14 @@ def main():
         subscription_id="d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     )
 
-    response = client.incidents.create_team(
+    response = client.workspace_manager_assignments.list(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
-        incident_id="69a30280-6a4c-4aa7-9af0-5d63f335d600",
-        team_properties={
-            "groupIds": None,
-            "memberIds": None,
-            "teamDescription": "Team description",
-            "teamName": "Team name",
-        },
     )
-    print(response)
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/incidents/IncidentTeam/Incidents_CreateTeam.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-03-01-preview/examples/workspaceManagerAssignments/GetAllWorkspaceManagerAssignments.json
 if __name__ == "__main__":
     main()
