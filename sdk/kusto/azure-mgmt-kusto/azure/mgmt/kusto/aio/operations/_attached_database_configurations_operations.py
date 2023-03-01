@@ -140,7 +140,8 @@ class AttachedDatabaseConfigurationsOperations:
         :type resource_group_name: str
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
-        :param resource_name: The name of the resource. Is either a model type or a IO type. Required.
+        :param resource_name: The name of the resource. Is either a
+         AttachedDatabaseConfigurationsCheckNameRequest type or a IO type. Required.
         :type resource_name: ~azure.mgmt.kusto.models.AttachedDatabaseConfigurationsCheckNameRequest or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -554,7 +555,7 @@ class AttachedDatabaseConfigurationsOperations:
          Required.
         :type attached_database_configuration_name: str
         :param parameters: The database parameters supplied to the CreateOrUpdate operation. Is either
-         a model type or a IO type. Required.
+         a AttachedDatabaseConfiguration type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.AttachedDatabaseConfiguration or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

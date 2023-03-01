@@ -330,7 +330,7 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
         :param parameters: The Kusto cluster parameters supplied to the CreateOrUpdate operation. Is
-         either a model type or a IO type. Required.
+         either a Cluster type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.Cluster or IO
         :param if_match: The ETag of the cluster. Omit this value to always overwrite the current
          cluster. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
@@ -593,7 +593,7 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
         :param parameters: The Kusto cluster parameters supplied to the Update operation. Is either a
-         model type or a IO type. Required.
+         ClusterUpdate type or a IO type. Required.
         :type parameters: ~azure.mgmt.kusto.models.ClusterUpdate or IO
         :param if_match: The ETag of the cluster. Omit this value to always overwrite the current
          cluster. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
@@ -1253,7 +1253,7 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
         :param follower_database_to_remove: The follower databases properties to remove. Is either a
-         model type or a IO type. Required.
+         FollowerDatabaseDefinition type or a IO type. Required.
         :type follower_database_to_remove: ~azure.mgmt.kusto.models.FollowerDatabaseDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1747,7 +1747,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
 
         :param location: Azure location (region) name. Required.
         :type location: str
-        :param cluster_name: The name of the cluster. Is either a model type or a IO type. Required.
+        :param cluster_name: The name of the cluster. Is either a ClusterCheckNameRequest type or a IO
+         type. Required.
         :type cluster_name: ~azure.mgmt.kusto.models.ClusterCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2244,8 +2245,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
-        :param language_extensions_to_add: The language extensions to add. Is either a model type or a
-         IO type. Required.
+        :param language_extensions_to_add: The language extensions to add. Is either a
+         LanguageExtensionsList type or a IO type. Required.
         :type language_extensions_to_add: ~azure.mgmt.kusto.models.LanguageExtensionsList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2459,8 +2460,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the Kusto cluster. Required.
         :type cluster_name: str
-        :param language_extensions_to_remove: The language extensions to remove. Is either a model type
-         or a IO type. Required.
+        :param language_extensions_to_remove: The language extensions to remove. Is either a
+         LanguageExtensionsList type or a IO type. Required.
         :type language_extensions_to_remove: ~azure.mgmt.kusto.models.LanguageExtensionsList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
