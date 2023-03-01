@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
-from azure.mgmt.rdbms import PostgreSQLManagementClient
+from azure.mgmt.rdbms import CosmosDBForPostgreSQL
 
 """
 # PREREQUISITES
@@ -24,18 +24,19 @@ from azure.mgmt.rdbms import PostgreSQLManagementClient
 
 
 def main():
-    client = PostgreSQLManagementClient(
+    client = CosmosDBForPostgreSQL(
         credential=DefaultAzureCredential(),
         subscription_id="ffffffff-ffff-ffff-ffff-ffffffffffff",
     )
 
     response = client.servers.get(
-        resource_group_name="testrg",
-        server_name="pgtestsvc1",
+        resource_group_name="TestGroup",
+        cluster_name="testcluster1",
+        server_name="testcluster1-c",
     )
     print(response)
 
 
-# x-ms-original-file: specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2017-12-01/examples/ServerGet.json
+# x-ms-original-file: specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/examples/ServerGet.json
 if __name__ == "__main__":
     main()
