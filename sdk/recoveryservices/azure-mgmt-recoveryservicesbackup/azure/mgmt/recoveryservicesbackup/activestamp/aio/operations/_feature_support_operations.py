@@ -115,8 +115,8 @@ class FeatureSupportOperations:
 
         :param azure_region: Azure region to hit Api. Required.
         :type azure_region: str
-        :param parameters: Feature support request object. Is either a model type or a IO type.
-         Required.
+        :param parameters: Feature support request object. Is either a FeatureSupportRequest type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.activestamp.models.FeatureSupportRequest
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

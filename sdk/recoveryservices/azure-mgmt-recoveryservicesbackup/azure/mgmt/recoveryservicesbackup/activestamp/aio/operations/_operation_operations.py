@@ -128,8 +128,8 @@ class OperationOperations:
         :param resource_group_name: The name of the resource group where the recovery services vault is
          present. Required.
         :type resource_group_name: str
-        :param parameters: resource validate operation request. Is either a model type or a IO type.
-         Required.
+        :param parameters: resource validate operation request. Is either a ValidateOperationRequest
+         type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.ValidateOperationRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

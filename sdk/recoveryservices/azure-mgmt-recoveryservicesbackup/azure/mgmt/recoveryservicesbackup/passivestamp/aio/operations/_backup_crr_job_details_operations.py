@@ -112,7 +112,7 @@ class BackupCrrJobDetailsOperations:
 
         :param azure_region: Azure region to hit Api. Required.
         :type azure_region: str
-        :param parameters: CRR Job request. Is either a model type or a IO type. Required.
+        :param parameters: CRR Job request. Is either a CrrJobRequest type or a IO type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.passivestamp.models.CrrJobRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

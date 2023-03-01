@@ -160,7 +160,8 @@ class BackupsOperations:
         :type container_name: str
         :param protected_item_name: Backup item for which backup needs to be triggered. Required.
         :type protected_item_name: str
-        :param parameters: resource backup request. Is either a model type or a IO type. Required.
+        :param parameters: resource backup request. Is either a BackupRequestResource type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.activestamp.models.BackupRequestResource
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

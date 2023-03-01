@@ -184,7 +184,8 @@ class ItemLevelRecoveryConnectionsOperations:
          will be provisioned
          for this backed up data. Required.
         :type recovery_point_id: str
-        :param parameters: resource ILR request. Is either a model type or a IO type. Required.
+        :param parameters: resource ILR request. Is either a ILRRequestResource type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.activestamp.models.ILRRequestResource or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

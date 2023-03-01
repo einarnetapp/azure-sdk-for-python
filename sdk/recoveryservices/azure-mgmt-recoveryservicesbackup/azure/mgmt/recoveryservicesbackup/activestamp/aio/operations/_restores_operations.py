@@ -260,7 +260,8 @@ class RestoresOperations:
         :param recovery_point_id: Recovery point ID which represents the backed up data to be restored.
          Required.
         :type recovery_point_id: str
-        :param parameters: resource restore request. Is either a model type or a IO type. Required.
+        :param parameters: resource restore request. Is either a RestoreRequestResource type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.activestamp.models.RestoreRequestResource
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
