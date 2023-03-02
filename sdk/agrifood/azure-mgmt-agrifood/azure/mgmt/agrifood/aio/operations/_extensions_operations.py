@@ -33,7 +33,7 @@ from ...operations._extensions_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
-    build_list_by_farm_beats_request,
+    build_list_by_data_manager_for_agriculture_request,
 )
 
 if sys.version_info >= (3, 8):
@@ -67,22 +67,23 @@ class ExtensionsOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         extension_id: str,
         request_body: Optional[_models.ExtensionInstallationRequest] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Extension:
-        """Install or Update extension. AdditionalApiProperties are merged patch and if the extension is
-        updated to a new version then the obsolete entries will be auto deleted from
-        AdditionalApiProperties.
+        """Install or Update extension. Additional Api Properties are merged patch and if the extension is
+        updated to a new version then the obsolete entries will be auto deleted from Additional Api
+        Properties.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param extension_id: Id of extension resource. Required.
         :type extension_id: str
         :param request_body: Extension resource request body. Default value is None.
@@ -100,22 +101,23 @@ class ExtensionsOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         extension_id: str,
         request_body: Optional[IO] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Extension:
-        """Install or Update extension. AdditionalApiProperties are merged patch and if the extension is
-        updated to a new version then the obsolete entries will be auto deleted from
-        AdditionalApiProperties.
+        """Install or Update extension. Additional Api Properties are merged patch and if the extension is
+        updated to a new version then the obsolete entries will be auto deleted from Additional Api
+        Properties.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param extension_id: Id of extension resource. Required.
         :type extension_id: str
         :param request_body: Extension resource request body. Default value is None.
@@ -133,24 +135,25 @@ class ExtensionsOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         extension_id: str,
         request_body: Optional[Union[_models.ExtensionInstallationRequest, IO]] = None,
         **kwargs: Any
     ) -> _models.Extension:
-        """Install or Update extension. AdditionalApiProperties are merged patch and if the extension is
-        updated to a new version then the obsolete entries will be auto deleted from
-        AdditionalApiProperties.
+        """Install or Update extension. Additional Api Properties are merged patch and if the extension is
+        updated to a new version then the obsolete entries will be auto deleted from Additional Api
+        Properties.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param extension_id: Id of extension resource. Required.
         :type extension_id: str
-        :param request_body: Extension resource request body. Is either a model type or a IO type.
-         Default value is None.
+        :param request_body: Extension resource request body. Is either a ExtensionInstallationRequest
+         type or a IO type. Default value is None.
         :type request_body: ~azure.mgmt.agrifood.models.ExtensionInstallationRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -190,7 +193,7 @@ class ExtensionsOperations:
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             extension_id=extension_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
@@ -210,37 +213,38 @@ class ExtensionsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 201]:
+        if response.status_code not in [201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if response.status_code == 200:
-            deserialized = self._deserialize("Extension", pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize("Extension", pipeline_response)
+        deserialized = self._deserialize("Extension", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, {})
 
-        return deserialized  # type: ignore
+        return deserialized
 
     create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions/{extensionId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}"
     }
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, farm_beats_resource_name: str, extension_id: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        data_manager_for_agriculture_resource_name: str,
+        extension_id: str,
+        **kwargs: Any
     ) -> _models.Extension:
         """Get installed extension details by extension id.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param extension_id: Id of extension resource. Required.
         :type extension_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -266,7 +270,7 @@ class ExtensionsOperations:
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             extension_id=extension_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
@@ -296,20 +300,25 @@ class ExtensionsOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions/{extensionId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}"
     }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, farm_beats_resource_name: str, extension_id: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        data_manager_for_agriculture_resource_name: str,
+        extension_id: str,
+        **kwargs: Any
     ) -> None:
         """Uninstall extension.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param extension_id: Id of extension resource. Required.
         :type extension_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -335,7 +344,7 @@ class ExtensionsOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             extension_id=extension_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
@@ -361,14 +370,14 @@ class ExtensionsOperations:
             return cls(pipeline_response, None, {})
 
     delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions/{extensionId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}"
     }
 
     @distributed_trace
-    def list_by_farm_beats(
+    def list_by_data_manager_for_agriculture(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         extension_ids: Optional[List[str]] = None,
         extension_categories: Optional[List[str]] = None,
         max_page_size: int = 50,
@@ -380,8 +389,9 @@ class ExtensionsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param extension_ids: Installed extension ids. Default value is None.
         :type extension_ids: list[str]
         :param extension_categories: Installed extension categories. Default value is None.
@@ -415,16 +425,16 @@ class ExtensionsOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_list_by_farm_beats_request(
+                request = build_list_by_data_manager_for_agriculture_request(
                     resource_group_name=resource_group_name,
-                    farm_beats_resource_name=farm_beats_resource_name,
+                    data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
                     subscription_id=self._config.subscription_id,
                     extension_ids=extension_ids,
                     extension_categories=extension_categories,
                     max_page_size=max_page_size,
                     skip_token=skip_token,
                     api_version=api_version,
-                    template_url=self.list_by_farm_beats.metadata["url"],
+                    template_url=self.list_by_data_manager_for_agriculture.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -473,6 +483,6 @@ class ExtensionsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_farm_beats.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions"
+    list_by_data_manager_for_agriculture.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions"
     }

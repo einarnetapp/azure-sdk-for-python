@@ -7,9 +7,10 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, Iterable, List, Optional, TypeVar
+from typing import Any, AsyncIterable, Callable, Dict, List, Optional, TypeVar
 import urllib.parse
 
+from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
     ClientAuthenticationError,
     HttpResponseError,
@@ -18,121 +19,39 @@ from azure.core.exceptions import (
     ResourceNotModifiedError,
     map_error,
 )
-from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import HttpResponse
+from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
+from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
-from .. import models as _models
-from .._serialization import Serializer
-from .._vendor import _convert_request, _format_url_section
+from ... import models as _models
+from ..._vendor import _convert_request
+from ...operations._data_manager_for_agriculture_extensions_operations import build_get_request, build_list_request
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
 else:
     from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
-
-_SERIALIZER = Serializer()
-_SERIALIZER.client_side_validation = False
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-def build_list_request(
-    *,
-    farm_beats_extension_ids: Optional[List[str]] = None,
-    farm_beats_extension_names: Optional[List[str]] = None,
-    extension_categories: Optional[List[str]] = None,
-    publisher_ids: Optional[List[str]] = None,
-    max_page_size: int = 50,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-09-01-preview")
-    )
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop("template_url", "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions")
-
-    # Construct parameters
-    if farm_beats_extension_ids is not None:
-        _params["farmBeatsExtensionIds"] = [
-            _SERIALIZER.query("farm_beats_extension_ids", q, "str") if q is not None else ""
-            for q in farm_beats_extension_ids
-        ]
-    if farm_beats_extension_names is not None:
-        _params["farmBeatsExtensionNames"] = [
-            _SERIALIZER.query("farm_beats_extension_names", q, "str") if q is not None else ""
-            for q in farm_beats_extension_names
-        ]
-    if extension_categories is not None:
-        _params["extensionCategories"] = [
-            _SERIALIZER.query("extension_categories", q, "str") if q is not None else "" for q in extension_categories
-        ]
-    if publisher_ids is not None:
-        _params["publisherIds"] = [
-            _SERIALIZER.query("publisher_ids", q, "str") if q is not None else "" for q in publisher_ids
-        ]
-    if max_page_size is not None:
-        _params["$maxPageSize"] = _SERIALIZER.query("max_page_size", max_page_size, "int", maximum=1000, minimum=10)
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_get_request(farm_beats_extension_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-09-01-preview")
-    )
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url", "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{farmBeatsExtensionId}"
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "farmBeatsExtensionId": _SERIALIZER.url(
-            "farm_beats_extension_id", farm_beats_extension_id, "str", pattern=r"^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
-        ),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-class FarmBeatsExtensionsOperations:
+class DataManagerForAgricultureExtensionsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.agrifood.AgriFoodMgmtClient`'s
-        :attr:`farm_beats_extensions` attribute.
+        :class:`~azure.mgmt.agrifood.aio.AgriFoodMgmtClient`'s
+        :attr:`data_manager_for_agriculture_extensions` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -148,12 +67,13 @@ class FarmBeatsExtensionsOperations:
         publisher_ids: Optional[List[str]] = None,
         max_page_size: int = 50,
         **kwargs: Any
-    ) -> Iterable["_models.FarmBeatsExtension"]:
-        """Get list of farmBeats extension.
+    ) -> AsyncIterable["_models.DataManagerForAgricultureExtension"]:
+        """Get list of Data Manager For Agriculture extension.
 
-        :param farm_beats_extension_ids: FarmBeatsExtension ids. Default value is None.
+        :param farm_beats_extension_ids: DataManagerForAgricultureExtension ids. Default value is None.
         :type farm_beats_extension_ids: list[str]
-        :param farm_beats_extension_names: FarmBeats extension names. Default value is None.
+        :param farm_beats_extension_names: DataManagerForAgriculture extension names. Default value is
+         None.
         :type farm_beats_extension_names: list[str]
         :param extension_categories: Extension categories. Default value is None.
         :type extension_categories: list[str]
@@ -163,8 +83,10 @@ class FarmBeatsExtensionsOperations:
          Minimum = 10, Maximum = 1000, Default value = 50. Default value is 50.
         :type max_page_size: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either FarmBeatsExtension or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.agrifood.models.FarmBeatsExtension]
+        :return: An iterator like instance of either DataManagerForAgricultureExtension or the result
+         of cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.agrifood.models.DataManagerForAgricultureExtension]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -173,7 +95,7 @@ class FarmBeatsExtensionsOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.FarmBeatsExtensionListResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgricultureExtensionListResponse] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -218,17 +140,17 @@ class FarmBeatsExtensionsOperations:
                 request.method = "GET"
             return request
 
-        def extract_data(pipeline_response):
-            deserialized = self._deserialize("FarmBeatsExtensionListResponse", pipeline_response)
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("DataManagerForAgricultureExtensionListResponse", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, iter(list_of_elem)
+            return deserialized.next_link or None, AsyncList(list_of_elem)
 
-        def get_next(next_link=None):
+        async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -240,19 +162,22 @@ class FarmBeatsExtensionsOperations:
 
             return pipeline_response
 
-        return ItemPaged(get_next, extract_data)
+        return AsyncItemPaged(get_next, extract_data)
 
     list.metadata = {"url": "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions"}
 
-    @distributed_trace
-    def get(self, farm_beats_extension_id: str, **kwargs: Any) -> _models.FarmBeatsExtension:
-        """Get farmBeats extension.
+    @distributed_trace_async
+    async def get(
+        self, data_manager_for_agriculture_extension_id: str, **kwargs: Any
+    ) -> _models.DataManagerForAgricultureExtension:
+        """Get Data Manager For Agriculture extension.
 
-        :param farm_beats_extension_id: farmBeatsExtensionId to be queried. Required.
-        :type farm_beats_extension_id: str
+        :param data_manager_for_agriculture_extension_id: dataManagerForAgricultureExtensionId to be
+         queried. Required.
+        :type data_manager_for_agriculture_extension_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: FarmBeatsExtension or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.FarmBeatsExtension
+        :return: DataManagerForAgricultureExtension or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.DataManagerForAgricultureExtension
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -269,10 +194,10 @@ class FarmBeatsExtensionsOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.FarmBeatsExtension] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgricultureExtension] = kwargs.pop("cls", None)
 
         request = build_get_request(
-            farm_beats_extension_id=farm_beats_extension_id,
+            data_manager_for_agriculture_extension_id=data_manager_for_agriculture_extension_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
             headers=_headers,
@@ -281,7 +206,7 @@ class FarmBeatsExtensionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -292,11 +217,13 @@ class FarmBeatsExtensionsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("FarmBeatsExtension", pipeline_response)
+        deserialized = self._deserialize("DataManagerForAgricultureExtension", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{farmBeatsExtensionId}"}
+    get.metadata = {
+        "url": "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}"
+    }

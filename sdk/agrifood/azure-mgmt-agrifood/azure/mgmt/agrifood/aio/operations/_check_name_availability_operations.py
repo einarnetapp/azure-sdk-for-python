@@ -26,7 +26,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._locations_operations import build_check_name_availability_request
+from ...operations._check_name_availability_operations import build_check_name_availability_request
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
@@ -36,14 +36,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class LocationsOperations:
+class CheckNameAvailabilityOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.agrifood.aio.AgriFoodMgmtClient`'s
-        :attr:`locations` attribute.
+        :attr:`check_name_availability` attribute.
     """
 
     models = _models
@@ -57,12 +57,16 @@ class LocationsOperations:
 
     @overload
     async def check_name_availability(
-        self, body: _models.CheckNameAvailabilityRequest, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        name_availability_request: _models.CheckNameAvailabilityRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.CheckNameAvailabilityResponse:
         """Checks the name availability of the resource with requested resource name.
 
-        :param body: NameAvailabilityRequest object. Required.
-        :type body: ~azure.mgmt.agrifood.models.CheckNameAvailabilityRequest
+        :param name_availability_request: NameAvailabilityRequest object. Required.
+        :type name_availability_request: ~azure.mgmt.agrifood.models.CheckNameAvailabilityRequest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -74,12 +78,12 @@ class LocationsOperations:
 
     @overload
     async def check_name_availability(
-        self, body: IO, *, content_type: str = "application/json", **kwargs: Any
+        self, name_availability_request: IO, *, content_type: str = "application/json", **kwargs: Any
     ) -> _models.CheckNameAvailabilityResponse:
         """Checks the name availability of the resource with requested resource name.
 
-        :param body: NameAvailabilityRequest object. Required.
-        :type body: IO
+        :param name_availability_request: NameAvailabilityRequest object. Required.
+        :type name_availability_request: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -91,12 +95,13 @@ class LocationsOperations:
 
     @distributed_trace_async
     async def check_name_availability(
-        self, body: Union[_models.CheckNameAvailabilityRequest, IO], **kwargs: Any
+        self, name_availability_request: Union[_models.CheckNameAvailabilityRequest, IO], **kwargs: Any
     ) -> _models.CheckNameAvailabilityResponse:
         """Checks the name availability of the resource with requested resource name.
 
-        :param body: NameAvailabilityRequest object. Is either a model type or a IO type. Required.
-        :type body: ~azure.mgmt.agrifood.models.CheckNameAvailabilityRequest or IO
+        :param name_availability_request: NameAvailabilityRequest object. Is either a
+         CheckNameAvailabilityRequest type or a IO type. Required.
+        :type name_availability_request: ~azure.mgmt.agrifood.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -125,10 +130,10 @@ class LocationsOperations:
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
+        if isinstance(name_availability_request, (IO, bytes)):
+            _content = name_availability_request
         else:
-            _json = self._serialize.body(body, "CheckNameAvailabilityRequest")
+            _json = self._serialize.body(name_availability_request, "CheckNameAvailabilityRequest")
 
         request = build_check_name_availability_request(
             subscription_id=self._config.subscription_id,

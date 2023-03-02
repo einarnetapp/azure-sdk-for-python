@@ -65,21 +65,23 @@ class SolutionsDiscoverabilityOperations:
         farm_beats_solution_names: Optional[List[str]] = None,
         max_page_size: int = 50,
         **kwargs: Any
-    ) -> AsyncIterable["_models.FarmBeatsSolution"]:
-        """Get list of farmBeats solutions.
+    ) -> AsyncIterable["_models.DataManagerForAgricultureSolution"]:
+        """Get list of Data Manager For Agriculture solutions.
 
-        :param farm_beats_solution_ids: Ids of FarmBeats Solutions which the customer requests to
-         fetch. Default value is None.
+        :param farm_beats_solution_ids: Ids of Data Manager For Agriculture Solutions which the
+         customer requests to fetch. Default value is None.
         :type farm_beats_solution_ids: list[str]
-        :param farm_beats_solution_names: Names of FarmBeats Solutions which the customer requests to
-         fetch. Default value is None.
+        :param farm_beats_solution_names: Names of Data Manager For Agriculture Solutions which the
+         customer requests to fetch. Default value is None.
         :type farm_beats_solution_names: list[str]
         :param max_page_size: Maximum number of items needed (inclusive).
          Minimum = 10, Maximum = 1000, Default value = 50. Default value is 50.
         :type max_page_size: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either FarmBeatsSolution or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.agrifood.models.FarmBeatsSolution]
+        :return: An iterator like instance of either DataManagerForAgricultureSolution or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.agrifood.models.DataManagerForAgricultureSolution]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -88,7 +90,7 @@ class SolutionsDiscoverabilityOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.FarmBeatsSolutionListResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgricultureSolutionListResponse] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -132,7 +134,7 @@ class SolutionsDiscoverabilityOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("FarmBeatsSolutionListResponse", pipeline_response)
+            deserialized = self._deserialize("DataManagerForAgricultureSolutionListResponse", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -158,14 +160,17 @@ class SolutionsDiscoverabilityOperations:
     list.metadata = {"url": "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions"}
 
     @distributed_trace_async
-    async def get(self, farm_beats_solution_id: str, **kwargs: Any) -> _models.FarmBeatsSolution:
-        """Get farmBeats solution by id.
+    async def get(
+        self, data_manager_for_agriculture_solution_id: str, **kwargs: Any
+    ) -> _models.DataManagerForAgricultureSolution:
+        """Get Data Manager For Agriculture solution by id.
 
-        :param farm_beats_solution_id: farmBeatsSolutionId to be queried. Required.
-        :type farm_beats_solution_id: str
+        :param data_manager_for_agriculture_solution_id: dataManagerForAgricultureSolutionId to be
+         queried. Required.
+        :type data_manager_for_agriculture_solution_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: FarmBeatsSolution or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.FarmBeatsSolution
+        :return: DataManagerForAgricultureSolution or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.DataManagerForAgricultureSolution
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -182,10 +187,10 @@ class SolutionsDiscoverabilityOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.FarmBeatsSolution] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgricultureSolution] = kwargs.pop("cls", None)
 
         request = build_get_request(
-            farm_beats_solution_id=farm_beats_solution_id,
+            data_manager_for_agriculture_solution_id=data_manager_for_agriculture_solution_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
             headers=_headers,
@@ -205,11 +210,13 @@ class SolutionsDiscoverabilityOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("FarmBeatsSolution", pipeline_response)
+        deserialized = self._deserialize("DataManagerForAgricultureSolution", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{farmBeatsSolutionId}"}
+    get.metadata = {
+        "url": "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}"
+    }

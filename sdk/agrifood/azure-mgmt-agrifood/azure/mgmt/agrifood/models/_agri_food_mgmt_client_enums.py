@@ -60,17 +60,18 @@ class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiv
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Sensor integration instance provisioning state."""
+    """Data Manager For Agriculture instance provisioning state."""
 
     CREATING = "Creating"
     UPDATING = "Updating"
     DELETING = "Deleting"
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
+    RUNNING = "Running"
 
 
 class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Property to allow or block public traffic for an Azure FarmBeats resource."""
+    """Property to allow or block public traffic for an Azure Data Manager For Agriculture resource."""
 
     ENABLED = "Enabled"
-    HYBRID = "Hybrid"
+    DISABLED = "Disabled"

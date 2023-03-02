@@ -68,8 +68,9 @@ class SolutionsOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: Optional[_models.SolutionInstallationRequest] = None,
+        data_manager_for_agriculture_resource_name: str,
+        solution_id: str,
+        request_body: Optional[_models.SolutionInstallationRequest] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -79,10 +80,13 @@ class SolutionsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: Solution resource request body. Default value is None.
-        :type body: ~azure.mgmt.agrifood.models.SolutionInstallationRequest
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param solution_id: SolutionId for Data Manager For Agriculture Resource. Required.
+        :type solution_id: str
+        :param request_body: Solution resource request body. Default value is None.
+        :type request_body: ~azure.mgmt.agrifood.models.SolutionInstallationRequest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -96,8 +100,9 @@ class SolutionsOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: Optional[IO] = None,
+        data_manager_for_agriculture_resource_name: str,
+        solution_id: str,
+        request_body: Optional[IO] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -107,10 +112,13 @@ class SolutionsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: Solution resource request body. Default value is None.
-        :type body: IO
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param solution_id: SolutionId for Data Manager For Agriculture Resource. Required.
+        :type solution_id: str
+        :param request_body: Solution resource request body. Default value is None.
+        :type request_body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -124,8 +132,9 @@ class SolutionsOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: Optional[Union[_models.SolutionInstallationRequest, IO]] = None,
+        data_manager_for_agriculture_resource_name: str,
+        solution_id: str,
+        request_body: Optional[Union[_models.SolutionInstallationRequest, IO]] = None,
         **kwargs: Any
     ) -> _models.Solution:
         """Install Or Update Solution.
@@ -133,11 +142,14 @@ class SolutionsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: Solution resource request body. Is either a model type or a IO type. Default value
-         is None.
-        :type body: ~azure.mgmt.agrifood.models.SolutionInstallationRequest or IO
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param solution_id: SolutionId for Data Manager For Agriculture Resource. Required.
+        :type solution_id: str
+        :param request_body: Solution resource request body. Is either a SolutionInstallationRequest
+         type or a IO type. Default value is None.
+        :type request_body: ~azure.mgmt.agrifood.models.SolutionInstallationRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -166,19 +178,19 @@ class SolutionsOperations:
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
+        if isinstance(request_body, (IO, bytes)):
+            _content = request_body
         else:
-            if body is not None:
-                _json = self._serialize.body(body, "SolutionInstallationRequest")
+            if request_body is not None:
+                _json = self._serialize.body(request_body, "SolutionInstallationRequest")
             else:
                 _json = None
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
+            solution_id=solution_id,
             subscription_id=self._config.subscription_id,
-            solution_id=self._config.solution_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -213,18 +225,23 @@ class SolutionsOperations:
         return deserialized  # type: ignore
 
     create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions/{solutionId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}"
     }
 
     @distributed_trace_async
-    async def get(self, resource_group_name: str, farm_beats_resource_name: str, **kwargs: Any) -> _models.Solution:
+    async def get(
+        self, resource_group_name: str, data_manager_for_agriculture_resource_name: str, solution_id: str, **kwargs: Any
+    ) -> _models.Solution:
         """Get installed Solution details by Solution id.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param solution_id: SolutionId for Data Manager For Agriculture Resource. Required.
+        :type solution_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Solution or the result of cls(response)
         :rtype: ~azure.mgmt.agrifood.models.Solution
@@ -248,9 +265,9 @@ class SolutionsOperations:
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
+            solution_id=solution_id,
             subscription_id=self._config.subscription_id,
-            solution_id=self._config.solution_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
             headers=_headers,
@@ -278,20 +295,23 @@ class SolutionsOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions/{solutionId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}"
     }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, farm_beats_resource_name: str, **kwargs: Any
+        self, resource_group_name: str, data_manager_for_agriculture_resource_name: str, solution_id: str, **kwargs: Any
     ) -> None:
         """Uninstall Solution.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param solution_id: SolutionId for Data Manager For Agriculture Resource. Required.
+        :type solution_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -315,9 +335,9 @@ class SolutionsOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
+            solution_id=solution_id,
             subscription_id=self._config.subscription_id,
-            solution_id=self._config.solution_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
             headers=_headers,
@@ -341,14 +361,14 @@ class SolutionsOperations:
             return cls(pipeline_response, None, {})
 
     delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions/{solutionId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}"
     }
 
     @distributed_trace
     def list(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         solution_ids: Optional[List[str]] = None,
         ids: Optional[List[str]] = None,
         names: Optional[List[str]] = None,
@@ -367,8 +387,9 @@ class SolutionsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param solution_ids: Installed Solution ids. Default value is None.
         :type solution_ids: list[str]
         :param ids: Ids of the resource. Default value is None.
@@ -423,7 +444,7 @@ class SolutionsOperations:
 
                 request = build_list_request(
                     resource_group_name=resource_group_name,
-                    farm_beats_resource_name=farm_beats_resource_name,
+                    data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
                     subscription_id=self._config.subscription_id,
                     solution_ids=solution_ids,
                     ids=ids,
@@ -487,5 +508,5 @@ class SolutionsOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     list.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions"
     }

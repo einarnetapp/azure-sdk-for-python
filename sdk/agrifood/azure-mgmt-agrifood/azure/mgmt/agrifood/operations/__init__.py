@@ -6,10 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._check_name_availability_operations import CheckNameAvailabilityOperations
+from ._data_manager_for_agriculture_extensions_operations import DataManagerForAgricultureExtensionsOperations
+from ._data_manager_for_agriculture_resources_operations import DataManagerForAgricultureResourcesOperations
+from ._operation_results_operations import OperationResultsOperations
 from ._extensions_operations import ExtensionsOperations
-from ._farm_beats_extensions_operations import FarmBeatsExtensionsOperations
-from ._farm_beats_models_operations import FarmBeatsModelsOperations
-from ._locations_operations import LocationsOperations
 from ._operations import Operations
 from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations
 from ._private_link_resources_operations import PrivateLinkResourcesOperations
@@ -21,10 +22,11 @@ from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "CheckNameAvailabilityOperations",
+    "DataManagerForAgricultureExtensionsOperations",
+    "DataManagerForAgricultureResourcesOperations",
+    "OperationResultsOperations",
     "ExtensionsOperations",
-    "FarmBeatsExtensionsOperations",
-    "FarmBeatsModelsOperations",
-    "LocationsOperations",
     "Operations",
     "PrivateEndpointConnectionsOperations",
     "PrivateLinkResourcesOperations",

@@ -8,8 +8,19 @@
 
 from ._models_py3 import ApiProperties
 from ._models_py3 import ArmAsyncOperation
+from ._models_py3 import ArmAsyncOperationError
 from ._models_py3 import CheckNameAvailabilityRequest
 from ._models_py3 import CheckNameAvailabilityResponse
+from ._models_py3 import DataManagerForAgriculture
+from ._models_py3 import DataManagerForAgricultureExtension
+from ._models_py3 import DataManagerForAgricultureExtensionListResponse
+from ._models_py3 import DataManagerForAgricultureExtensionProperties
+from ._models_py3 import DataManagerForAgricultureListResponse
+from ._models_py3 import DataManagerForAgricultureSolution
+from ._models_py3 import DataManagerForAgricultureSolutionListResponse
+from ._models_py3 import DataManagerForAgricultureSolutionProperties
+from ._models_py3 import DataManagerForAgricultureUpdateProperties
+from ._models_py3 import DataManagerForAgricultureUpdateRequestModel
 from ._models_py3 import DetailedInformation
 from ._models_py3 import ErrorAdditionalInfo
 from ._models_py3 import ErrorDetail
@@ -17,15 +28,6 @@ from ._models_py3 import ErrorResponse
 from ._models_py3 import Extension
 from ._models_py3 import ExtensionInstallationRequest
 from ._models_py3 import ExtensionListResponse
-from ._models_py3 import FarmBeats
-from ._models_py3 import FarmBeatsExtension
-from ._models_py3 import FarmBeatsExtensionListResponse
-from ._models_py3 import FarmBeatsListResponse
-from ._models_py3 import FarmBeatsSolution
-from ._models_py3 import FarmBeatsSolutionListResponse
-from ._models_py3 import FarmBeatsSolutionProperties
-from ._models_py3 import FarmBeatsUpdateProperties
-from ._models_py3 import FarmBeatsUpdateRequestModel
 from ._models_py3 import Identity
 from ._models_py3 import Insight
 from ._models_py3 import InsightAttachment
@@ -68,8 +70,19 @@ from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     "ApiProperties",
     "ArmAsyncOperation",
+    "ArmAsyncOperationError",
     "CheckNameAvailabilityRequest",
     "CheckNameAvailabilityResponse",
+    "DataManagerForAgriculture",
+    "DataManagerForAgricultureExtension",
+    "DataManagerForAgricultureExtensionListResponse",
+    "DataManagerForAgricultureExtensionProperties",
+    "DataManagerForAgricultureListResponse",
+    "DataManagerForAgricultureSolution",
+    "DataManagerForAgricultureSolutionListResponse",
+    "DataManagerForAgricultureSolutionProperties",
+    "DataManagerForAgricultureUpdateProperties",
+    "DataManagerForAgricultureUpdateRequestModel",
     "DetailedInformation",
     "ErrorAdditionalInfo",
     "ErrorDetail",
@@ -77,15 +90,6 @@ __all__ = [
     "Extension",
     "ExtensionInstallationRequest",
     "ExtensionListResponse",
-    "FarmBeats",
-    "FarmBeatsExtension",
-    "FarmBeatsExtensionListResponse",
-    "FarmBeatsListResponse",
-    "FarmBeatsSolution",
-    "FarmBeatsSolutionListResponse",
-    "FarmBeatsSolutionProperties",
-    "FarmBeatsUpdateProperties",
-    "FarmBeatsUpdateRequestModel",
     "Identity",
     "Insight",
     "InsightAttachment",

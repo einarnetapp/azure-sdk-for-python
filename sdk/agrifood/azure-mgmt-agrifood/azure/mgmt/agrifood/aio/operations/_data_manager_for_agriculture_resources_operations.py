@@ -31,10 +31,9 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._farm_beats_models_operations import (
+from ...operations._data_manager_for_agriculture_resources_operations import (
     build_create_or_update_request,
     build_delete_request,
-    build_get_operation_result_request,
     build_get_request,
     build_list_by_resource_group_request,
     build_list_by_subscription_request,
@@ -49,14 +48,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class FarmBeatsModelsOperations:
+class DataManagerForAgricultureResourcesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.agrifood.aio.AgriFoodMgmtClient`'s
-        :attr:`farm_beats_models` attribute.
+        :attr:`data_manager_for_agriculture_resources` attribute.
     """
 
     models = _models
@@ -69,17 +68,20 @@ class FarmBeatsModelsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def get(self, resource_group_name: str, farm_beats_resource_name: str, **kwargs: Any) -> _models.FarmBeats:
-        """Get FarmBeats resource.
+    async def get(
+        self, resource_group_name: str, data_manager_for_agriculture_resource_name: str, **kwargs: Any
+    ) -> _models.DataManagerForAgriculture:
+        """Get DataManagerForAgriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: FarmBeats or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.FarmBeats
+        :return: DataManagerForAgriculture or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.DataManagerForAgriculture
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -96,11 +98,11 @@ class FarmBeatsModelsOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.FarmBeats] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgriculture] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -121,7 +123,7 @@ class FarmBeatsModelsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("FarmBeats", pipeline_response)
+        deserialized = self._deserialize("DataManagerForAgriculture", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -129,34 +131,36 @@ class FarmBeatsModelsOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}"
     }
 
     @overload
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: _models.FarmBeats,
+        data_manager_for_agriculture_resource_name: str,
+        request: _models.DataManagerForAgriculture,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.FarmBeats:
-        """Create or update FarmBeats resource.
+    ) -> _models.DataManagerForAgriculture:
+        """Create or update Data Manager For Agriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: FarmBeats resource create or update request object. Required.
-        :type body: ~azure.mgmt.agrifood.models.FarmBeats
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param request: Data Manager For Agriculture resource create or update request object.
+         Required.
+        :type request: ~azure.mgmt.agrifood.models.DataManagerForAgriculture
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: FarmBeats or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.FarmBeats
+        :return: DataManagerForAgriculture or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.DataManagerForAgriculture
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -164,50 +168,57 @@ class FarmBeatsModelsOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: IO,
+        data_manager_for_agriculture_resource_name: str,
+        request: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.FarmBeats:
-        """Create or update FarmBeats resource.
+    ) -> _models.DataManagerForAgriculture:
+        """Create or update Data Manager For Agriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: FarmBeats resource create or update request object. Required.
-        :type body: IO
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param request: Data Manager For Agriculture resource create or update request object.
+         Required.
+        :type request: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: FarmBeats or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.FarmBeats
+        :return: DataManagerForAgriculture or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.DataManagerForAgriculture
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace_async
     async def create_or_update(
-        self, resource_group_name: str, farm_beats_resource_name: str, body: Union[_models.FarmBeats, IO], **kwargs: Any
-    ) -> _models.FarmBeats:
-        """Create or update FarmBeats resource.
+        self,
+        resource_group_name: str,
+        data_manager_for_agriculture_resource_name: str,
+        request: Union[_models.DataManagerForAgriculture, IO],
+        **kwargs: Any
+    ) -> _models.DataManagerForAgriculture:
+        """Create or update Data Manager For Agriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: FarmBeats resource create or update request object. Is either a model type or a IO
-         type. Required.
-        :type body: ~azure.mgmt.agrifood.models.FarmBeats or IO
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param request: Data Manager For Agriculture resource create or update request object. Is
+         either a DataManagerForAgriculture type or a IO type. Required.
+        :type request: ~azure.mgmt.agrifood.models.DataManagerForAgriculture or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: FarmBeats or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.FarmBeats
+        :return: DataManagerForAgriculture or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.DataManagerForAgriculture
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -225,19 +236,19 @@ class FarmBeatsModelsOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.FarmBeats] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgriculture] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
+        if isinstance(request, (IO, bytes)):
+            _content = request
         else:
-            _json = self._serialize.body(body, "FarmBeats")
+            _json = self._serialize.body(request, "DataManagerForAgriculture")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -262,10 +273,10 @@ class FarmBeatsModelsOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("FarmBeats", pipeline_response)
+            deserialized = self._deserialize("DataManagerForAgriculture", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("FarmBeats", pipeline_response)
+            deserialized = self._deserialize("DataManagerForAgriculture", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -273,16 +284,16 @@ class FarmBeatsModelsOperations:
         return deserialized  # type: ignore
 
     create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}"
     }
 
     async def _update_initial(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: Union[_models.FarmBeatsUpdateRequestModel, IO],
+        data_manager_for_agriculture_resource_name: str,
+        request: Union[_models.DataManagerForAgricultureUpdateRequestModel, IO],
         **kwargs: Any
-    ) -> Optional[_models.FarmBeats]:
+    ) -> _models.DataManagerForAgriculture:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -298,19 +309,19 @@ class FarmBeatsModelsOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Optional[_models.FarmBeats]] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgriculture] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
+        if isinstance(request, (IO, bytes)):
+            _content = request
         else:
-            _json = self._serialize.body(body, "FarmBeatsUpdateRequestModel")
+            _json = self._serialize.body(request, "DataManagerForAgricultureUpdateRequestModel")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -334,42 +345,44 @@ class FarmBeatsModelsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = None
         response_headers = {}
         if response.status_code == 200:
-            deserialized = self._deserialize("FarmBeats", pipeline_response)
+            deserialized = self._deserialize("DataManagerForAgriculture", pipeline_response)
 
         if response.status_code == 202:
             response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
 
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            deserialized = self._deserialize("DataManagerForAgriculture", pipeline_response)
 
-        return deserialized
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
 
     _update_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}"
     }
 
     @overload
     async def begin_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: _models.FarmBeatsUpdateRequestModel,
+        data_manager_for_agriculture_resource_name: str,
+        request: _models.DataManagerForAgricultureUpdateRequestModel,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.FarmBeats]:
-        """Update a FarmBeats resource.
+    ) -> AsyncLROPoller[_models.DataManagerForAgriculture]:
+        """Update a Data Manager For Agriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: Request object. Required.
-        :type body: ~azure.mgmt.agrifood.models.FarmBeatsUpdateRequestModel
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param request: Request object. Required.
+        :type request: ~azure.mgmt.agrifood.models.DataManagerForAgricultureUpdateRequestModel
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -381,9 +394,10 @@ class FarmBeatsModelsOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either FarmBeats or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.agrifood.models.FarmBeats]
+        :return: An instance of AsyncLROPoller that returns either DataManagerForAgriculture or the
+         result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.agrifood.models.DataManagerForAgriculture]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -391,21 +405,22 @@ class FarmBeatsModelsOperations:
     async def begin_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: IO,
+        data_manager_for_agriculture_resource_name: str,
+        request: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.FarmBeats]:
-        """Update a FarmBeats resource.
+    ) -> AsyncLROPoller[_models.DataManagerForAgriculture]:
+        """Update a Data Manager For Agriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: Request object. Required.
-        :type body: IO
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param request: Request object. Required.
+        :type request: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -417,9 +432,10 @@ class FarmBeatsModelsOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either FarmBeats or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.agrifood.models.FarmBeats]
+        :return: An instance of AsyncLROPoller that returns either DataManagerForAgriculture or the
+         result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.agrifood.models.DataManagerForAgriculture]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -427,19 +443,21 @@ class FarmBeatsModelsOperations:
     async def begin_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
-        body: Union[_models.FarmBeatsUpdateRequestModel, IO],
+        data_manager_for_agriculture_resource_name: str,
+        request: Union[_models.DataManagerForAgricultureUpdateRequestModel, IO],
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.FarmBeats]:
-        """Update a FarmBeats resource.
+    ) -> AsyncLROPoller[_models.DataManagerForAgriculture]:
+        """Update a Data Manager For Agriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param body: Request object. Is either a model type or a IO type. Required.
-        :type body: ~azure.mgmt.agrifood.models.FarmBeatsUpdateRequestModel or IO
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
+        :param request: Request object. Is either a DataManagerForAgricultureUpdateRequestModel type or
+         a IO type. Required.
+        :type request: ~azure.mgmt.agrifood.models.DataManagerForAgricultureUpdateRequestModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -451,9 +469,10 @@ class FarmBeatsModelsOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either FarmBeats or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.agrifood.models.FarmBeats]
+        :return: An instance of AsyncLROPoller that returns either DataManagerForAgriculture or the
+         result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.agrifood.models.DataManagerForAgriculture]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -463,15 +482,15 @@ class FarmBeatsModelsOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.FarmBeats] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgriculture] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._update_initial(
                 resource_group_name=resource_group_name,
-                farm_beats_resource_name=farm_beats_resource_name,
-                body=body,
+                data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
+                request=request,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -482,7 +501,7 @@ class FarmBeatsModelsOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("FarmBeats", pipeline_response)
+            deserialized = self._deserialize("DataManagerForAgriculture", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -505,20 +524,21 @@ class FarmBeatsModelsOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}"
     }
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, farm_beats_resource_name: str, **kwargs: Any
+        self, resource_group_name: str, data_manager_for_agriculture_resource_name: str, **kwargs: Any
     ) -> None:
-        """Delete a FarmBeats resource.
+        """Delete a Data Manager For Agriculture resource.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -542,7 +562,7 @@ class FarmBeatsModelsOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -567,14 +587,14 @@ class FarmBeatsModelsOperations:
             return cls(pipeline_response, None, {})
 
     delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}"
     }
 
     @distributed_trace
     def list_by_subscription(
         self, max_page_size: int = 50, skip_token: Optional[str] = None, **kwargs: Any
-    ) -> AsyncIterable["_models.FarmBeats"]:
-        """Lists the FarmBeats instances for a subscription.
+    ) -> AsyncIterable["_models.DataManagerForAgriculture"]:
+        """Lists the DataManagerForAgriculture instances for a subscription.
 
         :param max_page_size: Maximum number of items needed (inclusive).
          Minimum = 10, Maximum = 1000, Default value = 50. Default value is 50.
@@ -582,8 +602,10 @@ class FarmBeatsModelsOperations:
         :param skip_token: Skip token for getting next set of results. Default value is None.
         :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either FarmBeats or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.agrifood.models.FarmBeats]
+        :return: An iterator like instance of either DataManagerForAgriculture or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.agrifood.models.DataManagerForAgriculture]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -592,7 +614,7 @@ class FarmBeatsModelsOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.FarmBeatsListResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgricultureListResponse] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -636,7 +658,7 @@ class FarmBeatsModelsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("FarmBeatsListResponse", pipeline_response)
+            deserialized = self._deserialize("DataManagerForAgricultureListResponse", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -666,8 +688,8 @@ class FarmBeatsModelsOperations:
     @distributed_trace
     def list_by_resource_group(
         self, resource_group_name: str, max_page_size: int = 50, skip_token: Optional[str] = None, **kwargs: Any
-    ) -> AsyncIterable["_models.FarmBeats"]:
-        """Lists the FarmBeats instances for a resource group.
+    ) -> AsyncIterable["_models.DataManagerForAgriculture"]:
+        """Lists the DataManagerForAgriculture instances for a resource group.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -678,8 +700,10 @@ class FarmBeatsModelsOperations:
         :param skip_token: Continuation token for getting next set of results. Default value is None.
         :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either FarmBeats or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.agrifood.models.FarmBeats]
+        :return: An iterator like instance of either DataManagerForAgriculture or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.agrifood.models.DataManagerForAgriculture]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -688,7 +712,7 @@ class FarmBeatsModelsOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.FarmBeatsListResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataManagerForAgricultureListResponse] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -733,7 +757,7 @@ class FarmBeatsModelsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("FarmBeatsListResponse", pipeline_response)
+            deserialized = self._deserialize("DataManagerForAgricultureListResponse", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -758,73 +782,4 @@ class FarmBeatsModelsOperations:
 
     list_by_resource_group.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats"
-    }
-
-    @distributed_trace_async
-    async def get_operation_result(
-        self, resource_group_name: str, farm_beats_resource_name: str, operation_results_id: str, **kwargs: Any
-    ) -> _models.ArmAsyncOperation:
-        """Get operationResults for a FarmBeats resource.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param operation_results_id: The operation results id. Required.
-        :type operation_results_id: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ArmAsyncOperation or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.ArmAsyncOperation
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        cls: ClsType[_models.ArmAsyncOperation] = kwargs.pop("cls", None)
-
-        request = build_get_operation_result_request(
-            resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
-            operation_results_id=operation_results_id,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.get_operation_result.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("ArmAsyncOperation", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get_operation_result.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/operationResults/{operationResultsId}"
     }

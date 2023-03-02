@@ -26,12 +26,11 @@ from azure.mgmt.agrifood import AgriFoodMgmtClient
 def main():
     client = AgriFoodMgmtClient(
         credential=DefaultAzureCredential(),
-        solution_id="SOLUTION_ID",
         subscription_id="SUBSCRIPTION_ID",
     )
 
     response = client.solutions_discoverability.get(
-        farm_beats_solution_id="bayerAgPowered.gdu",
+        data_manager_for_agriculture_solution_id="bayerAgPowered.gdu",
     )
     print(response)
 

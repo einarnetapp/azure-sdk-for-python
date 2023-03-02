@@ -7,8 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, IO, Iterable, Optional, TypeVar, Union, cast, overload
-import urllib.parse
+from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -18,7 +17,6 @@ from azure.core.exceptions import (
     ResourceNotModifiedError,
     map_error,
 )
-from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
 from azure.core.polling import LROPoller, NoPolling, PollingMethod
@@ -45,7 +43,7 @@ _SERIALIZER.client_side_validation = False
 
 def build_create_or_update_request(
     resource_group_name: str,
-    farm_beats_resource_name: str,
+    data_manager_for_agriculture_resource_name: str,
     private_endpoint_connection_name: str,
     subscription_id: str,
     **kwargs: Any
@@ -62,14 +60,21 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "farmBeatsResourceName": _SERIALIZER.url("farm_beats_resource_name", farm_beats_resource_name, "str"),
+        "dataManagerForAgricultureResourceName": _SERIALIZER.url(
+            "data_manager_for_agriculture_resource_name",
+            data_manager_for_agriculture_resource_name,
+            "str",
+            max_length=63,
+            min_length=1,
+            pattern=r"^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+        ),
         "privateEndpointConnectionName": _SERIALIZER.url(
             "private_endpoint_connection_name", private_endpoint_connection_name, "str"
         ),
@@ -90,7 +95,7 @@ def build_create_or_update_request(
 
 def build_get_request(
     resource_group_name: str,
-    farm_beats_resource_name: str,
+    data_manager_for_agriculture_resource_name: str,
     private_endpoint_connection_name: str,
     subscription_id: str,
     **kwargs: Any
@@ -106,14 +111,21 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "farmBeatsResourceName": _SERIALIZER.url("farm_beats_resource_name", farm_beats_resource_name, "str"),
+        "dataManagerForAgricultureResourceName": _SERIALIZER.url(
+            "data_manager_for_agriculture_resource_name",
+            data_manager_for_agriculture_resource_name,
+            "str",
+            max_length=63,
+            min_length=1,
+            pattern=r"^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+        ),
         "privateEndpointConnectionName": _SERIALIZER.url(
             "private_endpoint_connection_name", private_endpoint_connection_name, "str"
         ),
@@ -132,7 +144,7 @@ def build_get_request(
 
 def build_delete_request(
     resource_group_name: str,
-    farm_beats_resource_name: str,
+    data_manager_for_agriculture_resource_name: str,
     private_endpoint_connection_name: str,
     subscription_id: str,
     **kwargs: Any
@@ -148,14 +160,21 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "farmBeatsResourceName": _SERIALIZER.url("farm_beats_resource_name", farm_beats_resource_name, "str"),
+        "dataManagerForAgricultureResourceName": _SERIALIZER.url(
+            "data_manager_for_agriculture_resource_name",
+            data_manager_for_agriculture_resource_name,
+            "str",
+            max_length=63,
+            min_length=1,
+            pattern=r"^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+        ),
         "privateEndpointConnectionName": _SERIALIZER.url(
             "private_endpoint_connection_name", private_endpoint_connection_name, "str"
         ),
@@ -173,7 +192,7 @@ def build_delete_request(
 
 
 def build_list_by_resource_request(
-    resource_group_name: str, farm_beats_resource_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, data_manager_for_agriculture_resource_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -186,14 +205,21 @@ def build_list_by_resource_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "farmBeatsResourceName": _SERIALIZER.url("farm_beats_resource_name", farm_beats_resource_name, "str"),
+        "dataManagerForAgricultureResourceName": _SERIALIZER.url(
+            "data_manager_for_agriculture_resource_name",
+            data_manager_for_agriculture_resource_name,
+            "str",
+            max_length=63,
+            min_length=1,
+            pattern=r"^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -230,30 +256,32 @@ class PrivateEndpointConnectionsOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         private_endpoint_connection_name: str,
-        body: _models.PrivateEndpointConnection,
+        request: _models.PrivateEndpointConnection,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.PrivateEndpointConnection:
+    ) -> Union[_models.PrivateEndpointConnection, _models.ErrorResponse]:
         """Approves or Rejects a Private endpoint connection request.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param private_endpoint_connection_name: Private endpoint connection name. Required.
         :type private_endpoint_connection_name: str
-        :param body: Request object. Required.
-        :type body: ~azure.mgmt.agrifood.models.PrivateEndpointConnection
+        :param request: Request object. Required.
+        :type request: ~azure.mgmt.agrifood.models.PrivateEndpointConnection
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PrivateEndpointConnection or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection
+        :return: PrivateEndpointConnection or ErrorResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection or
+         ~azure.mgmt.agrifood.models.ErrorResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -261,30 +289,32 @@ class PrivateEndpointConnectionsOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         private_endpoint_connection_name: str,
-        body: IO,
+        request: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.PrivateEndpointConnection:
+    ) -> Union[_models.PrivateEndpointConnection, _models.ErrorResponse]:
         """Approves or Rejects a Private endpoint connection request.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param private_endpoint_connection_name: Private endpoint connection name. Required.
         :type private_endpoint_connection_name: str
-        :param body: Request object. Required.
-        :type body: IO
+        :param request: Request object. Required.
+        :type request: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PrivateEndpointConnection or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection
+        :return: PrivateEndpointConnection or ErrorResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection or
+         ~azure.mgmt.agrifood.models.ErrorResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -292,28 +322,31 @@ class PrivateEndpointConnectionsOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         private_endpoint_connection_name: str,
-        body: Union[_models.PrivateEndpointConnection, IO],
+        request: Union[_models.PrivateEndpointConnection, IO],
         **kwargs: Any
-    ) -> _models.PrivateEndpointConnection:
+    ) -> Union[_models.PrivateEndpointConnection, _models.ErrorResponse]:
         """Approves or Rejects a Private endpoint connection request.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param private_endpoint_connection_name: Private endpoint connection name. Required.
         :type private_endpoint_connection_name: str
-        :param body: Request object. Is either a model type or a IO type. Required.
-        :type body: ~azure.mgmt.agrifood.models.PrivateEndpointConnection or IO
+        :param request: Request object. Is either a PrivateEndpointConnection type or a IO type.
+         Required.
+        :type request: ~azure.mgmt.agrifood.models.PrivateEndpointConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PrivateEndpointConnection or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection
+        :return: PrivateEndpointConnection or ErrorResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection or
+         ~azure.mgmt.agrifood.models.ErrorResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -331,19 +364,19 @@ class PrivateEndpointConnectionsOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
+        cls: ClsType[Union[_models.PrivateEndpointConnection, _models.ErrorResponse]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
+        if isinstance(request, (IO, bytes)):
+            _content = request
         else:
-            _json = self._serialize.body(body, "PrivateEndpointConnection")
+            _json = self._serialize.body(request, "PrivateEndpointConnection")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             private_endpoint_connection_name=private_endpoint_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
@@ -363,51 +396,55 @@ class PrivateEndpointConnectionsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200]:
+        if response.status_code not in [200, 400]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("PrivateEndpointConnection", pipeline_response)
+        if response.status_code == 200:
+            deserialized = self._deserialize("PrivateEndpointConnection", pipeline_response)
+
+        if response.status_code == 400:
+            deserialized = self._deserialize("ErrorResponse", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
     create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
     }
 
     @distributed_trace
     def get(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         private_endpoint_connection_name: str,
         **kwargs: Any
-    ) -> _models.PrivateEndpointConnection:
+    ) -> Union[_models.PrivateEndpointConnection, _models.ErrorResponse]:
         """Get Private endpoint connection object.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param private_endpoint_connection_name: Private endpoint connection name. Required.
         :type private_endpoint_connection_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PrivateEndpointConnection or the result of cls(response)
-        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection
+        :return: PrivateEndpointConnection or ErrorResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnection or
+         ~azure.mgmt.agrifood.models.ErrorResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
             401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
             409: ResourceExistsError,
             304: ResourceNotModifiedError,
-            404: lambda response: ResourceNotFoundError(
-                response=response, model=self._deserialize(_models.ErrorResponse, response), error_format=ARMErrorFormat
-            ),
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -417,11 +454,11 @@ class PrivateEndpointConnectionsOperations:
         api_version: Literal["2021-09-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
+        cls: ClsType[Union[_models.PrivateEndpointConnection, _models.ErrorResponse]] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             private_endpoint_connection_name=private_endpoint_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
@@ -438,26 +475,30 @@ class PrivateEndpointConnectionsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200]:
+        if response.status_code not in [200, 404]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("PrivateEndpointConnection", pipeline_response)
+        if response.status_code == 200:
+            deserialized = self._deserialize("PrivateEndpointConnection", pipeline_response)
+
+        if response.status_code == 404:
+            deserialized = self._deserialize("ErrorResponse", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
     }
 
     def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         private_endpoint_connection_name: str,
         **kwargs: Any
     ) -> None:
@@ -479,7 +520,7 @@ class PrivateEndpointConnectionsOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
             private_endpoint_connection_name=private_endpoint_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
@@ -509,14 +550,14 @@ class PrivateEndpointConnectionsOperations:
             return cls(pipeline_response, None, response_headers)
 
     _delete_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
     }
 
     @distributed_trace
     def begin_delete(
         self,
         resource_group_name: str,
-        farm_beats_resource_name: str,
+        data_manager_for_agriculture_resource_name: str,
         private_endpoint_connection_name: str,
         **kwargs: Any
     ) -> LROPoller[None]:
@@ -525,8 +566,9 @@ class PrivateEndpointConnectionsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :param private_endpoint_connection_name: Private endpoint connection name. Required.
         :type private_endpoint_connection_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -554,7 +596,7 @@ class PrivateEndpointConnectionsOperations:
         if cont_token is None:
             raw_result = self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                farm_beats_resource_name=farm_beats_resource_name,
+                data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
                 private_endpoint_connection_name=private_endpoint_connection_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
@@ -570,7 +612,7 @@ class PrivateEndpointConnectionsOperations:
 
         if polling is True:
             polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
             )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
@@ -586,34 +628,26 @@ class PrivateEndpointConnectionsOperations:
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
     }
 
     @distributed_trace
     def list_by_resource(
-        self, resource_group_name: str, farm_beats_resource_name: str, **kwargs: Any
-    ) -> Iterable["_models.PrivateEndpointConnection"]:
+        self, resource_group_name: str, data_manager_for_agriculture_resource_name: str, **kwargs: Any
+    ) -> _models.PrivateEndpointConnectionListResult:
         """Get list of Private endpoint connections.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
+        :param data_manager_for_agriculture_resource_name: DataManagerForAgriculture resource name.
+         Required.
+        :type data_manager_for_agriculture_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PrivateEndpointConnection or the result of
-         cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.agrifood.models.PrivateEndpointConnection]
+        :return: PrivateEndpointConnectionListResult or the result of cls(response)
+        :rtype: ~azure.mgmt.agrifood.models.PrivateEndpointConnectionListResult
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        cls: ClsType[_models.PrivateEndpointConnectionListResult] = kwargs.pop("cls", None)
-
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -622,63 +656,44 @@ class PrivateEndpointConnectionsOperations:
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
-        def prepare_request(next_link=None):
-            if not next_link:
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-                request = build_list_by_resource_request(
-                    resource_group_name=resource_group_name,
-                    farm_beats_resource_name=farm_beats_resource_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    template_url=self.list_by_resource.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+        api_version: Literal["2021-09-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.PrivateEndpointConnectionListResult] = kwargs.pop("cls", None)
 
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
+        request = build_list_by_resource_request(
+            resource_group_name=resource_group_name,
+            data_manager_for_agriculture_resource_name=data_manager_for_agriculture_resource_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.list_by_resource.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
 
-        def extract_data(pipeline_response):
-            deserialized = self._deserialize("PrivateEndpointConnectionListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return None, iter(list_of_elem)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
 
-        def get_next(next_link=None):
-            request = prepare_request(next_link)
+        response = pipeline_response.http_response
 
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+        deserialized = self._deserialize("PrivateEndpointConnectionListResult", pipeline_response)
 
-            return pipeline_response
+        if cls:
+            return cls(pipeline_response, deserialized, {})
 
-        return ItemPaged(get_next, extract_data)
+        return deserialized
 
     list_by_resource.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections"
     }
