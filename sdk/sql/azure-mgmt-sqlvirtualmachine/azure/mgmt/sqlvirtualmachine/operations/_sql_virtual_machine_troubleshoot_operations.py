@@ -267,8 +267,8 @@ class SqlVirtualMachineTroubleshootOperations:
         :type resource_group_name: str
         :param sql_virtual_machine_name: Name of the SQL virtual machine. Required.
         :type sql_virtual_machine_name: str
-        :param parameters: The SQL virtual machine troubleshooting entity. Is either a model type or a
-         IO type. Required.
+        :param parameters: The SQL virtual machine troubleshooting entity. Is either a
+         SqlVmTroubleshooting type or a IO type. Required.
         :type parameters: ~azure.mgmt.sqlvirtualmachine.models.SqlVmTroubleshooting or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

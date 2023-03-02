@@ -480,8 +480,8 @@ class AvailabilityGroupListenersOperations:
         :type sql_virtual_machine_group_name: str
         :param availability_group_listener_name: Name of the availability group listener. Required.
         :type availability_group_listener_name: str
-        :param parameters: The availability group listener. Is either a model type or a IO type.
-         Required.
+        :param parameters: The availability group listener. Is either a AvailabilityGroupListener type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.sqlvirtualmachine.models.AvailabilityGroupListener or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
