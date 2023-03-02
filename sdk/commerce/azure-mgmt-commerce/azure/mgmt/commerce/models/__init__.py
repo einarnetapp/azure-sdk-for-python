@@ -7,7 +7,6 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import ErrorResponse
-from ._models_py3 import InfoField
 from ._models_py3 import MeterInfo
 from ._models_py3 import MonetaryCommitment
 from ._models_py3 import MonetaryCredit
@@ -26,7 +25,6 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "ErrorResponse",
-    "InfoField",
     "MeterInfo",
     "MonetaryCommitment",
     "MonetaryCredit",
