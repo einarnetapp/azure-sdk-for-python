@@ -88,10 +88,10 @@ class ClusterVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-06-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-06-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ClusterCodeVersionsListResult]
+        )
+        cls: ClsType[_models.ClusterCodeVersionsListResult] = kwargs.pop("cls", None)
 
         request = build_get_request(
             location=location,
@@ -103,9 +103,9 @@ class ClusterVersionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -123,7 +123,9 @@ class ClusterVersionsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}"
+    }
 
     @distributed_trace_async
     async def get_by_environment(
@@ -162,10 +164,10 @@ class ClusterVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-06-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-06-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ClusterCodeVersionsListResult]
+        )
+        cls: ClsType[_models.ClusterCodeVersionsListResult] = kwargs.pop("cls", None)
 
         request = build_get_by_environment_request(
             location=location,
@@ -178,9 +180,9 @@ class ClusterVersionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -198,7 +200,9 @@ class ClusterVersionsOperations:
 
         return deserialized
 
-    get_by_environment.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}"}  # type: ignore
+    get_by_environment.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}"
+    }
 
     @distributed_trace_async
     async def list(self, location: str, **kwargs: Any) -> _models.ClusterCodeVersionsListResult:
@@ -225,10 +229,10 @@ class ClusterVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-06-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-06-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ClusterCodeVersionsListResult]
+        )
+        cls: ClsType[_models.ClusterCodeVersionsListResult] = kwargs.pop("cls", None)
 
         request = build_list_request(
             location=location,
@@ -239,9 +243,9 @@ class ClusterVersionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -259,7 +263,9 @@ class ClusterVersionsOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"
+    }
 
     @distributed_trace_async
     async def list_by_environment(
@@ -291,10 +297,10 @@ class ClusterVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-06-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-06-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ClusterCodeVersionsListResult]
+        )
+        cls: ClsType[_models.ClusterCodeVersionsListResult] = kwargs.pop("cls", None)
 
         request = build_list_by_environment_request(
             location=location,
@@ -306,9 +312,9 @@ class ClusterVersionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -326,4 +332,6 @@ class ClusterVersionsOperations:
 
         return deserialized
 
-    list_by_environment.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"}  # type: ignore
+    list_by_environment.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"
+    }
