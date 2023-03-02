@@ -71,6 +71,9 @@ class ViewsOperations:
     def list(self, **kwargs: Any) -> AsyncIterable["_models.View"]:
         """Lists all views by tenant and object.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either View or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.costmanagement.models.View]
@@ -79,10 +82,10 @@ class ViewsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ViewListResult]
+        )
+        cls: ClsType[_models.ViewListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -102,7 +105,7 @@ class ViewsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -118,7 +121,7 @@ class ViewsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -126,13 +129,13 @@ class ViewsOperations:
             deserialized = self._deserialize("ViewListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -146,11 +149,14 @@ class ViewsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/providers/Microsoft.CostManagement/views"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.CostManagement/views"}
 
     @distributed_trace
     def list_by_scope(self, scope: str, **kwargs: Any) -> AsyncIterable["_models.View"]:
         """Lists all views at the given scope.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with view operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
@@ -178,10 +184,10 @@ class ViewsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ViewListResult]
+        )
+        cls: ClsType[_models.ViewListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -202,7 +208,7 @@ class ViewsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -218,7 +224,7 @@ class ViewsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -226,13 +232,13 @@ class ViewsOperations:
             deserialized = self._deserialize("ViewListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -246,11 +252,14 @@ class ViewsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views"}  # type: ignore
+    list_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views"}
 
     @distributed_trace_async
     async def get(self, view_name: str, **kwargs: Any) -> _models.View:
         """Gets the view by view name.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param view_name: View name. Required.
         :type view_name: str
@@ -270,10 +279,10 @@ class ViewsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.View]
+        )
+        cls: ClsType[_models.View] = kwargs.pop("cls", None)
 
         request = build_get_request(
             view_name=view_name,
@@ -283,9 +292,9 @@ class ViewsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -303,7 +312,7 @@ class ViewsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.CostManagement/views/{viewName}"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.CostManagement/views/{viewName}"}
 
     @overload
     async def create_or_update(
@@ -312,6 +321,9 @@ class ViewsOperations:
         """The operation to create or update a view. Update operation requires latest eTag to be set in
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param view_name: View name. Required.
         :type view_name: str
@@ -334,6 +346,9 @@ class ViewsOperations:
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param view_name: View name. Required.
         :type view_name: str
         :param parameters: Parameters supplied to the CreateOrUpdate View operation. Required.
@@ -355,9 +370,12 @@ class ViewsOperations:
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param view_name: View name. Required.
         :type view_name: str
-        :param parameters: Parameters supplied to the CreateOrUpdate View operation. Is either a model
+        :param parameters: Parameters supplied to the CreateOrUpdate View operation. Is either a View
          type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.View or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -379,11 +397,11 @@ class ViewsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.View]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.View] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -404,9 +422,9 @@ class ViewsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -424,15 +442,18 @@ class ViewsOperations:
             deserialized = self._deserialize("View", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/providers/Microsoft.CostManagement/views/{viewName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/providers/Microsoft.CostManagement/views/{viewName}"}
 
     @distributed_trace_async
     async def delete(self, view_name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
         """The operation to delete a view.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param view_name: View name. Required.
         :type view_name: str
@@ -452,10 +473,10 @@ class ViewsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             view_name=view_name,
@@ -465,9 +486,9 @@ class ViewsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -481,11 +502,14 @@ class ViewsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/providers/Microsoft.CostManagement/views/{viewName}"}  # type: ignore
+    delete.metadata = {"url": "/providers/Microsoft.CostManagement/views/{viewName}"}
 
     @distributed_trace_async
     async def get_by_scope(self, scope: str, view_name: str, **kwargs: Any) -> _models.View:
         """Gets the view for the defined scope by view name.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with view operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
@@ -523,10 +547,10 @@ class ViewsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.View]
+        )
+        cls: ClsType[_models.View] = kwargs.pop("cls", None)
 
         request = build_get_by_scope_request(
             scope=scope,
@@ -537,9 +561,9 @@ class ViewsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -557,7 +581,7 @@ class ViewsOperations:
 
         return deserialized
 
-    get_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views/{viewName}"}  # type: ignore
+    get_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views/{viewName}"}
 
     @overload
     async def create_or_update_by_scope(
@@ -572,6 +596,9 @@ class ViewsOperations:
         """The operation to create or update a view. Update operation requires latest eTag to be set in
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with view operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
@@ -612,6 +639,9 @@ class ViewsOperations:
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with view operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
          'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -651,6 +681,9 @@ class ViewsOperations:
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with view operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
          'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -671,7 +704,7 @@ class ViewsOperations:
         :type scope: str
         :param view_name: View name. Required.
         :type view_name: str
-        :param parameters: Parameters supplied to the CreateOrUpdate View operation. Is either a model
+        :param parameters: Parameters supplied to the CreateOrUpdate View operation. Is either a View
          type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.View or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -693,11 +726,11 @@ class ViewsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.View]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.View] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -719,9 +752,9 @@ class ViewsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -739,17 +772,20 @@ class ViewsOperations:
             deserialized = self._deserialize("View", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views/{viewName}"}  # type: ignore
+    create_or_update_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views/{viewName}"}
 
     @distributed_trace_async
     async def delete_by_scope(  # pylint: disable=inconsistent-return-statements
         self, scope: str, view_name: str, **kwargs: Any
     ) -> None:
         """The operation to delete a view.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with view operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
@@ -787,10 +823,10 @@ class ViewsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_by_scope_request(
             scope=scope,
@@ -801,9 +837,9 @@ class ViewsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -817,4 +853,4 @@ class ViewsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views/{viewName}"}  # type: ignore
+    delete_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/views/{viewName}"}

@@ -71,11 +71,11 @@ class GenerateDetailedCostReportOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.GenerateDetailedCostReportOperationResult]]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Optional[_models.GenerateDetailedCostReportOperationResult]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -96,9 +96,9 @@ class GenerateDetailedCostReportOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -131,7 +131,9 @@ class GenerateDetailedCostReportOperations:
 
         return deserialized
 
-    _create_operation_initial.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/generateDetailedCostReport"}  # type: ignore
+    _create_operation_initial.metadata = {
+        "url": "/{scope}/providers/Microsoft.CostManagement/generateDetailedCostReport"
+    }
 
     @overload
     async def begin_create_operation(
@@ -147,6 +149,9 @@ class GenerateDetailedCostReportOperations:
         Azure-Consumption-AsyncOperation providing a link to the operation created. A call on the
         operation will provide the status and if the operation is completed the blob file where
         generated detailed cost report is being stored.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The ARM Resource ID for subscription, resource group, billing account, or other
          billing scopes. For details, see https://aka.ms/costmgmt/scopes. Required.
@@ -181,6 +186,9 @@ class GenerateDetailedCostReportOperations:
         operation will provide the status and if the operation is completed the blob file where
         generated detailed cost report is being stored.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The ARM Resource ID for subscription, resource group, billing account, or other
          billing scopes. For details, see https://aka.ms/costmgmt/scopes. Required.
         :type scope: str
@@ -214,11 +222,14 @@ class GenerateDetailedCostReportOperations:
         operation will provide the status and if the operation is completed the blob file where
         generated detailed cost report is being stored.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The ARM Resource ID for subscription, resource group, billing account, or other
          billing scopes. For details, see https://aka.ms/costmgmt/scopes. Required.
         :type scope: str
         :param parameters: Parameters supplied to the Create detailed cost report operation. Is either
-         a model type or a IO type. Required.
+         a GenerateDetailedCostReportDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.GenerateDetailedCostReportDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -240,16 +251,16 @@ class GenerateDetailedCostReportOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GenerateDetailedCostReportOperationResult]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.GenerateDetailedCostReportOperationResult] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._create_operation_initial(  # type: ignore
+            raw_result = await self._create_operation_initial(
                 scope=scope,
                 parameters=parameters,
                 api_version=api_version,
@@ -268,9 +279,9 @@ class GenerateDetailedCostReportOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -282,6 +293,6 @@ class GenerateDetailedCostReportOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_create_operation.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/generateDetailedCostReport"}  # type: ignore
+    begin_create_operation.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/generateDetailedCostReport"}

@@ -43,8 +43,10 @@ def build_usage_request(scope: str, *, filter: Optional[str] = None, **kwargs: A
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -53,7 +55,7 @@ def build_usage_request(scope: str, *, filter: Optional[str] = None, **kwargs: A
         "scope": _SERIALIZER.url("scope", scope, "str", skip_quote=True),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     if filter is not None:
@@ -78,8 +80,10 @@ def build_external_cloud_provider_usage_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -94,7 +98,7 @@ def build_external_cloud_provider_usage_request(
         "externalCloudProviderId": _SERIALIZER.url("external_cloud_provider_id", external_cloud_provider_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     if filter is not None:
@@ -140,6 +144,9 @@ class ForecastOperations:
     ) -> Optional[_models.ForecastResult]:
         """Lists the forecast charges for scope defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with forecast operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -185,6 +192,9 @@ class ForecastOperations:
     ) -> Optional[_models.ForecastResult]:
         """Lists the forecast charges for scope defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with forecast operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -224,6 +234,9 @@ class ForecastOperations:
     ) -> Optional[_models.ForecastResult]:
         """Lists the forecast charges for scope defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with forecast operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -242,7 +255,7 @@ class ForecastOperations:
          specific for partners. Required.
         :type scope: str
         :param parameters: Parameters supplied to the CreateOrUpdate Forecast Config operation. Is
-         either a model type or a IO type. Required.
+         either a ForecastDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.ForecastDefinition or IO
         :param filter: May be used to filter forecasts by properties/usageDate (Utc time),
          properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge',
@@ -267,11 +280,11 @@ class ForecastOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.ForecastResult]]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Optional[_models.ForecastResult]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -293,9 +306,9 @@ class ForecastOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -315,7 +328,7 @@ class ForecastOperations:
 
         return deserialized
 
-    usage.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/forecast"}  # type: ignore
+    usage.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/forecast"}
 
     @overload
     def external_cloud_provider_usage(
@@ -329,6 +342,9 @@ class ForecastOperations:
         **kwargs: Any
     ) -> _models.ForecastResult:
         """Lists the forecast charges for external cloud provider type defined.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param external_cloud_provider_type: The external cloud provider type associated with
          dimension/query operations. This includes 'externalSubscriptions' for linked account and
@@ -369,6 +385,9 @@ class ForecastOperations:
     ) -> _models.ForecastResult:
         """Lists the forecast charges for external cloud provider type defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param external_cloud_provider_type: The external cloud provider type associated with
          dimension/query operations. This includes 'externalSubscriptions' for linked account and
          'externalBillingAccounts' for consolidated account. Known values are: "externalSubscriptions"
@@ -406,6 +425,9 @@ class ForecastOperations:
     ) -> _models.ForecastResult:
         """Lists the forecast charges for external cloud provider type defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param external_cloud_provider_type: The external cloud provider type associated with
          dimension/query operations. This includes 'externalSubscriptions' for linked account and
          'externalBillingAccounts' for consolidated account. Known values are: "externalSubscriptions"
@@ -417,7 +439,7 @@ class ForecastOperations:
          Required.
         :type external_cloud_provider_id: str
         :param parameters: Parameters supplied to the CreateOrUpdate Forecast Config operation. Is
-         either a model type or a IO type. Required.
+         either a ForecastDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.ForecastDefinition or IO
         :param filter: May be used to filter forecasts by properties/usageDate (Utc time),
          properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge',
@@ -442,11 +464,11 @@ class ForecastOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ForecastResult]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ForecastResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -469,9 +491,9 @@ class ForecastOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -489,4 +511,6 @@ class ForecastOperations:
 
         return deserialized
 
-    external_cloud_provider_usage.metadata = {"url": "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/forecast"}  # type: ignore
+    external_cloud_provider_usage.metadata = {
+        "url": "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/forecast"
+    }
