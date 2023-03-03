@@ -11663,13 +11663,11 @@ class VirtualMachineScaleSetInstanceViewStatusesSummary(_serialization.Model):
         self.statuses_summary = None
 
 
-class VirtualMachineScaleSetIPConfiguration(SubResource):
+class VirtualMachineScaleSetIPConfiguration(_serialization.Model):
     """Describes a virtual machine scale set network profile's IP configuration.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Resource Id.
-    :vartype id: str
     :ivar name: The IP configuration name. Required.
     :vartype name: str
     :ivar subnet: Specifies the identifier of the subnet.
@@ -11709,7 +11707,6 @@ class VirtualMachineScaleSetIPConfiguration(SubResource):
     }
 
     _attribute_map = {
-        "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "subnet": {"key": "properties.subnet", "type": "ApiEntityReference"},
         "primary": {"key": "properties.primary", "type": "bool"},
@@ -11734,7 +11731,6 @@ class VirtualMachineScaleSetIPConfiguration(SubResource):
         self,
         *,
         name: str,
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
         subnet: Optional["_models.ApiEntityReference"] = None,
         primary: Optional[bool] = None,
         public_ip_address_configuration: Optional["_models.VirtualMachineScaleSetPublicIPAddressConfiguration"] = None,
@@ -11746,8 +11742,6 @@ class VirtualMachineScaleSetIPConfiguration(SubResource):
         **kwargs: Any
     ) -> None:
         """
-        :keyword id: Resource Id.
-        :paramtype id: str
         :keyword name: The IP configuration name. Required.
         :paramtype name: str
         :keyword subnet: Specifies the identifier of the subnet.
@@ -11783,7 +11777,7 @@ class VirtualMachineScaleSetIPConfiguration(SubResource):
         :paramtype load_balancer_inbound_nat_pools:
          list[~azure.mgmt.compute.v2022_11_01.models.SubResource]
         """
-        super().__init__(id=id, **kwargs)
+        super().__init__(**kwargs)
         self.name = name
         self.subnet = subnet
         self.primary = primary
@@ -12022,13 +12016,11 @@ class VirtualMachineScaleSetManagedDiskParameters(_serialization.Model):
         self.security_profile = security_profile
 
 
-class VirtualMachineScaleSetNetworkConfiguration(SubResource):  # pylint: disable=too-many-instance-attributes
+class VirtualMachineScaleSetNetworkConfiguration(_serialization.Model):
     """Describes a virtual machine scale set network profile's network configurations.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Resource Id.
-    :vartype id: str
     :ivar name: The network configuration name. Required.
     :vartype name: str
     :ivar primary: Specifies the primary network interface in case the virtual machine has more
@@ -12062,7 +12054,6 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):  # pylint: disabl
     }
 
     _attribute_map = {
-        "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "primary": {"key": "properties.primary", "type": "bool"},
         "enable_accelerated_networking": {"key": "properties.enableAcceleratedNetworking", "type": "bool"},
@@ -12082,7 +12073,6 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):  # pylint: disabl
         self,
         *,
         name: str,
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
         primary: Optional[bool] = None,
         enable_accelerated_networking: Optional[bool] = None,
         disable_tcp_state_tracking: Optional[bool] = None,
@@ -12095,8 +12085,6 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):  # pylint: disabl
         **kwargs: Any
     ) -> None:
         """
-        :keyword id: Resource Id.
-        :paramtype id: str
         :keyword name: The network configuration name. Required.
         :paramtype name: str
         :keyword primary: Specifies the primary network interface in case the virtual machine has more
@@ -12124,7 +12112,7 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):  # pylint: disabl
          Known values are: "Delete" and "Detach".
         :paramtype delete_option: str or ~azure.mgmt.compute.v2022_11_01.models.DeleteOptions
         """
-        super().__init__(id=id, **kwargs)
+        super().__init__(**kwargs)
         self.name = name
         self.primary = primary
         self.enable_accelerated_networking = enable_accelerated_networking
@@ -12914,6 +12902,12 @@ class VirtualMachineScaleSetUpdate(UpdateResource):  # pylint: disable=too-many-
      the virtual machine scale set should be assigned to. :code:`<br>`:code:`<br>`Minimum
      api-version: 2018-04-01.
     :vartype proximity_placement_group: ~azure.mgmt.compute.v2022_11_01.models.SubResource
+    :ivar priority_mix_policy: Specifies the desired targets for mixing Spot and Regular priority
+     VMs within the same VMSS Flex instance.
+    :vartype priority_mix_policy: ~azure.mgmt.compute.v2022_11_01.models.PriorityMixPolicy
+    :ivar spot_restore_policy: Specifies the Spot Restore properties for the virtual machine scale
+     set.
+    :vartype spot_restore_policy: ~azure.mgmt.compute.v2022_11_01.models.SpotRestorePolicy
     """
 
     _attribute_map = {
@@ -12936,6 +12930,8 @@ class VirtualMachineScaleSetUpdate(UpdateResource):  # pylint: disable=too-many-
         "additional_capabilities": {"key": "properties.additionalCapabilities", "type": "AdditionalCapabilities"},
         "scale_in_policy": {"key": "properties.scaleInPolicy", "type": "ScaleInPolicy"},
         "proximity_placement_group": {"key": "properties.proximityPlacementGroup", "type": "SubResource"},
+        "priority_mix_policy": {"key": "properties.priorityMixPolicy", "type": "PriorityMixPolicy"},
+        "spot_restore_policy": {"key": "properties.spotRestorePolicy", "type": "SpotRestorePolicy"},
     }
 
     def __init__(
@@ -12954,6 +12950,8 @@ class VirtualMachineScaleSetUpdate(UpdateResource):  # pylint: disable=too-many-
         additional_capabilities: Optional["_models.AdditionalCapabilities"] = None,
         scale_in_policy: Optional["_models.ScaleInPolicy"] = None,
         proximity_placement_group: Optional["_models.SubResource"] = None,
+        priority_mix_policy: Optional["_models.PriorityMixPolicy"] = None,
+        spot_restore_policy: Optional["_models.SpotRestorePolicy"] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -12998,6 +12996,12 @@ class VirtualMachineScaleSetUpdate(UpdateResource):  # pylint: disable=too-many-
          that the virtual machine scale set should be assigned to. :code:`<br>`:code:`<br>`Minimum
          api-version: 2018-04-01.
         :paramtype proximity_placement_group: ~azure.mgmt.compute.v2022_11_01.models.SubResource
+        :keyword priority_mix_policy: Specifies the desired targets for mixing Spot and Regular
+         priority VMs within the same VMSS Flex instance.
+        :paramtype priority_mix_policy: ~azure.mgmt.compute.v2022_11_01.models.PriorityMixPolicy
+        :keyword spot_restore_policy: Specifies the Spot Restore properties for the virtual machine
+         scale set.
+        :paramtype spot_restore_policy: ~azure.mgmt.compute.v2022_11_01.models.SpotRestorePolicy
         """
         super().__init__(tags=tags, **kwargs)
         self.sku = sku
@@ -13012,6 +13016,8 @@ class VirtualMachineScaleSetUpdate(UpdateResource):  # pylint: disable=too-many-
         self.additional_capabilities = additional_capabilities
         self.scale_in_policy = scale_in_policy
         self.proximity_placement_group = proximity_placement_group
+        self.priority_mix_policy = priority_mix_policy
+        self.spot_restore_policy = spot_restore_policy
 
 
 class VirtualMachineScaleSetUpdateIPConfiguration(SubResource):
