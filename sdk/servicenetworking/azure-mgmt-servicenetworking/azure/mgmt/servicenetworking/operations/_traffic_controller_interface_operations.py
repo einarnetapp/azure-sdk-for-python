@@ -125,7 +125,10 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
     }
 
@@ -163,7 +166,10 @@ def build_create_or_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
     }
 
@@ -203,7 +209,10 @@ def build_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
     }
 
@@ -242,7 +251,10 @@ def build_delete_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
     }
 
@@ -675,7 +687,8 @@ class TrafficControllerInterfaceOperations:
         :type resource_group_name: str
         :param traffic_controller_name: traffic controller name for path. Required.
         :type traffic_controller_name: str
-        :param resource: Resource create parameters. Is either a model type or a IO type. Required.
+        :param resource: Resource create parameters. Is either a TrafficController type or a IO type.
+         Required.
         :type resource: ~azure.mgmt.servicenetworking.models.TrafficController or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -816,8 +829,8 @@ class TrafficControllerInterfaceOperations:
         :type resource_group_name: str
         :param traffic_controller_name: traffic controller name for path. Required.
         :type traffic_controller_name: str
-        :param properties: The resource properties to be updated. Is either a model type or a IO type.
-         Required.
+        :param properties: The resource properties to be updated. Is either a TrafficControllerUpdate
+         type or a IO type. Required.
         :type properties: ~azure.mgmt.servicenetworking.models.TrafficControllerUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
