@@ -47,7 +47,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -73,7 +73,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -103,7 +103,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -139,7 +139,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -175,7 +175,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -208,7 +208,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -241,7 +241,7 @@ def build_run_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -274,7 +274,7 @@ def build_cancel_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -307,7 +307,7 @@ def build_list_run_outputs_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -340,7 +340,7 @@ def build_get_run_output_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-02-14"] = kwargs.pop("api_version", _params.pop("api-version", "2022-02-14"))
+    api_version: Literal["2022-07-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -399,7 +399,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ImageTemplateListResult] = kwargs.pop("cls", None)
@@ -482,7 +482,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ImageTemplateListResult] = kwargs.pop("cls", None)
@@ -572,7 +572,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -710,8 +710,8 @@ class VirtualMachineImageTemplatesOperations:
         :type resource_group_name: str
         :param image_template_name: The name of the image Template. Required.
         :type image_template_name: str
-        :param parameters: Parameters supplied to the CreateImageTemplate operation. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameters supplied to the CreateImageTemplate operation. Is either a
+         ImageTemplate type or a IO type. Required.
         :type parameters: ~azure.mgmt.imagebuilder.models.ImageTemplate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -732,7 +732,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -799,7 +799,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -935,8 +935,8 @@ class VirtualMachineImageTemplatesOperations:
         :type resource_group_name: str
         :param image_template_name: The name of the image Template. Required.
         :type image_template_name: str
-        :param parameters: Additional parameters for Image Template update. Is either a model type or a
-         IO type. Required.
+        :param parameters: Additional parameters for Image Template update. Is either a
+         ImageTemplateUpdateParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.imagebuilder.models.ImageTemplateUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -957,7 +957,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1030,7 +1030,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ImageTemplate] = kwargs.pop("cls", None)
@@ -1082,7 +1082,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1109,8 +1109,12 @@ class VirtualMachineImageTemplatesOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, None, response_headers)
 
     _delete_initial.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}"
@@ -1139,7 +1143,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1164,7 +1168,7 @@ class VirtualMachineImageTemplatesOperations:
 
         if polling is True:
             polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
             )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
@@ -1197,7 +1201,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1254,7 +1258,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1312,7 +1316,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1369,7 +1373,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1431,7 +1435,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RunOutputCollection] = kwargs.pop("cls", None)
@@ -1532,7 +1536,7 @@ class VirtualMachineImageTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-02-14"] = kwargs.pop(
+        api_version: Literal["2022-07-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RunOutput] = kwargs.pop("cls", None)
