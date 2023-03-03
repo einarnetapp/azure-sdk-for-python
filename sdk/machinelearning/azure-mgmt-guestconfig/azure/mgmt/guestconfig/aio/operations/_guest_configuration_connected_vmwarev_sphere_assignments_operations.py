@@ -29,7 +29,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._guest_configuration_assignments_vmss_operations import (
+from ...operations._guest_configuration_connected_vmwarev_sphere_assignments_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
@@ -44,14 +44,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class GuestConfigurationAssignmentsVMSSOperations:
+class GuestConfigurationConnectedVMwarevSphereAssignmentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.guestconfig.aio.GuestConfigurationClient`'s
-        :attr:`guest_configuration_assignments_vmss` attribute.
+        :attr:`guest_configuration_connected_vmwarev_sphere_assignments` attribute.
     """
 
     models = _models
@@ -67,21 +67,22 @@ class GuestConfigurationAssignmentsVMSSOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        vmss_name: str,
-        name: str,
+        vm_name: str,
+        guest_configuration_assignment_name: str,
         parameters: _models.GuestConfigurationAssignment,
         *,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.GuestConfigurationAssignment:
-        """Creates an association between a VMSS and guest configuration.
+        """Creates an association between a Connected VM Sphere machine and guest configuration.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param vmss_name: The name of the virtual machine scale set. Required.
-        :type vmss_name: str
-        :param name: Name of the guest configuration assignment. Required.
-        :type name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
+        :param guest_configuration_assignment_name: Name of the guest configuration assignment.
+         Required.
+        :type guest_configuration_assignment_name: str
         :param parameters: Parameters supplied to the create or update guest configuration assignment.
          Required.
         :type parameters: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignment
@@ -98,21 +99,22 @@ class GuestConfigurationAssignmentsVMSSOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        vmss_name: str,
-        name: str,
+        vm_name: str,
+        guest_configuration_assignment_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.GuestConfigurationAssignment:
-        """Creates an association between a VMSS and guest configuration.
+        """Creates an association between a Connected VM Sphere machine and guest configuration.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param vmss_name: The name of the virtual machine scale set. Required.
-        :type vmss_name: str
-        :param name: Name of the guest configuration assignment. Required.
-        :type name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
+        :param guest_configuration_assignment_name: Name of the guest configuration assignment.
+         Required.
+        :type guest_configuration_assignment_name: str
         :param parameters: Parameters supplied to the create or update guest configuration assignment.
          Required.
         :type parameters: IO
@@ -129,19 +131,20 @@ class GuestConfigurationAssignmentsVMSSOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        vmss_name: str,
-        name: str,
+        vm_name: str,
+        guest_configuration_assignment_name: str,
         parameters: Union[_models.GuestConfigurationAssignment, IO],
         **kwargs: Any
     ) -> _models.GuestConfigurationAssignment:
-        """Creates an association between a VMSS and guest configuration.
+        """Creates an association between a Connected VM Sphere machine and guest configuration.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param vmss_name: The name of the virtual machine scale set. Required.
-        :type vmss_name: str
-        :param name: Name of the guest configuration assignment. Required.
-        :type name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
+        :param guest_configuration_assignment_name: Name of the guest configuration assignment.
+         Required.
+        :type guest_configuration_assignment_name: str
         :param parameters: Parameters supplied to the create or update guest configuration assignment.
          Is either a GuestConfigurationAssignment type or a IO type. Required.
         :type parameters: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignment or IO
@@ -180,8 +183,8 @@ class GuestConfigurationAssignmentsVMSSOperations:
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            vmss_name=vmss_name,
-            name=name,
+            vm_name=vm_name,
+            guest_configuration_assignment_name=guest_configuration_assignment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -217,21 +220,21 @@ class GuestConfigurationAssignmentsVMSSOperations:
         return deserialized  # type: ignore
 
     create_or_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}"
     }
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, vmss_name: str, name: str, **kwargs: Any
+        self, resource_group_name: str, vm_name: str, guest_configuration_assignment_name: str, **kwargs: Any
     ) -> _models.GuestConfigurationAssignment:
-        """Get information about a guest configuration assignment for VMSS.
+        """Get information about a guest configuration assignment.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param vmss_name: The name of the virtual machine scale set. Required.
-        :type vmss_name: str
-        :param name: The guest configuration assignment name. Required.
-        :type name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
+        :param guest_configuration_assignment_name: The guest configuration assignment name. Required.
+        :type guest_configuration_assignment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GuestConfigurationAssignment or the result of cls(response)
         :rtype: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignment
@@ -255,8 +258,8 @@ class GuestConfigurationAssignmentsVMSSOperations:
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            vmss_name=vmss_name,
-            name=name,
+            vm_name=vm_name,
+            guest_configuration_assignment_name=guest_configuration_assignment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -285,24 +288,25 @@ class GuestConfigurationAssignmentsVMSSOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}"
     }
 
     @distributed_trace_async
-    async def delete(
-        self, resource_group_name: str, vmss_name: str, name: str, **kwargs: Any
-    ) -> Optional[_models.GuestConfigurationAssignment]:
-        """Delete a guest configuration assignment for VMSS.
+    async def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, vm_name: str, guest_configuration_assignment_name: str, **kwargs: Any
+    ) -> None:
+        """Delete a guest configuration assignment.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param vmss_name: The name of the virtual machine scale set. Required.
-        :type vmss_name: str
-        :param name: The guest configuration assignment name. Required.
-        :type name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
+        :param guest_configuration_assignment_name: Name of the guest configuration assignment.
+         Required.
+        :type guest_configuration_assignment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: GuestConfigurationAssignment or None or the result of cls(response)
-        :rtype: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignment or None
+        :return: None or the result of cls(response)
+        :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -319,12 +323,12 @@ class GuestConfigurationAssignmentsVMSSOperations:
         api_version: Literal["2022-01-25"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[Optional[_models.GuestConfigurationAssignment]] = kwargs.pop("cls", None)
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            vmss_name=vmss_name,
-            name=name,
+            vm_name=vm_name,
+            guest_configuration_assignment_name=guest_configuration_assignment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -345,29 +349,23 @@ class GuestConfigurationAssignmentsVMSSOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = None
-        if response.status_code == 200:
-            deserialized = self._deserialize("GuestConfigurationAssignment", pipeline_response)
-
         if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
+            return cls(pipeline_response, None, {})
 
     delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}"
     }
 
     @distributed_trace
     def list(
-        self, resource_group_name: str, vmss_name: str, **kwargs: Any
+        self, resource_group_name: str, vm_name: str, **kwargs: Any
     ) -> AsyncIterable["_models.GuestConfigurationAssignment"]:
-        """List all guest configuration assignments for VMSS.
+        """List all guest configuration assignments for an ARC machine.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param vmss_name: The name of the virtual machine scale set. Required.
-        :type vmss_name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either GuestConfigurationAssignment or the result of
          cls(response)
@@ -396,7 +394,7 @@ class GuestConfigurationAssignmentsVMSSOperations:
 
                 request = build_list_request(
                     resource_group_name=resource_group_name,
-                    vmss_name=vmss_name,
+                    vm_name=vm_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
@@ -449,5 +447,5 @@ class GuestConfigurationAssignmentsVMSSOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     list.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments"
     }

@@ -14,7 +14,7 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
     pip install azure-identity
     pip install azure-mgmt-guestconfig
 # USAGE
-    python lists_all_of_the_available_guest_configuration_rest_api_operations.py
+    python list_all_guest_configuration_assignment_reports.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,14 +26,17 @@ from azure.mgmt.guestconfig import GuestConfigurationClient
 def main():
     client = GuestConfigurationClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
+        subscription_id="mySubscriptionid",
     )
 
-    response = client.operations.list()
-    for item in response:
-        print(item)
+    response = client.guest_configuration_assignment_reports.list(
+        resource_group_name="myResourceGroupName",
+        guest_configuration_assignment_name="AuditSecureProtocol",
+        vm_name="myVMName",
+    )
+    print(response)
 
 
-# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/listOperations.json
+# x-ms-original-file: specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2022-01-25/examples/listAllGuestConfigurationAssignmentReports.json
 if __name__ == "__main__":
     main()

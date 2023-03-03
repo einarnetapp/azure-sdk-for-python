@@ -12,7 +12,7 @@ from typing import Any, Awaitable, TYPE_CHECKING
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
 
-from .. import models
+from .. import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import GuestConfigurationClientConfiguration
 from .operations import (
@@ -20,6 +20,8 @@ from .operations import (
     GuestConfigurationAssignmentReportsVMSSOperations,
     GuestConfigurationAssignmentsOperations,
     GuestConfigurationAssignmentsVMSSOperations,
+    GuestConfigurationConnectedVMwarevSphereAssignmentsOperations,
+    GuestConfigurationConnectedVMwarevSphereAssignmentsReportsOperations,
     GuestConfigurationHCRPAssignmentReportsOperations,
     GuestConfigurationHCRPAssignmentsOperations,
     Operations,
@@ -56,6 +58,14 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
      GuestConfigurationAssignmentReportsVMSSOperations operations
     :vartype guest_configuration_assignment_reports_vmss:
      azure.mgmt.guestconfig.aio.operations.GuestConfigurationAssignmentReportsVMSSOperations
+    :ivar guest_configuration_connected_vmwarev_sphere_assignments:
+     GuestConfigurationConnectedVMwarevSphereAssignmentsOperations operations
+    :vartype guest_configuration_connected_vmwarev_sphere_assignments:
+     azure.mgmt.guestconfig.aio.operations.GuestConfigurationConnectedVMwarevSphereAssignmentsOperations
+    :ivar guest_configuration_connected_vmwarev_sphere_assignments_reports:
+     GuestConfigurationConnectedVMwarevSphereAssignmentsReportsOperations operations
+    :vartype guest_configuration_connected_vmwarev_sphere_assignments_reports:
+     azure.mgmt.guestconfig.aio.operations.GuestConfigurationConnectedVMwarevSphereAssignmentsReportsOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.guestconfig.aio.operations.Operations
     :param credential: Credential needed for the client to connect to Azure. Required.
@@ -82,7 +92,7 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
         )
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -103,6 +113,16 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
         )
         self.guest_configuration_assignment_reports_vmss = GuestConfigurationAssignmentReportsVMSSOperations(
             self._client, self._config, self._serialize, self._deserialize
+        )
+        self.guest_configuration_connected_vmwarev_sphere_assignments = (
+            GuestConfigurationConnectedVMwarevSphereAssignmentsOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
+        self.guest_configuration_connected_vmwarev_sphere_assignments_reports = (
+            GuestConfigurationConnectedVMwarevSphereAssignmentsReportsOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
         )
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
 
@@ -135,5 +155,5 @@ class GuestConfigurationClient:  # pylint: disable=client-accepts-api-version-ke
         await self._client.__aenter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
+    async def __aexit__(self, *exc_details: Any) -> None:
         await self._client.__aexit__(*exc_details)

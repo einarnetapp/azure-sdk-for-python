@@ -41,7 +41,7 @@ from ._guest_configuration_client_enums import Kind
 from ._guest_configuration_client_enums import ProvisioningState
 from ._guest_configuration_client_enums import Type
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
