@@ -65,7 +65,10 @@ def build_list_by_traffic_controller_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
     }
 
@@ -102,9 +105,14 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
-        "frontendName": _SERIALIZER.url("frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]*"),
+        "frontendName": _SERIALIZER.url(
+            "frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -141,9 +149,14 @@ def build_create_or_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
-        "frontendName": _SERIALIZER.url("frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]*"),
+        "frontendName": _SERIALIZER.url(
+            "frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -182,9 +195,14 @@ def build_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
-        "frontendName": _SERIALIZER.url("frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]*"),
+        "frontendName": _SERIALIZER.url(
+            "frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -222,9 +240,14 @@ def build_delete_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "trafficControllerName": _SERIALIZER.url(
-            "traffic_controller_name", traffic_controller_name, "str", pattern=r"[A-Za-z0-9]*"
+            "traffic_controller_name",
+            traffic_controller_name,
+            "str",
+            pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+",
         ),
-        "frontendName": _SERIALIZER.url("frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]*"),
+        "frontendName": _SERIALIZER.url(
+            "frontend_name", frontend_name, "str", pattern=r"[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -591,7 +614,7 @@ class FrontendsInterfaceOperations:
         :type traffic_controller_name: str
         :param frontend_name: Frontends. Required.
         :type frontend_name: str
-        :param resource: Resource create parameters. Is either a model type or a IO type. Required.
+        :param resource: Resource create parameters. Is either a Frontend type or a IO type. Required.
         :type resource: ~azure.mgmt.servicenetworking.models.Frontend or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -741,8 +764,8 @@ class FrontendsInterfaceOperations:
         :type traffic_controller_name: str
         :param frontend_name: Frontends. Required.
         :type frontend_name: str
-        :param properties: The resource properties to be updated. Is either a model type or a IO type.
-         Required.
+        :param properties: The resource properties to be updated. Is either a FrontendUpdate type or a
+         IO type. Required.
         :type properties: ~azure.mgmt.servicenetworking.models.FrontendUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

@@ -474,7 +474,8 @@ class TrafficControllerInterfaceOperations:
         :type resource_group_name: str
         :param traffic_controller_name: traffic controller name for path. Required.
         :type traffic_controller_name: str
-        :param resource: Resource create parameters. Is either a model type or a IO type. Required.
+        :param resource: Resource create parameters. Is either a TrafficController type or a IO type.
+         Required.
         :type resource: ~azure.mgmt.servicenetworking.models.TrafficController or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -617,8 +618,8 @@ class TrafficControllerInterfaceOperations:
         :type resource_group_name: str
         :param traffic_controller_name: traffic controller name for path. Required.
         :type traffic_controller_name: str
-        :param properties: The resource properties to be updated. Is either a model type or a IO type.
-         Required.
+        :param properties: The resource properties to be updated. Is either a TrafficControllerUpdate
+         type or a IO type. Required.
         :type properties: ~azure.mgmt.servicenetworking.models.TrafficControllerUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
