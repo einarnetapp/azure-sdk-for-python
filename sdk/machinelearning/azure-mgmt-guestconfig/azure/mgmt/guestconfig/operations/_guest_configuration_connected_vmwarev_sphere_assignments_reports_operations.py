@@ -41,8 +41,8 @@ _SERIALIZER.client_side_validation = False
 
 def build_list_request(
     resource_group_name: str,
-    guest_configuration_assignment_name: str,
     vm_name: str,
+    guest_configuration_assignment_name: str,
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -55,15 +55,18 @@ def build_list_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str", pattern=r"^[-\w\._]+$"),
-        "guestConfigurationAssignmentName": _SERIALIZER.url(
-            "guest_configuration_assignment_name", guest_configuration_assignment_name, "str"
-        ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str", pattern=r"^[-\w\._]+$"),
         "vmName": _SERIALIZER.url("vm_name", vm_name, "str", pattern=r"^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"),
+        "guestConfigurationAssignmentName": _SERIALIZER.url(
+            "guest_configuration_assignment_name",
+            guest_configuration_assignment_name,
+            "str",
+            pattern=r"^[^<>%&:\\?/#]*$",
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -79,9 +82,9 @@ def build_list_request(
 
 def build_get_request(
     resource_group_name: str,
+    vm_name: str,
     guest_configuration_assignment_name: str,
     report_id: str,
-    vm_name: str,
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -94,16 +97,19 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str", pattern=r"^[-\w\._]+$"),
+        "vmName": _SERIALIZER.url("vm_name", vm_name, "str", pattern=r"^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"),
         "guestConfigurationAssignmentName": _SERIALIZER.url(
-            "guest_configuration_assignment_name", guest_configuration_assignment_name, "str"
+            "guest_configuration_assignment_name",
+            guest_configuration_assignment_name,
+            "str",
+            pattern=r"^[^<>%&:\\?/#]*$",
         ),
         "reportId": _SERIALIZER.url("report_id", report_id, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "vmName": _SERIALIZER.url("vm_name", vm_name, "str", pattern=r"^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -117,14 +123,14 @@ def build_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class GuestConfigurationAssignmentReportsOperations:
+class GuestConfigurationConnectedVMwarevSphereAssignmentsReportsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.guestconfig.GuestConfigurationClient`'s
-        :attr:`guest_configuration_assignment_reports` attribute.
+        :attr:`guest_configuration_connected_vmwarev_sphere_assignments_reports` attribute.
     """
 
     models = _models
@@ -138,16 +144,16 @@ class GuestConfigurationAssignmentReportsOperations:
 
     @distributed_trace
     def list(
-        self, resource_group_name: str, guest_configuration_assignment_name: str, vm_name: str, **kwargs: Any
+        self, resource_group_name: str, vm_name: str, guest_configuration_assignment_name: str, **kwargs: Any
     ) -> _models.GuestConfigurationAssignmentReportList:
         """List all reports for the guest configuration assignment, latest report first.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
-        :param guest_configuration_assignment_name: The guest configuration assignment name. Required.
-        :type guest_configuration_assignment_name: str
         :param vm_name: The name of the virtual machine. Required.
         :type vm_name: str
+        :param guest_configuration_assignment_name: The guest configuration assignment name. Required.
+        :type guest_configuration_assignment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GuestConfigurationAssignmentReportList or the result of cls(response)
         :rtype: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReportList
@@ -171,8 +177,8 @@ class GuestConfigurationAssignmentReportsOperations:
 
         request = build_list_request(
             resource_group_name=resource_group_name,
-            guest_configuration_assignment_name=guest_configuration_assignment_name,
             vm_name=vm_name,
+            guest_configuration_assignment_name=guest_configuration_assignment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.list.metadata["url"],
@@ -201,28 +207,28 @@ class GuestConfigurationAssignmentReportsOperations:
         return deserialized
 
     list.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports"
     }
 
     @distributed_trace
     def get(
         self,
         resource_group_name: str,
+        vm_name: str,
         guest_configuration_assignment_name: str,
         report_id: str,
-        vm_name: str,
         **kwargs: Any
     ) -> _models.GuestConfigurationAssignmentReport:
         """Get a report for the guest configuration assignment, by reportId.
 
         :param resource_group_name: The resource group name. Required.
         :type resource_group_name: str
+        :param vm_name: The name of the virtual machine. Required.
+        :type vm_name: str
         :param guest_configuration_assignment_name: The guest configuration assignment name. Required.
         :type guest_configuration_assignment_name: str
         :param report_id: The GUID for the guest configuration assignment report. Required.
         :type report_id: str
-        :param vm_name: The name of the virtual machine. Required.
-        :type vm_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GuestConfigurationAssignmentReport or the result of cls(response)
         :rtype: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReport
@@ -246,9 +252,9 @@ class GuestConfigurationAssignmentReportsOperations:
 
         request = build_get_request(
             resource_group_name=resource_group_name,
+            vm_name=vm_name,
             guest_configuration_assignment_name=guest_configuration_assignment_name,
             report_id=report_id,
-            vm_name=vm_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -277,5 +283,5 @@ class GuestConfigurationAssignmentReportsOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}"
     }
