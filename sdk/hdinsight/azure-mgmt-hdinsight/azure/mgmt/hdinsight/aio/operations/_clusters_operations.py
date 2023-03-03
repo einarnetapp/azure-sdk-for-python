@@ -228,7 +228,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param parameters: The cluster create request. Is either a model type or a IO type. Required.
+        :param parameters: The cluster create request. Is either a ClusterCreateParametersExtended type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ClusterCreateParametersExtended or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -366,7 +367,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param parameters: The cluster patch request. Is either a model type or a IO type. Required.
+        :param parameters: The cluster patch request. Is either a ClusterPatchParameters type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ClusterPatchParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -862,8 +864,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type cluster_name: str
         :param role_name: The constant value for the roleName. "workernode" Required.
         :type role_name: str or ~azure.mgmt.hdinsight.models.RoleName
-        :param parameters: The parameters for the resize operation. Is either a model type or a IO
-         type. Required.
+        :param parameters: The parameters for the resize operation. Is either a ClusterResizeParameters
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ClusterResizeParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1090,7 +1092,7 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :param role_name: The constant value for the roleName. "workernode" Required.
         :type role_name: str or ~azure.mgmt.hdinsight.models.RoleName
         :param parameters: The parameters for the update autoscale configuration operation. Is either a
-         model type or a IO type. Required.
+         AutoscaleConfigurationUpdateParameter type or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.AutoscaleConfigurationUpdateParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1387,8 +1389,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param parameters: The parameters for the disk encryption operation. Is either a model type or
-         a IO type. Required.
+        :param parameters: The parameters for the disk encryption operation. Is either a
+         ClusterDiskEncryptionParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ClusterDiskEncryptionParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1667,7 +1669,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param parameters: The cluster configurations. Is either a model type or a IO type. Required.
+        :param parameters: The cluster configurations. Is either a UpdateGatewaySettingsParameters type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.UpdateGatewaySettingsParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1949,7 +1952,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param parameters: The cluster configurations. Is either a model type or a IO type. Required.
+        :param parameters: The cluster configurations. Is either a
+         UpdateClusterIdentityCertificateParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.UpdateClusterIdentityCertificateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2163,8 +2167,8 @@ class ClustersOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param parameters: The parameters for executing script actions. Is either a model type or a IO
-         type. Required.
+        :param parameters: The parameters for executing script actions. Is either a
+         ExecuteScriptActionParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ExecuteScriptActionParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

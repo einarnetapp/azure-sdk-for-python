@@ -537,7 +537,7 @@ class ExtensionsOperations:
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
         :param parameters: The Operations Management Suite (OMS) workspace parameters. Is either a
-         model type or a IO type. Required.
+         ClusterMonitoringRequest type or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ClusterMonitoringRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -932,8 +932,8 @@ class ExtensionsOperations:
         :type resource_group_name: str
         :param cluster_name: The name of the cluster. Required.
         :type cluster_name: str
-        :param parameters: The Log Analytics workspace parameters. Is either a model type or a IO type.
-         Required.
+        :param parameters: The Log Analytics workspace parameters. Is either a AzureMonitorRequest type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.AzureMonitorRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1341,8 +1341,8 @@ class ExtensionsOperations:
         :type cluster_name: str
         :param extension_name: The name of the cluster extension. Required.
         :type extension_name: str
-        :param parameters: The cluster extensions create request. Is either a model type or a IO type.
-         Required.
+        :param parameters: The cluster extensions create request. Is either a Extension type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.Extension or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

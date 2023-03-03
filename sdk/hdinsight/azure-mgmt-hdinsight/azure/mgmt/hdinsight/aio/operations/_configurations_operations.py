@@ -281,7 +281,8 @@ class ConfigurationsOperations:
         :type cluster_name: str
         :param configuration_name: The name of the cluster configuration. Required.
         :type configuration_name: str
-        :param parameters: The cluster configurations. Is either a dict type or a IO type. Required.
+        :param parameters: The cluster configurations. Is either a {str: str} type or a IO type.
+         Required.
         :type parameters: dict[str, str] or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
