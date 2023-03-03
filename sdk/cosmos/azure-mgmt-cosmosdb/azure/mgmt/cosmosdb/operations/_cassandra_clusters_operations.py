@@ -47,7 +47,7 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -73,7 +73,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -103,7 +103,7 @@ def build_get_request(resource_group_name: str, cluster_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -138,7 +138,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -173,7 +173,7 @@ def build_create_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -211,7 +211,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -249,7 +249,7 @@ def build_invoke_command_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -287,7 +287,7 @@ def build_deallocate_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -322,7 +322,7 @@ def build_start_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -357,7 +357,7 @@ def build_status_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-11-15"] = kwargs.pop("api_version", _params.pop("api-version", "2022-11-15"))
+    api_version: Literal["2023-03-15"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-15"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -417,7 +417,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ListClusters] = kwargs.pop("cls", None)
@@ -503,7 +503,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ListClusters] = kwargs.pop("cls", None)
@@ -600,7 +600,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ClusterResource] = kwargs.pop("cls", None)
@@ -652,7 +652,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -710,7 +710,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -766,7 +766,7 @@ class CassandraClustersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -909,7 +909,7 @@ class CassandraClustersOperations:
         :param cluster_name: Managed Cassandra cluster name. Required.
         :type cluster_name: str
         :param body: The properties specifying the desired state of the managed Cassandra cluster. Is
-         either a model type or a IO type. Required.
+         either a ClusterResource type or a IO type. Required.
         :type body: ~azure.mgmt.cosmosdb.models.ClusterResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -930,7 +930,7 @@ class CassandraClustersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -991,7 +991,7 @@ class CassandraClustersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1129,7 +1129,7 @@ class CassandraClustersOperations:
         :param cluster_name: Managed Cassandra cluster name. Required.
         :type cluster_name: str
         :param body: Parameters to provide for specifying the managed Cassandra cluster. Is either a
-         model type or a IO type. Required.
+         ClusterResource type or a IO type. Required.
         :type body: ~azure.mgmt.cosmosdb.models.ClusterResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1150,7 +1150,7 @@ class CassandraClustersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1211,7 +1211,7 @@ class CassandraClustersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1344,8 +1344,8 @@ class CassandraClustersOperations:
         :type resource_group_name: str
         :param cluster_name: Managed Cassandra cluster name. Required.
         :type cluster_name: str
-        :param body: Specification which command to run where. Is either a model type or a IO type.
-         Required.
+        :param body: Specification which command to run where. Is either a CommandPostBody type or a IO
+         type. Required.
         :type body: ~azure.mgmt.cosmosdb.models.CommandPostBody or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1366,7 +1366,7 @@ class CassandraClustersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1427,7 +1427,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1487,7 +1487,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1543,7 +1543,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1603,7 +1603,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1672,7 +1672,7 @@ class CassandraClustersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-11-15"] = kwargs.pop(
+        api_version: Literal["2023-03-15"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.CassandraClusterPublicStatus] = kwargs.pop("cls", None)
