@@ -215,7 +215,8 @@ class Operations:
 
         Check whether a workspace name is available.
 
-        :param request: The check request. Is either a model type or a IO type. Required.
+        :param request: The check request. Is either a CheckNameAvailabilityRequest type or a IO type.
+         Required.
         :type request: ~azure.mgmt.synapse.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

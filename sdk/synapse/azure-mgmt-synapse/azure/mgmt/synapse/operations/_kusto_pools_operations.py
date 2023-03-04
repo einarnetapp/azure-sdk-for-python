@@ -743,7 +743,8 @@ class KustoPoolsOperations:  # pylint: disable=too-many-public-methods
 
         :param location: The name of Azure region. Required.
         :type location: str
-        :param kusto_pool_name: The name of the cluster. Is either a model type or a IO type. Required.
+        :param kusto_pool_name: The name of the cluster. Is either a KustoPoolCheckNameRequest type or
+         a IO type. Required.
         :type kusto_pool_name: ~azure.mgmt.synapse.models.KustoPoolCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1149,7 +1150,7 @@ class KustoPoolsOperations:  # pylint: disable=too-many-public-methods
         :param kusto_pool_name: The name of the Kusto pool. Required.
         :type kusto_pool_name: str
         :param parameters: The Kusto pool parameters supplied to the CreateOrUpdate operation. Is
-         either a model type or a IO type. Required.
+         either a KustoPool type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.KustoPool or IO
         :param if_match: The ETag of the Kusto Pool. Omit this value to always overwrite the current
          Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
@@ -1410,7 +1411,7 @@ class KustoPoolsOperations:  # pylint: disable=too-many-public-methods
         :param kusto_pool_name: The name of the Kusto pool. Required.
         :type kusto_pool_name: str
         :param parameters: The Kusto pool parameters supplied to the Update operation. Is either a
-         model type or a IO type. Required.
+         KustoPoolUpdate type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.KustoPoolUpdate or IO
         :param if_match: The ETag of the Kusto Pool. Omit this value to always overwrite the current
          Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
@@ -2177,8 +2178,8 @@ class KustoPoolsOperations:  # pylint: disable=too-many-public-methods
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param language_extensions_to_add: The language extensions to add. Is either a model type or a
-         IO type. Required.
+        :param language_extensions_to_add: The language extensions to add. Is either a
+         LanguageExtensionsList type or a IO type. Required.
         :type language_extensions_to_add: ~azure.mgmt.synapse.models.LanguageExtensionsList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2405,8 +2406,8 @@ class KustoPoolsOperations:  # pylint: disable=too-many-public-methods
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param language_extensions_to_remove: The language extensions to remove. Is either a model type
-         or a IO type. Required.
+        :param language_extensions_to_remove: The language extensions to remove. Is either a
+         LanguageExtensionsList type or a IO type. Required.
         :type language_extensions_to_remove: ~azure.mgmt.synapse.models.LanguageExtensionsList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2721,7 +2722,7 @@ class KustoPoolsOperations:  # pylint: disable=too-many-public-methods
          Required.
         :type resource_group_name: str
         :param follower_database_to_remove: The follower databases properties to remove. Is either a
-         model type or a IO type. Required.
+         FollowerDatabaseDefinition type or a IO type. Required.
         :type follower_database_to_remove: ~azure.mgmt.synapse.models.FollowerDatabaseDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

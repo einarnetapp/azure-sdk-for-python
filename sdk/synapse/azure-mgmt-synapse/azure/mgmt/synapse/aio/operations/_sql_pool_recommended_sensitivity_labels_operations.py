@@ -135,7 +135,8 @@ class SqlPoolRecommendedSensitivityLabelsOperations:
         :type workspace_name: str
         :param sql_pool_name: SQL pool name. Required.
         :type sql_pool_name: str
-        :param parameters: Is either a model type or a IO type. Required.
+        :param parameters: Is either a RecommendedSensitivityLabelUpdateList type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.synapse.models.RecommendedSensitivityLabelUpdateList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

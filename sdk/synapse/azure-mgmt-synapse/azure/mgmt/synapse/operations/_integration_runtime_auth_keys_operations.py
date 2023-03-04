@@ -223,7 +223,8 @@ class IntegrationRuntimeAuthKeysOperations:
         :param integration_runtime_name: Integration runtime name. Required.
         :type integration_runtime_name: str
         :param regenerate_key_parameters: The parameters for regenerating integration runtime
-         authentication key. Is either a model type or a IO type. Required.
+         authentication key. Is either a IntegrationRuntimeRegenerateKeyParameters type or a IO type.
+         Required.
         :type regenerate_key_parameters:
          ~azure.mgmt.synapse.models.IntegrationRuntimeRegenerateKeyParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

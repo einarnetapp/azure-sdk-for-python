@@ -405,7 +405,7 @@ class KustoPoolDatabasesOperations:
         :param database_name: The name of the database in the Kusto pool. Required.
         :type database_name: str
         :param parameters: The database parameters supplied to the CreateOrUpdate operation. Is either
-         a model type or a IO type. Required.
+         a Database type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.Database or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -657,8 +657,8 @@ class KustoPoolDatabasesOperations:
         :type kusto_pool_name: str
         :param database_name: The name of the database in the Kusto pool. Required.
         :type database_name: str
-        :param parameters: The database parameters supplied to the Update operation. Is either a model
-         type or a IO type. Required.
+        :param parameters: The database parameters supplied to the Update operation. Is either a
+         Database type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.Database or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

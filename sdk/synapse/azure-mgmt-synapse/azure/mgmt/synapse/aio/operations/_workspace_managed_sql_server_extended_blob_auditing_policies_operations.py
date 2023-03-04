@@ -309,8 +309,8 @@ class WorkspaceManagedSqlServerExtendedBlobAuditingPoliciesOperations:
         :type workspace_name: str
         :param blob_auditing_policy_name: The name of the blob auditing policy. "default" Required.
         :type blob_auditing_policy_name: str or ~azure.mgmt.synapse.models.BlobAuditingPolicyName
-        :param parameters: Properties of extended blob auditing policy. Is either a model type or a IO
-         type. Required.
+        :param parameters: Properties of extended blob auditing policy. Is either a
+         ExtendedServerBlobAuditingPolicy type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.ExtendedServerBlobAuditingPolicy or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

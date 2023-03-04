@@ -461,7 +461,7 @@ class SqlPoolRestorePointsOperations:
         :param sql_pool_name: SQL pool name. Required.
         :type sql_pool_name: str
         :param parameters: The definition for creating the restore point of this Sql pool. Is either a
-         model type or a IO type. Required.
+         CreateSqlPoolRestorePointDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.CreateSqlPoolRestorePointDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

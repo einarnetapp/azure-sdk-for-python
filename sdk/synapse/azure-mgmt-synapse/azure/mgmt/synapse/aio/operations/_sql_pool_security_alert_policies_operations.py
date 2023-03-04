@@ -318,8 +318,8 @@ class SqlPoolSecurityAlertPoliciesOperations:
         :type sql_pool_name: str
         :param security_alert_policy_name: The name of the security alert policy. "default" Required.
         :type security_alert_policy_name: str or ~azure.mgmt.synapse.models.SecurityAlertPolicyName
-        :param parameters: The Sql pool security alert policy. Is either a model type or a IO type.
-         Required.
+        :param parameters: The Sql pool security alert policy. Is either a SqlPoolSecurityAlertPolicy
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.SqlPoolSecurityAlertPolicy or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

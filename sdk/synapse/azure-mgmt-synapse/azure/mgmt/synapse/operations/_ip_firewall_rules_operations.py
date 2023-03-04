@@ -485,8 +485,8 @@ class IpFirewallRulesOperations:
         :type workspace_name: str
         :param rule_name: The IP firewall rule name. Required.
         :type rule_name: str
-        :param ip_firewall_rule_info: IP firewall rule properties. Is either a model type or a IO type.
-         Required.
+        :param ip_firewall_rule_info: IP firewall rule properties. Is either a IpFirewallRuleInfo type
+         or a IO type. Required.
         :type ip_firewall_rule_info: ~azure.mgmt.synapse.models.IpFirewallRuleInfo or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -908,8 +908,8 @@ class IpFirewallRulesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param request: Replace all IP firewall rules request. Is either a model type or a IO type.
-         Required.
+        :param request: Replace all IP firewall rules request. Is either a
+         ReplaceAllIpFirewallRulesRequest type or a IO type. Required.
         :type request: ~azure.mgmt.synapse.models.ReplaceAllIpFirewallRulesRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

@@ -244,7 +244,7 @@ class SqlPoolTransparentDataEncryptionsOperations:
         :type transparent_data_encryption_name: str or
          ~azure.mgmt.synapse.models.TransparentDataEncryptionName
         :param parameters: The required parameters for creating or updating transparent data
-         encryption. Is either a model type or a IO type. Required.
+         encryption. Is either a TransparentDataEncryption type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.TransparentDataEncryption or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

@@ -222,8 +222,8 @@ class BigDataPoolsOperations:
         :type workspace_name: str
         :param big_data_pool_name: Big Data pool name. Required.
         :type big_data_pool_name: str
-        :param big_data_pool_patch_info: The updated Big Data pool properties. Is either a model type
-         or a IO type. Required.
+        :param big_data_pool_patch_info: The updated Big Data pool properties. Is either a
+         BigDataPoolPatchInfo type or a IO type. Required.
         :type big_data_pool_patch_info: ~azure.mgmt.synapse.models.BigDataPoolPatchInfo or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -482,8 +482,8 @@ class BigDataPoolsOperations:
         :type workspace_name: str
         :param big_data_pool_name: Big Data pool name. Required.
         :type big_data_pool_name: str
-        :param big_data_pool_info: The Big Data pool to create. Is either a model type or a IO type.
-         Required.
+        :param big_data_pool_info: The Big Data pool to create. Is either a BigDataPoolResourceInfo
+         type or a IO type. Required.
         :type big_data_pool_info: ~azure.mgmt.synapse.models.BigDataPoolResourceInfo or IO
         :param force: Whether to stop any running jobs in the Big Data pool. Default value is False.
         :type force: bool

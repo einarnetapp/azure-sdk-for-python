@@ -281,8 +281,8 @@ class WorkspaceSqlAadAdminsOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param aad_admin_info: Workspace active directory administrator properties. Is either a model
-         type or a IO type. Required.
+        :param aad_admin_info: Workspace active directory administrator properties. Is either a
+         WorkspaceAadAdminInfo type or a IO type. Required.
         :type aad_admin_info: ~azure.mgmt.synapse.models.WorkspaceAadAdminInfo or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

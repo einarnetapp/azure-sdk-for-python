@@ -568,7 +568,7 @@ class IntegrationRuntimesOperations:
         :param integration_runtime_name: Integration runtime name. Required.
         :type integration_runtime_name: str
         :param update_integration_runtime_request: The parameters for updating an integration runtime.
-         Is either a model type or a IO type. Required.
+         Is either a UpdateIntegrationRuntimeRequest type or a IO type. Required.
         :type update_integration_runtime_request:
          ~azure.mgmt.synapse.models.UpdateIntegrationRuntimeRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -913,8 +913,8 @@ class IntegrationRuntimesOperations:
         :type workspace_name: str
         :param integration_runtime_name: Integration runtime name. Required.
         :type integration_runtime_name: str
-        :param integration_runtime: Integration runtime resource definition. Is either a model type or
-         a IO type. Required.
+        :param integration_runtime: Integration runtime resource definition. Is either a
+         IntegrationRuntimeResource type or a IO type. Required.
         :type integration_runtime: ~azure.mgmt.synapse.models.IntegrationRuntimeResource or IO
         :param if_match: ETag of the integration runtime entity. Should only be specified for update,
          for which it should match existing entity or can be * for unconditional update. Default value

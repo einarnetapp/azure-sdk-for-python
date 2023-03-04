@@ -230,7 +230,7 @@ class SqlPoolMaintenanceWindowsOperations:
         :param maintenance_window_name: Maintenance window name. Required.
         :type maintenance_window_name: str
         :param parameters: The required parameters for creating or updating Maintenance Windows
-         settings. Is either a model type or a IO type. Required.
+         settings. Is either a MaintenanceWindows type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.MaintenanceWindows or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

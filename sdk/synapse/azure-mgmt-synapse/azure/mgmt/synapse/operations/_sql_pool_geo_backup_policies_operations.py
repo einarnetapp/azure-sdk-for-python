@@ -353,7 +353,7 @@ class SqlPoolGeoBackupPoliciesOperations:
         :param geo_backup_policy_name: The name of the geo backup policy. "Default" Required.
         :type geo_backup_policy_name: str or ~azure.mgmt.synapse.models.GeoBackupPolicyName
         :param parameters: The required parameters for creating or updating the geo backup policy. Is
-         either a model type or a IO type. Required.
+         either a GeoBackupPolicy type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.GeoBackupPolicy or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

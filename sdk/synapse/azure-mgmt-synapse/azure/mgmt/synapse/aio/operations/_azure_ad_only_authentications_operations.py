@@ -318,8 +318,8 @@ class AzureADOnlyAuthenticationsOperations:
         :param azure_ad_only_authentication_name: name of the property. "default" Required.
         :type azure_ad_only_authentication_name: str or
          ~azure.mgmt.synapse.models.AzureADOnlyAuthenticationName
-        :param azure_ad_only_authentication_info: Azure Active Directory Property. Is either a model
-         type or a IO type. Required.
+        :param azure_ad_only_authentication_info: Azure Active Directory Property. Is either a
+         AzureADOnlyAuthentication type or a IO type. Required.
         :type azure_ad_only_authentication_info: ~azure.mgmt.synapse.models.AzureADOnlyAuthentication
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

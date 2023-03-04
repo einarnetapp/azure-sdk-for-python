@@ -365,7 +365,7 @@ class WorkspaceManagedIdentitySqlControlSettingsOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :param managed_identity_sql_control_settings: Managed Identity Sql Control Settings. Is either
-         a model type or a IO type. Required.
+         a ManagedIdentitySqlControlSettingsModel type or a IO type. Required.
         :type managed_identity_sql_control_settings:
          ~azure.mgmt.synapse.models.ManagedIdentitySqlControlSettingsModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

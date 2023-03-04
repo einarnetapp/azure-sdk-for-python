@@ -585,7 +585,7 @@ class KustoPoolAttachedDatabaseConfigurationsOperations:
          Required.
         :type resource_group_name: str
         :param parameters: The database parameters supplied to the CreateOrUpdate operation. Is either
-         a model type or a IO type. Required.
+         a AttachedDatabaseConfiguration type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.AttachedDatabaseConfiguration or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

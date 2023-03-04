@@ -135,8 +135,8 @@ class KustoPoolChildResourceOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param resource_name: The name of the Kusto Pool child resource. Is either a model type or a IO
-         type. Required.
+        :param resource_name: The name of the Kusto Pool child resource. Is either a
+         DatabaseCheckNameRequest type or a IO type. Required.
         :type resource_name: ~azure.mgmt.synapse.models.DatabaseCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

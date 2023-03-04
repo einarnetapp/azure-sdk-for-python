@@ -358,7 +358,8 @@ class WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations:
          settings. "default" Required.
         :type dedicated_sq_lminimal_tls_settings_name: str or
          ~azure.mgmt.synapse.models.DedicatedSQLMinimalTlsSettingsName
-        :param parameters: minimal tls settings. Is either a model type or a IO type. Required.
+        :param parameters: minimal tls settings. Is either a DedicatedSQLminimalTlsSettings type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.DedicatedSQLminimalTlsSettings or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

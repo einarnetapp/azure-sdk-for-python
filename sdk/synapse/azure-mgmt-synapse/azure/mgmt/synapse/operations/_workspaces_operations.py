@@ -546,8 +546,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param workspace_patch_info: Workspace patch request properties. Is either a model type or a IO
-         type. Required.
+        :param workspace_patch_info: Workspace patch request properties. Is either a WorkspacePatchInfo
+         type or a IO type. Required.
         :type workspace_patch_info: ~azure.mgmt.synapse.models.WorkspacePatchInfo or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -762,8 +762,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param workspace_info: Workspace create or update request properties. Is either a model type or
-         a IO type. Required.
+        :param workspace_info: Workspace create or update request properties. Is either a Workspace
+         type or a IO type. Required.
         :type workspace_info: ~azure.mgmt.synapse.models.Workspace or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
