@@ -14,7 +14,7 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
     pip install azure-identity
     pip install azure-mgmt-hybridcompute
 # USAGE
-    python machines_get.py
+    python extension_metadata_list.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,16 +26,18 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
 def main():
     client = HybridComputeManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="{subscriptionId}",
+        subscription_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     )
 
-    response = client.machines.get(
-        resource_group_name="myResourceGroup",
-        machine_name="myMachine",
+    response = client.extension_metadata.list(
+        location="EastUS",
+        publisher="microsoft.azure.monitor",
+        extension_type="azuremonitorlinuxagent",
     )
-    print(response)
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2023-03-03-preview/examples/Machines_Get.json
+# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2023-03-03-preview/examples/ExtensionMetadata_List.json
 if __name__ == "__main__":
     main()
