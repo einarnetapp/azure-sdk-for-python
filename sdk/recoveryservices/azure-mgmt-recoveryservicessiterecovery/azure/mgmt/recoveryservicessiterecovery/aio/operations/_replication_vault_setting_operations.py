@@ -79,7 +79,7 @@ class ReplicationVaultSettingOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.VaultSettingCollection] = kwargs.pop("cls", None)
@@ -176,7 +176,7 @@ class ReplicationVaultSettingOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.VaultSetting] = kwargs.pop("cls", None)
@@ -229,7 +229,7 @@ class ReplicationVaultSettingOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -358,7 +358,8 @@ class ReplicationVaultSettingOperations:
 
         :param vault_setting_name: Vault setting name. Required.
         :type vault_setting_name: str
-        :param input: Vault setting creation input. Is either a model type or a IO type. Required.
+        :param input: Vault setting creation input. Is either a VaultSettingCreationInput type or a IO
+         type. Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.VaultSettingCreationInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -380,7 +381,7 @@ class ReplicationVaultSettingOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))

@@ -54,7 +54,7 @@ def build_list_by_replication_protection_containers_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -93,7 +93,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -133,7 +133,7 @@ def build_create_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -175,7 +175,7 @@ def build_purge_request(
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     # Construct URL
     _url = kwargs.pop(
         "template_url",
@@ -210,7 +210,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -253,7 +253,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     # Construct URL
     _url = kwargs.pop(
@@ -287,7 +287,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -353,7 +353,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProtectionContainerMappingCollection] = kwargs.pop("cls", None)
@@ -458,7 +458,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProtectionContainerMapping] = kwargs.pop("cls", None)
@@ -518,7 +518,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -675,7 +675,8 @@ class ReplicationProtectionContainerMappingsOperations:
         :type protection_container_name: str
         :param mapping_name: Protection container mapping name. Required.
         :type mapping_name: str
-        :param creation_input: Mapping creation input. Is either a model type or a IO type. Required.
+        :param creation_input: Mapping creation input. Is either a
+         CreateProtectionContainerMappingInput type or a IO type. Required.
         :type creation_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.CreateProtectionContainerMappingInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -698,7 +699,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -760,7 +761,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -826,7 +827,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -888,7 +889,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1045,7 +1046,8 @@ class ReplicationProtectionContainerMappingsOperations:
         :type protection_container_name: str
         :param mapping_name: Protection container mapping name. Required.
         :type mapping_name: str
-        :param update_input: Mapping update input. Is either a model type or a IO type. Required.
+        :param update_input: Mapping update input. Is either a UpdateProtectionContainerMappingInput
+         type or a IO type. Required.
         :type update_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.UpdateProtectionContainerMappingInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1068,7 +1070,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1135,7 +1137,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1282,7 +1284,8 @@ class ReplicationProtectionContainerMappingsOperations:
         :type protection_container_name: str
         :param mapping_name: Protection container mapping name. Required.
         :type mapping_name: str
-        :param removal_input: Removal input. Is either a model type or a IO type. Required.
+        :param removal_input: Removal input. Is either a RemoveProtectionContainerMappingInput type or
+         a IO type. Required.
         :type removal_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.RemoveProtectionContainerMappingInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1303,7 +1306,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1365,7 +1368,7 @@ class ReplicationProtectionContainerMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProtectionContainerMappingCollection] = kwargs.pop("cls", None)

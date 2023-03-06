@@ -88,7 +88,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RecoveryPlanCollection] = kwargs.pop("cls", None)
@@ -185,7 +185,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RecoveryPlan] = kwargs.pop("cls", None)
@@ -238,7 +238,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -366,7 +366,8 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
 
         :param recovery_plan_name: Recovery plan name. Required.
         :type recovery_plan_name: str
-        :param input: Recovery Plan creation input. Is either a model type or a IO type. Required.
+        :param input: Recovery Plan creation input. Is either a CreateRecoveryPlanInput type or a IO
+         type. Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.CreateRecoveryPlanInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -388,7 +389,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -448,7 +449,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -506,7 +507,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -561,7 +562,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -689,7 +690,8 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
 
         :param recovery_plan_name: Recovery plan name. Required.
         :type recovery_plan_name: str
-        :param input: Update recovery plan input. Is either a model type or a IO type. Required.
+        :param input: Update recovery plan input. Is either a UpdateRecoveryPlanInput type or a IO
+         type. Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.UpdateRecoveryPlanInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -711,7 +713,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -769,7 +771,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.RecoveryPlan]] = kwargs.pop("cls", None)
@@ -837,7 +839,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RecoveryPlan] = kwargs.pop("cls", None)
@@ -892,7 +894,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.RecoveryPlan]] = kwargs.pop("cls", None)
@@ -960,7 +962,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RecoveryPlan] = kwargs.pop("cls", None)
@@ -1017,7 +1019,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1145,7 +1147,8 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
 
         :param recovery_plan_name: Recovery plan name. Required.
         :type recovery_plan_name: str
-        :param input: Failover input. Is either a model type or a IO type. Required.
+        :param input: Failover input. Is either a RecoveryPlanPlannedFailoverInput type or a IO type.
+         Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.RecoveryPlanPlannedFailoverInput
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1168,7 +1171,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1226,7 +1229,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.RecoveryPlan]] = kwargs.pop("cls", None)
@@ -1292,7 +1295,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.RecoveryPlan] = kwargs.pop("cls", None)
@@ -1349,7 +1352,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1477,7 +1480,8 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
 
         :param recovery_plan_name: Recovery plan name. Required.
         :type recovery_plan_name: str
-        :param input: Recovery plan test failover input. Is either a model type or a IO type. Required.
+        :param input: Recovery plan test failover input. Is either a RecoveryPlanTestFailoverInput type
+         or a IO type. Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.RecoveryPlanTestFailoverInput or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1500,7 +1504,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1560,7 +1564,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1689,8 +1693,8 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
 
         :param recovery_plan_name: Recovery plan name. Required.
         :type recovery_plan_name: str
-        :param input: Recovery plan test failover cleanup input. Is either a model type or a IO type.
-         Required.
+        :param input: Recovery plan test failover cleanup input. Is either a
+         RecoveryPlanTestFailoverCleanupInput type or a IO type. Required.
         :type input:
          ~azure.mgmt.recoveryservicessiterecovery.models.RecoveryPlanTestFailoverCleanupInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1713,7 +1717,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1773,7 +1777,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1901,8 +1905,8 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
 
         :param recovery_plan_name: Recovery plan name. Required.
         :type recovery_plan_name: str
-        :param input: Recovery plan unplanned failover input. Is either a model type or a IO type.
-         Required.
+        :param input: Recovery plan unplanned failover input. Is either a
+         RecoveryPlanUnplannedFailoverInput type or a IO type. Required.
         :type input: ~azure.mgmt.recoveryservicessiterecovery.models.RecoveryPlanUnplannedFailoverInput
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1925,7 +1929,7 @@ class ReplicationRecoveryPlansOperations:  # pylint: disable=too-many-public-met
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
