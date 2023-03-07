@@ -344,7 +344,8 @@ class ResourceGuardProxyOperations:
         :type resource_group_name: str
         :param resource_guard_proxy_name: Required.
         :type resource_guard_proxy_name: str
-        :param parameters: Request body for operation. Is either a model type or a IO type. Required.
+        :param parameters: Request body for operation. Is either a ResourceGuardProxyBaseResource type
+         or a IO type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.ResourceGuardProxyBaseResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -561,7 +562,8 @@ class ResourceGuardProxyOperations:
         :type resource_group_name: str
         :param resource_guard_proxy_name: Required.
         :type resource_guard_proxy_name: str
-        :param parameters: Request body for operation. Is either a model type or a IO type. Required.
+        :param parameters: Request body for operation. Is either a UnlockDeleteRequest type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.activestamp.models.UnlockDeleteRequest or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

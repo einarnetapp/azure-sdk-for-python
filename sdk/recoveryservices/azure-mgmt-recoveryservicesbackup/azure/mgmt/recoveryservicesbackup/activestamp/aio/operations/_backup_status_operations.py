@@ -113,8 +113,8 @@ class BackupStatusOperations:
 
         :param azure_region: Azure region to hit Api. Required.
         :type azure_region: str
-        :param parameters: Container Backup Status Request. Is either a model type or a IO type.
-         Required.
+        :param parameters: Container Backup Status Request. Is either a BackupStatusRequest type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.activestamp.models.BackupStatusRequest or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

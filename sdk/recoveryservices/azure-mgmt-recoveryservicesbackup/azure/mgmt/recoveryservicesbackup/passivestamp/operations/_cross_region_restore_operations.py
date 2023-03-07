@@ -229,8 +229,8 @@ class CrossRegionRestoreOperations:
 
         :param azure_region: Azure region to hit Api. Required.
         :type azure_region: str
-        :param parameters: resource cross region restore request. Is either a model type or a IO type.
-         Required.
+        :param parameters: resource cross region restore request. Is either a CrossRegionRestoreRequest
+         type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.passivestamp.models.CrossRegionRestoreRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

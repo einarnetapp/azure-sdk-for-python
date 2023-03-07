@@ -429,7 +429,8 @@ class ProtectionContainersOperations:
         :type fabric_name: str
         :param container_name: Name of the container to be registered. Required.
         :type container_name: str
-        :param parameters: Request body for operation. Is either a model type or a IO type. Required.
+        :param parameters: Request body for operation. Is either a ProtectionContainerResource type or
+         a IO type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.ProtectionContainerResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

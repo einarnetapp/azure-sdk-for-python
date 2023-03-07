@@ -149,8 +149,8 @@ class ProtectionIntentOperations:
 
         :param azure_region: Azure region to hit Api. Required.
         :type azure_region: str
-        :param parameters: Enable backup validation request on Virtual Machine. Is either a model type
-         or a IO type. Required.
+        :param parameters: Enable backup validation request on Virtual Machine. Is either a
+         PreValidateEnableBackupRequest type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.PreValidateEnableBackupRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -384,7 +384,8 @@ class ProtectionIntentOperations:
         :type fabric_name: str
         :param intent_object_name: Intent object name. Required.
         :type intent_object_name: str
-        :param parameters: resource backed up item. Is either a model type or a IO type. Required.
+        :param parameters: resource backed up item. Is either a ProtectionIntentResource type or a IO
+         type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.ProtectionIntentResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

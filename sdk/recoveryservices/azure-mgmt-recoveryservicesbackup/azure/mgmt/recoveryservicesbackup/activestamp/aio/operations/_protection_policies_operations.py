@@ -219,7 +219,8 @@ class ProtectionPoliciesOperations:
         :type resource_group_name: str
         :param policy_name: Backup policy to be created. Required.
         :type policy_name: str
-        :param parameters: resource backup policy. Is either a model type or a IO type. Required.
+        :param parameters: resource backup policy. Is either a ProtectionPolicyResource type or a IO
+         type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.ProtectionPolicyResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

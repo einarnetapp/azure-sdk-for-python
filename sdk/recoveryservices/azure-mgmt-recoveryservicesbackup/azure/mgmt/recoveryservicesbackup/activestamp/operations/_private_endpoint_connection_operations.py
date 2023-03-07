@@ -419,7 +419,8 @@ class PrivateEndpointConnectionOperations:
         :type resource_group_name: str
         :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
         :type private_endpoint_connection_name: str
-        :param parameters: Request body for operation. Is either a model type or a IO type. Required.
+        :param parameters: Request body for operation. Is either a PrivateEndpointConnectionResource
+         type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.PrivateEndpointConnectionResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

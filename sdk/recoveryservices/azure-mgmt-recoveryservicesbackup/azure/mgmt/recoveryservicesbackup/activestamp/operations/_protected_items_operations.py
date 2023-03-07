@@ -378,7 +378,8 @@ class ProtectedItemsOperations:
         :type container_name: str
         :param protected_item_name: Item name to be backed up. Required.
         :type protected_item_name: str
-        :param parameters: resource backed up item. Is either a model type or a IO type. Required.
+        :param parameters: resource backed up item. Is either a ProtectedItemResource type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.activestamp.models.ProtectedItemResource
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

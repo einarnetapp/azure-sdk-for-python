@@ -216,7 +216,8 @@ class RecoveryPointsOperations:
         :type protected_item_name: str
         :param recovery_point_id: Recovery Point Id. Required.
         :type recovery_point_id: str
-        :param parameters: Get Access Token request. Is either a model type or a IO type. Required.
+        :param parameters: Get Access Token request. Is either a AADPropertiesResource type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.recoveryservicesbackup.passivestamp.models.AADPropertiesResource
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

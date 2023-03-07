@@ -161,8 +161,8 @@ class RecoveryPointsRecommendedForMoveOperations:
         :type container_name: str
         :param protected_item_name: Required.
         :type protected_item_name: str
-        :param parameters: List Recovery points Recommended for Move Request. Is either a model type or
-         a IO type. Required.
+        :param parameters: List Recovery points Recommended for Move Request. Is either a
+         ListRecoveryPointsRecommendedForMoveRequest type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.recoveryservicesbackup.activestamp.models.ListRecoveryPointsRecommendedForMoveRequest
          or IO
