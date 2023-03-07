@@ -473,8 +473,8 @@ class LoadTestsOperations:
         :type resource_group_name: str
         :param load_test_name: Load Test name. Required.
         :type load_test_name: str
-        :param load_test_resource: LoadTest resource data. Is either a model type or a IO type.
-         Required.
+        :param load_test_resource: LoadTest resource data. Is either a LoadTestResource type or a IO
+         type. Required.
         :type load_test_resource: ~azure.mgmt.loadtesting.models.LoadTestResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -710,8 +710,8 @@ class LoadTestsOperations:
         :type resource_group_name: str
         :param load_test_name: Load Test name. Required.
         :type load_test_name: str
-        :param load_test_resource_patch_request_body: LoadTest resource update data. Is either a model
-         type or a IO type. Required.
+        :param load_test_resource_patch_request_body: LoadTest resource update data. Is either a
+         LoadTestResourcePatchRequestBody type or a IO type. Required.
         :type load_test_resource_patch_request_body:
          ~azure.mgmt.loadtesting.models.LoadTestResourcePatchRequestBody or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
