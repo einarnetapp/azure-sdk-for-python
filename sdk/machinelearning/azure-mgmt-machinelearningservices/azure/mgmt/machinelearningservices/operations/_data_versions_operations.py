@@ -57,7 +57,9 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -70,7 +72,9 @@ def build_list_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
     }
 
@@ -101,7 +105,9 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -114,7 +120,9 @@ def build_delete_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
         "version": _SERIALIZER.url("version", version, "str"),
     }
@@ -136,7 +144,9 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -149,7 +159,9 @@ def build_get_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
         "version": _SERIALIZER.url("version", version, "str"),
     }
@@ -171,7 +183,9 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-02-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-02-01-preview")
+    )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -185,7 +199,9 @@ def build_create_or_update_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9\-_]{0,254}$"),
         "version": _SERIALIZER.url("version", version, "str"),
     }
@@ -271,7 +287,7 @@ class DataVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataVersionBaseResourceArmPaginatedResult] = kwargs.pop("cls", None)
@@ -384,7 +400,7 @@ class DataVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -454,7 +470,7 @@ class DataVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataVersionBase] = kwargs.pop("cls", None)
@@ -590,7 +606,8 @@ class DataVersionsOperations:
         :type name: str
         :param version: Version identifier. Required.
         :type version: str
-        :param body: Version entity to create or update. Is either a model type or a IO type. Required.
+        :param body: Version entity to create or update. Is either a DataVersionBase type or a IO type.
+         Required.
         :type body: ~azure.mgmt.machinelearningservices.models.DataVersionBase or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -611,7 +628,7 @@ class DataVersionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
