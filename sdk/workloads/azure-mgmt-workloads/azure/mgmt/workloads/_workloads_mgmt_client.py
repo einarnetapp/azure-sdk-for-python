@@ -13,7 +13,7 @@ from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
 from . import models as _models
-from ._configuration import WorkloadsClientConfiguration
+from ._configuration import WorkloadsMgmtClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
     MonitorsOperations,
@@ -24,7 +24,7 @@ from .operations import (
     SAPDatabaseInstancesOperations,
     SAPVirtualInstancesOperations,
     SapLandscapeMonitorOperations,
-    WorkloadsClientOperationsMixin,
+    WorkloadsMgmtClientOperationsMixin,
 )
 
 if TYPE_CHECKING:
@@ -32,10 +32,13 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class WorkloadsClient(
-    WorkloadsClientOperationsMixin
+class WorkloadsMgmtClient(
+    WorkloadsMgmtClientOperationsMixin
 ):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """Workloads client provides access to various workload operations.
+    """Workloads client provides access to various workload operations.:code:`<br>`Azure Center for
+    SAP solutions is currently in PREVIEW. See the `Azure Center for SAP solutions - Legal Terms
+    <https://learn.microsoft.com/legal/azure-center-for-sap-solutions/azure-center-for-sap-solutions-legal-terms>`_
+    for legal notices applicable to Azure Center for SAP solutions.
 
     :ivar sap_virtual_instances: SAPVirtualInstancesOperations operations
     :vartype sap_virtual_instances: azure.mgmt.workloads.operations.SAPVirtualInstancesOperations
@@ -60,8 +63,8 @@ class WorkloadsClient(
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
-     this default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2023-04-01". Note that overriding this
+     default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -74,7 +77,9 @@ class WorkloadsClient(
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = WorkloadsClientConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
+        self._config = WorkloadsMgmtClientConfiguration(
+            credential=credential, subscription_id=subscription_id, **kwargs
+        )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
@@ -127,9 +132,9 @@ class WorkloadsClient(
     def close(self) -> None:
         self._client.close()
 
-    def __enter__(self) -> "WorkloadsClient":
+    def __enter__(self) -> "WorkloadsMgmtClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details) -> None:
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)
