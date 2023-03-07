@@ -69,7 +69,12 @@ class ReservationsSummariesOperations:
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.ReservationSummary"]:
-        """Lists the reservations summaries for daily or monthly grain.
+        """Lists the reservations summaries for daily or monthly grain. Note: ARM has a payload size limit
+        of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such
+        cases, API call should be made with smaller date ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
@@ -87,7 +92,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
@@ -170,7 +175,12 @@ class ReservationsSummariesOperations:
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.ReservationSummary"]:
-        """Lists the reservations summaries for daily or monthly grain.
+        """Lists the reservations summaries for daily or monthly grain. Note: ARM has a payload size limit
+        of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such
+        cases, API call should be made with smaller date ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
@@ -190,7 +200,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
@@ -277,7 +287,12 @@ class ReservationsSummariesOperations:
         reservation_order_id: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.ReservationSummary"]:
-        """Lists the reservations summaries for the defined scope daily or monthly grain.
+        """Lists the reservations summaries for the defined scope daily or monthly grain. Note: ARM has a
+        payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM
+        limit. In such cases, API call should be made with smaller date ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param resource_scope: The scope associated with reservations summaries operations. This
          includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount
@@ -312,7 +327,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)

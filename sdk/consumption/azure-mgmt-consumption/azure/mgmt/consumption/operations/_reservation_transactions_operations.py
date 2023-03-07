@@ -41,11 +41,18 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_request(billing_account_id: str, *, filter: Optional[str] = None, **kwargs: Any) -> HttpRequest:
+def build_list_request(
+    billing_account_id: str,
+    *,
+    filter: Optional[str] = None,
+    use_markup_if_partner: Optional[bool] = None,
+    preview_markup_percentage: Optional[float] = None,
+    **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -63,6 +70,12 @@ def build_list_request(billing_account_id: str, *, filter: Optional[str] = None,
     if filter is not None:
         _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if use_markup_if_partner is not None:
+        _params["useMarkupIfPartner"] = _SERIALIZER.query("use_markup_if_partner", use_markup_if_partner, "bool")
+    if preview_markup_percentage is not None:
+        _params["previewMarkupPercentage"] = _SERIALIZER.query(
+            "preview_markup_percentage", preview_markup_percentage, "float"
+        )
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -76,7 +89,7 @@ def build_list_by_billing_profile_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -123,13 +136,23 @@ class ReservationTransactionsOperations:
 
     @distributed_trace
     def list(
-        self, billing_account_id: str, filter: Optional[str] = None, **kwargs: Any
+        self,
+        billing_account_id: str,
+        filter: Optional[str] = None,
+        use_markup_if_partner: Optional[bool] = None,
+        preview_markup_percentage: Optional[float] = None,
+        **kwargs: Any
     ) -> Iterable["_models.ReservationTransaction"]:
         """List of transactions for reserved instances on billing account scope. Note: The refund
         transactions are posted along with its purchase transaction (i.e. in the purchase billing
         month). For example, The refund is requested in May 2021. This refund transaction will have
         event date as May 2021 but the billing month as April 2020 when the reservation purchase was
-        made.
+        made. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the
+        response size exceeds the ARM limit. In such cases, API call should be made with smaller date
+        ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
@@ -140,6 +163,12 @@ class ReservationTransactionsOperations:
          the entire December 2020 month (i.e. will contain records for dates December 30 and 31).
          Default value is None.
         :type filter: str
+        :param use_markup_if_partner: Applies mark up to the transactions if the caller is a partner.
+         Default value is None.
+        :type use_markup_if_partner: bool
+        :param preview_markup_percentage: Preview markup percentage to be applied. Default value is
+         None.
+        :type preview_markup_percentage: float
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReservationTransaction or the result of
          cls(response)
@@ -149,7 +178,7 @@ class ReservationTransactionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationTransactionsListResult] = kwargs.pop("cls", None)
@@ -168,6 +197,8 @@ class ReservationTransactionsOperations:
                 request = build_list_request(
                     billing_account_id=billing_account_id,
                     filter=filter,
+                    use_markup_if_partner=use_markup_if_partner,
+                    preview_markup_percentage=preview_markup_percentage,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -229,7 +260,12 @@ class ReservationTransactionsOperations:
         """List of transactions for reserved instances on billing profile scope. The refund transactions
         are posted along with its purchase transaction (i.e. in the purchase billing month). For
         example, The refund is requested in May 2021. This refund transaction will have event date as
-        May 2021 but the billing month as April 2020 when the reservation purchase was made.
+        May 2021 but the billing month as April 2020 when the reservation purchase was made. Note: ARM
+        has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds
+        the ARM limit. In such cases, API call should be made with smaller date ranges.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
@@ -252,7 +288,7 @@ class ReservationTransactionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ModernReservationTransactionsListResult] = kwargs.pop("cls", None)
