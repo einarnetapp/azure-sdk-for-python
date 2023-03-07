@@ -152,7 +152,7 @@ class CheckNameAvailabilityWithLocationOperations:
         :param location_name: The name of the location. Required.
         :type location_name: str
         :param name_availability_request: The required parameters for checking if resource name is
-         available. Is either a model type or a IO type. Required.
+         available. Is either a CheckNameAvailabilityRequest type or a IO type. Required.
         :type name_availability_request:
          ~azure.mgmt.rdbms.postgresql_flexibleservers.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

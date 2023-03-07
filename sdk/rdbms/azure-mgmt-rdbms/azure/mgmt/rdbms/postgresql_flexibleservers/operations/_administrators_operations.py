@@ -64,7 +64,7 @@ def build_create_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "objectId": _SERIALIZER.url("object_id", object_id, "str"),
     }
@@ -102,7 +102,7 @@ def build_delete_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "objectId": _SERIALIZER.url("object_id", object_id, "str"),
     }
@@ -138,7 +138,7 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "objectId": _SERIALIZER.url("object_id", object_id, "str"),
     }
@@ -174,7 +174,7 @@ def build_list_by_server_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -390,7 +390,7 @@ class AdministratorsOperations:
         :param object_id: Guid of the objectId for the administrator. Required.
         :type object_id: str
         :param parameters: The required parameters for adding an active directory administrator for a
-         server. Is either a model type or a IO type. Required.
+         server. Is either a ActiveDirectoryAdministratorAdd type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministratorAdd or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

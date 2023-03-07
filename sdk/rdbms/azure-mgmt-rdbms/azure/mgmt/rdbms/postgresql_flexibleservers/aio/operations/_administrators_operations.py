@@ -247,7 +247,7 @@ class AdministratorsOperations:
         :param object_id: Guid of the objectId for the administrator. Required.
         :type object_id: str
         :param parameters: The required parameters for adding an active directory administrator for a
-         server. Is either a model type or a IO type. Required.
+         server. Is either a ActiveDirectoryAdministratorAdd type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministratorAdd or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

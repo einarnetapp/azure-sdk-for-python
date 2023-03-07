@@ -63,7 +63,7 @@ def build_list_by_server_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -98,7 +98,7 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "configurationName": _SERIALIZER.url(
             "configuration_name", configuration_name, "str", min_length=1, pattern=r"^[-\w\._]+$"
@@ -137,7 +137,7 @@ def build_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "configurationName": _SERIALIZER.url(
             "configuration_name", configuration_name, "str", min_length=1, pattern=r"^[-\w\._]+$"
@@ -178,7 +178,7 @@ def build_put_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
         "configurationName": _SERIALIZER.url(
             "configuration_name", configuration_name, "str", min_length=1, pattern=r"^[-\w\._]+$"
@@ -559,7 +559,7 @@ class ConfigurationsOperations:
         :param configuration_name: The name of the server configuration. Required.
         :type configuration_name: str
         :param parameters: The required parameters for updating a server configuration. Is either a
-         model type or a IO type. Required.
+         ConfigurationForUpdate type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ConfigurationForUpdate or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -811,7 +811,7 @@ class ConfigurationsOperations:
         :param configuration_name: The name of the server configuration. Required.
         :type configuration_name: str
         :param parameters: The required parameters for updating a server configuration. Is either a
-         model type or a IO type. Required.
+         Configuration type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.Configuration or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

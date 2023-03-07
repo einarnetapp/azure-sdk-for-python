@@ -217,8 +217,8 @@ class ServersOperations:
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param parameters: The required parameters for creating or updating a server. Is either a model
-         type or a IO type. Required.
+        :param parameters: The required parameters for creating or updating a server. Is either a
+         ServerForCreate type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql.models.ServerForCreate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -442,8 +442,8 @@ class ServersOperations:
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param parameters: The required parameters for updating a server. Is either a model type or a
-         IO type. Required.
+        :param parameters: The required parameters for updating a server. Is either a
+         ServerUpdateParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql.models.ServerUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
