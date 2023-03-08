@@ -102,8 +102,9 @@ class SqlPoolMetadataSyncConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -210,8 +211,8 @@ class SqlPoolMetadataSyncConfigsOperations:
         :type workspace_name: str
         :param sql_pool_name: SQL pool name. Required.
         :type sql_pool_name: str
-        :param metadata_sync_configuration: Metadata sync configuration. Is either a model type or a IO
-         type. Required.
+        :param metadata_sync_configuration: Metadata sync configuration. Is either a MetadataSyncConfig
+         type or a IO type. Required.
         :type metadata_sync_configuration: ~azure.mgmt.synapse.models.MetadataSyncConfig or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -260,8 +261,9 @@ class SqlPoolMetadataSyncConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

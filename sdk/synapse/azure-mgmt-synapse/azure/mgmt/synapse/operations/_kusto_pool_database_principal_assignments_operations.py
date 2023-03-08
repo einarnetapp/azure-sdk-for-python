@@ -373,8 +373,8 @@ class KustoPoolDatabasePrincipalAssignmentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param principal_assignment_name: The name of the resource. Is either a model type or a IO
-         type. Required.
+        :param principal_assignment_name: The name of the resource. Is either a
+         DatabasePrincipalAssignmentCheckNameRequest type or a IO type. Required.
         :type principal_assignment_name:
          ~azure.mgmt.synapse.models.DatabasePrincipalAssignmentCheckNameRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -427,8 +427,9 @@ class KustoPoolDatabasePrincipalAssignmentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -520,8 +521,9 @@ class KustoPoolDatabasePrincipalAssignmentsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -597,8 +599,9 @@ class KustoPoolDatabasePrincipalAssignmentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -672,8 +675,9 @@ class KustoPoolDatabasePrincipalAssignmentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -815,7 +819,7 @@ class KustoPoolDatabasePrincipalAssignmentsOperations:
          Required.
         :type resource_group_name: str
         :param parameters: The Kusto principalAssignments parameters supplied for the operation. Is
-         either a model type or a IO type. Required.
+         either a DatabasePrincipalAssignment type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.DatabasePrincipalAssignment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -926,8 +930,9 @@ class KustoPoolDatabasePrincipalAssignmentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

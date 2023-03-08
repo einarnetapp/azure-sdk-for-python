@@ -229,8 +229,9 @@ class AzureADOnlyAuthenticationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -298,8 +299,9 @@ class AzureADOnlyAuthenticationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -430,8 +432,8 @@ class AzureADOnlyAuthenticationsOperations:
         :param azure_ad_only_authentication_name: name of the property. "default" Required.
         :type azure_ad_only_authentication_name: str or
          ~azure.mgmt.synapse.models.AzureADOnlyAuthenticationName
-        :param azure_ad_only_authentication_info: Azure Active Directory Property. Is either a model
-         type or a IO type. Required.
+        :param azure_ad_only_authentication_info: Azure Active Directory Property. Is either a
+         AzureADOnlyAuthentication type or a IO type. Required.
         :type azure_ad_only_authentication_info: ~azure.mgmt.synapse.models.AzureADOnlyAuthentication
          or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -566,8 +568,9 @@ class AzureADOnlyAuthenticationsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
