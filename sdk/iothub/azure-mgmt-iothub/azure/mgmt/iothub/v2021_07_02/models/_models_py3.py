@@ -2977,7 +2977,8 @@ class RoutingProperties(_serialization.Model):
     :vartype routes: list[~azure.mgmt.iothub.v2021_07_02.models.RouteProperties]
     :ivar fallback_route: The properties of the route that is used as a fall-back route when none
      of the conditions specified in the 'routes' section are met. This is an optional parameter.
-     When this property is not present in the template, the fallback route is disabled by default.
+     When this property is not set, the messages which do not meet any of the conditions specified
+     in the 'routes' section get routed to the built-in eventhub endpoint.
     :vartype fallback_route: ~azure.mgmt.iothub.v2021_07_02.models.FallbackRouteProperties
     :ivar enrichments: The list of user-provided enrichments that the IoT hub applies to messages
      to be delivered to built-in and custom endpoints. See: https://aka.ms/telemetryoneventgrid.
@@ -3012,8 +3013,8 @@ class RoutingProperties(_serialization.Model):
         :paramtype routes: list[~azure.mgmt.iothub.v2021_07_02.models.RouteProperties]
         :keyword fallback_route: The properties of the route that is used as a fall-back route when
          none of the conditions specified in the 'routes' section are met. This is an optional
-         parameter. When this property is not present in the template, the fallback route is disabled by
-         default.
+         parameter. When this property is not set, the messages which do not meet any of the conditions
+         specified in the 'routes' section get routed to the built-in eventhub endpoint.
         :paramtype fallback_route: ~azure.mgmt.iothub.v2021_07_02.models.FallbackRouteProperties
         :keyword enrichments: The list of user-provided enrichments that the IoT hub applies to
          messages to be delivered to built-in and custom endpoints. See:
