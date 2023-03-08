@@ -47,8 +47,8 @@ def build_create_indicator_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -92,8 +92,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -135,8 +135,8 @@ def build_create_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -181,8 +181,8 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -224,8 +224,8 @@ def build_query_indicators_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -269,8 +269,8 @@ def build_append_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -315,8 +315,8 @@ def build_replace_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -449,7 +449,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :param threat_intelligence_properties: Properties of threat intelligence indicators to create
-         and update. Is either a model type or a IO type. Required.
+         and update. Is either a ThreatIntelligenceIndicatorModel type or a IO type. Required.
         :type threat_intelligence_properties:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceIndicatorModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -471,7 +471,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -500,8 +500,9 @@ class ThreatIntelligenceIndicatorOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -554,7 +555,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ThreatIntelligenceInformation] = kwargs.pop("cls", None)
@@ -572,8 +573,9 @@ class ThreatIntelligenceIndicatorOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -677,7 +679,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param name: Threat intelligence indicator name field. Required.
         :type name: str
         :param threat_intelligence_properties: Properties of threat intelligence indicators to create
-         and update. Is either a model type or a IO type. Required.
+         and update. Is either a ThreatIntelligenceIndicatorModel type or a IO type. Required.
         :type threat_intelligence_properties:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceIndicatorModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -699,7 +701,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -729,8 +731,9 @@ class ThreatIntelligenceIndicatorOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -783,7 +786,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -801,8 +804,9 @@ class ThreatIntelligenceIndicatorOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -897,7 +901,8 @@ class ThreatIntelligenceIndicatorOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :param threat_intelligence_filtering_criteria: Filtering criteria for querying threat
-         intelligence indicators. Is either a model type or a IO type. Required.
+         intelligence indicators. Is either a ThreatIntelligenceFilteringCriteria type or a IO type.
+         Required.
         :type threat_intelligence_filtering_criteria:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceFilteringCriteria or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -913,7 +918,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -980,8 +985,9 @@ class ThreatIntelligenceIndicatorOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1081,7 +1087,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param name: Threat intelligence indicator name field. Required.
         :type name: str
         :param threat_intelligence_append_tags: The threat intelligence append tags request body. Is
-         either a model type or a IO type. Required.
+         either a ThreatIntelligenceAppendTags type or a IO type. Required.
         :type threat_intelligence_append_tags:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceAppendTags or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1103,7 +1109,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1133,8 +1139,9 @@ class ThreatIntelligenceIndicatorOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1234,7 +1241,7 @@ class ThreatIntelligenceIndicatorOperations:
         :param name: Threat intelligence indicator name field. Required.
         :type name: str
         :param threat_intelligence_replace_tags: Tags in the threat intelligence indicator to be
-         replaced. Is either a model type or a IO type. Required.
+         replaced. Is either a ThreatIntelligenceIndicatorModel type or a IO type. Required.
         :type threat_intelligence_replace_tags:
          ~azure.mgmt.securityinsight.models.ThreatIntelligenceIndicatorModel or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1256,7 +1263,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1286,8 +1293,9 @@ class ThreatIntelligenceIndicatorOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
