@@ -98,8 +98,9 @@ class ConfigurationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -169,8 +170,9 @@ class ConfigurationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -281,7 +283,8 @@ class ConfigurationsOperations:
         :type cluster_name: str
         :param configuration_name: The name of the cluster configuration. Required.
         :type configuration_name: str
-        :param parameters: The cluster configurations. Is either a dict type or a IO type. Required.
+        :param parameters: The cluster configurations. Is either a {str: str} type or a IO type.
+         Required.
         :type parameters: dict[str, str] or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -396,8 +399,9 @@ class ConfigurationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
