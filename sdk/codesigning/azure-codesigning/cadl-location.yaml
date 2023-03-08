@@ -1,0 +1,4 @@
+cleanup: false
+commit: c425efbca5d2d28c2694b07e763ecfee6cbb28f5
+directory: specification/codesigning/Microsoft.CodeSigning
+repo: Azure/azure-rest-api-specs

@@ -1,0 +1,18 @@
+{
+  "commit": "c425efbca5d2d28c2694b07e763ecfee6cbb28f5",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
+  "cadl_src": "specification/codesigning/Microsoft.CodeSigning",
+  "@autorest/python": {
+    "version": "6.4.0",
+    "resolved": "https://registry.npmjs.org/@autorest/python/-/python-6.4.0.tgz"
+  },
+  "@azure-tools/cadl-python": {
+    "version": "0.4.25",
+    "resolved": "https://registry.npmjs.org/@azure-tools/cadl-python/-/cadl-python-0.4.25.tgz",
+    "dependencies": {
+      "@autorest/python": {
+        "version": "6.4.0"
+      }
+    }
+  }
+}
