@@ -7,14 +7,14 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
-from azure.mgmt.rdbms import PostgreSQLManagementClient
+from azure.mgmt.rdbms import MySQLManagementClient
 
 """
 # PREREQUISITES
     pip install azure-identity
     pip install azure-mgmt-rdbms
 # USAGE
-    python administrator_add.py
+    python query_texts_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -24,26 +24,19 @@ from azure.mgmt.rdbms import PostgreSQLManagementClient
 
 
 def main():
-    client = PostgreSQLManagementClient(
+    client = MySQLManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="ffffffff-ffff-ffff-ffff-ffffffffffff",
     )
 
-    response = client.administrators.begin_create(
-        resource_group_name="testrg",
-        server_name="testserver",
-        object_id="oooooooo-oooo-oooo-oooo-oooooooooooo",
-        parameters={
-            "properties": {
-                "principalName": "testuser1@microsoft.com",
-                "principalType": "User",
-                "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt",
-            }
-        },
-    ).result()
+    response = client.query_texts.get(
+        resource_group_name="testResourceGroupName",
+        server_name="testServerName",
+        query_id="1",
+    )
     print(response)
 
 
-# x-ms-original-file: specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-12-01/examples/AdministratorAdd.json
+# x-ms-original-file: specification/mysql/resource-manager/Microsoft.DBforMySQL/legacy/stable/2018-06-01/examples/QueryTextsGet.json
 if __name__ == "__main__":
     main()
