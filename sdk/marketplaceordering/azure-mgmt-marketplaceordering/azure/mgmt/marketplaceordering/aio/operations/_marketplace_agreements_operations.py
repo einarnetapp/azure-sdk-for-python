@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, IO, List, Optional, TypeVar, Union, overload
+from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, overload
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -93,10 +93,10 @@ class MarketplaceAgreementsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AgreementTerms]
+        )
+        cls: ClsType[_models.AgreementTerms] = kwargs.pop("cls", None)
 
         request = build_get_request(
             offer_type=offer_type,
@@ -110,10 +110,11 @@ class MarketplaceAgreementsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -130,7 +131,9 @@ class MarketplaceAgreementsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current"
+    }
 
     @overload
     async def create(
@@ -222,7 +225,7 @@ class MarketplaceAgreementsOperations:
         :param plan_id: Plan identifier string of image being deployed. Required.
         :type plan_id: str
         :param parameters: Parameters supplied to the Create Marketplace Terms operation. Is either a
-         model type or a IO type. Required.
+         AgreementTerms type or a IO type. Required.
         :type parameters: ~azure.mgmt.marketplaceordering.models.AgreementTerms or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -243,11 +246,11 @@ class MarketplaceAgreementsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-01-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AgreementTerms]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.AgreementTerms] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -272,10 +275,11 @@ class MarketplaceAgreementsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -292,10 +296,12 @@ class MarketplaceAgreementsOperations:
 
         return deserialized
 
-    create.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current"}  # type: ignore
+    create.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current"
+    }
 
     @distributed_trace_async
-    async def sign(self, publisher_id: str, offer_id: str, plan_id: str, **kwargs: Any) -> _models.AgreementTerms:
+    async def sign(self, publisher_id: str, offer_id: str, plan_id: str, **kwargs: Any) -> _models.OldAgreementTerms:
         """Sign marketplace terms.
 
         :param publisher_id: Publisher identifier string of image being deployed. Required.
@@ -305,8 +311,8 @@ class MarketplaceAgreementsOperations:
         :param plan_id: Plan identifier string of image being deployed. Required.
         :type plan_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AgreementTerms or the result of cls(response)
-        :rtype: ~azure.mgmt.marketplaceordering.models.AgreementTerms
+        :return: OldAgreementTerms or the result of cls(response)
+        :rtype: ~azure.mgmt.marketplaceordering.models.OldAgreementTerms
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -320,10 +326,10 @@ class MarketplaceAgreementsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AgreementTerms]
+        )
+        cls: ClsType[_models.OldAgreementTerms] = kwargs.pop("cls", None)
 
         request = build_sign_request(
             publisher_id=publisher_id,
@@ -336,10 +342,11 @@ class MarketplaceAgreementsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -349,17 +356,19 @@ class MarketplaceAgreementsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AgreementTerms", pipeline_response)
+        deserialized = self._deserialize("OldAgreementTerms", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    sign.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign"}  # type: ignore
+    sign.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign"
+    }
 
     @distributed_trace_async
-    async def cancel(self, publisher_id: str, offer_id: str, plan_id: str, **kwargs: Any) -> _models.AgreementTerms:
+    async def cancel(self, publisher_id: str, offer_id: str, plan_id: str, **kwargs: Any) -> _models.OldAgreementTerms:
         """Cancel marketplace terms.
 
         :param publisher_id: Publisher identifier string of image being deployed. Required.
@@ -369,8 +378,8 @@ class MarketplaceAgreementsOperations:
         :param plan_id: Plan identifier string of image being deployed. Required.
         :type plan_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AgreementTerms or the result of cls(response)
-        :rtype: ~azure.mgmt.marketplaceordering.models.AgreementTerms
+        :return: OldAgreementTerms or the result of cls(response)
+        :rtype: ~azure.mgmt.marketplaceordering.models.OldAgreementTerms
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -384,10 +393,10 @@ class MarketplaceAgreementsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AgreementTerms]
+        )
+        cls: ClsType[_models.OldAgreementTerms] = kwargs.pop("cls", None)
 
         request = build_cancel_request(
             publisher_id=publisher_id,
@@ -400,10 +409,11 @@ class MarketplaceAgreementsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -413,19 +423,21 @@ class MarketplaceAgreementsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AgreementTerms", pipeline_response)
+        deserialized = self._deserialize("OldAgreementTerms", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    cancel.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel"}  # type: ignore
+    cancel.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel"
+    }
 
     @distributed_trace_async
     async def get_agreement(
         self, publisher_id: str, offer_id: str, plan_id: str, **kwargs: Any
-    ) -> _models.AgreementTerms:
+    ) -> _models.OldAgreementTerms:
         """Get marketplace agreement.
 
         :param publisher_id: Publisher identifier string of image being deployed. Required.
@@ -435,8 +447,8 @@ class MarketplaceAgreementsOperations:
         :param plan_id: Plan identifier string of image being deployed. Required.
         :type plan_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AgreementTerms or the result of cls(response)
-        :rtype: ~azure.mgmt.marketplaceordering.models.AgreementTerms
+        :return: OldAgreementTerms or the result of cls(response)
+        :rtype: ~azure.mgmt.marketplaceordering.models.OldAgreementTerms
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -450,10 +462,10 @@ class MarketplaceAgreementsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AgreementTerms]
+        )
+        cls: ClsType[_models.OldAgreementTerms] = kwargs.pop("cls", None)
 
         request = build_get_agreement_request(
             publisher_id=publisher_id,
@@ -466,10 +478,11 @@ class MarketplaceAgreementsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -479,22 +492,24 @@ class MarketplaceAgreementsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AgreementTerms", pipeline_response)
+        deserialized = self._deserialize("OldAgreementTerms", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_agreement.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}"}  # type: ignore
+    get_agreement.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}"
+    }
 
     @distributed_trace_async
-    async def list(self, **kwargs: Any) -> List[_models.AgreementTerms]:
+    async def list(self, **kwargs: Any) -> _models.OldAgreementTermsList:
         """List marketplace agreements in the subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of AgreementTerms or the result of cls(response)
-        :rtype: list[~azure.mgmt.marketplaceordering.models.AgreementTerms]
+        :return: OldAgreementTermsList or the result of cls(response)
+        :rtype: ~azure.mgmt.marketplaceordering.models.OldAgreementTermsList
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -508,10 +523,10 @@ class MarketplaceAgreementsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[List[_models.AgreementTerms]]
+        )
+        cls: ClsType[_models.OldAgreementTermsList] = kwargs.pop("cls", None)
 
         request = build_list_request(
             subscription_id=self._config.subscription_id,
@@ -521,10 +536,11 @@ class MarketplaceAgreementsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -534,11 +550,11 @@ class MarketplaceAgreementsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("[AgreementTerms]", pipeline_response)
+        deserialized = self._deserialize("OldAgreementTermsList", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements"}
