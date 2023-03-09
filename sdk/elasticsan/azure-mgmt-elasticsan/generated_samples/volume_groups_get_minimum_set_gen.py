@@ -16,7 +16,7 @@ from azure.mgmt.elasticsan import ElasticSanManagement
 # USAGE
     python volume_groups_get_minimum_set_gen.py
 
-    Before run the sample, please set the values of the client ID, tenant ID and client secret 
+    Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
     AZURE_CLIENT_SECRET. For more info about how to get the value, please see:
     https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal
@@ -26,17 +26,17 @@ from azure.mgmt.elasticsan import ElasticSanManagement
 def main():
     client = ElasticSanManagement(
         credential=DefaultAzureCredential(),
-        subscription_id="aaaaaaaaaaaaaaaaaa",
+        subscription_id="B96210C4-0970-4BC6-BCCC-9B8E9B6A45A3",
     )
 
     response = client.volume_groups.get(
         resource_group_name="rgelasticsan",
-        elastic_san_name="ti7q-k952-1qB3J_5",
-        volume_group_name="u_5I_1j4t3",
+        elastic_san_name="f4L_0O89-l11",
+        volume_group_name="az_614w67_h4s2b_742-2434",
     )
     print(response)
 
 
-# x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2021-11-20-preview/examples/VolumeGroups_Get_MinimumSet_Gen.json
+# x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2023-01-01/examples/VolumeGroups_Get_MinimumSet_Gen.json
 if __name__ == "__main__":
     main()

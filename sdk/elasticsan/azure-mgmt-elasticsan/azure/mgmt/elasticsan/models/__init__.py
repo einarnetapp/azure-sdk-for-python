@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import ElasticSan
+from ._models_py3 import ElasticSanCreateParameter
 from ._models_py3 import ElasticSanList
 from ._models_py3 import ElasticSanOperationDisplay
 from ._models_py3 import ElasticSanOperationListResult
@@ -23,11 +24,17 @@ from ._models_py3 import Sku
 from ._models_py3 import SkuInformation
 from ._models_py3 import SkuInformationList
 from ._models_py3 import SkuLocationInfo
+from ._models_py3 import Snapshot
+from ._models_py3 import SnapshotCreateParameter
+from ._models_py3 import SnapshotCreationData
+from ._models_py3 import SnapshotList
+from ._models_py3 import SnapshotUpdate
 from ._models_py3 import SourceCreationData
 from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
 from ._models_py3 import VirtualNetworkRule
 from ._models_py3 import Volume
+from ._models_py3 import VolumeCreateParameter
 from ._models_py3 import VolumeGroup
 from ._models_py3 import VolumeGroupList
 from ._models_py3 import VolumeGroupUpdate
@@ -42,12 +49,14 @@ from ._elastic_san_management_enums import SkuName
 from ._elastic_san_management_enums import SkuTier
 from ._elastic_san_management_enums import State
 from ._elastic_san_management_enums import StorageTargetType
+from ._elastic_san_management_enums import VolumeCreateOption
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "ElasticSan",
+    "ElasticSanCreateParameter",
     "ElasticSanList",
     "ElasticSanOperationDisplay",
     "ElasticSanOperationListResult",
@@ -64,11 +73,17 @@ __all__ = [
     "SkuInformation",
     "SkuInformationList",
     "SkuLocationInfo",
+    "Snapshot",
+    "SnapshotCreateParameter",
+    "SnapshotCreationData",
+    "SnapshotList",
+    "SnapshotUpdate",
     "SourceCreationData",
     "SystemData",
     "TrackedResource",
     "VirtualNetworkRule",
     "Volume",
+    "VolumeCreateParameter",
     "VolumeGroup",
     "VolumeGroupList",
     "VolumeGroupUpdate",
@@ -82,6 +97,7 @@ __all__ = [
     "SkuTier",
     "State",
     "StorageTargetType",
+    "VolumeCreateOption",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

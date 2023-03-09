@@ -14,7 +14,7 @@ from azure.mgmt.elasticsan import ElasticSanManagement
     pip install azure-identity
     pip install azure-mgmt-elasticsan
 # USAGE
-    python volumes_delete_minimum_set_gen.py
+    python snapshots_delete_minimum_set_gen.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,15 +29,15 @@ def main():
         subscription_id="B96210C4-0970-4BC6-BCCC-9B8E9B6A45A3",
     )
 
-    response = client.volumes.begin_delete(
+    response = client.snapshots.begin_delete(
         resource_group_name="rgelasticsan",
         elastic_san_name="f4L_0O89-l11",
         volume_group_name="az_614w67_h4s2b_742-2434",
-        volume_name="vy2jp1-487929-7W",
+        snapshot_name="ob5-8dg-51x-wea47_w",
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2023-01-01/examples/Volumes_Delete_MinimumSet_Gen.json
+# x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2023-01-01/examples/Snapshots_Delete_MinimumSet_Gen.json
 if __name__ == "__main__":
     main()
