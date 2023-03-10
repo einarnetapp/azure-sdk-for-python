@@ -87,7 +87,7 @@ class ReplicationProtectionContainersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProtectionContainerCollection] = kwargs.pop("cls", None)
@@ -144,8 +144,9 @@ class ReplicationProtectionContainersOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -187,7 +188,7 @@ class ReplicationProtectionContainersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProtectionContainer] = kwargs.pop("cls", None)
@@ -206,8 +207,9 @@ class ReplicationProtectionContainersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -245,7 +247,7 @@ class ReplicationProtectionContainersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -276,8 +278,9 @@ class ReplicationProtectionContainersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -392,7 +395,8 @@ class ReplicationProtectionContainersOperations:
         :type fabric_name: str
         :param protection_container_name: Unique protection container ARM name. Required.
         :type protection_container_name: str
-        :param creation_input: Creation input. Is either a model type or a IO type. Required.
+        :param creation_input: Creation input. Is either a CreateProtectionContainerInput type or a IO
+         type. Required.
         :type creation_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.CreateProtectionContainerInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -415,7 +419,7 @@ class ReplicationProtectionContainersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -480,7 +484,7 @@ class ReplicationProtectionContainersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -511,8 +515,9 @@ class ReplicationProtectionContainersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -630,7 +635,7 @@ class ReplicationProtectionContainersOperations:
         :param protection_container_name: The name of the protection container. Required.
         :type protection_container_name: str
         :param discover_protectable_item_request: The request object to add a protectable item. Is
-         either a model type or a IO type. Required.
+         either a DiscoverProtectableItemRequest type or a IO type. Required.
         :type discover_protectable_item_request:
          ~azure.mgmt.recoveryservicessiterecovery.models.DiscoverProtectableItemRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -653,7 +658,7 @@ class ReplicationProtectionContainersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -714,7 +719,7 @@ class ReplicationProtectionContainersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -733,8 +738,9 @@ class ReplicationProtectionContainersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -777,7 +783,7 @@ class ReplicationProtectionContainersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -837,7 +843,7 @@ class ReplicationProtectionContainersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -868,8 +874,9 @@ class ReplicationProtectionContainersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -986,7 +993,8 @@ class ReplicationProtectionContainersOperations:
         :type fabric_name: str
         :param protection_container_name: Protection container name. Required.
         :type protection_container_name: str
-        :param switch_input: Switch protection input. Is either a model type or a IO type. Required.
+        :param switch_input: Switch protection input. Is either a SwitchProtectionInput type or a IO
+         type. Required.
         :type switch_input: ~azure.mgmt.recoveryservicessiterecovery.models.SwitchProtectionInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1008,7 +1016,7 @@ class ReplicationProtectionContainersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1070,7 +1078,7 @@ class ReplicationProtectionContainersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ProtectionContainerCollection] = kwargs.pop("cls", None)
@@ -1126,8 +1134,9 @@ class ReplicationProtectionContainersOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

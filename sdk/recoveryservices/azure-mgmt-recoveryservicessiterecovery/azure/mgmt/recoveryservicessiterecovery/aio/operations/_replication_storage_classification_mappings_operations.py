@@ -88,7 +88,7 @@ class ReplicationStorageClassificationMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.StorageClassificationMappingCollection] = kwargs.pop("cls", None)
@@ -146,8 +146,9 @@ class ReplicationStorageClassificationMappingsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -197,7 +198,7 @@ class ReplicationStorageClassificationMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.StorageClassificationMapping] = kwargs.pop("cls", None)
@@ -217,8 +218,9 @@ class ReplicationStorageClassificationMappingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -257,7 +259,7 @@ class ReplicationStorageClassificationMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -289,8 +291,9 @@ class ReplicationStorageClassificationMappingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -414,7 +417,8 @@ class ReplicationStorageClassificationMappingsOperations:
         :type storage_classification_name: str
         :param storage_classification_mapping_name: Storage classification mapping name. Required.
         :type storage_classification_mapping_name: str
-        :param pairing_input: Pairing input. Is either a model type or a IO type. Required.
+        :param pairing_input: Pairing input. Is either a StorageClassificationMappingInput type or a IO
+         type. Required.
         :type pairing_input:
          ~azure.mgmt.recoveryservicessiterecovery.models.StorageClassificationMappingInput or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -437,7 +441,7 @@ class ReplicationStorageClassificationMappingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -503,7 +507,7 @@ class ReplicationStorageClassificationMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -523,8 +527,9 @@ class ReplicationStorageClassificationMappingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -573,7 +578,7 @@ class ReplicationStorageClassificationMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -632,7 +637,7 @@ class ReplicationStorageClassificationMappingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-02-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.StorageClassificationMappingCollection] = kwargs.pop("cls", None)
@@ -688,8 +693,9 @@ class ReplicationStorageClassificationMappingsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
