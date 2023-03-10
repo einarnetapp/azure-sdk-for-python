@@ -139,8 +139,9 @@ class LinkedServicesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -244,8 +245,8 @@ class LinkedServicesOperations:
         :type factory_name: str
         :param linked_service_name: The linked service name. Required.
         :type linked_service_name: str
-        :param linked_service: Linked service resource definition. Is either a model type or a IO type.
-         Required.
+        :param linked_service: Linked service resource definition. Is either a LinkedServiceResource
+         type or a IO type. Required.
         :type linked_service: ~azure.mgmt.datafactory.models.LinkedServiceResource or IO
         :param if_match: ETag of the linkedService entity.  Should only be specified for update, for
          which it should match existing entity or can be * for unconditional update. Default value is
@@ -301,8 +302,9 @@ class LinkedServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -378,8 +380,9 @@ class LinkedServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -447,8 +450,9 @@ class LinkedServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

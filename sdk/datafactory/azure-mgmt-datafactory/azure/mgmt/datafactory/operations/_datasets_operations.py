@@ -337,8 +337,9 @@ class DatasetsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -440,7 +441,8 @@ class DatasetsOperations:
         :type factory_name: str
         :param dataset_name: The dataset name. Required.
         :type dataset_name: str
-        :param dataset: Dataset resource definition. Is either a model type or a IO type. Required.
+        :param dataset: Dataset resource definition. Is either a DatasetResource type or a IO type.
+         Required.
         :type dataset: ~azure.mgmt.datafactory.models.DatasetResource or IO
         :param if_match: ETag of the dataset entity.  Should only be specified for update, for which it
          should match existing entity or can be * for unconditional update. Default value is None.
@@ -495,8 +497,9 @@ class DatasetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -572,8 +575,9 @@ class DatasetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -641,8 +645,9 @@ class DatasetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

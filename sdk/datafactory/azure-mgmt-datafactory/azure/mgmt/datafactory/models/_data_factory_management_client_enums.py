@@ -413,12 +413,6 @@ class IntegrationRuntimeLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta
     LICENSE_INCLUDED = "LicenseIncluded"
 
 
-class IntegrationRuntimeReferenceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Type of integration runtime."""
-
-    INTEGRATION_RUNTIME_REFERENCE = "IntegrationRuntimeReference"
-
-
 class IntegrationRuntimeSsisCatalogPricingTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The pricing tier for the catalog database. The valid values could be found in
     https://azure.microsoft.com/en-us/pricing/details/sql-database/.
@@ -960,12 +954,6 @@ class TumblingWindowFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MINUTE = "Minute"
     HOUR = "Hour"
     MONTH = "Month"
-
-
-class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Linked service reference type."""
-
-    LINKED_SERVICE_REFERENCE = "LinkedServiceReference"
 
 
 class VariableType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

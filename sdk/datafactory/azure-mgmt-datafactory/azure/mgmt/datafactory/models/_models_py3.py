@@ -5216,7 +5216,7 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
     :ivar annotations: List of tags that can be used for describing the linked service.
     :vartype annotations: list[JSON]
     :ivar url: Endpoint for the Azure Data Lake Storage Gen2 service. Type: string (or Expression
-     with resultType string). Required.
+     with resultType string).
     :vartype url: JSON
     :ivar account_key: Account key for the Azure Data Lake Storage Gen2 service. Type: string (or
      Expression with resultType string).
@@ -5250,11 +5250,15 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
      servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only
      be AzureKeyVaultSecretReference.
     :vartype service_principal_credential: ~azure.mgmt.datafactory.models.SecretBase
+    :ivar sas_uri: SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString
+     or AzureKeyVaultSecretReference.
+    :vartype sas_uri: JSON
+    :ivar sas_token: The Azure key vault secret reference of sasToken in sas uri.
+    :vartype sas_token: ~azure.mgmt.datafactory.models.SecretBase
     """
 
     _validation = {
         "type": {"required": True},
-        "url": {"required": True},
     }
 
     _attribute_map = {
@@ -5274,17 +5278,19 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
         "credential": {"key": "typeProperties.credential", "type": "CredentialReference"},
         "service_principal_credential_type": {"key": "typeProperties.servicePrincipalCredentialType", "type": "object"},
         "service_principal_credential": {"key": "typeProperties.servicePrincipalCredential", "type": "SecretBase"},
+        "sas_uri": {"key": "typeProperties.sasUri", "type": "object"},
+        "sas_token": {"key": "typeProperties.sasToken", "type": "SecretBase"},
     }
 
     def __init__(
         self,
         *,
-        url: JSON,
         additional_properties: Optional[Dict[str, JSON]] = None,
         connect_via: Optional["_models.IntegrationRuntimeReference"] = None,
         description: Optional[str] = None,
         parameters: Optional[Dict[str, "_models.ParameterSpecification"]] = None,
         annotations: Optional[List[JSON]] = None,
+        url: Optional[JSON] = None,
         account_key: Optional[JSON] = None,
         service_principal_id: Optional[JSON] = None,
         service_principal_key: Optional["_models.SecretBase"] = None,
@@ -5294,6 +5300,8 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
         credential: Optional["_models.CredentialReference"] = None,
         service_principal_credential_type: Optional[JSON] = None,
         service_principal_credential: Optional["_models.SecretBase"] = None,
+        sas_uri: Optional[JSON] = None,
+        sas_token: Optional["_models.SecretBase"] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -5309,7 +5317,7 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
         :keyword annotations: List of tags that can be used for describing the linked service.
         :paramtype annotations: list[JSON]
         :keyword url: Endpoint for the Azure Data Lake Storage Gen2 service. Type: string (or
-         Expression with resultType string). Required.
+         Expression with resultType string).
         :paramtype url: JSON
         :keyword account_key: Account key for the Azure Data Lake Storage Gen2 service. Type: string
          (or Expression with resultType string).
@@ -5343,6 +5351,11 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
          servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only
          be AzureKeyVaultSecretReference.
         :paramtype service_principal_credential: ~azure.mgmt.datafactory.models.SecretBase
+        :keyword sas_uri: SAS URI of the Azure Data Lake Storage Gen2 service. Type: string,
+         SecureString or AzureKeyVaultSecretReference.
+        :paramtype sas_uri: JSON
+        :keyword sas_token: The Azure key vault secret reference of sasToken in sas uri.
+        :paramtype sas_token: ~azure.mgmt.datafactory.models.SecretBase
         """
         super().__init__(
             additional_properties=additional_properties,
@@ -5363,6 +5376,8 @@ class AzureBlobFSLinkedService(LinkedService):  # pylint: disable=too-many-insta
         self.credential = credential
         self.service_principal_credential_type = service_principal_credential_type
         self.service_principal_credential = service_principal_credential
+        self.sas_uri = sas_uri
+        self.sas_token = sas_token
 
 
 class AzureBlobFSLocation(DatasetLocation):
@@ -34356,13 +34371,46 @@ class IntegrationRuntimeOutboundNetworkDependenciesEndpointsResponse(_serializat
         self.value = value
 
 
-class IntegrationRuntimeReference(_serialization.Model):
+class Reference(_serialization.Model):
+    """Base reference type.
+
+    You probably want to use the sub-classes and not this class directly. Known sub-classes are:
+    IntegrationRuntimeReference, LinkedServiceReference
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar type: Type of reference. Required.
+    :vartype type: str
+    """
+
+    _validation = {
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "type": {"key": "type", "type": "str"},
+    }
+
+    _subtype_map = {
+        "type": {
+            "IntegrationRuntimeReference": "IntegrationRuntimeReference",
+            "LinkedServiceReference": "LinkedServiceReference",
+        }
+    }
+
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
+        super().__init__(**kwargs)
+        self.type: Optional[str] = None
+
+
+class IntegrationRuntimeReference(Reference):
     """Integration runtime reference type.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Type of integration runtime. Required. "IntegrationRuntimeReference"
-    :vartype type: str or ~azure.mgmt.datafactory.models.IntegrationRuntimeReferenceType
+    :ivar type: Type of reference. Required.
+    :vartype type: str
     :ivar reference_name: Reference integration runtime name. Required.
     :vartype reference_name: str
     :ivar parameters: Arguments for integration runtime.
@@ -34380,24 +34428,15 @@ class IntegrationRuntimeReference(_serialization.Model):
         "parameters": {"key": "parameters", "type": "{object}"},
     }
 
-    def __init__(
-        self,
-        *,
-        type: Union[str, "_models.IntegrationRuntimeReferenceType"],
-        reference_name: str,
-        parameters: Optional[Dict[str, JSON]] = None,
-        **kwargs: Any
-    ) -> None:
+    def __init__(self, *, reference_name: str, parameters: Optional[Dict[str, JSON]] = None, **kwargs: Any) -> None:
         """
-        :keyword type: Type of integration runtime. Required. "IntegrationRuntimeReference"
-        :paramtype type: str or ~azure.mgmt.datafactory.models.IntegrationRuntimeReferenceType
         :keyword reference_name: Reference integration runtime name. Required.
         :paramtype reference_name: str
         :keyword parameters: Arguments for integration runtime.
         :paramtype parameters: dict[str, JSON]
         """
         super().__init__(**kwargs)
-        self.type = type
+        self.type: str = "IntegrationRuntimeReference"
         self.reference_name = reference_name
         self.parameters = parameters
 
@@ -35935,13 +35974,13 @@ class LinkedServiceListResponse(_serialization.Model):
         self.next_link = next_link
 
 
-class LinkedServiceReference(_serialization.Model):
+class LinkedServiceReference(Reference):
     """Linked service reference type.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Linked service reference type. Required. "LinkedServiceReference"
-    :vartype type: str or ~azure.mgmt.datafactory.models.Type
+    :ivar type: Type of reference. Required.
+    :vartype type: str
     :ivar reference_name: Reference LinkedService name. Required.
     :vartype reference_name: str
     :ivar parameters: Arguments for LinkedService.
@@ -35959,24 +35998,15 @@ class LinkedServiceReference(_serialization.Model):
         "parameters": {"key": "parameters", "type": "{object}"},
     }
 
-    def __init__(
-        self,
-        *,
-        type: Union[str, "_models.Type"],
-        reference_name: str,
-        parameters: Optional[Dict[str, JSON]] = None,
-        **kwargs: Any
-    ) -> None:
+    def __init__(self, *, reference_name: str, parameters: Optional[Dict[str, JSON]] = None, **kwargs: Any) -> None:
         """
-        :keyword type: Linked service reference type. Required. "LinkedServiceReference"
-        :paramtype type: str or ~azure.mgmt.datafactory.models.Type
         :keyword reference_name: Reference LinkedService name. Required.
         :paramtype reference_name: str
         :keyword parameters: Arguments for LinkedService.
         :paramtype parameters: dict[str, JSON]
         """
         super().__init__(**kwargs)
-        self.type = type
+        self.type: str = "LinkedServiceReference"
         self.reference_name = reference_name
         self.parameters = parameters
 

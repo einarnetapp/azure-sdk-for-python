@@ -529,6 +529,7 @@ from ._models_py3 import RecurrenceSchedule
 from ._models_py3 import RecurrenceScheduleOccurrence
 from ._models_py3 import RedirectIncompatibleRowSettings
 from ._models_py3 import RedshiftUnloadSettings
+from ._models_py3 import Reference
 from ._models_py3 import RelationalSource
 from ._models_py3 import RelationalTableDataset
 from ._models_py3 import RemotePrivateEndpointConnection
@@ -777,7 +778,6 @@ from ._data_factory_management_client_enums import IntegrationRuntimeEdition
 from ._data_factory_management_client_enums import IntegrationRuntimeEntityReferenceType
 from ._data_factory_management_client_enums import IntegrationRuntimeInternalChannelEncryptionMode
 from ._data_factory_management_client_enums import IntegrationRuntimeLicenseType
-from ._data_factory_management_client_enums import IntegrationRuntimeReferenceType
 from ._data_factory_management_client_enums import IntegrationRuntimeSsisCatalogPricingTier
 from ._data_factory_management_client_enums import IntegrationRuntimeState
 from ._data_factory_management_client_enums import IntegrationRuntimeType
@@ -841,7 +841,6 @@ from ._data_factory_management_client_enums import TriggerReferenceType
 from ._data_factory_management_client_enums import TriggerRunStatus
 from ._data_factory_management_client_enums import TriggerRuntimeState
 from ._data_factory_management_client_enums import TumblingWindowFrequency
-from ._data_factory_management_client_enums import Type
 from ._data_factory_management_client_enums import VariableType
 from ._data_factory_management_client_enums import WebActivityMethod
 from ._data_factory_management_client_enums import WebAuthenticationType
@@ -1375,6 +1374,7 @@ __all__ = [
     "RecurrenceScheduleOccurrence",
     "RedirectIncompatibleRowSettings",
     "RedshiftUnloadSettings",
+    "Reference",
     "RelationalSource",
     "RelationalTableDataset",
     "RemotePrivateEndpointConnection",
@@ -1622,7 +1622,6 @@ __all__ = [
     "IntegrationRuntimeEntityReferenceType",
     "IntegrationRuntimeInternalChannelEncryptionMode",
     "IntegrationRuntimeLicenseType",
-    "IntegrationRuntimeReferenceType",
     "IntegrationRuntimeSsisCatalogPricingTier",
     "IntegrationRuntimeState",
     "IntegrationRuntimeType",
@@ -1686,7 +1685,6 @@ __all__ = [
     "TriggerRunStatus",
     "TriggerRuntimeState",
     "TumblingWindowFrequency",
-    "Type",
     "VariableType",
     "WebActivityMethod",
     "WebAuthenticationType",

@@ -110,8 +110,8 @@ class ExposureControlOperations:
 
         :param location_id: The location identifier. Required.
         :type location_id: str
-        :param exposure_control_request: The exposure control request. Is either a model type or a IO
-         type. Required.
+        :param exposure_control_request: The exposure control request. Is either a
+         ExposureControlRequest type or a IO type. Required.
         :type exposure_control_request: ~azure.mgmt.datafactory.models.ExposureControlRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -160,8 +160,9 @@ class ExposureControlOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -249,8 +250,8 @@ class ExposureControlOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param exposure_control_request: The exposure control request. Is either a model type or a IO
-         type. Required.
+        :param exposure_control_request: The exposure control request. Is either a
+         ExposureControlRequest type or a IO type. Required.
         :type exposure_control_request: ~azure.mgmt.datafactory.models.ExposureControlRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -300,8 +301,9 @@ class ExposureControlOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -393,7 +395,7 @@ class ExposureControlOperations:
         :param factory_name: The factory name. Required.
         :type factory_name: str
         :param exposure_control_batch_request: The exposure control request for list of features. Is
-         either a model type or a IO type. Required.
+         either a ExposureControlBatchRequest type or a IO type. Required.
         :type exposure_control_batch_request:
          ~azure.mgmt.datafactory.models.ExposureControlBatchRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -444,8 +446,9 @@ class ExposureControlOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
