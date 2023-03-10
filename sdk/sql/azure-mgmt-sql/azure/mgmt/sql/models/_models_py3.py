@@ -1976,8 +1976,8 @@ class DatabaseColumnListResult(_serialization.Model):
         self.next_link = None
 
 
-class DatabaseExtensions(ProxyResource):
-    """An export managed database operation result resource.
+class DatabaseExtensions(ProxyResource):  # pylint: disable=too-many-instance-attributes
+    """An Import, Export, or PolybaseImport resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -1987,15 +1987,33 @@ class DatabaseExtensions(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar operation_mode: Operation Mode. "PolybaseImport"
+    :ivar operation_mode: Operation mode of the operation: Import, Export, or PolybaseImport. Known
+     values are: "PolybaseImport", "Import", and "Export".
     :vartype operation_mode: str or ~azure.mgmt.sql.models.OperationMode
-    :ivar storage_key_type: Storage key type. Known values are: "SharedAccessKey" and
-     "StorageAccessKey".
+    :ivar storage_key_type: Storage key type: StorageAccessKey or SharedAccessKey. Known values
+     are: "SharedAccessKey" and "StorageAccessKey".
     :vartype storage_key_type: str or ~azure.mgmt.sql.models.StorageKeyType
-    :ivar storage_key: Storage key.
+    :ivar storage_key: Storage key for the storage account.
     :vartype storage_key: str
-    :ivar storage_uri: Storage Uri.
+    :ivar storage_uri: Storage Uri for the storage account.
     :vartype storage_uri: str
+    :ivar administrator_login: Administrator login name.
+    :vartype administrator_login: str
+    :ivar administrator_login_password: Administrator login password.
+    :vartype administrator_login_password: str
+    :ivar authentication_type: Authentication type: SQL authentication or AD password.
+    :vartype authentication_type: str
+    :ivar database_edition: Database edition for the newly created database in the case of an
+     import operation.
+    :vartype database_edition: str
+    :ivar service_objective_name: Database service level objective for the newly created database
+     in the case of an import operation.
+    :vartype service_objective_name: str
+    :ivar max_size_bytes: Database max size in bytes for the newly created database in the case of
+     an import operation.
+    :vartype max_size_bytes: str
+    :ivar network_isolation: Optional resource information to enable network isolation for request.
+    :vartype network_isolation: ~azure.mgmt.sql.models.NetworkIsolationSettings
     """
 
     _validation = {
@@ -2012,6 +2030,13 @@ class DatabaseExtensions(ProxyResource):
         "storage_key_type": {"key": "properties.storageKeyType", "type": "str"},
         "storage_key": {"key": "properties.storageKey", "type": "str"},
         "storage_uri": {"key": "properties.storageUri", "type": "str"},
+        "administrator_login": {"key": "properties.administratorLogin", "type": "str"},
+        "administrator_login_password": {"key": "properties.administratorLoginPassword", "type": "str"},
+        "authentication_type": {"key": "properties.authenticationType", "type": "str"},
+        "database_edition": {"key": "properties.databaseEdition", "type": "str"},
+        "service_objective_name": {"key": "properties.serviceObjectiveName", "type": "str"},
+        "max_size_bytes": {"key": "properties.maxSizeBytes", "type": "str"},
+        "network_isolation": {"key": "properties.networkIsolation", "type": "NetworkIsolationSettings"},
     }
 
     def __init__(
@@ -2021,24 +2046,57 @@ class DatabaseExtensions(ProxyResource):
         storage_key_type: Optional[Union[str, "_models.StorageKeyType"]] = None,
         storage_key: Optional[str] = None,
         storage_uri: Optional[str] = None,
+        administrator_login: Optional[str] = None,
+        administrator_login_password: Optional[str] = None,
+        authentication_type: Optional[str] = None,
+        database_edition: Optional[str] = None,
+        service_objective_name: Optional[str] = None,
+        max_size_bytes: Optional[str] = None,
+        network_isolation: Optional["_models.NetworkIsolationSettings"] = None,
         **kwargs: Any
     ) -> None:
         """
-        :keyword operation_mode: Operation Mode. "PolybaseImport"
+        :keyword operation_mode: Operation mode of the operation: Import, Export, or PolybaseImport.
+         Known values are: "PolybaseImport", "Import", and "Export".
         :paramtype operation_mode: str or ~azure.mgmt.sql.models.OperationMode
-        :keyword storage_key_type: Storage key type. Known values are: "SharedAccessKey" and
-         "StorageAccessKey".
+        :keyword storage_key_type: Storage key type: StorageAccessKey or SharedAccessKey. Known values
+         are: "SharedAccessKey" and "StorageAccessKey".
         :paramtype storage_key_type: str or ~azure.mgmt.sql.models.StorageKeyType
-        :keyword storage_key: Storage key.
+        :keyword storage_key: Storage key for the storage account.
         :paramtype storage_key: str
-        :keyword storage_uri: Storage Uri.
+        :keyword storage_uri: Storage Uri for the storage account.
         :paramtype storage_uri: str
+        :keyword administrator_login: Administrator login name.
+        :paramtype administrator_login: str
+        :keyword administrator_login_password: Administrator login password.
+        :paramtype administrator_login_password: str
+        :keyword authentication_type: Authentication type: SQL authentication or AD password.
+        :paramtype authentication_type: str
+        :keyword database_edition: Database edition for the newly created database in the case of an
+         import operation.
+        :paramtype database_edition: str
+        :keyword service_objective_name: Database service level objective for the newly created
+         database in the case of an import operation.
+        :paramtype service_objective_name: str
+        :keyword max_size_bytes: Database max size in bytes for the newly created database in the case
+         of an import operation.
+        :paramtype max_size_bytes: str
+        :keyword network_isolation: Optional resource information to enable network isolation for
+         request.
+        :paramtype network_isolation: ~azure.mgmt.sql.models.NetworkIsolationSettings
         """
         super().__init__(**kwargs)
         self.operation_mode = operation_mode
         self.storage_key_type = storage_key_type
         self.storage_key = storage_key
         self.storage_uri = storage_uri
+        self.administrator_login = administrator_login
+        self.administrator_login_password = administrator_login_password
+        self.authentication_type = authentication_type
+        self.database_edition = database_edition
+        self.service_objective_name = service_objective_name
+        self.max_size_bytes = max_size_bytes
+        self.network_isolation = network_isolation
 
 
 class DatabaseIdentity(_serialization.Model):
@@ -2189,6 +2247,8 @@ class DatabaseOperation(ProxyResource):  # pylint: disable=too-many-instance-att
     :vartype description: str
     :ivar is_cancellable: Whether the operation can be cancelled.
     :vartype is_cancellable: bool
+    :ivar operation_phase_details: The operation phase details.
+    :vartype operation_phase_details: ~azure.mgmt.sql.models.PhaseDetails
     """
 
     _validation = {
@@ -2209,6 +2269,7 @@ class DatabaseOperation(ProxyResource):  # pylint: disable=too-many-instance-att
         "estimated_completion_time": {"readonly": True},
         "description": {"readonly": True},
         "is_cancellable": {"readonly": True},
+        "operation_phase_details": {"readonly": True},
     }
 
     _attribute_map = {
@@ -2229,6 +2290,7 @@ class DatabaseOperation(ProxyResource):  # pylint: disable=too-many-instance-att
         "estimated_completion_time": {"key": "properties.estimatedCompletionTime", "type": "iso-8601"},
         "description": {"key": "properties.description", "type": "str"},
         "is_cancellable": {"key": "properties.isCancellable", "type": "bool"},
+        "operation_phase_details": {"key": "properties.operationPhaseDetails", "type": "PhaseDetails"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -2248,6 +2310,7 @@ class DatabaseOperation(ProxyResource):  # pylint: disable=too-many-instance-att
         self.estimated_completion_time = None
         self.description = None
         self.is_cancellable = None
+        self.operation_phase_details = None
 
 
 class DatabaseOperationListResult(_serialization.Model):
@@ -3396,11 +3459,13 @@ class DatabaseVulnerabilityAssessment(ProxyResource):
     :vartype storage_container_path: str
     :ivar storage_container_sas_key: A shared access signature (SAS Key) that has write access to
      the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey'
-     isn't specified, StorageContainerSasKey is required.
+     isn't specified, StorageContainerSasKey is required. Applies only if the storage account is not
+     behind a Vnet or a firewall.
     :vartype storage_container_sas_key: str
     :ivar storage_account_access_key: Specifies the identifier key of the storage account for
      vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified,
-     storageAccountAccessKey is required.
+     storageAccountAccessKey is required. Applies only if the storage account is not behind a Vnet
+     or a firewall.
     :vartype storage_account_access_key: str
     :ivar recurring_scans: The recurring scans settings.
     :vartype recurring_scans:
@@ -3442,11 +3507,13 @@ class DatabaseVulnerabilityAssessment(ProxyResource):
         :paramtype storage_container_path: str
         :keyword storage_container_sas_key: A shared access signature (SAS Key) that has write access
          to the blob container specified in 'storageContainerPath' parameter. If
-         'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required.
+         'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required. Applies only if
+         the storage account is not behind a Vnet or a firewall.
         :paramtype storage_container_sas_key: str
         :keyword storage_account_access_key: Specifies the identifier key of the storage account for
          vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified,
-         storageAccountAccessKey is required.
+         storageAccountAccessKey is required. Applies only if the storage account is not behind a Vnet
+         or a firewall.
         :paramtype storage_account_access_key: str
         :keyword recurring_scans: The recurring scans settings.
         :paramtype recurring_scans:
@@ -3597,7 +3664,7 @@ class DatabaseVulnerabilityAssessmentScansExport(ProxyResource):
 
 
 class DataMaskingPolicy(ProxyResource):
-    """Represents a database data masking policy.
+    """A database data masking policy.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -3609,10 +3676,10 @@ class DataMaskingPolicy(ProxyResource):
     :vartype type: str
     :ivar location: The location of the data masking policy.
     :vartype location: str
-    :ivar kind: The kind of data masking policy. Metadata, used for Azure portal.
+    :ivar kind: The kind of Data Masking Policy. Metadata, used for Azure portal.
     :vartype kind: str
-    :ivar data_masking_state: The state of the data masking policy. Known values are: "Disabled"
-     and "Enabled".
+    :ivar data_masking_state: The state of the data masking policy. Known values are: "Enabled" and
+     "Disabled".
     :vartype data_masking_state: str or ~azure.mgmt.sql.models.DataMaskingState
     :ivar exempt_principals: The list of the exempt principals. Specifies the semicolon-separated
      list of database users for which the data masking policy does not apply. The specified users
@@ -3655,8 +3722,8 @@ class DataMaskingPolicy(ProxyResource):
         **kwargs: Any
     ) -> None:
         """
-        :keyword data_masking_state: The state of the data masking policy. Known values are: "Disabled"
-         and "Enabled".
+        :keyword data_masking_state: The state of the data masking policy. Known values are: "Enabled"
+         and "Disabled".
         :paramtype data_masking_state: str or ~azure.mgmt.sql.models.DataMaskingState
         :keyword exempt_principals: The list of the exempt principals. Specifies the
          semicolon-separated list of database users for which the data masking policy does not apply.
@@ -3673,7 +3740,7 @@ class DataMaskingPolicy(ProxyResource):
 
 
 class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attributes
-    """Represents a database data masking rule.
+    """A database data masking rule.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -3689,13 +3756,11 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
     :vartype kind: str
     :ivar id_properties_id: The rule Id.
     :vartype id_properties_id: str
-    :ivar alias_name: The alias name. This is a legacy parameter and is no longer used.
-    :vartype alias_name: str
     :ivar rule_state: The rule state. Used to delete a rule. To delete an existing rule, specify
      the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled.
      However, if the rule doesn't already exist, the rule will be created with ruleState set to
-     enabled, regardless of the provided value of ruleState. Known values are: "Disabled" and
-     "Enabled".
+     enabled, regardless of the provided value of ruleState. Known values are: "Enabled" and
+     "Disabled".
     :vartype rule_state: str or ~azure.mgmt.sql.models.DataMaskingRuleState
     :ivar schema_name: The schema name on which the data masking rule is applied.
     :vartype schema_name: str
@@ -3703,6 +3768,8 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
     :vartype table_name: str
     :ivar column_name: The column name on which the data masking rule is applied.
     :vartype column_name: str
+    :ivar alias_name: The alias name. This is a legacy parameter and is no longer used.
+    :vartype alias_name: str
     :ivar masking_function: The masking function that is used for the data masking rule. Known
      values are: "Default", "CCN", "Email", "Number", "SSN", and "Text".
     :vartype masking_function: str or ~azure.mgmt.sql.models.DataMaskingFunction
@@ -3739,11 +3806,11 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "id_properties_id": {"key": "properties.id", "type": "str"},
-        "alias_name": {"key": "properties.aliasName", "type": "str"},
         "rule_state": {"key": "properties.ruleState", "type": "str"},
         "schema_name": {"key": "properties.schemaName", "type": "str"},
         "table_name": {"key": "properties.tableName", "type": "str"},
         "column_name": {"key": "properties.columnName", "type": "str"},
+        "alias_name": {"key": "properties.aliasName", "type": "str"},
         "masking_function": {"key": "properties.maskingFunction", "type": "str"},
         "number_from": {"key": "properties.numberFrom", "type": "str"},
         "number_to": {"key": "properties.numberTo", "type": "str"},
@@ -3755,11 +3822,11 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
     def __init__(
         self,
         *,
-        alias_name: Optional[str] = None,
         rule_state: Optional[Union[str, "_models.DataMaskingRuleState"]] = None,
         schema_name: Optional[str] = None,
         table_name: Optional[str] = None,
         column_name: Optional[str] = None,
+        alias_name: Optional[str] = None,
         masking_function: Optional[Union[str, "_models.DataMaskingFunction"]] = None,
         number_from: Optional[str] = None,
         number_to: Optional[str] = None,
@@ -3769,13 +3836,11 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
         **kwargs: Any
     ) -> None:
         """
-        :keyword alias_name: The alias name. This is a legacy parameter and is no longer used.
-        :paramtype alias_name: str
         :keyword rule_state: The rule state. Used to delete a rule. To delete an existing rule, specify
          the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled.
          However, if the rule doesn't already exist, the rule will be created with ruleState set to
-         enabled, regardless of the provided value of ruleState. Known values are: "Disabled" and
-         "Enabled".
+         enabled, regardless of the provided value of ruleState. Known values are: "Enabled" and
+         "Disabled".
         :paramtype rule_state: str or ~azure.mgmt.sql.models.DataMaskingRuleState
         :keyword schema_name: The schema name on which the data masking rule is applied.
         :paramtype schema_name: str
@@ -3783,6 +3848,8 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
         :paramtype table_name: str
         :keyword column_name: The column name on which the data masking rule is applied.
         :paramtype column_name: str
+        :keyword alias_name: The alias name. This is a legacy parameter and is no longer used.
+        :paramtype alias_name: str
         :keyword masking_function: The masking function that is used for the data masking rule. Known
          values are: "Default", "CCN", "Email", "Number", "SSN", and "Text".
         :paramtype masking_function: str or ~azure.mgmt.sql.models.DataMaskingFunction
@@ -3806,11 +3873,11 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
         self.location = None
         self.kind = None
         self.id_properties_id = None
-        self.alias_name = alias_name
         self.rule_state = rule_state
         self.schema_name = schema_name
         self.table_name = table_name
         self.column_name = column_name
+        self.alias_name = alias_name
         self.masking_function = masking_function
         self.number_from = number_from
         self.number_to = number_to
@@ -3820,23 +3887,31 @@ class DataMaskingRule(ProxyResource):  # pylint: disable=too-many-instance-attri
 
 
 class DataMaskingRuleListResult(_serialization.Model):
-    """The response to a list data masking rules request.
+    """The list of database data masking rules.
 
-    :ivar value: The list of database data masking rules.
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
     :vartype value: list[~azure.mgmt.sql.models.DataMaskingRule]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[DataMaskingRule]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DataMaskingRule"]] = None, **kwargs: Any) -> None:
-        """
-        :keyword value: The list of database data masking rules.
-        :paramtype value: list[~azure.mgmt.sql.models.DataMaskingRule]
-        """
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
         super().__init__(**kwargs)
-        self.value = value
+        self.value = None
+        self.next_link = None
 
 
 class DataWarehouseUserActivities(ProxyResource):
@@ -4012,6 +4087,8 @@ class DistributedAvailabilityGroup(ProxyResource):  # pylint: disable=too-many-i
     :vartype link_state: str
     :ivar last_hardened_lsn: The last hardened lsn.
     :vartype last_hardened_lsn: str
+    :ivar instance_role: Role of managed instance.
+    :vartype instance_role: str
     """
 
     _validation = {
@@ -4023,6 +4100,7 @@ class DistributedAvailabilityGroup(ProxyResource):  # pylint: disable=too-many-i
         "target_replica_id": {"readonly": True},
         "link_state": {"readonly": True},
         "last_hardened_lsn": {"readonly": True},
+        "instance_role": {"readonly": True},
     }
 
     _attribute_map = {
@@ -4039,6 +4117,7 @@ class DistributedAvailabilityGroup(ProxyResource):  # pylint: disable=too-many-i
         "target_replica_id": {"key": "properties.targetReplicaId", "type": "str"},
         "link_state": {"key": "properties.linkState", "type": "str"},
         "last_hardened_lsn": {"key": "properties.lastHardenedLsn", "type": "str"},
+        "instance_role": {"key": "properties.instanceRole", "type": "str"},
     }
 
     def __init__(
@@ -4075,6 +4154,50 @@ class DistributedAvailabilityGroup(ProxyResource):  # pylint: disable=too-many-i
         self.target_replica_id = None
         self.link_state = None
         self.last_hardened_lsn = None
+        self.instance_role = None
+
+
+class DistributedAvailabilityGroupSetRole(_serialization.Model):
+    """Distributed availability group failover request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar instance_role: New role of managed instance in a distributed availability group, can be
+     Primary or Secondary. Required. Known values are: "Primary" and "Secondary".
+    :vartype instance_role: str or ~azure.mgmt.sql.models.InstanceRole
+    :ivar role_change_type: The type of the role change, can be Planned or Forced. Required. Known
+     values are: "Forced" and "Planned".
+    :vartype role_change_type: str or ~azure.mgmt.sql.models.RoleChangeType
+    """
+
+    _validation = {
+        "instance_role": {"required": True},
+        "role_change_type": {"required": True},
+    }
+
+    _attribute_map = {
+        "instance_role": {"key": "instanceRole", "type": "str"},
+        "role_change_type": {"key": "roleChangeType", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        instance_role: Union[str, "_models.InstanceRole"],
+        role_change_type: Union[str, "_models.RoleChangeType"],
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword instance_role: New role of managed instance in a distributed availability group, can
+         be Primary or Secondary. Required. Known values are: "Primary" and "Secondary".
+        :paramtype instance_role: str or ~azure.mgmt.sql.models.InstanceRole
+        :keyword role_change_type: The type of the role change, can be Planned or Forced. Required.
+         Known values are: "Forced" and "Planned".
+        :paramtype role_change_type: str or ~azure.mgmt.sql.models.RoleChangeType
+        """
+        super().__init__(**kwargs)
+        self.instance_role = instance_role
+        self.role_change_type = role_change_type
 
 
 class DistributedAvailabilityGroupsListResult(_serialization.Model):
@@ -4123,6 +4246,8 @@ class EditionCapability(_serialization.Model):
     :ivar supported_storage_capabilities: The list of supported storage capabilities for this
      edition.
     :vartype supported_storage_capabilities: list[~azure.mgmt.sql.models.StorageCapability]
+    :ivar zone_pinning: Whether or not zone pinning is supported for the edition.
+    :vartype zone_pinning: bool
     :ivar status: The status of the capability. Known values are: "Visible", "Available",
      "Default", and "Disabled".
     :vartype status: str or ~azure.mgmt.sql.models.CapabilityStatus
@@ -4136,6 +4261,7 @@ class EditionCapability(_serialization.Model):
         "zone_redundant": {"readonly": True},
         "read_scale": {"readonly": True},
         "supported_storage_capabilities": {"readonly": True},
+        "zone_pinning": {"readonly": True},
         "status": {"readonly": True},
     }
 
@@ -4148,6 +4274,7 @@ class EditionCapability(_serialization.Model):
         "zone_redundant": {"key": "zoneRedundant", "type": "bool"},
         "read_scale": {"key": "readScale", "type": "ReadScaleCapability"},
         "supported_storage_capabilities": {"key": "supportedStorageCapabilities", "type": "[StorageCapability]"},
+        "zone_pinning": {"key": "zonePinning", "type": "bool"},
         "status": {"key": "status", "type": "str"},
         "reason": {"key": "reason", "type": "str"},
     }
@@ -4163,6 +4290,7 @@ class EditionCapability(_serialization.Model):
         self.zone_redundant = None
         self.read_scale = None
         self.supported_storage_capabilities = None
+        self.zone_pinning = None
         self.status = None
         self.reason = reason
 
@@ -4204,6 +4332,8 @@ class ElasticPool(TrackedResource):  # pylint: disable=too-many-instance-attribu
     :vartype creation_date: ~datetime.datetime
     :ivar max_size_bytes: The storage limit for the database elastic pool in bytes.
     :vartype max_size_bytes: int
+    :ivar min_capacity: Minimal capacity that serverless pool will not shrink below, if not paused.
+    :vartype min_capacity: float
     :ivar per_database_settings: The per database settings for the elastic pool.
     :vartype per_database_settings: ~azure.mgmt.sql.models.ElasticPoolPerDatabaseSettings
     :ivar zone_redundant: Whether or not this elastic pool is zone redundant, which means the
@@ -4216,8 +4346,15 @@ class ElasticPool(TrackedResource):  # pylint: disable=too-many-instance-attribu
      This configuration defines the period when the maintenance updates will will occur.
     :vartype maintenance_configuration_id: str
     :ivar high_availability_replica_count: The number of secondary replicas associated with the
-     elastic pool that are used to provide high availability.
+     elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic
+     pools.
     :vartype high_availability_replica_count: int
+    :ivar preferred_enclave_type: Type of enclave requested on the elastic pool. Known values are:
+     "Default" and "VBS".
+    :vartype preferred_enclave_type: str or ~azure.mgmt.sql.models.AlwaysEncryptedEnclaveType
+    :ivar availability_zone: Specifies the availability zone the pool's primary replica is pinned
+     to. Known values are: "NoPreference", "1", "2", and "3".
+    :vartype availability_zone: str or ~azure.mgmt.sql.models.AvailabilityZoneType
     """
 
     _validation = {
@@ -4241,11 +4378,14 @@ class ElasticPool(TrackedResource):  # pylint: disable=too-many-instance-attribu
         "state": {"key": "properties.state", "type": "str"},
         "creation_date": {"key": "properties.creationDate", "type": "iso-8601"},
         "max_size_bytes": {"key": "properties.maxSizeBytes", "type": "int"},
+        "min_capacity": {"key": "properties.minCapacity", "type": "float"},
         "per_database_settings": {"key": "properties.perDatabaseSettings", "type": "ElasticPoolPerDatabaseSettings"},
         "zone_redundant": {"key": "properties.zoneRedundant", "type": "bool"},
         "license_type": {"key": "properties.licenseType", "type": "str"},
         "maintenance_configuration_id": {"key": "properties.maintenanceConfigurationId", "type": "str"},
         "high_availability_replica_count": {"key": "properties.highAvailabilityReplicaCount", "type": "int"},
+        "preferred_enclave_type": {"key": "properties.preferredEnclaveType", "type": "str"},
+        "availability_zone": {"key": "properties.availabilityZone", "type": "str"},
     }
 
     def __init__(
@@ -4255,11 +4395,14 @@ class ElasticPool(TrackedResource):  # pylint: disable=too-many-instance-attribu
         tags: Optional[Dict[str, str]] = None,
         sku: Optional["_models.Sku"] = None,
         max_size_bytes: Optional[int] = None,
+        min_capacity: Optional[float] = None,
         per_database_settings: Optional["_models.ElasticPoolPerDatabaseSettings"] = None,
         zone_redundant: Optional[bool] = None,
         license_type: Optional[Union[str, "_models.ElasticPoolLicenseType"]] = None,
         maintenance_configuration_id: Optional[str] = None,
         high_availability_replica_count: Optional[int] = None,
+        preferred_enclave_type: Optional[Union[str, "_models.AlwaysEncryptedEnclaveType"]] = None,
+        availability_zone: Optional[Union[str, "_models.AvailabilityZoneType"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -4280,6 +4423,9 @@ class ElasticPool(TrackedResource):  # pylint: disable=too-many-instance-attribu
         :paramtype sku: ~azure.mgmt.sql.models.Sku
         :keyword max_size_bytes: The storage limit for the database elastic pool in bytes.
         :paramtype max_size_bytes: int
+        :keyword min_capacity: Minimal capacity that serverless pool will not shrink below, if not
+         paused.
+        :paramtype min_capacity: float
         :keyword per_database_settings: The per database settings for the elastic pool.
         :paramtype per_database_settings: ~azure.mgmt.sql.models.ElasticPoolPerDatabaseSettings
         :keyword zone_redundant: Whether or not this elastic pool is zone redundant, which means the
@@ -4292,8 +4438,15 @@ class ElasticPool(TrackedResource):  # pylint: disable=too-many-instance-attribu
          pool. This configuration defines the period when the maintenance updates will will occur.
         :paramtype maintenance_configuration_id: str
         :keyword high_availability_replica_count: The number of secondary replicas associated with the
-         elastic pool that are used to provide high availability.
+         elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic
+         pools.
         :paramtype high_availability_replica_count: int
+        :keyword preferred_enclave_type: Type of enclave requested on the elastic pool. Known values
+         are: "Default" and "VBS".
+        :paramtype preferred_enclave_type: str or ~azure.mgmt.sql.models.AlwaysEncryptedEnclaveType
+        :keyword availability_zone: Specifies the availability zone the pool's primary replica is
+         pinned to. Known values are: "NoPreference", "1", "2", and "3".
+        :paramtype availability_zone: str or ~azure.mgmt.sql.models.AvailabilityZoneType
         """
         super().__init__(location=location, tags=tags, **kwargs)
         self.sku = sku
@@ -4301,315 +4454,14 @@ class ElasticPool(TrackedResource):  # pylint: disable=too-many-instance-attribu
         self.state = None
         self.creation_date = None
         self.max_size_bytes = max_size_bytes
+        self.min_capacity = min_capacity
         self.per_database_settings = per_database_settings
         self.zone_redundant = zone_redundant
         self.license_type = license_type
         self.maintenance_configuration_id = maintenance_configuration_id
         self.high_availability_replica_count = high_availability_replica_count
-
-
-class ElasticPoolActivity(ProxyResource):  # pylint: disable=too-many-instance-attributes
-    """Represents the activity on an elastic pool.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Resource ID.
-    :vartype id: str
-    :ivar name: Resource name.
-    :vartype name: str
-    :ivar type: Resource type.
-    :vartype type: str
-    :ivar location: The geo-location where the resource lives.
-    :vartype location: str
-    :ivar end_time: The time the operation finished (ISO8601 format).
-    :vartype end_time: ~datetime.datetime
-    :ivar error_code: The error code if available.
-    :vartype error_code: int
-    :ivar error_message: The error message if available.
-    :vartype error_message: str
-    :ivar error_severity: The error severity if available.
-    :vartype error_severity: int
-    :ivar operation: The operation name.
-    :vartype operation: str
-    :ivar operation_id: The unique operation ID.
-    :vartype operation_id: str
-    :ivar percent_complete: The percentage complete if available.
-    :vartype percent_complete: int
-    :ivar requested_database_dtu_max: The requested max DTU per database if available.
-    :vartype requested_database_dtu_max: int
-    :ivar requested_database_dtu_min: The requested min DTU per database if available.
-    :vartype requested_database_dtu_min: int
-    :ivar requested_dtu: The requested DTU for the pool if available.
-    :vartype requested_dtu: int
-    :ivar requested_elastic_pool_name: The requested name for the elastic pool if available.
-    :vartype requested_elastic_pool_name: str
-    :ivar requested_storage_limit_in_gb: The requested storage limit for the pool in GB if
-     available.
-    :vartype requested_storage_limit_in_gb: int
-    :ivar elastic_pool_name: The name of the elastic pool.
-    :vartype elastic_pool_name: str
-    :ivar server_name: The name of the server the elastic pool is in.
-    :vartype server_name: str
-    :ivar start_time: The time the operation started (ISO8601 format).
-    :vartype start_time: ~datetime.datetime
-    :ivar state: The current state of the operation.
-    :vartype state: str
-    :ivar requested_storage_limit_in_mb: The requested storage limit in MB.
-    :vartype requested_storage_limit_in_mb: int
-    :ivar requested_database_dtu_guarantee: The requested per database DTU guarantee.
-    :vartype requested_database_dtu_guarantee: int
-    :ivar requested_database_dtu_cap: The requested per database DTU cap.
-    :vartype requested_database_dtu_cap: int
-    :ivar requested_dtu_guarantee: The requested DTU guarantee.
-    :vartype requested_dtu_guarantee: int
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "end_time": {"readonly": True},
-        "error_code": {"readonly": True},
-        "error_message": {"readonly": True},
-        "error_severity": {"readonly": True},
-        "operation": {"readonly": True},
-        "operation_id": {"readonly": True},
-        "percent_complete": {"readonly": True},
-        "requested_database_dtu_max": {"readonly": True},
-        "requested_database_dtu_min": {"readonly": True},
-        "requested_dtu": {"readonly": True},
-        "requested_elastic_pool_name": {"readonly": True},
-        "requested_storage_limit_in_gb": {"readonly": True},
-        "elastic_pool_name": {"readonly": True},
-        "server_name": {"readonly": True},
-        "start_time": {"readonly": True},
-        "state": {"readonly": True},
-        "requested_storage_limit_in_mb": {"readonly": True},
-        "requested_database_dtu_guarantee": {"readonly": True},
-        "requested_database_dtu_cap": {"readonly": True},
-        "requested_dtu_guarantee": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "location": {"key": "location", "type": "str"},
-        "end_time": {"key": "properties.endTime", "type": "iso-8601"},
-        "error_code": {"key": "properties.errorCode", "type": "int"},
-        "error_message": {"key": "properties.errorMessage", "type": "str"},
-        "error_severity": {"key": "properties.errorSeverity", "type": "int"},
-        "operation": {"key": "properties.operation", "type": "str"},
-        "operation_id": {"key": "properties.operationId", "type": "str"},
-        "percent_complete": {"key": "properties.percentComplete", "type": "int"},
-        "requested_database_dtu_max": {"key": "properties.requestedDatabaseDtuMax", "type": "int"},
-        "requested_database_dtu_min": {"key": "properties.requestedDatabaseDtuMin", "type": "int"},
-        "requested_dtu": {"key": "properties.requestedDtu", "type": "int"},
-        "requested_elastic_pool_name": {"key": "properties.requestedElasticPoolName", "type": "str"},
-        "requested_storage_limit_in_gb": {"key": "properties.requestedStorageLimitInGB", "type": "int"},
-        "elastic_pool_name": {"key": "properties.elasticPoolName", "type": "str"},
-        "server_name": {"key": "properties.serverName", "type": "str"},
-        "start_time": {"key": "properties.startTime", "type": "iso-8601"},
-        "state": {"key": "properties.state", "type": "str"},
-        "requested_storage_limit_in_mb": {"key": "properties.requestedStorageLimitInMB", "type": "int"},
-        "requested_database_dtu_guarantee": {"key": "properties.requestedDatabaseDtuGuarantee", "type": "int"},
-        "requested_database_dtu_cap": {"key": "properties.requestedDatabaseDtuCap", "type": "int"},
-        "requested_dtu_guarantee": {"key": "properties.requestedDtuGuarantee", "type": "int"},
-    }
-
-    def __init__(self, *, location: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
-        """
-        :keyword location: The geo-location where the resource lives.
-        :paramtype location: str
-        """
-        super().__init__(**kwargs)
-        self.location = location
-        self.end_time = None
-        self.error_code = None
-        self.error_message = None
-        self.error_severity = None
-        self.operation = None
-        self.operation_id = None
-        self.percent_complete = None
-        self.requested_database_dtu_max = None
-        self.requested_database_dtu_min = None
-        self.requested_dtu = None
-        self.requested_elastic_pool_name = None
-        self.requested_storage_limit_in_gb = None
-        self.elastic_pool_name = None
-        self.server_name = None
-        self.start_time = None
-        self.state = None
-        self.requested_storage_limit_in_mb = None
-        self.requested_database_dtu_guarantee = None
-        self.requested_database_dtu_cap = None
-        self.requested_dtu_guarantee = None
-
-
-class ElasticPoolActivityListResult(_serialization.Model):
-    """Represents the response to a list elastic pool activity request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: The list of elastic pool activities. Required.
-    :vartype value: list[~azure.mgmt.sql.models.ElasticPoolActivity]
-    """
-
-    _validation = {
-        "value": {"required": True},
-    }
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[ElasticPoolActivity]"},
-    }
-
-    def __init__(self, *, value: List["_models.ElasticPoolActivity"], **kwargs: Any) -> None:
-        """
-        :keyword value: The list of elastic pool activities. Required.
-        :paramtype value: list[~azure.mgmt.sql.models.ElasticPoolActivity]
-        """
-        super().__init__(**kwargs)
-        self.value = value
-
-
-class ElasticPoolDatabaseActivity(ProxyResource):  # pylint: disable=too-many-instance-attributes
-    """Represents the activity on an elastic pool.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Resource ID.
-    :vartype id: str
-    :ivar name: Resource name.
-    :vartype name: str
-    :ivar type: Resource type.
-    :vartype type: str
-    :ivar location: The geo-location where the resource lives.
-    :vartype location: str
-    :ivar database_name: The database name.
-    :vartype database_name: str
-    :ivar end_time: The time the operation finished (ISO8601 format).
-    :vartype end_time: ~datetime.datetime
-    :ivar error_code: The error code if available.
-    :vartype error_code: int
-    :ivar error_message: The error message if available.
-    :vartype error_message: str
-    :ivar error_severity: The error severity if available.
-    :vartype error_severity: int
-    :ivar operation: The operation name.
-    :vartype operation: str
-    :ivar operation_id: The unique operation ID.
-    :vartype operation_id: str
-    :ivar percent_complete: The percentage complete if available.
-    :vartype percent_complete: int
-    :ivar requested_elastic_pool_name: The name for the elastic pool the database is moving into if
-     available.
-    :vartype requested_elastic_pool_name: str
-    :ivar current_elastic_pool_name: The name of the current elastic pool the database is in if
-     available.
-    :vartype current_elastic_pool_name: str
-    :ivar current_service_objective: The name of the current service objective if available.
-    :vartype current_service_objective: str
-    :ivar requested_service_objective: The name of the requested service objective if available.
-    :vartype requested_service_objective: str
-    :ivar server_name: The name of the server the elastic pool is in.
-    :vartype server_name: str
-    :ivar start_time: The time the operation started (ISO8601 format).
-    :vartype start_time: ~datetime.datetime
-    :ivar state: The current state of the operation.
-    :vartype state: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "database_name": {"readonly": True},
-        "end_time": {"readonly": True},
-        "error_code": {"readonly": True},
-        "error_message": {"readonly": True},
-        "error_severity": {"readonly": True},
-        "operation": {"readonly": True},
-        "operation_id": {"readonly": True},
-        "percent_complete": {"readonly": True},
-        "requested_elastic_pool_name": {"readonly": True},
-        "current_elastic_pool_name": {"readonly": True},
-        "current_service_objective": {"readonly": True},
-        "requested_service_objective": {"readonly": True},
-        "server_name": {"readonly": True},
-        "start_time": {"readonly": True},
-        "state": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "location": {"key": "location", "type": "str"},
-        "database_name": {"key": "properties.databaseName", "type": "str"},
-        "end_time": {"key": "properties.endTime", "type": "iso-8601"},
-        "error_code": {"key": "properties.errorCode", "type": "int"},
-        "error_message": {"key": "properties.errorMessage", "type": "str"},
-        "error_severity": {"key": "properties.errorSeverity", "type": "int"},
-        "operation": {"key": "properties.operation", "type": "str"},
-        "operation_id": {"key": "properties.operationId", "type": "str"},
-        "percent_complete": {"key": "properties.percentComplete", "type": "int"},
-        "requested_elastic_pool_name": {"key": "properties.requestedElasticPoolName", "type": "str"},
-        "current_elastic_pool_name": {"key": "properties.currentElasticPoolName", "type": "str"},
-        "current_service_objective": {"key": "properties.currentServiceObjective", "type": "str"},
-        "requested_service_objective": {"key": "properties.requestedServiceObjective", "type": "str"},
-        "server_name": {"key": "properties.serverName", "type": "str"},
-        "start_time": {"key": "properties.startTime", "type": "iso-8601"},
-        "state": {"key": "properties.state", "type": "str"},
-    }
-
-    def __init__(self, *, location: Optional[str] = None, **kwargs: Any) -> None:
-        """
-        :keyword location: The geo-location where the resource lives.
-        :paramtype location: str
-        """
-        super().__init__(**kwargs)
-        self.location = location
-        self.database_name = None
-        self.end_time = None
-        self.error_code = None
-        self.error_message = None
-        self.error_severity = None
-        self.operation = None
-        self.operation_id = None
-        self.percent_complete = None
-        self.requested_elastic_pool_name = None
-        self.current_elastic_pool_name = None
-        self.current_service_objective = None
-        self.requested_service_objective = None
-        self.server_name = None
-        self.start_time = None
-        self.state = None
-
-
-class ElasticPoolDatabaseActivityListResult(_serialization.Model):
-    """Represents the response to a list elastic pool database activity request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: The list of elastic pool database activities. Required.
-    :vartype value: list[~azure.mgmt.sql.models.ElasticPoolDatabaseActivity]
-    """
-
-    _validation = {
-        "value": {"required": True},
-    }
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[ElasticPoolDatabaseActivity]"},
-    }
-
-    def __init__(self, *, value: List["_models.ElasticPoolDatabaseActivity"], **kwargs: Any) -> None:
-        """
-        :keyword value: The list of elastic pool database activities. Required.
-        :paramtype value: list[~azure.mgmt.sql.models.ElasticPoolDatabaseActivity]
-        """
-        super().__init__(**kwargs)
-        self.value = value
+        self.preferred_enclave_type = preferred_enclave_type
+        self.availability_zone = availability_zone
 
 
 class ElasticPoolEditionCapability(_serialization.Model):
@@ -4625,6 +4477,8 @@ class ElasticPoolEditionCapability(_serialization.Model):
      list[~azure.mgmt.sql.models.ElasticPoolPerformanceLevelCapability]
     :ivar zone_redundant: Whether or not zone redundancy is supported for the edition.
     :vartype zone_redundant: bool
+    :ivar zone_pinning: Whether or not zone pinning is supported for the edition.
+    :vartype zone_pinning: bool
     :ivar status: The status of the capability. Known values are: "Visible", "Available",
      "Default", and "Disabled".
     :vartype status: str or ~azure.mgmt.sql.models.CapabilityStatus
@@ -4636,6 +4490,7 @@ class ElasticPoolEditionCapability(_serialization.Model):
         "name": {"readonly": True},
         "supported_elastic_pool_performance_levels": {"readonly": True},
         "zone_redundant": {"readonly": True},
+        "zone_pinning": {"readonly": True},
         "status": {"readonly": True},
     }
 
@@ -4646,6 +4501,7 @@ class ElasticPoolEditionCapability(_serialization.Model):
             "type": "[ElasticPoolPerformanceLevelCapability]",
         },
         "zone_redundant": {"key": "zoneRedundant", "type": "bool"},
+        "zone_pinning": {"key": "zonePinning", "type": "bool"},
         "status": {"key": "status", "type": "str"},
         "reason": {"key": "reason", "type": "str"},
     }
@@ -4659,6 +4515,7 @@ class ElasticPoolEditionCapability(_serialization.Model):
         self.name = None
         self.supported_elastic_pool_performance_levels = None
         self.zone_redundant = None
+        self.zone_pinning = None
         self.status = None
         self.reason = reason
 
@@ -5029,7 +4886,7 @@ class ElasticPoolPerformanceLevelCapability(_serialization.Model):  # pylint: di
         self.reason = reason
 
 
-class ElasticPoolUpdate(_serialization.Model):
+class ElasticPoolUpdate(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """An elastic pool update.
 
     :ivar sku: An ARM Resource SKU.
@@ -5038,6 +4895,8 @@ class ElasticPoolUpdate(_serialization.Model):
     :vartype tags: dict[str, str]
     :ivar max_size_bytes: The storage limit for the database elastic pool in bytes.
     :vartype max_size_bytes: int
+    :ivar min_capacity: Minimal capacity that serverless pool will not shrink below, if not paused.
+    :vartype min_capacity: float
     :ivar per_database_settings: The per database settings for the elastic pool.
     :vartype per_database_settings: ~azure.mgmt.sql.models.ElasticPoolPerDatabaseSettings
     :ivar zone_redundant: Whether or not this elastic pool is zone redundant, which means the
@@ -5053,17 +4912,26 @@ class ElasticPoolUpdate(_serialization.Model):
      elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic
      pools.
     :vartype high_availability_replica_count: int
+    :ivar preferred_enclave_type: Type of enclave requested on the elastic pool. Known values are:
+     "Default" and "VBS".
+    :vartype preferred_enclave_type: str or ~azure.mgmt.sql.models.AlwaysEncryptedEnclaveType
+    :ivar availability_zone: Specifies the availability zone the pool's primary replica is pinned
+     to. Known values are: "NoPreference", "1", "2", and "3".
+    :vartype availability_zone: str or ~azure.mgmt.sql.models.AvailabilityZoneType
     """
 
     _attribute_map = {
         "sku": {"key": "sku", "type": "Sku"},
         "tags": {"key": "tags", "type": "{str}"},
         "max_size_bytes": {"key": "properties.maxSizeBytes", "type": "int"},
+        "min_capacity": {"key": "properties.minCapacity", "type": "float"},
         "per_database_settings": {"key": "properties.perDatabaseSettings", "type": "ElasticPoolPerDatabaseSettings"},
         "zone_redundant": {"key": "properties.zoneRedundant", "type": "bool"},
         "license_type": {"key": "properties.licenseType", "type": "str"},
         "maintenance_configuration_id": {"key": "properties.maintenanceConfigurationId", "type": "str"},
         "high_availability_replica_count": {"key": "properties.highAvailabilityReplicaCount", "type": "int"},
+        "preferred_enclave_type": {"key": "properties.preferredEnclaveType", "type": "str"},
+        "availability_zone": {"key": "properties.availabilityZone", "type": "str"},
     }
 
     def __init__(
@@ -5072,11 +4940,14 @@ class ElasticPoolUpdate(_serialization.Model):
         sku: Optional["_models.Sku"] = None,
         tags: Optional[Dict[str, str]] = None,
         max_size_bytes: Optional[int] = None,
+        min_capacity: Optional[float] = None,
         per_database_settings: Optional["_models.ElasticPoolPerDatabaseSettings"] = None,
         zone_redundant: Optional[bool] = None,
         license_type: Optional[Union[str, "_models.ElasticPoolLicenseType"]] = None,
         maintenance_configuration_id: Optional[str] = None,
         high_availability_replica_count: Optional[int] = None,
+        preferred_enclave_type: Optional[Union[str, "_models.AlwaysEncryptedEnclaveType"]] = None,
+        availability_zone: Optional[Union[str, "_models.AvailabilityZoneType"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -5086,6 +4957,9 @@ class ElasticPoolUpdate(_serialization.Model):
         :paramtype tags: dict[str, str]
         :keyword max_size_bytes: The storage limit for the database elastic pool in bytes.
         :paramtype max_size_bytes: int
+        :keyword min_capacity: Minimal capacity that serverless pool will not shrink below, if not
+         paused.
+        :paramtype min_capacity: float
         :keyword per_database_settings: The per database settings for the elastic pool.
         :paramtype per_database_settings: ~azure.mgmt.sql.models.ElasticPoolPerDatabaseSettings
         :keyword zone_redundant: Whether or not this elastic pool is zone redundant, which means the
@@ -5101,16 +4975,25 @@ class ElasticPoolUpdate(_serialization.Model):
          elastic pool that are used to provide high availability. Applicable only to Hyperscale elastic
          pools.
         :paramtype high_availability_replica_count: int
+        :keyword preferred_enclave_type: Type of enclave requested on the elastic pool. Known values
+         are: "Default" and "VBS".
+        :paramtype preferred_enclave_type: str or ~azure.mgmt.sql.models.AlwaysEncryptedEnclaveType
+        :keyword availability_zone: Specifies the availability zone the pool's primary replica is
+         pinned to. Known values are: "NoPreference", "1", "2", and "3".
+        :paramtype availability_zone: str or ~azure.mgmt.sql.models.AvailabilityZoneType
         """
         super().__init__(**kwargs)
         self.sku = sku
         self.tags = tags
         self.max_size_bytes = max_size_bytes
+        self.min_capacity = min_capacity
         self.per_database_settings = per_database_settings
         self.zone_redundant = zone_redundant
         self.license_type = license_type
         self.maintenance_configuration_id = maintenance_configuration_id
         self.high_availability_replica_count = high_availability_replica_count
+        self.preferred_enclave_type = preferred_enclave_type
+        self.availability_zone = availability_zone
 
 
 class EncryptionProtector(ProxyResource):  # pylint: disable=too-many-instance-attributes
@@ -6566,11 +6449,9 @@ class FirewallRuleListResult(_serialization.Model):
 
 
 class GeoBackupPolicy(ProxyResource):
-    """A database geo backup policy.
+    """A Geo backup policy.
 
     Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
 
     :ivar id: Resource ID.
     :vartype id: str
@@ -6578,12 +6459,11 @@ class GeoBackupPolicy(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar kind: Kind of geo backup policy.  This is metadata used for the Azure portal experience.
-    :vartype kind: str
     :ivar location: Backup policy location.
     :vartype location: str
-    :ivar state: The state of the geo backup policy. Required. Known values are: "Disabled" and
-     "Enabled".
+    :ivar kind: Kind of geo backup policy.  This is metadata used for the Azure portal experience.
+    :vartype kind: str
+    :ivar state: The state of the geo backup policy. Known values are: "Enabled" and "Disabled".
     :vartype state: str or ~azure.mgmt.sql.models.GeoBackupPolicyState
     :ivar storage_type: The storage type of the geo backup policy.
     :vartype storage_type: str
@@ -6593,9 +6473,8 @@ class GeoBackupPolicy(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
-        "kind": {"readonly": True},
         "location": {"readonly": True},
-        "state": {"required": True},
+        "kind": {"readonly": True},
         "storage_type": {"readonly": True},
     }
 
@@ -6603,43 +6482,50 @@ class GeoBackupPolicy(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
-        "kind": {"key": "kind", "type": "str"},
         "location": {"key": "location", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
         "state": {"key": "properties.state", "type": "str"},
         "storage_type": {"key": "properties.storageType", "type": "str"},
     }
 
-    def __init__(self, *, state: Union[str, "_models.GeoBackupPolicyState"], **kwargs: Any) -> None:
+    def __init__(self, *, state: Optional[Union[str, "_models.GeoBackupPolicyState"]] = None, **kwargs: Any) -> None:
         """
-        :keyword state: The state of the geo backup policy. Required. Known values are: "Disabled" and
-         "Enabled".
+        :keyword state: The state of the geo backup policy. Known values are: "Enabled" and "Disabled".
         :paramtype state: str or ~azure.mgmt.sql.models.GeoBackupPolicyState
         """
         super().__init__(**kwargs)
-        self.kind = None
         self.location = None
+        self.kind = None
         self.state = state
         self.storage_type = None
 
 
 class GeoBackupPolicyListResult(_serialization.Model):
-    """The response to a list geo backup policies request.
+    """The list of geo backup policies.
 
-    :ivar value: The list of geo backup policies.
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
     :vartype value: list[~azure.mgmt.sql.models.GeoBackupPolicy]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[GeoBackupPolicy]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.GeoBackupPolicy"]] = None, **kwargs: Any) -> None:
-        """
-        :keyword value: The list of geo backup policies.
-        :paramtype value: list[~azure.mgmt.sql.models.GeoBackupPolicy]
-        """
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
         super().__init__(**kwargs)
-        self.value = value
+        self.value = None
+        self.next_link = None
 
 
 class ImportExistingDatabaseDefinition(_serialization.Model):
@@ -6750,7 +6636,7 @@ class ImportExportExtensionsOperationListResult(_serialization.Model):
         self.next_link = None
 
 
-class ImportExportExtensionsOperationResult(ProxyResource):
+class ImportExportExtensionsOperationResult(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """An Extension operation result resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -6775,6 +6661,14 @@ class ImportExportExtensionsOperationResult(ProxyResource):
     :vartype status: str
     :ivar error_message: Error message.
     :vartype error_message: str
+    :ivar queued_time: Queued time.
+    :vartype queued_time: str
+    :ivar blob_uri: Blob URI.
+    :vartype blob_uri: str
+    :ivar private_endpoint_connections: Gets the status of private endpoints associated with this
+     request.
+    :vartype private_endpoint_connections:
+     list[~azure.mgmt.sql.models.PrivateEndpointConnectionRequestStatus]
     """
 
     _validation = {
@@ -6788,6 +6682,9 @@ class ImportExportExtensionsOperationResult(ProxyResource):
         "database_name": {"readonly": True},
         "status": {"readonly": True},
         "error_message": {"readonly": True},
+        "queued_time": {"readonly": True},
+        "blob_uri": {"readonly": True},
+        "private_endpoint_connections": {"readonly": True},
     }
 
     _attribute_map = {
@@ -6801,6 +6698,12 @@ class ImportExportExtensionsOperationResult(ProxyResource):
         "database_name": {"key": "properties.databaseName", "type": "str"},
         "status": {"key": "properties.status", "type": "str"},
         "error_message": {"key": "properties.errorMessage", "type": "str"},
+        "queued_time": {"key": "properties.queuedTime", "type": "str"},
+        "blob_uri": {"key": "properties.blobUri", "type": "str"},
+        "private_endpoint_connections": {
+            "key": "properties.privateEndpointConnections",
+            "type": "[PrivateEndpointConnectionRequestStatus]",
+        },
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -6813,6 +6716,9 @@ class ImportExportExtensionsOperationResult(ProxyResource):
         self.database_name = None
         self.status = None
         self.error_message = None
+        self.queued_time = None
+        self.blob_uri = None
+        self.private_endpoint_connections = None
 
 
 class ImportExportOperationResult(ProxyResource):  # pylint: disable=too-many-instance-attributes
@@ -7801,6 +7707,206 @@ class JobExecution(ProxyResource):  # pylint: disable=too-many-instance-attribut
      "InProgress", "WaitingForChildJobExecutions", "WaitingForRetry", "Succeeded",
      "SucceededWithSkipped", "Failed", "TimedOut", "Canceled", and "Skipped".
     :vartype lifecycle: str or ~azure.mgmt.sql.models.JobExecutionLifecycle
+    :ivar provisioning_state: Provisioning state of managed instance DTC. Known values are:
+     "Created", "InProgress", "Succeeded", "Failed", and "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
+    :ivar create_time: The time that the job execution was created.
+    :vartype create_time: ~datetime.datetime
+    :ivar start_time: The time that the job execution started.
+    :vartype start_time: ~datetime.datetime
+    :ivar end_time: The time that the job execution completed.
+    :vartype end_time: ~datetime.datetime
+    :ivar current_attempts: Number of times the job execution has been attempted.
+    :vartype current_attempts: int
+    :ivar current_attempt_start_time: Start time of the current attempt.
+    :vartype current_attempt_start_time: ~datetime.datetime
+    :ivar last_message: The last status or error message.
+    :vartype last_message: str
+    :ivar target: The target that this execution is executed on.
+    :vartype target: ~azure.mgmt.sql.models.JobExecutionTarget
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "job_version": {"readonly": True},
+        "step_name": {"readonly": True},
+        "step_id": {"readonly": True},
+        "job_execution_id": {"readonly": True},
+        "lifecycle": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "create_time": {"readonly": True},
+        "start_time": {"readonly": True},
+        "end_time": {"readonly": True},
+        "current_attempt_start_time": {"readonly": True},
+        "last_message": {"readonly": True},
+        "target": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "job_version": {"key": "properties.jobVersion", "type": "int"},
+        "step_name": {"key": "properties.stepName", "type": "str"},
+        "step_id": {"key": "properties.stepId", "type": "int"},
+        "job_execution_id": {"key": "properties.jobExecutionId", "type": "str"},
+        "lifecycle": {"key": "properties.lifecycle", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "create_time": {"key": "properties.createTime", "type": "iso-8601"},
+        "start_time": {"key": "properties.startTime", "type": "iso-8601"},
+        "end_time": {"key": "properties.endTime", "type": "iso-8601"},
+        "current_attempts": {"key": "properties.currentAttempts", "type": "int"},
+        "current_attempt_start_time": {"key": "properties.currentAttemptStartTime", "type": "iso-8601"},
+        "last_message": {"key": "properties.lastMessage", "type": "str"},
+        "target": {"key": "properties.target", "type": "JobExecutionTarget"},
+    }
+
+    def __init__(self, *, current_attempts: Optional[int] = None, **kwargs: Any) -> None:
+        """
+        :keyword current_attempts: Number of times the job execution has been attempted.
+        :paramtype current_attempts: int
+        """
+        super().__init__(**kwargs)
+        self.job_version = None
+        self.step_name = None
+        self.step_id = None
+        self.job_execution_id = None
+        self.lifecycle = None
+        self.provisioning_state = None
+        self.create_time = None
+        self.start_time = None
+        self.end_time = None
+        self.current_attempts = current_attempts
+        self.current_attempt_start_time = None
+        self.last_message = None
+        self.target = None
+
+
+class JobExecutionAutoGenerated(ProxyResource):  # pylint: disable=too-many-instance-attributes
+    """An execution of a job.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar job_version: The job version number.
+    :vartype job_version: int
+    :ivar step_name: The job step name.
+    :vartype step_name: str
+    :ivar step_id: The job step id.
+    :vartype step_id: int
+    :ivar job_execution_id: The unique identifier of the job execution.
+    :vartype job_execution_id: str
+    :ivar lifecycle: The detailed state of the job execution. Known values are: "Created",
+     "InProgress", "WaitingForChildJobExecutions", "WaitingForRetry", "Succeeded",
+     "SucceededWithSkipped", "Failed", "TimedOut", "Canceled", and "Skipped".
+    :vartype lifecycle: str or ~azure.mgmt.sql.models.JobExecutionLifecycle
+    :ivar provisioning_state: The ARM provisioning state of the job execution. Known values are:
+     "Created", "InProgress", "Succeeded", "Failed", and "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
+    :ivar create_time: The time that the job execution was created.
+    :vartype create_time: ~datetime.datetime
+    :ivar start_time: The time that the job execution started.
+    :vartype start_time: ~datetime.datetime
+    :ivar end_time: The time that the job execution completed.
+    :vartype end_time: ~datetime.datetime
+    :ivar current_attempts: Number of times the job execution has been attempted.
+    :vartype current_attempts: int
+    :ivar current_attempt_start_time: Start time of the current attempt.
+    :vartype current_attempt_start_time: ~datetime.datetime
+    :ivar last_message: The last status or error message.
+    :vartype last_message: str
+    :ivar target: The target that this execution is executed on.
+    :vartype target: ~azure.mgmt.sql.models.JobExecutionTarget
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "job_version": {"readonly": True},
+        "step_name": {"readonly": True},
+        "step_id": {"readonly": True},
+        "job_execution_id": {"readonly": True},
+        "lifecycle": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "create_time": {"readonly": True},
+        "start_time": {"readonly": True},
+        "end_time": {"readonly": True},
+        "current_attempt_start_time": {"readonly": True},
+        "last_message": {"readonly": True},
+        "target": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "job_version": {"key": "properties.jobVersion", "type": "int"},
+        "step_name": {"key": "properties.stepName", "type": "str"},
+        "step_id": {"key": "properties.stepId", "type": "int"},
+        "job_execution_id": {"key": "properties.jobExecutionId", "type": "str"},
+        "lifecycle": {"key": "properties.lifecycle", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "create_time": {"key": "properties.createTime", "type": "iso-8601"},
+        "start_time": {"key": "properties.startTime", "type": "iso-8601"},
+        "end_time": {"key": "properties.endTime", "type": "iso-8601"},
+        "current_attempts": {"key": "properties.currentAttempts", "type": "int"},
+        "current_attempt_start_time": {"key": "properties.currentAttemptStartTime", "type": "iso-8601"},
+        "last_message": {"key": "properties.lastMessage", "type": "str"},
+        "target": {"key": "properties.target", "type": "JobExecutionTarget"},
+    }
+
+    def __init__(self, *, current_attempts: Optional[int] = None, **kwargs: Any) -> None:
+        """
+        :keyword current_attempts: Number of times the job execution has been attempted.
+        :paramtype current_attempts: int
+        """
+        super().__init__(**kwargs)
+        self.job_version = None
+        self.step_name = None
+        self.step_id = None
+        self.job_execution_id = None
+        self.lifecycle = None
+        self.provisioning_state = None
+        self.create_time = None
+        self.start_time = None
+        self.end_time = None
+        self.current_attempts = current_attempts
+        self.current_attempt_start_time = None
+        self.last_message = None
+        self.target = None
+
+
+class JobExecutionAutoGenerated2(ProxyResource):  # pylint: disable=too-many-instance-attributes
+    """An execution of a job.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar job_version: The job version number.
+    :vartype job_version: int
+    :ivar step_name: The job step name.
+    :vartype step_name: str
+    :ivar step_id: The job step id.
+    :vartype step_id: int
+    :ivar job_execution_id: The unique identifier of the job execution.
+    :vartype job_execution_id: str
+    :ivar lifecycle: The detailed state of the job execution. Known values are: "Created",
+     "InProgress", "WaitingForChildJobExecutions", "WaitingForRetry", "Succeeded",
+     "SucceededWithSkipped", "Failed", "TimedOut", "Canceled", and "Skipped".
+    :vartype lifecycle: str or ~azure.mgmt.sql.models.JobExecutionLifecycle
     :ivar provisioning_state: The ARM provisioning state of the job execution. Known values are:
      "Created", "InProgress", "Succeeded", "Failed", and "Canceled".
     :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
@@ -7906,6 +8012,62 @@ class JobExecutionListResult(_serialization.Model):
         self.next_link = None
 
 
+class JobExecutionListResultAutoGenerated(_serialization.Model):
+    """A list of job executions.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.JobExecutionAutoGenerated]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[JobExecutionAutoGenerated]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
+        super().__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
+class JobExecutionListResultAutoGenerated2(_serialization.Model):
+    """A list of job executions.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.JobExecutionAutoGenerated2]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[JobExecutionAutoGenerated2]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
+        super().__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
 class JobExecutionTarget(_serialization.Model):
     """The target that a job execution is executed on.
 
@@ -7995,8 +8157,8 @@ class JobSchedule(_serialization.Model):
     def __init__(
         self,
         *,
-        start_time: datetime.datetime = "0001-01-01T00:00:00+00:00",
-        end_time: datetime.datetime = "9999-12-31T11:59:59+00:00",
+        start_time: datetime.datetime = "0001-01-01T16:00:00-08:00",
+        end_time: datetime.datetime = "9999-12-31T03:59:59-08:00",
         type: Union[str, "_models.JobScheduleType"] = "Once",
         enabled: Optional[bool] = None,
         interval: Optional[str] = None,
@@ -9028,6 +9190,9 @@ class LongTermRetentionPolicy(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
+    :ivar backup_storage_access_tier: The BackupStorageAccessTier for the LTR backups. Known values
+     are: "Hot" and "Archive".
+    :vartype backup_storage_access_tier: str or ~azure.mgmt.sql.models.BackupStorageAccessTier
     :ivar weekly_retention: The weekly retention policy for an LTR backup in an ISO 8601 format.
     :vartype weekly_retention: str
     :ivar monthly_retention: The monthly retention policy for an LTR backup in an ISO 8601 format.
@@ -9048,6 +9213,7 @@ class LongTermRetentionPolicy(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "backup_storage_access_tier": {"key": "properties.backupStorageAccessTier", "type": "str"},
         "weekly_retention": {"key": "properties.weeklyRetention", "type": "str"},
         "monthly_retention": {"key": "properties.monthlyRetention", "type": "str"},
         "yearly_retention": {"key": "properties.yearlyRetention", "type": "str"},
@@ -9057,6 +9223,7 @@ class LongTermRetentionPolicy(ProxyResource):
     def __init__(
         self,
         *,
+        backup_storage_access_tier: Optional[Union[str, "_models.BackupStorageAccessTier"]] = None,
         weekly_retention: Optional[str] = None,
         monthly_retention: Optional[str] = None,
         yearly_retention: Optional[str] = None,
@@ -9064,6 +9231,9 @@ class LongTermRetentionPolicy(ProxyResource):
         **kwargs: Any
     ) -> None:
         """
+        :keyword backup_storage_access_tier: The BackupStorageAccessTier for the LTR backups. Known
+         values are: "Hot" and "Archive".
+        :paramtype backup_storage_access_tier: str or ~azure.mgmt.sql.models.BackupStorageAccessTier
         :keyword weekly_retention: The weekly retention policy for an LTR backup in an ISO 8601 format.
         :paramtype weekly_retention: str
         :keyword monthly_retention: The monthly retention policy for an LTR backup in an ISO 8601
@@ -9075,6 +9245,7 @@ class LongTermRetentionPolicy(ProxyResource):
         :paramtype week_of_year: int
         """
         super().__init__(**kwargs)
+        self.backup_storage_access_tier = backup_storage_access_tier
         self.weekly_retention = weekly_retention
         self.monthly_retention = monthly_retention
         self.yearly_retention = yearly_retention
@@ -9479,6 +9650,10 @@ class ManagedDatabase(TrackedResource):  # pylint: disable=too-many-instance-att
     :ivar cross_subscription_target_managed_instance_id: Target managed instance id used in
      cross-subscription restore.
     :vartype cross_subscription_target_managed_instance_id: str
+    :ivar is_ledger_on: Whether or not this database is a ledger database, which means all tables
+     in the database are ledger tables. Note: the value of this property cannot be changed after the
+     database has been created.
+    :vartype is_ledger_on: bool
     """
 
     _validation = {
@@ -9529,6 +9704,7 @@ class ManagedDatabase(TrackedResource):  # pylint: disable=too-many-instance-att
             "key": "properties.crossSubscriptionTargetManagedInstanceId",
             "type": "str",
         },
+        "is_ledger_on": {"key": "properties.isLedgerOn", "type": "bool"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -9552,6 +9728,7 @@ class ManagedDatabase(TrackedResource):  # pylint: disable=too-many-instance-att
         auto_complete_restore: Optional[bool] = None,
         last_backup_name: Optional[str] = None,
         cross_subscription_target_managed_instance_id: Optional[str] = None,
+        is_ledger_on: Optional[bool] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -9617,6 +9794,10 @@ class ManagedDatabase(TrackedResource):  # pylint: disable=too-many-instance-att
         :keyword cross_subscription_target_managed_instance_id: Target managed instance id used in
          cross-subscription restore.
         :paramtype cross_subscription_target_managed_instance_id: str
+        :keyword is_ledger_on: Whether or not this database is a ledger database, which means all
+         tables in the database are ledger tables. Note: the value of this property cannot be changed
+         after the database has been created.
+        :paramtype is_ledger_on: bool
         """
         super().__init__(location=location, tags=tags, **kwargs)
         self.collation = collation
@@ -9640,6 +9821,7 @@ class ManagedDatabase(TrackedResource):  # pylint: disable=too-many-instance-att
         self.auto_complete_restore = auto_complete_restore
         self.last_backup_name = last_backup_name
         self.cross_subscription_target_managed_instance_id = cross_subscription_target_managed_instance_id
+        self.is_ledger_on = is_ledger_on
 
 
 class ManagedDatabaseAdvancedThreatProtection(ProxyResource):
@@ -10390,6 +10572,10 @@ class ManagedDatabaseUpdate(_serialization.Model):  # pylint: disable=too-many-i
     :ivar cross_subscription_target_managed_instance_id: Target managed instance id used in
      cross-subscription restore.
     :vartype cross_subscription_target_managed_instance_id: str
+    :ivar is_ledger_on: Whether or not this database is a ledger database, which means all tables
+     in the database are ledger tables. Note: the value of this property cannot be changed after the
+     database has been created.
+    :vartype is_ledger_on: bool
     """
 
     _validation = {
@@ -10432,6 +10618,7 @@ class ManagedDatabaseUpdate(_serialization.Model):  # pylint: disable=too-many-i
             "key": "properties.crossSubscriptionTargetManagedInstanceId",
             "type": "str",
         },
+        "is_ledger_on": {"key": "properties.isLedgerOn", "type": "bool"},
     }
 
     def __init__(
@@ -10454,6 +10641,7 @@ class ManagedDatabaseUpdate(_serialization.Model):  # pylint: disable=too-many-i
         auto_complete_restore: Optional[bool] = None,
         last_backup_name: Optional[str] = None,
         cross_subscription_target_managed_instance_id: Optional[str] = None,
+        is_ledger_on: Optional[bool] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -10517,6 +10705,10 @@ class ManagedDatabaseUpdate(_serialization.Model):  # pylint: disable=too-many-i
         :keyword cross_subscription_target_managed_instance_id: Target managed instance id used in
          cross-subscription restore.
         :paramtype cross_subscription_target_managed_instance_id: str
+        :keyword is_ledger_on: Whether or not this database is a ledger database, which means all
+         tables in the database are ledger tables. Note: the value of this property cannot be changed
+         after the database has been created.
+        :paramtype is_ledger_on: bool
         """
         super().__init__(**kwargs)
         self.tags = tags
@@ -10541,6 +10733,7 @@ class ManagedDatabaseUpdate(_serialization.Model):  # pylint: disable=too-many-i
         self.auto_complete_restore = auto_complete_restore
         self.last_backup_name = last_backup_name
         self.cross_subscription_target_managed_instance_id = cross_subscription_target_managed_instance_id
+        self.is_ledger_on = is_ledger_on
 
 
 class ManagedInstance(TrackedResource):  # pylint: disable=too-many-instance-attributes
@@ -10565,11 +10758,9 @@ class ManagedInstance(TrackedResource):  # pylint: disable=too-many-instance-att
     :ivar sku: Managed instance SKU. Allowed values for sku.name: GP_Gen5, GP_G8IM, GP_G8IH,
      BC_Gen5, BC_G8IM, BC_G8IH.
     :vartype sku: ~azure.mgmt.sql.models.Sku
-    :ivar provisioning_state: Known values are: "Creating", "Deleting", "Updating", "Unknown",
-     "Succeeded", "Failed", "Accepted", "Created", "Deleted", "Unrecognized", "Running", "Canceled",
-     "NotSpecified", "Registering", and "TimedOut".
-    :vartype provisioning_state: str or
-     ~azure.mgmt.sql.models.ManagedInstancePropertiesProvisioningState
+    :ivar provisioning_state: Provisioning state of managed instance. Known values are: "Created",
+     "InProgress", "Succeeded", "Failed", and "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
     :ivar managed_instance_create_mode: Specifies the mode of database creation.
 
      Default: Regular instance creation.
@@ -10661,6 +10852,8 @@ class ManagedInstance(TrackedResource):  # pylint: disable=too-many-instance-att
     :vartype administrators: ~azure.mgmt.sql.models.ManagedInstanceExternalAdministrator
     :ivar service_principal: The managed instance's service principal.
     :vartype service_principal: ~azure.mgmt.sql.models.ServicePrincipal
+    :ivar virtual_cluster_id: Virtual cluster resource id for the Managed Instance.
+    :vartype virtual_cluster_id: str
     """
 
     _validation = {
@@ -10674,6 +10867,7 @@ class ManagedInstance(TrackedResource):  # pylint: disable=too-many-instance-att
         "dns_zone": {"readonly": True},
         "private_endpoint_connections": {"readonly": True},
         "current_backup_storage_redundancy": {"readonly": True},
+        "virtual_cluster_id": {"readonly": True},
     }
 
     _attribute_map = {
@@ -10716,6 +10910,7 @@ class ManagedInstance(TrackedResource):  # pylint: disable=too-many-instance-att
         "key_id": {"key": "properties.keyId", "type": "str"},
         "administrators": {"key": "properties.administrators", "type": "ManagedInstanceExternalAdministrator"},
         "service_principal": {"key": "properties.servicePrincipal", "type": "ServicePrincipal"},
+        "virtual_cluster_id": {"key": "properties.virtualClusterId", "type": "str"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -10870,6 +11065,7 @@ class ManagedInstance(TrackedResource):  # pylint: disable=too-many-instance-att
         self.key_id = key_id
         self.administrators = administrators
         self.service_principal = service_principal
+        self.virtual_cluster_id = None
 
 
 class ManagedInstanceAdministrator(ProxyResource):
@@ -12102,7 +12298,8 @@ class ManagedInstanceOperationSteps(_serialization.Model):
     :ivar current_step: The number of current operation steps.
     :vartype current_step: int
     :ivar steps_list: The operation steps list.
-    :vartype steps_list: list[~azure.mgmt.sql.models.UpsertManagedServerOperationStep]
+    :vartype steps_list:
+     list[~azure.mgmt.sql.models.UpsertManagedServerOperationStepWithEstimatesAndDuration]
     """
 
     _validation = {
@@ -12114,7 +12311,7 @@ class ManagedInstanceOperationSteps(_serialization.Model):
     _attribute_map = {
         "total_steps": {"key": "totalSteps", "type": "str"},
         "current_step": {"key": "currentStep", "type": "int"},
-        "steps_list": {"key": "stepsList", "type": "[UpsertManagedServerOperationStep]"},
+        "steps_list": {"key": "stepsList", "type": "[UpsertManagedServerOperationStepWithEstimatesAndDuration]"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -12419,16 +12616,20 @@ class ManagedInstancePrivateLinkProperties(_serialization.Model):
     :vartype group_id: str
     :ivar required_members: The private link resource required member names.
     :vartype required_members: list[str]
+    :ivar required_zone_names: The private link resource required zone names.
+    :vartype required_zone_names: list[str]
     """
 
     _validation = {
         "group_id": {"readonly": True},
         "required_members": {"readonly": True},
+        "required_zone_names": {"readonly": True},
     }
 
     _attribute_map = {
         "group_id": {"key": "groupId", "type": "str"},
         "required_members": {"key": "requiredMembers", "type": "[str]"},
+        "required_zone_names": {"key": "requiredZoneNames", "type": "[str]"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -12436,6 +12637,7 @@ class ManagedInstancePrivateLinkProperties(_serialization.Model):
         super().__init__(**kwargs)
         self.group_id = None
         self.required_members = None
+        self.required_zone_names = None
 
 
 class ManagedInstancePrivateLinkServiceConnectionStateProperty(_serialization.Model):
@@ -12554,11 +12756,9 @@ class ManagedInstanceUpdate(_serialization.Model):  # pylint: disable=too-many-i
     :vartype identity: ~azure.mgmt.sql.models.ResourceIdentity
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar provisioning_state: Known values are: "Creating", "Deleting", "Updating", "Unknown",
-     "Succeeded", "Failed", "Accepted", "Created", "Deleted", "Unrecognized", "Running", "Canceled",
-     "NotSpecified", "Registering", and "TimedOut".
-    :vartype provisioning_state: str or
-     ~azure.mgmt.sql.models.ManagedInstancePropertiesProvisioningState
+    :ivar provisioning_state: Provisioning state of managed instance. Known values are: "Created",
+     "InProgress", "Succeeded", "Failed", and "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
     :ivar managed_instance_create_mode: Specifies the mode of database creation.
 
      Default: Regular instance creation.
@@ -12650,6 +12850,8 @@ class ManagedInstanceUpdate(_serialization.Model):  # pylint: disable=too-many-i
     :vartype administrators: ~azure.mgmt.sql.models.ManagedInstanceExternalAdministrator
     :ivar service_principal: The managed instance's service principal.
     :vartype service_principal: ~azure.mgmt.sql.models.ServicePrincipal
+    :ivar virtual_cluster_id: Virtual cluster resource id for the Managed Instance.
+    :vartype virtual_cluster_id: str
     """
 
     _validation = {
@@ -12659,6 +12861,7 @@ class ManagedInstanceUpdate(_serialization.Model):  # pylint: disable=too-many-i
         "dns_zone": {"readonly": True},
         "private_endpoint_connections": {"readonly": True},
         "current_backup_storage_redundancy": {"readonly": True},
+        "virtual_cluster_id": {"readonly": True},
     }
 
     _attribute_map = {
@@ -12697,6 +12900,7 @@ class ManagedInstanceUpdate(_serialization.Model):  # pylint: disable=too-many-i
         "key_id": {"key": "properties.keyId", "type": "str"},
         "administrators": {"key": "properties.administrators", "type": "ManagedInstanceExternalAdministrator"},
         "service_principal": {"key": "properties.servicePrincipal", "type": "ServicePrincipal"},
+        "virtual_cluster_id": {"key": "properties.virtualClusterId", "type": "str"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -12848,6 +13052,7 @@ class ManagedInstanceUpdate(_serialization.Model):  # pylint: disable=too-many-i
         self.key_id = key_id
         self.administrators = administrators
         self.service_principal = service_principal
+        self.virtual_cluster_id = None
 
 
 class ManagedInstanceVcoresCapability(_serialization.Model):
@@ -13557,256 +13762,6 @@ class MaxSizeRangeCapability(_serialization.Model):
         self.reason = reason
 
 
-class Metric(_serialization.Model):
-    """Database metrics.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar start_time: The start time for the metric (ISO-8601 format).
-    :vartype start_time: ~datetime.datetime
-    :ivar end_time: The end time for the metric (ISO-8601 format).
-    :vartype end_time: ~datetime.datetime
-    :ivar time_grain: The time step to be used to summarize the metric values.
-    :vartype time_grain: str
-    :ivar unit: The unit of the metric. Known values are: "count", "bytes", "seconds", "percent",
-     "countPerSecond", and "bytesPerSecond".
-    :vartype unit: str or ~azure.mgmt.sql.models.UnitType
-    :ivar name: The name information for the metric.
-    :vartype name: ~azure.mgmt.sql.models.MetricName
-    :ivar metric_values: The metric values for the specified time window and timestep.
-    :vartype metric_values: list[~azure.mgmt.sql.models.MetricValue]
-    """
-
-    _validation = {
-        "start_time": {"readonly": True},
-        "end_time": {"readonly": True},
-        "time_grain": {"readonly": True},
-        "unit": {"readonly": True},
-        "name": {"readonly": True},
-        "metric_values": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "start_time": {"key": "startTime", "type": "iso-8601"},
-        "end_time": {"key": "endTime", "type": "iso-8601"},
-        "time_grain": {"key": "timeGrain", "type": "str"},
-        "unit": {"key": "unit", "type": "str"},
-        "name": {"key": "name", "type": "MetricName"},
-        "metric_values": {"key": "metricValues", "type": "[MetricValue]"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.start_time = None
-        self.end_time = None
-        self.time_grain = None
-        self.unit = None
-        self.name = None
-        self.metric_values = None
-
-
-class MetricAvailability(_serialization.Model):
-    """A metric availability value.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar retention: The length of retention for the database metric.
-    :vartype retention: str
-    :ivar time_grain: The granularity of the database metric.
-    :vartype time_grain: str
-    """
-
-    _validation = {
-        "retention": {"readonly": True},
-        "time_grain": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "retention": {"key": "retention", "type": "str"},
-        "time_grain": {"key": "timeGrain", "type": "str"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.retention = None
-        self.time_grain = None
-
-
-class MetricDefinition(_serialization.Model):
-    """A database metric definition.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar name: The name information for the metric.
-    :vartype name: ~azure.mgmt.sql.models.MetricName
-    :ivar primary_aggregation_type: The primary aggregation type defining how metric values are
-     displayed. Known values are: "None", "Average", "Count", "Minimum", "Maximum", and "Total".
-    :vartype primary_aggregation_type: str or ~azure.mgmt.sql.models.PrimaryAggregationType
-    :ivar resource_uri: The resource uri of the database.
-    :vartype resource_uri: str
-    :ivar unit: The unit of the metric. Known values are: "Count", "Bytes", "Seconds", "Percent",
-     "CountPerSecond", and "BytesPerSecond".
-    :vartype unit: str or ~azure.mgmt.sql.models.UnitDefinitionType
-    :ivar metric_availabilities: The list of database metric availabilities for the metric.
-    :vartype metric_availabilities: list[~azure.mgmt.sql.models.MetricAvailability]
-    """
-
-    _validation = {
-        "name": {"readonly": True},
-        "primary_aggregation_type": {"readonly": True},
-        "resource_uri": {"readonly": True},
-        "unit": {"readonly": True},
-        "metric_availabilities": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "name": {"key": "name", "type": "MetricName"},
-        "primary_aggregation_type": {"key": "primaryAggregationType", "type": "str"},
-        "resource_uri": {"key": "resourceUri", "type": "str"},
-        "unit": {"key": "unit", "type": "str"},
-        "metric_availabilities": {"key": "metricAvailabilities", "type": "[MetricAvailability]"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.name = None
-        self.primary_aggregation_type = None
-        self.resource_uri = None
-        self.unit = None
-        self.metric_availabilities = None
-
-
-class MetricDefinitionListResult(_serialization.Model):
-    """The response to a list database metric definitions request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: The list of metric definitions for the database. Required.
-    :vartype value: list[~azure.mgmt.sql.models.MetricDefinition]
-    """
-
-    _validation = {
-        "value": {"required": True},
-    }
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[MetricDefinition]"},
-    }
-
-    def __init__(self, *, value: List["_models.MetricDefinition"], **kwargs: Any) -> None:
-        """
-        :keyword value: The list of metric definitions for the database. Required.
-        :paramtype value: list[~azure.mgmt.sql.models.MetricDefinition]
-        """
-        super().__init__(**kwargs)
-        self.value = value
-
-
-class MetricListResult(_serialization.Model):
-    """The response to a list database metrics request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: The list of metrics for the database. Required.
-    :vartype value: list[~azure.mgmt.sql.models.Metric]
-    """
-
-    _validation = {
-        "value": {"required": True},
-    }
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[Metric]"},
-    }
-
-    def __init__(self, *, value: List["_models.Metric"], **kwargs: Any) -> None:
-        """
-        :keyword value: The list of metrics for the database. Required.
-        :paramtype value: list[~azure.mgmt.sql.models.Metric]
-        """
-        super().__init__(**kwargs)
-        self.value = value
-
-
-class MetricName(_serialization.Model):
-    """A database metric name.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar value: The name of the database metric.
-    :vartype value: str
-    :ivar localized_value: The friendly name of the database metric.
-    :vartype localized_value: str
-    """
-
-    _validation = {
-        "value": {"readonly": True},
-        "localized_value": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "str"},
-        "localized_value": {"key": "localizedValue", "type": "str"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.value = None
-        self.localized_value = None
-
-
-class MetricValue(_serialization.Model):
-    """Represents database metrics.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar count: The number of values for the metric.
-    :vartype count: int
-    :ivar average: The average value of the metric.
-    :vartype average: float
-    :ivar maximum: The max value of the metric.
-    :vartype maximum: float
-    :ivar minimum: The min value of the metric.
-    :vartype minimum: float
-    :ivar timestamp: The metric timestamp (ISO-8601 format).
-    :vartype timestamp: ~datetime.datetime
-    :ivar total: The total value of the metric.
-    :vartype total: float
-    """
-
-    _validation = {
-        "count": {"readonly": True},
-        "average": {"readonly": True},
-        "maximum": {"readonly": True},
-        "minimum": {"readonly": True},
-        "timestamp": {"readonly": True},
-        "total": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "count": {"key": "count", "type": "int"},
-        "average": {"key": "average", "type": "float"},
-        "maximum": {"key": "maximum", "type": "float"},
-        "minimum": {"key": "minimum", "type": "float"},
-        "timestamp": {"key": "timestamp", "type": "iso-8601"},
-        "total": {"key": "total", "type": "float"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.count = None
-        self.average = None
-        self.maximum = None
-        self.minimum = None
-        self.timestamp = None
-        self.total = None
-
-
 class MinCapacityCapability(_serialization.Model):
     """The min capacity capability.
 
@@ -13984,44 +13939,6 @@ class OperationDisplay(_serialization.Model):
         self.resource = None
         self.operation = None
         self.description = None
-
-
-class OperationImpact(_serialization.Model):
-    """The impact of an operation, both in absolute and relative terms.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar name: The name of the impact dimension.
-    :vartype name: str
-    :ivar unit: The unit in which estimated impact to dimension is measured.
-    :vartype unit: str
-    :ivar change_value_absolute: The absolute impact to dimension.
-    :vartype change_value_absolute: float
-    :ivar change_value_relative: The relative impact to dimension (null if not applicable).
-    :vartype change_value_relative: float
-    """
-
-    _validation = {
-        "name": {"readonly": True},
-        "unit": {"readonly": True},
-        "change_value_absolute": {"readonly": True},
-        "change_value_relative": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "name": {"key": "name", "type": "str"},
-        "unit": {"key": "unit", "type": "str"},
-        "change_value_absolute": {"key": "changeValueAbsolute", "type": "float"},
-        "change_value_relative": {"key": "changeValueRelative", "type": "float"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.name = None
-        self.unit = None
-        self.change_value_absolute = None
-        self.change_value_relative = None
 
 
 class OperationListResult(_serialization.Model):
@@ -14272,6 +14189,35 @@ class PerformanceLevelCapability(_serialization.Model):
         self.unit = None
 
 
+class PhaseDetails(_serialization.Model):
+    """The phase details properties of a database operation.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar phase: The operation phase. Known values are: "Copying", "Catchup", "WaitingForCutover",
+     and "CutoverInProgress".
+    :vartype phase: str or ~azure.mgmt.sql.models.Phase
+    :ivar phase_information: The operation phase information.
+    :vartype phase_information: dict[str, str]
+    """
+
+    _validation = {
+        "phase": {"readonly": True},
+        "phase_information": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "phase": {"key": "phase", "type": "str"},
+        "phase_information": {"key": "phaseInformation", "type": "{str}"},
+    }
+
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
+        super().__init__(**kwargs)
+        self.phase = None
+        self.phase_information = None
+
+
 class PrivateEndpointConnection(ProxyResource):
     """A private endpoint connection.
 
@@ -14285,6 +14231,8 @@ class PrivateEndpointConnection(ProxyResource):
     :vartype type: str
     :ivar private_endpoint: Private endpoint which the connection belongs to.
     :vartype private_endpoint: ~azure.mgmt.sql.models.PrivateEndpointProperty
+    :ivar group_ids: Group IDs.
+    :vartype group_ids: list[str]
     :ivar private_link_service_connection_state: Connection state of the private endpoint
      connection.
     :vartype private_link_service_connection_state:
@@ -14298,6 +14246,7 @@ class PrivateEndpointConnection(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "group_ids": {"readonly": True},
         "provisioning_state": {"readonly": True},
     }
 
@@ -14306,6 +14255,7 @@ class PrivateEndpointConnection(ProxyResource):
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
         "private_endpoint": {"key": "properties.privateEndpoint", "type": "PrivateEndpointProperty"},
+        "group_ids": {"key": "properties.groupIds", "type": "[str]"},
         "private_link_service_connection_state": {
             "key": "properties.privateLinkServiceConnectionState",
             "type": "PrivateLinkServiceConnectionStateProperty",
@@ -14330,6 +14280,7 @@ class PrivateEndpointConnection(ProxyResource):
         """
         super().__init__(**kwargs)
         self.private_endpoint = private_endpoint
+        self.group_ids = None
         self.private_link_service_connection_state = private_link_service_connection_state
         self.provisioning_state = None
 
@@ -14923,13 +14874,13 @@ class RecommendedAction(ProxyResource):  # pylint: disable=too-many-instance-att
     :vartype execute_action_start_time: ~datetime.datetime
     :ivar execute_action_duration: Gets the time taken for applying this recommended action on user
      resource. e.g., time taken for index creation.
-    :vartype execute_action_duration: str
+    :vartype execute_action_duration: ~datetime.timedelta
     :ivar revert_action_start_time: Gets the time when system started reverting changes of this
      recommended action on user resource. e.g., time when index drop is executed.
     :vartype revert_action_start_time: ~datetime.datetime
     :ivar revert_action_duration: Gets the time taken for reverting changes of this recommended
      action on user resource. e.g., time taken for dropping the created index.
-    :vartype revert_action_duration: str
+    :vartype revert_action_duration: ~datetime.timedelta
     :ivar execute_action_initiated_by: Gets if approval for applying this recommended action was
      given by user/system. Known values are: "User" and "System".
     :vartype execute_action_initiated_by: str or
@@ -15011,9 +14962,9 @@ class RecommendedAction(ProxyResource):  # pylint: disable=too-many-instance-att
         "is_revertable_action": {"key": "properties.isRevertableAction", "type": "bool"},
         "is_archived_action": {"key": "properties.isArchivedAction", "type": "bool"},
         "execute_action_start_time": {"key": "properties.executeActionStartTime", "type": "iso-8601"},
-        "execute_action_duration": {"key": "properties.executeActionDuration", "type": "str"},
+        "execute_action_duration": {"key": "properties.executeActionDuration", "type": "duration"},
         "revert_action_start_time": {"key": "properties.revertActionStartTime", "type": "iso-8601"},
-        "revert_action_duration": {"key": "properties.revertActionDuration", "type": "str"},
+        "revert_action_duration": {"key": "properties.revertActionDuration", "type": "duration"},
         "execute_action_initiated_by": {"key": "properties.executeActionInitiatedBy", "type": "str"},
         "execute_action_initiated_time": {"key": "properties.executeActionInitiatedTime", "type": "iso-8601"},
         "revert_action_initiated_by": {"key": "properties.revertActionInitiatedBy", "type": "str"},
@@ -15634,6 +15585,8 @@ class ReplicationLink(ProxyResource):  # pylint: disable=too-many-instance-attri
     :vartype partner_server: str
     :ivar partner_database: Resource partner database.
     :vartype partner_database: str
+    :ivar partner_database_id: Resource partner database Id.
+    :vartype partner_database_id: str
     :ivar partner_location: Resource partner location.
     :vartype partner_location: str
     :ivar role: Local replication role. Known values are: "Primary", "Secondary",
@@ -15664,6 +15617,7 @@ class ReplicationLink(ProxyResource):  # pylint: disable=too-many-instance-attri
         "type": {"readonly": True},
         "partner_server": {"readonly": True},
         "partner_database": {"readonly": True},
+        "partner_database_id": {"readonly": True},
         "partner_location": {"readonly": True},
         "role": {"readonly": True},
         "partner_role": {"readonly": True},
@@ -15681,6 +15635,7 @@ class ReplicationLink(ProxyResource):  # pylint: disable=too-many-instance-attri
         "type": {"key": "type", "type": "str"},
         "partner_server": {"key": "properties.partnerServer", "type": "str"},
         "partner_database": {"key": "properties.partnerDatabase", "type": "str"},
+        "partner_database_id": {"key": "properties.partnerDatabaseId", "type": "str"},
         "partner_location": {"key": "properties.partnerLocation", "type": "str"},
         "role": {"key": "properties.role", "type": "str"},
         "partner_role": {"key": "properties.partnerRole", "type": "str"},
@@ -15697,6 +15652,7 @@ class ReplicationLink(ProxyResource):  # pylint: disable=too-many-instance-attri
         super().__init__(**kwargs)
         self.partner_server = None
         self.partner_database = None
+        self.partner_database_id = None
         self.partner_location = None
         self.role = None
         self.partner_role = None
@@ -17356,78 +17312,6 @@ class ServerBlobAuditingPolicyListResult(_serialization.Model):
         self.next_link = None
 
 
-class ServerCommunicationLink(ProxyResource):
-    """Server communication link.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Resource ID.
-    :vartype id: str
-    :ivar name: Resource name.
-    :vartype name: str
-    :ivar type: Resource type.
-    :vartype type: str
-    :ivar location: Communication link location.
-    :vartype location: str
-    :ivar kind: Communication link kind.  This property is used for Azure Portal metadata.
-    :vartype kind: str
-    :ivar state: The state.
-    :vartype state: str
-    :ivar partner_server: The name of the partner server.
-    :vartype partner_server: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "location": {"readonly": True},
-        "kind": {"readonly": True},
-        "state": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "location": {"key": "location", "type": "str"},
-        "kind": {"key": "kind", "type": "str"},
-        "state": {"key": "properties.state", "type": "str"},
-        "partner_server": {"key": "properties.partnerServer", "type": "str"},
-    }
-
-    def __init__(self, *, partner_server: Optional[str] = None, **kwargs: Any) -> None:
-        """
-        :keyword partner_server: The name of the partner server.
-        :paramtype partner_server: str
-        """
-        super().__init__(**kwargs)
-        self.location = None
-        self.kind = None
-        self.state = None
-        self.partner_server = partner_server
-
-
-class ServerCommunicationLinkListResult(_serialization.Model):
-    """A list of server communication links.
-
-    :ivar value: The list of server communication links.
-    :vartype value: list[~azure.mgmt.sql.models.ServerCommunicationLink]
-    """
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[ServerCommunicationLink]"},
-    }
-
-    def __init__(self, *, value: Optional[List["_models.ServerCommunicationLink"]] = None, **kwargs: Any) -> None:
-        """
-        :keyword value: The list of server communication links.
-        :paramtype value: list[~azure.mgmt.sql.models.ServerCommunicationLink]
-        """
-        super().__init__(**kwargs)
-        self.value = value
-
-
 class ServerConfigurationOption(ProxyResource):
     """A server configuration option.
 
@@ -17441,7 +17325,7 @@ class ServerConfigurationOption(ProxyResource):
     :vartype type: str
     :ivar server_configuration_option_value: Value of the server configuration option.
     :vartype server_configuration_option_value: int
-    :ivar provisioning_state: Provisioning state of server configuration option. Known values are:
+    :ivar provisioning_state: Provisioning state of managed instance DTC. Known values are:
      "Created", "InProgress", "Succeeded", "Failed", and "Canceled".
     :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
     """
@@ -17948,7 +17832,8 @@ class ServerKey(ProxyResource):  # pylint: disable=too-many-instance-attributes
      are: "ServiceManaged" and "AzureKeyVault".
     :vartype server_key_type: str or ~azure.mgmt.sql.models.ServerKeyType
     :ivar uri: The URI of the server key. If the ServerKeyType is AzureKeyVault, then the URI is
-     required.
+     required. The AKV URI is required to be in this format:
+     'https://YourVaultName.vault.azure.net/keys/YourKeyName/YourKeyVersion'.
     :vartype uri: str
     :ivar thumbprint: Thumbprint of the server key.
     :vartype thumbprint: str
@@ -17996,7 +17881,8 @@ class ServerKey(ProxyResource):  # pylint: disable=too-many-instance-attributes
          values are: "ServiceManaged" and "AzureKeyVault".
         :paramtype server_key_type: str or ~azure.mgmt.sql.models.ServerKeyType
         :keyword uri: The URI of the server key. If the ServerKeyType is AzureKeyVault, then the URI is
-         required.
+         required. The AKV URI is required to be in this format:
+         'https://YourVaultName.vault.azure.net/keys/YourKeyName/YourKeyVersion'.
         :paramtype uri: str
         """
         super().__init__(**kwargs)
@@ -18639,83 +18525,82 @@ class ServerUpdate(_serialization.Model):  # pylint: disable=too-many-instance-a
         self.external_governance_status = None
 
 
-class ServerUsage(_serialization.Model):
-    """Represents server metrics.
+class ServerUsage(ProxyResource):
+    """Usage metric of a server.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar name: Name of the server usage metric.
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
     :vartype name: str
-    :ivar resource_name: The name of the resource.
-    :vartype resource_name: str
-    :ivar display_name: The metric display name.
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar display_name: User-readable name of the metric.
     :vartype display_name: str
-    :ivar current_value: The current value of the metric.
+    :ivar current_value: Current value of the metric.
     :vartype current_value: float
-    :ivar limit: The current limit of the metric.
+    :ivar limit: Boundary value of the metric.
     :vartype limit: float
-    :ivar unit: The units of the metric.
+    :ivar unit: Unit of the metric.
     :vartype unit: str
-    :ivar next_reset_time: The next reset time for the metric (ISO8601 format).
-    :vartype next_reset_time: ~datetime.datetime
     """
 
     _validation = {
+        "id": {"readonly": True},
         "name": {"readonly": True},
-        "resource_name": {"readonly": True},
+        "type": {"readonly": True},
         "display_name": {"readonly": True},
         "current_value": {"readonly": True},
         "limit": {"readonly": True},
         "unit": {"readonly": True},
-        "next_reset_time": {"readonly": True},
     }
 
     _attribute_map = {
+        "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
-        "resource_name": {"key": "resourceName", "type": "str"},
-        "display_name": {"key": "displayName", "type": "str"},
-        "current_value": {"key": "currentValue", "type": "float"},
-        "limit": {"key": "limit", "type": "float"},
-        "unit": {"key": "unit", "type": "str"},
-        "next_reset_time": {"key": "nextResetTime", "type": "iso-8601"},
+        "type": {"key": "type", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "current_value": {"key": "properties.currentValue", "type": "float"},
+        "limit": {"key": "properties.limit", "type": "float"},
+        "unit": {"key": "properties.unit", "type": "str"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.name = None
-        self.resource_name = None
         self.display_name = None
         self.current_value = None
         self.limit = None
         self.unit = None
-        self.next_reset_time = None
 
 
 class ServerUsageListResult(_serialization.Model):
-    """Represents the response to a list server metrics request.
+    """A list of server usage metrics.
 
-    All required parameters must be populated in order to send to Azure.
+    Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar value: The list of server metrics for the server. Required.
+    :ivar value: Array of results.
     :vartype value: list[~azure.mgmt.sql.models.ServerUsage]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
     """
 
     _validation = {
-        "value": {"required": True},
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[ServerUsage]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.ServerUsage"], **kwargs: Any) -> None:
-        """
-        :keyword value: The list of server metrics for the server. Required.
-        :paramtype value: list[~azure.mgmt.sql.models.ServerUsage]
-        """
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
         super().__init__(**kwargs)
-        self.value = value
+        self.value = None
+        self.next_link = None
 
 
 class ServerVersionCapability(_serialization.Model):
@@ -18878,61 +18763,6 @@ class ServerVulnerabilityAssessmentListResult(_serialization.Model):
         self.next_link = None
 
 
-class ServiceObjective(ProxyResource):
-    """Represents a database service objective.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Resource ID.
-    :vartype id: str
-    :ivar name: Resource name.
-    :vartype name: str
-    :ivar type: Resource type.
-    :vartype type: str
-    :ivar service_objective_name: The name for the service objective.
-    :vartype service_objective_name: str
-    :ivar is_default: Gets whether the service level objective is the default service objective.
-    :vartype is_default: bool
-    :ivar is_system: Gets whether the service level objective is a system service objective.
-    :vartype is_system: bool
-    :ivar description: The description for the service level objective.
-    :vartype description: str
-    :ivar enabled: Gets whether the service level objective is enabled.
-    :vartype enabled: bool
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "service_objective_name": {"readonly": True},
-        "is_default": {"readonly": True},
-        "is_system": {"readonly": True},
-        "description": {"readonly": True},
-        "enabled": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "service_objective_name": {"key": "properties.serviceObjectiveName", "type": "str"},
-        "is_default": {"key": "properties.isDefault", "type": "bool"},
-        "is_system": {"key": "properties.isSystem", "type": "bool"},
-        "description": {"key": "properties.description", "type": "str"},
-        "enabled": {"key": "properties.enabled", "type": "bool"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.service_objective_name = None
-        self.is_default = None
-        self.is_system = None
-        self.description = None
-        self.enabled = None
-
-
 class ServiceObjectiveCapability(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """The service objectives capability.
 
@@ -18963,6 +18793,8 @@ class ServiceObjectiveCapability(_serialization.Model):  # pylint: disable=too-m
     :ivar supported_maintenance_configurations: List of supported maintenance configurations.
     :vartype supported_maintenance_configurations:
      list[~azure.mgmt.sql.models.MaintenanceConfigurationCapability]
+    :ivar zone_pinning: Whether or not zone pinning is supported.
+    :vartype zone_pinning: bool
     :ivar status: The status of the capability. Known values are: "Visible", "Available",
      "Default", and "Disabled".
     :vartype status: str or ~azure.mgmt.sql.models.CapabilityStatus
@@ -18983,6 +18815,7 @@ class ServiceObjectiveCapability(_serialization.Model):  # pylint: disable=too-m
         "supported_min_capacities": {"readonly": True},
         "compute_model": {"readonly": True},
         "supported_maintenance_configurations": {"readonly": True},
+        "zone_pinning": {"readonly": True},
         "status": {"readonly": True},
     }
 
@@ -19002,6 +18835,7 @@ class ServiceObjectiveCapability(_serialization.Model):  # pylint: disable=too-m
             "key": "supportedMaintenanceConfigurations",
             "type": "[MaintenanceConfigurationCapability]",
         },
+        "zone_pinning": {"key": "zonePinning", "type": "bool"},
         "status": {"key": "status", "type": "str"},
         "reason": {"key": "reason", "type": "str"},
     }
@@ -19024,34 +18858,9 @@ class ServiceObjectiveCapability(_serialization.Model):  # pylint: disable=too-m
         self.supported_min_capacities = None
         self.compute_model = None
         self.supported_maintenance_configurations = None
+        self.zone_pinning = None
         self.status = None
         self.reason = reason
-
-
-class ServiceObjectiveListResult(_serialization.Model):
-    """Represents the response to a get database service objectives request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: The list of database service objectives. Required.
-    :vartype value: list[~azure.mgmt.sql.models.ServiceObjective]
-    """
-
-    _validation = {
-        "value": {"required": True},
-    }
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[ServiceObjective]"},
-    }
-
-    def __init__(self, *, value: List["_models.ServiceObjective"], **kwargs: Any) -> None:
-        """
-        :keyword value: The list of database service objectives. Required.
-        :paramtype value: list[~azure.mgmt.sql.models.ServiceObjective]
-        """
-        super().__init__(**kwargs)
-        self.value = value
 
 
 class ServicePrincipal(_serialization.Model):
@@ -19153,46 +18962,6 @@ class Sku(_serialization.Model):
         self.size = size
         self.family = family
         self.capacity = capacity
-
-
-class SloUsageMetric(_serialization.Model):
-    """A Slo Usage Metric.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar service_level_objective: The serviceLevelObjective for SLO usage metric. Known values
-     are: "System", "System0", "System1", "System2", "System3", "System4", "System2L", "System3L",
-     "System4L", "Free", "Basic", "S0", "S1", "S2", "S3", "S4", "S6", "S7", "S9", "S12", "P1", "P2",
-     "P3", "P4", "P6", "P11", "P15", "PRS1", "PRS2", "PRS4", "PRS6", "DW100", "DW200", "DW300",
-     "DW400", "DW500", "DW600", "DW1000", "DW1200", "DW1000c", "DW1500", "DW1500c", "DW2000",
-     "DW2000c", "DW3000", "DW2500c", "DW3000c", "DW6000", "DW5000c", "DW6000c", "DW7500c",
-     "DW10000c", "DW15000c", "DW30000c", "DS100", "DS200", "DS300", "DS400", "DS500", "DS600",
-     "DS1000", "DS1200", "DS1500", "DS2000", and "ElasticPool".
-    :vartype service_level_objective: str or ~azure.mgmt.sql.models.ServiceObjectiveName
-    :ivar service_level_objective_id: The serviceLevelObjectiveId for SLO usage metric.
-    :vartype service_level_objective_id: str
-    :ivar in_range_time_ratio: Gets or sets inRangeTimeRatio for SLO usage metric.
-    :vartype in_range_time_ratio: float
-    """
-
-    _validation = {
-        "service_level_objective": {"readonly": True},
-        "service_level_objective_id": {"readonly": True},
-        "in_range_time_ratio": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "service_level_objective": {"key": "serviceLevelObjective", "type": "str"},
-        "service_level_objective_id": {"key": "serviceLevelObjectiveId", "type": "str"},
-        "in_range_time_ratio": {"key": "inRangeTimeRatio", "type": "float"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.service_level_objective = None
-        self.service_level_objective_id = None
-        self.in_range_time_ratio = None
 
 
 class SqlAgentConfiguration(ProxyResource):
@@ -19412,6 +19181,8 @@ class SqlVulnerabilityAssessmentScanRecord(ProxyResource):  # pylint: disable=to
     :vartype total_rules_count: int
     :ivar is_baseline_applied: Baseline created for this database, and has one or more rules.
     :vartype is_baseline_applied: bool
+    :ivar last_scan_time: The last scan time.
+    :vartype last_scan_time: ~datetime.datetime
     """
 
     _validation = {
@@ -19435,6 +19206,7 @@ class SqlVulnerabilityAssessmentScanRecord(ProxyResource):  # pylint: disable=to
         "total_failed_rules_count": {"readonly": True},
         "total_rules_count": {"readonly": True},
         "is_baseline_applied": {"readonly": True},
+        "last_scan_time": {"readonly": True},
     }
 
     _attribute_map = {
@@ -19458,6 +19230,7 @@ class SqlVulnerabilityAssessmentScanRecord(ProxyResource):  # pylint: disable=to
         "total_failed_rules_count": {"key": "properties.totalFailedRulesCount", "type": "int"},
         "total_rules_count": {"key": "properties.totalRulesCount", "type": "int"},
         "is_baseline_applied": {"key": "properties.isBaselineApplied", "type": "bool"},
+        "last_scan_time": {"key": "properties.lastScanTime", "type": "iso-8601"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -19480,6 +19253,7 @@ class SqlVulnerabilityAssessmentScanRecord(ProxyResource):  # pylint: disable=to
         self.total_failed_rules_count = None
         self.total_rules_count = None
         self.is_baseline_applied = None
+        self.last_scan_time = None
 
 
 class SqlVulnerabilityAssessmentScanRecordListResult(_serialization.Model):
@@ -19693,7 +19467,7 @@ class StorageCapability(_serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar storage_account_type: The storage account type for the database's backups. Known values
-     are: "GRS", "LRS", and "ZRS".
+     are: "GRS", "LRS", "ZRS", and "GZRS".
     :vartype storage_account_type: str or
      ~azure.mgmt.sql.models.StorageCapabilityStorageAccountType
     :ivar status: The status of the capability. Known values are: "Visible", "Available",
@@ -20909,7 +20683,7 @@ class TdeCertificate(ProxyResource):
 
 
 class TimeZone(ProxyResource):
-    """Time Zone.
+    """Time Zone property.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -21170,19 +20944,28 @@ class UpsertManagedServerOperationParameters(_serialization.Model):
         self.storage_size_in_gb = storage_size_in_gb
 
 
-class UpsertManagedServerOperationStep(_serialization.Model):
-    """UpsertManagedServerOperationStep.
+class UpsertManagedServerOperationStepWithEstimatesAndDuration(_serialization.Model):
+    """UpsertManagedServerOperationStepWithEstimatesAndDuration.
 
+    :ivar step_start_time:
+    :vartype step_start_time: ~datetime.datetime
+    :ivar step_end_time:
+    :vartype step_end_time: ~datetime.datetime
+    :ivar time_elapsed:
+    :vartype time_elapsed: str
     :ivar order:
     :vartype order: int
     :ivar name:
     :vartype name: str
     :ivar status: Known values are: "NotStarted", "InProgress", "SlowedDown", "Completed",
      "Failed", and "Canceled".
-    :vartype status: str or ~azure.mgmt.sql.models.UpsertManagedServerOperationStepStatus
+    :vartype status: str or ~azure.mgmt.sql.models.Status
     """
 
     _attribute_map = {
+        "step_start_time": {"key": "stepStartTime", "type": "iso-8601"},
+        "step_end_time": {"key": "stepEndTime", "type": "iso-8601"},
+        "time_elapsed": {"key": "timeElapsed", "type": "str"},
         "order": {"key": "order", "type": "int"},
         "name": {"key": "name", "type": "str"},
         "status": {"key": "status", "type": "str"},
@@ -21191,21 +20974,33 @@ class UpsertManagedServerOperationStep(_serialization.Model):
     def __init__(
         self,
         *,
+        step_start_time: Optional[datetime.datetime] = None,
+        step_end_time: Optional[datetime.datetime] = None,
+        time_elapsed: Optional[str] = None,
         order: Optional[int] = None,
         name: Optional[str] = None,
-        status: Optional[Union[str, "_models.UpsertManagedServerOperationStepStatus"]] = None,
+        status: Optional[Union[str, "_models.Status"]] = None,
         **kwargs: Any
     ) -> None:
         """
+        :keyword step_start_time:
+        :paramtype step_start_time: ~datetime.datetime
+        :keyword step_end_time:
+        :paramtype step_end_time: ~datetime.datetime
+        :keyword time_elapsed:
+        :paramtype time_elapsed: str
         :keyword order:
         :paramtype order: int
         :keyword name:
         :paramtype name: str
         :keyword status: Known values are: "NotStarted", "InProgress", "SlowedDown", "Completed",
          "Failed", and "Canceled".
-        :paramtype status: str or ~azure.mgmt.sql.models.UpsertManagedServerOperationStepStatus
+        :paramtype status: str or ~azure.mgmt.sql.models.Status
         """
         super().__init__(**kwargs)
+        self.step_start_time = step_start_time
+        self.step_end_time = step_end_time
+        self.time_elapsed = time_elapsed
         self.order = order
         self.name = name
         self.status = status
