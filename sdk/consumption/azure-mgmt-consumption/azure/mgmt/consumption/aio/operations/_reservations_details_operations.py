@@ -66,8 +66,14 @@ class ReservationsDetailsOperations:
         self, reservation_order_id: str, filter: str, **kwargs: Any
     ) -> AsyncIterable["_models.ReservationDetail"]:
         """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
-        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
-        API call should be made with smaller date ranges.
+        12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data
+        size is too large, customers may also get 504 as the API timed out preparing the data. In such
+        cases, API call should be made with smaller date ranges or a call to Generate Reservation
+        Details Report API should be made as it is asynchronous and will not run into response size
+        time outs.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
@@ -83,7 +89,7 @@ class ReservationsDetailsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationDetailsListResult] = kwargs.pop("cls", None)
@@ -138,8 +144,9 @@ class ReservationsDetailsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -161,8 +168,14 @@ class ReservationsDetailsOperations:
         self, reservation_order_id: str, reservation_id: str, filter: str, **kwargs: Any
     ) -> AsyncIterable["_models.ReservationDetail"]:
         """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
-        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
-        API call should be made with smaller date ranges.
+        12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data
+        size is too large, customers may also get 504 as the API timed out preparing the data. In such
+        cases, API call should be made with smaller date ranges or a call to Generate Reservation
+        Details Report API should be made as it is asynchronous and will not run into response size
+        time outs.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
@@ -180,7 +193,7 @@ class ReservationsDetailsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationDetailsListResult] = kwargs.pop("cls", None)
@@ -236,8 +249,9 @@ class ReservationsDetailsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -265,9 +279,15 @@ class ReservationsDetailsOperations:
         reservation_order_id: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.ReservationDetail"]:
-        """Lists the reservations details for the defined scope and provided date range. Note: ARM has a
-        payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM
-        limit. In such cases, API call should be made with smaller date ranges.
+        """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
+        12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data
+        size is too large, customers may also get 504 as the API timed out preparing the data. In such
+        cases, API call should be made with smaller date ranges or a call to Generate Reservation
+        Details Report API should be made as it is asynchronous and will not run into response size
+        time outs.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param resource_scope: The scope associated with reservations details operations. This includes
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope
@@ -300,7 +320,7 @@ class ReservationsDetailsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationDetailsListResult] = kwargs.pop("cls", None)
@@ -359,8 +379,9 @@ class ReservationsDetailsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
