@@ -61,6 +61,9 @@ class QueryOperations:
     ) -> Optional[_models.QueryResult]:
         """Query the usage data for scope defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with query and export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -94,6 +97,9 @@ class QueryOperations:
         self, scope: str, parameters: IO, *, content_type: str = "application/json", **kwargs: Any
     ) -> Optional[_models.QueryResult]:
         """Query the usage data for scope defined.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with query and export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -129,6 +135,9 @@ class QueryOperations:
     ) -> Optional[_models.QueryResult]:
         """Query the usage data for scope defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with query and export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -147,7 +156,7 @@ class QueryOperations:
          specific for partners. Required.
         :type scope: str
         :param parameters: Parameters supplied to the CreateOrUpdate Query Config operation. Is either
-         a model type or a IO type. Required.
+         a QueryDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.QueryDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -168,11 +177,11 @@ class QueryOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.QueryResult]]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Optional[_models.QueryResult]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -193,10 +202,11 @@ class QueryOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -215,7 +225,7 @@ class QueryOperations:
 
         return deserialized
 
-    usage.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/query"}  # type: ignore
+    usage.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/query"}
 
     @overload
     async def usage_by_external_cloud_provider_type(
@@ -228,6 +238,9 @@ class QueryOperations:
         **kwargs: Any
     ) -> _models.QueryResult:
         """Query the usage data for external cloud provider type defined.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param external_cloud_provider_type: The external cloud provider type associated with
          dimension/query operations. This includes 'externalSubscriptions' for linked account and
@@ -262,6 +275,9 @@ class QueryOperations:
     ) -> _models.QueryResult:
         """Query the usage data for external cloud provider type defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param external_cloud_provider_type: The external cloud provider type associated with
          dimension/query operations. This includes 'externalSubscriptions' for linked account and
          'externalBillingAccounts' for consolidated account. Known values are: "externalSubscriptions"
@@ -293,6 +309,9 @@ class QueryOperations:
     ) -> _models.QueryResult:
         """Query the usage data for external cloud provider type defined.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param external_cloud_provider_type: The external cloud provider type associated with
          dimension/query operations. This includes 'externalSubscriptions' for linked account and
          'externalBillingAccounts' for consolidated account. Known values are: "externalSubscriptions"
@@ -304,7 +323,7 @@ class QueryOperations:
          Required.
         :type external_cloud_provider_id: str
         :param parameters: Parameters supplied to the CreateOrUpdate Query Config operation. Is either
-         a model type or a IO type. Required.
+         a QueryDefinition type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.QueryDefinition or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -325,11 +344,11 @@ class QueryOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.QueryResult]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.QueryResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -351,10 +370,11 @@ class QueryOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -371,4 +391,6 @@ class QueryOperations:
 
         return deserialized
 
-    usage_by_external_cloud_provider_type.metadata = {"url": "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/query"}  # type: ignore
+    usage_by_external_cloud_provider_type.metadata = {
+        "url": "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/query"
+    }

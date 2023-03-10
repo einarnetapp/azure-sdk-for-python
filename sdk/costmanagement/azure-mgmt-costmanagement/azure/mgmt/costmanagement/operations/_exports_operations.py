@@ -43,7 +43,9 @@ def build_list_request(scope: str, *, expand: Optional[str] = None, **kwargs: An
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -52,7 +54,7 @@ def build_list_request(scope: str, *, expand: Optional[str] = None, **kwargs: An
         "scope": _SERIALIZER.url("scope", scope, "str", skip_quote=True),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -69,7 +71,9 @@ def build_get_request(scope: str, export_name: str, *, expand: Optional[str] = N
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -79,7 +83,7 @@ def build_get_request(scope: str, export_name: str, *, expand: Optional[str] = N
         "exportName": _SERIALIZER.url("export_name", export_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -96,8 +100,10 @@ def build_create_or_update_request(scope: str, export_name: str, **kwargs: Any) 
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -107,7 +113,7 @@ def build_create_or_update_request(scope: str, export_name: str, **kwargs: Any) 
         "exportName": _SERIALIZER.url("export_name", export_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -124,7 +130,9 @@ def build_delete_request(scope: str, export_name: str, **kwargs: Any) -> HttpReq
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -134,7 +142,7 @@ def build_delete_request(scope: str, export_name: str, **kwargs: Any) -> HttpReq
         "exportName": _SERIALIZER.url("export_name", export_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -149,7 +157,9 @@ def build_execute_request(scope: str, export_name: str, **kwargs: Any) -> HttpRe
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -159,7 +169,7 @@ def build_execute_request(scope: str, export_name: str, **kwargs: Any) -> HttpRe
         "exportName": _SERIALIZER.url("export_name", export_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -174,7 +184,9 @@ def build_get_execution_history_request(scope: str, export_name: str, **kwargs: 
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))  # type: Literal["2022-10-01"]
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -184,7 +196,7 @@ def build_get_execution_history_request(scope: str, export_name: str, **kwargs: 
         "exportName": _SERIALIZER.url("export_name", export_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -217,6 +229,9 @@ class ExportsOperations:
     @distributed_trace
     def list(self, scope: str, expand: Optional[str] = None, **kwargs: Any) -> _models.ExportListResult:
         """The operation to list all exports at the given scope.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -255,10 +270,10 @@ class ExportsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ExportListResult]
+        )
+        cls: ClsType[_models.ExportListResult] = kwargs.pop("cls", None)
 
         request = build_list_request(
             scope=scope,
@@ -269,10 +284,11 @@ class ExportsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -289,11 +305,14 @@ class ExportsOperations:
 
         return deserialized
 
-    list.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports"}  # type: ignore
+    list.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports"}
 
     @distributed_trace
     def get(self, scope: str, export_name: str, expand: Optional[str] = None, **kwargs: Any) -> _models.Export:
         """The operation to get the export for the defined scope by export name.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -334,10 +353,10 @@ class ExportsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Export]
+        )
+        cls: ClsType[_models.Export] = kwargs.pop("cls", None)
 
         request = build_get_request(
             scope=scope,
@@ -349,10 +368,11 @@ class ExportsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -369,7 +389,7 @@ class ExportsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}"}  # type: ignore
+    get.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}"}
 
     @overload
     def create_or_update(
@@ -384,6 +404,9 @@ class ExportsOperations:
         """The operation to create or update a export. Update operation requires latest eTag to be set in
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -423,6 +446,9 @@ class ExportsOperations:
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -461,6 +487,9 @@ class ExportsOperations:
         the request. You may obtain the latest eTag by performing a get operation. Create operation
         does not require eTag.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
+
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,
@@ -481,7 +510,7 @@ class ExportsOperations:
         :param export_name: Export Name. Required.
         :type export_name: str
         :param parameters: Parameters supplied to the CreateOrUpdate Export operation. Is either a
-         model type or a IO type. Required.
+         Export type or a IO type. Required.
         :type parameters: ~azure.mgmt.costmanagement.models.Export or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -502,11 +531,11 @@ class ExportsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Export]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.Export] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -528,10 +557,11 @@ class ExportsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -548,17 +578,20 @@ class ExportsOperations:
             deserialized = self._deserialize("Export", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}"}
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
         self, scope: str, export_name: str, **kwargs: Any
     ) -> None:
         """The operation to delete a export.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -595,10 +628,10 @@ class ExportsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             scope=scope,
@@ -609,10 +642,11 @@ class ExportsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -625,13 +659,16 @@ class ExportsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}"}  # type: ignore
+    delete.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}"}
 
     @distributed_trace
     def execute(  # pylint: disable=inconsistent-return-statements
         self, scope: str, export_name: str, **kwargs: Any
     ) -> None:
         """The operation to run an export.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -668,10 +705,10 @@ class ExportsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_execute_request(
             scope=scope,
@@ -682,10 +719,11 @@ class ExportsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -698,11 +736,14 @@ class ExportsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    execute.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/run"}  # type: ignore
+    execute.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/run"}
 
     @distributed_trace
     def get_execution_history(self, scope: str, export_name: str, **kwargs: Any) -> _models.ExportExecutionListResult:
         """The operation to get the run history of an export for the defined scope and export name.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param scope: The scope associated with export operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
@@ -739,10 +780,10 @@ class ExportsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ExportExecutionListResult]
+        )
+        cls: ClsType[_models.ExportExecutionListResult] = kwargs.pop("cls", None)
 
         request = build_get_execution_history_request(
             scope=scope,
@@ -753,10 +794,11 @@ class ExportsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -773,4 +815,6 @@ class ExportsOperations:
 
         return deserialized
 
-    get_execution_history.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory"}  # type: ignore
+    get_execution_history.metadata = {
+        "url": "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory"
+    }

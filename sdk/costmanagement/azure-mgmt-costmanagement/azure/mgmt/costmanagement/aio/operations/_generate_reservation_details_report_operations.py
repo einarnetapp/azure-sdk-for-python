@@ -74,10 +74,10 @@ class GenerateReservationDetailsReportOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.OperationStatus]]
+        )
+        cls: ClsType[Optional[_models.OperationStatus]] = kwargs.pop("cls", None)
 
         request = build_by_billing_account_id_request(
             billing_account_id=billing_account_id,
@@ -89,10 +89,11 @@ class GenerateReservationDetailsReportOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -116,7 +117,9 @@ class GenerateReservationDetailsReportOperations:
 
         return deserialized
 
-    _by_billing_account_id_initial.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    _by_billing_account_id_initial.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"
+    }
 
     @distributed_trace_async
     async def begin_by_billing_account_id(
@@ -126,6 +129,9 @@ class GenerateReservationDetailsReportOperations:
         enrollment id. The Reservation usage details can be viewed only by certain enterprise roles.
         For more details on the roles see,
         https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/understand-ea-roles#usage-and-costs-access-by-role.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param billing_account_id: Enrollment ID (Legacy BillingAccount ID). Required.
         :type billing_account_id: str
@@ -149,15 +155,15 @@ class GenerateReservationDetailsReportOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationStatus]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[_models.OperationStatus] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._by_billing_account_id_initial(  # type: ignore
+            raw_result = await self._by_billing_account_id_initial(
                 billing_account_id=billing_account_id,
                 start_date=start_date,
                 end_date=end_date,
@@ -176,9 +182,9 @@ class GenerateReservationDetailsReportOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -190,9 +196,11 @@ class GenerateReservationDetailsReportOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_by_billing_account_id.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    begin_by_billing_account_id.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"
+    }
 
     async def _by_billing_profile_id_initial(
         self, billing_account_id: str, billing_profile_id: str, start_date: str, end_date: str, **kwargs: Any
@@ -208,10 +216,10 @@ class GenerateReservationDetailsReportOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.OperationStatus]]
+        )
+        cls: ClsType[Optional[_models.OperationStatus]] = kwargs.pop("cls", None)
 
         request = build_by_billing_profile_id_request(
             billing_account_id=billing_account_id,
@@ -224,10 +232,11 @@ class GenerateReservationDetailsReportOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -251,7 +260,9 @@ class GenerateReservationDetailsReportOperations:
 
         return deserialized
 
-    _by_billing_profile_id_initial.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    _by_billing_profile_id_initial.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"
+    }
 
     @distributed_trace_async
     async def begin_by_billing_profile_id(
@@ -261,6 +272,9 @@ class GenerateReservationDetailsReportOperations:
         profile. The Reservation usage details can be viewed by only certain enterprise roles by
         default. For more details on the roles see,
         https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/costmanagement/
 
         :param billing_account_id: Billing account ID. Required.
         :type billing_account_id: str
@@ -286,15 +300,15 @@ class GenerateReservationDetailsReportOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationStatus]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[_models.OperationStatus] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._by_billing_profile_id_initial(  # type: ignore
+            raw_result = await self._by_billing_profile_id_initial(
                 billing_account_id=billing_account_id,
                 billing_profile_id=billing_profile_id,
                 start_date=start_date,
@@ -314,9 +328,9 @@ class GenerateReservationDetailsReportOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -328,6 +342,8 @@ class GenerateReservationDetailsReportOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_by_billing_profile_id.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    begin_by_billing_profile_id.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"
+    }
