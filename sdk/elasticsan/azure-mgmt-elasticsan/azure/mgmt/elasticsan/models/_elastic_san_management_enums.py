@@ -22,8 +22,8 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class EncryptionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of key used to encrypt the data of the disk."""
 
-    #: Volume is encrypted at rest with Platform managed key. It is the default encryption type.
     ENCRYPTION_AT_REST_WITH_PLATFORM_KEY = "EncryptionAtRestWithPlatformKey"
+    """Volume is encrypted at rest with Platform managed key. It is the default encryption type."""
 
 
 class OperationalStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -55,17 +55,17 @@ class ProvisioningStates(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The sku name."""
 
-    #: Premium locally redundant storage
     PREMIUM_LRS = "Premium_LRS"
-    #: Premium zone redundant storage
+    """Premium locally redundant storage"""
     PREMIUM_ZRS = "Premium_ZRS"
+    """Premium zone redundant storage"""
 
 
 class SkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The sku tier."""
 
-    #: Premium Tier
     PREMIUM = "Premium"
+    """Premium Tier"""
 
 
 class State(str, Enum, metaclass=CaseInsensitiveEnumMeta):

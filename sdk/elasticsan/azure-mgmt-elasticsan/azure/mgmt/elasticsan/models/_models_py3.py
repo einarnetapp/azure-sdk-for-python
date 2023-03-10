@@ -8,9 +8,15 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+import sys
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
+
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -45,7 +51,7 @@ class Resource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -88,7 +94,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, location: Optional[str] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, location: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -185,8 +191,8 @@ class ElasticSan(TrackedResource):  # pylint: disable=too-many-instance-attribut
         tags: Optional[Dict[str, str]] = None,
         location: Optional[str] = None,
         availability_zones: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -239,7 +245,7 @@ class ElasticSanList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.ElasticSan"], **kwargs):
+    def __init__(self, *, value: List["_models.ElasticSan"], **kwargs: Any) -> None:
         """
         :keyword value: An array of Elastic San objects. Required.
         :paramtype value: list[~azure.mgmt.elasticsan.models.ElasticSan]
@@ -281,7 +287,7 @@ class ElasticSanOperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, *, provider: str, resource: str, operation: str, description: str, **kwargs):
+    def __init__(self, *, provider: str, resource: str, operation: str, description: str, **kwargs: Any) -> None:
         """
         :keyword provider: Localized friendly form of the resource provider name. Required.
         :paramtype provider: str
@@ -322,7 +328,9 @@ class ElasticSanOperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.ElasticSanRPOperation"], next_link: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, value: List["_models.ElasticSanRPOperation"], next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: An array of operations supported by the ElasticSan RP. Required.
         :paramtype value: list[~azure.mgmt.elasticsan.models.ElasticSanRPOperation]
@@ -361,7 +369,7 @@ class ElasticSanRPOperation(_serialization.Model):
         "display": {"key": "display", "type": "ElasticSanOperationDisplay"},
     }
 
-    def __init__(self, *, name: str, **kwargs):
+    def __init__(self, *, name: str, **kwargs: Any) -> None:
         """
         :keyword name: The name of the operation being performed on this particular object. Required.
         :paramtype name: str
@@ -395,8 +403,8 @@ class ElasticSanUpdate(_serialization.Model):
         tags: Optional[Dict[str, str]] = None,
         base_size_ti_b: Optional[int] = None,
         extended_capacity_size_ti_b: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Update tags.
         :paramtype tags: dict[str, str]
@@ -422,7 +430,7 @@ class Error(_serialization.Model):
         "error": {"key": "error", "type": "ErrorResponse"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorResponse"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorResponse"] = None, **kwargs: Any) -> None:
         """
         :keyword error: RP error response.
         :paramtype error: ~azure.mgmt.elasticsan.models.ErrorResponse
@@ -452,7 +460,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -492,7 +500,7 @@ class ErrorResponse(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -537,7 +545,7 @@ class IscsiTargetInfo(_serialization.Model):
         "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(self, *, status: Optional[Union[str, "_models.OperationalStatus"]] = None, **kwargs):
+    def __init__(self, *, status: Optional[Union[str, "_models.OperationalStatus"]] = None, **kwargs: Any) -> None:
         """
         :keyword status: Operational status of the iSCSI Target. Known values are: "Invalid",
          "Unknown", "Healthy", "Unhealthy", "Updating", "Running", "Stopped", and "Stopped
@@ -563,7 +571,9 @@ class NetworkRuleSet(_serialization.Model):
         "virtual_network_rules": {"key": "virtualNetworkRules", "type": "[VirtualNetworkRule]"},
     }
 
-    def __init__(self, *, virtual_network_rules: Optional[List["_models.VirtualNetworkRule"]] = None, **kwargs):
+    def __init__(
+        self, *, virtual_network_rules: Optional[List["_models.VirtualNetworkRule"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword virtual_network_rules: The list of virtual network rules.
         :paramtype virtual_network_rules: list[~azure.mgmt.elasticsan.models.VirtualNetworkRule]
@@ -593,8 +603,12 @@ class Sku(_serialization.Model):
     }
 
     def __init__(
-        self, *, name: Union[str, "_models.SkuName"], tier: Optional[Union[str, "_models.SkuTier"]] = None, **kwargs
-    ):
+        self,
+        *,
+        name: Union[str, "_models.SkuName"],
+        tier: Optional[Union[str, "_models.SkuTier"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The sku name. Required. Known values are: "Premium_LRS" and "Premium_ZRS".
         :paramtype name: str or ~azure.mgmt.elasticsan.models.SkuName
@@ -627,7 +641,7 @@ class SKUCapability(_serialization.Model):
         "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -674,8 +688,12 @@ class SkuInformation(_serialization.Model):
     }
 
     def __init__(
-        self, *, name: Union[str, "_models.SkuName"], tier: Optional[Union[str, "_models.SkuTier"]] = None, **kwargs
-    ):
+        self,
+        *,
+        name: Union[str, "_models.SkuName"],
+        tier: Optional[Union[str, "_models.SkuTier"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Sku Name. Required. Known values are: "Premium_LRS" and "Premium_ZRS".
         :paramtype name: str or ~azure.mgmt.elasticsan.models.SkuName
@@ -708,7 +726,7 @@ class SkuInformationList(_serialization.Model):
         "value": {"key": "value", "type": "[SkuInformation]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -735,7 +753,7 @@ class SkuLocationInfo(_serialization.Model):
         "zones": {"key": "zones", "type": "[str]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.location = None
@@ -758,7 +776,9 @@ class SourceCreationData(_serialization.Model):
         "source_uri": {"key": "sourceUri", "type": "str"},
     }
 
-    def __init__(self, *, create_source: Optional[str] = None, source_uri: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, create_source: Optional[Literal["None"]] = None, source_uri: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword create_source: This enumerates the possible sources of a volume creation. Default
          value is "None".
@@ -809,8 +829,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -865,7 +885,7 @@ class VirtualNetworkRule(_serialization.Model):
         "state": {"key": "state", "type": "str"},
     }
 
-    def __init__(self, *, virtual_network_resource_id: str, action: str = "Allow", **kwargs):
+    def __init__(self, *, virtual_network_resource_id: str, action: Literal["Allow"] = "Allow", **kwargs: Any) -> None:
         """
         :keyword virtual_network_resource_id: Resource ID of a subnet, for example:
          /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
@@ -932,8 +952,8 @@ class Volume(Resource):
         tags: Optional[Dict[str, str]] = None,
         creation_data: Optional["_models.SourceCreationData"] = None,
         size_gi_b: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -1004,8 +1024,8 @@ class VolumeGroup(Resource):
         protocol_type: Optional[Union[str, "_models.StorageTargetType"]] = None,
         encryption: Optional[Union[str, "_models.EncryptionType"]] = None,
         network_acls: Optional["_models.NetworkRuleSet"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -1048,7 +1068,7 @@ class VolumeGroupList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.VolumeGroup"], **kwargs):
+    def __init__(self, *, value: List["_models.VolumeGroup"], **kwargs: Any) -> None:
         """
         :keyword value: An array of Volume Groups objects. Required.
         :paramtype value: list[~azure.mgmt.elasticsan.models.VolumeGroup]
@@ -1086,8 +1106,8 @@ class VolumeGroupUpdate(_serialization.Model):
         protocol_type: Optional[Union[str, "_models.StorageTargetType"]] = None,
         encryption: Optional[Union[str, "_models.EncryptionType"]] = None,
         network_acls: Optional["_models.NetworkRuleSet"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1129,7 +1149,7 @@ class VolumeList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.Volume"], **kwargs):
+    def __init__(self, *, value: List["_models.Volume"], **kwargs: Any) -> None:
         """
         :keyword value: An array of Volume objects. Required.
         :paramtype value: list[~azure.mgmt.elasticsan.models.Volume]
@@ -1153,7 +1173,9 @@ class VolumeUpdate(_serialization.Model):
         "size_gi_b": {"key": "properties.sizeGiB", "type": "int"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, size_gi_b: Optional[int] = None, **kwargs):
+    def __init__(
+        self, *, tags: Optional[Dict[str, str]] = None, size_gi_b: Optional[int] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
