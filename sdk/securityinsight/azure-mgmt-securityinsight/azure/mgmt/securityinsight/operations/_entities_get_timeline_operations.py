@@ -45,8 +45,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-08-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-08-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -187,7 +187,7 @@ class EntitiesGetTimelineOperations:
         :param entity_id: entity ID. Required.
         :type entity_id: str
         :param parameters: The parameters required to execute an timeline operation on the given
-         entity. Is either a model type or a IO type. Required.
+         entity. Is either a EntityTimelineParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.securityinsight.models.EntityTimelineParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -208,7 +208,7 @@ class EntitiesGetTimelineOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-08-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -238,8 +238,9 @@ class EntitiesGetTimelineOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

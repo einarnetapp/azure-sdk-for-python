@@ -26,6 +26,7 @@ from ._file_imports_operations import FileImportsOperations
 from ._incident_comments_operations import IncidentCommentsOperations
 from ._incident_relations_operations import IncidentRelationsOperations
 from ._incident_tasks_operations import IncidentTasksOperations
+from ._incident_creation_rules_operations import IncidentCreationRulesOperations
 from ._metadata_operations import MetadataOperations
 from ._office_consents_operations import OfficeConsentsOperations
 from ._sentinel_onboarding_states_operations import SentinelOnboardingStatesOperations
@@ -39,6 +40,9 @@ from ._source_controls_operations import SourceControlsOperations
 from ._threat_intelligence_indicator_operations import ThreatIntelligenceIndicatorOperations
 from ._threat_intelligence_indicators_operations import ThreatIntelligenceIndicatorsOperations
 from ._threat_intelligence_indicator_metrics_operations import ThreatIntelligenceIndicatorMetricsOperations
+from ._triggered_analytics_rule_run_operations import TriggeredAnalyticsRuleRunOperations
+from ._get_triggered_analytics_rule_runs_operations import GetTriggeredAnalyticsRuleRunsOperations
+from ._alert_rule_operations import AlertRuleOperations
 from ._watchlists_operations import WatchlistsOperations
 from ._watchlist_items_operations import WatchlistItemsOperations
 from ._data_connectors_operations import DataConnectorsOperations
@@ -70,6 +74,7 @@ __all__ = [
     "IncidentCommentsOperations",
     "IncidentRelationsOperations",
     "IncidentTasksOperations",
+    "IncidentCreationRulesOperations",
     "MetadataOperations",
     "OfficeConsentsOperations",
     "SentinelOnboardingStatesOperations",
@@ -83,6 +88,9 @@ __all__ = [
     "ThreatIntelligenceIndicatorOperations",
     "ThreatIntelligenceIndicatorsOperations",
     "ThreatIntelligenceIndicatorMetricsOperations",
+    "TriggeredAnalyticsRuleRunOperations",
+    "GetTriggeredAnalyticsRuleRunsOperations",
+    "AlertRuleOperations",
     "WatchlistsOperations",
     "WatchlistItemsOperations",
     "DataConnectorsOperations",

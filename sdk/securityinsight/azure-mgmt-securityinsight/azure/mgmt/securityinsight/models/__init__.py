@@ -42,6 +42,7 @@ from ._models_py3 import AlertRuleTemplateWithMitreProperties
 from ._models_py3 import AlertRuleTemplatesList
 from ._models_py3 import AlertRulesList
 from ._models_py3 import AlertsDataTypeOfDataConnector
+from ._models_py3 import AnalyticsRuleRunTrigger
 from ._models_py3 import Anomalies
 from ._models_py3 import AnomalySecurityMLAnalyticsSettings
 from ._models_py3 import AnomalyTimelineItem
@@ -193,6 +194,14 @@ from ._models_py3 import IncidentBookmarkList
 from ._models_py3 import IncidentComment
 from ._models_py3 import IncidentCommentList
 from ._models_py3 import IncidentConfiguration
+from ._models_py3 import IncidentCreationPropertyConditionProperties
+from ._models_py3 import IncidentCreationRule
+from ._models_py3 import IncidentCreationRuleCondition
+from ._models_py3 import IncidentCreationRuleGroupingAttribute
+from ._models_py3 import IncidentCreationRuleGroupingConfiguration
+from ._models_py3 import IncidentCreationRulePropertyBasedGroupingProperties
+from ._models_py3 import IncidentCreationRulePropertyConditionProperties
+from ._models_py3 import IncidentCreationRulesList
 from ._models_py3 import IncidentEntitiesResponse
 from ._models_py3 import IncidentEntitiesResultsMetadata
 from ._models_py3 import IncidentInfo
@@ -246,6 +255,7 @@ from ._models_py3 import MSTIDataConnectorProperties
 from ._models_py3 import MTPCheckRequirementsProperties
 from ._models_py3 import MTPDataConnector
 from ._models_py3 import MTPDataConnectorDataTypes
+from ._models_py3 import MTPDataConnectorDataTypesAlerts
 from ._models_py3 import MTPDataConnectorDataTypesIncidents
 from ._models_py3 import MTPDataConnectorProperties
 from ._models_py3 import MailClusterEntity
@@ -265,12 +275,19 @@ from ._models_py3 import MetadataModel
 from ._models_py3 import MetadataPatch
 from ._models_py3 import MetadataSource
 from ._models_py3 import MetadataSupport
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirements
+from ._models_py3 import MicrosoftPurviewInformationProtectionCheckRequirementsProperties
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypes
+from ._models_py3 import MicrosoftPurviewInformationProtectionConnectorDataTypesLogs
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnector
+from ._models_py3 import MicrosoftPurviewInformationProtectionDataConnectorProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRule
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleCommonProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleTemplate
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties
 from ._models_py3 import MtpCheckRequirements
+from ._models_py3 import MtpFilteredProviders
 from ._models_py3 import NicEntity
 from ._models_py3 import NicEntityProperties
 from ._models_py3 import NrtAlertRule
@@ -315,6 +332,7 @@ from ._models_py3 import ProcessEntity
 from ._models_py3 import ProcessEntityProperties
 from ._models_py3 import PropertyArrayChangedConditionProperties
 from ._models_py3 import PropertyArrayConditionProperties
+from ._models_py3 import PropertyBasedGroupingProperties
 from ._models_py3 import PropertyChangedConditionProperties
 from ._models_py3 import PropertyConditionProperties
 from ._models_py3 import QueryBasedAlertRuleTemplateProperties
@@ -397,6 +415,8 @@ from ._models_py3 import TiTaxiiDataConnectorProperties
 from ._models_py3 import TimelineAggregation
 from ._models_py3 import TimelineError
 from ._models_py3 import TimelineResultsMetadata
+from ._models_py3 import TriggeredAnalyticsRuleRun
+from ._models_py3 import TriggeredAnalyticsRuleRuns
 from ._models_py3 import Ueba
 from ._models_py3 import UrlEntity
 from ._models_py3 import UrlEntityProperties
@@ -463,8 +483,13 @@ from ._security_insights_enums import FileHashAlgorithm
 from ._security_insights_enums import FileImportContentType
 from ._security_insights_enums import FileImportState
 from ._security_insights_enums import GetInsightsError
+from ._security_insights_enums import GroupingKind
 from ._security_insights_enums import IncidentClassification
 from ._security_insights_enums import IncidentClassificationReason
+from ._security_insights_enums import IncidentCreationRuleConditionType
+from ._security_insights_enums import IncidentCreationRulePropertyConditionSupportedOperator
+from ._security_insights_enums import IncidentCreationRulePropertyConditionSupportedProperty
+from ._security_insights_enums import IncidentCreationRulePropertyGroupingSupportedProperty
 from ._security_insights_enums import IncidentLabelType
 from ._security_insights_enums import IncidentSeverity
 from ._security_insights_enums import IncidentStatus
@@ -474,6 +499,7 @@ from ._security_insights_enums import KillChainIntent
 from ._security_insights_enums import Kind
 from ._security_insights_enums import MatchingMethod
 from ._security_insights_enums import MicrosoftSecurityProductName
+from ._security_insights_enums import MtpProvider
 from ._security_insights_enums import OSFamily
 from ._security_insights_enums import Operator
 from ._security_insights_enums import OutputType
@@ -482,6 +508,7 @@ from ._security_insights_enums import PermissionProviderScope
 from ._security_insights_enums import PollingFrequency
 from ._security_insights_enums import Priority
 from ._security_insights_enums import ProviderName
+from ._security_insights_enums import ProvisioningState
 from ._security_insights_enums import RegistryHive
 from ._security_insights_enums import RegistryValueKind
 from ._security_insights_enums import RepoType
@@ -542,6 +569,7 @@ __all__ = [
     "AlertRuleTemplatesList",
     "AlertRulesList",
     "AlertsDataTypeOfDataConnector",
+    "AnalyticsRuleRunTrigger",
     "Anomalies",
     "AnomalySecurityMLAnalyticsSettings",
     "AnomalyTimelineItem",
@@ -693,6 +721,14 @@ __all__ = [
     "IncidentComment",
     "IncidentCommentList",
     "IncidentConfiguration",
+    "IncidentCreationPropertyConditionProperties",
+    "IncidentCreationRule",
+    "IncidentCreationRuleCondition",
+    "IncidentCreationRuleGroupingAttribute",
+    "IncidentCreationRuleGroupingConfiguration",
+    "IncidentCreationRulePropertyBasedGroupingProperties",
+    "IncidentCreationRulePropertyConditionProperties",
+    "IncidentCreationRulesList",
     "IncidentEntitiesResponse",
     "IncidentEntitiesResultsMetadata",
     "IncidentInfo",
@@ -746,6 +782,7 @@ __all__ = [
     "MTPCheckRequirementsProperties",
     "MTPDataConnector",
     "MTPDataConnectorDataTypes",
+    "MTPDataConnectorDataTypesAlerts",
     "MTPDataConnectorDataTypesIncidents",
     "MTPDataConnectorProperties",
     "MailClusterEntity",
@@ -765,12 +802,19 @@ __all__ = [
     "MetadataPatch",
     "MetadataSource",
     "MetadataSupport",
+    "MicrosoftPurviewInformationProtectionCheckRequirements",
+    "MicrosoftPurviewInformationProtectionCheckRequirementsProperties",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypes",
+    "MicrosoftPurviewInformationProtectionConnectorDataTypesLogs",
+    "MicrosoftPurviewInformationProtectionDataConnector",
+    "MicrosoftPurviewInformationProtectionDataConnectorProperties",
     "MicrosoftSecurityIncidentCreationAlertRule",
     "MicrosoftSecurityIncidentCreationAlertRuleCommonProperties",
     "MicrosoftSecurityIncidentCreationAlertRuleProperties",
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate",
     "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
     "MtpCheckRequirements",
+    "MtpFilteredProviders",
     "NicEntity",
     "NicEntityProperties",
     "NrtAlertRule",
@@ -815,6 +859,7 @@ __all__ = [
     "ProcessEntityProperties",
     "PropertyArrayChangedConditionProperties",
     "PropertyArrayConditionProperties",
+    "PropertyBasedGroupingProperties",
     "PropertyChangedConditionProperties",
     "PropertyConditionProperties",
     "QueryBasedAlertRuleTemplateProperties",
@@ -897,6 +942,8 @@ __all__ = [
     "TimelineAggregation",
     "TimelineError",
     "TimelineResultsMetadata",
+    "TriggeredAnalyticsRuleRun",
+    "TriggeredAnalyticsRuleRuns",
     "Ueba",
     "UrlEntity",
     "UrlEntityProperties",
@@ -962,8 +1009,13 @@ __all__ = [
     "FileImportContentType",
     "FileImportState",
     "GetInsightsError",
+    "GroupingKind",
     "IncidentClassification",
     "IncidentClassificationReason",
+    "IncidentCreationRuleConditionType",
+    "IncidentCreationRulePropertyConditionSupportedOperator",
+    "IncidentCreationRulePropertyConditionSupportedProperty",
+    "IncidentCreationRulePropertyGroupingSupportedProperty",
     "IncidentLabelType",
     "IncidentSeverity",
     "IncidentStatus",
@@ -973,6 +1025,7 @@ __all__ = [
     "Kind",
     "MatchingMethod",
     "MicrosoftSecurityProductName",
+    "MtpProvider",
     "OSFamily",
     "Operator",
     "OutputType",
@@ -981,6 +1034,7 @@ __all__ = [
     "PollingFrequency",
     "Priority",
     "ProviderName",
+    "ProvisioningState",
     "RegistryHive",
     "RegistryValueKind",
     "RepoType",

@@ -47,8 +47,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-08-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-08-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -89,8 +89,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-08-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-08-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -132,8 +132,8 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-08-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-08-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -178,8 +178,8 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-08-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-08-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -221,8 +221,8 @@ def build_connect_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-08-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-08-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -267,8 +267,8 @@ def build_disconnect_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-08-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-08-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -340,7 +340,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-08-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataConnectorList] = kwargs.pop("cls", None)
@@ -396,8 +396,9 @@ class DataConnectorsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -442,7 +443,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-08-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataConnector] = kwargs.pop("cls", None)
@@ -460,8 +461,9 @@ class DataConnectorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -561,7 +563,8 @@ class DataConnectorsOperations:
         :type workspace_name: str
         :param data_connector_id: Connector ID. Required.
         :type data_connector_id: str
-        :param data_connector: The data connector. Is either a model type or a IO type. Required.
+        :param data_connector: The data connector. Is either a DataConnector type or a IO type.
+         Required.
         :type data_connector: ~azure.mgmt.securityinsight.models.DataConnector or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -582,7 +585,7 @@ class DataConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-08-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -612,8 +615,9 @@ class DataConnectorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -666,7 +670,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-08-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -684,8 +688,9 @@ class DataConnectorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -781,7 +786,8 @@ class DataConnectorsOperations:
         :type workspace_name: str
         :param data_connector_id: Connector ID. Required.
         :type data_connector_id: str
-        :param connect_body: The data connector. Is either a model type or a IO type. Required.
+        :param connect_body: The data connector. Is either a DataConnectorConnectBody type or a IO
+         type. Required.
         :type connect_body: ~azure.mgmt.securityinsight.models.DataConnectorConnectBody or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -802,7 +808,7 @@ class DataConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-08-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -832,8 +838,9 @@ class DataConnectorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -878,7 +885,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-08-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -896,8 +903,9 @@ class DataConnectorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

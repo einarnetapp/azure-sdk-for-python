@@ -17,6 +17,7 @@ from .._serialization import Deserializer, Serializer
 from ._configuration import SecurityInsightsConfiguration
 from .operations import (
     ActionsOperations,
+    AlertRuleOperations,
     AlertRuleTemplatesOperations,
     AlertRulesOperations,
     AutomationRulesOperations,
@@ -35,8 +36,10 @@ from .operations import (
     FileImportsOperations,
     GetOperations,
     GetRecommendationsOperations,
+    GetTriggeredAnalyticsRuleRunsOperations,
     IPGeodataOperations,
     IncidentCommentsOperations,
+    IncidentCreationRulesOperations,
     IncidentRelationsOperations,
     IncidentTasksOperations,
     IncidentsOperations,
@@ -51,6 +54,7 @@ from .operations import (
     ThreatIntelligenceIndicatorMetricsOperations,
     ThreatIntelligenceIndicatorOperations,
     ThreatIntelligenceIndicatorsOperations,
+    TriggeredAnalyticsRuleRunOperations,
     UpdateOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
@@ -111,6 +115,9 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
      azure.mgmt.securityinsight.aio.operations.IncidentRelationsOperations
     :ivar incident_tasks: IncidentTasksOperations operations
     :vartype incident_tasks: azure.mgmt.securityinsight.aio.operations.IncidentTasksOperations
+    :ivar incident_creation_rules: IncidentCreationRulesOperations operations
+    :vartype incident_creation_rules:
+     azure.mgmt.securityinsight.aio.operations.IncidentCreationRulesOperations
     :ivar metadata: MetadataOperations operations
     :vartype metadata: azure.mgmt.securityinsight.aio.operations.MetadataOperations
     :ivar office_consents: OfficeConsentsOperations operations
@@ -144,6 +151,14 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
      operations
     :vartype threat_intelligence_indicator_metrics:
      azure.mgmt.securityinsight.aio.operations.ThreatIntelligenceIndicatorMetricsOperations
+    :ivar triggered_analytics_rule_run: TriggeredAnalyticsRuleRunOperations operations
+    :vartype triggered_analytics_rule_run:
+     azure.mgmt.securityinsight.aio.operations.TriggeredAnalyticsRuleRunOperations
+    :ivar get_triggered_analytics_rule_runs: GetTriggeredAnalyticsRuleRunsOperations operations
+    :vartype get_triggered_analytics_rule_runs:
+     azure.mgmt.securityinsight.aio.operations.GetTriggeredAnalyticsRuleRunsOperations
+    :ivar alert_rule: AlertRuleOperations operations
+    :vartype alert_rule: azure.mgmt.securityinsight.aio.operations.AlertRuleOperations
     :ivar watchlists: WatchlistsOperations operations
     :vartype watchlists: azure.mgmt.securityinsight.aio.operations.WatchlistsOperations
     :ivar watchlist_items: WatchlistItemsOperations operations
@@ -161,7 +176,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-12-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-08-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -176,7 +191,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         **kwargs: Any
     ) -> None:
         self._config = SecurityInsightsConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
-        self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
+        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
@@ -220,6 +235,9 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
             self._client, self._config, self._serialize, self._deserialize
         )
         self.incident_tasks = IncidentTasksOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.incident_creation_rules = IncidentCreationRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.metadata = MetadataOperations(self._client, self._config, self._serialize, self._deserialize)
         self.office_consents = OfficeConsentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.sentinel_onboarding_states = SentinelOnboardingStatesOperations(
@@ -247,6 +265,13 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self.threat_intelligence_indicator_metrics = ThreatIntelligenceIndicatorMetricsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.triggered_analytics_rule_run = TriggeredAnalyticsRuleRunOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.get_triggered_analytics_rule_runs = GetTriggeredAnalyticsRuleRunsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.alert_rule = AlertRuleOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlists = WatchlistsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlist_items = WatchlistItemsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connectors = DataConnectorsOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -284,5 +309,5 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         await self._client.__aenter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
+    async def __aexit__(self, *exc_details: Any) -> None:
         await self._client.__aexit__(*exc_details)
