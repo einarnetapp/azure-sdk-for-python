@@ -73,6 +73,9 @@ class BenefitUtilizationSummariesOperations:
         """Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain
         values: 'Daily' and 'Monthly'.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/cost-management/
+
         :param billing_account_id: Billing account ID. Required.
         :type billing_account_id: str
         :param grain_parameter: Grain. Known values are: "Hourly", "Daily", and "Monthly". Default
@@ -91,10 +94,10 @@ class BenefitUtilizationSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BenefitUtilizationSummariesListResult]
+        )
+        cls: ClsType[_models.BenefitUtilizationSummariesListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -117,7 +120,7 @@ class BenefitUtilizationSummariesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -133,7 +136,7 @@ class BenefitUtilizationSummariesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -141,14 +144,15 @@ class BenefitUtilizationSummariesOperations:
             deserialized = self._deserialize("BenefitUtilizationSummariesListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -161,7 +165,9 @@ class BenefitUtilizationSummariesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_billing_account_id.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"}  # type: ignore
+    list_by_billing_account_id.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"
+    }
 
     @distributed_trace
     def list_by_billing_profile_id(
@@ -174,6 +180,9 @@ class BenefitUtilizationSummariesOperations:
     ) -> AsyncIterable["_models.BenefitUtilizationSummary"]:
         """Lists savings plan utilization summaries for billing profile. Supported at grain values:
         'Daily' and 'Monthly'.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/cost-management/
 
         :param billing_account_id: Billing account ID. Required.
         :type billing_account_id: str
@@ -195,10 +204,10 @@ class BenefitUtilizationSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BenefitUtilizationSummariesListResult]
+        )
+        cls: ClsType[_models.BenefitUtilizationSummariesListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -222,7 +231,7 @@ class BenefitUtilizationSummariesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -238,7 +247,7 @@ class BenefitUtilizationSummariesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -246,14 +255,15 @@ class BenefitUtilizationSummariesOperations:
             deserialized = self._deserialize("BenefitUtilizationSummariesListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -266,7 +276,9 @@ class BenefitUtilizationSummariesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_billing_profile_id.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"}  # type: ignore
+    list_by_billing_profile_id.metadata = {
+        "url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"
+    }
 
     @distributed_trace
     def list_by_savings_plan_order(
@@ -277,6 +289,9 @@ class BenefitUtilizationSummariesOperations:
         **kwargs: Any
     ) -> AsyncIterable["_models.BenefitUtilizationSummary"]:
         """Lists the savings plan utilization summaries for daily or monthly grain.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/cost-management/
 
         :param savings_plan_order_id: Savings plan order ID. Required.
         :type savings_plan_order_id: str
@@ -295,10 +310,10 @@ class BenefitUtilizationSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BenefitUtilizationSummariesListResult]
+        )
+        cls: ClsType[_models.BenefitUtilizationSummariesListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -321,7 +336,7 @@ class BenefitUtilizationSummariesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -337,7 +352,7 @@ class BenefitUtilizationSummariesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -345,14 +360,15 @@ class BenefitUtilizationSummariesOperations:
             deserialized = self._deserialize("BenefitUtilizationSummariesListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -365,7 +381,9 @@ class BenefitUtilizationSummariesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_savings_plan_order.metadata = {"url": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"}  # type: ignore
+    list_by_savings_plan_order.metadata = {
+        "url": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"
+    }
 
     @distributed_trace
     def list_by_savings_plan_id(
@@ -377,6 +395,9 @@ class BenefitUtilizationSummariesOperations:
         **kwargs: Any
     ) -> AsyncIterable["_models.BenefitUtilizationSummary"]:
         """Lists the savings plan utilization summaries for daily or monthly grain.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/cost-management/
 
         :param savings_plan_order_id: Savings plan order ID. Required.
         :type savings_plan_order_id: str
@@ -397,10 +418,10 @@ class BenefitUtilizationSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.BenefitUtilizationSummariesListResult]
+        )
+        cls: ClsType[_models.BenefitUtilizationSummariesListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -424,7 +445,7 @@ class BenefitUtilizationSummariesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -440,7 +461,7 @@ class BenefitUtilizationSummariesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -448,14 +469,15 @@ class BenefitUtilizationSummariesOperations:
             deserialized = self._deserialize("BenefitUtilizationSummariesListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -468,4 +490,6 @@ class BenefitUtilizationSummariesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_savings_plan_id.metadata = {"url": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"}  # type: ignore
+    list_by_savings_plan_id.metadata = {
+        "url": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries"
+    }

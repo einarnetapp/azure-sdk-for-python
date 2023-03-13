@@ -75,6 +75,9 @@ class ScheduledActionsOperations:
     def list(self, filter: Optional[str] = None, **kwargs: Any) -> AsyncIterable["_models.ScheduledAction"]:
         """List all private scheduled actions.
 
+        .. seealso::
+           - https://docs.microsoft.com/rest/api/cost-management/
+
         :param filter: May be used to filter scheduled actions by properties/viewId. Supported operator
          is 'eq'. Default value is None.
         :type filter: str
@@ -87,10 +90,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ScheduledActionListResult]
+        )
+        cls: ClsType[_models.ScheduledActionListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -111,7 +114,7 @@ class ScheduledActionsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -127,7 +130,7 @@ class ScheduledActionsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -135,33 +138,39 @@ class ScheduledActionsOperations:
             deserialized = self._deserialize("ScheduledActionListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponseWithNestedDetails, pipeline_response
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions"}
 
     @distributed_trace
     def list_by_scope(
         self, scope: str, filter: Optional[str] = None, **kwargs: Any
     ) -> AsyncIterable["_models.ScheduledAction"]:
         """List all shared scheduled actions within the given scope.
+
+        .. seealso::
+           - https://docs.microsoft.com/rest/api/cost-management/
 
         :param scope: The scope associated with scheduled action operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
@@ -193,10 +202,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ScheduledActionListResult]
+        )
+        cls: ClsType[_models.ScheduledActionListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -218,7 +227,7 @@ class ScheduledActionsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -234,7 +243,7 @@ class ScheduledActionsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -242,33 +251,37 @@ class ScheduledActionsOperations:
             deserialized = self._deserialize("ScheduledActionListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponseWithNestedDetails, pipeline_response
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions"}  # type: ignore
+    list_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions"}
 
     @overload
     async def create_or_update(
         self,
         name: str,
         scheduled_action: _models.ScheduledAction,
+        if_match: Optional[str] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -279,6 +292,10 @@ class ScheduledActionsOperations:
         :type name: str
         :param scheduled_action: Scheduled action to be created or updated. Required.
         :type scheduled_action: ~azure.mgmt.costmanagement.models.ScheduledAction
+        :param if_match: ETag of the Entity. Not required when creating an entity. Optional when
+         updating an entity and can be specified to achieve optimistic concurrency. Default value is
+         None.
+        :type if_match: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -290,7 +307,13 @@ class ScheduledActionsOperations:
 
     @overload
     async def create_or_update(
-        self, name: str, scheduled_action: IO, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        name: str,
+        scheduled_action: IO,
+        if_match: Optional[str] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.ScheduledAction:
         """Create or update a private scheduled action.
 
@@ -298,6 +321,10 @@ class ScheduledActionsOperations:
         :type name: str
         :param scheduled_action: Scheduled action to be created or updated. Required.
         :type scheduled_action: IO
+        :param if_match: ETag of the Entity. Not required when creating an entity. Optional when
+         updating an entity and can be specified to achieve optimistic concurrency. Default value is
+         None.
+        :type if_match: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -309,15 +336,23 @@ class ScheduledActionsOperations:
 
     @distributed_trace_async
     async def create_or_update(
-        self, name: str, scheduled_action: Union[_models.ScheduledAction, IO], **kwargs: Any
+        self,
+        name: str,
+        scheduled_action: Union[_models.ScheduledAction, IO],
+        if_match: Optional[str] = None,
+        **kwargs: Any
     ) -> _models.ScheduledAction:
         """Create or update a private scheduled action.
 
         :param name: Scheduled action name. Required.
         :type name: str
-        :param scheduled_action: Scheduled action to be created or updated. Is either a model type or a
-         IO type. Required.
+        :param scheduled_action: Scheduled action to be created or updated. Is either a ScheduledAction
+         type or a IO type. Required.
         :type scheduled_action: ~azure.mgmt.costmanagement.models.ScheduledAction or IO
+        :param if_match: ETag of the Entity. Not required when creating an entity. Optional when
+         updating an entity and can be specified to achieve optimistic concurrency. Default value is
+         None.
+        :type if_match: str
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -337,11 +372,11 @@ class ScheduledActionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ScheduledAction]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ScheduledAction] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -353,6 +388,7 @@ class ScheduledActionsOperations:
 
         request = build_create_or_update_request(
             name=name,
+            if_match=if_match,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -362,17 +398,18 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
@@ -382,15 +419,18 @@ class ScheduledActionsOperations:
             deserialized = self._deserialize("ScheduledAction", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}"}  # type: ignore
+    create_or_update.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}"}
 
     @distributed_trace_async
     async def get(self, name: str, **kwargs: Any) -> _models.ScheduledAction:
         """Get the private scheduled action by name.
+
+        .. seealso::
+           - https://docs.microsoft.com/rest/api/cost-management/
 
         :param name: Scheduled action name. Required.
         :type name: str
@@ -410,10 +450,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ScheduledAction]
+        )
+        cls: ClsType[_models.ScheduledAction] = kwargs.pop("cls", None)
 
         request = build_get_request(
             name=name,
@@ -423,17 +463,18 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ScheduledAction", pipeline_response)
@@ -443,11 +484,14 @@ class ScheduledActionsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}"}
 
     @distributed_trace_async
     async def delete(self, name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
         """Delete a private scheduled action.
+
+        .. seealso::
+           - https://docs.microsoft.com/rest/api/cost-management/
 
         :param name: Scheduled action name. Required.
         :type name: str
@@ -467,10 +511,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             name=name,
@@ -480,23 +524,24 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}"}  # type: ignore
+    delete.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}"}
 
     @overload
     async def create_or_update_by_scope(
@@ -504,6 +549,7 @@ class ScheduledActionsOperations:
         scope: str,
         name: str,
         scheduled_action: _models.ScheduledAction,
+        if_match: Optional[str] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -532,6 +578,10 @@ class ScheduledActionsOperations:
         :type name: str
         :param scheduled_action: Scheduled action to be created or updated. Required.
         :type scheduled_action: ~azure.mgmt.costmanagement.models.ScheduledAction
+        :param if_match: ETag of the Entity. Not required when creating an entity. Optional when
+         updating an entity and can be specified to achieve optimistic concurrency. Default value is
+         None.
+        :type if_match: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -543,7 +593,14 @@ class ScheduledActionsOperations:
 
     @overload
     async def create_or_update_by_scope(
-        self, scope: str, name: str, scheduled_action: IO, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        scope: str,
+        name: str,
+        scheduled_action: IO,
+        if_match: Optional[str] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.ScheduledAction:
         """Create or update a shared scheduled action within the given scope.
 
@@ -569,6 +626,10 @@ class ScheduledActionsOperations:
         :type name: str
         :param scheduled_action: Scheduled action to be created or updated. Required.
         :type scheduled_action: IO
+        :param if_match: ETag of the Entity. Not required when creating an entity. Optional when
+         updating an entity and can be specified to achieve optimistic concurrency. Default value is
+         None.
+        :type if_match: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -580,7 +641,12 @@ class ScheduledActionsOperations:
 
     @distributed_trace_async
     async def create_or_update_by_scope(
-        self, scope: str, name: str, scheduled_action: Union[_models.ScheduledAction, IO], **kwargs: Any
+        self,
+        scope: str,
+        name: str,
+        scheduled_action: Union[_models.ScheduledAction, IO],
+        if_match: Optional[str] = None,
+        **kwargs: Any
     ) -> _models.ScheduledAction:
         """Create or update a shared scheduled action within the given scope.
 
@@ -604,9 +670,13 @@ class ScheduledActionsOperations:
         :type scope: str
         :param name: Scheduled action name. Required.
         :type name: str
-        :param scheduled_action: Scheduled action to be created or updated. Is either a model type or a
-         IO type. Required.
+        :param scheduled_action: Scheduled action to be created or updated. Is either a ScheduledAction
+         type or a IO type. Required.
         :type scheduled_action: ~azure.mgmt.costmanagement.models.ScheduledAction or IO
+        :param if_match: ETag of the Entity. Not required when creating an entity. Optional when
+         updating an entity and can be specified to achieve optimistic concurrency. Default value is
+         None.
+        :type if_match: str
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -626,11 +696,11 @@ class ScheduledActionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ScheduledAction]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ScheduledAction] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -643,6 +713,7 @@ class ScheduledActionsOperations:
         request = build_create_or_update_by_scope_request(
             scope=scope,
             name=name,
+            if_match=if_match,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -652,17 +723,18 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
@@ -672,15 +744,18 @@ class ScheduledActionsOperations:
             deserialized = self._deserialize("ScheduledAction", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}"}  # type: ignore
+    create_or_update_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}"}
 
     @distributed_trace_async
     async def get_by_scope(self, scope: str, name: str, **kwargs: Any) -> _models.ScheduledAction:
         """Get the shared scheduled action from the given scope by name.
+
+        .. seealso::
+           - https://docs.microsoft.com/rest/api/cost-management/
 
         :param scope: The scope associated with scheduled action operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
@@ -718,10 +793,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ScheduledAction]
+        )
+        cls: ClsType[_models.ScheduledAction] = kwargs.pop("cls", None)
 
         request = build_get_by_scope_request(
             scope=scope,
@@ -732,17 +807,18 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ScheduledAction", pipeline_response)
@@ -752,13 +828,16 @@ class ScheduledActionsOperations:
 
         return deserialized
 
-    get_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}"}  # type: ignore
+    get_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}"}
 
     @distributed_trace_async
     async def delete_by_scope(  # pylint: disable=inconsistent-return-statements
         self, scope: str, name: str, **kwargs: Any
     ) -> None:
         """Delete a scheduled action within the given scope.
+
+        .. seealso::
+           - https://docs.microsoft.com/rest/api/cost-management/
 
         :param scope: The scope associated with scheduled action operations. This includes
          'subscriptions/{subscriptionId}' for subscription scope,
@@ -796,10 +875,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_by_scope_request(
             scope=scope,
@@ -810,23 +889,24 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}"}  # type: ignore
+    delete_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}"}
 
     @distributed_trace_async
     async def run(self, name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
@@ -850,10 +930,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_run_request(
             name=name,
@@ -863,23 +943,24 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
-    run.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}/execute"}  # type: ignore
+    run.metadata = {"url": "/providers/Microsoft.CostManagement/scheduledActions/{name}/execute"}
 
     @distributed_trace_async
     async def run_by_scope(  # pylint: disable=inconsistent-return-statements
@@ -923,10 +1004,10 @@ class ScheduledActionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_run_by_scope_request(
             scope=scope,
@@ -937,23 +1018,24 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
-    run_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}/execute"}  # type: ignore
+    run_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/scheduledActions/{name}/execute"}
 
     @overload
     async def check_name_availability(
@@ -1001,7 +1083,7 @@ class ScheduledActionsOperations:
         """Checks availability and correctness of the name for a scheduled action.
 
         :param check_name_availability_request: Scheduled action to be created or updated. Is either a
-         model type or a IO type. Required.
+         CheckNameAvailabilityRequest type or a IO type. Required.
         :type check_name_availability_request:
          ~azure.mgmt.costmanagement.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1023,11 +1105,11 @@ class ScheduledActionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CheckNameAvailabilityResponse]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.CheckNameAvailabilityResponse] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1047,17 +1129,18 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("CheckNameAvailabilityResponse", pipeline_response)
@@ -1067,7 +1150,7 @@ class ScheduledActionsOperations:
 
         return deserialized
 
-    check_name_availability.metadata = {"url": "/providers/Microsoft.CostManagement/checkNameAvailability"}  # type: ignore
+    check_name_availability.metadata = {"url": "/providers/Microsoft.CostManagement/checkNameAvailability"}
 
     @overload
     async def check_name_availability_by_scope(
@@ -1173,7 +1256,7 @@ class ScheduledActionsOperations:
          Required.
         :type scope: str
         :param check_name_availability_request: Scheduled action to be created or updated. Is either a
-         model type or a IO type. Required.
+         CheckNameAvailabilityRequest type or a IO type. Required.
         :type check_name_availability_request:
          ~azure.mgmt.costmanagement.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1195,11 +1278,11 @@ class ScheduledActionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CheckNameAvailabilityResponse]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.CheckNameAvailabilityResponse] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1220,17 +1303,18 @@ class ScheduledActionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseWithNestedDetails, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("CheckNameAvailabilityResponse", pipeline_response)
@@ -1240,4 +1324,6 @@ class ScheduledActionsOperations:
 
         return deserialized
 
-    check_name_availability_by_scope.metadata = {"url": "/{scope}/providers/Microsoft.CostManagement/checkNameAvailability"}  # type: ignore
+    check_name_availability_by_scope.metadata = {
+        "url": "/{scope}/providers/Microsoft.CostManagement/checkNameAvailability"
+    }
