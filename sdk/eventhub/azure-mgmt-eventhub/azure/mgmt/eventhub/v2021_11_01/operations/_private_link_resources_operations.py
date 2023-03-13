@@ -57,7 +57,14 @@ def build_get_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -135,8 +142,9 @@ class PrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

@@ -61,7 +61,14 @@ def build_check_name_availability_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -95,7 +102,14 @@ def build_list_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -129,7 +143,14 @@ def build_create_or_update_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -165,7 +186,14 @@ def build_delete_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -199,7 +227,14 @@ def build_get_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -233,7 +268,14 @@ def build_break_pairing_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -267,7 +309,14 @@ def build_fail_over_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -301,7 +350,14 @@ def build_list_authorization_rules_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -340,7 +396,14 @@ def build_get_authorization_rule_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "authorizationRuleName": _SERIALIZER.url(
             "authorization_rule_name", authorization_rule_name, "str", min_length=1
@@ -382,7 +445,14 @@ def build_list_keys_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "namespaceName": _SERIALIZER.url("namespace_name", namespace_name, "str", max_length=50, min_length=6),
+        "namespaceName": _SERIALIZER.url(
+            "namespace_name",
+            namespace_name,
+            "str",
+            max_length=50,
+            min_length=6,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
+        ),
         "alias": _SERIALIZER.url("alias", alias, "str", max_length=50, min_length=1),
         "authorizationRuleName": _SERIALIZER.url(
             "authorization_rule_name", authorization_rule_name, "str", min_length=1
@@ -537,8 +607,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -632,8 +703,9 @@ class DisasterRecoveryConfigsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -779,8 +851,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -847,8 +920,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -909,8 +983,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -976,8 +1051,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1038,8 +1114,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1131,8 +1208,9 @@ class DisasterRecoveryConfigsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1196,8 +1274,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1265,8 +1344,9 @@ class DisasterRecoveryConfigsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
