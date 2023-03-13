@@ -131,6 +131,9 @@ class ReservationTransactionsOperations:
         event date as May 2021 but the billing month as April 2020 when the reservation purchase was
         made.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :param filter: Filter reservation transactions by date range. The properties/EventDate for
@@ -204,8 +207,9 @@ class ReservationTransactionsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -230,6 +234,9 @@ class ReservationTransactionsOperations:
         are posted along with its purchase transaction (i.e. in the purchase billing month). For
         example, The refund is requested in May 2021. This refund transaction will have event date as
         May 2021 but the billing month as April 2020 when the reservation purchase was made.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
@@ -308,8 +315,9 @@ class ReservationTransactionsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

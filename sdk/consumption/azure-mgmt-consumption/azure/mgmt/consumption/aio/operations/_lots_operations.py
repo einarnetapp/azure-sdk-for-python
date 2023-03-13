@@ -68,6 +68,9 @@ class LotsOperations:
         """Lists all Azure credits for a billing account or a billing profile. The API is only supported
         for Microsoft Customer Agreements (MCA) billing accounts.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :param billing_profile_id: Azure Billing Profile ID. Required.
@@ -135,8 +138,9 @@ class LotsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -160,6 +164,9 @@ class LotsOperations:
         """Lists all Microsoft Azure consumption commitments for a billing account. The API is only
         supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing
         accounts.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
@@ -231,8 +238,9 @@ class LotsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -255,6 +263,9 @@ class LotsOperations:
     ) -> AsyncIterable["_models.LotSummary"]:
         """Lists all Azure credits for a customer. The API is only supported for Microsoft Partner
         Agreements (MPA) billing accounts.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
@@ -328,8 +339,9 @@ class LotsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

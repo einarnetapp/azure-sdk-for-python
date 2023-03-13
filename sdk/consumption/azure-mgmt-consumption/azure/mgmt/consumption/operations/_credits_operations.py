@@ -90,6 +90,9 @@ class CreditsOperations:
     def get(self, billing_account_id: str, billing_profile_id: str, **kwargs: Any) -> Optional[_models.CreditSummary]:
         """The credit summary by billingAccountId and billingProfileId.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :param billing_profile_id: Azure Billing Profile ID. Required.
@@ -126,8 +129,9 @@ class CreditsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

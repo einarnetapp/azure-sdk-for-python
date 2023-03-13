@@ -146,6 +146,9 @@ class PriceSheetOperations:
         """Gets the price sheet for a subscription. Price sheet is available via this API only for May 1,
         2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param expand: May be used to expand the properties/meterDetails within a price sheet. By
          default, these fields are not included when returning price sheet. Default value is None.
         :type expand: str
@@ -191,8 +194,9 @@ class PriceSheetOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -222,6 +226,9 @@ class PriceSheetOperations:
     ) -> _models.PriceSheetResult:
         """Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available
         via this API only for May 1, 2014 or later.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_period_name: Billing Period Name. Required.
         :type billing_period_name: str
@@ -271,8 +278,9 @@ class PriceSheetOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

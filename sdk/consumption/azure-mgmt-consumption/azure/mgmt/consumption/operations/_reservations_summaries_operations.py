@@ -185,6 +185,9 @@ class ReservationsSummariesOperations:
     ) -> Iterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param grain: Can be daily or monthly. Known values are: "daily" and "monthly". Required.
@@ -256,8 +259,9 @@ class ReservationsSummariesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -284,6 +288,9 @@ class ReservationsSummariesOperations:
         **kwargs: Any
     ) -> Iterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
@@ -359,8 +366,9 @@ class ReservationsSummariesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -390,6 +398,9 @@ class ReservationsSummariesOperations:
         **kwargs: Any
     ) -> Iterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for the defined scope daily or monthly grain.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param resource_scope: The scope associated with reservations summaries operations. This
          includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount
@@ -483,8 +494,9 @@ class ReservationsSummariesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

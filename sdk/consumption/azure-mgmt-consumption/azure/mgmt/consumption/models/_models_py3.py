@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
@@ -38,7 +38,7 @@ class Amount(_serialization.Model):
         "value": {"key": "value", "type": "float"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.currency = None
@@ -74,7 +74,7 @@ class AmountWithExchangeRate(Amount):
         "exchange_rate_month": {"key": "exchangeRateMonth", "type": "int"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.exchange_rate = None
@@ -114,7 +114,7 @@ class Resource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -226,7 +226,9 @@ class Balance(Resource):  # pylint: disable=too-many-instance-attributes
         },
     }
 
-    def __init__(self, *, billing_frequency: Optional[Union[str, "_models.BillingFrequency"]] = None, **kwargs):
+    def __init__(
+        self, *, billing_frequency: Optional[Union[str, "_models.BillingFrequency"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword billing_frequency: The billing frequency. Known values are: "Month", "Quarter", and
          "Year".
@@ -271,7 +273,7 @@ class BalancePropertiesAdjustmentDetailsItem(_serialization.Model):
         "value": {"key": "value", "type": "float"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -299,7 +301,7 @@ class BalancePropertiesNewPurchasesDetailsItem(_serialization.Model):
         "value": {"key": "value", "type": "float"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -335,7 +337,7 @@ class ProxyResource(_serialization.Model):
         "e_tag": {"key": "eTag", "type": "str"},
     }
 
-    def __init__(self, *, e_tag: Optional[str] = None, **kwargs):
+    def __init__(self, *, e_tag: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
          used to determine whether the user is updating the latest version or not.
@@ -420,8 +422,8 @@ class Budget(ProxyResource):  # pylint: disable=too-many-instance-attributes
         time_period: Optional["_models.BudgetTimePeriod"] = None,
         filter: Optional["_models.BudgetFilter"] = None,  # pylint: disable=redefined-builtin
         notifications: Optional[Dict[str, "_models.Notification"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
          used to determine whether the user is updating the latest version or not.
@@ -482,7 +484,9 @@ class BudgetComparisonExpression(_serialization.Model):
         "values": {"key": "values", "type": "[str]"},
     }
 
-    def __init__(self, *, name: str, operator: Union[str, "_models.BudgetOperatorType"], values: List[str], **kwargs):
+    def __init__(
+        self, *, name: str, operator: Union[str, "_models.BudgetOperatorType"], values: List[str], **kwargs: Any
+    ) -> None:
         """
         :keyword name: The name of the column to use in comparison. Required.
         :paramtype name: str
@@ -520,8 +524,8 @@ class BudgetFilter(_serialization.Model):
         and_property: Optional[List["_models.BudgetFilterProperties"]] = None,
         dimensions: Optional["_models.BudgetComparisonExpression"] = None,
         tags: Optional["_models.BudgetComparisonExpression"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword and_property: The logical "AND" expression. Must have at least 2 items.
         :paramtype and_property: list[~azure.mgmt.consumption.models.BudgetFilterProperties]
@@ -555,8 +559,8 @@ class BudgetFilterProperties(_serialization.Model):
         *,
         dimensions: Optional["_models.BudgetComparisonExpression"] = None,
         tags: Optional["_models.BudgetComparisonExpression"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword dimensions: Has comparison expression for a dimension.
         :paramtype dimensions: ~azure.mgmt.consumption.models.BudgetComparisonExpression
@@ -589,7 +593,7 @@ class BudgetsListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -617,7 +621,9 @@ class BudgetTimePeriod(_serialization.Model):
         "end_date": {"key": "endDate", "type": "iso-8601"},
     }
 
-    def __init__(self, *, start_date: datetime.datetime, end_date: Optional[datetime.datetime] = None, **kwargs):
+    def __init__(
+        self, *, start_date: datetime.datetime, end_date: Optional[datetime.datetime] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword start_date: The start date for the budget. Required.
         :paramtype start_date: ~datetime.datetime
@@ -647,7 +653,7 @@ class ChargesListResult(_serialization.Model):
         "value": {"key": "value", "type": "[ChargeSummary]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -698,7 +704,7 @@ class ChargeSummary(Resource):
 
     _subtype_map = {"kind": {"legacy": "LegacyChargeSummary", "modern": "ModernChargeSummary"}}
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.kind: Optional[str] = None
@@ -733,7 +739,7 @@ class CreditBalanceSummary(_serialization.Model):
         },
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.estimated_balance = None
@@ -802,7 +808,7 @@ class CreditSummary(ProxyResource):  # pylint: disable=too-many-instance-attribu
         "e_tag_properties_e_tag": {"key": "properties.eTag", "type": "str"},
     }
 
-    def __init__(self, *, e_tag: Optional[str] = None, **kwargs):
+    def __init__(self, *, e_tag: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
          used to determine whether the user is updating the latest version or not.
@@ -840,7 +846,7 @@ class CurrentSpend(_serialization.Model):
         "unit": {"key": "unit", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.amount = None
@@ -868,7 +874,7 @@ class DownloadProperties(_serialization.Model):
         "valid_till": {"key": "validTill", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.download_url = None
@@ -896,7 +902,7 @@ class ErrorDetails(_serialization.Model):
         "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -904,26 +910,29 @@ class ErrorDetails(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+    """Error response indicates that the service is not able to process the incoming request. The
+    reason is provided in the error message.
 
     Some Error responses:
 
 
     *
-      429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header.
+      429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the
+    "x-ms-ratelimit-microsoft.consumption-retry-after" header.
 
     *
-      503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
+      503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time
+    specified in the "Retry-After" header.
 
-        :ivar error: The details of the error.
-        :vartype error: ~azure.mgmt.consumption.models.ErrorDetails
+    :ivar error: The details of the error.
+    :vartype error: ~azure.mgmt.consumption.models.ErrorDetails
     """
 
     _attribute_map = {
         "error": {"key": "error", "type": "ErrorDetails"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetails"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetails"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The details of the error.
         :paramtype error: ~azure.mgmt.consumption.models.ErrorDetails
@@ -953,7 +962,7 @@ class Events(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1108,8 +1117,12 @@ class EventSummary(ProxyResource):  # pylint: disable=too-many-instance-attribut
     }
 
     def __init__(  # pylint: disable=too-many-locals
-        self, *, e_tag: Optional[str] = None, event_type: Optional[Union[str, "_models.EventType"]] = None, **kwargs
-    ):
+        self,
+        *,
+        e_tag: Optional[str] = None,
+        event_type: Optional[Union[str, "_models.EventType"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
          used to determine whether the user is updating the latest version or not.
@@ -1167,7 +1180,7 @@ class ForecastSpend(_serialization.Model):
         "unit": {"key": "unit", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.amount = None
@@ -1195,7 +1208,7 @@ class HighCasedErrorDetails(_serialization.Model):
         "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -1203,26 +1216,29 @@ class HighCasedErrorDetails(_serialization.Model):
 
 
 class HighCasedErrorResponse(_serialization.Model):
-    """Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+    """Error response indicates that the service is not able to process the incoming request. The
+    reason is provided in the error message.
 
     Some Error responses:
 
 
     *
-      429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header.
+      429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the
+    "x-ms-ratelimit-microsoft.consumption-retry-after" header.
 
     *
-      503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
+      503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time
+    specified in the "Retry-After" header.
 
-        :ivar error: The details of the error.
-        :vartype error: ~azure.mgmt.consumption.models.HighCasedErrorDetails
+    :ivar error: The details of the error.
+    :vartype error: ~azure.mgmt.consumption.models.HighCasedErrorDetails
     """
 
     _attribute_map = {
         "error": {"key": "error", "type": "HighCasedErrorDetails"},
     }
 
-    def __init__(self, *, error: Optional["_models.HighCasedErrorDetails"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.HighCasedErrorDetails"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The details of the error.
         :paramtype error: ~azure.mgmt.consumption.models.HighCasedErrorDetails
@@ -1299,7 +1315,7 @@ class LegacyChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "currency": {"key": "properties.currency", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.kind: str = "legacy"
@@ -1333,7 +1349,7 @@ class ResourceAttributes(_serialization.Model):
         "sku": {"key": "sku", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.location = None
@@ -1393,7 +1409,7 @@ class ReservationRecommendation(Resource, ResourceAttributes):
 
     _subtype_map = {"kind": {"legacy": "LegacyReservationRecommendation", "modern": "ModernReservationRecommendation"}}
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.location = None
@@ -1514,7 +1530,7 @@ class LegacyReservationRecommendation(ReservationRecommendation):  # pylint: dis
         "sku_properties": {"key": "properties.skuProperties", "type": "[SkuProperty]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.kind: str = "legacy"
@@ -1621,7 +1637,7 @@ class LegacyReservationRecommendationProperties(_serialization.Model):  # pylint
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.look_back_period = None
@@ -1670,7 +1686,7 @@ class ReservationTransactionResource(_serialization.Model):
         "tags": {"key": "tags", "type": "[str]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -1805,7 +1821,7 @@ class ReservationTransaction(ReservationTransactionResource):  # pylint: disable
         "overage": {"key": "properties.overage", "type": "float"},
     }
 
-    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+    def __init__(self, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
         """ """
         super().__init__(**kwargs)
         self.event_date = None
@@ -1959,7 +1975,7 @@ class LegacyReservationTransaction(ReservationTransaction):  # pylint: disable=t
         "overage": {"key": "properties.overage", "type": "float"},
     }
 
-    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+    def __init__(self, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
         """ """
         super().__init__(**kwargs)
 
@@ -2041,7 +2057,7 @@ class LegacySharedScopeReservationRecommendationProperties(
         "sku_properties": {"key": "skuProperties", "type": "[SkuProperty]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.scope: str = "Shared"
@@ -2128,7 +2144,7 @@ class LegacySingleScopeReservationRecommendationProperties(
         "subscription_id": {"key": "subscriptionId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.scope: str = "Single"
@@ -2180,7 +2196,7 @@ class UsageDetail(Resource):
 
     _subtype_map = {"kind": {"legacy": "LegacyUsageDetail", "modern": "ModernUsageDetail"}}
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.kind: Optional[str] = None
@@ -2428,7 +2444,7 @@ class LegacyUsageDetail(UsageDetail):  # pylint: disable=too-many-instance-attri
         "pricing_model": {"key": "properties.pricingModel", "type": "str"},
     }
 
-    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+    def __init__(self, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
         """ """
         super().__init__(**kwargs)
         self.kind: str = "legacy"
@@ -2501,7 +2517,7 @@ class Lots(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -2605,7 +2621,7 @@ class LotSummary(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "e_tag_properties_e_tag": {"key": "properties.eTag", "type": "str"},
     }
 
-    def __init__(self, *, e_tag: Optional[str] = None, **kwargs):
+    def __init__(self, *, e_tag: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
          used to determine whether the user is updating the latest version or not.
@@ -2707,8 +2723,8 @@ class ManagementGroupAggregatedCostResult(Resource):  # pylint: disable=too-many
         children: Optional[List["_models.ManagementGroupAggregatedCostResult"]] = None,
         included_subscriptions: Optional[List[str]] = None,
         excluded_subscriptions: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword children: Children of a management group.
         :paramtype children: list[~azure.mgmt.consumption.models.ManagementGroupAggregatedCostResult]
@@ -2871,7 +2887,7 @@ class Marketplace(Resource):  # pylint: disable=too-many-instance-attributes
         "is_recurring_charge": {"key": "properties.isRecurringCharge", "type": "bool"},
     }
 
-    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+    def __init__(self, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
         """ """
         super().__init__(**kwargs)
         self.billing_period_id = None
@@ -2903,7 +2919,8 @@ class Marketplace(Resource):  # pylint: disable=too-many-instance-attributes
 
 
 class MarketplacesListResult(_serialization.Model):
-    """Result of listing marketplaces. It contains a list of available marketplaces in reverse chronological order by billing period.
+    """Result of listing marketplaces. It contains a list of available marketplaces in reverse
+    chronological order by billing period.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -2923,7 +2940,7 @@ class MarketplacesListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -2982,7 +2999,7 @@ class MeterDetails(_serialization.Model):
         "service_tier": {"key": "serviceTier", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.meter_name = None
@@ -3032,7 +3049,7 @@ class MeterDetailsResponse(_serialization.Model):
         "service_family": {"key": "serviceFamily", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.meter_name = None
@@ -3084,6 +3101,8 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
     :vartype customer_id: str
     :ivar is_invoiced: Is charge Invoiced.
     :vartype is_invoiced: bool
+    :ivar subscription_id: Subscription guid.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -3104,6 +3123,7 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "invoice_section_id": {"readonly": True},
         "customer_id": {"readonly": True},
         "is_invoiced": {"readonly": True},
+        "subscription_id": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3124,9 +3144,10 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         "invoice_section_id": {"key": "properties.invoiceSectionId", "type": "str"},
         "customer_id": {"key": "properties.customerId", "type": "str"},
         "is_invoiced": {"key": "properties.isInvoiced", "type": "bool"},
+        "subscription_id": {"key": "properties.subscriptionId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.kind: str = "modern"
@@ -3141,6 +3162,7 @@ class ModernChargeSummary(ChargeSummary):  # pylint: disable=too-many-instance-a
         self.invoice_section_id = None
         self.customer_id = None
         self.is_invoiced = None
+        self.subscription_id = None
 
 
 class ModernReservationRecommendation(ReservationRecommendation):  # pylint: disable=too-many-instance-attributes
@@ -3259,7 +3281,7 @@ class ModernReservationRecommendation(ReservationRecommendation):  # pylint: dis
         "sku_name": {"key": "properties.skuName", "type": "str"},
     }
 
-    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+    def __init__(self, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
         """ """
         super().__init__(**kwargs)
         self.kind: str = "modern"
@@ -3376,7 +3398,7 @@ class ModernReservationRecommendationProperties(_serialization.Model):  # pylint
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.location = None
@@ -3511,7 +3533,7 @@ class ModernReservationTransaction(ReservationTransactionResource):  # pylint: d
         "term": {"key": "properties.term", "type": "str"},
     }
 
-    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+    def __init__(self, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
         """ """
         super().__init__(**kwargs)
         self.amount = None
@@ -3557,7 +3579,7 @@ class ModernReservationTransactionsListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -3649,7 +3671,7 @@ class ModernSharedScopeReservationRecommendationProperties(
         "sku_name": {"key": "skuName", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.scope: str = "Shared"
@@ -3744,7 +3766,7 @@ class ModernSingleScopeReservationRecommendationProperties(
         "subscription_id": {"key": "subscriptionId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.scope: str = "Single"
@@ -4126,7 +4148,7 @@ class ModernUsageDetail(UsageDetail):  # pylint: disable=too-many-instance-attri
         "cost_allocation_rule_name": {"key": "properties.costAllocationRuleName", "type": "str"},
     }
 
-    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+    def __init__(self, **kwargs: Any) -> None:  # pylint: disable=too-many-locals
         """ """
         super().__init__(**kwargs)
         self.kind: str = "modern"
@@ -4268,8 +4290,8 @@ class Notification(_serialization.Model):
         contact_groups: Optional[List[str]] = None,
         threshold_type: Union[str, "_models.ThresholdType"] = "Actual",
         locale: Optional[Union[str, "_models.CultureCode"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword enabled: The notification is enabled or not. Required.
         :paramtype enabled: bool
@@ -4335,7 +4357,7 @@ class Operation(_serialization.Model):
         "display": {"key": "display", "type": "OperationDisplay"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: The object that represents the operation.
         :paramtype display: ~azure.mgmt.consumption.models.OperationDisplay
@@ -4375,7 +4397,7 @@ class OperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -4385,7 +4407,8 @@ class OperationDisplay(_serialization.Model):
 
 
 class OperationListResult(_serialization.Model):
-    """Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.
+    """Result of listing consumption operations. It contains a list of operations and a URL link to
+    get the next set of results.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -4406,7 +4429,7 @@ class OperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -4463,7 +4486,7 @@ class PriceSheetProperties(_serialization.Model):
         "offer_id": {"key": "offerId", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.billing_period_id = None
@@ -4522,7 +4545,7 @@ class PriceSheetResult(Resource):
         "download": {"key": "properties.download", "type": "MeterDetails"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.pricesheets = None
@@ -4551,7 +4574,7 @@ class Reseller(_serialization.Model):
         "reseller_description": {"key": "resellerDescription", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.reseller_id = None
@@ -4645,7 +4668,7 @@ class ReservationDetail(Resource):  # pylint: disable=too-many-instance-attribut
         "kind": {"key": "properties.kind", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.reservation_order_id = None
@@ -4682,7 +4705,7 @@ class ReservationDetailsListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -4732,7 +4755,7 @@ class ReservationRecommendationDetailsCalculatedSavingsProperties(_serialization
         "savings": {"key": "savings", "type": "float"},
     }
 
-    def __init__(self, *, reserved_unit_count: Optional[float] = None, **kwargs):
+    def __init__(self, *, reserved_unit_count: Optional[float] = None, **kwargs: Any) -> None:
         """
         :keyword reserved_unit_count: The number of reserved units used to calculate savings. Always 1
          for virtual machines.
@@ -4813,7 +4836,7 @@ class ReservationRecommendationDetailsModel(Resource):  # pylint: disable=too-ma
         "usage": {"key": "properties.usage", "type": "ReservationRecommendationDetailsUsageProperties"},
     }
 
-    def __init__(self, *, location: Optional[str] = None, sku: Optional[str] = None, **kwargs):
+    def __init__(self, *, location: Optional[str] = None, sku: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword location: Resource Location.
         :paramtype location: str
@@ -4869,7 +4892,7 @@ class ReservationRecommendationDetailsResourceProperties(_serialization.Model):
         "resource_type": {"key": "resourceType", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.applied_scopes = None
@@ -4927,8 +4950,8 @@ class ReservationRecommendationDetailsSavingsProperties(_serialization.Model):
         calculated_savings: Optional[
             List["_models.ReservationRecommendationDetailsCalculatedSavingsProperties"]
         ] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword calculated_savings: List of calculated savings.
         :paramtype calculated_savings:
@@ -4979,7 +5002,7 @@ class ReservationRecommendationDetailsUsageProperties(_serialization.Model):
         "usage_grain": {"key": "usageGrain", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.first_consumption_date = None
@@ -5014,7 +5037,7 @@ class ReservationRecommendationsListResult(_serialization.Model):
         "previous_link": {"key": "previousLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -5043,7 +5066,7 @@ class ReservationSummariesListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -5157,7 +5180,7 @@ class ReservationSummary(Resource):  # pylint: disable=too-many-instance-attribu
         "utilized_percentage": {"key": "properties.utilizedPercentage", "type": "float"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.reservation_order_id = None
@@ -5198,7 +5221,7 @@ class ReservationTransactionsListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -5226,7 +5249,7 @@ class SkuProperty(_serialization.Model):
         "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -5247,7 +5270,7 @@ class Tag(_serialization.Model):
         "value": {"key": "value", "type": "[str]"},
     }
 
-    def __init__(self, *, key: Optional[str] = None, value: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, key: Optional[str] = None, value: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword key: Tag key.
         :paramtype key: str
@@ -5299,7 +5322,9 @@ class TagsResult(ProxyResource):
         "previous_link": {"key": "properties.previousLink", "type": "str"},
     }
 
-    def __init__(self, *, e_tag: Optional[str] = None, tags: Optional[List["_models.Tag"]] = None, **kwargs):
+    def __init__(
+        self, *, e_tag: Optional[str] = None, tags: Optional[List["_models.Tag"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
          used to determine whether the user is updating the latest version or not.
@@ -5314,7 +5339,8 @@ class TagsResult(ProxyResource):
 
 
 class UsageDetailsListResult(_serialization.Model):
-    """Result of listing usage details. It contains a list of available usage details in reverse chronological order by billing period.
+    """Result of listing usage details. It contains a list of available usage details in reverse
+    chronological order by billing period.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -5334,7 +5360,7 @@ class UsageDetailsListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None

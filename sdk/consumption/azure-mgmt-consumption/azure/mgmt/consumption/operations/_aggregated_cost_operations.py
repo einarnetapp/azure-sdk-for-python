@@ -126,6 +126,9 @@ class AggregatedCostOperations:
         """Provides the aggregate cost of a management group and all child management groups by current
         billing period.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param management_group_id: Azure Management Group ID. Required.
         :type management_group_id: str
         :param filter: May be used to filter aggregated cost by properties/usageStart (Utc time),
@@ -165,8 +168,9 @@ class AggregatedCostOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -193,6 +197,9 @@ class AggregatedCostOperations:
     ) -> _models.ManagementGroupAggregatedCostResult:
         """Provides the aggregate cost of a management group and all child management groups by specified
         billing period.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param management_group_id: Azure Management Group ID. Required.
         :type management_group_id: str
@@ -230,8 +237,9 @@ class AggregatedCostOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

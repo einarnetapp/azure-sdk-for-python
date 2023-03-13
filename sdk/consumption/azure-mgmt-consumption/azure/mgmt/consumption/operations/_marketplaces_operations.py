@@ -109,6 +109,9 @@ class MarketplacesOperations:
         """Lists the marketplaces for a scope at the defined scope. Marketplaces are available via this
         API only for May 1, 2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with marketplace operations. This includes
          '/subscriptions/{subscriptionId}/' for subscription scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,
@@ -200,8 +203,9 @@ class MarketplacesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

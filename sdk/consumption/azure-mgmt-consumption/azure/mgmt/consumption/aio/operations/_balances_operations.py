@@ -63,6 +63,9 @@ class BalancesOperations:
         """Gets the balances for a scope by billingAccountId. Balances are available via this API only for
         May 1, 2014 or later.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -96,8 +99,9 @@ class BalancesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -124,6 +128,9 @@ class BalancesOperations:
     ) -> _models.Balance:
         """Gets the balances for a scope by billing period and billingAccountId. Balances are available
         via this API only for May 1, 2014 or later.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
@@ -161,8 +168,9 @@ class BalancesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

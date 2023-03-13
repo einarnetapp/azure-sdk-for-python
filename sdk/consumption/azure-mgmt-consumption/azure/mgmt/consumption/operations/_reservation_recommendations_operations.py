@@ -92,6 +92,9 @@ class ReservationRecommendationsOperations:
     ) -> Iterable["_models.ReservationRecommendation"]:
         """List of recommendations for purchasing reserved instances.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param resource_scope: The scope associated with reservation recommendations operations. This
          includes '/subscriptions/{subscriptionId}/' for subscription scope,
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope,
@@ -171,8 +174,9 @@ class ReservationRecommendationsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

@@ -67,6 +67,9 @@ class ChargesOperations:
     ) -> _models.ChargesListResult:
         """Lists the charges based for the defined scope.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param scope: The scope associated with charges operations. This includes
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'
          for Department scope, and
@@ -79,9 +82,9 @@ class ChargesOperations:
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
          for billingProfile scope,
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope, and
-         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
          specific for partners. Required.
         :type scope: str
         :param start_date: Start date. Default value is None.
@@ -133,8 +136,9 @@ class ChargesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
