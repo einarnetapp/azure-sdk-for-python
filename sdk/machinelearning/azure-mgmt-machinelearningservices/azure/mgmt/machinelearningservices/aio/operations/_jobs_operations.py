@@ -75,6 +75,9 @@ class JobsOperations:
         job_type: Optional[str] = None,
         tag: Optional[str] = None,
         list_view_type: Optional[Union[str, _models.ListViewType]] = None,
+        asset_name: Optional[str] = None,
+        scheduled: Optional[bool] = None,
+        schedule_id: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.JobBase"]:
         """Lists Jobs in the workspace.
@@ -95,6 +98,12 @@ class JobsOperations:
         :param list_view_type: View type for including/excluding (for example) archived entities. Known
          values are: "ActiveOnly", "ArchivedOnly", and "All". Default value is None.
         :type list_view_type: str or ~azure.mgmt.machinelearningservices.models.ListViewType
+        :param asset_name: Asset name the job's named output is registered with. Default value is None.
+        :type asset_name: str
+        :param scheduled: Indicator whether the job is scheduled job. Default value is None.
+        :type scheduled: bool
+        :param schedule_id: The scheduled id for listing the job triggered from. Default value is None.
+        :type schedule_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either JobBase or the result of cls(response)
         :rtype:
@@ -104,7 +113,7 @@ class JobsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.JobBaseResourceArmPaginatedResult] = kwargs.pop("cls", None)
@@ -128,6 +137,9 @@ class JobsOperations:
                     job_type=job_type,
                     tag=tag,
                     list_view_type=list_view_type,
+                    asset_name=asset_name,
+                    scheduled=scheduled,
+                    schedule_id=schedule_id,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -164,8 +176,9 @@ class JobsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -196,7 +209,7 @@ class JobsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -214,8 +227,9 @@ class JobsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -270,7 +284,7 @@ class JobsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -295,7 +309,9 @@ class JobsOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -342,7 +358,7 @@ class JobsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.JobBase] = kwargs.pop("cls", None)
@@ -360,8 +376,9 @@ class JobsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -463,7 +480,7 @@ class JobsOperations:
         :type workspace_name: str
         :param id: The name and identifier for the Job. This is case-sensitive. Required.
         :type id: str
-        :param body: Job definition object. Is either a model type or a IO type. Required.
+        :param body: Job definition object. Is either a JobBase type or a IO type. Required.
         :type body: ~azure.mgmt.machinelearningservices.models.JobBase or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -484,7 +501,7 @@ class JobsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -514,8 +531,9 @@ class JobsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -554,7 +572,7 @@ class JobsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -572,8 +590,9 @@ class JobsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -625,7 +644,7 @@ class JobsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)

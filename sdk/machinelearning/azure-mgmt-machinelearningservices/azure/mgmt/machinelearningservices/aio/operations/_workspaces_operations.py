@@ -100,7 +100,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Workspace] = kwargs.pop("cls", None)
@@ -117,8 +117,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -153,7 +154,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -182,8 +183,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -294,7 +296,7 @@ class WorkspacesOperations:
         :param workspace_name: Name of Azure Machine Learning workspace. Required.
         :type workspace_name: str
         :param parameters: The parameters for creating or updating a machine learning workspace. Is
-         either a model type or a IO type. Required.
+         either a Workspace type or a IO type. Required.
         :type parameters: ~azure.mgmt.machinelearningservices.models.Workspace or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -316,7 +318,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -364,7 +366,7 @@ class WorkspacesOperations:
     }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, workspace_name: str, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, force_to_purge: Optional[bool] = None, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -377,7 +379,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -386,6 +388,7 @@ class WorkspacesOperations:
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            force_to_purge=force_to_purge,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
             headers=_headers,
@@ -394,8 +397,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -413,7 +417,9 @@ class WorkspacesOperations:
     }
 
     @distributed_trace_async
-    async def begin_delete(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> AsyncLROPoller[None]:
+    async def begin_delete(
+        self, resource_group_name: str, workspace_name: str, force_to_purge: Optional[bool] = None, **kwargs: Any
+    ) -> AsyncLROPoller[None]:
         """Deletes a machine learning workspace.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -421,6 +427,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: Name of Azure Machine Learning workspace. Required.
         :type workspace_name: str
+        :param force_to_purge: Flag to indicate delete is a purge request. Default value is None.
+        :type force_to_purge: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -436,7 +444,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -447,6 +455,7 @@ class WorkspacesOperations:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
                 workspace_name=workspace_name,
+                force_to_purge=force_to_purge,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -496,7 +505,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -525,8 +534,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -638,8 +648,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: Name of Azure Machine Learning workspace. Required.
         :type workspace_name: str
-        :param parameters: The parameters for updating a machine learning workspace. Is either a model
-         type or a IO type. Required.
+        :param parameters: The parameters for updating a machine learning workspace. Is either a
+         WorkspaceUpdateParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.machinelearningservices.models.WorkspaceUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -661,7 +671,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -710,7 +720,7 @@ class WorkspacesOperations:
 
     @distributed_trace
     def list_by_resource_group(
-        self, resource_group_name: str, skip: Optional[str] = None, **kwargs: Any
+        self, resource_group_name: str, skip: Optional[str] = None, kind: Optional[str] = None, **kwargs: Any
     ) -> AsyncIterable["_models.Workspace"]:
         """Lists all the available machine learning workspaces under the specified resource group.
 
@@ -719,6 +729,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param skip: Continuation token for pagination. Default value is None.
         :type skip: str
+        :param kind: Kind of workspace. Default value is None.
+        :type kind: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either Workspace or the result of cls(response)
         :rtype:
@@ -728,7 +740,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.WorkspaceListResult] = kwargs.pop("cls", None)
@@ -748,6 +760,7 @@ class WorkspacesOperations:
                     resource_group_name=resource_group_name,
                     subscription_id=self._config.subscription_id,
                     skip=skip,
+                    kind=kind,
                     api_version=api_version,
                     template_url=self.list_by_resource_group.metadata["url"],
                     headers=_headers,
@@ -784,8 +797,9 @@ class WorkspacesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -820,7 +834,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -852,8 +866,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -976,8 +991,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: Name of Azure Machine Learning workspace. Required.
         :type workspace_name: str
-        :param parameters: The parameter of diagnosing workspace health. Is either a model type or a IO
-         type. Default value is None.
+        :param parameters: The parameter of diagnosing workspace health. Is either a
+         DiagnoseWorkspaceParameters type or a IO type. Default value is None.
         :type parameters: ~azure.mgmt.machinelearningservices.models.DiagnoseWorkspaceParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -999,7 +1014,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -1076,7 +1091,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ListWorkspaceKeysResult] = kwargs.pop("cls", None)
@@ -1093,8 +1108,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1129,7 +1145,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1146,8 +1162,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1191,7 +1208,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -1234,11 +1251,15 @@ class WorkspacesOperations:
     }
 
     @distributed_trace
-    def list_by_subscription(self, skip: Optional[str] = None, **kwargs: Any) -> AsyncIterable["_models.Workspace"]:
+    def list_by_subscription(
+        self, skip: Optional[str] = None, kind: Optional[str] = None, **kwargs: Any
+    ) -> AsyncIterable["_models.Workspace"]:
         """Lists all the available machine learning workspaces under the specified subscription.
 
         :param skip: Continuation token for pagination. Default value is None.
         :type skip: str
+        :param kind: Kind of workspace. Default value is None.
+        :type kind: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either Workspace or the result of cls(response)
         :rtype:
@@ -1248,7 +1269,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.WorkspaceListResult] = kwargs.pop("cls", None)
@@ -1267,6 +1288,7 @@ class WorkspacesOperations:
                 request = build_list_by_subscription_request(
                     subscription_id=self._config.subscription_id,
                     skip=skip,
+                    kind=kind,
                     api_version=api_version,
                     template_url=self.list_by_subscription.metadata["url"],
                     headers=_headers,
@@ -1303,8 +1325,9 @@ class WorkspacesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1348,7 +1371,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.NotebookAccessTokenResult] = kwargs.pop("cls", None)
@@ -1365,8 +1388,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1401,7 +1425,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[Optional[_models.NotebookResourceInfo]] = kwargs.pop("cls", None)
@@ -1418,8 +1442,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1470,7 +1495,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.NotebookResourceInfo] = kwargs.pop("cls", None)
@@ -1543,7 +1568,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ListStorageAccountKeysResult] = kwargs.pop("cls", None)
@@ -1560,8 +1585,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1609,7 +1635,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ListNotebookKeysResult] = kwargs.pop("cls", None)
@@ -1626,8 +1652,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1679,7 +1706,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExternalFQDNResponse] = kwargs.pop("cls", None)
@@ -1696,8 +1723,9 @@ class WorkspacesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
