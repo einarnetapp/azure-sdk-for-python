@@ -14,7 +14,7 @@ from azure.mgmt.machinelearningservices import MachineLearningServicesMgmtClient
     pip install azure-identity
     pip install azure-mgmt-machinelearningservices
 # USAGE
-    python get_logs.py
+    python create_or_get_pending_upload.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,16 +29,16 @@ def main():
         subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
-    response = client.online_deployments.get_logs(
-        resource_group_name="testrg123",
-        workspace_name="workspace123",
-        endpoint_name="testEndpoint",
-        deployment_name="testDeployment",
-        body={"containerType": "StorageInitializer", "tail": 0},
+    response = client.registry_code_versions.create_or_get_pending_upload(
+        resource_group_name="test-rg",
+        registry_name="registryName",
+        code_name="string",
+        version="string",
+        body={"pendingUploadId": "string", "pendingUploadType": "TemporaryBlobReference"},
     )
     print(response)
 
 
-# x-ms-original-file: specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-10-01/examples/OnlineDeployment/getLogs.json
+# x-ms-original-file: specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2023-04-01/examples/Registry/CodeVersion/createOrGetPendingUpload.json
 if __name__ == "__main__":
     main()

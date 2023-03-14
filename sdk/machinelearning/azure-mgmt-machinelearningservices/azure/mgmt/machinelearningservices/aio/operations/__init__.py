@@ -15,6 +15,14 @@ from ._compute_operations import ComputeOperations
 from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations
 from ._private_link_resources_operations import PrivateLinkResourcesOperations
 from ._workspace_connections_operations import WorkspaceConnectionsOperations
+from ._registry_code_containers_operations import RegistryCodeContainersOperations
+from ._registry_code_versions_operations import RegistryCodeVersionsOperations
+from ._registry_component_containers_operations import RegistryComponentContainersOperations
+from ._registry_component_versions_operations import RegistryComponentVersionsOperations
+from ._registry_environment_containers_operations import RegistryEnvironmentContainersOperations
+from ._registry_environment_versions_operations import RegistryEnvironmentVersionsOperations
+from ._registry_model_containers_operations import RegistryModelContainersOperations
+from ._registry_model_versions_operations import RegistryModelVersionsOperations
 from ._batch_endpoints_operations import BatchEndpointsOperations
 from ._batch_deployments_operations import BatchDeploymentsOperations
 from ._code_containers_operations import CodeContainersOperations
@@ -48,6 +56,14 @@ __all__ = [
     "PrivateEndpointConnectionsOperations",
     "PrivateLinkResourcesOperations",
     "WorkspaceConnectionsOperations",
+    "RegistryCodeContainersOperations",
+    "RegistryCodeVersionsOperations",
+    "RegistryComponentContainersOperations",
+    "RegistryComponentVersionsOperations",
+    "RegistryEnvironmentContainersOperations",
+    "RegistryEnvironmentVersionsOperations",
+    "RegistryModelContainersOperations",
+    "RegistryModelVersionsOperations",
     "BatchEndpointsOperations",
     "BatchDeploymentsOperations",
     "CodeContainersOperations",

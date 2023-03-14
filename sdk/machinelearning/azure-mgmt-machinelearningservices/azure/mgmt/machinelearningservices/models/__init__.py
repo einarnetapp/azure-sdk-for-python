@@ -14,6 +14,7 @@ from ._models_py3 import AccountKeyDatastoreSecrets
 from ._models_py3 import AksComputeSecrets
 from ._models_py3 import AksComputeSecretsProperties
 from ._models_py3 import AksNetworkingConfiguration
+from ._models_py3 import AllNodes
 from ._models_py3 import AmlCompute
 from ._models_py3 import AmlComputeNodeInformation
 from ._models_py3 import AmlComputeNodesInformation
@@ -53,6 +54,7 @@ from ._models_py3 import BatchEndpointProperties
 from ._models_py3 import BatchEndpointTrackedResourceArmPaginatedResult
 from ._models_py3 import BatchRetrySettings
 from ._models_py3 import BayesianSamplingAlgorithm
+from ._models_py3 import BlobReferenceForConsumptionDto
 from ._models_py3 import BuildContext
 from ._models_py3 import CertificateDatastoreCredentials
 from ._models_py3 import CertificateDatastoreSecrets
@@ -233,6 +235,7 @@ from ._models_py3 import NlpVertical
 from ._models_py3 import NlpVerticalFeaturizationSettings
 from ._models_py3 import NlpVerticalLimitSettings
 from ._models_py3 import NodeStateCounts
+from ._models_py3 import Nodes
 from ._models_py3 import NoneAuthTypeWorkspaceConnectionProperties
 from ._models_py3 import NoneDatastoreCredentials
 from ._models_py3 import NotebookAccessTokenResult
@@ -258,6 +261,9 @@ from ._models_py3 import PartialMinimalTrackedResourceWithIdentity
 from ._models_py3 import PartialMinimalTrackedResourceWithSku
 from ._models_py3 import PartialSku
 from ._models_py3 import Password
+from ._models_py3 import PendingUploadCredentialDto
+from ._models_py3 import PendingUploadRequestDto
+from ._models_py3 import PendingUploadResponseDto
 from ._models_py3 import PersonalComputeInstanceSettings
 from ._models_py3 import PipelineJob
 from ._models_py3 import PrivateEndpoint
@@ -285,6 +291,7 @@ from ._models_py3 import ResourceName
 from ._models_py3 import ResourceQuota
 from ._models_py3 import Route
 from ._models_py3 import SASAuthTypeWorkspaceConnectionProperties
+from ._models_py3 import SASCredentialDto
 from ._models_py3 import SamplingAlgorithm
 from ._models_py3 import SasDatastoreCredentials
 from ._models_py3 import SasDatastoreSecrets
@@ -369,6 +376,7 @@ from ._models_py3 import WorkspaceUpdateParameters
 
 from ._machine_learning_services_mgmt_client_enums import AllocationState
 from ._machine_learning_services_mgmt_client_enums import ApplicationSharingPolicy
+from ._machine_learning_services_mgmt_client_enums import AssetProvisioningState
 from ._machine_learning_services_mgmt_client_enums import AutoRebuildSetting
 from ._machine_learning_services_mgmt_client_enums import Autosave
 from ._machine_learning_services_mgmt_client_enums import BatchLoggingLevel
@@ -427,6 +435,7 @@ from ._machine_learning_services_mgmt_client_enums import MountState
 from ._machine_learning_services_mgmt_client_enums import NCrossValidationsMode
 from ._machine_learning_services_mgmt_client_enums import Network
 from ._machine_learning_services_mgmt_client_enums import NodeState
+from ._machine_learning_services_mgmt_client_enums import NodesValueType
 from ._machine_learning_services_mgmt_client_enums import ObjectDetectionPrimaryMetrics
 from ._machine_learning_services_mgmt_client_enums import OperatingSystemType
 from ._machine_learning_services_mgmt_client_enums import OperationName
@@ -435,6 +444,8 @@ from ._machine_learning_services_mgmt_client_enums import OperationTrigger
 from ._machine_learning_services_mgmt_client_enums import OrderString
 from ._machine_learning_services_mgmt_client_enums import OsType
 from ._machine_learning_services_mgmt_client_enums import OutputDeliveryMode
+from ._machine_learning_services_mgmt_client_enums import PendingUploadCredentialType
+from ._machine_learning_services_mgmt_client_enums import PendingUploadType
 from ._machine_learning_services_mgmt_client_enums import PrivateEndpointConnectionProvisioningState
 from ._machine_learning_services_mgmt_client_enums import PrivateEndpointServiceConnectionStatus
 from ._machine_learning_services_mgmt_client_enums import ProvisioningState
@@ -496,6 +507,7 @@ __all__ = [
     "AksComputeSecrets",
     "AksComputeSecretsProperties",
     "AksNetworkingConfiguration",
+    "AllNodes",
     "AmlCompute",
     "AmlComputeNodeInformation",
     "AmlComputeNodesInformation",
@@ -535,6 +547,7 @@ __all__ = [
     "BatchEndpointTrackedResourceArmPaginatedResult",
     "BatchRetrySettings",
     "BayesianSamplingAlgorithm",
+    "BlobReferenceForConsumptionDto",
     "BuildContext",
     "CertificateDatastoreCredentials",
     "CertificateDatastoreSecrets",
@@ -715,6 +728,7 @@ __all__ = [
     "NlpVerticalFeaturizationSettings",
     "NlpVerticalLimitSettings",
     "NodeStateCounts",
+    "Nodes",
     "NoneAuthTypeWorkspaceConnectionProperties",
     "NoneDatastoreCredentials",
     "NotebookAccessTokenResult",
@@ -740,6 +754,9 @@ __all__ = [
     "PartialMinimalTrackedResourceWithSku",
     "PartialSku",
     "Password",
+    "PendingUploadCredentialDto",
+    "PendingUploadRequestDto",
+    "PendingUploadResponseDto",
     "PersonalComputeInstanceSettings",
     "PipelineJob",
     "PrivateEndpoint",
@@ -767,6 +784,7 @@ __all__ = [
     "ResourceQuota",
     "Route",
     "SASAuthTypeWorkspaceConnectionProperties",
+    "SASCredentialDto",
     "SamplingAlgorithm",
     "SasDatastoreCredentials",
     "SasDatastoreSecrets",
@@ -850,6 +868,7 @@ __all__ = [
     "WorkspaceUpdateParameters",
     "AllocationState",
     "ApplicationSharingPolicy",
+    "AssetProvisioningState",
     "AutoRebuildSetting",
     "Autosave",
     "BatchLoggingLevel",
@@ -908,6 +927,7 @@ __all__ = [
     "NCrossValidationsMode",
     "Network",
     "NodeState",
+    "NodesValueType",
     "ObjectDetectionPrimaryMetrics",
     "OperatingSystemType",
     "OperationName",
@@ -916,6 +936,8 @@ __all__ = [
     "OrderString",
     "OsType",
     "OutputDeliveryMode",
+    "PendingUploadCredentialType",
+    "PendingUploadType",
     "PrivateEndpointConnectionProvisioningState",
     "PrivateEndpointServiceConnectionStatus",
     "ProvisioningState",
