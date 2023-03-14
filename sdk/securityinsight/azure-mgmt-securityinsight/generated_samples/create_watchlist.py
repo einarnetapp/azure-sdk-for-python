@@ -40,14 +40,13 @@ def main():
                 "displayName": "High Value Assets Watchlist",
                 "itemsSearchKey": "header1",
                 "provider": "Microsoft",
-                "source": "watchlist.csv",
-                "sourceType": "Local file",
+                "source": "Local file",
             },
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/watchlists/CreateWatchlist.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-03-01-preview/examples/watchlists/CreateWatchlist.json
 if __name__ == "__main__":
     main()

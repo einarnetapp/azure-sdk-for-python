@@ -26,17 +26,17 @@ from azure.mgmt.securityinsight import SecurityInsights
 def main():
     client = SecurityInsights(
         credential=DefaultAzureCredential(),
-        subscription_id="bd794837-4d29-4647-9105-6339bfdb4e6a",
+        subscription_id="d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     )
 
-    response = client.threat_intelligence_indicator.get(
+    response = client.data_connectors.get(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
-        name="e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+        data_connector_id="c345bf40-8509-4ed2-b947-50cb773aaf04",
     )
     print(response)
 
 
-# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2022-12-01-preview/examples/threatintelligence/GetThreatIntelligenceById.json
+# x-ms-original-file: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2023-03-01-preview/examples/dataConnectors/GetThreatIntelligenceById.json
 if __name__ == "__main__":
     main()
