@@ -103,7 +103,7 @@ class CheckNameAvailabilityOperations:
         """Check the availability of name for resource.
 
         :param name_availability_request: The required parameters for checking if resource name is
-         available. Is either a model type or a IO type. Required.
+         available. Is either a CheckNameAvailabilityRequest type or a IO type. Required.
         :type name_availability_request:
          ~azure.mgmt.rdbms.postgresql_flexibleservers.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -152,8 +152,9 @@ class CheckNameAvailabilityOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

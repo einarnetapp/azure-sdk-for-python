@@ -61,7 +61,7 @@ def build_list_by_server_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "serverName": _SERIALIZER.url(
-            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-z][a-z0-9]*$"
+            "server_name", server_name, "str", max_length=63, min_length=3, pattern=r"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
         ),
     }
 
@@ -169,8 +169,9 @@ class ReplicasOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

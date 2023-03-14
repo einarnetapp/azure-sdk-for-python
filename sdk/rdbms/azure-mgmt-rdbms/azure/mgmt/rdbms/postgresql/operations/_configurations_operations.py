@@ -212,8 +212,9 @@ class ConfigurationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -332,7 +333,7 @@ class ConfigurationsOperations:
         :param configuration_name: The name of the server configuration. Required.
         :type configuration_name: str
         :param parameters: The required parameters for updating a server configuration. Is either a
-         model type or a IO type. Required.
+         Configuration type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql.models.Configuration or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -444,8 +445,9 @@ class ConfigurationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -527,8 +529,9 @@ class ConfigurationsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
