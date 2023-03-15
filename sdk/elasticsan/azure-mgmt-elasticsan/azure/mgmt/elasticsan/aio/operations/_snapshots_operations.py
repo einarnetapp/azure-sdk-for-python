@@ -31,7 +31,7 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._volumes_operations import (
+from ...operations._snapshots_operations import (
     build_create_request,
     build_delete_request,
     build_get_request,
@@ -47,14 +47,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class VolumesOperations:
+class SnapshotsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.elasticsan.aio.ElasticSanManagement`'s
-        :attr:`volumes` attribute.
+        :attr:`snapshots` attribute.
     """
 
     models = _models
@@ -66,15 +66,122 @@ class VolumesOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
+    @distributed_trace
+    def list_by_volume_group(
+        self,
+        resource_group_name: str,
+        elastic_san_name: str,
+        volume_group_name: str,
+        filter: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.Snapshot"]:
+        """List Snapshots in a VolumeGroup or List Snapshots by Volume (name) in a VolumeGroup using
+        filter.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param elastic_san_name: The name of the ElasticSan. Required.
+        :type elastic_san_name: str
+        :param volume_group_name: The name of the VolumeGroup. Required.
+        :type volume_group_name: str
+        :param filter: Specify $filter='volumeName eq :code:`<volume name>`' to filter on volume.
+         Default value is None.
+        :type filter: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either Snapshot or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.elasticsan.models.Snapshot]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2023-01-01"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.SnapshotList] = kwargs.pop("cls", None)
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_volume_group_request(
+                    resource_group_name=resource_group_name,
+                    elastic_san_name=elastic_san_name,
+                    volume_group_name=volume_group_name,
+                    subscription_id=self._config.subscription_id,
+                    filter=filter,
+                    api_version=api_version,
+                    template_url=self.list_by_volume_group.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("SnapshotList", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_volume_group.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots"
+    }
+
     async def _create_initial(
         self,
         resource_group_name: str,
         elastic_san_name: str,
         volume_group_name: str,
-        volume_name: str,
-        parameters: Union[_models.VolumeCreateParameter, IO],
+        snapshot_name: str,
+        parameters: Union[_models.SnapshotCreateParameter, IO],
         **kwargs: Any
-    ) -> _models.Volume:
+    ) -> _models.Snapshot:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -90,7 +197,7 @@ class VolumesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.Volume] = kwargs.pop("cls", None)
+        cls: ClsType[_models.Snapshot] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -98,13 +205,13 @@ class VolumesOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "VolumeCreateParameter")
+            _json = self._serialize.body(parameters, "SnapshotCreateParameter")
 
         request = build_create_request(
             resource_group_name=resource_group_name,
             elastic_san_name=elastic_san_name,
             volume_group_name=volume_group_name,
-            volume_name=volume_name,
+            snapshot_name=snapshot_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -130,10 +237,10 @@ class VolumesOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("Volume", pipeline_response)
+            deserialized = self._deserialize("Snapshot", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("Volume", pipeline_response)
+            deserialized = self._deserialize("Snapshot", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -141,7 +248,7 @@ class VolumesOperations:
         return deserialized  # type: ignore
 
     _create_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}"
     }
 
     @overload
@@ -150,13 +257,13 @@ class VolumesOperations:
         resource_group_name: str,
         elastic_san_name: str,
         volume_group_name: str,
-        volume_name: str,
-        parameters: _models.VolumeCreateParameter,
+        snapshot_name: str,
+        parameters: _models.SnapshotCreateParameter,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.Volume]:
-        """Create a Volume.
+    ) -> AsyncLROPoller[_models.Snapshot]:
+        """Create a Volume Snapshot.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -165,10 +272,10 @@ class VolumesOperations:
         :type elastic_san_name: str
         :param volume_group_name: The name of the VolumeGroup. Required.
         :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
-        :param parameters: Volume object. Required.
-        :type parameters: ~azure.mgmt.elasticsan.models.VolumeCreateParameter
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
+        :param parameters: Snapshot object. Required.
+        :type parameters: ~azure.mgmt.elasticsan.models.SnapshotCreateParameter
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -180,9 +287,9 @@ class VolumesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either Volume or the result of
+        :return: An instance of AsyncLROPoller that returns either Snapshot or the result of
          cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Volume]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Snapshot]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -192,13 +299,13 @@ class VolumesOperations:
         resource_group_name: str,
         elastic_san_name: str,
         volume_group_name: str,
-        volume_name: str,
+        snapshot_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.Volume]:
-        """Create a Volume.
+    ) -> AsyncLROPoller[_models.Snapshot]:
+        """Create a Volume Snapshot.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -207,9 +314,9 @@ class VolumesOperations:
         :type elastic_san_name: str
         :param volume_group_name: The name of the VolumeGroup. Required.
         :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
-        :param parameters: Volume object. Required.
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
+        :param parameters: Snapshot object. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -222,9 +329,9 @@ class VolumesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either Volume or the result of
+        :return: An instance of AsyncLROPoller that returns either Snapshot or the result of
          cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Volume]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Snapshot]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -234,11 +341,11 @@ class VolumesOperations:
         resource_group_name: str,
         elastic_san_name: str,
         volume_group_name: str,
-        volume_name: str,
-        parameters: Union[_models.VolumeCreateParameter, IO],
+        snapshot_name: str,
+        parameters: Union[_models.SnapshotCreateParameter, IO],
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.Volume]:
-        """Create a Volume.
+    ) -> AsyncLROPoller[_models.Snapshot]:
+        """Create a Volume Snapshot.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -247,11 +354,11 @@ class VolumesOperations:
         :type elastic_san_name: str
         :param volume_group_name: The name of the VolumeGroup. Required.
         :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
-        :param parameters: Volume object. Is either a VolumeCreateParameter type or a IO type.
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
+        :param parameters: Snapshot object. Is either a SnapshotCreateParameter type or a IO type.
          Required.
-        :type parameters: ~azure.mgmt.elasticsan.models.VolumeCreateParameter or IO
+        :type parameters: ~azure.mgmt.elasticsan.models.SnapshotCreateParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -263,9 +370,9 @@ class VolumesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either Volume or the result of
+        :return: An instance of AsyncLROPoller that returns either Snapshot or the result of
          cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Volume]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Snapshot]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -275,7 +382,7 @@ class VolumesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.Volume] = kwargs.pop("cls", None)
+        cls: ClsType[_models.Snapshot] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
@@ -284,7 +391,7 @@ class VolumesOperations:
                 resource_group_name=resource_group_name,
                 elastic_san_name=elastic_san_name,
                 volume_group_name=volume_group_name,
-                volume_name=volume_name,
+                snapshot_name=snapshot_name,
                 parameters=parameters,
                 api_version=api_version,
                 content_type=content_type,
@@ -296,7 +403,7 @@ class VolumesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("Volume", pipeline_response)
+            deserialized = self._deserialize("Snapshot", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -320,18 +427,108 @@ class VolumesOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_create.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}"
     }
 
-    async def _update_initial(
+    @overload
+    async def update(
         self,
         resource_group_name: str,
         elastic_san_name: str,
         volume_group_name: str,
-        volume_name: str,
-        parameters: Union[_models.VolumeUpdate, IO],
+        snapshot_name: str,
+        parameters: _models.SnapshotUpdate,
+        *,
+        content_type: str = "application/json",
         **kwargs: Any
-    ) -> Optional[_models.Volume]:
+    ) -> _models.Snapshot:
+        """Update a Volume Snapshot.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param elastic_san_name: The name of the ElasticSan. Required.
+        :type elastic_san_name: str
+        :param volume_group_name: The name of the VolumeGroup. Required.
+        :type volume_group_name: str
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
+        :param parameters: Snapshot object. Required.
+        :type parameters: ~azure.mgmt.elasticsan.models.SnapshotUpdate
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Snapshot or the result of cls(response)
+        :rtype: ~azure.mgmt.elasticsan.models.Snapshot
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def update(
+        self,
+        resource_group_name: str,
+        elastic_san_name: str,
+        volume_group_name: str,
+        snapshot_name: str,
+        parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.Snapshot:
+        """Update a Volume Snapshot.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param elastic_san_name: The name of the ElasticSan. Required.
+        :type elastic_san_name: str
+        :param volume_group_name: The name of the VolumeGroup. Required.
+        :type volume_group_name: str
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
+        :param parameters: Snapshot object. Required.
+        :type parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Snapshot or the result of cls(response)
+        :rtype: ~azure.mgmt.elasticsan.models.Snapshot
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def update(
+        self,
+        resource_group_name: str,
+        elastic_san_name: str,
+        volume_group_name: str,
+        snapshot_name: str,
+        parameters: Union[_models.SnapshotUpdate, IO],
+        **kwargs: Any
+    ) -> _models.Snapshot:
+        """Update a Volume Snapshot.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param elastic_san_name: The name of the ElasticSan. Required.
+        :type elastic_san_name: str
+        :param volume_group_name: The name of the VolumeGroup. Required.
+        :type volume_group_name: str
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
+        :param parameters: Snapshot object. Is either a SnapshotUpdate type or a IO type. Required.
+        :type parameters: ~azure.mgmt.elasticsan.models.SnapshotUpdate or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Snapshot or the result of cls(response)
+        :rtype: ~azure.mgmt.elasticsan.models.Snapshot
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -347,7 +544,7 @@ class VolumesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Optional[_models.Volume]] = kwargs.pop("cls", None)
+        cls: ClsType[_models.Snapshot] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -355,19 +552,19 @@ class VolumesOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "VolumeUpdate")
+            _json = self._serialize.body(parameters, "SnapshotUpdate")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
             elastic_san_name=elastic_san_name,
             volume_group_name=volume_group_name,
-            volume_name=volume_name,
+            snapshot_name=snapshot_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self._update_initial.metadata["url"],
+            template_url=self.update.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -381,208 +578,24 @@ class VolumesOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 202]:
+        if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = None
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = self._deserialize("Volume", pipeline_response)
-
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+        deserialized = self._deserialize("Snapshot", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _update_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
-    }
-
-    @overload
-    async def begin_update(
-        self,
-        resource_group_name: str,
-        elastic_san_name: str,
-        volume_group_name: str,
-        volume_name: str,
-        parameters: _models.VolumeUpdate,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.Volume]:
-        """Update an Volume.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param elastic_san_name: The name of the ElasticSan. Required.
-        :type elastic_san_name: str
-        :param volume_group_name: The name of the VolumeGroup. Required.
-        :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
-        :param parameters: Volume object. Required.
-        :type parameters: ~azure.mgmt.elasticsan.models.VolumeUpdate
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either Volume or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Volume]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_update(
-        self,
-        resource_group_name: str,
-        elastic_san_name: str,
-        volume_group_name: str,
-        volume_name: str,
-        parameters: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.Volume]:
-        """Update an Volume.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param elastic_san_name: The name of the ElasticSan. Required.
-        :type elastic_san_name: str
-        :param volume_group_name: The name of the VolumeGroup. Required.
-        :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
-        :param parameters: Volume object. Required.
-        :type parameters: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either Volume or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Volume]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def begin_update(
-        self,
-        resource_group_name: str,
-        elastic_san_name: str,
-        volume_group_name: str,
-        volume_name: str,
-        parameters: Union[_models.VolumeUpdate, IO],
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.Volume]:
-        """Update an Volume.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param elastic_san_name: The name of the ElasticSan. Required.
-        :type elastic_san_name: str
-        :param volume_group_name: The name of the VolumeGroup. Required.
-        :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
-        :param parameters: Volume object. Is either a VolumeUpdate type or a IO type. Required.
-        :type parameters: ~azure.mgmt.elasticsan.models.VolumeUpdate or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either Volume or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.elasticsan.models.Volume]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2023-01-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.Volume] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._update_initial(
-                resource_group_name=resource_group_name,
-                elastic_san_name=elastic_san_name,
-                volume_group_name=volume_group_name,
-                volume_name=volume_name,
-                parameters=parameters,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("Volume", pipeline_response)
-            if cls:
-                return cls(pipeline_response, deserialized, {})
-            return deserialized
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(
-                AsyncPollingMethod,
-                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
-            )
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    begin_update.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
+    update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}"
     }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, elastic_san_name: str, volume_group_name: str, volume_name: str, **kwargs: Any
+        self, resource_group_name: str, elastic_san_name: str, volume_group_name: str, snapshot_name: str, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -604,7 +617,7 @@ class VolumesOperations:
             resource_group_name=resource_group_name,
             elastic_san_name=elastic_san_name,
             volume_group_name=volume_group_name,
-            volume_name=volume_name,
+            snapshot_name=snapshot_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -634,14 +647,14 @@ class VolumesOperations:
             return cls(pipeline_response, None, response_headers)
 
     _delete_initial.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}"
     }
 
     @distributed_trace_async
     async def begin_delete(
-        self, resource_group_name: str, elastic_san_name: str, volume_group_name: str, volume_name: str, **kwargs: Any
+        self, resource_group_name: str, elastic_san_name: str, volume_group_name: str, snapshot_name: str, **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Delete an Volume.
+        """Delete a Volume Snapshot.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -650,8 +663,8 @@ class VolumesOperations:
         :type elastic_san_name: str
         :param volume_group_name: The name of the VolumeGroup. Required.
         :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -679,7 +692,7 @@ class VolumesOperations:
                 resource_group_name=resource_group_name,
                 elastic_san_name=elastic_san_name,
                 volume_group_name=volume_group_name,
-                volume_name=volume_name,
+                snapshot_name=snapshot_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -710,14 +723,14 @@ class VolumesOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     begin_delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}"
     }
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, elastic_san_name: str, volume_group_name: str, volume_name: str, **kwargs: Any
-    ) -> _models.Volume:
-        """Get an Volume.
+        self, resource_group_name: str, elastic_san_name: str, volume_group_name: str, snapshot_name: str, **kwargs: Any
+    ) -> _models.Snapshot:
+        """Get a Volume Snapshot.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -726,11 +739,11 @@ class VolumesOperations:
         :type elastic_san_name: str
         :param volume_group_name: The name of the VolumeGroup. Required.
         :type volume_group_name: str
-        :param volume_name: The name of the Volume. Required.
-        :type volume_name: str
+        :param snapshot_name: The name of the volume snapshot within the given volume group. Required.
+        :type snapshot_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Volume or the result of cls(response)
-        :rtype: ~azure.mgmt.elasticsan.models.Volume
+        :return: Snapshot or the result of cls(response)
+        :rtype: ~azure.mgmt.elasticsan.models.Snapshot
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -747,13 +760,13 @@ class VolumesOperations:
         api_version: Literal["2023-01-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
-        cls: ClsType[_models.Volume] = kwargs.pop("cls", None)
+        cls: ClsType[_models.Snapshot] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             elastic_san_name=elastic_san_name,
             volume_group_name=volume_group_name,
-            volume_name=volume_name,
+            snapshot_name=snapshot_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -775,7 +788,7 @@ class VolumesOperations:
             error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Volume", pipeline_response)
+        deserialized = self._deserialize("Snapshot", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -783,102 +796,5 @@ class VolumesOperations:
         return deserialized
 
     get.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
-    }
-
-    @distributed_trace
-    def list_by_volume_group(
-        self, resource_group_name: str, elastic_san_name: str, volume_group_name: str, **kwargs: Any
-    ) -> AsyncIterable["_models.Volume"]:
-        """List Volumes in a VolumeGroup.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param elastic_san_name: The name of the ElasticSan. Required.
-        :type elastic_san_name: str
-        :param volume_group_name: The name of the VolumeGroup. Required.
-        :type volume_group_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Volume or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.elasticsan.models.Volume]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: Literal["2023-01-01"] = kwargs.pop(
-            "api_version", _params.pop("api-version", self._config.api_version)
-        )
-        cls: ClsType[_models.VolumeList] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_volume_group_request(
-                    resource_group_name=resource_group_name,
-                    elastic_san_name=elastic_san_name,
-                    volume_group_name=volume_group_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    template_url=self.list_by_volume_group.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("VolumeList", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    list_by_volume_group.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes"
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}"
     }

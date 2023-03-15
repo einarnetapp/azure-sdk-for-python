@@ -16,7 +16,7 @@ from azure.mgmt.elasticsan import ElasticSanManagement
 # USAGE
     python volumes_create_maximum_set_gen.py
 
-    Before run the sample, please set the values of the client ID, tenant ID and client secret 
+    Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
     AZURE_CLIENT_SECRET. For more info about how to get the value, please see:
     https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal
@@ -26,22 +26,22 @@ from azure.mgmt.elasticsan import ElasticSanManagement
 def main():
     client = ElasticSanManagement(
         credential=DefaultAzureCredential(),
-        subscription_id="aaaaaaaaaaaaaaaaaa",
+        subscription_id="E721FC62-7162-4E69-B214-347600FAC505",
     )
 
     response = client.volumes.begin_create(
         resource_group_name="rgelasticsan",
-        elastic_san_name="ti7q-k952-1qB3J_5",
-        volume_group_name="u_5I_1j4t3",
-        volume_name="9132y",
+        elastic_san_name="qjXY",
+        volume_group_name="1UitIu-qVKdf-5g",
+        volume_name="4p-5k0n71",
         parameters={
-            "properties": {"creationData": {"createSource": "None", "sourceUri": "aaaaaa"}, "sizeGiB": 22},
-            "tags": {"key7423": "aaaa"},
+            "properties": {"creationData": {"createSource": "None", "sourceUri": "zhgz"}, "sizeGiB": 30},
+            "tags": {"key6355": "dkyqozsjb"},
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2021-11-20-preview/examples/Volumes_Create_MaximumSet_Gen.json
+# x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2023-01-01/examples/Volumes_Create_MaximumSet_Gen.json
 if __name__ == "__main__":
     main()

@@ -8,9 +8,15 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+import sys
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
+
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -45,7 +51,7 @@ class Resource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -88,7 +94,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, location: Optional[str] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, location: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -100,6 +106,117 @@ class TrackedResource(Resource):
 
 
 class ElasticSan(TrackedResource):  # pylint: disable=too-many-instance-attributes
+    """Response for ElasticSan request.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Azure resource identifier.
+    :vartype id: str
+    :ivar name: Azure resource name.
+    :vartype name: str
+    :ivar type: Azure resource type.
+    :vartype type: str
+    :ivar tags: Azure resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives.
+    :vartype location: str
+    :ivar system_data: Resource metadata required by ARM RPC.
+    :vartype system_data: ~azure.mgmt.elasticsan.models.SystemData
+    :ivar sku: resource sku.
+    :vartype sku: ~azure.mgmt.elasticsan.models.Sku
+    :ivar availability_zones: Logical zone for Elastic San resource; example: ["1"].
+    :vartype availability_zones: list[str]
+    :ivar provisioning_state: State of the operation on the resource. Known values are: "Invalid",
+     "Succeeded", "Failed", "Canceled", "Pending", "Creating", "Updating", and "Deleting".
+    :vartype provisioning_state: str or ~azure.mgmt.elasticsan.models.ProvisioningStates
+    :ivar base_size_ti_b: Base size of the Elastic San appliance in TiB.
+    :vartype base_size_ti_b: int
+    :ivar extended_capacity_size_ti_b: Extended size of the Elastic San appliance in TiB.
+    :vartype extended_capacity_size_ti_b: int
+    :ivar total_volume_size_gi_b: Total size of the provisioned Volumes in GiB.
+    :vartype total_volume_size_gi_b: int
+    :ivar volume_group_count: Total number of volume groups in this Elastic San appliance.
+    :vartype volume_group_count: int
+    :ivar total_iops: Total Provisioned IOPS of the Elastic San appliance.
+    :vartype total_iops: int
+    :ivar total_m_bps: Total Provisioned MBps Elastic San appliance.
+    :vartype total_m_bps: int
+    :ivar total_size_ti_b: Total size of the Elastic San appliance in TB.
+    :vartype total_size_ti_b: int
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "total_volume_size_gi_b": {"readonly": True},
+        "volume_group_count": {"readonly": True},
+        "total_iops": {"readonly": True},
+        "total_m_bps": {"readonly": True},
+        "total_size_ti_b": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "sku": {"key": "properties.sku", "type": "Sku"},
+        "availability_zones": {"key": "properties.availabilityZones", "type": "[str]"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "base_size_ti_b": {"key": "properties.baseSizeTiB", "type": "int"},
+        "extended_capacity_size_ti_b": {"key": "properties.extendedCapacitySizeTiB", "type": "int"},
+        "total_volume_size_gi_b": {"key": "properties.totalVolumeSizeGiB", "type": "int"},
+        "volume_group_count": {"key": "properties.volumeGroupCount", "type": "int"},
+        "total_iops": {"key": "properties.totalIops", "type": "int"},
+        "total_m_bps": {"key": "properties.totalMBps", "type": "int"},
+        "total_size_ti_b": {"key": "properties.totalSizeTiB", "type": "int"},
+    }
+
+    def __init__(
+        self,
+        *,
+        tags: Optional[Dict[str, str]] = None,
+        location: Optional[str] = None,
+        sku: Optional["_models.Sku"] = None,
+        availability_zones: Optional[List[str]] = None,
+        base_size_ti_b: Optional[int] = None,
+        extended_capacity_size_ti_b: Optional[int] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword tags: Azure resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: The geo-location where the resource lives.
+        :paramtype location: str
+        :keyword sku: resource sku.
+        :paramtype sku: ~azure.mgmt.elasticsan.models.Sku
+        :keyword availability_zones: Logical zone for Elastic San resource; example: ["1"].
+        :paramtype availability_zones: list[str]
+        :keyword base_size_ti_b: Base size of the Elastic San appliance in TiB.
+        :paramtype base_size_ti_b: int
+        :keyword extended_capacity_size_ti_b: Extended size of the Elastic San appliance in TiB.
+        :paramtype extended_capacity_size_ti_b: int
+        """
+        super().__init__(tags=tags, location=location, **kwargs)
+        self.system_data = None
+        self.sku = sku
+        self.availability_zones = availability_zones
+        self.provisioning_state = None
+        self.base_size_ti_b = base_size_ti_b
+        self.extended_capacity_size_ti_b = extended_capacity_size_ti_b
+        self.total_volume_size_gi_b = None
+        self.volume_group_count = None
+        self.total_iops = None
+        self.total_m_bps = None
+        self.total_size_ti_b = None
+
+
+class ElasticSanCreateParameter(TrackedResource):  # pylint: disable=too-many-instance-attributes
     """Response for ElasticSan request.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -185,8 +302,8 @@ class ElasticSan(TrackedResource):  # pylint: disable=too-many-instance-attribut
         tags: Optional[Dict[str, str]] = None,
         location: Optional[str] = None,
         availability_zones: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -221,16 +338,13 @@ class ElasticSanList(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: An array of Elastic San objects. Required.
+    :ivar value: An array of Elastic San objects.
     :vartype value: list[~azure.mgmt.elasticsan.models.ElasticSan]
     :ivar next_link: URI to fetch the next section of the paginated response.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"required": True},
         "next_link": {"readonly": True},
     }
 
@@ -239,9 +353,9 @@ class ElasticSanList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.ElasticSan"], **kwargs):
+    def __init__(self, *, value: Optional[List["_models.ElasticSan"]] = None, **kwargs: Any) -> None:
         """
-        :keyword value: An array of Elastic San objects. Required.
+        :keyword value: An array of Elastic San objects.
         :paramtype value: list[~azure.mgmt.elasticsan.models.ElasticSan]
         """
         super().__init__(**kwargs)
@@ -281,7 +395,7 @@ class ElasticSanOperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, *, provider: str, resource: str, operation: str, description: str, **kwargs):
+    def __init__(self, *, provider: str, resource: str, operation: str, description: str, **kwargs: Any) -> None:
         """
         :keyword provider: Localized friendly form of the resource provider name. Required.
         :paramtype provider: str
@@ -322,7 +436,9 @@ class ElasticSanOperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.ElasticSanRPOperation"], next_link: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, value: List["_models.ElasticSanRPOperation"], next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: An array of operations supported by the ElasticSan RP. Required.
         :paramtype value: list[~azure.mgmt.elasticsan.models.ElasticSanRPOperation]
@@ -361,7 +477,7 @@ class ElasticSanRPOperation(_serialization.Model):
         "display": {"key": "display", "type": "ElasticSanOperationDisplay"},
     }
 
-    def __init__(self, *, name: str, **kwargs):
+    def __init__(self, *, name: str, **kwargs: Any) -> None:
         """
         :keyword name: The name of the operation being performed on this particular object. Required.
         :paramtype name: str
@@ -395,8 +511,8 @@ class ElasticSanUpdate(_serialization.Model):
         tags: Optional[Dict[str, str]] = None,
         base_size_ti_b: Optional[int] = None,
         extended_capacity_size_ti_b: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Update tags.
         :paramtype tags: dict[str, str]
@@ -422,7 +538,7 @@ class Error(_serialization.Model):
         "error": {"key": "error", "type": "ErrorResponse"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorResponse"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorResponse"] = None, **kwargs: Any) -> None:
         """
         :keyword error: RP error response.
         :paramtype error: ~azure.mgmt.elasticsan.models.ErrorResponse
@@ -452,7 +568,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -492,7 +608,7 @@ class ErrorResponse(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -537,7 +653,7 @@ class IscsiTargetInfo(_serialization.Model):
         "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(self, *, status: Optional[Union[str, "_models.OperationalStatus"]] = None, **kwargs):
+    def __init__(self, *, status: Optional[Union[str, "_models.OperationalStatus"]] = None, **kwargs: Any) -> None:
         """
         :keyword status: Operational status of the iSCSI Target. Known values are: "Invalid",
          "Unknown", "Healthy", "Unhealthy", "Updating", "Running", "Stopped", and "Stopped
@@ -563,7 +679,9 @@ class NetworkRuleSet(_serialization.Model):
         "virtual_network_rules": {"key": "virtualNetworkRules", "type": "[VirtualNetworkRule]"},
     }
 
-    def __init__(self, *, virtual_network_rules: Optional[List["_models.VirtualNetworkRule"]] = None, **kwargs):
+    def __init__(
+        self, *, virtual_network_rules: Optional[List["_models.VirtualNetworkRule"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword virtual_network_rules: The list of virtual network rules.
         :paramtype virtual_network_rules: list[~azure.mgmt.elasticsan.models.VirtualNetworkRule]
@@ -593,8 +711,12 @@ class Sku(_serialization.Model):
     }
 
     def __init__(
-        self, *, name: Union[str, "_models.SkuName"], tier: Optional[Union[str, "_models.SkuTier"]] = None, **kwargs
-    ):
+        self,
+        *,
+        name: Union[str, "_models.SkuName"],
+        tier: Optional[Union[str, "_models.SkuTier"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The sku name. Required. Known values are: "Premium_LRS" and "Premium_ZRS".
         :paramtype name: str or ~azure.mgmt.elasticsan.models.SkuName
@@ -627,7 +749,7 @@ class SKUCapability(_serialization.Model):
         "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -674,8 +796,12 @@ class SkuInformation(_serialization.Model):
     }
 
     def __init__(
-        self, *, name: Union[str, "_models.SkuName"], tier: Optional[Union[str, "_models.SkuTier"]] = None, **kwargs
-    ):
+        self,
+        *,
+        name: Union[str, "_models.SkuName"],
+        tier: Optional[Union[str, "_models.SkuTier"]] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Sku Name. Required. Known values are: "Premium_LRS" and "Premium_ZRS".
         :paramtype name: str or ~azure.mgmt.elasticsan.models.SkuName
@@ -708,7 +834,7 @@ class SkuInformationList(_serialization.Model):
         "value": {"key": "value", "type": "[SkuInformation]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -735,19 +861,235 @@ class SkuLocationInfo(_serialization.Model):
         "zones": {"key": "zones", "type": "[str]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.location = None
         self.zones = None
 
 
+class Snapshot(Resource):
+    """Response for Volume Snapshot request.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Azure resource identifier.
+    :vartype id: str
+    :ivar name: Azure resource name.
+    :vartype name: str
+    :ivar type: Azure resource type.
+    :vartype type: str
+    :ivar tags: Azure resource tags.
+    :vartype tags: dict[str, str]
+    :ivar system_data: Resource metadata required by ARM RPC.
+    :vartype system_data: ~azure.mgmt.elasticsan.models.SystemData
+    :ivar creation_data: Data used when creating a volume snapshot.
+    :vartype creation_data: ~azure.mgmt.elasticsan.models.SnapshotCreationData
+    :ivar provisioning_state: State of the operation on the resource. Known values are: "Invalid",
+     "Succeeded", "Failed", "Canceled", "Pending", "Creating", "Updating", and "Deleting".
+    :vartype provisioning_state: str or ~azure.mgmt.elasticsan.models.ProvisioningStates
+    :ivar source_volume_size_gi_b: Size of Source Volume.
+    :vartype source_volume_size_gi_b: int
+    :ivar volume_name: Source Volume Name of a snapshot.
+    :vartype volume_name: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "source_volume_size_gi_b": {"readonly": True},
+        "volume_name": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "creation_data": {"key": "properties.creationData", "type": "SnapshotCreationData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "source_volume_size_gi_b": {"key": "properties.sourceVolumeSizeGiB", "type": "int"},
+        "volume_name": {"key": "properties.volumeName", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        tags: Optional[Dict[str, str]] = None,
+        creation_data: Optional["_models.SnapshotCreationData"] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword tags: Azure resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword creation_data: Data used when creating a volume snapshot.
+        :paramtype creation_data: ~azure.mgmt.elasticsan.models.SnapshotCreationData
+        """
+        super().__init__(tags=tags, **kwargs)
+        self.system_data = None
+        self.creation_data = creation_data
+        self.provisioning_state = None
+        self.source_volume_size_gi_b = None
+        self.volume_name = None
+
+
+class SnapshotCreateParameter(Resource):
+    """Response for Volume Snapshot request.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Azure resource identifier.
+    :vartype id: str
+    :ivar name: Azure resource name.
+    :vartype name: str
+    :ivar type: Azure resource type.
+    :vartype type: str
+    :ivar tags: Azure resource tags.
+    :vartype tags: dict[str, str]
+    :ivar system_data: Resource metadata required by ARM RPC.
+    :vartype system_data: ~azure.mgmt.elasticsan.models.SystemData
+    :ivar creation_data: Data used when creating a volume snapshot. Required.
+    :vartype creation_data: ~azure.mgmt.elasticsan.models.SnapshotCreationData
+    :ivar provisioning_state: State of the operation on the resource. Known values are: "Invalid",
+     "Succeeded", "Failed", "Canceled", "Pending", "Creating", "Updating", and "Deleting".
+    :vartype provisioning_state: str or ~azure.mgmt.elasticsan.models.ProvisioningStates
+    :ivar source_volume_size_gi_b: Size of Source Volume.
+    :vartype source_volume_size_gi_b: int
+    :ivar volume_name: Source Volume Name of a snapshot.
+    :vartype volume_name: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "creation_data": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "source_volume_size_gi_b": {"readonly": True},
+        "volume_name": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "creation_data": {"key": "properties.creationData", "type": "SnapshotCreationData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "source_volume_size_gi_b": {"key": "properties.sourceVolumeSizeGiB", "type": "int"},
+        "volume_name": {"key": "properties.volumeName", "type": "str"},
+    }
+
+    def __init__(
+        self, *, creation_data: "_models.SnapshotCreationData", tags: Optional[Dict[str, str]] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword tags: Azure resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword creation_data: Data used when creating a volume snapshot. Required.
+        :paramtype creation_data: ~azure.mgmt.elasticsan.models.SnapshotCreationData
+        """
+        super().__init__(tags=tags, **kwargs)
+        self.system_data = None
+        self.creation_data = creation_data
+        self.provisioning_state = None
+        self.source_volume_size_gi_b = None
+        self.volume_name = None
+
+
+class SnapshotCreationData(_serialization.Model):
+    """Data used when creating a volume snapshot.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar source_uri: If createOption is Copy, this is the ARM id of the source snapshot or disk.
+     If createOption is Restore, this is the ARM-like id of the source disk restore point. Required.
+    :vartype source_uri: str
+    """
+
+    _validation = {
+        "source_uri": {"required": True},
+    }
+
+    _attribute_map = {
+        "source_uri": {"key": "sourceUri", "type": "str"},
+    }
+
+    def __init__(self, *, source_uri: str, **kwargs: Any) -> None:
+        """
+        :keyword source_uri: If createOption is Copy, this is the ARM id of the source snapshot or
+         disk. If createOption is Restore, this is the ARM-like id of the source disk restore point.
+         Required.
+        :paramtype source_uri: str
+        """
+        super().__init__(**kwargs)
+        self.source_uri = source_uri
+
+
+class SnapshotList(_serialization.Model):
+    """List of Snapshots.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: An array of Snapshot objects.
+    :vartype value: list[~azure.mgmt.elasticsan.models.Snapshot]
+    :ivar next_link: URI to fetch the next section of the paginated response.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[Snapshot]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, *, value: Optional[List["_models.Snapshot"]] = None, **kwargs: Any) -> None:
+        """
+        :keyword value: An array of Snapshot objects.
+        :paramtype value: list[~azure.mgmt.elasticsan.models.Snapshot]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
+class SnapshotUpdate(_serialization.Model):
+    """Snapshot request.
+
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    """
+
+    _attribute_map = {
+        "tags": {"key": "tags", "type": "{str}"},
+    }
+
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+        """
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.tags = tags
+
+
 class SourceCreationData(_serialization.Model):
     """Data source used when creating the volume.
 
-    :ivar create_source: This enumerates the possible sources of a volume creation. Default value
-     is "None".
-    :vartype create_source: str
+    :ivar create_source: This enumerates the possible sources of a volume creation. Known values
+     are: "None", "VolumeSnapshot", "DiskSnapshot", "Disk", "DiskRestorePoint", and "Export".
+    :vartype create_source: str or ~azure.mgmt.elasticsan.models.VolumeCreateOption
     :ivar source_uri: If createOption is Copy, this is the ARM id of the source snapshot or disk.
      If createOption is Restore, this is the ARM-like id of the source disk restore point.
     :vartype source_uri: str
@@ -758,11 +1100,17 @@ class SourceCreationData(_serialization.Model):
         "source_uri": {"key": "sourceUri", "type": "str"},
     }
 
-    def __init__(self, *, create_source: Optional[str] = None, source_uri: Optional[str] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        create_source: Optional[Union[str, "_models.VolumeCreateOption"]] = None,
+        source_uri: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
-        :keyword create_source: This enumerates the possible sources of a volume creation. Default
-         value is "None".
-        :paramtype create_source: str
+        :keyword create_source: This enumerates the possible sources of a volume creation. Known values
+         are: "None", "VolumeSnapshot", "DiskSnapshot", "Disk", "DiskRestorePoint", and "Export".
+        :paramtype create_source: str or ~azure.mgmt.elasticsan.models.VolumeCreateOption
         :keyword source_uri: If createOption is Copy, this is the ARM id of the source snapshot or
          disk. If createOption is Restore, this is the ARM-like id of the source disk restore point.
         :paramtype source_uri: str
@@ -809,8 +1157,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -865,7 +1213,7 @@ class VirtualNetworkRule(_serialization.Model):
         "state": {"key": "state", "type": "str"},
     }
 
-    def __init__(self, *, virtual_network_resource_id: str, action: str = "Allow", **kwargs):
+    def __init__(self, *, virtual_network_resource_id: str, action: Literal["Allow"] = "Allow", **kwargs: Any) -> None:
         """
         :keyword virtual_network_resource_id: Resource ID of a subnet, for example:
          /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
@@ -932,14 +1280,87 @@ class Volume(Resource):
         tags: Optional[Dict[str, str]] = None,
         creation_data: Optional["_models.SourceCreationData"] = None,
         size_gi_b: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
         :keyword creation_data: State of the operation on the resource.
         :paramtype creation_data: ~azure.mgmt.elasticsan.models.SourceCreationData
         :keyword size_gi_b: Volume size.
+        :paramtype size_gi_b: int
+        """
+        super().__init__(tags=tags, **kwargs)
+        self.system_data = None
+        self.volume_id = None
+        self.creation_data = creation_data
+        self.size_gi_b = size_gi_b
+        self.storage_target = None
+
+
+class VolumeCreateParameter(Resource):
+    """Response for Volume request.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Azure resource identifier.
+    :vartype id: str
+    :ivar name: Azure resource name.
+    :vartype name: str
+    :ivar type: Azure resource type.
+    :vartype type: str
+    :ivar tags: Azure resource tags.
+    :vartype tags: dict[str, str]
+    :ivar system_data: Resource metadata required by ARM RPC.
+    :vartype system_data: ~azure.mgmt.elasticsan.models.SystemData
+    :ivar volume_id: Unique Id of the volume in GUID format.
+    :vartype volume_id: str
+    :ivar creation_data: State of the operation on the resource.
+    :vartype creation_data: ~azure.mgmt.elasticsan.models.SourceCreationData
+    :ivar size_gi_b: Volume size. Required.
+    :vartype size_gi_b: int
+    :ivar storage_target: Storage target information.
+    :vartype storage_target: ~azure.mgmt.elasticsan.models.IscsiTargetInfo
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "volume_id": {"readonly": True},
+        "size_gi_b": {"required": True},
+        "storage_target": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "volume_id": {"key": "properties.volumeId", "type": "str"},
+        "creation_data": {"key": "properties.creationData", "type": "SourceCreationData"},
+        "size_gi_b": {"key": "properties.sizeGiB", "type": "int"},
+        "storage_target": {"key": "properties.storageTarget", "type": "IscsiTargetInfo"},
+    }
+
+    def __init__(
+        self,
+        *,
+        size_gi_b: int,
+        tags: Optional[Dict[str, str]] = None,
+        creation_data: Optional["_models.SourceCreationData"] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword tags: Azure resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword creation_data: State of the operation on the resource.
+        :paramtype creation_data: ~azure.mgmt.elasticsan.models.SourceCreationData
+        :keyword size_gi_b: Volume size. Required.
         :paramtype size_gi_b: int
         """
         super().__init__(tags=tags, **kwargs)
@@ -1004,8 +1425,8 @@ class VolumeGroup(Resource):
         protocol_type: Optional[Union[str, "_models.StorageTargetType"]] = None,
         encryption: Optional[Union[str, "_models.EncryptionType"]] = None,
         network_acls: Optional["_models.NetworkRuleSet"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Azure resource tags.
         :paramtype tags: dict[str, str]
@@ -1030,16 +1451,13 @@ class VolumeGroupList(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: An array of Volume Groups objects. Required.
+    :ivar value: An array of Volume Groups objects.
     :vartype value: list[~azure.mgmt.elasticsan.models.VolumeGroup]
     :ivar next_link: URI to fetch the next section of the paginated response.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"required": True},
         "next_link": {"readonly": True},
     }
 
@@ -1048,9 +1466,9 @@ class VolumeGroupList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.VolumeGroup"], **kwargs):
+    def __init__(self, *, value: Optional[List["_models.VolumeGroup"]] = None, **kwargs: Any) -> None:
         """
-        :keyword value: An array of Volume Groups objects. Required.
+        :keyword value: An array of Volume Groups objects.
         :paramtype value: list[~azure.mgmt.elasticsan.models.VolumeGroup]
         """
         super().__init__(**kwargs)
@@ -1086,8 +1504,8 @@ class VolumeGroupUpdate(_serialization.Model):
         protocol_type: Optional[Union[str, "_models.StorageTargetType"]] = None,
         encryption: Optional[Union[str, "_models.EncryptionType"]] = None,
         network_acls: Optional["_models.NetworkRuleSet"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1111,16 +1529,13 @@ class VolumeList(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: An array of Volume objects. Required.
+    :ivar value: An array of Volume objects.
     :vartype value: list[~azure.mgmt.elasticsan.models.Volume]
     :ivar next_link: URI to fetch the next section of the paginated response.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"required": True},
         "next_link": {"readonly": True},
     }
 
@@ -1129,9 +1544,9 @@ class VolumeList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.Volume"], **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Volume"]] = None, **kwargs: Any) -> None:
         """
-        :keyword value: An array of Volume objects. Required.
+        :keyword value: An array of Volume objects.
         :paramtype value: list[~azure.mgmt.elasticsan.models.Volume]
         """
         super().__init__(**kwargs)
@@ -1153,7 +1568,9 @@ class VolumeUpdate(_serialization.Model):
         "size_gi_b": {"key": "properties.sizeGiB", "type": "int"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, size_gi_b: Optional[int] = None, **kwargs):
+    def __init__(
+        self, *, tags: Optional[Dict[str, str]] = None, size_gi_b: Optional[int] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
