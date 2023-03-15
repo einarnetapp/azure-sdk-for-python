@@ -35,6 +35,7 @@ from ...operations._configurations_operations import (
     build_list_by_resource_group_request,
     build_list_by_subscription_request,
 )
+from .._vendor import AdvisorManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
@@ -78,10 +79,10 @@ class ConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConfigurationListResult]
+        )
+        cls: ClsType[_models.ConfigurationListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -102,7 +103,7 @@ class ConfigurationsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -118,7 +119,7 @@ class ConfigurationsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -126,14 +127,15 @@ class ConfigurationsOperations:
             deserialized = self._deserialize("ConfigurationListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -146,7 +148,9 @@ class ConfigurationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations"}  # type: ignore
+    list_by_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations"
+    }
 
     @overload
     async def create_in_subscription(
@@ -219,8 +223,8 @@ class ConfigurationsOperations:
         :param configuration_name: Advisor configuration name. Value must be 'default'. "default"
          Required.
         :type configuration_name: str or ~azure.mgmt.advisor.models.ConfigurationName
-        :param config_contract: The Azure Advisor configuration data structure. Is either a model type
-         or a IO type. Required.
+        :param config_contract: The Azure Advisor configuration data structure. Is either a ConfigData
+         type or a IO type. Required.
         :type config_contract: ~azure.mgmt.advisor.models.ConfigData or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -241,11 +245,11 @@ class ConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-01-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConfigData]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ConfigData] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -267,10 +271,11 @@ class ConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -287,7 +292,9 @@ class ConfigurationsOperations:
 
         return deserialized
 
-    create_in_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}"}  # type: ignore
+    create_in_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}"
+    }
 
     @distributed_trace
     def list_by_resource_group(self, resource_group: str, **kwargs: Any) -> AsyncIterable["_models.ConfigData"]:
@@ -305,10 +312,10 @@ class ConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-01-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConfigurationListResult]
+        )
+        cls: ClsType[_models.ConfigurationListResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -330,7 +337,7 @@ class ConfigurationsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -346,7 +353,7 @@ class ConfigurationsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -354,14 +361,15 @@ class ConfigurationsOperations:
             deserialized = self._deserialize("ConfigurationListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -374,7 +382,9 @@ class ConfigurationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations"}  # type: ignore
+    list_by_resource_group.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations"
+    }
 
     @overload
     async def create_in_resource_group(
@@ -453,8 +463,8 @@ class ConfigurationsOperations:
         :type configuration_name: str or ~azure.mgmt.advisor.models.ConfigurationName
         :param resource_group: The name of the Azure resource group. Required.
         :type resource_group: str
-        :param config_contract: The Azure Advisor configuration data structure. Is either a model type
-         or a IO type. Required.
+        :param config_contract: The Azure Advisor configuration data structure. Is either a ConfigData
+         type or a IO type. Required.
         :type config_contract: ~azure.mgmt.advisor.models.ConfigData or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -475,11 +485,11 @@ class ConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-10-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2020-01-01"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConfigData]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ConfigData] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -502,10 +512,11 @@ class ConfigurationsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -522,4 +533,6 @@ class ConfigurationsOperations:
 
         return deserialized
 
-    create_in_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}"}  # type: ignore
+    create_in_resource_group.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}"
+    }
