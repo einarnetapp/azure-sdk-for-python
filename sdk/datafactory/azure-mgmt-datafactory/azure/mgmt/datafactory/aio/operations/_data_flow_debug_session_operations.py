@@ -113,8 +113,9 @@ class DataFlowDebugSessionOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -226,8 +227,8 @@ class DataFlowDebugSessionOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param request: Data flow debug session definition. Is either a model type or a IO type.
-         Required.
+        :param request: Data flow debug session definition. Is either a
+         CreateDataFlowDebugSessionRequest type or a IO type. Required.
         :type request: ~azure.mgmt.datafactory.models.CreateDataFlowDebugSessionRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -372,8 +373,9 @@ class DataFlowDebugSessionOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -457,8 +459,8 @@ class DataFlowDebugSessionOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param request: Data flow debug session definition with debug content. Is either a model type
-         or a IO type. Required.
+        :param request: Data flow debug session definition with debug content. Is either a
+         DataFlowDebugPackage type or a IO type. Required.
         :type request: ~azure.mgmt.datafactory.models.DataFlowDebugPackage or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -508,8 +510,9 @@ class DataFlowDebugSessionOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -597,8 +600,8 @@ class DataFlowDebugSessionOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param request: Data flow debug session definition for deletion. Is either a model type or a IO
-         type. Required.
+        :param request: Data flow debug session definition for deletion. Is either a
+         DeleteDataFlowDebugSessionRequest type or a IO type. Required.
         :type request: ~azure.mgmt.datafactory.models.DeleteDataFlowDebugSessionRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -648,8 +651,9 @@ class DataFlowDebugSessionOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -712,8 +716,9 @@ class DataFlowDebugSessionOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -825,8 +830,8 @@ class DataFlowDebugSessionOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param request: Data flow debug command definition. Is either a model type or a IO type.
-         Required.
+        :param request: Data flow debug command definition. Is either a DataFlowDebugCommandRequest
+         type or a IO type. Required.
         :type request: ~azure.mgmt.datafactory.models.DataFlowDebugCommandRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

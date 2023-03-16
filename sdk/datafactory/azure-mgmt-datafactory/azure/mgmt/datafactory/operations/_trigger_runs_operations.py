@@ -248,8 +248,9 @@ class TriggerRunsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -314,8 +315,9 @@ class TriggerRunsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -399,8 +401,8 @@ class TriggerRunsOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param filter_parameters: Parameters to filter the pipeline run. Is either a model type or a IO
-         type. Required.
+        :param filter_parameters: Parameters to filter the pipeline run. Is either a
+         RunFilterParameters type or a IO type. Required.
         :type filter_parameters: ~azure.mgmt.datafactory.models.RunFilterParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -450,8 +452,9 @@ class TriggerRunsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

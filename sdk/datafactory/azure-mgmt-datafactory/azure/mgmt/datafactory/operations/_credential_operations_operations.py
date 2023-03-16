@@ -339,8 +339,9 @@ class CredentialOperationsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -442,8 +443,8 @@ class CredentialOperationsOperations:
         :type factory_name: str
         :param credential_name: Credential name. Required.
         :type credential_name: str
-        :param credential: Credential resource definition. Is either a model type or a IO type.
-         Required.
+        :param credential: Credential resource definition. Is either a
+         ManagedIdentityCredentialResource type or a IO type. Required.
         :type credential: ~azure.mgmt.datafactory.models.ManagedIdentityCredentialResource or IO
         :param if_match: ETag of the credential entity. Should only be specified for update, for which
          it should match existing entity or can be * for unconditional update. Default value is None.
@@ -498,8 +499,9 @@ class CredentialOperationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -575,8 +577,9 @@ class CredentialOperationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -644,8 +647,9 @@ class CredentialOperationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

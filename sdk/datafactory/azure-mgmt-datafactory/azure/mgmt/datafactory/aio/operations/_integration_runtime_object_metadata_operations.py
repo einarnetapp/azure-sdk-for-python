@@ -89,8 +89,9 @@ class IntegrationRuntimeObjectMetadataOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -269,7 +270,7 @@ class IntegrationRuntimeObjectMetadataOperations:
         :param integration_runtime_name: The integration runtime name. Required.
         :type integration_runtime_name: str
         :param get_metadata_request: The parameters for getting a SSIS object metadata. Is either a
-         model type or a IO type. Default value is None.
+         GetSsisObjectMetadataRequest type or a IO type. Default value is None.
         :type get_metadata_request: ~azure.mgmt.datafactory.models.GetSsisObjectMetadataRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -323,8 +324,9 @@ class IntegrationRuntimeObjectMetadataOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

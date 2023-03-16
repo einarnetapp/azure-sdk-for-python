@@ -472,8 +472,9 @@ class FactoriesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -538,8 +539,8 @@ class FactoriesOperations:
 
         :param location_id: The location identifier. Required.
         :type location_id: str
-        :param factory_repo_update: Update factory repo request definition. Is either a model type or a
-         IO type. Required.
+        :param factory_repo_update: Update factory repo request definition. Is either a
+         FactoryRepoUpdate type or a IO type. Required.
         :type factory_repo_update: ~azure.mgmt.datafactory.models.FactoryRepoUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -588,8 +589,9 @@ class FactoriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -678,8 +680,9 @@ class FactoriesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -772,7 +775,7 @@ class FactoriesOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param factory: Factory resource definition. Is either a model type or a IO type. Required.
+        :param factory: Factory resource definition. Is either a Factory type or a IO type. Required.
         :type factory: ~azure.mgmt.datafactory.models.Factory or IO
         :param if_match: ETag of the factory entity. Should only be specified for update, for which it
          should match existing entity or can be * for unconditional update. Default value is None.
@@ -826,8 +829,9 @@ class FactoriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -915,8 +919,8 @@ class FactoriesOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param factory_update_parameters: The parameters for updating a factory. Is either a model type
-         or a IO type. Required.
+        :param factory_update_parameters: The parameters for updating a factory. Is either a
+         FactoryUpdateParameters type or a IO type. Required.
         :type factory_update_parameters: ~azure.mgmt.datafactory.models.FactoryUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -966,8 +970,9 @@ class FactoriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1035,8 +1040,9 @@ class FactoriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1101,8 +1107,9 @@ class FactoriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1187,7 +1194,7 @@ class FactoriesOperations:
         :param factory_name: The factory name. Required.
         :type factory_name: str
         :param git_hub_access_token_request: Get GitHub access token request definition. Is either a
-         model type or a IO type. Required.
+         GitHubAccessTokenRequest type or a IO type. Required.
         :type git_hub_access_token_request: ~azure.mgmt.datafactory.models.GitHubAccessTokenRequest or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1238,8 +1245,9 @@ class FactoriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1323,8 +1331,8 @@ class FactoriesOperations:
         :type resource_group_name: str
         :param factory_name: The factory name. Required.
         :type factory_name: str
-        :param policy: Data Plane user access policy definition. Is either a model type or a IO type.
-         Required.
+        :param policy: Data Plane user access policy definition. Is either a UserAccessPolicy type or a
+         IO type. Required.
         :type policy: ~azure.mgmt.datafactory.models.UserAccessPolicy or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1374,8 +1382,9 @@ class FactoriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

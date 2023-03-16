@@ -291,8 +291,9 @@ class ManagedVirtualNetworksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -396,8 +397,8 @@ class ManagedVirtualNetworksOperations:
         :type factory_name: str
         :param managed_virtual_network_name: Managed virtual network name. Required.
         :type managed_virtual_network_name: str
-        :param managed_virtual_network: Managed Virtual Network resource definition. Is either a model
-         type or a IO type. Required.
+        :param managed_virtual_network: Managed Virtual Network resource definition. Is either a
+         ManagedVirtualNetworkResource type or a IO type. Required.
         :type managed_virtual_network: ~azure.mgmt.datafactory.models.ManagedVirtualNetworkResource or
          IO
         :param if_match: ETag of the managed Virtual Network entity. Should only be specified for
@@ -454,8 +455,9 @@ class ManagedVirtualNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -531,8 +533,9 @@ class ManagedVirtualNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
