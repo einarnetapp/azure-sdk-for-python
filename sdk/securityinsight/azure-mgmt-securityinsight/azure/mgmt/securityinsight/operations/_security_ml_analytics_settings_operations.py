@@ -47,8 +47,8 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -89,8 +89,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -132,8 +132,8 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -178,8 +178,8 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -255,7 +255,7 @@ class SecurityMLAnalyticsSettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SecurityMLAnalyticsSettingsList] = kwargs.pop("cls", None)
@@ -311,8 +311,9 @@ class SecurityMLAnalyticsSettingsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -357,7 +358,7 @@ class SecurityMLAnalyticsSettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SecurityMLAnalyticsSetting] = kwargs.pop("cls", None)
@@ -375,8 +376,9 @@ class SecurityMLAnalyticsSettingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -477,8 +479,8 @@ class SecurityMLAnalyticsSettingsOperations:
         :type workspace_name: str
         :param settings_resource_name: Security ML Analytics Settings resource name. Required.
         :type settings_resource_name: str
-        :param security_ml_analytics_setting: The security ML Analytics setting. Is either a model type
-         or a IO type. Required.
+        :param security_ml_analytics_setting: The security ML Analytics setting. Is either a
+         SecurityMLAnalyticsSetting type or a IO type. Required.
         :type security_ml_analytics_setting:
          ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -500,7 +502,7 @@ class SecurityMLAnalyticsSettingsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -530,8 +532,9 @@ class SecurityMLAnalyticsSettingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -584,7 +587,7 @@ class SecurityMLAnalyticsSettingsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -602,8 +605,9 @@ class SecurityMLAnalyticsSettingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
