@@ -71,6 +71,9 @@ class ReservationsSummariesOperations:
     ) -> AsyncIterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param grain: Can be daily or monthly. Known values are: "daily" and "monthly". Required.
@@ -87,7 +90,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2022-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
@@ -143,8 +146,9 @@ class ReservationsSummariesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -172,6 +176,9 @@ class ReservationsSummariesOperations:
     ) -> AsyncIterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for daily or monthly grain.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param reservation_id: Id of the reservation. Required.
@@ -190,7 +197,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2022-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
@@ -247,8 +254,9 @@ class ReservationsSummariesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -278,6 +286,9 @@ class ReservationsSummariesOperations:
         **kwargs: Any
     ) -> AsyncIterable["_models.ReservationSummary"]:
         """Lists the reservations summaries for the defined scope daily or monthly grain.
+
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
 
         :param resource_scope: The scope associated with reservations summaries operations. This
          includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount
@@ -312,7 +323,7 @@ class ReservationsSummariesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2022-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ReservationSummariesListResult] = kwargs.pop("cls", None)
@@ -372,8 +383,9 @@ class ReservationsSummariesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
