@@ -145,8 +145,9 @@ class QueriesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -270,7 +271,8 @@ class QueriesOperations:
         :param query_pack_name: The name of the Log Analytics QueryPack resource. Required.
         :type query_pack_name: str
         :param query_search_properties: Properties by which to search queries in the given Log
-         Analytics QueryPack. Is either a model type or a IO type. Required.
+         Analytics QueryPack. Is either a LogAnalyticsQueryPackQuerySearchProperties type or a IO type.
+         Required.
         :type query_search_properties:
          ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPackQuerySearchProperties or IO
         :param top: Maximum items returned in page. Default value is None.
@@ -351,8 +353,9 @@ class QueriesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -414,8 +417,9 @@ class QueriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -519,7 +523,7 @@ class QueriesOperations:
         :param id: The id of a specific query defined in the Log Analytics QueryPack. Required.
         :type id: str
         :param query_payload: Properties that need to be specified to create a new query and add it to
-         a Log Analytics QueryPack. Is either a model type or a IO type. Required.
+         a Log Analytics QueryPack. Is either a LogAnalyticsQueryPackQuery type or a IO type. Required.
         :type query_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPackQuery or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -568,8 +572,9 @@ class QueriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -673,7 +678,7 @@ class QueriesOperations:
         :param id: The id of a specific query defined in the Log Analytics QueryPack. Required.
         :type id: str
         :param query_payload: Properties that need to be specified to create a new query and add it to
-         a Log Analytics QueryPack. Is either a model type or a IO type. Required.
+         a Log Analytics QueryPack. Is either a LogAnalyticsQueryPackQuery type or a IO type. Required.
         :type query_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPackQuery or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -722,8 +727,9 @@ class QueriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -789,8 +795,9 @@ class QueriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

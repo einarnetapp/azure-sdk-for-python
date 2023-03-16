@@ -317,8 +317,9 @@ class ClustersOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -388,8 +389,9 @@ class ClustersOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -445,8 +447,9 @@ class ClustersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -556,7 +559,7 @@ class ClustersOperations:
         :param cluster_name: The name of the Log Analytics cluster. Required.
         :type cluster_name: str
         :param parameters: The parameters required to create or update a Log Analytics cluster. Is
-         either a model type or a IO type. Required.
+         either a Cluster type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.Cluster or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -650,8 +653,9 @@ class ClustersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -772,8 +776,9 @@ class ClustersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -835,8 +840,9 @@ class ClustersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -938,8 +944,8 @@ class ClustersOperations:
         :type resource_group_name: str
         :param cluster_name: Name of the Log Analytics Cluster. Required.
         :type cluster_name: str
-        :param parameters: The parameters required to patch a Log Analytics cluster. Is either a model
-         type or a IO type. Required.
+        :param parameters: The parameters required to patch a Log Analytics cluster. Is either a
+         ClusterPatch type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.ClusterPatch or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
