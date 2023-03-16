@@ -55,7 +55,9 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -68,7 +70,9 @@ def build_list_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
     }
 
@@ -95,7 +99,9 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -108,7 +114,9 @@ def build_delete_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
         "version": _SERIALIZER.url("version", version, "str"),
     }
@@ -130,7 +138,9 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -143,7 +153,9 @@ def build_get_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
         "version": _SERIALIZER.url("version", version, "str"),
     }
@@ -165,7 +177,9 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01"))
+    api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-04-01-preview")
+    )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -179,7 +193,9 @@ def build_create_or_update_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "workspaceName": _SERIALIZER.url(
+            "workspace_name", workspace_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        ),
         "name": _SERIALIZER.url("name", name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9\-_]{0,254}$"),
         "version": _SERIALIZER.url("version", version, "str"),
     }
@@ -252,7 +268,7 @@ class CodeVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.CodeVersionResourceArmPaginatedResult] = kwargs.pop("cls", None)
@@ -312,8 +328,9 @@ class CodeVersionsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -363,7 +380,7 @@ class CodeVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -382,8 +399,9 @@ class CodeVersionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -433,7 +451,7 @@ class CodeVersionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.CodeVersion] = kwargs.pop("cls", None)
@@ -452,8 +470,9 @@ class CodeVersionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -569,7 +588,8 @@ class CodeVersionsOperations:
         :type name: str
         :param version: Version identifier. This is case-sensitive. Required.
         :type version: str
-        :param body: Version entity to create or update. Is either a model type or a IO type. Required.
+        :param body: Version entity to create or update. Is either a CodeVersion type or a IO type.
+         Required.
         :type body: ~azure.mgmt.machinelearningservices.models.CodeVersion or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -590,7 +610,7 @@ class CodeVersionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -621,8 +641,9 @@ class CodeVersionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
