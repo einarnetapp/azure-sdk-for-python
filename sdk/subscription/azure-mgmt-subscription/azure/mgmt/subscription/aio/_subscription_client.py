@@ -21,8 +21,6 @@ from .operations import (
     Operations,
     SubscriptionOperations,
     SubscriptionPolicyOperations,
-    SubscriptionsOperations,
-    TenantsOperations,
 )
 
 if TYPE_CHECKING:
@@ -30,13 +28,10 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class SubscriptionClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """The subscription client.
+class SubscriptionClient:  # pylint: disable=client-accepts-api-version-keyword
+    """Subscription client provides an interface to create and manage Azure subscriptions
+    programmatically.
 
-    :ivar subscriptions: SubscriptionsOperations operations
-    :vartype subscriptions: azure.mgmt.subscription.aio.operations.SubscriptionsOperations
-    :ivar tenants: TenantsOperations operations
-    :vartype tenants: azure.mgmt.subscription.aio.operations.TenantsOperations
     :ivar subscription: SubscriptionOperations operations
     :vartype subscription: azure.mgmt.subscription.aio.operations.SubscriptionOperations
     :ivar operations: Operations operations
@@ -52,6 +47,9 @@ class SubscriptionClient:  # pylint: disable=client-accepts-api-version-keyword,
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2021-10-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
+    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -60,14 +58,12 @@ class SubscriptionClient:  # pylint: disable=client-accepts-api-version-keyword,
         self, credential: "AsyncTokenCredential", base_url: str = "https://management.azure.com", **kwargs: Any
     ) -> None:
         self._config = SubscriptionClientConfiguration(credential=credential, **kwargs)
-        self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
+        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.subscriptions = SubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.tenants = TenantsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.subscription = SubscriptionOperations(self._client, self._config, self._serialize, self._deserialize)
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.alias = AliasOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -105,5 +101,5 @@ class SubscriptionClient:  # pylint: disable=client-accepts-api-version-keyword,
         await self._client.__aenter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
+    async def __aexit__(self, *exc_details: Any) -> None:
         await self._client.__aexit__(*exc_details)

@@ -17,8 +17,6 @@ from ._models_py3 import ErrorResponse
 from ._models_py3 import ErrorResponseBody
 from ._models_py3 import GetTenantPolicyListResponse
 from ._models_py3 import GetTenantPolicyResponse
-from ._models_py3 import Location
-from ._models_py3 import LocationListResult
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
@@ -28,24 +26,17 @@ from ._models_py3 import PutAliasRequestProperties
 from ._models_py3 import PutTenantPolicyRequestProperties
 from ._models_py3 import RenamedSubscriptionId
 from ._models_py3 import ServiceTenantResponse
-from ._models_py3 import Subscription
 from ._models_py3 import SubscriptionAliasListResult
 from ._models_py3 import SubscriptionAliasResponse
 from ._models_py3 import SubscriptionAliasResponseProperties
-from ._models_py3 import SubscriptionListResult
 from ._models_py3 import SubscriptionName
-from ._models_py3 import SubscriptionPolicies
 from ._models_py3 import SystemData
-from ._models_py3 import TenantIdDescription
-from ._models_py3 import TenantListResult
 from ._models_py3 import TenantPolicy
 
 from ._subscription_client_enums import AcceptOwnership
 from ._subscription_client_enums import CreatedByType
 from ._subscription_client_enums import Provisioning
 from ._subscription_client_enums import ProvisioningState
-from ._subscription_client_enums import SpendingLimit
-from ._subscription_client_enums import SubscriptionState
 from ._subscription_client_enums import Workload
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
@@ -63,8 +54,6 @@ __all__ = [
     "ErrorResponseBody",
     "GetTenantPolicyListResponse",
     "GetTenantPolicyResponse",
-    "Location",
-    "LocationListResult",
     "Operation",
     "OperationDisplay",
     "OperationListResult",
@@ -74,23 +63,16 @@ __all__ = [
     "PutTenantPolicyRequestProperties",
     "RenamedSubscriptionId",
     "ServiceTenantResponse",
-    "Subscription",
     "SubscriptionAliasListResult",
     "SubscriptionAliasResponse",
     "SubscriptionAliasResponseProperties",
-    "SubscriptionListResult",
     "SubscriptionName",
-    "SubscriptionPolicies",
     "SystemData",
-    "TenantIdDescription",
-    "TenantListResult",
     "TenantPolicy",
     "AcceptOwnership",
     "CreatedByType",
     "Provisioning",
     "ProvisioningState",
-    "SpendingLimit",
-    "SubscriptionState",
     "Workload",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])

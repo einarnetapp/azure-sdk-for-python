@@ -34,6 +34,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/stable/2021-10-01/examples/acceptOwnershipStatus.json
+# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/preview/2021-10-01-preview/examples/acceptOwnershipStatus.json
 if __name__ == "__main__":
     main()

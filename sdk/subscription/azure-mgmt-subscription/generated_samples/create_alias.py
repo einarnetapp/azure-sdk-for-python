@@ -48,6 +48,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/stable/2021-10-01/examples/createAlias.json
+# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/preview/2021-10-01-preview/examples/createAlias.json
 if __name__ == "__main__":
     main()

@@ -43,24 +43,6 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     FAILED = "Failed"
 
 
-class SpendingLimit(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The subscription spending limit."""
-
-    ON = "On"
-    OFF = "Off"
-    CURRENT_PERIOD_OFF = "CurrentPeriodOff"
-
-
-class SubscriptionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted."""
-
-    ENABLED = "Enabled"
-    WARNED = "Warned"
-    PAST_DUE = "PastDue"
-    DISABLED = "Disabled"
-    DELETED = "Deleted"
-
-
 class Workload(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The workload type of the subscription. It can be either Production or DevTest."""
 
