@@ -11,6 +11,7 @@ from ._models_py3 import AKSSchema
 from ._models_py3 import AKSSchemaProperties
 from ._models_py3 import AccountKeyDatastoreCredentials
 from ._models_py3 import AccountKeyDatastoreSecrets
+from ._models_py3 import AcrDetails
 from ._models_py3 import AksComputeSecrets
 from ._models_py3 import AksComputeSecretsProperties
 from ._models_py3 import AksNetworkingConfiguration
@@ -24,6 +25,7 @@ from ._models_py3 import AmlOperationDisplay
 from ._models_py3 import AmlOperationListResult
 from ._models_py3 import AmlToken
 from ._models_py3 import AmlUserFeature
+from ._models_py3 import ArmResourceId
 from ._models_py3 import AssetBase
 from ._models_py3 import AssetContainer
 from ._models_py3 import AssetJobInput
@@ -97,6 +99,7 @@ from ._models_py3 import ComputeStartStopSchedule
 from ._models_py3 import ContainerResourceRequirements
 from ._models_py3 import ContainerResourceSettings
 from ._models_py3 import CosmosDbSettings
+from ._models_py3 import Cron
 from ._models_py3 import CronTrigger
 from ._models_py3 import CustomForecastHorizon
 from ._models_py3 import CustomModelJobInput
@@ -256,6 +259,7 @@ from ._models_py3 import PartialManagedServiceIdentity
 from ._models_py3 import PartialMinimalTrackedResource
 from ._models_py3 import PartialMinimalTrackedResourceWithIdentity
 from ._models_py3 import PartialMinimalTrackedResourceWithSku
+from ._models_py3 import PartialRegistryPartialTrackedResource
 from ._models_py3 import PartialSku
 from ._models_py3 import Password
 from ._models_py3 import PersonalComputeInstanceSettings
@@ -271,10 +275,15 @@ from ._models_py3 import PyTorch
 from ._models_py3 import QuotaBaseProperties
 from ._models_py3 import QuotaUpdateParameters
 from ._models_py3 import RandomSamplingAlgorithm
+from ._models_py3 import Recurrence
 from ._models_py3 import RecurrenceSchedule
 from ._models_py3 import RecurrenceTrigger
 from ._models_py3 import RegenerateEndpointKeysRequest
+from ._models_py3 import Registry
 from ._models_py3 import RegistryListCredentialsResult
+from ._models_py3 import RegistryProperties
+from ._models_py3 import RegistryRegionArmDetails
+from ._models_py3 import RegistryTrackedResourceArmPaginatedResult
 from ._models_py3 import Regression
 from ._models_py3 import RegressionTrainingSettings
 from ._models_py3 import Resource
@@ -310,10 +319,13 @@ from ._models_py3 import SkuResourceArmPaginatedResult
 from ._models_py3 import SkuSetting
 from ._models_py3 import SslConfiguration
 from ._models_py3 import StackEnsembleSettings
+from ._models_py3 import StorageAccountDetails
 from ._models_py3 import SweepJob
 from ._models_py3 import SweepJobLimits
 from ._models_py3 import SynapseSpark
 from ._models_py3 import SynapseSparkProperties
+from ._models_py3 import SystemCreatedAcrAccount
+from ._models_py3 import SystemCreatedStorageAccount
 from ._models_py3 import SystemData
 from ._models_py3 import SystemService
 from ._models_py3 import TableVertical
@@ -345,6 +357,8 @@ from ._models_py3 import Usage
 from ._models_py3 import UsageName
 from ._models_py3 import UserAccountCredentials
 from ._models_py3 import UserAssignedIdentity
+from ._models_py3 import UserCreatedAcrAccount
+from ._models_py3 import UserCreatedStorageAccount
 from ._models_py3 import UserIdentity
 from ._models_py3 import UsernamePasswordAuthTypeWorkspaceConnectionProperties
 from ._models_py3 import VirtualMachine
@@ -493,6 +507,7 @@ __all__ = [
     "AKSSchemaProperties",
     "AccountKeyDatastoreCredentials",
     "AccountKeyDatastoreSecrets",
+    "AcrDetails",
     "AksComputeSecrets",
     "AksComputeSecretsProperties",
     "AksNetworkingConfiguration",
@@ -506,6 +521,7 @@ __all__ = [
     "AmlOperationListResult",
     "AmlToken",
     "AmlUserFeature",
+    "ArmResourceId",
     "AssetBase",
     "AssetContainer",
     "AssetJobInput",
@@ -579,6 +595,7 @@ __all__ = [
     "ContainerResourceRequirements",
     "ContainerResourceSettings",
     "CosmosDbSettings",
+    "Cron",
     "CronTrigger",
     "CustomForecastHorizon",
     "CustomModelJobInput",
@@ -738,6 +755,7 @@ __all__ = [
     "PartialMinimalTrackedResource",
     "PartialMinimalTrackedResourceWithIdentity",
     "PartialMinimalTrackedResourceWithSku",
+    "PartialRegistryPartialTrackedResource",
     "PartialSku",
     "Password",
     "PersonalComputeInstanceSettings",
@@ -753,10 +771,15 @@ __all__ = [
     "QuotaBaseProperties",
     "QuotaUpdateParameters",
     "RandomSamplingAlgorithm",
+    "Recurrence",
     "RecurrenceSchedule",
     "RecurrenceTrigger",
     "RegenerateEndpointKeysRequest",
+    "Registry",
     "RegistryListCredentialsResult",
+    "RegistryProperties",
+    "RegistryRegionArmDetails",
+    "RegistryTrackedResourceArmPaginatedResult",
     "Regression",
     "RegressionTrainingSettings",
     "Resource",
@@ -792,10 +815,13 @@ __all__ = [
     "SkuSetting",
     "SslConfiguration",
     "StackEnsembleSettings",
+    "StorageAccountDetails",
     "SweepJob",
     "SweepJobLimits",
     "SynapseSpark",
     "SynapseSparkProperties",
+    "SystemCreatedAcrAccount",
+    "SystemCreatedStorageAccount",
     "SystemData",
     "SystemService",
     "TableVertical",
@@ -827,6 +853,8 @@ __all__ = [
     "UsageName",
     "UserAccountCredentials",
     "UserAssignedIdentity",
+    "UserCreatedAcrAccount",
+    "UserCreatedStorageAccount",
     "UserIdentity",
     "UsernamePasswordAuthTypeWorkspaceConnectionProperties",
     "VirtualMachine",

@@ -37,6 +37,7 @@ from .operations import (
     PrivateEndpointConnectionsOperations,
     PrivateLinkResourcesOperations,
     QuotasOperations,
+    RegistriesOperations,
     SchedulesOperations,
     UsagesOperations,
     VirtualMachineSizesOperations,
@@ -120,6 +121,8 @@ class MachineLearningServicesMgmtClient:  # pylint: disable=client-accepts-api-v
      azure.mgmt.machinelearningservices.operations.OnlineDeploymentsOperations
     :ivar schedules: SchedulesOperations operations
     :vartype schedules: azure.mgmt.machinelearningservices.operations.SchedulesOperations
+    :ivar registries: RegistriesOperations operations
+    :vartype registries: azure.mgmt.machinelearningservices.operations.RegistriesOperations
     :ivar workspace_features: WorkspaceFeaturesOperations operations
     :vartype workspace_features:
      azure.mgmt.machinelearningservices.operations.WorkspaceFeaturesOperations
@@ -129,7 +132,7 @@ class MachineLearningServicesMgmtClient:  # pylint: disable=client-accepts-api-v
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2023-04-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -146,7 +149,7 @@ class MachineLearningServicesMgmtClient:  # pylint: disable=client-accepts-api-v
         self._config = MachineLearningServicesMgmtClientConfiguration(
             credential=credential, subscription_id=subscription_id, **kwargs
         )
-        self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
+        self._client: ARMPipelineClient = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
@@ -202,6 +205,7 @@ class MachineLearningServicesMgmtClient:  # pylint: disable=client-accepts-api-v
             self._client, self._config, self._serialize, self._deserialize
         )
         self.schedules = SchedulesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.registries = RegistriesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.workspace_features = WorkspaceFeaturesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -235,5 +239,5 @@ class MachineLearningServicesMgmtClient:  # pylint: disable=client-accepts-api-v
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details) -> None:
+    def __exit__(self, *exc_details: Any) -> None:
         self._client.__exit__(*exc_details)

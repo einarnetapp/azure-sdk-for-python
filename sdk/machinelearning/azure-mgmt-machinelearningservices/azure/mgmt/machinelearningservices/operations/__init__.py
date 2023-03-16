@@ -32,6 +32,7 @@ from ._model_versions_operations import ModelVersionsOperations
 from ._online_endpoints_operations import OnlineEndpointsOperations
 from ._online_deployments_operations import OnlineDeploymentsOperations
 from ._schedules_operations import SchedulesOperations
+from ._registries_operations import RegistriesOperations
 from ._workspace_features_operations import WorkspaceFeaturesOperations
 
 from ._patch import __all__ as _patch_all
@@ -65,6 +66,7 @@ __all__ = [
     "OnlineEndpointsOperations",
     "OnlineDeploymentsOperations",
     "SchedulesOperations",
+    "RegistriesOperations",
     "WorkspaceFeaturesOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
