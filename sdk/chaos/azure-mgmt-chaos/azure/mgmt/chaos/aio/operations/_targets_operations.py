@@ -154,8 +154,9 @@ class TargetsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -231,8 +232,9 @@ class TargetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -312,8 +314,9 @@ class TargetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -428,7 +431,7 @@ class TargetsOperations:
         :type parent_resource_name: str
         :param target_name: String that represents a Target resource name. Required.
         :type target_name: str
-        :param target: Target resource to be created or updated. Is either a model type or a IO type.
+        :param target: Target resource to be created or updated. Is either a Target type or a IO type.
          Required.
         :type target: ~azure.mgmt.chaos.models.Target or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -482,8 +485,9 @@ class TargetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
