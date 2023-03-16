@@ -349,7 +349,8 @@ class DataFlowsOperations:
         :type factory_name: str
         :param data_flow_name: The data flow name. Required.
         :type data_flow_name: str
-        :param data_flow: Data flow resource definition. Is either a model type or a IO type. Required.
+        :param data_flow: Data flow resource definition. Is either a DataFlowResource type or a IO
+         type. Required.
         :type data_flow: ~azure.mgmt.datafactory.models.DataFlowResource or IO
         :param if_match: ETag of the data flow entity. Should only be specified for update, for which
          it should match existing entity or can be * for unconditional update. Default value is None.
@@ -404,8 +405,9 @@ class DataFlowsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -481,8 +483,9 @@ class DataFlowsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -548,8 +551,9 @@ class DataFlowsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -639,8 +643,9 @@ class DataFlowsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

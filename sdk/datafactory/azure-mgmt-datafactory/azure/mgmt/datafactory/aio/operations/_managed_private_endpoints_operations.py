@@ -142,8 +142,9 @@ class ManagedPrivateEndpointsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -257,7 +258,7 @@ class ManagedPrivateEndpointsOperations:
         :param managed_private_endpoint_name: Managed private endpoint name. Required.
         :type managed_private_endpoint_name: str
         :param managed_private_endpoint: Managed private endpoint resource definition. Is either a
-         model type or a IO type. Required.
+         ManagedPrivateEndpointResource type or a IO type. Required.
         :type managed_private_endpoint: ~azure.mgmt.datafactory.models.ManagedPrivateEndpointResource
          or IO
         :param if_match: ETag of the managed private endpoint entity. Should only be specified for
@@ -315,8 +316,9 @@ class ManagedPrivateEndpointsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -396,8 +398,9 @@ class ManagedPrivateEndpointsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -471,8 +474,9 @@ class ManagedPrivateEndpointsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

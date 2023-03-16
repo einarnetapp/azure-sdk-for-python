@@ -109,8 +109,9 @@ class IntegrationRuntimeNodesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -179,8 +180,9 @@ class IntegrationRuntimeNodesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -286,7 +288,7 @@ class IntegrationRuntimeNodesOperations:
         :param node_name: The integration runtime node name. Required.
         :type node_name: str
         :param update_integration_runtime_node_request: The parameters for updating an integration
-         runtime node. Is either a model type or a IO type. Required.
+         runtime node. Is either a UpdateIntegrationRuntimeNodeRequest type or a IO type. Required.
         :type update_integration_runtime_node_request:
          ~azure.mgmt.datafactory.models.UpdateIntegrationRuntimeNodeRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -339,8 +341,9 @@ class IntegrationRuntimeNodesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -409,8 +412,9 @@ class IntegrationRuntimeNodesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
