@@ -10,13 +10,13 @@ from ._alert_rules_operations import AlertRulesOperations
 from ._actions_operations import ActionsOperations
 from ._alert_rule_templates_operations import AlertRuleTemplatesOperations
 from ._automation_rules_operations import AutomationRulesOperations
+from ._entities_operations import EntitiesOperations
 from ._incidents_operations import IncidentsOperations
 from ._bookmarks_operations import BookmarksOperations
 from ._bookmark_relations_operations import BookmarkRelationsOperations
 from ._bookmark_operations import BookmarkOperations
 from ._ip_geodata_operations import IPGeodataOperations
 from ._domain_whois_operations import DomainWhoisOperations
-from ._entities_operations import EntitiesOperations
 from ._entities_get_timeline_operations import EntitiesGetTimelineOperations
 from ._entities_relations_operations import EntitiesRelationsOperations
 from ._entity_relations_operations import EntityRelationsOperations
@@ -39,8 +39,12 @@ from ._source_controls_operations import SourceControlsOperations
 from ._threat_intelligence_indicator_operations import ThreatIntelligenceIndicatorOperations
 from ._threat_intelligence_indicators_operations import ThreatIntelligenceIndicatorsOperations
 from ._threat_intelligence_indicator_metrics_operations import ThreatIntelligenceIndicatorMetricsOperations
+from ._triggered_analytics_rule_run_operations import TriggeredAnalyticsRuleRunOperations
+from ._get_triggered_analytics_rule_runs_operations import GetTriggeredAnalyticsRuleRunsOperations
+from ._alert_rule_operations import AlertRuleOperations
 from ._watchlists_operations import WatchlistsOperations
 from ._watchlist_items_operations import WatchlistItemsOperations
+from ._workspace_manager_members_operations import WorkspaceManagerMembersOperations
 from ._data_connectors_operations import DataConnectorsOperations
 from ._data_connectors_check_requirements_operations import DataConnectorsCheckRequirementsOperations
 from ._operations import Operations
@@ -54,13 +58,13 @@ __all__ = [
     "ActionsOperations",
     "AlertRuleTemplatesOperations",
     "AutomationRulesOperations",
+    "EntitiesOperations",
     "IncidentsOperations",
     "BookmarksOperations",
     "BookmarkRelationsOperations",
     "BookmarkOperations",
     "IPGeodataOperations",
     "DomainWhoisOperations",
-    "EntitiesOperations",
     "EntitiesGetTimelineOperations",
     "EntitiesRelationsOperations",
     "EntityRelationsOperations",
@@ -83,8 +87,12 @@ __all__ = [
     "ThreatIntelligenceIndicatorOperations",
     "ThreatIntelligenceIndicatorsOperations",
     "ThreatIntelligenceIndicatorMetricsOperations",
+    "TriggeredAnalyticsRuleRunOperations",
+    "GetTriggeredAnalyticsRuleRunsOperations",
+    "AlertRuleOperations",
     "WatchlistsOperations",
     "WatchlistItemsOperations",
+    "WorkspaceManagerMembersOperations",
     "DataConnectorsOperations",
     "DataConnectorsCheckRequirementsOperations",
     "Operations",
