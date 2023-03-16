@@ -14,7 +14,7 @@ from azure.mgmt.media import AzureMediaServices
     pip install azure-identity
     pip install azure-mgmt-media
 # USAGE
-    python liveeventallocate.py
+    python assetscreatewithencryptionscope.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,17 +26,24 @@ from azure.mgmt.media import AzureMediaServices
 def main():
     client = AzureMediaServices(
         credential=DefaultAzureCredential(),
-        subscription_id="0a6ec948-5a62-437d-b9df-934dc7c1b722",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
-    response = client.live_events.begin_allocate(
-        resource_group_name="mediaresources",
-        account_name="slitestmedia10",
-        live_event_name="myLiveEvent1",
-    ).result()
+    response = client.assets.create_or_update(
+        resource_group_name="contosorg",
+        account_name="contosomedia",
+        asset_name="ClimbingMountLogan",
+        parameters={
+            "properties": {
+                "description": "A documentary showing the ascent of Mount Logan",
+                "encryptionScope": "encryptionScope1",
+                "storageAccountName": "storage0",
+            }
+        },
+    )
     print(response)
 
 
-# x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Streaming/stable/2022-11-01/examples/liveevent-allocate.json
+# x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2023-01-01/examples/assets-create-with-encryption-scope.json
 if __name__ == "__main__":
     main()
