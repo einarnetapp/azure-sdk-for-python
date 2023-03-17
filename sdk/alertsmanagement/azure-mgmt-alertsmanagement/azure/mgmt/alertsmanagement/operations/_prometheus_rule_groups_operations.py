@@ -44,9 +44,7 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-07-22-preview")
-    )
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -72,9 +70,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-07-22-preview")
-    )
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -106,9 +102,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-07-22-preview")
-    )
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -121,7 +115,7 @@ def build_get_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str", pattern=r"^[^:@/#{}%&+*<>?]+$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -141,9 +135,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-07-22-preview")
-    )
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -157,7 +149,7 @@ def build_create_or_update_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str", pattern=r"^[^:@/#{}%&+*<>?]+$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -179,9 +171,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-07-22-preview")
-    )
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -195,7 +185,7 @@ def build_update_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str", pattern=r"^[^:@/#{}%&+*<>?]+$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -217,9 +207,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2021-07-22-preview")
-    )
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -232,7 +220,7 @@ def build_delete_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str", pattern=r"^[^:@/#{}%&+*<>?]+$"),
     }
 
     _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
@@ -267,7 +255,7 @@ class PrometheusRuleGroupsOperations:
 
     @distributed_trace
     def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.PrometheusRuleGroupResource"]:
-        """Retrieve Prometheus rule group definitions in a subscription.
+        """Retrieve Prometheus all rule group definitions in a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PrometheusRuleGroupResource or the result of
@@ -279,9 +267,7 @@ class PrometheusRuleGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-07-22-preview")
-        )
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
         cls: ClsType[_models.PrometheusRuleGroupResourceCollection] = kwargs.pop("cls", None)
 
         error_map = {
@@ -322,14 +308,15 @@ class PrometheusRuleGroupsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -359,9 +346,7 @@ class PrometheusRuleGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-07-22-preview")
-        )
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
         cls: ClsType[_models.PrometheusRuleGroupResourceCollection] = kwargs.pop("cls", None)
 
         error_map = {
@@ -403,14 +388,15 @@ class PrometheusRuleGroupsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -446,9 +432,7 @@ class PrometheusRuleGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-07-22-preview")
-        )
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
         cls: ClsType[_models.PrometheusRuleGroupResource] = kwargs.pop("cls", None)
 
         request = build_get_request(
@@ -463,15 +447,16 @@ class PrometheusRuleGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("PrometheusRuleGroupResource", pipeline_response)
@@ -556,8 +541,8 @@ class PrometheusRuleGroupsOperations:
         :type resource_group_name: str
         :param rule_group_name: The name of the rule group. Required.
         :type rule_group_name: str
-        :param parameters: The parameters of the rule group to create or update. Is either a model type
-         or a IO type. Required.
+        :param parameters: The parameters of the rule group to create or update. Is either a
+         PrometheusRuleGroupResource type or a IO type. Required.
         :type parameters: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -578,9 +563,7 @@ class PrometheusRuleGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-07-22-preview")
-        )
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.PrometheusRuleGroupResource] = kwargs.pop("cls", None)
 
@@ -607,15 +590,16 @@ class PrometheusRuleGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
@@ -638,7 +622,7 @@ class PrometheusRuleGroupsOperations:
         self,
         resource_group_name: str,
         rule_group_name: str,
-        parameters: _models.PrometheusRuleGroupResourcePatch,
+        parameters: _models.PrometheusRuleGroupResourcePatchParameters,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -651,7 +635,8 @@ class PrometheusRuleGroupsOperations:
         :param rule_group_name: The name of the rule group. Required.
         :type rule_group_name: str
         :param parameters: The parameters of the rule group to update. Required.
-        :type parameters: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResourcePatch
+        :type parameters:
+         ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResourcePatchParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -694,7 +679,7 @@ class PrometheusRuleGroupsOperations:
         self,
         resource_group_name: str,
         rule_group_name: str,
-        parameters: Union[_models.PrometheusRuleGroupResourcePatch, IO],
+        parameters: Union[_models.PrometheusRuleGroupResourcePatchParameters, IO],
         **kwargs: Any
     ) -> _models.PrometheusRuleGroupResource:
         """Update an Prometheus rule group definition.
@@ -704,9 +689,10 @@ class PrometheusRuleGroupsOperations:
         :type resource_group_name: str
         :param rule_group_name: The name of the rule group. Required.
         :type rule_group_name: str
-        :param parameters: The parameters of the rule group to update. Is either a model type or a IO
-         type. Required.
-        :type parameters: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResourcePatch or IO
+        :param parameters: The parameters of the rule group to update. Is either a
+         PrometheusRuleGroupResourcePatchParameters type or a IO type. Required.
+        :type parameters:
+         ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResourcePatchParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -726,9 +712,7 @@ class PrometheusRuleGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-07-22-preview")
-        )
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.PrometheusRuleGroupResource] = kwargs.pop("cls", None)
 
@@ -738,7 +722,7 @@ class PrometheusRuleGroupsOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "PrometheusRuleGroupResourcePatch")
+            _json = self._serialize.body(parameters, "PrometheusRuleGroupResourcePatchParameters")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
@@ -755,15 +739,16 @@ class PrometheusRuleGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("PrometheusRuleGroupResource", pipeline_response)
@@ -804,9 +789,7 @@ class PrometheusRuleGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-07-22-preview"] = kwargs.pop(
-            "api_version", _params.pop("api-version", "2021-07-22-preview")
-        )
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
@@ -821,15 +804,16 @@ class PrometheusRuleGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
