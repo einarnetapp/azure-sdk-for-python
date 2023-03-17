@@ -71,8 +71,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
     ) -> AsyncIterable["_models.SharedPrivateLinkResource"]:
         """List shared private link resources.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -86,10 +86,10 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SharedPrivateLinkResourceList]
+        )
+        cls: ClsType[_models.SharedPrivateLinkResourceList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -112,7 +112,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -128,7 +128,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -136,14 +136,15 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
             deserialized = self._deserialize("SharedPrivateLinkResourceList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -156,7 +157,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources"
+    }
 
     @distributed_trace_async
     async def get(
@@ -167,8 +170,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -188,10 +191,10 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SharedPrivateLinkResource]
+        )
+        cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
 
         request = build_get_request(
             shared_private_link_resource_name=shared_private_link_resource_name,
@@ -204,10 +207,11 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -224,7 +228,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"
+    }
 
     async def _create_or_update_initial(
         self,
@@ -245,11 +251,11 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SharedPrivateLinkResource]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -273,10 +279,11 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -293,11 +300,13 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
             deserialized = self._deserialize("SharedPrivateLinkResource", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"}  # type: ignore
+    _create_or_update_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"
+    }
 
     @overload
     async def begin_create_or_update(
@@ -315,8 +324,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -356,8 +365,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -395,13 +404,13 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: The shared private link resource. Is either a model type or a IO type.
-         Required.
+        :param parameters: The shared private link resource. Is either a SharedPrivateLinkResource type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.webpubsub.models.SharedPrivateLinkResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -423,16 +432,16 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SharedPrivateLinkResource]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._create_or_update_initial(  # type: ignore
+            raw_result = await self._create_or_update_initial(
                 shared_private_link_resource_name=shared_private_link_resource_name,
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
@@ -453,7 +462,10 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -465,9 +477,11 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"}  # type: ignore
+    begin_create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"
+    }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self, shared_private_link_resource_name: str, resource_group_name: str, resource_name: str, **kwargs: Any
@@ -483,10 +497,10 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             shared_private_link_resource_name=shared_private_link_resource_name,
@@ -499,10 +513,11 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -515,7 +530,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"}  # type: ignore
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"
+    }
 
     @distributed_trace_async
     async def begin_delete(
@@ -526,8 +543,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -546,13 +563,13 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 shared_private_link_resource_name=shared_private_link_resource_name,
@@ -571,9 +588,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -585,6 +602,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"}  # type: ignore
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}"
+    }

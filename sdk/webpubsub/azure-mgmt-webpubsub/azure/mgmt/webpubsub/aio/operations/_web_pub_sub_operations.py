@@ -123,8 +123,8 @@ class WebPubSubOperations:
 
         :param location: the region. Required.
         :type location: str
-        :param parameters: Parameters supplied to the operation. Is either a model type or a IO type.
-         Required.
+        :param parameters: Parameters supplied to the operation. Is either a NameAvailabilityParameters
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.webpubsub.models.NameAvailabilityParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -145,11 +145,11 @@ class WebPubSubOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NameAvailability]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NameAvailability] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -171,10 +171,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -191,7 +192,9 @@ class WebPubSubOperations:
 
         return deserialized
 
-    check_name_availability.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability"}  # type: ignore
+    check_name_availability.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability"
+    }
 
     @distributed_trace
     def list_by_subscription(self, **kwargs: Any) -> AsyncIterable["_models.WebPubSubResource"]:
@@ -205,10 +208,10 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubResourceList]
+        )
+        cls: ClsType[_models.WebPubSubResourceList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -229,7 +232,7 @@ class WebPubSubOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -245,7 +248,7 @@ class WebPubSubOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -253,14 +256,15 @@ class WebPubSubOperations:
             deserialized = self._deserialize("WebPubSubResourceList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -273,7 +277,9 @@ class WebPubSubOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/webPubSub"}  # type: ignore
+    list_by_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/webPubSub"
+    }
 
     @distributed_trace
     def list_by_resource_group(
@@ -281,8 +287,8 @@ class WebPubSubOperations:
     ) -> AsyncIterable["_models.WebPubSubResource"]:
         """Handles requests to list all resources in a resource group.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WebPubSubResource or the result of cls(response)
@@ -292,10 +298,10 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubResourceList]
+        )
+        cls: ClsType[_models.WebPubSubResourceList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -317,7 +323,7 @@ class WebPubSubOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -333,7 +339,7 @@ class WebPubSubOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -341,14 +347,15 @@ class WebPubSubOperations:
             deserialized = self._deserialize("WebPubSubResourceList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -361,14 +368,16 @@ class WebPubSubOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub"}  # type: ignore
+    list_by_resource_group.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub"
+    }
 
     @distributed_trace_async
     async def get(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> _models.WebPubSubResource:
         """Get the resource and its properties.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -388,10 +397,10 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubResource]
+        )
+        cls: ClsType[_models.WebPubSubResource] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -403,10 +412,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -423,7 +433,9 @@ class WebPubSubOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"
+    }
 
     async def _create_or_update_initial(
         self,
@@ -443,11 +455,11 @@ class WebPubSubOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.WebPubSubResource]]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Optional[_models.WebPubSubResource]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -470,10 +482,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -495,7 +508,9 @@ class WebPubSubOperations:
 
         return deserialized
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"}  # type: ignore
+    _create_or_update_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"
+    }
 
     @overload
     async def begin_create_or_update(
@@ -509,8 +524,8 @@ class WebPubSubOperations:
     ) -> AsyncLROPoller[_models.WebPubSubResource]:
         """Create or update a resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -545,8 +560,8 @@ class WebPubSubOperations:
     ) -> AsyncLROPoller[_models.WebPubSubResource]:
         """Create or update a resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -579,13 +594,13 @@ class WebPubSubOperations:
     ) -> AsyncLROPoller[_models.WebPubSubResource]:
         """Create or update a resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: Parameters for the create or update operation. Is either a model type or a
-         IO type. Required.
+        :param parameters: Parameters for the create or update operation. Is either a WebPubSubResource
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.webpubsub.models.WebPubSubResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -606,16 +621,16 @@ class WebPubSubOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubResource]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.WebPubSubResource] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._create_or_update_initial(  # type: ignore
+            raw_result = await self._create_or_update_initial(
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
                 parameters=parameters,
@@ -635,7 +650,10 @@ class WebPubSubOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -647,9 +665,11 @@ class WebPubSubOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"}  # type: ignore
+    begin_create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"
+    }
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, resource_name: str, **kwargs: Any
@@ -665,10 +685,10 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
@@ -680,10 +700,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -696,14 +717,16 @@ class WebPubSubOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"}  # type: ignore
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"
+    }
 
     @distributed_trace_async
     async def begin_delete(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> AsyncLROPoller[None]:
         """Operation to delete a resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -722,13 +745,13 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
@@ -746,9 +769,9 @@ class WebPubSubOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(
+            polling_method: AsyncPollingMethod = cast(
                 AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: AsyncPollingMethod
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -760,9 +783,11 @@ class WebPubSubOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"}  # type: ignore
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"
+    }
 
     async def _update_initial(
         self,
@@ -782,11 +807,11 @@ class WebPubSubOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.WebPubSubResource]]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Optional[_models.WebPubSubResource]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -809,10 +834,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -823,15 +849,21 @@ class WebPubSubOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = None
+        response_headers = {}
         if response.status_code == 200:
             deserialized = self._deserialize("WebPubSubResource", pipeline_response)
 
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
-    _update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"}  # type: ignore
+    _update_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"
+    }
 
     @overload
     async def begin_update(
@@ -845,8 +877,8 @@ class WebPubSubOperations:
     ) -> AsyncLROPoller[_models.WebPubSubResource]:
         """Operation to update an exiting resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -881,8 +913,8 @@ class WebPubSubOperations:
     ) -> AsyncLROPoller[_models.WebPubSubResource]:
         """Operation to update an exiting resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -915,13 +947,13 @@ class WebPubSubOperations:
     ) -> AsyncLROPoller[_models.WebPubSubResource]:
         """Operation to update an exiting resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: Parameters for the update operation. Is either a model type or a IO type.
-         Required.
+        :param parameters: Parameters for the update operation. Is either a WebPubSubResource type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.webpubsub.models.WebPubSubResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -942,16 +974,16 @@ class WebPubSubOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubResource]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.WebPubSubResource] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._update_initial(  # type: ignore
+            raw_result = await self._update_initial(
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
                 parameters=parameters,
@@ -971,7 +1003,9 @@ class WebPubSubOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -983,16 +1017,18 @@ class WebPubSubOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"}  # type: ignore
+    begin_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}"
+    }
 
     @distributed_trace_async
     async def list_keys(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> _models.WebPubSubKeys:
         """Get the access keys of the resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -1012,10 +1048,10 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubKeys]
+        )
+        cls: ClsType[_models.WebPubSubKeys] = kwargs.pop("cls", None)
 
         request = build_list_keys_request(
             resource_group_name=resource_group_name,
@@ -1027,10 +1063,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1047,7 +1084,9 @@ class WebPubSubOperations:
 
         return deserialized
 
-    list_keys.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/listKeys"}  # type: ignore
+    list_keys.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/listKeys"
+    }
 
     async def _regenerate_key_initial(
         self,
@@ -1067,11 +1106,11 @@ class WebPubSubOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubKeys]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.WebPubSubKeys] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -1094,27 +1133,37 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [202]:
+        if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("WebPubSubKeys", pipeline_response)
+        response_headers = {}
+        if response.status_code == 200:
+            deserialized = self._deserialize("WebPubSubKeys", pipeline_response)
+
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
+            deserialized = self._deserialize("WebPubSubKeys", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    _regenerate_key_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/regenerateKey"}  # type: ignore
+    _regenerate_key_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/regenerateKey"
+    }
 
     @overload
     async def begin_regenerate_key(
@@ -1129,8 +1178,8 @@ class WebPubSubOperations:
         """Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated
         at the same time.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -1166,8 +1215,8 @@ class WebPubSubOperations:
         """Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated
         at the same time.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -1201,13 +1250,13 @@ class WebPubSubOperations:
         """Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated
         at the same time.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: Parameter that describes the Regenerate Key Operation. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameter that describes the Regenerate Key Operation. Is either a
+         RegenerateKeyParameters type or a IO type. Required.
         :type parameters: ~azure.mgmt.webpubsub.models.RegenerateKeyParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1228,16 +1277,16 @@ class WebPubSubOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubKeys]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.WebPubSubKeys] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._regenerate_key_initial(  # type: ignore
+            raw_result = await self._regenerate_key_initial(
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
                 parameters=parameters,
@@ -1257,10 +1306,9 @@ class WebPubSubOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(
-                AsyncPollingMethod,
-                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
-            )  # type: AsyncPollingMethod
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -1272,9 +1320,11 @@ class WebPubSubOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_regenerate_key.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/regenerateKey"}  # type: ignore
+    begin_regenerate_key.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/regenerateKey"
+    }
 
     async def _restart_initial(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, resource_name: str, **kwargs: Any
@@ -1290,10 +1340,10 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_restart_request(
             resource_group_name=resource_group_name,
@@ -1305,10 +1355,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1318,17 +1369,23 @@ class WebPubSubOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if cls:
-            return cls(pipeline_response, None, {})
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
 
-    _restart_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/restart"}  # type: ignore
+        if cls:
+            return cls(pipeline_response, None, response_headers)
+
+    _restart_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/restart"
+    }
 
     @distributed_trace_async
     async def begin_restart(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> AsyncLROPoller[None]:
         """Operation to restart a resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -1347,13 +1404,13 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._restart_initial(  # type: ignore
                 resource_group_name=resource_group_name,
@@ -1371,10 +1428,9 @@ class WebPubSubOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(
-                AsyncPollingMethod,
-                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
-            )  # type: AsyncPollingMethod
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -1386,16 +1442,18 @@ class WebPubSubOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_restart.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/restart"}  # type: ignore
+    begin_restart.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/restart"
+    }
 
     @distributed_trace_async
     async def list_skus(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> _models.SkuList:
         """List all available skus of the resource.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -1415,10 +1473,10 @@ class WebPubSubOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SkuList]
+        )
+        cls: ClsType[_models.SkuList] = kwargs.pop("cls", None)
 
         request = build_list_skus_request(
             resource_group_name=resource_group_name,
@@ -1430,10 +1488,11 @@ class WebPubSubOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1450,4 +1509,6 @@ class WebPubSubOperations:
 
         return deserialized
 
-    list_skus.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/skus"}  # type: ignore
+    list_skus.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/skus"
+    }
