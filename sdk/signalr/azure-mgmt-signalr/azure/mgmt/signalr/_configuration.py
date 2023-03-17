@@ -33,17 +33,16 @@ class SignalRManagementClientConfiguration(Configuration):  # pylint: disable=to
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: Gets subscription Id which uniquely identify the Microsoft Azure
-     subscription. The subscription ID forms part of the URI for every service call. Required.
+    :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2022-08-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-03-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(SignalRManagementClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-08-01-preview")  # type: Literal["2022-08-01-preview"]
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop("api_version", "2023-03-01-preview")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
@@ -57,10 +56,7 @@ class SignalRManagementClientConfiguration(Configuration):  # pylint: disable=to
         kwargs.setdefault("sdk_moniker", "mgmt-signalr/{}".format(VERSION))
         self._configure(**kwargs)
 
-    def _configure(
-        self, **kwargs  # type: Any
-    ):
-        # type: (...) -> None
+    def _configure(self, **kwargs: Any) -> None:
         self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
         self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
         self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)

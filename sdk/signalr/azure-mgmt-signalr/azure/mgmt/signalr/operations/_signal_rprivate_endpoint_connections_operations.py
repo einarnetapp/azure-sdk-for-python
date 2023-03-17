@@ -49,9 +49,9 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-01-preview")
-    )  # type: Literal["2022-08-01-preview"]
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -61,11 +61,20 @@ def build_list_request(
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "resourceName": _SERIALIZER.url(
+            "resource_name",
+            resource_name,
+            "str",
+            max_length=63,
+            min_length=3,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+        ),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -86,9 +95,9 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-01-preview")
-    )  # type: Literal["2022-08-01-preview"]
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -101,11 +110,20 @@ def build_get_request(
             "private_endpoint_connection_name", private_endpoint_connection_name, "str"
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "resourceName": _SERIALIZER.url(
+            "resource_name",
+            resource_name,
+            "str",
+            max_length=63,
+            min_length=3,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+        ),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -126,10 +144,10 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-01-preview")
-    )  # type: Literal["2022-08-01-preview"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -142,11 +160,20 @@ def build_update_request(
             "private_endpoint_connection_name", private_endpoint_connection_name, "str"
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "resourceName": _SERIALIZER.url(
+            "resource_name",
+            resource_name,
+            "str",
+            max_length=63,
+            min_length=3,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+        ),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -169,9 +196,9 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-08-01-preview")
-    )  # type: Literal["2022-08-01-preview"]
+    api_version: Literal["2023-03-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-01-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -184,11 +211,20 @@ def build_delete_request(
             "private_endpoint_connection_name", private_endpoint_connection_name, "str"
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "resourceName": _SERIALIZER.url(
+            "resource_name",
+            resource_name,
+            "str",
+            max_length=63,
+            min_length=3,
+            pattern=r"^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+        ),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -224,8 +260,8 @@ class SignalRPrivateEndpointConnectionsOperations:
     ) -> Iterable["_models.PrivateEndpointConnection"]:
         """List private endpoint connections.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -238,10 +274,10 @@ class SignalRPrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrivateEndpointConnectionList]
+        )
+        cls: ClsType[_models.PrivateEndpointConnectionList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -264,7 +300,7 @@ class SignalRPrivateEndpointConnectionsOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -280,7 +316,7 @@ class SignalRPrivateEndpointConnectionsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -288,14 +324,15 @@ class SignalRPrivateEndpointConnectionsOperations:
             deserialized = self._deserialize("PrivateEndpointConnectionList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -308,7 +345,9 @@ class SignalRPrivateEndpointConnectionsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections"
+    }
 
     @distributed_trace
     def get(
@@ -316,10 +355,11 @@ class SignalRPrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Get the specified private endpoint connection.
 
-        :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
         :type private_endpoint_connection_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -339,10 +379,10 @@ class SignalRPrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrivateEndpointConnection]
+        )
+        cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
 
         request = build_get_request(
             private_endpoint_connection_name=private_endpoint_connection_name,
@@ -355,10 +395,11 @@ class SignalRPrivateEndpointConnectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -375,7 +416,9 @@ class SignalRPrivateEndpointConnectionsOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+    }
 
     @overload
     def update(
@@ -390,10 +433,11 @@ class SignalRPrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Update the state of specified private endpoint connection.
 
-        :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
         :type private_endpoint_connection_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -421,10 +465,11 @@ class SignalRPrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Update the state of specified private endpoint connection.
 
-        :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
         :type private_endpoint_connection_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -450,15 +495,16 @@ class SignalRPrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Update the state of specified private endpoint connection.
 
-        :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
         :type private_endpoint_connection_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: The resource of private endpoint and its properties. Is either a model type
-         or a IO type. Required.
+        :param parameters: The resource of private endpoint and its properties. Is either a
+         PrivateEndpointConnection type or a IO type. Required.
         :type parameters: ~azure.mgmt.signalr.models.PrivateEndpointConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -479,11 +525,11 @@ class SignalRPrivateEndpointConnectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrivateEndpointConnection]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -507,10 +553,11 @@ class SignalRPrivateEndpointConnectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -527,7 +574,9 @@ class SignalRPrivateEndpointConnectionsOperations:
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"}  # type: ignore
+    update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+    }
 
     def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self, private_endpoint_connection_name: str, resource_group_name: str, resource_name: str, **kwargs: Any
@@ -543,10 +592,10 @@ class SignalRPrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             private_endpoint_connection_name=private_endpoint_connection_name,
@@ -559,10 +608,11 @@ class SignalRPrivateEndpointConnectionsOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -575,7 +625,9 @@ class SignalRPrivateEndpointConnectionsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"}  # type: ignore
+    _delete_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+    }
 
     @distributed_trace
     def begin_delete(
@@ -583,10 +635,11 @@ class SignalRPrivateEndpointConnectionsOperations:
     ) -> LROPoller[None]:
         """Delete the specified private endpoint connection.
 
-        :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
         :type private_endpoint_connection_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -605,13 +658,13 @@ class SignalRPrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-08-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = self._delete_initial(  # type: ignore
                 private_endpoint_connection_name=private_endpoint_connection_name,
@@ -630,9 +683,9 @@ class SignalRPrivateEndpointConnectionsOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(
+            polling_method: PollingMethod = cast(
                 PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: PollingMethod
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -644,6 +697,8 @@ class SignalRPrivateEndpointConnectionsOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"}  # type: ignore
+    begin_delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+    }
