@@ -13,7 +13,6 @@ from ._models_py3 import Capabilities
 from ._models_py3 import CapabilitiesCapabilities
 from ._models_py3 import CapabilitiesListResult
 from ._models_py3 import CloudErrorBody
-from ._models_py3 import ConfidentialComputeProperties
 from ._models_py3 import Container
 from ._models_py3 import ContainerAttachResponse
 from ._models_py3 import ContainerExec
@@ -63,7 +62,6 @@ from ._models_py3 import VolumeMount
 
 from ._container_instance_management_client_enums import ContainerGroupIpAddressType
 from ._container_instance_management_client_enums import ContainerGroupNetworkProtocol
-from ._container_instance_management_client_enums import ContainerGroupPriority
 from ._container_instance_management_client_enums import ContainerGroupRestartPolicy
 from ._container_instance_management_client_enums import ContainerGroupSku
 from ._container_instance_management_client_enums import ContainerInstanceOperationsOrigin
@@ -86,7 +84,6 @@ __all__ = [
     "CapabilitiesCapabilities",
     "CapabilitiesListResult",
     "CloudErrorBody",
-    "ConfidentialComputeProperties",
     "Container",
     "ContainerAttachResponse",
     "ContainerExec",
@@ -135,7 +132,6 @@ __all__ = [
     "VolumeMount",
     "ContainerGroupIpAddressType",
     "ContainerGroupNetworkProtocol",
-    "ContainerGroupPriority",
     "ContainerGroupRestartPolicy",
     "ContainerGroupSku",
     "ContainerInstanceOperationsOrigin",
