@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, overload
+from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
 import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
@@ -21,11 +21,13 @@ from azure.core.exceptions import (
 )
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
+from azure.core.polling import AsyncLROPoller, AsyncNoPolling, AsyncPollingMethod
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
+from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
@@ -41,6 +43,7 @@ from ...operations._experiments_operations import (
     build_list_execution_details_request,
     build_list_request,
     build_start_request,
+    build_update_request,
 )
 
 if sys.version_info >= (3, 8):
@@ -91,7 +94,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentListResult] = kwargs.pop("cls", None)
@@ -147,8 +150,9 @@ class ExperimentsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -190,7 +194,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentListResult] = kwargs.pop("cls", None)
@@ -247,8 +251,9 @@ class ExperimentsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -291,7 +296,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -308,8 +313,9 @@ class ExperimentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -350,7 +356,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.Experiment] = kwargs.pop("cls", None)
@@ -367,8 +373,9 @@ class ExperimentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -389,81 +396,9 @@ class ExperimentsOperations:
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}"
     }
 
-    @overload
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        experiment_name: str,
-        experiment: _models.Experiment,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Experiment:
-        """Create or update a Experiment resource.
-
-        :param resource_group_name: String that represents an Azure resource group. Required.
-        :type resource_group_name: str
-        :param experiment_name: String that represents a Experiment resource name. Required.
-        :type experiment_name: str
-        :param experiment: Experiment resource to be created or updated. Required.
-        :type experiment: ~azure.mgmt.chaos.models.Experiment
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Experiment or the result of cls(response)
-        :rtype: ~azure.mgmt.chaos.models.Experiment
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        experiment_name: str,
-        experiment: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Experiment:
-        """Create or update a Experiment resource.
-
-        :param resource_group_name: String that represents an Azure resource group. Required.
-        :type resource_group_name: str
-        :param experiment_name: String that represents a Experiment resource name. Required.
-        :type experiment_name: str
-        :param experiment: Experiment resource to be created or updated. Required.
-        :type experiment: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Experiment or the result of cls(response)
-        :rtype: ~azure.mgmt.chaos.models.Experiment
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def create_or_update(
+    async def _create_or_update_initial(
         self, resource_group_name: str, experiment_name: str, experiment: Union[_models.Experiment, IO], **kwargs: Any
     ) -> _models.Experiment:
-        """Create or update a Experiment resource.
-
-        :param resource_group_name: String that represents an Azure resource group. Required.
-        :type resource_group_name: str
-        :param experiment_name: String that represents a Experiment resource name. Required.
-        :type experiment_name: str
-        :param experiment: Experiment resource to be created or updated. Is either a model type or a IO
-         type. Required.
-        :type experiment: ~azure.mgmt.chaos.models.Experiment or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Experiment or the result of cls(response)
-        :rtype: ~azure.mgmt.chaos.models.Experiment
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -475,7 +410,7 @@ class ExperimentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -497,15 +432,314 @@ class ExperimentsOperations:
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self.create_or_update.metadata["url"],
+            template_url=self._create_or_update_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if response.status_code == 200:
+            deserialized = self._deserialize("Experiment", pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize("Experiment", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    _create_or_update_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}"
+    }
+
+    @overload
+    async def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        experiment_name: str,
+        experiment: _models.Experiment,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.Experiment]:
+        """Create or update a Experiment resource.
+
+        :param resource_group_name: String that represents an Azure resource group. Required.
+        :type resource_group_name: str
+        :param experiment_name: String that represents a Experiment resource name. Required.
+        :type experiment_name: str
+        :param experiment: Experiment resource to be created or updated. Required.
+        :type experiment: ~azure.mgmt.chaos.models.Experiment
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either Experiment or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.chaos.models.Experiment]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        experiment_name: str,
+        experiment: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.Experiment]:
+        """Create or update a Experiment resource.
+
+        :param resource_group_name: String that represents an Azure resource group. Required.
+        :type resource_group_name: str
+        :param experiment_name: String that represents a Experiment resource name. Required.
+        :type experiment_name: str
+        :param experiment: Experiment resource to be created or updated. Required.
+        :type experiment: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either Experiment or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.chaos.models.Experiment]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def begin_create_or_update(
+        self, resource_group_name: str, experiment_name: str, experiment: Union[_models.Experiment, IO], **kwargs: Any
+    ) -> AsyncLROPoller[_models.Experiment]:
+        """Create or update a Experiment resource.
+
+        :param resource_group_name: String that represents an Azure resource group. Required.
+        :type resource_group_name: str
+        :param experiment_name: String that represents a Experiment resource name. Required.
+        :type experiment_name: str
+        :param experiment: Experiment resource to be created or updated. Is either a Experiment type or
+         a IO type. Required.
+        :type experiment: ~azure.mgmt.chaos.models.Experiment or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either Experiment or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.chaos.models.Experiment]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.Experiment] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._create_or_update_initial(
+                resource_group_name=resource_group_name,
+                experiment_name=experiment_name,
+                experiment=experiment,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("Experiment", pipeline_response)
+            if cls:
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    begin_create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}"
+    }
+
+    @overload
+    async def update(
+        self,
+        resource_group_name: str,
+        experiment_name: str,
+        experiment: _models.ExperimentUpdate,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.Experiment:
+        """The operation to update an experiment.
+
+        :param resource_group_name: String that represents an Azure resource group. Required.
+        :type resource_group_name: str
+        :param experiment_name: String that represents a Experiment resource name. Required.
+        :type experiment_name: str
+        :param experiment: Parameters supplied to the Update experiment operation. Required.
+        :type experiment: ~azure.mgmt.chaos.models.ExperimentUpdate
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Experiment or the result of cls(response)
+        :rtype: ~azure.mgmt.chaos.models.Experiment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def update(
+        self,
+        resource_group_name: str,
+        experiment_name: str,
+        experiment: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.Experiment:
+        """The operation to update an experiment.
+
+        :param resource_group_name: String that represents an Azure resource group. Required.
+        :type resource_group_name: str
+        :param experiment_name: String that represents a Experiment resource name. Required.
+        :type experiment_name: str
+        :param experiment: Parameters supplied to the Update experiment operation. Required.
+        :type experiment: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Experiment or the result of cls(response)
+        :rtype: ~azure.mgmt.chaos.models.Experiment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def update(
+        self,
+        resource_group_name: str,
+        experiment_name: str,
+        experiment: Union[_models.ExperimentUpdate, IO],
+        **kwargs: Any
+    ) -> _models.Experiment:
+        """The operation to update an experiment.
+
+        :param resource_group_name: String that represents an Azure resource group. Required.
+        :type resource_group_name: str
+        :param experiment_name: String that represents a Experiment resource name. Required.
+        :type experiment_name: str
+        :param experiment: Parameters supplied to the Update experiment operation. Is either a
+         ExperimentUpdate type or a IO type. Required.
+        :type experiment: ~azure.mgmt.chaos.models.ExperimentUpdate or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Experiment or the result of cls(response)
+        :rtype: ~azure.mgmt.chaos.models.Experiment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.Experiment] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(experiment, (IO, bytes)):
+            _content = experiment
+        else:
+            _json = self._serialize.body(experiment, "ExperimentUpdate")
+
+        request = build_update_request(
+            resource_group_name=resource_group_name,
+            experiment_name=experiment_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.update.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -522,25 +756,13 @@ class ExperimentsOperations:
 
         return deserialized
 
-    create_or_update.metadata = {
+    update.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}"
     }
 
-    @distributed_trace_async
-    async def cancel(
+    async def _cancel_initial(
         self, resource_group_name: str, experiment_name: str, **kwargs: Any
     ) -> _models.ExperimentCancelOperationResult:
-        """Cancel a running Experiment resource.
-
-        :param resource_group_name: String that represents an Azure resource group. Required.
-        :type resource_group_name: str
-        :param experiment_name: String that represents a Experiment resource name. Required.
-        :type experiment_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ExperimentCancelOperationResult or the result of cls(response)
-        :rtype: ~azure.mgmt.chaos.models.ExperimentCancelOperationResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -552,7 +774,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentCancelOperationResult] = kwargs.pop("cls", None)
@@ -562,15 +784,16 @@ class ExperimentsOperations:
             experiment_name=experiment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.cancel.metadata["url"],
+            template_url=self._cancel_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -580,32 +803,100 @@ class ExperimentsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         deserialized = self._deserialize("ExperimentCancelOperationResult", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
-    cancel.metadata = {
+    _cancel_initial.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/cancel"
     }
 
     @distributed_trace_async
-    async def start(
+    async def begin_cancel(
         self, resource_group_name: str, experiment_name: str, **kwargs: Any
-    ) -> _models.ExperimentStartOperationResult:
-        """Start a Experiment resource.
+    ) -> AsyncLROPoller[_models.ExperimentCancelOperationResult]:
+        """Cancel a running Experiment resource.
 
         :param resource_group_name: String that represents an Azure resource group. Required.
         :type resource_group_name: str
         :param experiment_name: String that represents a Experiment resource name. Required.
         :type experiment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ExperimentStartOperationResult or the result of cls(response)
-        :rtype: ~azure.mgmt.chaos.models.ExperimentStartOperationResult
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either ExperimentCancelOperationResult or
+         the result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.chaos.models.ExperimentCancelOperationResult]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.ExperimentCancelOperationResult] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._cancel_initial(
+                resource_group_name=resource_group_name,
+                experiment_name=experiment_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
+            deserialized = self._deserialize("ExperimentCancelOperationResult", pipeline_response)
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    begin_cancel.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/cancel"
+    }
+
+    async def _start_initial(
+        self, resource_group_name: str, experiment_name: str, **kwargs: Any
+    ) -> _models.ExperimentStartOperationResult:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -617,7 +908,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentStartOperationResult] = kwargs.pop("cls", None)
@@ -627,15 +918,16 @@ class ExperimentsOperations:
             experiment_name=experiment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.start.metadata["url"],
+            template_url=self._start_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -645,14 +937,94 @@ class ExperimentsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         deserialized = self._deserialize("ExperimentStartOperationResult", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
-    start.metadata = {
+    _start_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/start"
+    }
+
+    @distributed_trace_async
+    async def begin_start(
+        self, resource_group_name: str, experiment_name: str, **kwargs: Any
+    ) -> AsyncLROPoller[_models.ExperimentStartOperationResult]:
+        """Start a Experiment resource.
+
+        :param resource_group_name: String that represents an Azure resource group. Required.
+        :type resource_group_name: str
+        :param experiment_name: String that represents a Experiment resource name. Required.
+        :type experiment_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either ExperimentStartOperationResult or
+         the result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.chaos.models.ExperimentStartOperationResult]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        cls: ClsType[_models.ExperimentStartOperationResult] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._start_initial(
+                resource_group_name=resource_group_name,
+                experiment_name=experiment_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
+            deserialized = self._deserialize("ExperimentStartOperationResult", pipeline_response)
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    begin_start.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/start"
     }
 
@@ -674,7 +1046,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentStatusListResult] = kwargs.pop("cls", None)
@@ -730,8 +1102,9 @@ class ExperimentsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -776,7 +1149,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentStatus] = kwargs.pop("cls", None)
@@ -794,8 +1167,9 @@ class ExperimentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -836,7 +1210,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentExecutionDetailsListResult] = kwargs.pop("cls", None)
@@ -892,8 +1266,9 @@ class ExperimentsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -938,7 +1313,7 @@ class ExperimentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-10-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-04-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ExperimentExecutionDetails] = kwargs.pop("cls", None)
@@ -956,8 +1331,9 @@ class ExperimentsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

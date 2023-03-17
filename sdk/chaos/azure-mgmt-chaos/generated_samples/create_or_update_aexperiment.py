@@ -29,7 +29,7 @@ def main():
         subscription_id="6b052e15-03d3-4f17-b2e1-be7f07588291",
     )
 
-    response = client.experiments.create_or_update(
+    response = client.experiments.begin_create_or_update(
         resource_group_name="exampleRG",
         experiment_name="exampleExperiment",
         experiment={
@@ -69,10 +69,10 @@ def main():
                 ],
             },
         },
-    )
+    ).result()
     print(response)
 
 
-# x-ms-original-file: specification/chaos/resource-manager/Microsoft.Chaos/preview/2022-10-01-preview/examples/CreateOrUpdateAExperiment.json
+# x-ms-original-file: specification/chaos/resource-manager/Microsoft.Chaos/preview/2023-04-01-preview/examples/CreateOrUpdateAExperiment.json
 if __name__ == "__main__":
     main()

@@ -15,6 +15,7 @@ from ._models_py3 import CapabilityListResult
 from ._models_py3 import CapabilityType
 from ._models_py3 import CapabilityTypeListResult
 from ._models_py3 import CapabilityTypePropertiesRuntimeProperties
+from ._models_py3 import ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties
 from ._models_py3 import ContinuousAction
 from ._models_py3 import DelayAction
 from ._models_py3 import DiscreteAction
@@ -32,7 +33,7 @@ from ._models_py3 import ExperimentListResult
 from ._models_py3 import ExperimentStartOperationResult
 from ._models_py3 import ExperimentStatus
 from ._models_py3 import ExperimentStatusListResult
-from ._models_py3 import Filter
+from ._models_py3 import ExperimentUpdate
 from ._models_py3 import KeyValuePair
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
@@ -40,8 +41,6 @@ from ._models_py3 import OperationListResult
 from ._models_py3 import Resource
 from ._models_py3 import ResourceIdentity
 from ._models_py3 import Selector
-from ._models_py3 import SimpleFilter
-from ._models_py3 import SimpleFilterParameters
 from ._models_py3 import Step
 from ._models_py3 import StepStatus
 from ._models_py3 import SystemData
@@ -54,7 +53,6 @@ from ._models_py3 import TrackedResource
 
 from ._chaos_management_client_enums import ActionType
 from ._chaos_management_client_enums import CreatedByType
-from ._chaos_management_client_enums import FilterType
 from ._chaos_management_client_enums import Origin
 from ._chaos_management_client_enums import ResourceIdentityType
 from ._chaos_management_client_enums import SelectorType
@@ -72,6 +70,7 @@ __all__ = [
     "CapabilityType",
     "CapabilityTypeListResult",
     "CapabilityTypePropertiesRuntimeProperties",
+    "ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties",
     "ContinuousAction",
     "DelayAction",
     "DiscreteAction",
@@ -89,7 +88,7 @@ __all__ = [
     "ExperimentStartOperationResult",
     "ExperimentStatus",
     "ExperimentStatusListResult",
-    "Filter",
+    "ExperimentUpdate",
     "KeyValuePair",
     "Operation",
     "OperationDisplay",
@@ -97,8 +96,6 @@ __all__ = [
     "Resource",
     "ResourceIdentity",
     "Selector",
-    "SimpleFilter",
-    "SimpleFilterParameters",
     "Step",
     "StepStatus",
     "SystemData",
@@ -110,7 +107,6 @@ __all__ = [
     "TrackedResource",
     "ActionType",
     "CreatedByType",
-    "FilterType",
     "Origin",
     "ResourceIdentityType",
     "SelectorType",

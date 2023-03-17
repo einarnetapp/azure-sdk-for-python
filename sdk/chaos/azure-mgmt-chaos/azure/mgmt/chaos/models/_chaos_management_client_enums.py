@@ -25,12 +25,6 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     KEY = "Key"
 
 
-class FilterType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Enum that discriminates between filter types. Currently only ``Simple`` type is supported."""
-
-    SIMPLE = "Simple"
-
-
 class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit
     logs UX. Default value is "user,system".
@@ -46,6 +40,7 @@ class ResourceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     NONE = "None"
     SYSTEM_ASSIGNED = "SystemAssigned"
+    USER_ASSIGNED = "UserAssigned"
 
 
 class SelectorType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
