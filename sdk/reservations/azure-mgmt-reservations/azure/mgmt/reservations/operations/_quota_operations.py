@@ -241,8 +241,9 @@ class QuotaOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -316,8 +317,9 @@ class QuotaOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -476,8 +478,8 @@ class QuotaOperations:
          Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices.
          Required.
         :type resource_name: str
-        :param create_quota_request: Quota requests payload. Is either a model type or a IO type.
-         Required.
+        :param create_quota_request: Quota requests payload. Is either a CurrentQuotaLimitBase type or
+         a IO type. Required.
         :type create_quota_request: ~azure.mgmt.reservations.models.CurrentQuotaLimitBase or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -598,8 +600,9 @@ class QuotaOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -749,8 +752,8 @@ class QuotaOperations:
          Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices.
          Required.
         :type resource_name: str
-        :param create_quota_request: Payload for the quota request. Is either a model type or a IO
-         type. Required.
+        :param create_quota_request: Payload for the quota request. Is either a CurrentQuotaLimitBase
+         type or a IO type. Required.
         :type create_quota_request: ~azure.mgmt.reservations.models.CurrentQuotaLimitBase or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -886,8 +889,9 @@ class QuotaOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

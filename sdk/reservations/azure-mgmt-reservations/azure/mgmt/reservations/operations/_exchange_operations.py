@@ -120,8 +120,9 @@ class ExchangeOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -215,7 +216,7 @@ class ExchangeOperations:
         Returns one or more ``Reservations`` in exchange for one or more ``Reservation`` purchases.
 
         :param body: Request containing the refunds and purchases that need to be executed. Is either a
-         model type or a IO type. Required.
+         ExchangeRequest type or a IO type. Required.
         :type body: ~azure.mgmt.reservations.models.ExchangeRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

@@ -228,8 +228,8 @@ class ReservationOrderOperations:
 
         Calculate price for placing a ``ReservationOrder``.
 
-        :param body: Information needed for calculate or purchase reservation. Is either a model type
-         or a IO type. Required.
+        :param body: Information needed for calculate or purchase reservation. Is either a
+         PurchaseRequest type or a IO type. Required.
         :type body: ~azure.mgmt.reservations.models.PurchaseRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -274,8 +274,9 @@ class ReservationOrderOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -349,8 +350,9 @@ class ReservationOrderOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -404,8 +406,9 @@ class ReservationOrderOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -505,8 +508,8 @@ class ReservationOrderOperations:
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
-        :param body: Information needed for calculate or purchase reservation. Is either a model type
-         or a IO type. Required.
+        :param body: Information needed for calculate or purchase reservation. Is either a
+         PurchaseRequest type or a IO type. Required.
         :type body: ~azure.mgmt.reservations.models.PurchaseRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -613,8 +616,9 @@ class ReservationOrderOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -693,8 +697,8 @@ class ReservationOrderOperations:
 
         :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
-        :param body: Information needed to change directory of reservation order. Is either a model
-         type or a IO type. Required.
+        :param body: Information needed to change directory of reservation order. Is either a
+         ChangeDirectoryRequest type or a IO type. Required.
         :type body: ~azure.mgmt.reservations.models.ChangeDirectoryRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -740,8 +744,9 @@ class ReservationOrderOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
