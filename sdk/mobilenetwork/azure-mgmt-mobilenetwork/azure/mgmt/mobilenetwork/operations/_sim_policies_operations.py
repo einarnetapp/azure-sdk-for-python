@@ -287,8 +287,9 @@ class SimPoliciesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -425,8 +426,9 @@ class SimPoliciesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -496,8 +498,9 @@ class SimPoliciesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -620,7 +623,7 @@ class SimPoliciesOperations:
         :param sim_policy_name: The name of the SIM policy. Required.
         :type sim_policy_name: str
         :param parameters: Parameters supplied to the create or update SIM policy operation. Is either
-         a model type or a IO type. Required.
+         a SimPolicy type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.SimPolicy or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -770,8 +773,8 @@ class SimPoliciesOperations:
         :type mobile_network_name: str
         :param sim_policy_name: The name of the SIM policy. Required.
         :type sim_policy_name: str
-        :param parameters: Parameters supplied to update SIM policy tags. Is either a model type or a
-         IO type. Required.
+        :param parameters: Parameters supplied to update SIM policy tags. Is either a TagsObject type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -822,8 +825,9 @@ class SimPoliciesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -919,8 +923,9 @@ class SimPoliciesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

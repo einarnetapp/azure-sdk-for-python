@@ -388,8 +388,9 @@ class AttachedDataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -542,8 +543,9 @@ class AttachedDataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -615,8 +617,9 @@ class AttachedDataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -752,7 +755,7 @@ class AttachedDataNetworksOperations:
         :param attached_data_network_name: The name of the attached data network. Required.
         :type attached_data_network_name: str
         :param parameters: Parameters supplied to the create or update attached data network operation.
-         Is either a model type or a IO type. Required.
+         Is either a AttachedDataNetwork type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.AttachedDataNetwork or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -913,8 +916,8 @@ class AttachedDataNetworksOperations:
         :type packet_core_data_plane_name: str
         :param attached_data_network_name: The name of the attached data network. Required.
         :type attached_data_network_name: str
-        :param parameters: Parameters supplied to update attached data network tags. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameters supplied to update attached data network tags. Is either a
+         TagsObject type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -966,8 +969,9 @@ class AttachedDataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1070,8 +1074,9 @@ class AttachedDataNetworksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
