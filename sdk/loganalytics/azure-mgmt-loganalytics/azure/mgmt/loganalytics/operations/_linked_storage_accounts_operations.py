@@ -320,7 +320,7 @@ class LinkedStorageAccountsOperations:
          "AzureWatson", "Query", "Ingestion", and "Alerts". Required.
         :type data_source_type: str or ~azure.mgmt.loganalytics.models.DataSourceType
         :param parameters: The parameters required to create or update linked storage accounts. Is
-         either a model type or a IO type. Required.
+         either a LinkedStorageAccountsResource type or a IO type. Required.
         :type parameters: ~azure.mgmt.loganalytics.models.LinkedStorageAccountsResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -369,8 +369,9 @@ class LinkedStorageAccountsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -441,8 +442,9 @@ class LinkedStorageAccountsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -509,8 +511,9 @@ class LinkedStorageAccountsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -595,8 +598,9 @@ class LinkedStorageAccountsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
