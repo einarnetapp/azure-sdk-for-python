@@ -98,8 +98,9 @@ class SitesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -237,8 +238,9 @@ class SitesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -308,8 +310,9 @@ class SitesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -434,7 +437,7 @@ class SitesOperations:
         :param site_name: The name of the mobile network site. Required.
         :type site_name: str
         :param parameters: Parameters supplied to the create or update mobile network site operation.
-         Is either a model type or a IO type. Required.
+         Is either a Site type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.Site or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -585,8 +588,8 @@ class SitesOperations:
         :type mobile_network_name: str
         :param site_name: The name of the mobile network site. Required.
         :type site_name: str
-        :param parameters: Parameters supplied to update network site tags. Is either a model type or a
-         IO type. Required.
+        :param parameters: Parameters supplied to update network site tags. Is either a TagsObject type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -637,8 +640,9 @@ class SitesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -734,8 +738,9 @@ class SitesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

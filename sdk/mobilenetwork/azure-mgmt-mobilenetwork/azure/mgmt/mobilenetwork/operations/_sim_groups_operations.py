@@ -293,8 +293,9 @@ class SimGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -421,8 +422,9 @@ class SimGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -486,8 +488,9 @@ class SimGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -594,7 +597,7 @@ class SimGroupsOperations:
         :param sim_group_name: The name of the SIM Group. Required.
         :type sim_group_name: str
         :param parameters: Parameters supplied to the create or update SIM group operation. Is either a
-         model type or a IO type. Required.
+         SimGroup type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.SimGroup or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -730,8 +733,8 @@ class SimGroupsOperations:
         :type resource_group_name: str
         :param sim_group_name: The name of the SIM Group. Required.
         :type sim_group_name: str
-        :param parameters: Parameters supplied to update SIM group tags. Is either a model type or a IO
-         type. Required.
+        :param parameters: Parameters supplied to update SIM group tags. Is either a TagsObject type or
+         a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -781,8 +784,9 @@ class SimGroupsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -869,8 +873,9 @@ class SimGroupsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -957,8 +962,9 @@ class SimGroupsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

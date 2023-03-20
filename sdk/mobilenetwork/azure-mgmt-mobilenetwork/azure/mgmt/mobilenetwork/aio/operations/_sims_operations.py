@@ -100,8 +100,9 @@ class SimsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -236,8 +237,9 @@ class SimsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -307,8 +309,9 @@ class SimsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -427,7 +430,7 @@ class SimsOperations:
         :type sim_group_name: str
         :param sim_name: The name of the SIM. Required.
         :type sim_name: str
-        :param parameters: Parameters supplied to the create or update SIM operation. Is either a model
+        :param parameters: Parameters supplied to the create or update SIM operation. Is either a Sim
          type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.Sim or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -574,8 +577,9 @@ class SimsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -635,8 +639,9 @@ class SimsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -744,8 +749,8 @@ class SimsOperations:
         :type resource_group_name: str
         :param sim_group_name: The name of the SIM Group. Required.
         :type sim_group_name: str
-        :param parameters: Parameters supplied to the bulk SIM upload operation. Is either a model type
-         or a IO type. Required.
+        :param parameters: Parameters supplied to the bulk SIM upload operation. Is either a
+         SimUploadList type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.SimUploadList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -859,8 +864,9 @@ class SimsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -968,8 +974,8 @@ class SimsOperations:
         :type resource_group_name: str
         :param sim_group_name: The name of the SIM Group. Required.
         :type sim_group_name: str
-        :param parameters: Parameters supplied to the bulk SIM delete operation. Is either a model type
-         or a IO type. Required.
+        :param parameters: Parameters supplied to the bulk SIM delete operation. Is either a
+         SimDeleteList type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.SimDeleteList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1087,8 +1093,9 @@ class SimsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1201,7 +1208,7 @@ class SimsOperations:
         :param sim_group_name: The name of the SIM Group. Required.
         :type sim_group_name: str
         :param parameters: Parameters supplied to the encrypted SIMs upload operation. Is either a
-         model type or a IO type. Required.
+         EncryptedSimUploadList type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.EncryptedSimUploadList or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

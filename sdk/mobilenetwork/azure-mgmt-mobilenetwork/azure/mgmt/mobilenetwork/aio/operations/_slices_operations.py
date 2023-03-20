@@ -98,8 +98,9 @@ class SlicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -236,8 +237,9 @@ class SlicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -307,8 +309,9 @@ class SlicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -433,7 +436,7 @@ class SlicesOperations:
         :param slice_name: The name of the network slice. Required.
         :type slice_name: str
         :param parameters: Parameters supplied to the create or update network slice operation. Is
-         either a model type or a IO type. Required.
+         either a Slice type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.Slice or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -584,8 +587,8 @@ class SlicesOperations:
         :type mobile_network_name: str
         :param slice_name: The name of the network slice. Required.
         :type slice_name: str
-        :param parameters: Parameters supplied to update network slice tags. Is either a model type or
-         a IO type. Required.
+        :param parameters: Parameters supplied to update network slice tags. Is either a TagsObject
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -636,8 +639,9 @@ class SlicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -733,8 +737,9 @@ class SlicesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

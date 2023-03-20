@@ -303,8 +303,9 @@ class DataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -441,8 +442,9 @@ class DataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -512,8 +514,9 @@ class DataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -640,7 +643,7 @@ class DataNetworksOperations:
         :param data_network_name: The name of the data network. Required.
         :type data_network_name: str
         :param parameters: Parameters supplied to the create or update data network operation. Is
-         either a model type or a IO type. Required.
+         either a DataNetwork type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.DataNetwork or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -791,8 +794,8 @@ class DataNetworksOperations:
         :type mobile_network_name: str
         :param data_network_name: The name of the data network. Required.
         :type data_network_name: str
-        :param parameters: Parameters supplied to update data network tags. Is either a model type or a
-         IO type. Required.
+        :param parameters: Parameters supplied to update data network tags. Is either a TagsObject type
+         or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -843,8 +846,9 @@ class DataNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -940,8 +944,9 @@ class DataNetworksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

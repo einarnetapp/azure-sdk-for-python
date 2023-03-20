@@ -303,8 +303,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -443,8 +444,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -514,8 +516,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -641,7 +644,7 @@ class ServicesOperations:
          strings - ``default``\ , ``requested`` or ``service``. Required.
         :type service_name: str
         :param parameters: Parameters supplied to the create or update service operation. Is either a
-         model type or a IO type. Required.
+         Service type or a IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.Service or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -794,8 +797,8 @@ class ServicesOperations:
         :param service_name: The name of the service. You must not use any of the following reserved
          strings - ``default``\ , ``requested`` or ``service``. Required.
         :type service_name: str
-        :param parameters: Parameters supplied to update service tags. Is either a model type or a IO
-         type. Required.
+        :param parameters: Parameters supplied to update service tags. Is either a TagsObject type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.mobilenetwork.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -846,8 +849,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -943,8 +947,9 @@ class ServicesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
