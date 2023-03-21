@@ -14,7 +14,7 @@ from azure.mgmt.healthcareapis import HealthcareApisManagementClient
     pip install azure-identity
     pip install azure-mgmt-healthcareapis
 # USAGE
-    python service_create.py
+    python service_create_in_data_sovereign_region_with_cmk_enabled.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -35,7 +35,7 @@ def main():
         service_description={
             "identity": {"type": "SystemAssigned"},
             "kind": "fhir-R4",
-            "location": "westus2",
+            "location": "Southeast Asia",
             "properties": {
                 "accessPolicies": [
                     {"objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"},
@@ -54,6 +54,7 @@ def main():
                     "origins": ["*"],
                 },
                 "cosmosDbConfiguration": {
+                    "crossTenantCmkApplicationId": "de3fbeef-8c3a-428e-8b9f-4d229c8a85f4",
                     "keyVaultKeyUri": "https://my-vault.vault.azure.net/keys/my-key",
                     "offerThroughput": 1000,
                 },
@@ -67,6 +68,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2023-02-28/examples/legacy/ServiceCreate.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2023-02-28/examples/legacy/ServiceCreateInDataSovereignRegionWithCmkEnabled.json
 if __name__ == "__main__":
     main()

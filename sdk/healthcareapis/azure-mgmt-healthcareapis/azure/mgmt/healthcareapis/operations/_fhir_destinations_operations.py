@@ -47,7 +47,7 @@ def build_list_by_iot_connector_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-06-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))
+    api_version: Literal["2023-02-28"] = kwargs.pop("api_version", _params.pop("api-version", "2023-02-28"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -59,7 +59,7 @@ def build_list_by_iot_connector_request(
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=24, min_length=3),
         "iotConnectorName": _SERIALIZER.url(
             "iot_connector_name", iot_connector_name, "str", max_length=24, min_length=3
@@ -117,7 +117,7 @@ class FhirDestinationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-06-01"] = kwargs.pop(
+        api_version: Literal["2023-02-28"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.IotFhirDestinationCollection] = kwargs.pop("cls", None)
@@ -174,8 +174,9 @@ class FhirDestinationsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

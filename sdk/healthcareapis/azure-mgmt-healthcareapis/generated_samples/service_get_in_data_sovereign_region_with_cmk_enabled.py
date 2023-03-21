@@ -14,7 +14,7 @@ from azure.mgmt.healthcareapis import HealthcareApisManagementClient
     pip install azure-identity
     pip install azure-mgmt-healthcareapis
 # USAGE
-    python dicom_services_get.py
+    python service_get_in_data_sovereign_region_with_cmk_enabled.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,13 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.dicom_services.get(
-        resource_group_name="testRG",
-        workspace_name="workspace1",
-        dicom_service_name="blue",
+    response = client.services.get(
+        resource_group_name="rg1",
+        resource_name="service1",
     )
     print(response)
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2023-02-28/examples/dicomservices/DicomServices_Get.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2023-02-28/examples/legacy/ServiceGetInDataSovereignRegionWithCmkEnabled.json
 if __name__ == "__main__":
     main()
