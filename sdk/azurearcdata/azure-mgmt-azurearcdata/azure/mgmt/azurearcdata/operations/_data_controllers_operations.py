@@ -47,8 +47,8 @@ def build_list_in_subscription_request(subscription_id: str, **kwargs: Any) -> H
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-03-01-preview")
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -75,8 +75,8 @@ def build_list_in_group_request(resource_group_name: str, subscription_id: str, 
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-03-01-preview")
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -107,8 +107,8 @@ def build_put_data_controller_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-03-01-preview")
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -143,8 +143,8 @@ def build_delete_data_controller_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-03-01-preview")
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -176,8 +176,8 @@ def build_get_data_controller_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-03-01-preview")
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -209,8 +209,8 @@ def build_patch_data_controller_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-03-01-preview")
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
     )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
@@ -273,7 +273,7 @@ class DataControllersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PageOfDataControllerResource] = kwargs.pop("cls", None)
@@ -327,8 +327,9 @@ class DataControllersOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -362,7 +363,7 @@ class DataControllersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PageOfDataControllerResource] = kwargs.pop("cls", None)
@@ -417,8 +418,9 @@ class DataControllersOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -453,7 +455,7 @@ class DataControllersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -482,8 +484,9 @@ class DataControllersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -592,7 +595,8 @@ class DataControllersOperations:
         :type resource_group_name: str
         :param data_controller_name: The name of the data controller. Required.
         :type data_controller_name: str
-        :param data_controller_resource: desc. Is either a model type or a IO type. Required.
+        :param data_controller_resource: desc. Is either a DataControllerResource type or a IO type.
+         Required.
         :type data_controller_resource: ~azure.mgmt.azurearcdata.models.DataControllerResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -613,7 +617,7 @@ class DataControllersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -676,7 +680,7 @@ class DataControllersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -693,8 +697,9 @@ class DataControllersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -736,7 +741,7 @@ class DataControllersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -804,7 +809,7 @@ class DataControllersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DataControllerResource] = kwargs.pop("cls", None)
@@ -821,8 +826,9 @@ class DataControllersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -861,7 +867,7 @@ class DataControllersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -890,8 +896,9 @@ class DataControllersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -998,8 +1005,8 @@ class DataControllersOperations:
         :type resource_group_name: str
         :param data_controller_name: The name of the data controller. Required.
         :type data_controller_name: str
-        :param data_controller_resource: The update data controller resource. Is either a model type or
-         a IO type. Required.
+        :param data_controller_resource: The update data controller resource. Is either a
+         DataControllerUpdate type or a IO type. Required.
         :type data_controller_resource: ~azure.mgmt.azurearcdata.models.DataControllerUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1020,7 +1027,7 @@ class DataControllersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
