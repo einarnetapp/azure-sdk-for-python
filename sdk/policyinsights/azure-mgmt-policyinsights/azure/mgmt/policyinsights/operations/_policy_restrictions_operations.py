@@ -196,8 +196,8 @@ class PolicyRestrictionsOperations:
     ) -> _models.CheckRestrictionsResult:
         """Checks what restrictions Azure Policy will place on a resource within a subscription.
 
-        :param parameters: The check policy restrictions parameters. Is either a model type or a IO
-         type. Required.
+        :param parameters: The check policy restrictions parameters. Is either a
+         CheckRestrictionsRequest type or a IO type. Required.
         :type parameters: ~azure.mgmt.policyinsights.models.CheckRestrictionsRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -243,8 +243,9 @@ class PolicyRestrictionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -322,8 +323,8 @@ class PolicyRestrictionsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param parameters: The check policy restrictions parameters. Is either a model type or a IO
-         type. Required.
+        :param parameters: The check policy restrictions parameters. Is either a
+         CheckRestrictionsRequest type or a IO type. Required.
         :type parameters: ~azure.mgmt.policyinsights.models.CheckRestrictionsRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -370,8 +371,9 @@ class PolicyRestrictionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -454,8 +456,8 @@ class PolicyRestrictionsOperations:
 
         :param management_group_id: Management group ID. Required.
         :type management_group_id: str
-        :param parameters: The check policy restrictions parameters. Is either a model type or a IO
-         type. Required.
+        :param parameters: The check policy restrictions parameters. Is either a
+         CheckManagementGroupRestrictionsRequest type or a IO type. Required.
         :type parameters: ~azure.mgmt.policyinsights.models.CheckManagementGroupRestrictionsRequest or
          IO
         :keyword management_groups_namespace: The namespace for Microsoft Management RP; only
@@ -510,8 +512,9 @@ class PolicyRestrictionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
