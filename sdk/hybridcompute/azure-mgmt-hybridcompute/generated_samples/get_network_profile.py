@@ -14,7 +14,7 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
     pip install azure-identity
     pip install azure-mgmt-hybridcompute
 # USAGE
-    python put_extension.py
+    python get_network_profile.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,26 +26,16 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
 def main():
     client = HybridComputeManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="{subscriptionId}",
+        subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
-    response = client.machine_extensions.begin_create_or_update(
+    response = client.network_profile.get(
         resource_group_name="myResourceGroup",
         machine_name="myMachine",
-        extension_name="CustomScriptExtension",
-        extension_parameters={
-            "location": "eastus2euap",
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "settings": {"commandToExecute": 'powershell.exe -c "Get-Process | Where-Object { $_.CPU -gt 10000 }"'},
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.10",
-            },
-        },
-    ).result()
+    )
     print(response)
 
 
-# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2022-12-27-preview/examples/PUTExtension.json
+# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2022-12-27-preview/examples/GETNetworkProfile.json
 if __name__ == "__main__":
     main()

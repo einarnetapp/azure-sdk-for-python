@@ -14,7 +14,7 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
     pip install azure-identity
     pip install azure-mgmt-hybridcompute
 # USAGE
-    python put_extension.py
+    python extension_metadata_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,26 +26,18 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
 def main():
     client = HybridComputeManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="{subscriptionId}",
+        subscription_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     )
 
-    response = client.machine_extensions.begin_create_or_update(
-        resource_group_name="myResourceGroup",
-        machine_name="myMachine",
-        extension_name="CustomScriptExtension",
-        extension_parameters={
-            "location": "eastus2euap",
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "settings": {"commandToExecute": 'powershell.exe -c "Get-Process | Where-Object { $_.CPU -gt 10000 }"'},
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.10",
-            },
-        },
-    ).result()
+    response = client.extension_metadata.get(
+        location="EastUS",
+        publisher="microsoft.azure.monitor",
+        extension_type="azuremonitorlinuxagent",
+        version="1.9.1",
+    )
     print(response)
 
 
-# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2022-12-27-preview/examples/PUTExtension.json
+# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/preview/2022-12-27-preview/examples/ExtensionMetadata_Get.json
 if __name__ == "__main__":
     main()

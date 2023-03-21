@@ -10,6 +10,15 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
+class AgentConfigurationMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Name of configuration mode to use. Modes are pre-defined configurations of security controls,
+    extension allowlists and guest configuration, maintained by Microsoft.
+    """
+
+    FULL = "full"
+    MONITOR = "monitor"
+
+
 class AssessmentModeTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Specifies the assessment mode."""
 
@@ -30,6 +39,13 @@ class InstanceViewTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """InstanceViewTypes."""
 
     INSTANCE_VIEW = "instanceView"
+
+
+class LastAttemptStatusEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Specifies the status of Agent Upgrade."""
+
+    SUCCESS = "Success"
+    FAILED = "Failed"
 
 
 class PatchModeTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
