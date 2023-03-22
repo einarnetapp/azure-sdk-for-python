@@ -14,7 +14,9 @@ from ._models_py3 import Capability
 from ._models_py3 import CapabilityListResult
 from ._models_py3 import CapabilityType
 from ._models_py3 import CapabilityTypeListResult
+from ._models_py3 import CapabilityTypePropertiesPermissionsNecessary
 from ._models_py3 import CapabilityTypePropertiesRuntimeProperties
+from ._models_py3 import ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties
 from ._models_py3 import ContinuousAction
 from ._models_py3 import DelayAction
 from ._models_py3 import DiscreteAction
@@ -32,6 +34,7 @@ from ._models_py3 import ExperimentListResult
 from ._models_py3 import ExperimentStartOperationResult
 from ._models_py3 import ExperimentStatus
 from ._models_py3 import ExperimentStatusListResult
+from ._models_py3 import ExperimentUpdate
 from ._models_py3 import Filter
 from ._models_py3 import KeyValuePair
 from ._models_py3 import Operation
@@ -71,7 +74,9 @@ __all__ = [
     "CapabilityListResult",
     "CapabilityType",
     "CapabilityTypeListResult",
+    "CapabilityTypePropertiesPermissionsNecessary",
     "CapabilityTypePropertiesRuntimeProperties",
+    "ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties",
     "ContinuousAction",
     "DelayAction",
     "DiscreteAction",
@@ -89,6 +94,7 @@ __all__ = [
     "ExperimentStartOperationResult",
     "ExperimentStatus",
     "ExperimentStatusListResult",
+    "ExperimentUpdate",
     "Filter",
     "KeyValuePair",
     "Operation",

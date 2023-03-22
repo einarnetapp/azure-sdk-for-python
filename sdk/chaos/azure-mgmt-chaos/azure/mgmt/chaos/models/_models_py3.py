@@ -43,7 +43,7 @@ class Action(_serialization.Model):
 
     _subtype_map = {"type": {"continuous": "ContinuousAction", "delay": "DelayAction", "discrete": "DiscreteAction"}}
 
-    def __init__(self, *, name: str, **kwargs):
+    def __init__(self, *, name: str, **kwargs: Any) -> None:
         """
         :keyword name: String that represents a Capability URN. Required.
         :paramtype name: str
@@ -91,7 +91,7 @@ class ActionStatus(_serialization.Model):
         "targets": {"key": "targets", "type": "[ExperimentExecutionActionTargetDetailsProperties]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.action_name = None
@@ -123,7 +123,7 @@ class Branch(_serialization.Model):
         "actions": {"key": "actions", "type": "[Action]"},
     }
 
-    def __init__(self, *, name: str, actions: List["_models.Action"], **kwargs):
+    def __init__(self, *, name: str, actions: List["_models.Action"], **kwargs: Any) -> None:
         """
         :keyword name: String of the branch name. Required.
         :paramtype name: str
@@ -164,7 +164,7 @@ class BranchStatus(_serialization.Model):
         "actions": {"key": "actions", "type": "[ActionStatus]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.branch_name = None
@@ -200,7 +200,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -259,7 +259,7 @@ class Capability(Resource):
         "urn": {"key": "properties.urn", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.system_data = None
@@ -291,7 +291,7 @@ class CapabilityListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -329,6 +329,10 @@ class CapabilityType(Resource):  # pylint: disable=too-many-instance-attributes
     :vartype urn: str
     :ivar kind: String of the kind of this Capability Type.
     :vartype kind: str
+    :ivar permissions_necessary: Array of control and data plane actions necessary to execute
+     capability type.
+    :vartype permissions_necessary:
+     ~azure.mgmt.chaos.models.CapabilityTypePropertiesPermissionsNecessary
     :ivar runtime_properties: Runtime properties of this Capability Type.
     :vartype runtime_properties: ~azure.mgmt.chaos.models.CapabilityTypePropertiesRuntimeProperties
     """
@@ -345,6 +349,7 @@ class CapabilityType(Resource):  # pylint: disable=too-many-instance-attributes
         "parameters_schema": {"readonly": True, "max_length": 2048},
         "urn": {"readonly": True, "max_length": 2048},
         "kind": {"readonly": True},
+        "permissions_necessary": {"readonly": True},
     }
 
     _attribute_map = {
@@ -360,6 +365,10 @@ class CapabilityType(Resource):  # pylint: disable=too-many-instance-attributes
         "parameters_schema": {"key": "properties.parametersSchema", "type": "str"},
         "urn": {"key": "properties.urn", "type": "str"},
         "kind": {"key": "properties.kind", "type": "str"},
+        "permissions_necessary": {
+            "key": "properties.permissionsNecessary",
+            "type": "CapabilityTypePropertiesPermissionsNecessary",
+        },
         "runtime_properties": {
             "key": "properties.runtimeProperties",
             "type": "CapabilityTypePropertiesRuntimeProperties",
@@ -371,8 +380,8 @@ class CapabilityType(Resource):  # pylint: disable=too-many-instance-attributes
         *,
         location: Optional[str] = None,
         runtime_properties: Optional["_models.CapabilityTypePropertiesRuntimeProperties"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Location of the Capability Type resource.
         :paramtype location: str
@@ -390,6 +399,7 @@ class CapabilityType(Resource):  # pylint: disable=too-many-instance-attributes
         self.parameters_schema = None
         self.urn = None
         self.kind = None
+        self.permissions_necessary = None
         self.runtime_properties = runtime_properties
 
 
@@ -414,11 +424,39 @@ class CapabilityTypeListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
         self.next_link = None
+
+
+class CapabilityTypePropertiesPermissionsNecessary(_serialization.Model):
+    """Array of control and data plane actions necessary to execute capability type.
+
+    :ivar actions: Control plane actions necessary to execute capability type.
+    :vartype actions: list[str]
+    :ivar data_actions: Control plane actions necessary to execute capability type.
+    :vartype data_actions: list[str]
+    """
+
+    _attribute_map = {
+        "actions": {"key": "actions", "type": "[str]"},
+        "data_actions": {"key": "dataActions", "type": "[str]"},
+    }
+
+    def __init__(
+        self, *, actions: Optional[List[str]] = None, data_actions: Optional[List[str]] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword actions: Control plane actions necessary to execute capability type.
+        :paramtype actions: list[str]
+        :keyword data_actions: Control plane actions necessary to execute capability type.
+        :paramtype data_actions: list[str]
+        """
+        super().__init__(**kwargs)
+        self.actions = actions
+        self.data_actions = data_actions
 
 
 class CapabilityTypePropertiesRuntimeProperties(_serialization.Model):
@@ -438,10 +476,38 @@ class CapabilityTypePropertiesRuntimeProperties(_serialization.Model):
         "kind": {"key": "kind", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.kind = None
+
+
+class ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties(_serialization.Model):
+    """The list of user identities associated with the experiment.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar principal_id: The principal id of user assigned identity.
+    :vartype principal_id: str
+    :ivar client_id: The client id of user assigned identity.
+    :vartype client_id: str
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "client_id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "client_id": {"key": "clientId", "type": "str"},
+    }
+
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
+        super().__init__(**kwargs)
+        self.principal_id = None
+        self.client_id = None
 
 
 class ContinuousAction(Action):
@@ -484,8 +550,8 @@ class ContinuousAction(Action):
         duration: datetime.timedelta,
         parameters: List["_models.KeyValuePair"],
         selector_id: str,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: String that represents a Capability URN. Required.
         :paramtype name: str
@@ -528,7 +594,7 @@ class DelayAction(Action):
         "duration": {"key": "duration", "type": "duration"},
     }
 
-    def __init__(self, *, name: str, duration: datetime.timedelta, **kwargs):
+    def __init__(self, *, name: str, duration: datetime.timedelta, **kwargs: Any) -> None:
         """
         :keyword name: String that represents a Capability URN. Required.
         :paramtype name: str
@@ -569,7 +635,7 @@ class DiscreteAction(Action):
         "selector_id": {"key": "selectorId", "type": "str"},
     }
 
-    def __init__(self, *, name: str, parameters: List["_models.KeyValuePair"], selector_id: str, **kwargs):
+    def __init__(self, *, name: str, parameters: List["_models.KeyValuePair"], selector_id: str, **kwargs: Any) -> None:
         """
         :keyword name: String that represents a Capability URN. Required.
         :paramtype name: str
@@ -605,7 +671,7 @@ class ErrorAdditionalInfo(_serialization.Model):
         "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -645,7 +711,7 @@ class ErrorDetail(_serialization.Model):
         "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -656,7 +722,8 @@ class ErrorDetail(_serialization.Model):
 
 
 class ErrorResponse(_serialization.Model):
-    """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
     :vartype error: ~azure.mgmt.chaos.models.ErrorDetail
@@ -666,7 +733,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.chaos.models.ErrorDetail
@@ -676,7 +743,8 @@ class ErrorResponse(_serialization.Model):
 
 
 class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+    """The resource model definition for an Azure Resource Manager tracked top level resource which
+    has 'tags' and a 'location'.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -711,7 +779,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -787,8 +855,8 @@ class Experiment(TrackedResource):
         tags: Optional[Dict[str, str]] = None,
         identity: Optional["_models.ResourceIdentity"] = None,
         start_on_creation: Optional[bool] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -833,7 +901,7 @@ class ExperimentCancelOperationResult(_serialization.Model):
         "status_url": {"key": "statusUrl", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -861,7 +929,7 @@ class ExperimentExecutionActionTargetDetailsError(_serialization.Model):
         "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -901,7 +969,7 @@ class ExperimentExecutionActionTargetDetailsProperties(_serialization.Model):
         "error": {"key": "error", "type": "ExperimentExecutionActionTargetDetailsError"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.status = None
@@ -972,7 +1040,7 @@ class ExperimentExecutionDetails(_serialization.Model):  # pylint: disable=too-m
         },
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -1009,7 +1077,7 @@ class ExperimentExecutionDetailsListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1033,7 +1101,7 @@ class ExperimentExecutionDetailsPropertiesRunInformation(_serialization.Model):
         "steps": {"key": "steps", "type": "[StepStatus]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.steps = None
@@ -1060,7 +1128,7 @@ class ExperimentListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1088,7 +1156,7 @@ class ExperimentStartOperationResult(_serialization.Model):
         "status_url": {"key": "statusUrl", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name = None
@@ -1132,7 +1200,7 @@ class ExperimentStatus(_serialization.Model):
         "end_date_utc": {"key": "properties.endDateUtc", "type": "iso-8601"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type = None
@@ -1164,11 +1232,31 @@ class ExperimentStatusListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
         self.next_link = None
+
+
+class ExperimentUpdate(_serialization.Model):
+    """Describes an experiment update.
+
+    :ivar identity: The identity of the experiment resource.
+    :vartype identity: ~azure.mgmt.chaos.models.ResourceIdentity
+    """
+
+    _attribute_map = {
+        "identity": {"key": "identity", "type": "ResourceIdentity"},
+    }
+
+    def __init__(self, *, identity: Optional["_models.ResourceIdentity"] = None, **kwargs: Any) -> None:
+        """
+        :keyword identity: The identity of the experiment resource.
+        :paramtype identity: ~azure.mgmt.chaos.models.ResourceIdentity
+        """
+        super().__init__(**kwargs)
+        self.identity = identity
 
 
 class Filter(_serialization.Model):
@@ -1194,7 +1282,7 @@ class Filter(_serialization.Model):
 
     _subtype_map = {"type": {"Simple": "SimpleFilter"}}
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.type: Optional[str] = None
@@ -1221,7 +1309,7 @@ class KeyValuePair(_serialization.Model):
         "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(self, *, key: str, value: str, **kwargs):
+    def __init__(self, *, key: str, value: str, **kwargs: Any) -> None:
         """
         :keyword key: The name of the setting for the action. Required.
         :paramtype key: str
@@ -1270,7 +1358,7 @@ class Operation(_serialization.Model):
         "action_type": {"key": "actionType", "type": "str"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: Localized display information for this particular operation.
         :paramtype display: ~azure.mgmt.chaos.models.OperationDisplay
@@ -1316,7 +1404,7 @@ class OperationDisplay(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.provider = None
@@ -1326,7 +1414,8 @@ class OperationDisplay(_serialization.Model):
 
 
 class OperationListResult(_serialization.Model):
-    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+    """A list of REST API operations supported by an Azure Resource Provider. It contains an URL link
+    to get the next set of results.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -1346,7 +1435,7 @@ class OperationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1354,15 +1443,20 @@ class OperationListResult(_serialization.Model):
 
 
 class ResourceIdentity(_serialization.Model):
-    """The managed identity of a resource.
+    """The identity of a resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: String of the resource identity type. Required. Known values are: "None" and
-     "SystemAssigned".
+    :ivar type: String of the resource identity type. Required. Known values are: "None",
+     "SystemAssigned", and "UserAssigned".
     :vartype type: str or ~azure.mgmt.chaos.models.ResourceIdentityType
+    :ivar user_assigned_identities: The list of user identities associated with the experiment. The
+     user identity dictionary key references will be ARM resource ids in the form:
+     '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+    :vartype user_assigned_identities: dict[str,
+     ~azure.mgmt.chaos.models.ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties]
     :ivar principal_id: GUID that represents the principal ID of this resource identity.
     :vartype principal_id: str
     :ivar tenant_id: GUID that represents the tenant ID of this resource identity.
@@ -1383,18 +1477,36 @@ class ResourceIdentity(_serialization.Model):
 
     _attribute_map = {
         "type": {"key": "type", "type": "str"},
+        "user_assigned_identities": {
+            "key": "userAssignedIdentities",
+            "type": "{ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties}",
+        },
         "principal_id": {"key": "principalId", "type": "str"},
         "tenant_id": {"key": "tenantId", "type": "str"},
     }
 
-    def __init__(self, *, type: Union[str, "_models.ResourceIdentityType"], **kwargs):
+    def __init__(
+        self,
+        *,
+        type: Union[str, "_models.ResourceIdentityType"],
+        user_assigned_identities: Optional[
+            Dict[str, "_models.ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties"]
+        ] = None,
+        **kwargs: Any
+    ) -> None:
         """
-        :keyword type: String of the resource identity type. Required. Known values are: "None" and
-         "SystemAssigned".
+        :keyword type: String of the resource identity type. Required. Known values are: "None",
+         "SystemAssigned", and "UserAssigned".
         :paramtype type: str or ~azure.mgmt.chaos.models.ResourceIdentityType
+        :keyword user_assigned_identities: The list of user identities associated with the experiment.
+         The user identity dictionary key references will be ARM resource ids in the form:
+         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+        :paramtype user_assigned_identities: dict[str,
+         ~azure.mgmt.chaos.models.ComponentsEwb5TmSchemasUserassignedidentitiesAdditionalproperties]
         """
         super().__init__(**kwargs)
         self.type = type
+        self.user_assigned_identities = user_assigned_identities
         self.principal_id = None
         self.tenant_id = None
 
@@ -1436,8 +1548,8 @@ class Selector(_serialization.Model):
         id: str,  # pylint: disable=redefined-builtin
         targets: List["_models.TargetReference"],
         filter: Optional["_models.Filter"] = None,  # pylint: disable=redefined-builtin
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword type: Enum of the selector type. Required. Known values are: "Percent", "Random",
          "Tag", and "List".
@@ -1478,7 +1590,7 @@ class SimpleFilter(Filter):
         "parameters": {"key": "parameters", "type": "SimpleFilterParameters"},
     }
 
-    def __init__(self, *, parameters: Optional["_models.SimpleFilterParameters"] = None, **kwargs):
+    def __init__(self, *, parameters: Optional["_models.SimpleFilterParameters"] = None, **kwargs: Any) -> None:
         """
         :keyword parameters: Model that represents the Simple filter parameters.
         :paramtype parameters: ~azure.mgmt.chaos.models.SimpleFilterParameters
@@ -1499,7 +1611,7 @@ class SimpleFilterParameters(_serialization.Model):
         "zones": {"key": "zones", "type": "[str]"},
     }
 
-    def __init__(self, *, zones: Optional[List[str]] = None, **kwargs):
+    def __init__(self, *, zones: Optional[List[str]] = None, **kwargs: Any) -> None:
         """
         :keyword zones: List of Azure availability zones to filter targets by.
         :paramtype zones: list[str]
@@ -1529,7 +1641,7 @@ class Step(_serialization.Model):
         "branches": {"key": "branches", "type": "[Branch]"},
     }
 
-    def __init__(self, *, name: str, branches: List["_models.Branch"], **kwargs):
+    def __init__(self, *, name: str, branches: List["_models.Branch"], **kwargs: Any) -> None:
         """
         :keyword name: String of the step name. Required.
         :paramtype name: str
@@ -1570,7 +1682,7 @@ class StepStatus(_serialization.Model):
         "branches": {"key": "branches", "type": "[BranchStatus]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.step_name = None
@@ -1616,8 +1728,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -1683,7 +1795,7 @@ class Target(Resource):
         "properties": {"key": "properties", "type": "{object}"},
     }
 
-    def __init__(self, *, properties: Dict[str, Any], location: Optional[str] = None, **kwargs):
+    def __init__(self, *, properties: Dict[str, Any], location: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword location: Location of the target resource.
         :paramtype location: str
@@ -1717,7 +1829,7 @@ class TargetListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None
@@ -1752,7 +1864,7 @@ class TargetReference(_serialization.Model):
 
     type = "ChaosTarget"
 
-    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: str, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: String of the resource ID of a Target resource. Required.
         :paramtype id: str
@@ -1811,7 +1923,7 @@ class TargetType(Resource):
         "resource_types": {"key": "properties.resourceTypes", "type": "[str]"},
     }
 
-    def __init__(self, *, location: Optional[str] = None, **kwargs):
+    def __init__(self, *, location: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword location: Location of the Target Type resource.
         :paramtype location: str
@@ -1846,7 +1958,7 @@ class TargetTypeListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.value = None

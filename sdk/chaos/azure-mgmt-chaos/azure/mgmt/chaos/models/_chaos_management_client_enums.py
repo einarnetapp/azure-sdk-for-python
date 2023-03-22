@@ -46,6 +46,7 @@ class ResourceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     NONE = "None"
     SYSTEM_ASSIGNED = "SystemAssigned"
+    USER_ASSIGNED = "UserAssigned"
 
 
 class SelectorType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
