@@ -310,8 +310,9 @@ class PrivateLinkHubsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -368,8 +369,9 @@ class PrivateLinkHubsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -461,8 +463,8 @@ class PrivateLinkHubsOperations:
         :type resource_group_name: str
         :param private_link_hub_name: Name of the privateLinkHub. Required.
         :type private_link_hub_name: str
-        :param private_link_hub_patch_info: PrivateLinkHub patch request properties. Is either a model
-         type or a IO type. Required.
+        :param private_link_hub_patch_info: PrivateLinkHub patch request properties. Is either a
+         PrivateLinkHubPatchInfo type or a IO type. Required.
         :type private_link_hub_patch_info: ~azure.mgmt.synapse.models.PrivateLinkHubPatchInfo or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -510,8 +512,9 @@ class PrivateLinkHubsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -608,7 +611,7 @@ class PrivateLinkHubsOperations:
         :param private_link_hub_name: Name of the privateLinkHub. Required.
         :type private_link_hub_name: str
         :param private_link_hub_info: PrivateLinkHub create or update request properties. Is either a
-         model type or a IO type. Required.
+         PrivateLinkHub type or a IO type. Required.
         :type private_link_hub_info: ~azure.mgmt.synapse.models.PrivateLinkHub or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -656,8 +659,9 @@ class PrivateLinkHubsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -711,8 +715,9 @@ class PrivateLinkHubsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -846,8 +851,9 @@ class PrivateLinkHubsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

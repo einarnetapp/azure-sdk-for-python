@@ -224,8 +224,9 @@ class WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -358,7 +359,8 @@ class WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations:
          settings. "default" Required.
         :type dedicated_sq_lminimal_tls_settings_name: str or
          ~azure.mgmt.synapse.models.DedicatedSQLMinimalTlsSettingsName
-        :param parameters: minimal tls settings. Is either a model type or a IO type. Required.
+        :param parameters: minimal tls settings. Is either a DedicatedSQLminimalTlsSettings type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.DedicatedSQLminimalTlsSettings or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -474,8 +476,9 @@ class WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -561,8 +564,9 @@ class WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

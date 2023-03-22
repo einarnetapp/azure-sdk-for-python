@@ -221,8 +221,8 @@ class DataMaskingPoliciesOperations:
         :type workspace_name: str
         :param sql_pool_name: SQL pool name. Required.
         :type sql_pool_name: str
-        :param parameters: Parameters for creating or updating a data masking policy. Is either a model
-         type or a IO type. Required.
+        :param parameters: Parameters for creating or updating a data masking policy. Is either a
+         DataMaskingPolicy type or a IO type. Required.
         :type parameters: ~azure.mgmt.synapse.models.DataMaskingPolicy or IO
         :keyword data_masking_policy_name: The name of the data masking policy for which the masking
          rule applies. Default value is "Default". Note that overriding this default value may result in
@@ -277,8 +277,9 @@ class DataMaskingPoliciesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -350,8 +351,9 @@ class DataMaskingPoliciesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
