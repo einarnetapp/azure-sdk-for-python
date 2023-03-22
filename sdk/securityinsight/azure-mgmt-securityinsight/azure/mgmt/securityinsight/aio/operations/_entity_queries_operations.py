@@ -68,7 +68,7 @@ class EntityQueriesOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        kind: Optional[Union[str, _models.Enum13]] = None,
+        kind: Optional[Union[str, _models.Enum14]] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.EntityQuery"]:
         """Gets all entity queries.
@@ -80,7 +80,7 @@ class EntityQueriesOperations:
         :type workspace_name: str
         :param kind: The entity query kind we want to fetch. Known values are: "Expansion" and
          "Activity". Default value is None.
-        :type kind: str or ~azure.mgmt.securityinsight.models.Enum13
+        :type kind: str or ~azure.mgmt.securityinsight.models.Enum14
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either EntityQuery or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.EntityQuery]
@@ -89,7 +89,7 @@ class EntityQueriesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-05-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.EntityQueryList] = kwargs.pop("cls", None)
@@ -146,8 +146,9 @@ class EntityQueriesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -192,7 +193,7 @@ class EntityQueriesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-05-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.EntityQuery] = kwargs.pop("cls", None)
@@ -210,8 +211,9 @@ class EntityQueriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -311,8 +313,8 @@ class EntityQueriesOperations:
         :type workspace_name: str
         :param entity_query_id: entity query ID. Required.
         :type entity_query_id: str
-        :param entity_query: The entity query we want to create or update. Is either a model type or a
-         IO type. Required.
+        :param entity_query: The entity query we want to create or update. Is either a
+         CustomEntityQuery type or a IO type. Required.
         :type entity_query: ~azure.mgmt.securityinsight.models.CustomEntityQuery or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -333,7 +335,7 @@ class EntityQueriesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-05-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -363,8 +365,9 @@ class EntityQueriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -417,7 +420,7 @@ class EntityQueriesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-05-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -435,8 +438,9 @@ class EntityQueriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

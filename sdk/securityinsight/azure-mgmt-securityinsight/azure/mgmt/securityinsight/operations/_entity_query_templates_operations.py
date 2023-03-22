@@ -46,14 +46,14 @@ def build_list_request(
     workspace_name: str,
     subscription_id: str,
     *,
-    kind: Optional[Union[str, _models.Enum15]] = None,
+    kind: Optional[Union[str, _models.Enum16]] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-05-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-05-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -96,8 +96,8 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-12-01-preview"] = kwargs.pop(
-        "api_version", _params.pop("api-version", "2022-12-01-preview")
+    api_version: Literal["2023-05-01-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-05-01-preview")
     )
     accept = _headers.pop("Accept", "application/json")
 
@@ -157,7 +157,7 @@ class EntityQueryTemplatesOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        kind: Optional[Union[str, _models.Enum15]] = None,
+        kind: Optional[Union[str, _models.Enum16]] = None,
         **kwargs: Any
     ) -> Iterable["_models.EntityQueryTemplate"]:
         """Gets all entity query templates.
@@ -168,7 +168,7 @@ class EntityQueryTemplatesOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :param kind: The entity template query kind we want to fetch. "Activity" Default value is None.
-        :type kind: str or ~azure.mgmt.securityinsight.models.Enum15
+        :type kind: str or ~azure.mgmt.securityinsight.models.Enum16
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either EntityQueryTemplate or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.EntityQueryTemplate]
@@ -177,7 +177,7 @@ class EntityQueryTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-05-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.EntityQueryTemplateList] = kwargs.pop("cls", None)
@@ -234,8 +234,9 @@ class EntityQueryTemplatesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -280,7 +281,7 @@ class EntityQueryTemplatesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-05-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.EntityQueryTemplate] = kwargs.pop("cls", None)
@@ -298,8 +299,9 @@ class EntityQueryTemplatesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
