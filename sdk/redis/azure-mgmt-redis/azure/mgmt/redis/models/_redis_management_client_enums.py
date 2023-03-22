@@ -108,18 +108,26 @@ class ReplicationRole(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class SkuFamily(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The SKU family to use. Valid values: (C, P). (C = Basic/Standard, P = Premium)."""
+    """The SKU family to use. Valid values: (C, P). (C = Basic/Standard, P = Premium, G = General
+    Purpose, M = Memory Optimized).
+    """
 
     C = "C"
     P = "P"
+    G = "G"
+    M = "M"
 
 
 class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium)."""
+    """The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium, General Purpose,
+    Memory Optimized).
+    """
 
     BASIC = "Basic"
     STANDARD = "Standard"
     PREMIUM = "Premium"
+    GENERAL_PURPOSE = "GeneralPurpose"
+    MEMORY_OPTIMIZED = "MemoryOptimized"
 
 
 class TlsVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
