@@ -346,8 +346,9 @@ class TasksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -406,8 +407,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -474,8 +476,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -593,7 +596,7 @@ class TasksOperations:
         :type registry_name: str
         :param task_name: The name of the container registry task. Required.
         :type task_name: str
-        :param task_create_parameters: The parameters for creating a task. Is either a model type or a
+        :param task_create_parameters: The parameters for creating a task. Is either a Task type or a
          IO type. Required.
         :type task_create_parameters: ~azure.mgmt.containerregistry.v2018_09_01.models.Task or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -690,8 +693,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -823,8 +827,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -943,8 +948,8 @@ class TasksOperations:
         :type registry_name: str
         :param task_name: The name of the container registry task. Required.
         :type task_name: str
-        :param task_update_parameters: The parameters for updating a task. Is either a model type or a
-         IO type. Required.
+        :param task_update_parameters: The parameters for updating a task. Is either a
+         TaskUpdateParameters type or a IO type. Required.
         :type task_update_parameters:
          ~azure.mgmt.containerregistry.v2018_09_01.models.TaskUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1054,8 +1059,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

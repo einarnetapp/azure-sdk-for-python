@@ -321,8 +321,9 @@ class ReplicationsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -383,8 +384,9 @@ class ReplicationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -451,8 +453,9 @@ class ReplicationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -579,8 +582,8 @@ class ReplicationsOperations:
         :type registry_name: str
         :param replication_name: The name of the replication. Required.
         :type replication_name: str
-        :param replication: The parameters for creating a replication. Is either a model type or a IO
-         type. Required.
+        :param replication: The parameters for creating a replication. Is either a Replication type or
+         a IO type. Required.
         :type replication: ~azure.mgmt.containerregistry.v2022_12_01.models.Replication or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -680,8 +683,9 @@ class ReplicationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -819,8 +823,9 @@ class ReplicationsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -949,7 +954,7 @@ class ReplicationsOperations:
         :param replication_name: The name of the replication. Required.
         :type replication_name: str
         :param replication_update_parameters: The parameters for updating a replication. Is either a
-         model type or a IO type. Required.
+         ReplicationUpdateParameters type or a IO type. Required.
         :type replication_update_parameters:
          ~azure.mgmt.containerregistry.v2022_12_01.models.ReplicationUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.

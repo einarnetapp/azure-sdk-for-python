@@ -385,8 +385,9 @@ class BuildTasksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -449,8 +450,9 @@ class BuildTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -519,8 +521,9 @@ class BuildTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -642,7 +645,7 @@ class BuildTasksOperations:
         :param build_task_name: The name of the container registry build task. Required.
         :type build_task_name: str
         :param build_task_create_parameters: The parameters for creating a build task. Is either a
-         model type or a IO type. Required.
+         BuildTask type or a IO type. Required.
         :type build_task_create_parameters:
          ~azure.mgmt.containerregistry.v2018_02_01_preview.models.BuildTask or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -744,8 +747,9 @@ class BuildTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -881,8 +885,9 @@ class BuildTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1004,7 +1009,7 @@ class BuildTasksOperations:
         :param build_task_name: The name of the container registry build task. Required.
         :type build_task_name: str
         :param build_task_update_parameters: The parameters for updating a build task. Is either a
-         model type or a IO type. Required.
+         BuildTaskUpdateParameters type or a IO type. Required.
         :type build_task_update_parameters:
          ~azure.mgmt.containerregistry.v2018_02_01_preview.models.BuildTaskUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1121,8 +1126,9 @@ class BuildTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

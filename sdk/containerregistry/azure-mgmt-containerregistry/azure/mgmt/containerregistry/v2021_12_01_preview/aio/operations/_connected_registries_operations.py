@@ -149,8 +149,9 @@ class ConnectedRegistriesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -214,8 +215,9 @@ class ConnectedRegistriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -285,8 +287,9 @@ class ConnectedRegistriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -413,7 +416,7 @@ class ConnectedRegistriesOperations:
         :param connected_registry_name: The name of the connected registry. Required.
         :type connected_registry_name: str
         :param connected_registry_create_parameters: The parameters for creating a connectedRegistry.
-         Is either a model type or a IO type. Required.
+         Is either a ConnectedRegistry type or a IO type. Required.
         :type connected_registry_create_parameters:
          ~azure.mgmt.containerregistry.v2021_12_01_preview.models.ConnectedRegistry or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -516,8 +519,9 @@ class ConnectedRegistriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -654,8 +658,9 @@ class ConnectedRegistriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -782,7 +787,7 @@ class ConnectedRegistriesOperations:
         :param connected_registry_name: The name of the connected registry. Required.
         :type connected_registry_name: str
         :param connected_registry_update_parameters: The parameters for updating a connectedRegistry.
-         Is either a model type or a IO type. Required.
+         Is either a ConnectedRegistryUpdateParameters type or a IO type. Required.
         :type connected_registry_update_parameters:
          ~azure.mgmt.containerregistry.v2021_12_01_preview.models.ConnectedRegistryUpdateParameters or
          IO
@@ -886,8 +891,9 @@ class ConnectedRegistriesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

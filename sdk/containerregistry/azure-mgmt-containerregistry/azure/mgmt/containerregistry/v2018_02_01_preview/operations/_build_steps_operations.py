@@ -409,8 +409,9 @@ class BuildStepsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -476,8 +477,9 @@ class BuildStepsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -548,8 +550,9 @@ class BuildStepsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -680,7 +683,7 @@ class BuildStepsOperations:
         :param step_name: The name of a build step for a container registry build task. Required.
         :type step_name: str
         :param build_step_create_parameters: The parameters for creating a build step. Is either a
-         model type or a IO type. Required.
+         BuildStep type or a IO type. Required.
         :type build_step_create_parameters:
          ~azure.mgmt.containerregistry.v2018_02_01_preview.models.BuildStep or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -784,8 +787,9 @@ class BuildStepsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -926,8 +930,9 @@ class BuildStepsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1058,7 +1063,7 @@ class BuildStepsOperations:
         :param step_name: The name of a build step for a container registry build task. Required.
         :type step_name: str
         :param build_step_update_parameters: The parameters for updating a build step. Is either a
-         model type or a IO type. Required.
+         BuildStepUpdateParameters type or a IO type. Required.
         :type build_step_update_parameters:
          ~azure.mgmt.containerregistry.v2018_02_01_preview.models.BuildStepUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1211,8 +1216,9 @@ class BuildStepsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

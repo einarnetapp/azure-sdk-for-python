@@ -282,8 +282,9 @@ class ImportPipelinesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -346,8 +347,9 @@ class ImportPipelinesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -416,8 +418,9 @@ class ImportPipelinesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -543,7 +546,7 @@ class ImportPipelinesOperations:
         :param import_pipeline_name: The name of the import pipeline. Required.
         :type import_pipeline_name: str
         :param import_pipeline_create_parameters: The parameters for creating an import pipeline. Is
-         either a model type or a IO type. Required.
+         either a ImportPipeline type or a IO type. Required.
         :type import_pipeline_create_parameters:
          ~azure.mgmt.containerregistry.v2021_08_01_preview.models.ImportPipeline or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -646,8 +649,9 @@ class ImportPipelinesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
