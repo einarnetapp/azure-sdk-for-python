@@ -34,9 +34,11 @@ from ._models_py3 import ExperimentStatus
 from ._models_py3 import ExperimentStatusListResult
 from ._models_py3 import Filter
 from ._models_py3 import KeyValuePair
+from ._models_py3 import ListSelector
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
+from ._models_py3 import QuerySelector
 from ._models_py3 import Resource
 from ._models_py3 import ResourceIdentity
 from ._models_py3 import Selector
@@ -54,7 +56,6 @@ from ._models_py3 import TrackedResource
 
 from ._chaos_management_client_enums import ActionType
 from ._chaos_management_client_enums import CreatedByType
-from ._chaos_management_client_enums import FilterType
 from ._chaos_management_client_enums import Origin
 from ._chaos_management_client_enums import ResourceIdentityType
 from ._chaos_management_client_enums import SelectorType
@@ -91,9 +92,11 @@ __all__ = [
     "ExperimentStatusListResult",
     "Filter",
     "KeyValuePair",
+    "ListSelector",
     "Operation",
     "OperationDisplay",
     "OperationListResult",
+    "QuerySelector",
     "Resource",
     "ResourceIdentity",
     "Selector",
@@ -110,7 +113,6 @@ __all__ = [
     "TrackedResource",
     "ActionType",
     "CreatedByType",
-    "FilterType",
     "Origin",
     "ResourceIdentityType",
     "SelectorType",
