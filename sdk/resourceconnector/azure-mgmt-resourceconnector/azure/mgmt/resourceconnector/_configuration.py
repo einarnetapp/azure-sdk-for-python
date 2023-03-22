@@ -25,8 +25,8 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class AppliancesConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
-    """Configuration for Appliances.
+class ResourceConnectorMgmtClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for ResourceConnectorMgmtClient.
 
     Note that all parameters used to create this instance are saved as instance
     attributes.
@@ -41,7 +41,7 @@ class AppliancesConfiguration(Configuration):  # pylint: disable=too-many-instan
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
-        super(AppliancesConfiguration, self).__init__(**kwargs)
+        super(ResourceConnectorMgmtClientConfiguration, self).__init__(**kwargs)
         api_version: Literal["2022-10-27"] = kwargs.pop("api_version", "2022-10-27")
 
         if credential is None:
