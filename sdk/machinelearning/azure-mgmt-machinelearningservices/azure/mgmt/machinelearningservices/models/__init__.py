@@ -97,6 +97,7 @@ from ._models_py3 import ComputeStartStopSchedule
 from ._models_py3 import ContainerResourceRequirements
 from ._models_py3 import ContainerResourceSettings
 from ._models_py3 import CosmosDbSettings
+from ._models_py3 import Cron
 from ._models_py3 import CronTrigger
 from ._models_py3 import CustomForecastHorizon
 from ._models_py3 import CustomModelJobInput
@@ -173,6 +174,7 @@ from ._models_py3 import HDInsightSchema
 from ._models_py3 import IdAssetReference
 from ._models_py3 import IdentityConfiguration
 from ._models_py3 import IdentityForCmk
+from ._models_py3 import IdleShutdownSetting
 from ._models_py3 import ImageClassification
 from ._models_py3 import ImageClassificationBase
 from ._models_py3 import ImageClassificationMultilabel
@@ -271,6 +273,7 @@ from ._models_py3 import PyTorch
 from ._models_py3 import QuotaBaseProperties
 from ._models_py3 import QuotaUpdateParameters
 from ._models_py3 import RandomSamplingAlgorithm
+from ._models_py3 import Recurrence
 from ._models_py3 import RecurrenceSchedule
 from ._models_py3 import RecurrenceTrigger
 from ._models_py3 import RegenerateEndpointKeysRequest
@@ -579,6 +582,7 @@ __all__ = [
     "ContainerResourceRequirements",
     "ContainerResourceSettings",
     "CosmosDbSettings",
+    "Cron",
     "CronTrigger",
     "CustomForecastHorizon",
     "CustomModelJobInput",
@@ -655,6 +659,7 @@ __all__ = [
     "IdAssetReference",
     "IdentityConfiguration",
     "IdentityForCmk",
+    "IdleShutdownSetting",
     "ImageClassification",
     "ImageClassificationBase",
     "ImageClassificationMultilabel",
@@ -753,6 +758,7 @@ __all__ = [
     "QuotaBaseProperties",
     "QuotaUpdateParameters",
     "RandomSamplingAlgorithm",
+    "Recurrence",
     "RecurrenceSchedule",
     "RecurrenceTrigger",
     "RegenerateEndpointKeysRequest",
