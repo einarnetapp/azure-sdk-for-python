@@ -58,11 +58,6 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
     LATEST_PROFILE = ProfileDefinition({
         _PROFILE_TAG: {
             None: DEFAULT_API_VERSION,
-            'application_accelerators': '2022-11-01-preview',
-            'application_live_views': '2022-11-01-preview',
-            'customized_accelerators': '2022-11-01-preview',
-            'dev_tool_portals': '2022-11-01-preview',
-            'predefined_accelerators': '2022-11-01-preview',
         }},
         _PROFILE_TAG + " latest"
     )
@@ -102,6 +97,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :mod:`v2022_09_01_preview.models<azure.mgmt.appplatform.v2022_09_01_preview.models>`
            * 2022-11-01-preview: :mod:`v2022_11_01_preview.models<azure.mgmt.appplatform.v2022_11_01_preview.models>`
            * 2022-12-01: :mod:`v2022_12_01.models<azure.mgmt.appplatform.v2022_12_01.models>`
+           * 2023-01-01-preview: :mod:`v2023_01_01_preview.models<azure.mgmt.appplatform.v2023_01_01_preview.models>`
+           * 2023-03-01-preview: :mod:`v2023_03_01_preview.models<azure.mgmt.appplatform.v2023_03_01_preview.models>`
         """
         if api_version == '2020-07-01':
             from ..v2020_07_01 import models
@@ -136,6 +133,12 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
         elif api_version == '2022-12-01':
             from ..v2022_12_01 import models
             return models
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview import models
+            return models
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview import models
+            return models
         raise ValueError("API version {} is not available".format(api_version))
 
     @property
@@ -148,6 +151,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`ApiPortalCustomDomainsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.ApiPortalCustomDomainsOperations>`
            * 2022-11-01-preview: :class:`ApiPortalCustomDomainsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ApiPortalCustomDomainsOperations>`
            * 2022-12-01: :class:`ApiPortalCustomDomainsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.ApiPortalCustomDomainsOperations>`
+           * 2023-01-01-preview: :class:`ApiPortalCustomDomainsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ApiPortalCustomDomainsOperations>`
+           * 2023-03-01-preview: :class:`ApiPortalCustomDomainsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ApiPortalCustomDomainsOperations>`
         """
         api_version = self._get_api_version('api_portal_custom_domains')
         if api_version == '2022-01-01-preview':
@@ -162,6 +167,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import ApiPortalCustomDomainsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import ApiPortalCustomDomainsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ApiPortalCustomDomainsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ApiPortalCustomDomainsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'api_portal_custom_domains'".format(api_version))
         self._config.api_version = api_version
@@ -177,6 +186,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`ApiPortalsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.ApiPortalsOperations>`
            * 2022-11-01-preview: :class:`ApiPortalsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ApiPortalsOperations>`
            * 2022-12-01: :class:`ApiPortalsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.ApiPortalsOperations>`
+           * 2023-01-01-preview: :class:`ApiPortalsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ApiPortalsOperations>`
+           * 2023-03-01-preview: :class:`ApiPortalsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ApiPortalsOperations>`
         """
         api_version = self._get_api_version('api_portals')
         if api_version == '2022-01-01-preview':
@@ -191,6 +202,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import ApiPortalsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import ApiPortalsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ApiPortalsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ApiPortalsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'api_portals'".format(api_version))
         self._config.api_version = api_version
@@ -201,10 +216,16 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
         """Instance depends on the API version:
 
            * 2022-11-01-preview: :class:`ApplicationAcceleratorsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ApplicationAcceleratorsOperations>`
+           * 2023-01-01-preview: :class:`ApplicationAcceleratorsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ApplicationAcceleratorsOperations>`
+           * 2023-03-01-preview: :class:`ApplicationAcceleratorsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ApplicationAcceleratorsOperations>`
         """
         api_version = self._get_api_version('application_accelerators')
         if api_version == '2022-11-01-preview':
             from ..v2022_11_01_preview.aio.operations import ApplicationAcceleratorsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ApplicationAcceleratorsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ApplicationAcceleratorsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'application_accelerators'".format(api_version))
         self._config.api_version = api_version
@@ -215,10 +236,16 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
         """Instance depends on the API version:
 
            * 2022-11-01-preview: :class:`ApplicationLiveViewsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ApplicationLiveViewsOperations>`
+           * 2023-01-01-preview: :class:`ApplicationLiveViewsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ApplicationLiveViewsOperations>`
+           * 2023-03-01-preview: :class:`ApplicationLiveViewsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ApplicationLiveViewsOperations>`
         """
         api_version = self._get_api_version('application_live_views')
         if api_version == '2022-11-01-preview':
             from ..v2022_11_01_preview.aio.operations import ApplicationLiveViewsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ApplicationLiveViewsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ApplicationLiveViewsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'application_live_views'".format(api_version))
         self._config.api_version = api_version
@@ -239,6 +266,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`AppsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.AppsOperations>`
            * 2022-11-01-preview: :class:`AppsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.AppsOperations>`
            * 2022-12-01: :class:`AppsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.AppsOperations>`
+           * 2023-01-01-preview: :class:`AppsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.AppsOperations>`
+           * 2023-03-01-preview: :class:`AppsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.AppsOperations>`
         """
         api_version = self._get_api_version('apps')
         if api_version == '2020-07-01':
@@ -263,6 +292,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import AppsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import AppsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import AppsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import AppsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'apps'".format(api_version))
         self._config.api_version = api_version
@@ -283,6 +316,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`BindingsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.BindingsOperations>`
            * 2022-11-01-preview: :class:`BindingsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.BindingsOperations>`
            * 2022-12-01: :class:`BindingsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.BindingsOperations>`
+           * 2023-01-01-preview: :class:`BindingsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.BindingsOperations>`
+           * 2023-03-01-preview: :class:`BindingsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.BindingsOperations>`
         """
         api_version = self._get_api_version('bindings')
         if api_version == '2020-07-01':
@@ -307,6 +342,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import BindingsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import BindingsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import BindingsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import BindingsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'bindings'".format(api_version))
         self._config.api_version = api_version
@@ -323,6 +362,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`BuildServiceOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.BuildServiceOperations>`
            * 2022-11-01-preview: :class:`BuildServiceOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.BuildServiceOperations>`
            * 2022-12-01: :class:`BuildServiceOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.BuildServiceOperations>`
+           * 2023-01-01-preview: :class:`BuildServiceOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.BuildServiceOperations>`
+           * 2023-03-01-preview: :class:`BuildServiceOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.BuildServiceOperations>`
         """
         api_version = self._get_api_version('build_service')
         if api_version == '2022-01-01-preview':
@@ -339,6 +380,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import BuildServiceOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import BuildServiceOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import BuildServiceOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import BuildServiceOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'build_service'".format(api_version))
         self._config.api_version = api_version
@@ -355,6 +400,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`BuildServiceAgentPoolOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.BuildServiceAgentPoolOperations>`
            * 2022-11-01-preview: :class:`BuildServiceAgentPoolOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.BuildServiceAgentPoolOperations>`
            * 2022-12-01: :class:`BuildServiceAgentPoolOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.BuildServiceAgentPoolOperations>`
+           * 2023-01-01-preview: :class:`BuildServiceAgentPoolOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.BuildServiceAgentPoolOperations>`
+           * 2023-03-01-preview: :class:`BuildServiceAgentPoolOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.BuildServiceAgentPoolOperations>`
         """
         api_version = self._get_api_version('build_service_agent_pool')
         if api_version == '2022-01-01-preview':
@@ -371,6 +418,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import BuildServiceAgentPoolOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import BuildServiceAgentPoolOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import BuildServiceAgentPoolOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import BuildServiceAgentPoolOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'build_service_agent_pool'".format(api_version))
         self._config.api_version = api_version
@@ -387,6 +438,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`BuildServiceBuilderOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.BuildServiceBuilderOperations>`
            * 2022-11-01-preview: :class:`BuildServiceBuilderOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.BuildServiceBuilderOperations>`
            * 2022-12-01: :class:`BuildServiceBuilderOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.BuildServiceBuilderOperations>`
+           * 2023-01-01-preview: :class:`BuildServiceBuilderOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.BuildServiceBuilderOperations>`
+           * 2023-03-01-preview: :class:`BuildServiceBuilderOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.BuildServiceBuilderOperations>`
         """
         api_version = self._get_api_version('build_service_builder')
         if api_version == '2022-01-01-preview':
@@ -403,6 +456,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import BuildServiceBuilderOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import BuildServiceBuilderOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import BuildServiceBuilderOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import BuildServiceBuilderOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'build_service_builder'".format(api_version))
         self._config.api_version = api_version
@@ -419,6 +476,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`BuildpackBindingOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.BuildpackBindingOperations>`
            * 2022-11-01-preview: :class:`BuildpackBindingOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.BuildpackBindingOperations>`
            * 2022-12-01: :class:`BuildpackBindingOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.BuildpackBindingOperations>`
+           * 2023-01-01-preview: :class:`BuildpackBindingOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.BuildpackBindingOperations>`
+           * 2023-03-01-preview: :class:`BuildpackBindingOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.BuildpackBindingOperations>`
         """
         api_version = self._get_api_version('buildpack_binding')
         if api_version == '2022-01-01-preview':
@@ -435,6 +494,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import BuildpackBindingOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import BuildpackBindingOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import BuildpackBindingOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import BuildpackBindingOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'buildpack_binding'".format(api_version))
         self._config.api_version = api_version
@@ -455,6 +518,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`CertificatesOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.CertificatesOperations>`
            * 2022-11-01-preview: :class:`CertificatesOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.CertificatesOperations>`
            * 2022-12-01: :class:`CertificatesOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.CertificatesOperations>`
+           * 2023-01-01-preview: :class:`CertificatesOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.CertificatesOperations>`
+           * 2023-03-01-preview: :class:`CertificatesOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.CertificatesOperations>`
         """
         api_version = self._get_api_version('certificates')
         if api_version == '2020-07-01':
@@ -479,6 +544,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import CertificatesOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import CertificatesOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import CertificatesOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import CertificatesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'certificates'".format(api_version))
         self._config.api_version = api_version
@@ -499,6 +568,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`ConfigServersOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.ConfigServersOperations>`
            * 2022-11-01-preview: :class:`ConfigServersOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ConfigServersOperations>`
            * 2022-12-01: :class:`ConfigServersOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.ConfigServersOperations>`
+           * 2023-01-01-preview: :class:`ConfigServersOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ConfigServersOperations>`
+           * 2023-03-01-preview: :class:`ConfigServersOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ConfigServersOperations>`
         """
         api_version = self._get_api_version('config_servers')
         if api_version == '2020-07-01':
@@ -523,6 +594,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import ConfigServersOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import ConfigServersOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ConfigServersOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ConfigServersOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'config_servers'".format(api_version))
         self._config.api_version = api_version
@@ -539,6 +614,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`ConfigurationServicesOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.ConfigurationServicesOperations>`
            * 2022-11-01-preview: :class:`ConfigurationServicesOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ConfigurationServicesOperations>`
            * 2022-12-01: :class:`ConfigurationServicesOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.ConfigurationServicesOperations>`
+           * 2023-01-01-preview: :class:`ConfigurationServicesOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ConfigurationServicesOperations>`
+           * 2023-03-01-preview: :class:`ConfigurationServicesOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ConfigurationServicesOperations>`
         """
         api_version = self._get_api_version('configuration_services')
         if api_version == '2022-01-01-preview':
@@ -555,8 +632,26 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import ConfigurationServicesOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import ConfigurationServicesOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ConfigurationServicesOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ConfigurationServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'configuration_services'".format(api_version))
+        self._config.api_version = api_version
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def container_registries(self):
+        """Instance depends on the API version:
+
+           * 2023-03-01-preview: :class:`ContainerRegistriesOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ContainerRegistriesOperations>`
+        """
+        api_version = self._get_api_version('container_registries')
+        if api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ContainerRegistriesOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'container_registries'".format(api_version))
         self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
@@ -575,6 +670,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`CustomDomainsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.CustomDomainsOperations>`
            * 2022-11-01-preview: :class:`CustomDomainsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.CustomDomainsOperations>`
            * 2022-12-01: :class:`CustomDomainsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.CustomDomainsOperations>`
+           * 2023-01-01-preview: :class:`CustomDomainsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.CustomDomainsOperations>`
+           * 2023-03-01-preview: :class:`CustomDomainsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.CustomDomainsOperations>`
         """
         api_version = self._get_api_version('custom_domains')
         if api_version == '2020-07-01':
@@ -599,6 +696,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import CustomDomainsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import CustomDomainsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import CustomDomainsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import CustomDomainsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'custom_domains'".format(api_version))
         self._config.api_version = api_version
@@ -609,10 +710,16 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
         """Instance depends on the API version:
 
            * 2022-11-01-preview: :class:`CustomizedAcceleratorsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.CustomizedAcceleratorsOperations>`
+           * 2023-01-01-preview: :class:`CustomizedAcceleratorsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.CustomizedAcceleratorsOperations>`
+           * 2023-03-01-preview: :class:`CustomizedAcceleratorsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.CustomizedAcceleratorsOperations>`
         """
         api_version = self._get_api_version('customized_accelerators')
         if api_version == '2022-11-01-preview':
             from ..v2022_11_01_preview.aio.operations import CustomizedAcceleratorsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import CustomizedAcceleratorsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import CustomizedAcceleratorsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'customized_accelerators'".format(api_version))
         self._config.api_version = api_version
@@ -633,6 +740,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`DeploymentsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.DeploymentsOperations>`
            * 2022-11-01-preview: :class:`DeploymentsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.DeploymentsOperations>`
            * 2022-12-01: :class:`DeploymentsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.DeploymentsOperations>`
+           * 2023-01-01-preview: :class:`DeploymentsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.DeploymentsOperations>`
+           * 2023-03-01-preview: :class:`DeploymentsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.DeploymentsOperations>`
         """
         api_version = self._get_api_version('deployments')
         if api_version == '2020-07-01':
@@ -657,6 +766,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import DeploymentsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import DeploymentsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import DeploymentsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import DeploymentsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'deployments'".format(api_version))
         self._config.api_version = api_version
@@ -667,10 +780,16 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
         """Instance depends on the API version:
 
            * 2022-11-01-preview: :class:`DevToolPortalsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.DevToolPortalsOperations>`
+           * 2023-01-01-preview: :class:`DevToolPortalsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.DevToolPortalsOperations>`
+           * 2023-03-01-preview: :class:`DevToolPortalsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.DevToolPortalsOperations>`
         """
         api_version = self._get_api_version('dev_tool_portals')
         if api_version == '2022-11-01-preview':
             from ..v2022_11_01_preview.aio.operations import DevToolPortalsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import DevToolPortalsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import DevToolPortalsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'dev_tool_portals'".format(api_version))
         self._config.api_version = api_version
@@ -686,6 +805,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`GatewayCustomDomainsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.GatewayCustomDomainsOperations>`
            * 2022-11-01-preview: :class:`GatewayCustomDomainsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.GatewayCustomDomainsOperations>`
            * 2022-12-01: :class:`GatewayCustomDomainsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.GatewayCustomDomainsOperations>`
+           * 2023-01-01-preview: :class:`GatewayCustomDomainsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.GatewayCustomDomainsOperations>`
+           * 2023-03-01-preview: :class:`GatewayCustomDomainsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.GatewayCustomDomainsOperations>`
         """
         api_version = self._get_api_version('gateway_custom_domains')
         if api_version == '2022-01-01-preview':
@@ -700,6 +821,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import GatewayCustomDomainsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import GatewayCustomDomainsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import GatewayCustomDomainsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import GatewayCustomDomainsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'gateway_custom_domains'".format(api_version))
         self._config.api_version = api_version
@@ -715,6 +840,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`GatewayRouteConfigsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.GatewayRouteConfigsOperations>`
            * 2022-11-01-preview: :class:`GatewayRouteConfigsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.GatewayRouteConfigsOperations>`
            * 2022-12-01: :class:`GatewayRouteConfigsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.GatewayRouteConfigsOperations>`
+           * 2023-01-01-preview: :class:`GatewayRouteConfigsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.GatewayRouteConfigsOperations>`
+           * 2023-03-01-preview: :class:`GatewayRouteConfigsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.GatewayRouteConfigsOperations>`
         """
         api_version = self._get_api_version('gateway_route_configs')
         if api_version == '2022-01-01-preview':
@@ -729,6 +856,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import GatewayRouteConfigsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import GatewayRouteConfigsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import GatewayRouteConfigsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import GatewayRouteConfigsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'gateway_route_configs'".format(api_version))
         self._config.api_version = api_version
@@ -744,6 +875,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`GatewaysOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.GatewaysOperations>`
            * 2022-11-01-preview: :class:`GatewaysOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.GatewaysOperations>`
            * 2022-12-01: :class:`GatewaysOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.GatewaysOperations>`
+           * 2023-01-01-preview: :class:`GatewaysOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.GatewaysOperations>`
+           * 2023-03-01-preview: :class:`GatewaysOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.GatewaysOperations>`
         """
         api_version = self._get_api_version('gateways')
         if api_version == '2022-01-01-preview':
@@ -758,6 +891,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import GatewaysOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import GatewaysOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import GatewaysOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import GatewaysOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'gateways'".format(api_version))
         self._config.api_version = api_version
@@ -778,6 +915,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`MonitoringSettingsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.MonitoringSettingsOperations>`
            * 2022-11-01-preview: :class:`MonitoringSettingsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.MonitoringSettingsOperations>`
            * 2022-12-01: :class:`MonitoringSettingsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.MonitoringSettingsOperations>`
+           * 2023-01-01-preview: :class:`MonitoringSettingsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.MonitoringSettingsOperations>`
+           * 2023-03-01-preview: :class:`MonitoringSettingsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.MonitoringSettingsOperations>`
         """
         api_version = self._get_api_version('monitoring_settings')
         if api_version == '2020-07-01':
@@ -802,6 +941,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import MonitoringSettingsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import MonitoringSettingsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import MonitoringSettingsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import MonitoringSettingsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'monitoring_settings'".format(api_version))
         self._config.api_version = api_version
@@ -822,6 +965,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`Operations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.Operations>`
            * 2022-11-01-preview: :class:`Operations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.Operations>`
            * 2022-12-01: :class:`Operations<azure.mgmt.appplatform.v2022_12_01.aio.operations.Operations>`
+           * 2023-01-01-preview: :class:`Operations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.Operations>`
+           * 2023-03-01-preview: :class:`Operations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.Operations>`
         """
         api_version = self._get_api_version('operations')
         if api_version == '2020-07-01':
@@ -846,6 +991,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import Operations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import Operations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import Operations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
         self._config.api_version = api_version
@@ -856,10 +1005,16 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
         """Instance depends on the API version:
 
            * 2022-11-01-preview: :class:`PredefinedAcceleratorsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.PredefinedAcceleratorsOperations>`
+           * 2023-01-01-preview: :class:`PredefinedAcceleratorsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.PredefinedAcceleratorsOperations>`
+           * 2023-03-01-preview: :class:`PredefinedAcceleratorsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.PredefinedAcceleratorsOperations>`
         """
         api_version = self._get_api_version('predefined_accelerators')
         if api_version == '2022-11-01-preview':
             from ..v2022_11_01_preview.aio.operations import PredefinedAcceleratorsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import PredefinedAcceleratorsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import PredefinedAcceleratorsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'predefined_accelerators'".format(api_version))
         self._config.api_version = api_version
@@ -880,6 +1035,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`RuntimeVersionsOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.RuntimeVersionsOperations>`
            * 2022-11-01-preview: :class:`RuntimeVersionsOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.RuntimeVersionsOperations>`
            * 2022-12-01: :class:`RuntimeVersionsOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.RuntimeVersionsOperations>`
+           * 2023-01-01-preview: :class:`RuntimeVersionsOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.RuntimeVersionsOperations>`
+           * 2023-03-01-preview: :class:`RuntimeVersionsOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.RuntimeVersionsOperations>`
         """
         api_version = self._get_api_version('runtime_versions')
         if api_version == '2020-07-01':
@@ -904,6 +1061,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import RuntimeVersionsOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import RuntimeVersionsOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import RuntimeVersionsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import RuntimeVersionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'runtime_versions'".format(api_version))
         self._config.api_version = api_version
@@ -920,6 +1081,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`ServiceRegistriesOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.ServiceRegistriesOperations>`
            * 2022-11-01-preview: :class:`ServiceRegistriesOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ServiceRegistriesOperations>`
            * 2022-12-01: :class:`ServiceRegistriesOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.ServiceRegistriesOperations>`
+           * 2023-01-01-preview: :class:`ServiceRegistriesOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ServiceRegistriesOperations>`
+           * 2023-03-01-preview: :class:`ServiceRegistriesOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ServiceRegistriesOperations>`
         """
         api_version = self._get_api_version('service_registries')
         if api_version == '2022-01-01-preview':
@@ -936,6 +1099,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import ServiceRegistriesOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import ServiceRegistriesOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ServiceRegistriesOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ServiceRegistriesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'service_registries'".format(api_version))
         self._config.api_version = api_version
@@ -956,6 +1123,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`ServicesOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.ServicesOperations>`
            * 2022-11-01-preview: :class:`ServicesOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.ServicesOperations>`
            * 2022-12-01: :class:`ServicesOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.ServicesOperations>`
+           * 2023-01-01-preview: :class:`ServicesOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.ServicesOperations>`
+           * 2023-03-01-preview: :class:`ServicesOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.ServicesOperations>`
         """
         api_version = self._get_api_version('services')
         if api_version == '2020-07-01':
@@ -980,6 +1149,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import ServicesOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import ServicesOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import ServicesOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'services'".format(api_version))
         self._config.api_version = api_version
@@ -1000,6 +1173,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`SkusOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.SkusOperations>`
            * 2022-11-01-preview: :class:`SkusOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.SkusOperations>`
            * 2022-12-01: :class:`SkusOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.SkusOperations>`
+           * 2023-01-01-preview: :class:`SkusOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.SkusOperations>`
+           * 2023-03-01-preview: :class:`SkusOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.SkusOperations>`
         """
         api_version = self._get_api_version('skus')
         if api_version == '2020-07-01':
@@ -1024,6 +1199,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import SkusOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import SkusOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import SkusOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import SkusOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'skus'".format(api_version))
         self._config.api_version = api_version
@@ -1040,6 +1219,8 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-09-01-preview: :class:`StoragesOperations<azure.mgmt.appplatform.v2022_09_01_preview.aio.operations.StoragesOperations>`
            * 2022-11-01-preview: :class:`StoragesOperations<azure.mgmt.appplatform.v2022_11_01_preview.aio.operations.StoragesOperations>`
            * 2022-12-01: :class:`StoragesOperations<azure.mgmt.appplatform.v2022_12_01.aio.operations.StoragesOperations>`
+           * 2023-01-01-preview: :class:`StoragesOperations<azure.mgmt.appplatform.v2023_01_01_preview.aio.operations.StoragesOperations>`
+           * 2023-03-01-preview: :class:`StoragesOperations<azure.mgmt.appplatform.v2023_03_01_preview.aio.operations.StoragesOperations>`
         """
         api_version = self._get_api_version('storages')
         if api_version == '2021-09-01-preview':
@@ -1056,6 +1237,10 @@ class AppPlatformManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_11_01_preview.aio.operations import StoragesOperations as OperationClass
         elif api_version == '2022-12-01':
             from ..v2022_12_01.aio.operations import StoragesOperations as OperationClass
+        elif api_version == '2023-01-01-preview':
+            from ..v2023_01_01_preview.aio.operations import StoragesOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import StoragesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'storages'".format(api_version))
         self._config.api_version = api_version
