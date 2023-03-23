@@ -35,14 +35,14 @@ class ConsumptionManagementClientConfiguration(Configuration):  # pylint: disabl
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: Azure Subscription ID. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2021-10-01". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2023-03-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(ConsumptionManagementClientConfiguration, self).__init__(**kwargs)
-        api_version: Literal["2021-10-01"] = kwargs.pop("api_version", "2021-10-01")
+        api_version: Literal["2023-03-01"] = kwargs.pop("api_version", "2023-03-01")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
