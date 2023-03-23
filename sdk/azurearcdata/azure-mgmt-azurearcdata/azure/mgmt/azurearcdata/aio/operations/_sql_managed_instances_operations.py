@@ -82,7 +82,7 @@ class SqlManagedInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SqlManagedInstanceListResult] = kwargs.pop("cls", None)
@@ -136,8 +136,9 @@ class SqlManagedInstancesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -171,7 +172,7 @@ class SqlManagedInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SqlManagedInstanceListResult] = kwargs.pop("cls", None)
@@ -226,8 +227,9 @@ class SqlManagedInstancesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -270,7 +272,7 @@ class SqlManagedInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SqlManagedInstance] = kwargs.pop("cls", None)
@@ -287,8 +289,9 @@ class SqlManagedInstancesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -327,7 +330,7 @@ class SqlManagedInstancesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -356,8 +359,9 @@ class SqlManagedInstancesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -467,7 +471,7 @@ class SqlManagedInstancesOperations:
         :param sql_managed_instance_name: Name of SQL Managed Instance. Required.
         :type sql_managed_instance_name: str
         :param sql_managed_instance: The SQL Managed Instance to be created or updated. Is either a
-         model type or a IO type. Required.
+         SqlManagedInstance type or a IO type. Required.
         :type sql_managed_instance: ~azure.mgmt.azurearcdata.models.SqlManagedInstance or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -488,7 +492,7 @@ class SqlManagedInstancesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -552,7 +556,7 @@ class SqlManagedInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -569,8 +573,9 @@ class SqlManagedInstancesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -612,7 +617,7 @@ class SqlManagedInstancesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -722,7 +727,8 @@ class SqlManagedInstancesOperations:
         :type resource_group_name: str
         :param sql_managed_instance_name: Name of SQL Managed Instance. Required.
         :type sql_managed_instance_name: str
-        :param parameters: The SQL Managed Instance. Is either a model type or a IO type. Required.
+        :param parameters: The SQL Managed Instance. Is either a SqlManagedInstanceUpdate type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.azurearcdata.models.SqlManagedInstanceUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -743,7 +749,7 @@ class SqlManagedInstancesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -772,8 +778,9 @@ class SqlManagedInstancesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
