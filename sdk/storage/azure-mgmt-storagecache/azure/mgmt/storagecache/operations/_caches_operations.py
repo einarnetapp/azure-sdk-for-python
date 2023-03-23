@@ -623,8 +623,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -707,8 +708,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -755,8 +757,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -887,8 +890,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -951,8 +955,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1062,7 +1067,7 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         :type cache_name: str
         :param cache: Object containing the user-selectable properties of the new Cache. If read-only
          properties are included, they must match the existing values of those properties. Is either a
-         model type or a IO type. Required.
+         Cache type or a IO type. Required.
         :type cache: ~azure.mgmt.storagecache.models.Cache or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1175,8 +1180,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1292,7 +1298,7 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         :type cache_name: str
         :param cache: Object containing the user-selectable properties of the Cache. If read-only
          properties are included, they must match the existing values of those properties. Is either a
-         model type or a IO type. Default value is None.
+         Cache type or a IO type. Default value is None.
         :type cache: ~azure.mgmt.storagecache.models.Cache or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1392,8 +1398,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1515,8 +1522,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1639,8 +1647,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1762,8 +1771,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1904,8 +1914,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2012,8 +2023,8 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         :param cache_name: Name of Cache. Length of name must not be greater than 80 and chars must be
          from the [-0-9a-zA-Z_] char class. Required.
         :type cache_name: str
-        :param primingjob: Object containing the definition of a priming job. Is either a model type or
-         a IO type. Default value is None.
+        :param primingjob: Object containing the definition of a priming job. Is either a PrimingJob
+         type or a IO type. Default value is None.
         :type primingjob: ~azure.mgmt.storagecache.models.PrimingJob or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2130,8 +2141,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2239,8 +2251,8 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         :param cache_name: Name of Cache. Length of name must not be greater than 80 and chars must be
          from the [-0-9a-zA-Z_] char class. Required.
         :type cache_name: str
-        :param priming_job_id: Object containing the priming job ID. Is either a model type or a IO
-         type. Default value is None.
+        :param priming_job_id: Object containing the priming job ID. Is either a PrimingJobIdParameter
+         type or a IO type. Default value is None.
         :type priming_job_id: ~azure.mgmt.storagecache.models.PrimingJobIdParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2357,8 +2369,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2466,8 +2479,8 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         :param cache_name: Name of Cache. Length of name must not be greater than 80 and chars must be
          from the [-0-9a-zA-Z_] char class. Required.
         :type cache_name: str
-        :param priming_job_id: Object containing the priming job ID. Is either a model type or a IO
-         type. Default value is None.
+        :param priming_job_id: Object containing the priming job ID. Is either a PrimingJobIdParameter
+         type or a IO type. Default value is None.
         :type priming_job_id: ~azure.mgmt.storagecache.models.PrimingJobIdParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2584,8 +2597,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2693,8 +2707,8 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         :param cache_name: Name of Cache. Length of name must not be greater than 80 and chars must be
          from the [-0-9a-zA-Z_] char class. Required.
         :type cache_name: str
-        :param priming_job_id: Object containing the priming job ID. Is either a model type or a IO
-         type. Default value is None.
+        :param priming_job_id: Object containing the priming job ID. Is either a PrimingJobIdParameter
+         type or a IO type. Default value is None.
         :type priming_job_id: ~azure.mgmt.storagecache.models.PrimingJobIdParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2792,8 +2806,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2935,8 +2950,9 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -3046,7 +3062,7 @@ class CachesOperations:  # pylint: disable=too-many-public-methods
          from the [-0-9a-zA-Z_] char class. Required.
         :type cache_name: str
         :param space_allocation: List containing storage target cache space percentage allocations. Is
-         either a list type or a IO type. Default value is None.
+         either a [StorageTargetSpaceAllocation] type or a IO type. Default value is None.
         :type space_allocation: list[~azure.mgmt.storagecache.models.StorageTargetSpaceAllocation] or
          IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
