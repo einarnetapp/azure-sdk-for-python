@@ -31,12 +31,12 @@ def main():
 
     response = client.policy_sets.evaluate_policies(
         resource_group_name="resourceGroupName",
-        lab_name="{labName}",
+        lab_name="myLabName",
         name="{policySetName}",
     )
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/PolicySets_EvaluatePolicies.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/PolicySets_EvaluatePolicies.json
 if __name__ == "__main__":
     main()

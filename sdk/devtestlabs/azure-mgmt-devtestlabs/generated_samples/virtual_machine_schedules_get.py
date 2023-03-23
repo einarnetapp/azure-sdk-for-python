@@ -31,13 +31,13 @@ def main():
 
     response = client.virtual_machine_schedules.get(
         resource_group_name="resourceGroupName",
-        lab_name="{labName}",
-        virtual_machine_name="{vmName}",
+        lab_name="myLabName",
+        virtual_machine_name="vmName",
         name="LabVmsShutdown",
     )
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/VirtualMachineSchedules_Get.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/VirtualMachineSchedules_Get.json
 if __name__ == "__main__":
     main()

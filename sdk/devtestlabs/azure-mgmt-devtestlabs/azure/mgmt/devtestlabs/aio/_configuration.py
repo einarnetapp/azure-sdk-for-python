@@ -35,14 +35,14 @@ class DevTestLabsClientConfiguration(Configuration):  # pylint: disable=too-many
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription ID. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2018-09-15". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2021-09-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "AsyncTokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(DevTestLabsClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2018-09-15")  # type: Literal["2018-09-15"]
+        api_version: Literal["2021-09-01"] = kwargs.pop("api_version", "2021-09-01")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")

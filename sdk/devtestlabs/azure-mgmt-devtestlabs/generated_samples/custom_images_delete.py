@@ -31,12 +31,12 @@ def main():
 
     response = client.custom_images.begin_delete(
         resource_group_name="resourceGroupName",
-        lab_name="{labName}",
+        lab_name="myLabName",
         name="{customImageName}",
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/CustomImages_Delete.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/CustomImages_Delete.json
 if __name__ == "__main__":
     main()

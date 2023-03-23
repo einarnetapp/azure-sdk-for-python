@@ -31,11 +31,11 @@ def main():
 
     response = client.labs.generate_upload_uri(
         resource_group_name="resourceGroupName",
-        name="{labName}",
+        name="myLabName",
     )
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/Labs_GenerateUploadUri.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/Labs_GenerateUploadUri.json
 if __name__ == "__main__":
     main()

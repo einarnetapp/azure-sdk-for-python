@@ -31,7 +31,7 @@ def main():
 
     response = client.virtual_machines.begin_add_data_disk(
         resource_group_name="resourceGroupName",
-        lab_name="{labName}",
+        lab_name="myLabName",
         name="{virtualMachineName}",
         data_disk_properties={
             "attachNewDataDiskOptions": {"diskName": "{diskName}", "diskSizeGiB": 127, "diskType": "{diskType}"}
@@ -40,6 +40,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/VirtualMachines_AddDataDisk.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/VirtualMachines_AddDataDisk.json
 if __name__ == "__main__":
     main()

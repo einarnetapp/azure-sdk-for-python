@@ -31,12 +31,12 @@ def main():
 
     response = client.gallery_images.list(
         resource_group_name="resourceGroupName",
-        lab_name="{labName}",
+        lab_name="myLabName",
     )
     for item in response:
         print(item)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/GalleryImages_List.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/GalleryImages_List.json
 if __name__ == "__main__":
     main()

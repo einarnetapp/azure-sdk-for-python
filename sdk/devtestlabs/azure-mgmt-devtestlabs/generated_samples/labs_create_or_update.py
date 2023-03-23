@@ -31,16 +31,12 @@ def main():
 
     response = client.labs.begin_create_or_update(
         resource_group_name="resourceGroupName",
-        name="{labName}",
-        lab={
-            "location": "{location}",
-            "properties": {"labStorageType": "{Standard|Premium}"},
-            "tags": {"tagName1": "tagValue1"},
-        },
+        name="myLabName",
+        lab={"location": "{location}", "properties": {"labStorageType": "Premium"}, "tags": {"tagName1": "tagValue1"}},
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/Labs_CreateOrUpdate.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/Labs_CreateOrUpdate.json
 if __name__ == "__main__":
     main()
