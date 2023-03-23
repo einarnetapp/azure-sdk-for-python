@@ -67,6 +67,9 @@ class PrivateLinkResourcesOperations:
     ) -> AsyncIterable["_models.PrivateLinkResource"]:
         """Gets a list of all supported private link resource types for the given service.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -144,8 +147,9 @@ class PrivateLinkResourcesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

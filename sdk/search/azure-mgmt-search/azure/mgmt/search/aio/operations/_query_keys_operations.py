@@ -74,6 +74,9 @@ class QueryKeysOperations:
         """Generates a new query key for the specified search service. You can create up to 50 query keys
         per service.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -124,8 +127,9 @@ class QueryKeysOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -154,6 +158,9 @@ class QueryKeysOperations:
         **kwargs: Any
     ) -> AsyncIterable["_models.QueryKey"]:
         """Returns the list of query API keys for the given Azure Cognitive Search service.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -232,8 +239,9 @@ class QueryKeysOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -260,6 +268,9 @@ class QueryKeysOperations:
     ) -> None:
         """Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process
         for regenerating a query key is to delete and then recreate it.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -312,8 +323,9 @@ class QueryKeysOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

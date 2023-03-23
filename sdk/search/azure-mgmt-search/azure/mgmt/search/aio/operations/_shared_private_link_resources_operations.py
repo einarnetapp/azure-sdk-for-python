@@ -119,8 +119,9 @@ class SharedPrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -156,6 +157,9 @@ class SharedPrivateLinkResourcesOperations:
     ) -> AsyncLROPoller[_models.SharedPrivateLinkResource]:
         """Initiates the creation or update of a shared private link resource managed by the search
         service in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -204,6 +208,9 @@ class SharedPrivateLinkResourcesOperations:
         """Initiates the creation or update of a shared private link resource managed by the search
         service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -249,6 +256,9 @@ class SharedPrivateLinkResourcesOperations:
         """Initiates the creation or update of a shared private link resource managed by the search
         service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -259,7 +269,7 @@ class SharedPrivateLinkResourcesOperations:
          by the Azure Cognitive Search service within the specified resource group. Required.
         :type shared_private_link_resource_name: str
         :param shared_private_link_resource: The definition of the shared private link resource to
-         create or update. Is either a model type or a IO type. Required.
+         create or update. Is either a SharedPrivateLinkResource type or a IO type. Required.
         :type shared_private_link_resource: ~azure.mgmt.search.models.SharedPrivateLinkResource or IO
         :param search_management_request_options: Parameter group. Default value is None.
         :type search_management_request_options:
@@ -347,6 +357,9 @@ class SharedPrivateLinkResourcesOperations:
         """Gets the details of the shared private link resource managed by the search service in the given
         resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -398,8 +411,9 @@ class SharedPrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -461,8 +475,9 @@ class SharedPrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -488,6 +503,9 @@ class SharedPrivateLinkResourcesOperations:
         **kwargs: Any
     ) -> AsyncLROPoller[None]:
         """Initiates the deletion of the shared private link resource from the search service.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -573,6 +591,9 @@ class SharedPrivateLinkResourcesOperations:
     ) -> AsyncIterable["_models.SharedPrivateLinkResource"]:
         """Gets a list of all shared private link resources managed by the given service.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -652,8 +673,9 @@ class SharedPrivateLinkResourcesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

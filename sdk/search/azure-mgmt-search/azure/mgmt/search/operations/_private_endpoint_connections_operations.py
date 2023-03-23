@@ -241,6 +241,9 @@ class PrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Updates a Private Endpoint connection to the search service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -279,6 +282,9 @@ class PrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Updates a Private Endpoint connection to the search service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -315,6 +321,9 @@ class PrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Updates a Private Endpoint connection to the search service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -325,7 +334,7 @@ class PrivateEndpointConnectionsOperations:
          Azure Cognitive Search service with the specified resource group. Required.
         :type private_endpoint_connection_name: str
         :param private_endpoint_connection: The definition of the private endpoint connection to
-         update. Is either a model type or a IO type. Required.
+         update. Is either a PrivateEndpointConnection type or a IO type. Required.
         :type private_endpoint_connection: ~azure.mgmt.search.models.PrivateEndpointConnection or IO
         :param search_management_request_options: Parameter group. Default value is None.
         :type search_management_request_options:
@@ -383,8 +392,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -415,6 +425,9 @@ class PrivateEndpointConnectionsOperations:
     ) -> _models.PrivateEndpointConnection:
         """Gets the details of the private endpoint connection to the search service in the given resource
         group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -467,8 +480,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -498,6 +512,9 @@ class PrivateEndpointConnectionsOperations:
         **kwargs: Any
     ) -> Optional[_models.PrivateEndpointConnection]:
         """Disconnects the private endpoint connection and deletes it from the search service.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -550,8 +567,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -582,6 +600,9 @@ class PrivateEndpointConnectionsOperations:
         **kwargs: Any
     ) -> Iterable["_models.PrivateEndpointConnection"]:
         """Gets a list of all private endpoint connections in the given service.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -661,8 +682,9 @@ class PrivateEndpointConnectionsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

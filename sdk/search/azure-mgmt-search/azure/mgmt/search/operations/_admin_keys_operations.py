@@ -146,6 +146,9 @@ class AdminKeysOperations:
     ) -> _models.AdminKeyResult:
         """Gets the primary and secondary admin API keys for the specified Azure Cognitive Search service.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -193,8 +196,9 @@ class AdminKeysOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -225,6 +229,9 @@ class AdminKeysOperations:
     ) -> _models.AdminKeyResult:
         """Regenerates either the primary or secondary admin API key. You can only regenerate one key at a
         time.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -277,8 +284,9 @@ class AdminKeysOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

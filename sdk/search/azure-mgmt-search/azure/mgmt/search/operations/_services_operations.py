@@ -366,8 +366,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -404,6 +405,9 @@ class ServicesOperations:
     ) -> LROPoller[_models.SearchService]:
         """Creates or updates a search service in the given resource group. If the search service already
         exists, all properties will be updated with the given values.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -451,6 +455,9 @@ class ServicesOperations:
         """Creates or updates a search service in the given resource group. If the search service already
         exists, all properties will be updated with the given values.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -495,6 +502,9 @@ class ServicesOperations:
         """Creates or updates a search service in the given resource group. If the search service already
         exists, all properties will be updated with the given values.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -505,8 +515,8 @@ class ServicesOperations:
          of the service URI (https://:code:`<name>`.search.windows.net). You cannot change the service
          name after the service is created. Required.
         :type search_service_name: str
-        :param service: The definition of the search service to create or update. Is either a model
-         type or a IO type. Required.
+        :param service: The definition of the search service to create or update. Is either a
+         SearchService type or a IO type. Required.
         :type service: ~azure.mgmt.search.models.SearchService or IO
         :param search_management_request_options: Parameter group. Default value is None.
         :type search_management_request_options:
@@ -591,6 +601,9 @@ class ServicesOperations:
     ) -> _models.SearchService:
         """Updates an existing search service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -623,6 +636,9 @@ class ServicesOperations:
     ) -> _models.SearchService:
         """Updates an existing search service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
@@ -653,13 +669,16 @@ class ServicesOperations:
     ) -> _models.SearchService:
         """Updates an existing search service in the given resource group.
 
+        .. seealso::
+           - https://aka.ms/search-manage
+
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure Cognitive Search service to update. Required.
         :type search_service_name: str
-        :param service: The definition of the search service to update. Is either a model type or a IO
-         type. Required.
+        :param service: The definition of the search service to update. Is either a SearchServiceUpdate
+         type or a IO type. Required.
         :type service: ~azure.mgmt.search.models.SearchServiceUpdate or IO
         :param search_management_request_options: Parameter group. Default value is None.
         :type search_management_request_options:
@@ -716,8 +735,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -746,6 +766,9 @@ class ServicesOperations:
         **kwargs: Any
     ) -> _models.SearchService:
         """Gets the search service with the given name in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -794,8 +817,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -824,6 +848,9 @@ class ServicesOperations:
         **kwargs: Any
     ) -> None:
         """Deletes a search service in the given resource group, along with its associated resources.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -872,8 +899,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -897,6 +925,9 @@ class ServicesOperations:
         **kwargs: Any
     ) -> Iterable["_models.SearchService"]:
         """Gets a list of all Search services in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param resource_group_name: The name of the resource group within the current subscription. You
          can obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -971,8 +1002,9 @@ class ServicesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -993,6 +1025,9 @@ class ServicesOperations:
         self, search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None, **kwargs: Any
     ) -> Iterable["_models.SearchService"]:
         """Gets a list of all Search services in the given subscription.
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param search_management_request_options: Parameter group. Default value is None.
         :type search_management_request_options:
@@ -1063,8 +1098,9 @@ class ServicesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1088,6 +1124,9 @@ class ServicesOperations:
         """Checks whether or not the given search service name is available for use. Search service names
         must be globally unique since they are part of the service URI
         (https://:code:`<name>`.search.windows.net).
+
+        .. seealso::
+           - https://aka.ms/search-manage
 
         :param name: The search service name to validate. Search service names must only contain
          lowercase letters, digits or dashes, cannot use dash as the first two or last one characters,
@@ -1142,8 +1181,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
