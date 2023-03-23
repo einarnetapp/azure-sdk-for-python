@@ -71,8 +71,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
     ) -> AsyncIterable["_models.SharedPrivateLinkResource"]:
         """List shared private link resources.
 
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -86,7 +86,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2023-02-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SharedPrivateLinkResourceList] = kwargs.pop("cls", None)
@@ -142,8 +142,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -169,8 +170,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -190,7 +191,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2023-02-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
@@ -208,8 +209,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -249,7 +251,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2023-02-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -279,8 +281,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -321,8 +324,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -362,8 +365,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -401,8 +404,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -429,7 +432,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2023-02-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -459,7 +462,10 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
             return deserialized
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -491,7 +497,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2023-02-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -509,8 +515,9 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -536,8 +543,8 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         :param shared_private_link_resource_name: The name of the shared private link resource.
          Required.
         :type shared_private_link_resource_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
@@ -556,7 +563,7 @@ class WebPubSubSharedPrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2023-02-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)

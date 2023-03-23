@@ -14,7 +14,7 @@ from azure.mgmt.webpubsub import WebPubSubManagementClient
     pip install azure-identity
     pip install azure-mgmt-webpubsub
 # USAGE
-    python web_pub_sub_shared_private_link_resources_delete.py
+    python web_pub_sub_replicas_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,14 @@ def main():
         subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
-    response = client.web_pub_sub_shared_private_link_resources.begin_delete(
-        shared_private_link_resource_name="upstream",
+    response = client.web_pub_sub_replicas.get(
         resource_group_name="myResourceGroup",
         resource_name="myWebPubSubService",
-    ).result()
+        replica_name="myWebPubSubService-eastus",
+    )
     print(response)
 
 
-# x-ms-original-file: specification/webpubsub/resource-manager/Microsoft.SignalRService/preview/2023-03-01-preview/examples/WebPubSubSharedPrivateLinkResources_Delete.json
+# x-ms-original-file: specification/webpubsub/resource-manager/Microsoft.SignalRService/preview/2023-03-01-preview/examples/WebPubSubReplicas_Get.json
 if __name__ == "__main__":
     main()
