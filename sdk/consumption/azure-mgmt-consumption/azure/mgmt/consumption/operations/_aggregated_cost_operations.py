@@ -45,7 +45,7 @@ def build_get_by_management_group_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -76,7 +76,7 @@ def build_get_for_billing_period_by_management_group_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2021-10-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))
+    api_version: Literal["2023-03-01"] = kwargs.pop("api_version", _params.pop("api-version", "2023-03-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -126,6 +126,9 @@ class AggregatedCostOperations:
         """Provides the aggregate cost of a management group and all child management groups by current
         billing period.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param management_group_id: Azure Management Group ID. Required.
         :type management_group_id: str
         :param filter: May be used to filter aggregated cost by properties/usageStart (Utc time),
@@ -149,7 +152,7 @@ class AggregatedCostOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ManagementGroupAggregatedCostResult] = kwargs.pop("cls", None)
@@ -165,8 +168,9 @@ class AggregatedCostOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -194,6 +198,9 @@ class AggregatedCostOperations:
         """Provides the aggregate cost of a management group and all child management groups by specified
         billing period.
 
+        .. seealso::
+           - https://docs.microsoft.com/en-us/rest/api/consumption/
+
         :param management_group_id: Azure Management Group ID. Required.
         :type management_group_id: str
         :param billing_period_name: Billing Period Name. Required.
@@ -214,7 +221,7 @@ class AggregatedCostOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2021-10-01"] = kwargs.pop(
+        api_version: Literal["2023-03-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.ManagementGroupAggregatedCostResult] = kwargs.pop("cls", None)
@@ -230,8 +237,9 @@ class AggregatedCostOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
