@@ -116,8 +116,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -184,8 +185,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -298,8 +300,8 @@ class SqlMigrationServicesOperations:
         :type resource_group_name: str
         :param sql_migration_service_name: Name of the SQL Migration Service. Required.
         :type sql_migration_service_name: str
-        :param parameters: Details of SqlMigrationService resource. Is either a model type or a IO
-         type. Required.
+        :param parameters: Details of SqlMigrationService resource. Is either a SqlMigrationService
+         type or a IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.SqlMigrationService or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -399,8 +401,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -531,8 +534,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -645,8 +649,8 @@ class SqlMigrationServicesOperations:
         :type resource_group_name: str
         :param sql_migration_service_name: Name of the SQL Migration Service. Required.
         :type sql_migration_service_name: str
-        :param parameters: Details of SqlMigrationService resource. Is either a model type or a IO
-         type. Required.
+        :param parameters: Details of SqlMigrationService resource. Is either a
+         SqlMigrationServiceUpdate type or a IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.SqlMigrationServiceUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -788,8 +792,9 @@ class SqlMigrationServicesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -849,8 +854,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -941,8 +947,8 @@ class SqlMigrationServicesOperations:
         :type resource_group_name: str
         :param sql_migration_service_name: Name of the SQL Migration Service. Required.
         :type sql_migration_service_name: str
-        :param parameters: Details of SqlMigrationService resource. Is either a model type or a IO
-         type. Required.
+        :param parameters: Details of SqlMigrationService resource. Is either a RegenAuthKeys type or a
+         IO type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.RegenAuthKeys or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -992,8 +998,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1084,7 +1091,7 @@ class SqlMigrationServicesOperations:
         :type resource_group_name: str
         :param sql_migration_service_name: Name of the SQL Migration Service. Required.
         :type sql_migration_service_name: str
-        :param parameters: Details of SqlMigrationService resource. Is either a model type or a IO
+        :param parameters: Details of SqlMigrationService resource. Is either a DeleteNode type or a IO
          type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.DeleteNode or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -1135,8 +1142,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1232,8 +1240,9 @@ class SqlMigrationServicesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1294,8 +1303,9 @@ class SqlMigrationServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1382,8 +1392,9 @@ class SqlMigrationServicesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

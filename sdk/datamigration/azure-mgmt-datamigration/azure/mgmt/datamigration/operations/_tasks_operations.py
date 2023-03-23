@@ -345,9 +345,10 @@ class TasksOperations:
     ) -> Iterable["_models.ProjectTask"]:
         """Get tasks in a service.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        This method returns a list of tasks owned by a service resource. Some tasks may have a status
-        of Unknown, which indicates that an error occurred while querying the status of that task.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This method returns a list of tasks owned by a service resource. Some tasks
+        may have a status of Unknown, which indicates that an error occurred while querying the status
+        of that task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -423,8 +424,9 @@ class TasksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -456,8 +458,12 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PUT method creates a new task or updates an existing one, although since tasks
-        have no mutable custom properties, there is little reason to update an existing one.
+        (classic) instance. The PUT method creates a new task or updates an existing one, although
+        since tasks have no mutable custom properties, there is little reason to update an existing
+        one. Database Migration Service (classic) - SQL scenarios are on a deprecation path and will be
+        retired on 15 March 2026 for all customers. Please migrate to Azure SQL database services by
+        using the latest Azure Database Migration Service version which is available as an extension in
+        Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -493,8 +499,12 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PUT method creates a new task or updates an existing one, although since tasks
-        have no mutable custom properties, there is little reason to update an existing one.
+        (classic) instance. The PUT method creates a new task or updates an existing one, although
+        since tasks have no mutable custom properties, there is little reason to update an existing
+        one. Database Migration Service (classic) - SQL scenarios are on a deprecation path and will be
+        retired on 15 March 2026 for all customers. Please migrate to Azure SQL database services by
+        using the latest Azure Database Migration Service version which is available as an extension in
+        Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -528,8 +538,12 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PUT method creates a new task or updates an existing one, although since tasks
-        have no mutable custom properties, there is little reason to update an existing one.
+        (classic) instance. The PUT method creates a new task or updates an existing one, although
+        since tasks have no mutable custom properties, there is little reason to update an existing
+        one. Database Migration Service (classic) - SQL scenarios are on a deprecation path and will be
+        retired on 15 March 2026 for all customers. Please migrate to Azure SQL database services by
+        using the latest Azure Database Migration Service version which is available as an extension in
+        Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -539,7 +553,8 @@ class TasksOperations:
         :type project_name: str
         :param task_name: Name of the Task. Required.
         :type task_name: str
-        :param parameters: Information about the task. Is either a model type or a IO type. Required.
+        :param parameters: Information about the task. Is either a ProjectTask type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectTask or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -591,8 +606,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -630,7 +646,7 @@ class TasksOperations:
         """Get task information.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The GET method retrieves information about a task.
+        (classic) instance. The GET method retrieves information about a task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -678,8 +694,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -713,7 +730,7 @@ class TasksOperations:
         """Delete task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The DELETE method deletes a task, canceling it first if it's running.
+        (classic) instance. The DELETE method deletes a task, canceling it first if it's running.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -762,8 +779,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -795,8 +813,12 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PATCH method updates an existing task, but since tasks have no mutable custom
-        properties, there is little reason to do so.
+        (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable
+        custom properties, there is little reason to do so. Database Migration Service (classic) - SQL
+        scenarios are on a deprecation path and will be retired on 15 March 2026 for all customers.
+        Please migrate to Azure SQL database services by using the latest Azure Database Migration
+        Service version which is available as an extension in Azure Data Studio, or by using Azure
+        PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -832,8 +854,12 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PATCH method updates an existing task, but since tasks have no mutable custom
-        properties, there is little reason to do so.
+        (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable
+        custom properties, there is little reason to do so. Database Migration Service (classic) - SQL
+        scenarios are on a deprecation path and will be retired on 15 March 2026 for all customers.
+        Please migrate to Azure SQL database services by using the latest Azure Database Migration
+        Service version which is available as an extension in Azure Data Studio, or by using Azure
+        PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -867,8 +893,12 @@ class TasksOperations:
         """Create or update task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. The PATCH method updates an existing task, but since tasks have no mutable custom
-        properties, there is little reason to do so.
+        (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable
+        custom properties, there is little reason to do so. Database Migration Service (classic) - SQL
+        scenarios are on a deprecation path and will be retired on 15 March 2026 for all customers.
+        Please migrate to Azure SQL database services by using the latest Azure Database Migration
+        Service version which is available as an extension in Azure Data Studio, or by using Azure
+        PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -878,7 +908,8 @@ class TasksOperations:
         :type project_name: str
         :param task_name: Name of the Task. Required.
         :type task_name: str
-        :param parameters: Information about the task. Is either a model type or a IO type. Required.
+        :param parameters: Information about the task. Is either a ProjectTask type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectTask or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -930,8 +961,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -959,7 +991,7 @@ class TasksOperations:
         """Cancel a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method cancels a task if it's currently queued or running.
+        (classic) instance. This method cancels a task if it's currently queued or running.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1004,8 +1036,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1041,7 +1074,7 @@ class TasksOperations:
         """Execute a command on a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method executes a command on a running task.
+        (classic) instance. This method executes a command on a running task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1077,7 +1110,7 @@ class TasksOperations:
         """Execute a command on a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method executes a command on a running task.
+        (classic) instance. This method executes a command on a running task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1111,7 +1144,7 @@ class TasksOperations:
         """Execute a command on a task.
 
         The tasks resource is a nested, proxy-only resource representing work performed by a DMS
-        instance. This method executes a command on a running task.
+        (classic) instance. This method executes a command on a running task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1121,7 +1154,8 @@ class TasksOperations:
         :type project_name: str
         :param task_name: Name of the Task. Required.
         :type task_name: str
-        :param parameters: Command to execute. Is either a model type or a IO type. Required.
+        :param parameters: Command to execute. Is either a CommandProperties type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.CommandProperties or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1173,8 +1207,9 @@ class TasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

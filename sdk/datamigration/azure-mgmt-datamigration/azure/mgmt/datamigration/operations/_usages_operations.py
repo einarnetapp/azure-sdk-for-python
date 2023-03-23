@@ -93,8 +93,8 @@ class UsagesOperations:
     def list(self, location: str, **kwargs: Any) -> Iterable["_models.Quota"]:
         """Get resource quotas and usage information.
 
-        This method returns region-specific quotas and resource usage information for the Database
-        Migration Service.
+        This method returns region-specific quotas and resource usage information for the Azure
+        Database Migration Service (classic).
 
         :param location: The Azure region of the operation. Required.
         :type location: str
@@ -161,8 +161,9 @@ class UsagesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

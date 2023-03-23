@@ -71,10 +71,10 @@ class ServiceTasksOperations:
     ) -> AsyncIterable["_models.ProjectTask"]:
         """Get service level tasks for a service.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        This method returns a list of service level tasks owned by a service resource. Some tasks may
-        have a status of Unknown, which indicates that an error occurred while querying the status of
-        that task.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This method returns a list of service level tasks owned by a service
+        resource. Some tasks may have a status of Unknown, which indicates that an error occurred while
+        querying the status of that task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -147,8 +147,9 @@ class ServiceTasksOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -179,9 +180,12 @@ class ServiceTasksOperations:
         """Create or update service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The PUT method creates a new service task or updates an existing one, although
-        since service tasks have no mutable custom properties, there is little reason to update an
-        existing one.
+        DMS (classic) instance. The PUT method creates a new service task or updates an existing one,
+        although since service tasks have no mutable custom properties, there is little reason to
+        update an existing one. Database Migration Service (classic) - SQL scenarios are on a
+        deprecation path and will be retired on 15 March 2026 for all customers. Please migrate to
+        Azure SQL database services by using the latest Azure Database Migration Service version which
+        is available as an extension in Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -214,9 +218,12 @@ class ServiceTasksOperations:
         """Create or update service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The PUT method creates a new service task or updates an existing one, although
-        since service tasks have no mutable custom properties, there is little reason to update an
-        existing one.
+        DMS (classic) instance. The PUT method creates a new service task or updates an existing one,
+        although since service tasks have no mutable custom properties, there is little reason to
+        update an existing one. Database Migration Service (classic) - SQL scenarios are on a
+        deprecation path and will be retired on 15 March 2026 for all customers. Please migrate to
+        Azure SQL database services by using the latest Azure Database Migration Service version which
+        is available as an extension in Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -247,9 +254,12 @@ class ServiceTasksOperations:
         """Create or update service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The PUT method creates a new service task or updates an existing one, although
-        since service tasks have no mutable custom properties, there is little reason to update an
-        existing one.
+        DMS (classic) instance. The PUT method creates a new service task or updates an existing one,
+        although since service tasks have no mutable custom properties, there is little reason to
+        update an existing one. Database Migration Service (classic) - SQL scenarios are on a
+        deprecation path and will be retired on 15 March 2026 for all customers. Please migrate to
+        Azure SQL database services by using the latest Azure Database Migration Service version which
+        is available as an extension in Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -257,7 +267,8 @@ class ServiceTasksOperations:
         :type service_name: str
         :param task_name: Name of the Task. Required.
         :type task_name: str
-        :param parameters: Information about the task. Is either a model type or a IO type. Required.
+        :param parameters: Information about the task. Is either a ProjectTask type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectTask or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -308,8 +319,9 @@ class ServiceTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -341,7 +353,7 @@ class ServiceTasksOperations:
         """Get service task information.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The GET method retrieves information about a service task.
+        DMS (classic) instance. The GET method retrieves information about a service task.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -386,8 +398,9 @@ class ServiceTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -420,7 +433,8 @@ class ServiceTasksOperations:
         """Delete service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The DELETE method deletes a service task, canceling it first if it's running.
+        DMS (classic) instance. The DELETE method deletes a service task, canceling it first if it's
+        running.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -466,8 +480,9 @@ class ServiceTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -498,8 +513,8 @@ class ServiceTasksOperations:
         """Create or update service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The PATCH method updates an existing service task, but since service tasks have
-        no mutable custom properties, there is little reason to do so.
+        DMS (classic) instance. The PATCH method updates an existing service task, but since service
+        tasks have no mutable custom properties, there is little reason to do so.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -532,8 +547,8 @@ class ServiceTasksOperations:
         """Create or update service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The PATCH method updates an existing service task, but since service tasks have
-        no mutable custom properties, there is little reason to do so.
+        DMS (classic) instance. The PATCH method updates an existing service task, but since service
+        tasks have no mutable custom properties, there is little reason to do so.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -564,8 +579,8 @@ class ServiceTasksOperations:
         """Create or update service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. The PATCH method updates an existing service task, but since service tasks have
-        no mutable custom properties, there is little reason to do so.
+        DMS (classic) instance. The PATCH method updates an existing service task, but since service
+        tasks have no mutable custom properties, there is little reason to do so.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -573,7 +588,8 @@ class ServiceTasksOperations:
         :type service_name: str
         :param task_name: Name of the Task. Required.
         :type task_name: str
-        :param parameters: Information about the task. Is either a model type or a IO type. Required.
+        :param parameters: Information about the task. Is either a ProjectTask type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.datamigration.models.ProjectTask or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -624,8 +640,9 @@ class ServiceTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -651,7 +668,7 @@ class ServiceTasksOperations:
         """Cancel a service task.
 
         The service tasks resource is a nested, proxy-only resource representing work performed by a
-        DMS instance. This method cancels a service task if it's currently queued or running.
+        DMS (classic) instance. This method cancels a service task if it's currently queued or running.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -693,8 +710,9 @@ class ServiceTasksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

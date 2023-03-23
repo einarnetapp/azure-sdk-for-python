@@ -495,8 +495,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -532,16 +533,20 @@ class ServicesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.DataMigrationService]:
-        """Create or update DMS Instance.
+        """Create or update DMS (classic) Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The PUT method creates a new service or updates an existing one. When a service is updated,
-        existing child resources (i.e. tasks) are unaffected. Services currently support a single kind,
-        "vm", which refers to a VM-based service, although other kinds may be added in the future. This
-        method can change the kind, SKU, and network of the service, but if tasks are currently running
-        (i.e. the service is busy), this will fail with 400 Bad Request ("ServiceIsBusy"). The provider
-        will reply when successful with 200 OK or 201 Created. Long-running operations use the
-        provisioningState property.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The PUT method creates a new service or updates an existing one. When a
+        service is updated, existing child resources (i.e. tasks) are unaffected. Services currently
+        support a single kind, "vm", which refers to a VM-based service, although other kinds may be
+        added in the future. This method can change the kind, SKU, and network of the service, but if
+        tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request
+        ("ServiceIsBusy"). The provider will reply when successful with 200 OK or 201 Created.
+        Long-running operations use the provisioningState property. Database Migration Service
+        (classic) - SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for
+        all customers. Please migrate to Azure SQL database services by using the latest Azure Database
+        Migration Service version which is available as an extension in Azure Data Studio, or by using
+        Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -576,16 +581,20 @@ class ServicesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.DataMigrationService]:
-        """Create or update DMS Instance.
+        """Create or update DMS (classic) Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The PUT method creates a new service or updates an existing one. When a service is updated,
-        existing child resources (i.e. tasks) are unaffected. Services currently support a single kind,
-        "vm", which refers to a VM-based service, although other kinds may be added in the future. This
-        method can change the kind, SKU, and network of the service, but if tasks are currently running
-        (i.e. the service is busy), this will fail with 400 Bad Request ("ServiceIsBusy"). The provider
-        will reply when successful with 200 OK or 201 Created. Long-running operations use the
-        provisioningState property.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The PUT method creates a new service or updates an existing one. When a
+        service is updated, existing child resources (i.e. tasks) are unaffected. Services currently
+        support a single kind, "vm", which refers to a VM-based service, although other kinds may be
+        added in the future. This method can change the kind, SKU, and network of the service, but if
+        tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request
+        ("ServiceIsBusy"). The provider will reply when successful with 200 OK or 201 Created.
+        Long-running operations use the provisioningState property. Database Migration Service
+        (classic) - SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for
+        all customers. Please migrate to Azure SQL database services by using the latest Azure Database
+        Migration Service version which is available as an extension in Azure Data Studio, or by using
+        Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -614,23 +623,27 @@ class ServicesOperations:
     def begin_create_or_update(
         self, group_name: str, service_name: str, parameters: Union[_models.DataMigrationService, IO], **kwargs: Any
     ) -> LROPoller[_models.DataMigrationService]:
-        """Create or update DMS Instance.
+        """Create or update DMS (classic) Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The PUT method creates a new service or updates an existing one. When a service is updated,
-        existing child resources (i.e. tasks) are unaffected. Services currently support a single kind,
-        "vm", which refers to a VM-based service, although other kinds may be added in the future. This
-        method can change the kind, SKU, and network of the service, but if tasks are currently running
-        (i.e. the service is busy), this will fail with 400 Bad Request ("ServiceIsBusy"). The provider
-        will reply when successful with 200 OK or 201 Created. Long-running operations use the
-        provisioningState property.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The PUT method creates a new service or updates an existing one. When a
+        service is updated, existing child resources (i.e. tasks) are unaffected. Services currently
+        support a single kind, "vm", which refers to a VM-based service, although other kinds may be
+        added in the future. This method can change the kind, SKU, and network of the service, but if
+        tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request
+        ("ServiceIsBusy"). The provider will reply when successful with 200 OK or 201 Created.
+        Long-running operations use the provisioningState property. Database Migration Service
+        (classic) - SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for
+        all customers. Please migrate to Azure SQL database services by using the latest Azure Database
+        Migration Service version which is available as an extension in Azure Data Studio, or by using
+        Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
         :param service_name: Name of the service. Required.
         :type service_name: str
-        :param parameters: Information about the service. Is either a model type or a IO type.
-         Required.
+        :param parameters: Information about the service. Is either a DataMigrationService type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.DataMigrationService or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -700,10 +713,10 @@ class ServicesOperations:
 
     @distributed_trace
     def get(self, group_name: str, service_name: str, **kwargs: Any) -> _models.DataMigrationService:
-        """Get DMS Service Instance.
+        """Get DMS (classic) Service Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The GET method retrieves information about a service instance.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The GET method retrieves information about a service instance.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -742,8 +755,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -796,8 +810,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -818,10 +833,10 @@ class ServicesOperations:
     def begin_delete(
         self, group_name: str, service_name: str, delete_running_tasks: Optional[bool] = None, **kwargs: Any
     ) -> LROPoller[None]:
-        """Delete DMS Service Instance.
+        """Delete DMS (classic) Service Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The DELETE method deletes a service. Any running tasks will be canceled.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The DELETE method deletes a service. Any running tasks will be canceled.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -931,8 +946,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -965,12 +981,16 @@ class ServicesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.DataMigrationService]:
-        """Create or update DMS Service Instance.
+        """Create or update DMS (classic) Service Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The PATCH method updates an existing service. This method can change the kind, SKU, and network
-        of the service, but if tasks are currently running (i.e. the service is busy), this will fail
-        with 400 Bad Request ("ServiceIsBusy").
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The PATCH method updates an existing service. This method can change the
+        kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is
+        busy), this will fail with 400 Bad Request ("ServiceIsBusy"). Database Migration Service
+        (classic) - SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for
+        all customers. Please migrate to Azure SQL database services by using the latest Azure Database
+        Migration Service version which is available as an extension in Azure Data Studio, or by using
+        Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1005,12 +1025,16 @@ class ServicesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.DataMigrationService]:
-        """Create or update DMS Service Instance.
+        """Create or update DMS (classic) Service Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The PATCH method updates an existing service. This method can change the kind, SKU, and network
-        of the service, but if tasks are currently running (i.e. the service is busy), this will fail
-        with 400 Bad Request ("ServiceIsBusy").
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The PATCH method updates an existing service. This method can change the
+        kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is
+        busy), this will fail with 400 Bad Request ("ServiceIsBusy"). Database Migration Service
+        (classic) - SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for
+        all customers. Please migrate to Azure SQL database services by using the latest Azure Database
+        Migration Service version which is available as an extension in Azure Data Studio, or by using
+        Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1039,19 +1063,23 @@ class ServicesOperations:
     def begin_update(
         self, group_name: str, service_name: str, parameters: Union[_models.DataMigrationService, IO], **kwargs: Any
     ) -> LROPoller[_models.DataMigrationService]:
-        """Create or update DMS Service Instance.
+        """Create or update DMS (classic) Service Instance.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The PATCH method updates an existing service. This method can change the kind, SKU, and network
-        of the service, but if tasks are currently running (i.e. the service is busy), this will fail
-        with 400 Bad Request ("ServiceIsBusy").
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). The PATCH method updates an existing service. This method can change the
+        kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is
+        busy), this will fail with 400 Bad Request ("ServiceIsBusy"). Database Migration Service
+        (classic) - SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for
+        all customers. Please migrate to Azure SQL database services by using the latest Azure Database
+        Migration Service version which is available as an extension in Azure Data Studio, or by using
+        Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
         :param service_name: Name of the service. Required.
         :type service_name: str
-        :param parameters: Information about the service. Is either a model type or a IO type.
-         Required.
+        :param parameters: Information about the service. Is either a DataMigrationService type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.DataMigrationService or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1125,9 +1153,9 @@ class ServicesOperations:
     ) -> _models.DataMigrationServiceStatusResponse:
         """Check service health status.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        This action performs a health check and returns the status of the service and virtual machine
-        size.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This action performs a health check and returns the status of the service
+        and virtual machine size.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1166,8 +1194,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1219,8 +1248,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1241,8 +1271,9 @@ class ServicesOperations:
     def begin_start(self, group_name: str, service_name: str, **kwargs: Any) -> LROPoller[None]:
         """Start service.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        This action starts the service and the service can be used for data migration.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This action starts the service and the service can be used for data
+        migration.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1336,8 +1367,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1358,9 +1390,9 @@ class ServicesOperations:
     def begin_stop(self, group_name: str, service_name: str, **kwargs: Any) -> LROPoller[None]:
         """Stop service.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        This action stops the service and the service cannot be used for data migration. The service
-        owner won't be billed when the service is stopped.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This action stops the service and the service cannot be used for data
+        migration. The service owner won't be billed when the service is stopped.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1427,8 +1459,8 @@ class ServicesOperations:
     def list_skus(self, group_name: str, service_name: str, **kwargs: Any) -> Iterable["_models.AvailableServiceSku"]:
         """Get compatible SKUs.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        The skus action returns the list of SKUs that a service resource can be updated to.
+        The services resource is the top-level resource that represents the Database Migration Service
+        (classic). The skus action returns the list of SKUs that a service resource can be updated to.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1498,8 +1530,9 @@ class ServicesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1586,7 +1619,8 @@ class ServicesOperations:
         :type group_name: str
         :param service_name: Name of the service. Required.
         :type service_name: str
-        :param parameters: Requested name to validate. Is either a model type or a IO type. Required.
+        :param parameters: Requested name to validate. Is either a NameAvailabilityRequest type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.NameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1636,8 +1670,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1662,8 +1697,8 @@ class ServicesOperations:
     def list_by_resource_group(self, group_name: str, **kwargs: Any) -> Iterable["_models.DataMigrationService"]:
         """Get services in resource group.
 
-        The Services resource is the top-level resource that represents the Database Migration Service.
-        This method returns a list of service resources in a resource group.
+        The Services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This method returns a list of service resources in a resource group.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -1731,8 +1766,9 @@ class ServicesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1753,8 +1789,8 @@ class ServicesOperations:
     def list(self, **kwargs: Any) -> Iterable["_models.DataMigrationService"]:
         """Get services in subscription.
 
-        The services resource is the top-level resource that represents the Database Migration Service.
-        This method returns a list of service resources in a subscription.
+        The services resource is the top-level resource that represents the Azure Database Migration
+        Service (classic). This method returns a list of service resources in a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either DataMigrationService or the result of
@@ -1819,8 +1855,9 @@ class ServicesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1892,7 +1929,8 @@ class ServicesOperations:
 
         :param location: The Azure region of the operation. Required.
         :type location: str
-        :param parameters: Requested name to validate. Is either a model type or a IO type. Required.
+        :param parameters: Requested name to validate. Is either a NameAvailabilityRequest type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.datamigration.models.NameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1941,8 +1979,9 @@ class ServicesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response

@@ -90,7 +90,7 @@ class ResourceSkusOperations:
     def list_skus(self, **kwargs: Any) -> Iterable["_models.ResourceSku"]:
         """Get supported SKUs.
 
-        The skus action returns the list of SKUs that DMS supports.
+        The skus action returns the list of SKUs that DMS (classic) supports.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ResourceSku or the result of cls(response)
@@ -154,8 +154,9 @@ class ResourceSkusOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

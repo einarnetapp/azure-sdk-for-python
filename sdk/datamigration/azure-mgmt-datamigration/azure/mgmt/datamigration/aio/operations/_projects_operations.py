@@ -139,8 +139,9 @@ class ProjectsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -171,7 +172,11 @@ class ProjectsOperations:
         """Create or update project.
 
         The project resource is a nested resource representing a stored migration project. The PUT
-        method creates a new project or updates an existing one.
+        method creates a new project or updates an existing one. Database Migration Service (classic) -
+        SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for all customers.
+        Please migrate to Azure SQL database services by using the latest Azure Database Migration
+        Service version which is available as an extension in Azure Data Studio, or by using Azure
+        PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -204,7 +209,11 @@ class ProjectsOperations:
         """Create or update project.
 
         The project resource is a nested resource representing a stored migration project. The PUT
-        method creates a new project or updates an existing one.
+        method creates a new project or updates an existing one. Database Migration Service (classic) -
+        SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for all customers.
+        Please migrate to Azure SQL database services by using the latest Azure Database Migration
+        Service version which is available as an extension in Azure Data Studio, or by using Azure
+        PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -235,7 +244,11 @@ class ProjectsOperations:
         """Create or update project.
 
         The project resource is a nested resource representing a stored migration project. The PUT
-        method creates a new project or updates an existing one.
+        method creates a new project or updates an existing one. Database Migration Service (classic) -
+        SQL scenarios are on a deprecation path and will be retired on 15 March 2026 for all customers.
+        Please migrate to Azure SQL database services by using the latest Azure Database Migration
+        Service version which is available as an extension in Azure Data Studio, or by using Azure
+        PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -243,7 +256,7 @@ class ProjectsOperations:
         :type service_name: str
         :param project_name: Name of the project. Required.
         :type project_name: str
-        :param parameters: Information about the project. Is either a model type or a IO type.
+        :param parameters: Information about the project. Is either a Project type or a IO type.
          Required.
         :type parameters: ~azure.mgmt.datamigration.models.Project or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -295,8 +308,9 @@ class ProjectsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -368,8 +382,9 @@ class ProjectsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -448,8 +463,9 @@ class ProjectsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -480,7 +496,10 @@ class ProjectsOperations:
         """Update project.
 
         The project resource is a nested resource representing a stored migration project. The PATCH
-        method updates an existing project.
+        method updates an existing project. Database Migration Service (classic) - SQL scenarios are on
+        a deprecation path and will be retired on 15 March 2026 for all customers. Please migrate to
+        Azure SQL database services by using the latest Azure Database Migration Service version which
+        is available as an extension in Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -513,7 +532,10 @@ class ProjectsOperations:
         """Update project.
 
         The project resource is a nested resource representing a stored migration project. The PATCH
-        method updates an existing project.
+        method updates an existing project. Database Migration Service (classic) - SQL scenarios are on
+        a deprecation path and will be retired on 15 March 2026 for all customers. Please migrate to
+        Azure SQL database services by using the latest Azure Database Migration Service version which
+        is available as an extension in Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -544,7 +566,10 @@ class ProjectsOperations:
         """Update project.
 
         The project resource is a nested resource representing a stored migration project. The PATCH
-        method updates an existing project.
+        method updates an existing project. Database Migration Service (classic) - SQL scenarios are on
+        a deprecation path and will be retired on 15 March 2026 for all customers. Please migrate to
+        Azure SQL database services by using the latest Azure Database Migration Service version which
+        is available as an extension in Azure Data Studio, or by using Azure PowerShell and Azure CLI.
 
         :param group_name: Name of the resource group. Required.
         :type group_name: str
@@ -552,7 +577,7 @@ class ProjectsOperations:
         :type service_name: str
         :param project_name: Name of the project. Required.
         :type project_name: str
-        :param parameters: Information about the project. Is either a model type or a IO type.
+        :param parameters: Information about the project. Is either a Project type or a IO type.
          Required.
         :type parameters: ~azure.mgmt.datamigration.models.Project or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -604,8 +629,9 @@ class ProjectsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
