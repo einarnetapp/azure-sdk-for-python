@@ -68,7 +68,7 @@ class SourceControlOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param repo_type: The repo type. Known values are: "Github" and "DevOps". Required.
+        :param repo_type: The repo type. Known values are: "Github" and "AzureDevOps". Required.
         :type repo_type: str or ~azure.mgmt.securityinsight.models.RepoType
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either Repo or the result of cls(response)
@@ -78,7 +78,7 @@ class SourceControlOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-12-01-preview"] = kwargs.pop(
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
@@ -138,8 +138,9 @@ class SourceControlOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
