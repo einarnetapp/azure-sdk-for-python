@@ -114,8 +114,9 @@ class BigDataPoolsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -222,8 +223,8 @@ class BigDataPoolsOperations:
         :type workspace_name: str
         :param big_data_pool_name: Big Data pool name. Required.
         :type big_data_pool_name: str
-        :param big_data_pool_patch_info: The updated Big Data pool properties. Is either a model type
-         or a IO type. Required.
+        :param big_data_pool_patch_info: The updated Big Data pool properties. Is either a
+         BigDataPoolPatchInfo type or a IO type. Required.
         :type big_data_pool_patch_info: ~azure.mgmt.synapse.models.BigDataPoolPatchInfo or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -274,8 +275,9 @@ class BigDataPoolsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -347,8 +349,9 @@ class BigDataPoolsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -482,8 +485,8 @@ class BigDataPoolsOperations:
         :type workspace_name: str
         :param big_data_pool_name: Big Data pool name. Required.
         :type big_data_pool_name: str
-        :param big_data_pool_info: The Big Data pool to create. Is either a model type or a IO type.
-         Required.
+        :param big_data_pool_info: The Big Data pool to create. Is either a BigDataPoolResourceInfo
+         type or a IO type. Required.
         :type big_data_pool_info: ~azure.mgmt.synapse.models.BigDataPoolResourceInfo or IO
         :param force: Whether to stop any running jobs in the Big Data pool. Default value is False.
         :type force: bool
@@ -590,8 +593,9 @@ class BigDataPoolsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -764,8 +768,9 @@ class BigDataPoolsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
