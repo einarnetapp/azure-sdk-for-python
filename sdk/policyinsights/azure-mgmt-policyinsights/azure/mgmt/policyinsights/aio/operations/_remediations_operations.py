@@ -162,8 +162,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -228,8 +229,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -324,8 +326,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -414,7 +417,8 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         :type management_group_id: str
         :param remediation_name: The name of the remediation. Required.
         :type remediation_name: str
-        :param parameters: The remediation parameters. Is either a model type or a IO type. Required.
+        :param parameters: The remediation parameters. Is either a Remediation type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.policyinsights.models.Remediation or IO
         :keyword management_groups_namespace: The namespace for Microsoft Management RP; only
          "Microsoft.Management" is allowed. Default value is "Microsoft.Management". Note that
@@ -469,8 +473,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -543,8 +548,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -613,8 +619,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -703,8 +710,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -757,8 +765,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -843,8 +852,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -912,7 +922,8 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
 
         :param remediation_name: The name of the remediation. Required.
         :type remediation_name: str
-        :param parameters: The remediation parameters. Is either a model type or a IO type. Required.
+        :param parameters: The remediation parameters. Is either a Remediation type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.policyinsights.models.Remediation or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -959,8 +970,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1021,8 +1033,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1079,8 +1092,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1176,8 +1190,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1235,8 +1250,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1324,8 +1340,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1406,7 +1423,8 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param remediation_name: The name of the remediation. Required.
         :type remediation_name: str
-        :param parameters: The remediation parameters. Is either a model type or a IO type. Required.
+        :param parameters: The remediation parameters. Is either a Remediation type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.policyinsights.models.Remediation or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1454,8 +1472,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1521,8 +1540,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1584,8 +1604,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1680,8 +1701,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1736,8 +1758,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1824,8 +1847,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1904,7 +1928,8 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         :type resource_id: str
         :param remediation_name: The name of the remediation. Required.
         :type remediation_name: str
-        :param parameters: The remediation parameters. Is either a model type or a IO type. Required.
+        :param parameters: The remediation parameters. Is either a Remediation type or a IO type.
+         Required.
         :type parameters: ~azure.mgmt.policyinsights.models.Remediation or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1951,8 +1976,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2015,8 +2041,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2077,8 +2104,9 @@ class RemediationsOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
