@@ -198,6 +198,7 @@ from ._storage_management_client_enums import MigrationState
 from ._storage_management_client_enums import MinimumTlsVersion
 from ._storage_management_client_enums import Name
 from ._storage_management_client_enums import ObjectType
+from ._storage_management_client_enums import PermissionScopeServiceName
 from ._storage_management_client_enums import Permissions
 from ._storage_management_client_enums import PrivateEndpointConnectionProvisioningState
 from ._storage_management_client_enums import PrivateEndpointServiceConnectionStatus
@@ -416,6 +417,7 @@ __all__ = [
     "MinimumTlsVersion",
     "Name",
     "ObjectType",
+    "PermissionScopeServiceName",
     "Permissions",
     "PrivateEndpointConnectionProvisioningState",
     "PrivateEndpointServiceConnectionStatus",

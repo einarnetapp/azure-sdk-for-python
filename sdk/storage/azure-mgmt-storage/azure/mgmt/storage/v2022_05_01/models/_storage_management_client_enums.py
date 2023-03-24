@@ -392,6 +392,13 @@ class Permissions(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     P = "p"
 
 
+class PermissionScopeServiceName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The service used by the local user, e.g. blob, file."""
+
+    BLOB = "blob"
+    FILE = "file"
+
+
 class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The current provisioning state."""
 

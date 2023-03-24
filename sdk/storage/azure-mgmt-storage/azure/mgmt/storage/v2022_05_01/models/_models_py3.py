@@ -5108,8 +5108,9 @@ class PermissionScope(_serialization.Model):
     :ivar permissions: The permissions for the local user. Possible values include: Read (r), Write
      (w), Delete (d), List (l), and Create (c). Required.
     :vartype permissions: str
-    :ivar service: The service used by the local user, e.g. blob, file. Required.
-    :vartype service: str
+    :ivar service: The service used by the local user, e.g. blob, file. Required. Known values are:
+     "blob" and "file".
+    :vartype service: str or ~azure.mgmt.storage.v2022_05_01.models.PermissionScopeServiceName
     :ivar resource_name: The name of resource, normally the container name or the file share name,
      used by the local user. Required.
     :vartype resource_name: str
@@ -5127,13 +5128,21 @@ class PermissionScope(_serialization.Model):
         "resource_name": {"key": "resourceName", "type": "str"},
     }
 
-    def __init__(self, *, permissions: str, service: str, resource_name: str, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        permissions: str,
+        service: Union[str, "_models.PermissionScopeServiceName"],
+        resource_name: str,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword permissions: The permissions for the local user. Possible values include: Read (r),
          Write (w), Delete (d), List (l), and Create (c). Required.
         :paramtype permissions: str
-        :keyword service: The service used by the local user, e.g. blob, file. Required.
-        :paramtype service: str
+        :keyword service: The service used by the local user, e.g. blob, file. Required. Known values
+         are: "blob" and "file".
+        :paramtype service: str or ~azure.mgmt.storage.v2022_05_01.models.PermissionScopeServiceName
         :keyword resource_name: The name of resource, normally the container name or the file share
          name, used by the local user. Required.
         :paramtype resource_name: str
