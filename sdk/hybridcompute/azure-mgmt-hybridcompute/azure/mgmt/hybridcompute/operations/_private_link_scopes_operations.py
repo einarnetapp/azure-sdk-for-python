@@ -47,7 +47,9 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -73,7 +75,9 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -103,7 +107,9 @@ def build_delete_request(resource_group_name: str, scope_name: str, subscription
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -134,7 +140,9 @@ def build_get_request(resource_group_name: str, scope_name: str, subscription_id
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -167,7 +175,9 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -203,7 +213,9 @@ def build_update_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -239,7 +251,9 @@ def build_get_validation_details_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -270,7 +284,9 @@ def build_get_validation_details_for_machine_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2023-03-15-preview"] = kwargs.pop(
+        "api_version", _params.pop("api-version", "2023-03-15-preview")
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -330,7 +346,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.HybridComputePrivateLinkScopeListResult] = kwargs.pop("cls", None)
@@ -384,8 +400,9 @@ class PrivateLinkScopesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -419,7 +436,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.HybridComputePrivateLinkScopeListResult] = kwargs.pop("cls", None)
@@ -474,8 +491,9 @@ class PrivateLinkScopesOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -506,7 +524,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -523,8 +541,9 @@ class PrivateLinkScopesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -534,8 +553,16 @@ class PrivateLinkScopesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, None, response_headers)
 
     _delete_initial.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}"
@@ -565,7 +592,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -632,7 +659,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.HybridComputePrivateLinkScope] = kwargs.pop("cls", None)
@@ -649,8 +676,9 @@ class PrivateLinkScopesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -748,7 +776,8 @@ class PrivateLinkScopesOperations:
         :param scope_name: The name of the Azure Arc PrivateLinkScope resource. Required.
         :type scope_name: str
         :param parameters: Properties that need to be specified to create or update a Azure Arc for
-         Servers and Clusters PrivateLinkScope. Is either a model type or a IO type. Required.
+         Servers and Clusters PrivateLinkScope. Is either a HybridComputePrivateLinkScope type or a IO
+         type. Required.
         :type parameters: ~azure.mgmt.hybridcompute.models.HybridComputePrivateLinkScope or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -769,7 +798,7 @@ class PrivateLinkScopesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -798,8 +827,9 @@ class PrivateLinkScopesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -901,7 +931,7 @@ class PrivateLinkScopesOperations:
         :param scope_name: The name of the Azure Arc PrivateLinkScope resource. Required.
         :type scope_name: str
         :param private_link_scope_tags: Updated tag information to set into the PrivateLinkScope
-         instance. Is either a model type or a IO type. Required.
+         instance. Is either a TagsResource type or a IO type. Required.
         :type private_link_scope_tags: ~azure.mgmt.hybridcompute.models.TagsResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -922,7 +952,7 @@ class PrivateLinkScopesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -951,8 +981,9 @@ class PrivateLinkScopesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1000,7 +1031,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PrivateLinkScopeValidationDetails] = kwargs.pop("cls", None)
@@ -1017,8 +1048,9 @@ class PrivateLinkScopesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1067,7 +1099,7 @@ class PrivateLinkScopesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2023-03-15-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PrivateLinkScopeValidationDetails] = kwargs.pop("cls", None)
@@ -1084,8 +1116,9 @@ class PrivateLinkScopesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
