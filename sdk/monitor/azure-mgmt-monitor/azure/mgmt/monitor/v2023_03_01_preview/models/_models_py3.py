@@ -16,6 +16,66 @@ if TYPE_CHECKING:
     from .. import models as _models
 
 
+class ActionDetail(_serialization.Model):
+    """The action detail.
+
+    :ivar mechanism_type: The mechanism type.
+    :vartype mechanism_type: str
+    :ivar name: The name of the action.
+    :vartype name: str
+    :ivar status: The status of the action.
+    :vartype status: str
+    :ivar sub_state: The substatus of the action.
+    :vartype sub_state: str
+    :ivar send_time: The send time.
+    :vartype send_time: str
+    :ivar detail: The detail of the friendly error message.
+    :vartype detail: str
+    """
+
+    _attribute_map = {
+        "mechanism_type": {"key": "MechanismType", "type": "str"},
+        "name": {"key": "Name", "type": "str"},
+        "status": {"key": "Status", "type": "str"},
+        "sub_state": {"key": "SubState", "type": "str"},
+        "send_time": {"key": "SendTime", "type": "str"},
+        "detail": {"key": "Detail", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        mechanism_type: Optional[str] = None,
+        name: Optional[str] = None,
+        status: Optional[str] = None,
+        sub_state: Optional[str] = None,
+        send_time: Optional[str] = None,
+        detail: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword mechanism_type: The mechanism type.
+        :paramtype mechanism_type: str
+        :keyword name: The name of the action.
+        :paramtype name: str
+        :keyword status: The status of the action.
+        :paramtype status: str
+        :keyword sub_state: The substatus of the action.
+        :paramtype sub_state: str
+        :keyword send_time: The send time.
+        :paramtype send_time: str
+        :keyword detail: The detail of the friendly error message.
+        :paramtype detail: str
+        """
+        super().__init__(**kwargs)
+        self.mechanism_type = mechanism_type
+        self.name = name
+        self.status = status
+        self.sub_state = sub_state
+        self.send_time = send_time
+        self.detail = detail
+
+
 class ActionGroupPatchBody(_serialization.Model):
     """A tenant action group object for the body of patch operations.
 
@@ -126,6 +186,34 @@ class AzureResource(_serialization.Model):
         self.type = None
         self.location = location
         self.tags = tags
+
+
+class Context(_serialization.Model):
+    """The context info.
+
+    :ivar notification_source: The source of the notification request.
+    :vartype notification_source: str
+    :ivar context_type: The context id type.
+    :vartype context_type: str
+    """
+
+    _attribute_map = {
+        "notification_source": {"key": "notificationSource", "type": "str"},
+        "context_type": {"key": "contextType", "type": "str"},
+    }
+
+    def __init__(
+        self, *, notification_source: Optional[str] = None, context_type: Optional[str] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword notification_source: The source of the notification request.
+        :paramtype notification_source: str
+        :keyword context_type: The context id type.
+        :paramtype context_type: str
+        """
+        super().__init__(**kwargs)
+        self.notification_source = notification_source
+        self.context_type = context_type
 
 
 class EmailReceiver(_serialization.Model):
@@ -403,6 +491,146 @@ class TenantActionGroupResource(AzureResource):  # pylint: disable=too-many-inst
         self.webhook_receivers = webhook_receivers
         self.azure_app_push_receivers = azure_app_push_receivers
         self.voice_receivers = voice_receivers
+
+
+class TenantNotificationRequestBody(_serialization.Model):
+    """The request body which contain contact detail metadata.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar alert_type: The value of the supported alert type. Supported alert type value is:
+     servicehealth. Required.
+    :vartype alert_type: str
+    :ivar email_receivers: The list of email receivers that are part of this action group.
+    :vartype email_receivers:
+     list[~$(python-base-namespace).v2023_03_01_preview.models.EmailReceiver]
+    :ivar sms_receivers: The list of SMS receivers that are part of this action group.
+    :vartype sms_receivers: list[~$(python-base-namespace).v2023_03_01_preview.models.SmsReceiver]
+    :ivar webhook_receivers: The list of webhook receivers that are part of this action group.
+    :vartype webhook_receivers:
+     list[~$(python-base-namespace).v2023_03_01_preview.models.WebhookReceiver]
+    :ivar azure_app_push_receivers: The list of AzureAppPush receivers that are part of this action
+     group.
+    :vartype azure_app_push_receivers:
+     list[~$(python-base-namespace).v2023_03_01_preview.models.AzureAppPushReceiver]
+    :ivar voice_receivers: The list of voice receivers that are part of this action group.
+    :vartype voice_receivers:
+     list[~$(python-base-namespace).v2023_03_01_preview.models.VoiceReceiver]
+    """
+
+    _validation = {
+        "alert_type": {"required": True, "max_length": 30},
+    }
+
+    _attribute_map = {
+        "alert_type": {"key": "alertType", "type": "str"},
+        "email_receivers": {"key": "emailReceivers", "type": "[EmailReceiver]"},
+        "sms_receivers": {"key": "smsReceivers", "type": "[SmsReceiver]"},
+        "webhook_receivers": {"key": "webhookReceivers", "type": "[WebhookReceiver]"},
+        "azure_app_push_receivers": {"key": "azureAppPushReceivers", "type": "[AzureAppPushReceiver]"},
+        "voice_receivers": {"key": "voiceReceivers", "type": "[VoiceReceiver]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        alert_type: str,
+        email_receivers: Optional[List["_models.EmailReceiver"]] = None,
+        sms_receivers: Optional[List["_models.SmsReceiver"]] = None,
+        webhook_receivers: Optional[List["_models.WebhookReceiver"]] = None,
+        azure_app_push_receivers: Optional[List["_models.AzureAppPushReceiver"]] = None,
+        voice_receivers: Optional[List["_models.VoiceReceiver"]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword alert_type: The value of the supported alert type. Supported alert type value is:
+         servicehealth. Required.
+        :paramtype alert_type: str
+        :keyword email_receivers: The list of email receivers that are part of this action group.
+        :paramtype email_receivers:
+         list[~$(python-base-namespace).v2023_03_01_preview.models.EmailReceiver]
+        :keyword sms_receivers: The list of SMS receivers that are part of this action group.
+        :paramtype sms_receivers:
+         list[~$(python-base-namespace).v2023_03_01_preview.models.SmsReceiver]
+        :keyword webhook_receivers: The list of webhook receivers that are part of this action group.
+        :paramtype webhook_receivers:
+         list[~$(python-base-namespace).v2023_03_01_preview.models.WebhookReceiver]
+        :keyword azure_app_push_receivers: The list of AzureAppPush receivers that are part of this
+         action group.
+        :paramtype azure_app_push_receivers:
+         list[~$(python-base-namespace).v2023_03_01_preview.models.AzureAppPushReceiver]
+        :keyword voice_receivers: The list of voice receivers that are part of this action group.
+        :paramtype voice_receivers:
+         list[~$(python-base-namespace).v2023_03_01_preview.models.VoiceReceiver]
+        """
+        super().__init__(**kwargs)
+        self.alert_type = alert_type
+        self.email_receivers = email_receivers
+        self.sms_receivers = sms_receivers
+        self.webhook_receivers = webhook_receivers
+        self.azure_app_push_receivers = azure_app_push_receivers
+        self.voice_receivers = voice_receivers
+
+
+class TestNotificationDetailsResponse(_serialization.Model):
+    """The details of the test notification results.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar context: The context info.
+    :vartype context: ~$(python-base-namespace).v2023_03_01_preview.models.Context
+    :ivar state: The overall state. Required.
+    :vartype state: str
+    :ivar completed_time: The completed time.
+    :vartype completed_time: str
+    :ivar created_time: The created time.
+    :vartype created_time: str
+    :ivar action_details: The list of action detail.
+    :vartype action_details:
+     list[~$(python-base-namespace).v2023_03_01_preview.models.ActionDetail]
+    """
+
+    _validation = {
+        "state": {"required": True},
+    }
+
+    _attribute_map = {
+        "context": {"key": "context", "type": "Context"},
+        "state": {"key": "state", "type": "str"},
+        "completed_time": {"key": "completedTime", "type": "str"},
+        "created_time": {"key": "createdTime", "type": "str"},
+        "action_details": {"key": "actionDetails", "type": "[ActionDetail]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        state: str,
+        context: Optional["_models.Context"] = None,
+        completed_time: Optional[str] = None,
+        created_time: Optional[str] = None,
+        action_details: Optional[List["_models.ActionDetail"]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword context: The context info.
+        :paramtype context: ~$(python-base-namespace).v2023_03_01_preview.models.Context
+        :keyword state: The overall state. Required.
+        :paramtype state: str
+        :keyword completed_time: The completed time.
+        :paramtype completed_time: str
+        :keyword created_time: The created time.
+        :paramtype created_time: str
+        :keyword action_details: The list of action detail.
+        :paramtype action_details:
+         list[~$(python-base-namespace).v2023_03_01_preview.models.ActionDetail]
+        """
+        super().__init__(**kwargs)
+        self.context = context
+        self.state = state
+        self.completed_time = completed_time
+        self.created_time = created_time
+        self.action_details = action_details
 
 
 class VoiceReceiver(_serialization.Model):

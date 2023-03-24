@@ -273,6 +273,7 @@ class MonitorManagementClient(MultiApiClientMixin, _SDKClient):
            * 2022-04-01: :class:`ActionGroupsOperations<azure.mgmt.monitor.v2022_04_01.aio.operations.ActionGroupsOperations>`
            * 2022-06-01: :class:`ActionGroupsOperations<azure.mgmt.monitor.v2022_06_01.aio.operations.ActionGroupsOperations>`
            * 2023-01-01: :class:`ActionGroupsOperations<azure.mgmt.monitor.v2023_01_01.aio.operations.ActionGroupsOperations>`
+           * 2023-03-01-preview: :class:`ActionGroupsOperations<azure.mgmt.monitor.v2023_03_01_preview.aio.operations.ActionGroupsOperations>`
         """
         api_version = self._get_api_version('action_groups')
         if api_version == '2017-04-01':
@@ -293,6 +294,8 @@ class MonitorManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_06_01.aio.operations import ActionGroupsOperations as OperationClass
         elif api_version == '2023-01-01':
             from ..v2023_01_01.aio.operations import ActionGroupsOperations as OperationClass
+        elif api_version == '2023-03-01-preview':
+            from ..v2023_03_01_preview.aio.operations import ActionGroupsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'action_groups'".format(api_version))
         self._config.api_version = api_version

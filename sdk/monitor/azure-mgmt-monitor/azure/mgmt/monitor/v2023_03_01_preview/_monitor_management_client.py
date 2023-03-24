@@ -15,7 +15,7 @@ from azure.mgmt.core import ARMPipelineClient
 from . import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import MonitorManagementClientConfiguration
-from .operations import TenantActionGroupsOperations
+from .operations import ActionGroupsOperations, TenantActionGroupsOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -28,6 +28,9 @@ class MonitorManagementClient:  # pylint: disable=client-accepts-api-version-key
     :ivar tenant_action_groups: TenantActionGroupsOperations operations
     :vartype tenant_action_groups:
      $(python-base-namespace).v2023_03_01_preview.operations.TenantActionGroupsOperations
+    :ivar action_groups: ActionGroupsOperations operations
+    :vartype action_groups:
+     $(python-base-namespace).v2023_03_01_preview.operations.ActionGroupsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param base_url: Service URL. Default value is "https://management.azure.com".
@@ -35,6 +38,8 @@ class MonitorManagementClient:  # pylint: disable=client-accepts-api-version-key
     :keyword api_version: Api Version. Default value is "2023-03-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
     """
 
     def __init__(
@@ -50,6 +55,7 @@ class MonitorManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.tenant_action_groups = TenantActionGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.action_groups = ActionGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.

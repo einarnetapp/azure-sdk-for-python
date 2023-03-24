@@ -6,14 +6,18 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import ActionDetail
 from ._models_py3 import ActionGroupPatchBody
 from ._models_py3 import AzureAppPushReceiver
 from ._models_py3 import AzureResource
+from ._models_py3 import Context
 from ._models_py3 import EmailReceiver
 from ._models_py3 import ErrorResponse
 from ._models_py3 import SmsReceiver
 from ._models_py3 import TenantActionGroupList
 from ._models_py3 import TenantActionGroupResource
+from ._models_py3 import TenantNotificationRequestBody
+from ._models_py3 import TestNotificationDetailsResponse
 from ._models_py3 import VoiceReceiver
 from ._models_py3 import WebhookReceiver
 
@@ -23,14 +27,18 @@ from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "ActionDetail",
     "ActionGroupPatchBody",
     "AzureAppPushReceiver",
     "AzureResource",
+    "Context",
     "EmailReceiver",
     "ErrorResponse",
     "SmsReceiver",
     "TenantActionGroupList",
     "TenantActionGroupResource",
+    "TenantNotificationRequestBody",
+    "TestNotificationDetailsResponse",
     "VoiceReceiver",
     "WebhookReceiver",
     "ReceiverStatus",
