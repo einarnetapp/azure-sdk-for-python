@@ -43,10 +43,10 @@ def build_execute_request(location_name: str, subscription_id: str, **kwargs: An
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2021-12-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2021-12-01-preview")
-    )  # type: Literal["2021-12-01-preview"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -59,7 +59,7 @@ def build_execute_request(location_name: str, subscription_id: str, **kwargs: An
         "locationName": _SERIALIZER.url("location_name", location_name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -143,8 +143,8 @@ class CheckVirtualNetworkSubnetUsageOperations:
 
         :param location_name: The name of the location. Required.
         :type location_name: str
-        :param parameters: The required parameters for creating or updating a server. Is either a model
-         type or a IO type. Required.
+        :param parameters: The required parameters for creating or updating a server. Is either a
+         VirtualNetworkSubnetUsageParameter type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.rdbms.mysql_flexibleservers.models.VirtualNetworkSubnetUsageParameter or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -166,11 +166,11 @@ class CheckVirtualNetworkSubnetUsageOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-12-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2021-12-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.VirtualNetworkSubnetUsageResult]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.VirtualNetworkSubnetUsageResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -192,10 +192,11 @@ class CheckVirtualNetworkSubnetUsageOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -211,4 +212,6 @@ class CheckVirtualNetworkSubnetUsageOperations:
 
         return deserialized
 
-    execute.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/checkVirtualNetworkSubnetUsage"}  # type: ignore
+    execute.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/checkVirtualNetworkSubnetUsage"
+    }
