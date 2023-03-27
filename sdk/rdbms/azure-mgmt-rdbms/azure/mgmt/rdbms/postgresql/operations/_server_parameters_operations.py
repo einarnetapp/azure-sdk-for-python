@@ -141,8 +141,9 @@ class ServerParametersOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -253,8 +254,8 @@ class ServerParametersOperations:
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param value: The parameters for updating a list of server configuration. Is either a model
-         type or a IO type. Required.
+        :param value: The parameters for updating a list of server configuration. Is either a
+         ConfigurationListResult type or a IO type. Required.
         :type value: ~azure.mgmt.rdbms.postgresql.models.ConfigurationListResult or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.

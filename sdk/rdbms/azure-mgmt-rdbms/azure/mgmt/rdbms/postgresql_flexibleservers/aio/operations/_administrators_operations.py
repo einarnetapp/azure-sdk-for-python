@@ -114,8 +114,9 @@ class AdministratorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -247,7 +248,7 @@ class AdministratorsOperations:
         :param object_id: Guid of the objectId for the administrator. Required.
         :type object_id: str
         :param parameters: The required parameters for adding an active directory administrator for a
-         server. Is either a model type or a IO type. Required.
+         server. Is either a ActiveDirectoryAdministratorAdd type or a IO type. Required.
         :type parameters:
          ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministratorAdd or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -353,8 +354,9 @@ class AdministratorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -495,8 +497,9 @@ class AdministratorsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -594,8 +597,9 @@ class AdministratorsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

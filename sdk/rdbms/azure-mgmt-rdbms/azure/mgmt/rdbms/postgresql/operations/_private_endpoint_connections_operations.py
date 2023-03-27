@@ -305,8 +305,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -373,8 +374,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -494,7 +496,7 @@ class PrivateEndpointConnectionsOperations:
         :type server_name: str
         :param private_endpoint_connection_name: Required.
         :type private_endpoint_connection_name: str
-        :param parameters: Is either a model type or a IO type. Required.
+        :param parameters: Is either a PrivateEndpointConnection type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql.models.PrivateEndpointConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -592,8 +594,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -725,8 +728,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -853,7 +857,7 @@ class PrivateEndpointConnectionsOperations:
         :param private_endpoint_connection_name: Required.
         :type private_endpoint_connection_name: str
         :param parameters: Parameters supplied to the Update private endpoint connection Tags
-         operation. Is either a model type or a IO type. Required.
+         operation. Is either a TagsObject type or a IO type. Required.
         :type parameters: ~azure.mgmt.rdbms.postgresql.models.TagsObject or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -985,8 +989,9 @@ class PrivateEndpointConnectionsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
