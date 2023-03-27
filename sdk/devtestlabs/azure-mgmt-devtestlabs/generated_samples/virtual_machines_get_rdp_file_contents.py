@@ -31,12 +31,12 @@ def main():
 
     response = client.virtual_machines.get_rdp_file_contents(
         resource_group_name="resourceGroupName",
-        lab_name="{labName}",
+        lab_name="myLabName",
         name="{vmName}",
     )
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/VirtualMachines_GetRdpFileContents.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/VirtualMachines_GetRdpFileContents.json
 if __name__ == "__main__":
     main()

@@ -33,6 +33,7 @@ def main():
         resource_group_name="resourceGroupName",
         name="labvmautostart",
         schedule={
+            "location": "southeastasia",
             "properties": {
                 "status": "Enabled",
                 "taskType": "LabVmsStartupTask",
@@ -41,12 +42,12 @@ def main():
                     "time": "0700",
                     "weekdays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                 },
-            }
+            },
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/GlobalSchedules_CreateOrUpdate.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/GlobalSchedules_CreateOrUpdate.json
 if __name__ == "__main__":
     main()

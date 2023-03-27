@@ -57,7 +57,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2018-09-15"))  # type: Literal["2018-09-15"]
+    api_version: Literal["2021-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-09-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -68,10 +68,12 @@ def build_list_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "labName": _SERIALIZER.url("lab_name", lab_name, "str"),
+        "labName": _SERIALIZER.url(
+            "lab_name", lab_name, "str", max_length=50, min_length=1, pattern=r"^[a-zA-Z0-9_\-]+$"
+        ),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     if expand is not None:
@@ -102,7 +104,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2018-09-15"))  # type: Literal["2018-09-15"]
+    api_version: Literal["2021-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-09-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -113,11 +115,13 @@ def build_get_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "labName": _SERIALIZER.url("lab_name", lab_name, "str"),
+        "labName": _SERIALIZER.url(
+            "lab_name", lab_name, "str", max_length=50, min_length=1, pattern=r"^[a-zA-Z0-9_\-]+$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     if expand is not None:
@@ -136,8 +140,8 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2018-09-15"))  # type: Literal["2018-09-15"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2021-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-09-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -148,11 +152,13 @@ def build_create_or_update_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "labName": _SERIALIZER.url("lab_name", lab_name, "str"),
+        "labName": _SERIALIZER.url(
+            "lab_name", lab_name, "str", max_length=50, min_length=1, pattern=r"^[a-zA-Z0-9_\-]+$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -171,7 +177,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2018-09-15"))  # type: Literal["2018-09-15"]
+    api_version: Literal["2021-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-09-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -182,11 +188,13 @@ def build_delete_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "labName": _SERIALIZER.url("lab_name", lab_name, "str"),
+        "labName": _SERIALIZER.url(
+            "lab_name", lab_name, "str", max_length=50, min_length=1, pattern=r"^[a-zA-Z0-9_\-]+$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -203,8 +211,8 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2018-09-15"))  # type: Literal["2018-09-15"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version: Literal["2021-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2021-09-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -215,11 +223,13 @@ def build_update_request(
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "labName": _SERIALIZER.url("lab_name", lab_name, "str"),
+        "labName": _SERIALIZER.url(
+            "lab_name", lab_name, "str", max_length=50, min_length=1, pattern=r"^[a-zA-Z0-9_\-]+$"
+        ),
         "name": _SERIALIZER.url("name", name, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -271,8 +281,8 @@ class FormulasOperations:
         :param expand: Specify the $expand query. Example: 'properties($select=description)'. Default
          value is None.
         :type expand: str
-        :param filter: The filter to apply to the operation. Example: '$filter=contains(name,'myName').
-         Default value is None.
+        :param filter: The filter to apply to the operation. Example:
+         '$filter=contains(name,'myName')'. Default value is None.
         :type filter: str
         :param top: The maximum number of resources to return from the operation. Example: '$top=10'.
          Default value is None.
@@ -288,10 +298,10 @@ class FormulasOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2018-09-15"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.FormulaList]
+        )
+        cls: ClsType[_models.FormulaList] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -318,7 +328,7 @@ class FormulasOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -334,7 +344,7 @@ class FormulasOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -342,14 +352,15 @@ class FormulasOperations:
             deserialized = self._deserialize("FormulaList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -361,7 +372,9 @@ class FormulasOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas"}  # type: ignore
+    list.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas"
+    }
 
     @distributed_trace
     def get(
@@ -394,10 +407,10 @@ class FormulasOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2018-09-15"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Formula]
+        )
+        cls: ClsType[_models.Formula] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -411,10 +424,11 @@ class FormulasOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -430,7 +444,9 @@ class FormulasOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"}  # type: ignore
+    get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"
+    }
 
     def _create_or_update_initial(
         self, resource_group_name: str, lab_name: str, name: str, formula: Union[_models.Formula, IO], **kwargs: Any
@@ -446,11 +462,11 @@ class FormulasOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2018-09-15"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Formula]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.Formula] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -474,10 +490,11 @@ class FormulasOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -493,11 +510,13 @@ class FormulasOperations:
             deserialized = self._deserialize("Formula", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"}  # type: ignore
+    _create_or_update_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"
+    }
 
     @overload
     def begin_create_or_update(
@@ -510,7 +529,7 @@ class FormulasOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.Formula]:
-        """Create or replace an existing formula. This operation can take a while to complete.
+        """Create or replace an existing Formula. This operation can take a while to complete.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
@@ -548,7 +567,7 @@ class FormulasOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.Formula]:
-        """Create or replace an existing formula. This operation can take a while to complete.
+        """Create or replace an existing Formula. This operation can take a while to complete.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
@@ -579,7 +598,7 @@ class FormulasOperations:
     def begin_create_or_update(
         self, resource_group_name: str, lab_name: str, name: str, formula: Union[_models.Formula, IO], **kwargs: Any
     ) -> LROPoller[_models.Formula]:
-        """Create or replace an existing formula. This operation can take a while to complete.
+        """Create or replace an existing Formula. This operation can take a while to complete.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
@@ -588,7 +607,7 @@ class FormulasOperations:
         :param name: The name of the formula. Required.
         :type name: str
         :param formula: A formula for creating a VM, specifying an image base and other parameters. Is
-         either a model type or a IO type. Required.
+         either a Formula type or a IO type. Required.
         :type formula: ~azure.mgmt.devtestlabs.models.Formula or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -608,16 +627,16 @@ class FormulasOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2018-09-15"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Formula]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.Formula] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._create_or_update_initial(  # type: ignore
+            raw_result = self._create_or_update_initial(
                 resource_group_name=resource_group_name,
                 lab_name=lab_name,
                 name=name,
@@ -638,7 +657,9 @@ class FormulasOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))  # type: PollingMethod
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -650,9 +671,11 @@ class FormulasOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"}  # type: ignore
+    begin_create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"
+    }
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
@@ -682,10 +705,10 @@ class FormulasOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2018-09-15"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
@@ -698,10 +721,11 @@ class FormulasOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -713,11 +737,19 @@ class FormulasOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"}  # type: ignore
+    delete.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"
+    }
 
     @distributed_trace
     def update(
-        self, resource_group_name: str, lab_name: str, name: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any
+        self,
+        resource_group_name: str,
+        lab_name: str,
+        name: str,
+        tags: Optional[Dict[str, str]] = None,
+        identity: Optional[_models.IdentityProperties] = None,
+        **kwargs: Any
     ) -> _models.Formula:
         """Allows modifying tags of formulas. All other properties will be ignored.
 
@@ -729,6 +761,8 @@ class FormulasOperations:
         :type name: str
         :param tags: The tags of the resource. Default value is None.
         :type tags: dict[str, str]
+        :param identity: The identity of the resource. Default value is None.
+        :type identity: ~azure.mgmt.devtestlabs.models.IdentityProperties
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Formula or the result of cls(response)
         :rtype: ~azure.mgmt.devtestlabs.models.Formula
@@ -745,13 +779,13 @@ class FormulasOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2021-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2018-09-15"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Formula]
+        )
+        content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
+        cls: ClsType[_models.Formula] = kwargs.pop("cls", None)
 
-        _formula = _models.FormulaFragment(tags=tags)
+        _formula = _models.FormulaFragment(identity=identity, tags=tags)
         _json = self._serialize.body(_formula, "FormulaFragment")
 
         request = build_update_request(
@@ -767,10 +801,11 @@ class FormulasOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -786,4 +821,6 @@ class FormulasOperations:
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"}  # type: ignore
+    update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}"
+    }

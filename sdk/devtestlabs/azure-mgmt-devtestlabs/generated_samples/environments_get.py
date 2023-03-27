@@ -31,13 +31,13 @@ def main():
 
     response = client.environments.get(
         resource_group_name="resourceGroupName",
-        lab_name="{labName}",
+        lab_name="myLabName",
         user_name="@me",
         name="{environmentName}",
     )
     print(response)
 
 
-# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2018-09-15/examples/Environments_Get.json
+# x-ms-original-file: specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2021-09-01/examples/Environments_Get.json
 if __name__ == "__main__":
     main()
