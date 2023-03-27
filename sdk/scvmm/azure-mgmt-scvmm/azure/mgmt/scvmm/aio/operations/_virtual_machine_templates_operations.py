@@ -112,8 +112,9 @@ class VirtualMachineTemplatesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -181,8 +182,9 @@ class VirtualMachineTemplatesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -297,7 +299,7 @@ class VirtualMachineTemplatesOperations:
         :type resource_group_name: str
         :param virtual_machine_template_name: Name of the VirtualMachineTemplate. Required.
         :type virtual_machine_template_name: str
-        :param body: Request payload. Is either a model type or a IO type. Required.
+        :param body: Request payload. Is either a VirtualMachineTemplate type or a IO type. Required.
         :type body: ~azure.mgmt.scvmm.models.VirtualMachineTemplate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -400,8 +402,9 @@ class VirtualMachineTemplatesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -541,8 +544,9 @@ class VirtualMachineTemplatesOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -658,8 +662,8 @@ class VirtualMachineTemplatesOperations:
         :type resource_group_name: str
         :param virtual_machine_template_name: Name of the VirtualMachineTemplate. Required.
         :type virtual_machine_template_name: str
-        :param body: VirtualMachineTemplates patch details. Is either a model type or a IO type.
-         Required.
+        :param body: VirtualMachineTemplates patch details. Is either a ResourcePatch type or a IO
+         type. Required.
         :type body: ~azure.mgmt.scvmm.models.ResourcePatch or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -805,8 +809,9 @@ class VirtualMachineTemplatesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -893,8 +898,9 @@ class VirtualMachineTemplatesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

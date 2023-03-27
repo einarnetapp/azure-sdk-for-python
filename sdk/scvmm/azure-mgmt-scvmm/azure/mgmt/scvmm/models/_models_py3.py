@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
@@ -74,8 +74,8 @@ class AvailabilitySet(_serialization.Model):
         extended_location: Optional["_models.ExtendedLocation"] = None,
         availability_set_name: Optional[str] = None,
         vmm_server_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Gets or sets the location.
         :paramtype location: str
@@ -116,8 +116,12 @@ class AvailabilitySetListItem(_serialization.Model):
     }
 
     def __init__(
-        self, *, id: Optional[str] = None, name: Optional[str] = None, **kwargs  # pylint: disable=redefined-builtin
-    ):
+        self,
+        *,
+        id: Optional[str] = None,  # pylint: disable=redefined-builtin
+        name: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: Gets the ARM Id of the microsoft.scvmm/availabilitySets resource.
         :paramtype id: str
@@ -144,8 +148,8 @@ class AvailabilitySetListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.AvailabilitySet"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.AvailabilitySet"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of AvailabilitySets.
         :paramtype value: list[~azure.mgmt.scvmm.models.AvailabilitySet]
@@ -184,8 +188,8 @@ class Checkpoint(_serialization.Model):
         checkpoint_id: Optional[str] = None,
         name: Optional[str] = None,
         description: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword parent_checkpoint_id: Gets ID of parent of the checkpoint.
         :paramtype parent_checkpoint_id: str
@@ -280,8 +284,8 @@ class Cloud(_serialization.Model):  # pylint: disable=too-many-instance-attribut
         inventory_item_id: Optional[str] = None,
         uuid: Optional[str] = None,
         vmm_server_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Gets or sets the location. Required.
         :paramtype location: str
@@ -337,8 +341,8 @@ class CloudCapacity(_serialization.Model):
         cpu_count: Optional[int] = None,
         memory_mb: Optional[int] = None,
         vm_count: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword cpu_count: CPUCount specifies the maximum number of CPUs that can be allocated in the
          cloud.
@@ -404,7 +408,7 @@ class InventoryItemProperties(_serialization.Model):
         }
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.inventory_type: Optional[str] = None
@@ -451,7 +455,7 @@ class CloudInventoryItem(InventoryItemProperties):
         "provisioning_state": {"key": "provisioningState", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.inventory_type: str = "Cloud"
@@ -471,7 +475,9 @@ class CloudListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Cloud"]] = None, next_link: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.Cloud"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of Clouds.
         :paramtype value: list[~azure.mgmt.scvmm.models.Cloud]
@@ -508,7 +514,7 @@ class ErrorDefinition(_serialization.Model):
         "details": {"key": "details", "type": "[ErrorDefinition]"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.code = None
@@ -527,7 +533,7 @@ class ErrorResponse(_serialization.Model):
         "error": {"key": "error", "type": "ErrorDefinition"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDefinition"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ErrorDefinition"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The error details.
         :paramtype error: ~azure.mgmt.scvmm.models.ErrorDefinition
@@ -550,7 +556,7 @@ class ExtendedLocation(_serialization.Model):
         "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(self, *, type: Optional[str] = None, name: Optional[str] = None, **kwargs):
+    def __init__(self, *, type: Optional[str] = None, name: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword type: The extended location type.
         :paramtype type: str
@@ -603,8 +609,8 @@ class HardwareProfile(_serialization.Model):
         dynamic_memory_max_mb: Optional[int] = None,
         dynamic_memory_min_mb: Optional[int] = None,
         is_highly_available: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword memory_mb: MemoryMB is the size of a virtual machine's memory, in MB.
         :paramtype memory_mb: int
@@ -670,8 +676,8 @@ class HardwareProfileUpdate(_serialization.Model):
         dynamic_memory_enabled: Optional[Union[str, "_models.DynamicMemoryEnabled"]] = None,
         dynamic_memory_max_mb: Optional[int] = None,
         dynamic_memory_min_mb: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword memory_mb: MemoryMB is the size of a virtual machine's memory, in MB.
         :paramtype memory_mb: int
@@ -724,7 +730,7 @@ class Resource(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.id = None
@@ -733,7 +739,8 @@ class Resource(_serialization.Model):
 
 
 class ProxyResource(Resource):
-    """The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location.
+    """The resource model definition for a Azure Resource Manager proxy resource. It will not have
+    tags and a location.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -759,7 +766,7 @@ class ProxyResource(Resource):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
 
@@ -824,7 +831,7 @@ class InventoryItem(ProxyResource):
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
 
-    def __init__(self, *, kind: Optional[str] = None, **kwargs):
+    def __init__(self, *, kind: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword kind: Metadata used by portal/tooling/etc to render different UX experiences for
          resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported,
@@ -855,7 +862,9 @@ class InventoryItemDetails(_serialization.Model):
         "inventory_item_name": {"key": "inventoryItemName", "type": "str"},
     }
 
-    def __init__(self, *, inventory_item_id: Optional[str] = None, inventory_item_name: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, inventory_item_id: Optional[str] = None, inventory_item_name: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword inventory_item_id: Gets or sets the inventory Item ID for the resource.
         :paramtype inventory_item_id: str
@@ -887,7 +896,7 @@ class InventoryItemsList(_serialization.Model):
         "value": {"key": "value", "type": "[InventoryItem]"},
     }
 
-    def __init__(self, *, value: List["_models.InventoryItem"], next_link: Optional[str] = None, **kwargs):
+    def __init__(self, *, value: List["_models.InventoryItem"], next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword next_link: Url to follow for getting next page of InventoryItems.
         :paramtype next_link: str
@@ -965,8 +974,8 @@ class NetworkInterfaces(_serialization.Model):  # pylint: disable=too-many-insta
         ipv6_address_type: Optional[Union[str, "_models.AllocationMethod"]] = None,
         mac_address_type: Optional[Union[str, "_models.AllocationMethod"]] = None,
         nic_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Gets or sets the name of the network interface.
         :paramtype name: str
@@ -1044,8 +1053,8 @@ class NetworkInterfacesUpdate(_serialization.Model):
         ipv6_address_type: Optional[Union[str, "_models.AllocationMethod"]] = None,
         mac_address_type: Optional[Union[str, "_models.AllocationMethod"]] = None,
         nic_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Gets or sets the name of the network interface.
         :paramtype name: str
@@ -1088,7 +1097,9 @@ class NetworkProfile(_serialization.Model):
         "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterfaces]"},
     }
 
-    def __init__(self, *, network_interfaces: Optional[List["_models.NetworkInterfaces"]] = None, **kwargs):
+    def __init__(
+        self, *, network_interfaces: Optional[List["_models.NetworkInterfaces"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword network_interfaces: Gets or sets the list of network interfaces associated with the
          virtual machine.
@@ -1110,7 +1121,9 @@ class NetworkProfileUpdate(_serialization.Model):
         "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterfacesUpdate]"},
     }
 
-    def __init__(self, *, network_interfaces: Optional[List["_models.NetworkInterfacesUpdate"]] = None, **kwargs):
+    def __init__(
+        self, *, network_interfaces: Optional[List["_models.NetworkInterfacesUpdate"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword network_interfaces: Gets or sets the list of network interfaces associated with the
          virtual machine.
@@ -1148,7 +1161,9 @@ class OsProfile(_serialization.Model):
         "os_name": {"key": "osName", "type": "str"},
     }
 
-    def __init__(self, *, admin_password: Optional[str] = None, computer_name: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, admin_password: Optional[str] = None, computer_name: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword admin_password: Admin password of the virtual machine.
         :paramtype admin_password: str
@@ -1173,7 +1188,7 @@ class ResourcePatch(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -1205,8 +1220,8 @@ class ResourceProviderOperation(_serialization.Model):
         is_data_action: Optional[str] = None,
         name: Optional[str] = None,
         display: Optional["_models.ResourceProviderOperationDisplay"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword is_data_action: Indicates whether the operation applies to data-plane.
         :paramtype is_data_action: str
@@ -1248,8 +1263,8 @@ class ResourceProviderOperationDisplay(_serialization.Model):
         resource: Optional[str] = None,
         operation: Optional[str] = None,
         description: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword provider: The resource provider.
         :paramtype provider: str
@@ -1286,8 +1301,8 @@ class ResourceProviderOperationList(_serialization.Model):
         *,
         value: Optional[List["_models.ResourceProviderOperation"]] = None,
         next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of Operations.
         :paramtype value: list[~azure.mgmt.scvmm.models.ResourceProviderOperation]
@@ -1312,7 +1327,7 @@ class StopVirtualMachineOptions(_serialization.Model):
         "skip_shutdown": {"key": "skipShutdown", "type": "bool"},
     }
 
-    def __init__(self, *, skip_shutdown: bool = False, **kwargs):
+    def __init__(self, *, skip_shutdown: bool = False, **kwargs: Any) -> None:
         """
         :keyword skip_shutdown: Gets or sets a value indicating whether to request non-graceful VM
          shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates
@@ -1334,7 +1349,7 @@ class StorageProfile(_serialization.Model):
         "disks": {"key": "disks", "type": "[VirtualDisk]"},
     }
 
-    def __init__(self, *, disks: Optional[List["_models.VirtualDisk"]] = None, **kwargs):
+    def __init__(self, *, disks: Optional[List["_models.VirtualDisk"]] = None, **kwargs: Any) -> None:
         """
         :keyword disks: Gets or sets the list of virtual disks associated with the virtual machine.
         :paramtype disks: list[~azure.mgmt.scvmm.models.VirtualDisk]
@@ -1354,7 +1369,7 @@ class StorageProfileUpdate(_serialization.Model):
         "disks": {"key": "disks", "type": "[VirtualDiskUpdate]"},
     }
 
-    def __init__(self, *, disks: Optional[List["_models.VirtualDiskUpdate"]] = None, **kwargs):
+    def __init__(self, *, disks: Optional[List["_models.VirtualDiskUpdate"]] = None, **kwargs: Any) -> None:
         """
         :keyword disks: Gets or sets the list of virtual disks associated with the virtual machine.
         :paramtype disks: list[~azure.mgmt.scvmm.models.VirtualDiskUpdate]
@@ -1398,8 +1413,8 @@ class StorageQoSPolicy(_serialization.Model):
         iops_minimum: Optional[int] = None,
         bandwidth_limit: Optional[int] = None,
         policy_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The name of the policy.
         :paramtype name: str
@@ -1438,8 +1453,12 @@ class StorageQoSPolicyDetails(_serialization.Model):
     }
 
     def __init__(
-        self, *, name: Optional[str] = None, id: Optional[str] = None, **kwargs  # pylint: disable=redefined-builtin
-    ):
+        self,
+        *,
+        name: Optional[str] = None,
+        id: Optional[str] = None,  # pylint: disable=redefined-builtin
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: The name of the policy.
         :paramtype name: str
@@ -1488,8 +1507,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -1589,8 +1608,8 @@ class VirtualDisk(_serialization.Model):  # pylint: disable=too-many-instance-at
         template_disk_id: Optional[str] = None,
         storage_qo_s_policy: Optional["_models.StorageQoSPolicyDetails"] = None,
         create_diff_disk: Optional[Union[str, "_models.CreateDiffDisk"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Gets or sets the name of the disk.
         :paramtype name: str
@@ -1674,8 +1693,8 @@ class VirtualDiskUpdate(_serialization.Model):
         bus_type: Optional[str] = None,
         vhd_type: Optional[str] = None,
         storage_qo_s_policy: Optional["_models.StorageQoSPolicyDetails"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Gets or sets the name of the disk.
         :paramtype name: str
@@ -1818,8 +1837,8 @@ class VirtualMachine(_serialization.Model):  # pylint: disable=too-many-instance
         vm_name: Optional[str] = None,
         uuid: Optional[str] = None,
         generation: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Gets or sets the location. Required.
         :paramtype location: str
@@ -1896,7 +1915,7 @@ class VirtualMachineCreateCheckpoint(_serialization.Model):
         "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(self, *, name: Optional[str] = None, description: Optional[str] = None, **kwargs):
+    def __init__(self, *, name: Optional[str] = None, description: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword name: Name of the checkpoint.
         :paramtype name: str
@@ -1919,7 +1938,7 @@ class VirtualMachineDeleteCheckpoint(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, *, id: Optional[str] = None, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: ID of the checkpoint to be deleted.
         :paramtype id: str
@@ -1989,8 +2008,8 @@ class VirtualMachineInventoryItem(InventoryItemProperties):
         *,
         ip_addresses: Optional[List[str]] = None,
         cloud: Optional["_models.InventoryItemDetails"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword ip_addresses: Gets or sets the nic ip addresses.
         :paramtype ip_addresses: list[str]
@@ -2021,8 +2040,8 @@ class VirtualMachineListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.VirtualMachine"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.VirtualMachine"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of VirtualMachines.
         :paramtype value: list[~azure.mgmt.scvmm.models.VirtualMachine]
@@ -2045,7 +2064,7 @@ class VirtualMachineRestoreCheckpoint(_serialization.Model):
         "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(self, *, id: Optional[str] = None, **kwargs):  # pylint: disable=redefined-builtin
+    def __init__(self, *, id: Optional[str] = None, **kwargs: Any) -> None:  # pylint: disable=redefined-builtin
         """
         :keyword id: ID of the checkpoint to be restored to.
         :paramtype id: str
@@ -2179,8 +2198,8 @@ class VirtualMachineTemplate(_serialization.Model):  # pylint: disable=too-many-
         inventory_item_id: Optional[str] = None,
         uuid: Optional[str] = None,
         vmm_server_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Gets or sets the location. Required.
         :paramtype location: str
@@ -2277,7 +2296,7 @@ class VirtualMachineTemplateInventoryItem(InventoryItemProperties):
         "os_name": {"key": "osName", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.inventory_type: str = "VirtualMachineTemplate"
@@ -2306,8 +2325,8 @@ class VirtualMachineTemplateListResult(_serialization.Model):
         *,
         value: Optional[List["_models.VirtualMachineTemplate"]] = None,
         next_link: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of VirtualMachineTemplates.
         :paramtype value: list[~azure.mgmt.scvmm.models.VirtualMachineTemplate]
@@ -2338,8 +2357,8 @@ class VirtualMachineUpdate(_serialization.Model):
         *,
         properties: Optional["_models.VirtualMachineUpdateProperties"] = None,
         tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword properties: Defines the resource properties.
         :paramtype properties: ~azure.mgmt.scvmm.models.VirtualMachineUpdateProperties
@@ -2378,8 +2397,8 @@ class VirtualMachineUpdateProperties(_serialization.Model):
         storage_profile: Optional["_models.StorageProfileUpdate"] = None,
         network_profile: Optional["_models.NetworkProfileUpdate"] = None,
         availability_sets: Optional[List["_models.AvailabilitySetListItem"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword hardware_profile: Defines the resource properties.
         :paramtype hardware_profile: ~azure.mgmt.scvmm.models.HardwareProfileUpdate
@@ -2466,8 +2485,8 @@ class VirtualNetwork(_serialization.Model):  # pylint: disable=too-many-instance
         inventory_item_id: Optional[str] = None,
         uuid: Optional[str] = None,
         vmm_server_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Gets or sets the location. Required.
         :paramtype location: str
@@ -2534,7 +2553,7 @@ class VirtualNetworkInventoryItem(InventoryItemProperties):
         "provisioning_state": {"key": "provisioningState", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.inventory_type: str = "VirtualNetwork"
@@ -2555,8 +2574,8 @@ class VirtualNetworkListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.VirtualNetwork"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self, *, value: Optional[List["_models.VirtualNetwork"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of VirtualNetworks.
         :paramtype value: list[~azure.mgmt.scvmm.models.VirtualNetwork]
@@ -2651,8 +2670,8 @@ class VMMServer(_serialization.Model):  # pylint: disable=too-many-instance-attr
         tags: Optional[Dict[str, str]] = None,
         credentials: Optional["_models.VMMServerPropertiesCredentials"] = None,
         port: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Gets or sets the location. Required.
         :paramtype location: str
@@ -2699,7 +2718,9 @@ class VMMServerListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.VMMServer"]] = None, next_link: Optional[str] = None, **kwargs):
+    def __init__(
+        self, *, value: Optional[List["_models.VMMServer"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of VmmServers.
         :paramtype value: list[~azure.mgmt.scvmm.models.VMMServer]
@@ -2725,7 +2746,7 @@ class VMMServerPropertiesCredentials(_serialization.Model):
         "password": {"key": "password", "type": "str"},
     }
 
-    def __init__(self, *, username: Optional[str] = None, password: Optional[str] = None, **kwargs):
+    def __init__(self, *, username: Optional[str] = None, password: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword username: Username to use to connect to VMMServer.
         :paramtype username: str

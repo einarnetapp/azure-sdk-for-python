@@ -306,8 +306,9 @@ class VirtualNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -375,8 +376,9 @@ class VirtualNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -491,7 +493,7 @@ class VirtualNetworksOperations:
         :type resource_group_name: str
         :param virtual_network_name: Name of the VirtualNetwork. Required.
         :type virtual_network_name: str
-        :param body: Request payload. Is either a model type or a IO type. Required.
+        :param body: Request payload. Is either a VirtualNetwork type or a IO type. Required.
         :type body: ~azure.mgmt.scvmm.models.VirtualNetwork or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -593,8 +595,9 @@ class VirtualNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -729,8 +732,9 @@ class VirtualNetworksOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -842,7 +846,8 @@ class VirtualNetworksOperations:
         :type resource_group_name: str
         :param virtual_network_name: Name of the VirtualNetwork. Required.
         :type virtual_network_name: str
-        :param body: VirtualNetworks patch payload. Is either a model type or a IO type. Required.
+        :param body: VirtualNetworks patch payload. Is either a ResourcePatch type or a IO type.
+         Required.
         :type body: ~azure.mgmt.scvmm.models.ResourcePatch or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -983,8 +988,9 @@ class VirtualNetworksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -1069,8 +1075,9 @@ class VirtualNetworksOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

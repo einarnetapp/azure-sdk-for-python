@@ -519,8 +519,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -588,8 +589,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -704,7 +706,7 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param virtual_machine_name: Name of the VirtualMachine. Required.
         :type virtual_machine_name: str
-        :param body: Request payload. Is either a model type or a IO type. Required.
+        :param body: Request payload. Is either a VirtualMachine type or a IO type. Required.
         :type body: ~azure.mgmt.scvmm.models.VirtualMachine or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -812,8 +814,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -961,8 +964,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1078,7 +1082,8 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param virtual_machine_name: Name of the VirtualMachine. Required.
         :type virtual_machine_name: str
-        :param body: VirtualMachines patch payload. Is either a model type or a IO type. Required.
+        :param body: VirtualMachines patch payload. Is either a VirtualMachineUpdate type or a IO type.
+         Required.
         :type body: ~azure.mgmt.scvmm.models.VirtualMachineUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1198,8 +1203,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1304,8 +1310,8 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param virtual_machine_name: Name of the VirtualMachine. Required.
         :type virtual_machine_name: str
-        :param body: Virtualmachine stop action payload. Is either a model type or a IO type. Default
-         value is None.
+        :param body: Virtualmachine stop action payload. Is either a StopVirtualMachineOptions type or
+         a IO type. Default value is None.
         :type body: ~azure.mgmt.scvmm.models.StopVirtualMachineOptions or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1401,8 +1407,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1517,8 +1524,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1652,8 +1660,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1758,8 +1767,8 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param virtual_machine_name: Name of the VirtualMachine. Required.
         :type virtual_machine_name: str
-        :param body: Virtualmachine create checkpoint action payload. Is either a model type or a IO
-         type. Default value is None.
+        :param body: Virtualmachine create checkpoint action payload. Is either a
+         VirtualMachineCreateCheckpoint type or a IO type. Default value is None.
         :type body: ~azure.mgmt.scvmm.models.VirtualMachineCreateCheckpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -1874,8 +1883,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -1980,8 +1990,8 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param virtual_machine_name: Name of the VirtualMachine. Required.
         :type virtual_machine_name: str
-        :param body: Virtualmachine delete checkpoint action payload. Is either a model type or a IO
-         type. Default value is None.
+        :param body: Virtualmachine delete checkpoint action payload. Is either a
+         VirtualMachineDeleteCheckpoint type or a IO type. Default value is None.
         :type body: ~azure.mgmt.scvmm.models.VirtualMachineDeleteCheckpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2096,8 +2106,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -2202,8 +2213,8 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param virtual_machine_name: Name of the VirtualMachine. Required.
         :type virtual_machine_name: str
-        :param body: Virtualmachine restore checkpoint action payload. Is either a model type or a IO
-         type. Default value is None.
+        :param body: Virtualmachine restore checkpoint action payload. Is either a
+         VirtualMachineRestoreCheckpoint type or a IO type. Default value is None.
         :type body: ~azure.mgmt.scvmm.models.VirtualMachineRestoreCheckpoint or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -2339,8 +2350,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -2425,8 +2437,9 @@ class VirtualMachinesOperations:  # pylint: disable=too-many-public-methods
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 

@@ -110,8 +110,9 @@ class AvailabilitySetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -179,8 +180,9 @@ class AvailabilitySetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -300,7 +302,7 @@ class AvailabilitySetsOperations:
         :type resource_group_name: str
         :param availability_set_name: Name of the AvailabilitySet. Required.
         :type availability_set_name: str
-        :param body: Request payload. Is either a model type or a IO type. Required.
+        :param body: Request payload. Is either a AvailabilitySet type or a IO type. Required.
         :type body: ~azure.mgmt.scvmm.models.AvailabilitySet or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -403,8 +405,9 @@ class AvailabilitySetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -547,8 +550,9 @@ class AvailabilitySetsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -664,7 +668,8 @@ class AvailabilitySetsOperations:
         :type resource_group_name: str
         :param availability_set_name: Name of the AvailabilitySet. Required.
         :type availability_set_name: str
-        :param body: AvailabilitySets patch payload. Is either a model type or a IO type. Required.
+        :param body: AvailabilitySets patch payload. Is either a ResourcePatch type or a IO type.
+         Required.
         :type body: ~azure.mgmt.scvmm.models.ResourcePatch or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -808,8 +813,9 @@ class AvailabilitySetsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -894,8 +900,9 @@ class AvailabilitySetsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
