@@ -14,7 +14,7 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
     pip install azure-identity
     pip install azure-mgmt-hybridcompute
 # USAGE
-    python private_endpoint_connection_update.py
+    python extension_metadata_list.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,25 +26,18 @@ from azure.mgmt.hybridcompute import HybridComputeManagementClient
 def main():
     client = HybridComputeManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="00000000-1111-2222-3333-444444444444",
+        subscription_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     )
 
-    response = client.private_endpoint_connections.begin_create_or_update(
-        resource_group_name="myResourceGroup",
-        scope_name="myPrivateLinkScope",
-        private_endpoint_connection_name="private-endpoint-connection-name",
-        parameters={
-            "properties": {
-                "privateLinkServiceConnectionState": {
-                    "description": "Approved by johndoe@contoso.com",
-                    "status": "Approved",
-                }
-            }
-        },
-    ).result()
-    print(response)
+    response = client.extension_metadata.list(
+        location="EastUS",
+        publisher="microsoft.azure.monitor",
+        extension_type="azuremonitorlinuxagent",
+    )
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/stable/2022-12-27/examples/PrivateEndpointConnectionUpdate.json
+# x-ms-original-file: specification/hybridcompute/resource-manager/Microsoft.HybridCompute/stable/2022-12-27/examples/ExtensionMetadata_List.json
 if __name__ == "__main__":
     main()

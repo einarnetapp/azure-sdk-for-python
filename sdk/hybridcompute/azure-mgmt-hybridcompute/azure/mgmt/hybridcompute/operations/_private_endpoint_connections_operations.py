@@ -53,7 +53,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2022-12-27"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-27"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -93,7 +93,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2022-12-27"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-27"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -136,7 +136,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2022-12-27"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-27"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -172,7 +172,7 @@ def build_list_by_private_link_scope_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2022-03-10"] = kwargs.pop("api_version", _params.pop("api-version", "2022-03-10"))
+    api_version: Literal["2022-12-27"] = kwargs.pop("api_version", _params.pop("api-version", "2022-12-27"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -247,7 +247,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2022-12-27"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
@@ -265,8 +265,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -306,7 +307,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2022-12-27"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -336,8 +337,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -458,7 +460,7 @@ class PrivateEndpointConnectionsOperations:
         :type scope_name: str
         :param private_endpoint_connection_name: The name of the private endpoint connection. Required.
         :type private_endpoint_connection_name: str
-        :param parameters: Is either a model type or a IO type. Required.
+        :param parameters: Is either a PrivateEndpointConnection type or a IO type. Required.
         :type parameters: ~azure.mgmt.hybridcompute.models.PrivateEndpointConnection or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -480,7 +482,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2022-12-27"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -542,7 +544,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2022-12-27"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -560,8 +562,9 @@ class PrivateEndpointConnectionsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
+        _stream = False
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
+            request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -571,8 +574,16 @@ class PrivateEndpointConnectionsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, None, response_headers)
 
     _delete_initial.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}"
@@ -606,7 +617,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2022-12-27"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -670,7 +681,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-10"] = kwargs.pop(
+        api_version: Literal["2022-12-27"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.PrivateEndpointConnectionListResult] = kwargs.pop("cls", None)
@@ -726,8 +737,9 @@ class PrivateEndpointConnectionsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
+            _stream = False
             pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
+                request, stream=_stream, **kwargs
             )
             response = pipeline_response.http_response
 
