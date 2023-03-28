@@ -106,12 +106,75 @@ class AlertType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class BenefitKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Kind/type of the benefit."""
 
-    #: Benefit is IncludedQuantity.
     INCLUDED_QUANTITY = "IncludedQuantity"
-    #: Benefit is Reservation.
+    """Benefit is IncludedQuantity."""
     RESERVATION = "Reservation"
-    #: Benefit is SavingsPlan.
+    """Benefit is Reservation."""
     SAVINGS_PLAN = "SavingsPlan"
+    """Benefit is SavingsPlan."""
+
+
+class BudgetNotificationOperatorType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The comparison operator.
+
+     Supported for CategoryType(s): Cost, ReservationUtilization.
+
+     Supported operators for **CategoryType: Cost**
+
+
+    * GreaterThan
+    *
+      GreaterThanOrEqualTo
+
+      Supported operators for **CategoryType: ReservationUtilization**
+
+    * LessThan.
+    """
+
+    EQUAL_TO = "EqualTo"
+    """Notification will be triggered if the evaluated cost is the same as threshold value. Note: It’s
+    #: not recommended to use this OperatorType as there’s low chance of cost being exactly the same
+    #: as threshold value, leading to missing of your alert. This OperatorType will be deprecated in
+    #: future.
+    #: 
+    #:  Supported for CategoryType(s): Cost."""
+    GREATER_THAN = "GreaterThan"
+    """Notification will be triggered if the evaluated cost is greater than the threshold value. Note:
+    #: This is the recommended OperatorType while configuring Budget Alert.
+    #: 
+    #:  Supported for CategoryType(s): Cost."""
+    GREATER_THAN_OR_EQUAL_TO = "GreaterThanOrEqualTo"
+    """Notification will be triggered if the evaluated cost is greater than or equal to the threshold
+    #: value.
+    #: 
+    #:  Supported for CategoryType(s): Cost."""
+    LESS_THAN = "LessThan"
+    """Notification will be triggered if any Reservations in the scope of the Reservation Utilization
+    #: Alert Rule have a utilization less than the threshold percentage.
+    #: 
+    #:  Supported for CategoryType(s): ReservationUtilization."""
+
+
+class BudgetOperatorType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The operator to use for comparison."""
+
+    IN = "In"
+
+
+class CategoryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The category of the budget.
+
+
+    * 'Cost' defines a Budget.
+    * 'ReservationUtilization' defines a Reservation Utilization Alert Rule.
+    """
+
+    COST = "Cost"
+    """A Budget that evaluates monetary cost of Azure resources against an amount, and alerts based on
+    #: a configured notification threshold."""
+    RESERVATION_UTILIZATION = "ReservationUtilization"
+    """An Alert Rule that evaluates the utilization percentage of Azure Reservations, and alerts based
+    #: on a configured notification threshold."""
 
 
 class ChartType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -134,28 +197,28 @@ class CheckNameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class CostDetailsDataFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The data format of the report."""
 
-    #: Csv data format.
     CSV_COST_DETAILS_DATA_FORMAT = "Csv"
+    """Csv data format."""
 
 
 class CostDetailsMetricType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the detailed report. By default ActualCost is provided."""
 
-    #: Actual cost data.
     ACTUAL_COST_COST_DETAILS_METRIC_TYPE = "ActualCost"
-    #: Amortized cost data.
+    """Actual cost data."""
     AMORTIZED_COST_COST_DETAILS_METRIC_TYPE = "AmortizedCost"
+    """Amortized cost data."""
 
 
 class CostDetailsStatusType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the cost details operation."""
 
-    #: Operation is Completed.
     COMPLETED_COST_DETAILS_STATUS_TYPE = "Completed"
-    #: Operation is Completed and no cost data found.
+    """Operation is Completed."""
     NO_DATA_FOUND_COST_DETAILS_STATUS_TYPE = "NoDataFound"
-    #: Operation Failed.
+    """Operation is Completed and no cost data found."""
     FAILED_COST_DETAILS_STATUS_TYPE = "Failed"
+    """Operation Failed."""
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -165,6 +228,35 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
+
+
+class CultureCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Language in which the recipient will receive the notification,
+
+    Supported for CategoryType(s): Cost, ReservationUtilization.
+    """
+
+    EN_US = "en-us"
+    JA_JP = "ja-jp"
+    ZH_CN = "zh-cn"
+    DE_DE = "de-de"
+    ES_ES = "es-es"
+    FR_FR = "fr-fr"
+    IT_IT = "it-it"
+    KO_KR = "ko-kr"
+    PT_BR = "pt-br"
+    RU_RU = "ru-ru"
+    ZH_TW = "zh-tw"
+    CS_CZ = "cs-cz"
+    PL_PL = "pl-pl"
+    TR_TR = "tr-tr"
+    DA_DK = "da-dk"
+    EN_GB = "en-gb"
+    HU_HU = "hu-hu"
+    NB_NO = "nb-no"
+    NL_NL = "nl-nl"
+    PT_PT = "pt-pt"
+    SV_SE = "sv-se"
 
 
 class DaysOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -199,7 +291,9 @@ class ExecutionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ExportType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of the query."""
+    """The type of the export. Note that 'Usage' is equivalent to 'ActualCost' and is applicable to
+    exports that do not yet provide data for charges or amortization for service reservations.
+    """
 
     USAGE = "Usage"
     ACTUAL_COST = "ActualCost"
@@ -245,6 +339,26 @@ class FormatType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CSV = "Csv"
 
 
+class Frequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Frequency of a notification. Represents how long the notification will be silent after
+    triggering an alert for a threshold breach. If not specified, the frequency will be set by
+    default based on the timeGrain (Weekly when timeGrain: Last7Days, Monthly when timeGrain:
+    Last30Days).
+
+     Supported for CategoryType(s): ReservationUtilization.
+    """
+
+    DAILY = "Daily"
+    """After the threshold breaches and an Alert is fired, no further alerts will be sent until the
+    #: next calendar day."""
+    WEEKLY = "Weekly"
+    """After the threshold breaches and an Alert is fired, no further alerts will be sent for 7
+    #: calendar days."""
+    MONTHLY = "Monthly"
+    """After the threshold breaches and an Alert is fired, no further alerts will be sent for 30
+    #: calendar days."""
+
+
 class FunctionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The name of the column to aggregate."""
 
@@ -270,27 +384,27 @@ class GenerateDetailedCostReportMetricType(str, Enum, metaclass=CaseInsensitiveE
 class Grain(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Grain which corresponds to value."""
 
-    #: Hourly grain corresponds to value per hour.
     HOURLY = "Hourly"
-    #: Hourly grain corresponds to value per day.
+    """Hourly grain corresponds to value per hour."""
     DAILY = "Daily"
-    #: Hourly grain corresponds to value per month.
+    """Hourly grain corresponds to value per day."""
     MONTHLY = "Monthly"
+    """Hourly grain corresponds to value per month."""
 
 
 class GrainParameter(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """GrainParameter."""
 
-    #: Hourly grain corresponds to value per hour.
     HOURLY = "Hourly"
-    #: Hourly grain corresponds to value per day.
+    """Hourly grain corresponds to value per hour."""
     DAILY = "Daily"
-    #: Hourly grain corresponds to value per month.
+    """Hourly grain corresponds to value per day."""
     MONTHLY = "Monthly"
+    """Hourly grain corresponds to value per month."""
 
 
 class GranularityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The granularity of rows in the forecast."""
+    """The granularity of rows in the export. Currently only 'Daily' is supported."""
 
     DAILY = "Daily"
 
@@ -305,12 +419,12 @@ class KpiType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class LookBackPeriod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The number of days used to look back."""
 
-    #: 7 days used to look back.
     LAST7_DAYS = "Last7Days"
-    #: 30 days used to look back.
+    """7 days used to look back."""
     LAST30_DAYS = "Last30Days"
-    #: 60 days used to look back.
+    """30 days used to look back."""
     LAST60_DAYS = "Last60Days"
+    """60 days used to look back."""
 
 
 class MetricType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -354,10 +468,12 @@ class PivotType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class QueryColumnType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of the column in the export."""
+    """The type of the column in the report."""
 
-    TAG = "Tag"
+    TAG_KEY = "TagKey"
+    """The tag associated with the cost data."""
     DIMENSION = "Dimension"
+    """The dimension of cost data."""
 
 
 class QueryOperatorType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -373,13 +489,6 @@ class RecurrenceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     WEEKLY = "Weekly"
     MONTHLY = "Monthly"
     ANNUALLY = "Annually"
-
-
-class ReportConfigColumnType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of the column in the report."""
-
-    TAG = "Tag"
-    DIMENSION = "Dimension"
 
 
 class ReportConfigSortingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -449,42 +558,42 @@ class ReservationReportSchema(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class ScheduledActionKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Kind of the scheduled action."""
 
-    #: Cost analysis data will be emailed.
     EMAIL = "Email"
-    #: Cost anomaly information will be emailed. Available only on subscription scope at daily
-    #: frequency. If no anomaly is detected on the resource, an email won't be sent.
+    """Cost analysis data will be emailed."""
     INSIGHT_ALERT = "InsightAlert"
+    """Cost anomaly information will be emailed. Available only on subscription scope at daily
+    #: frequency. If no anomaly is detected on the resource, an email won't be sent."""
 
 
 class ScheduledActionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the scheduled action."""
 
-    #: Scheduled action is saved but will not be run.
     DISABLED = "Disabled"
-    #: Scheduled action is saved and will be run.
+    """Scheduled action is saved but will not be run."""
     ENABLED = "Enabled"
-    #: Scheduled action is expired.
+    """Scheduled action is saved and will be run."""
     EXPIRED = "Expired"
+    """Scheduled action is expired."""
 
 
 class ScheduleFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Frequency of the schedule."""
 
-    #: Cost analysis data will be emailed every day.
     DAILY = "Daily"
-    #: Cost analysis data will be emailed every week.
+    """Cost analysis data will be emailed every day."""
     WEEKLY = "Weekly"
-    #: Cost analysis data will be emailed every month.
+    """Cost analysis data will be emailed every week."""
     MONTHLY = "Monthly"
+    """Cost analysis data will be emailed every month."""
 
 
 class Scope(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Kind of the recommendation scope."""
 
-    #: Single scope recommendation.
     SINGLE = "Single"
-    #: Shared scope recommendation.
+    """Single scope recommendation."""
     SHARED = "Shared"
+    """Shared scope recommendation."""
 
 
 class StatusType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -497,14 +606,27 @@ class StatusType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class Term(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Grain which corresponds to value."""
 
-    #: Benefit term is 1 year.
     P1_Y = "P1Y"
-    #: Benefit term is 3 years.
+    """Benefit term is 1 year."""
     P3_Y = "P3Y"
+    """Benefit term is 3 years."""
+
+
+class ThresholdType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of threshold.
+
+    Supported for CategoryType(s): Cost.
+    """
+
+    ACTUAL = "Actual"
+    """Actual costs budget alerts notify when the actual accrued cost exceeds the allocated budget."""
+    FORECASTED = "Forecasted"
+    """Forecasted costs budget alerts provide advanced notification that your spending trends are
+    #: likely to exceed your allocated budget, as it relies on forecasted cost predictions."""
 
 
 class TimeframeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The time frame for pulling data for the query. If custom, then a specific time period must be
+    """The time frame for pulling data for the export. If custom, then a specific time period must be
     provided.
     """
 
@@ -514,6 +636,69 @@ class TimeframeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     THE_LAST_BILLING_MONTH = "TheLastBillingMonth"
     WEEK_TO_DATE = "WeekToDate"
     CUSTOM = "Custom"
+
+
+class TimeGrainType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The time covered by a budget. Tracking of the amount will be reset based on the time grain.
+
+    Supported for CategoryType(s): Cost, ReservationUtilization.
+
+     Supported timeGrainTypes for **CategoryType: Cost**
+
+
+    * Monthly
+    * Quarterly
+    * Annually
+    * BillingMonth*
+    * BillingQuarter*
+    *
+      BillingAnnual*
+
+      *only supported for Web Direct customers.
+
+      Supported timeGrainTypes for **CategoryType: ReservationUtilization**
+
+    * Last7Days
+    *
+      Last30Days
+
+      Required for CategoryType(s): Cost, ReservationUtilization.
+    """
+
+    MONTHLY = "Monthly"
+    """The budget will track costs in the current calendar month against the amount.
+    #: 
+    #:  Supported for CategoryType: Cost only."""
+    QUARTERLY = "Quarterly"
+    """The budget will track costs in the current calendar quarter against the amount.
+    #: 
+    #:  Supported for CategoryType: Cost only."""
+    ANNUALLY = "Annually"
+    """The budget will track costs in the current calendar year against the amount.
+    #: 
+    #:  Supported for CategoryType: Cost only."""
+    BILLING_MONTH = "BillingMonth"
+    """The budget will track costs in the current billing month against the amount.
+    #: 
+    #:  Supported for CategoryType: Cost and Web Direct customers only."""
+    BILLING_QUARTER = "BillingQuarter"
+    """The budget will track costs in the current billing quarter against the amount.
+    #: 
+    #:  Supported for CategoryType: Cost and Web Direct customers only."""
+    BILLING_ANNUAL = "BillingAnnual"
+    """The budget will track costs in the current billing year against the amount.
+    #: 
+    #:  Supported for CategoryType: Cost and Web Direct customers only."""
+    LAST7_DAYS = "Last7Days"
+    """The Reservation Utilization Alert Rule will evaluate reservations based on their 7-Day
+    #: utilization percentage.
+    #: 
+    #:  Supported for CategoryType: ReservationUtilization only."""
+    LAST30_DAYS = "Last30Days"
+    """The Reservation Utilization Alert Rule will evaluate reservations based on their 30-Day
+    #: utilization percentage.
+    #: 
+    #:  Supported for CategoryType: ReservationUtilization only."""
 
 
 class WeeksOfMonth(str, Enum, metaclass=CaseInsensitiveEnumMeta):
