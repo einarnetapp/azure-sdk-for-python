@@ -35,14 +35,14 @@ class IotDpsClientConfiguration(Configuration):  # pylint: disable=too-many-inst
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription identifier. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2022-02-05". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2023-03-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "AsyncTokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(IotDpsClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-02-05")  # type: Literal["2022-02-05"]
+        api_version: Literal["2023-03-01-preview"] = kwargs.pop("api_version", "2023-03-01-preview")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
