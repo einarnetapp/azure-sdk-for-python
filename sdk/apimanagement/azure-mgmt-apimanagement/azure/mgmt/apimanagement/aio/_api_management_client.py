@@ -12,7 +12,7 @@ from typing import Any, Awaitable, TYPE_CHECKING
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
 
-from .. import models
+from .. import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import ApiManagementClientConfiguration
 from .operations import (
@@ -36,6 +36,12 @@ from .operations import (
     ApiSchemaOperations,
     ApiTagDescriptionOperations,
     ApiVersionSetOperations,
+    ApiWikiOperations,
+    ApiWikisOperations,
+    AuthorizationAccessPolicyOperations,
+    AuthorizationLoginLinksOperations,
+    AuthorizationOperations,
+    AuthorizationProviderOperations,
     AuthorizationServerOperations,
     BackendOperations,
     CacheOperations,
@@ -45,12 +51,15 @@ from .operations import (
     DelegationSettingsOperations,
     DeletedServicesOperations,
     DiagnosticOperations,
+    DocumentationOperations,
     EmailTemplateOperations,
     GatewayApiOperations,
     GatewayCertificateAuthorityOperations,
     GatewayHostnameConfigurationOperations,
     GatewayOperations,
     GlobalSchemaOperations,
+    GraphQLApiResolverOperations,
+    GraphQLApiResolverPolicyOperations,
     GroupOperations,
     GroupUserOperations,
     IdentityProviderOperations,
@@ -65,7 +74,9 @@ from .operations import (
     OperationOperations,
     OutboundNetworkDependenciesEndpointsOperations,
     PolicyDescriptionOperations,
+    PolicyFragmentOperations,
     PolicyOperations,
+    PortalConfigOperations,
     PortalRevisionOperations,
     PortalSettingsOperations,
     PrivateEndpointConnectionOperations,
@@ -74,6 +85,8 @@ from .operations import (
     ProductOperations,
     ProductPolicyOperations,
     ProductSubscriptionsOperations,
+    ProductWikiOperations,
+    ProductWikisOperations,
     QuotaByCounterKeysOperations,
     QuotaByPeriodKeysOperations,
     RegionOperations,
@@ -117,6 +130,12 @@ class ApiManagementClient(
      azure.mgmt.apimanagement.aio.operations.ApiOperationPolicyOperations
     :ivar tag: TagOperations operations
     :vartype tag: azure.mgmt.apimanagement.aio.operations.TagOperations
+    :ivar graph_ql_api_resolver: GraphQLApiResolverOperations operations
+    :vartype graph_ql_api_resolver:
+     azure.mgmt.apimanagement.aio.operations.GraphQLApiResolverOperations
+    :ivar graph_ql_api_resolver_policy: GraphQLApiResolverPolicyOperations operations
+    :vartype graph_ql_api_resolver_policy:
+     azure.mgmt.apimanagement.aio.operations.GraphQLApiResolverPolicyOperations
     :ivar api_product: ApiProductOperations operations
     :vartype api_product: azure.mgmt.apimanagement.aio.operations.ApiProductOperations
     :ivar api_policy: ApiPolicyOperations operations
@@ -137,10 +156,25 @@ class ApiManagementClient(
      azure.mgmt.apimanagement.aio.operations.ApiTagDescriptionOperations
     :ivar operation: OperationOperations operations
     :vartype operation: azure.mgmt.apimanagement.aio.operations.OperationOperations
+    :ivar api_wiki: ApiWikiOperations operations
+    :vartype api_wiki: azure.mgmt.apimanagement.aio.operations.ApiWikiOperations
+    :ivar api_wikis: ApiWikisOperations operations
+    :vartype api_wikis: azure.mgmt.apimanagement.aio.operations.ApiWikisOperations
     :ivar api_export: ApiExportOperations operations
     :vartype api_export: azure.mgmt.apimanagement.aio.operations.ApiExportOperations
     :ivar api_version_set: ApiVersionSetOperations operations
     :vartype api_version_set: azure.mgmt.apimanagement.aio.operations.ApiVersionSetOperations
+    :ivar authorization_provider: AuthorizationProviderOperations operations
+    :vartype authorization_provider:
+     azure.mgmt.apimanagement.aio.operations.AuthorizationProviderOperations
+    :ivar authorization: AuthorizationOperations operations
+    :vartype authorization: azure.mgmt.apimanagement.aio.operations.AuthorizationOperations
+    :ivar authorization_login_links: AuthorizationLoginLinksOperations operations
+    :vartype authorization_login_links:
+     azure.mgmt.apimanagement.aio.operations.AuthorizationLoginLinksOperations
+    :ivar authorization_access_policy: AuthorizationAccessPolicyOperations operations
+    :vartype authorization_access_policy:
+     azure.mgmt.apimanagement.aio.operations.AuthorizationAccessPolicyOperations
     :ivar authorization_server: AuthorizationServerOperations operations
     :vartype authorization_server:
      azure.mgmt.apimanagement.aio.operations.AuthorizationServerOperations
@@ -167,6 +201,8 @@ class ApiManagementClient(
      azure.mgmt.apimanagement.aio.operations.ApiManagementServiceOperations
     :ivar diagnostic: DiagnosticOperations operations
     :vartype diagnostic: azure.mgmt.apimanagement.aio.operations.DiagnosticOperations
+    :ivar documentation: DocumentationOperations operations
+    :vartype documentation: azure.mgmt.apimanagement.aio.operations.DocumentationOperations
     :ivar email_template: EmailTemplateOperations operations
     :vartype email_template: azure.mgmt.apimanagement.aio.operations.EmailTemplateOperations
     :ivar gateway: GatewayOperations operations
@@ -213,6 +249,10 @@ class ApiManagementClient(
     :ivar policy_description: PolicyDescriptionOperations operations
     :vartype policy_description:
      azure.mgmt.apimanagement.aio.operations.PolicyDescriptionOperations
+    :ivar policy_fragment: PolicyFragmentOperations operations
+    :vartype policy_fragment: azure.mgmt.apimanagement.aio.operations.PolicyFragmentOperations
+    :ivar portal_config: PortalConfigOperations operations
+    :vartype portal_config: azure.mgmt.apimanagement.aio.operations.PortalConfigOperations
     :ivar portal_revision: PortalRevisionOperations operations
     :vartype portal_revision: azure.mgmt.apimanagement.aio.operations.PortalRevisionOperations
     :ivar portal_settings: PortalSettingsOperations operations
@@ -238,6 +278,10 @@ class ApiManagementClient(
      azure.mgmt.apimanagement.aio.operations.ProductSubscriptionsOperations
     :ivar product_policy: ProductPolicyOperations operations
     :vartype product_policy: azure.mgmt.apimanagement.aio.operations.ProductPolicyOperations
+    :ivar product_wiki: ProductWikiOperations operations
+    :vartype product_wiki: azure.mgmt.apimanagement.aio.operations.ProductWikiOperations
+    :ivar product_wikis: ProductWikisOperations operations
+    :vartype product_wikis: azure.mgmt.apimanagement.aio.operations.ProductWikisOperations
     :ivar quota_by_counter_keys: QuotaByCounterKeysOperations operations
     :vartype quota_by_counter_keys:
      azure.mgmt.apimanagement.aio.operations.QuotaByCounterKeysOperations
@@ -279,13 +323,12 @@ class ApiManagementClient(
      azure.mgmt.apimanagement.aio.operations.UserConfirmationPasswordOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: Subscription credentials which uniquely identify Microsoft Azure
-     subscription. The subscription ID forms part of the URI for every service call. Required.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -301,9 +344,9 @@ class ApiManagementClient(
         self._config = ApiManagementClientConfiguration(
             credential=credential, subscription_id=subscription_id, **kwargs
         )
-        self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
+        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -315,6 +358,12 @@ class ApiManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.tag = TagOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.graph_ql_api_resolver = GraphQLApiResolverOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.graph_ql_api_resolver_policy = GraphQLApiResolverPolicyOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.api_product = ApiProductOperations(self._client, self._config, self._serialize, self._deserialize)
         self.api_policy = ApiPolicyOperations(self._client, self._config, self._serialize, self._deserialize)
         self.api_schema = ApiSchemaOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -330,8 +379,20 @@ class ApiManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.operation = OperationOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.api_wiki = ApiWikiOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.api_wikis = ApiWikisOperations(self._client, self._config, self._serialize, self._deserialize)
         self.api_export = ApiExportOperations(self._client, self._config, self._serialize, self._deserialize)
         self.api_version_set = ApiVersionSetOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.authorization_provider = AuthorizationProviderOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.authorization = AuthorizationOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.authorization_login_links = AuthorizationLoginLinksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.authorization_access_policy = AuthorizationAccessPolicyOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.authorization_server = AuthorizationServerOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -353,6 +414,7 @@ class ApiManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.diagnostic = DiagnosticOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.documentation = DocumentationOperations(self._client, self._config, self._serialize, self._deserialize)
         self.email_template = EmailTemplateOperations(self._client, self._config, self._serialize, self._deserialize)
         self.gateway = GatewayOperations(self._client, self._config, self._serialize, self._deserialize)
         self.gateway_hostname_configuration = GatewayHostnameConfigurationOperations(
@@ -388,6 +450,8 @@ class ApiManagementClient(
         self.policy_description = PolicyDescriptionOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.policy_fragment = PolicyFragmentOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.portal_config = PortalConfigOperations(self._client, self._config, self._serialize, self._deserialize)
         self.portal_revision = PortalRevisionOperations(self._client, self._config, self._serialize, self._deserialize)
         self.portal_settings = PortalSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.sign_in_settings = SignInSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -405,6 +469,8 @@ class ApiManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.product_policy = ProductPolicyOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.product_wiki = ProductWikiOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.product_wikis = ProductWikisOperations(self._client, self._config, self._serialize, self._deserialize)
         self.quota_by_counter_keys = QuotaByCounterKeysOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -466,5 +532,5 @@ class ApiManagementClient(
         await self._client.__aenter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
+    async def __aexit__(self, *exc_details: Any) -> None:
         await self._client.__aexit__(*exc_details)
