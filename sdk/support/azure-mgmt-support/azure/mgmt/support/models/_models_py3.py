@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import List, Optional, TYPE_CHECKING, Union
+from typing import Any, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
@@ -39,7 +39,7 @@ class CheckNameAvailabilityInput(_serialization.Model):
         "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(self, *, name: str, type: Union[str, "_models.Type"], **kwargs):
+    def __init__(self, *, name: str, type: Union[str, "_models.Type"], **kwargs: Any) -> None:
         """
         :keyword name: The resource name to validate. Required.
         :paramtype name: str
@@ -77,7 +77,7 @@ class CheckNameAvailabilityOutput(_serialization.Model):
         "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.name_available = None
@@ -134,8 +134,8 @@ class CommunicationDetails(_serialization.Model):
     }
 
     def __init__(
-        self, *, sender: Optional[str] = None, subject: Optional[str] = None, body: Optional[str] = None, **kwargs
-    ):
+        self, *, sender: Optional[str] = None, subject: Optional[str] = None, body: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword sender: Email address of the sender. This property is required if called by a service
          principal.
@@ -172,8 +172,12 @@ class CommunicationsListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.CommunicationDetails"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.CommunicationDetails"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of Communication resources.
         :paramtype value: list[~azure.mgmt.support.models.CommunicationDetails]
@@ -254,8 +258,8 @@ class ContactProfile(_serialization.Model):
         preferred_support_language: str,
         additional_email_addresses: Optional[List[str]] = None,
         phone_number: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword first_name: First name. Required.
         :paramtype first_name: str
@@ -309,7 +313,7 @@ class ExceptionResponse(_serialization.Model):
         "error": {"key": "error", "type": "ServiceError"},
     }
 
-    def __init__(self, *, error: Optional["_models.ServiceError"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.ServiceError"] = None, **kwargs: Any) -> None:
         """
         :keyword error: The API error details.
         :paramtype error: ~azure.mgmt.support.models.ServiceError
@@ -338,7 +342,7 @@ class Operation(_serialization.Model):
         "display": {"key": "display", "type": "OperationDisplay"},
     }
 
-    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs):
+    def __init__(self, *, display: Optional["_models.OperationDisplay"] = None, **kwargs: Any) -> None:
         """
         :keyword display: The object that describes the operation.
         :paramtype display: ~azure.mgmt.support.models.OperationDisplay
@@ -377,7 +381,7 @@ class OperationDisplay(_serialization.Model):
         "resource": {"key": "resource", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.description = None
@@ -397,7 +401,7 @@ class OperationsListResult(_serialization.Model):
         "value": {"key": "value", "type": "[Operation]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Operation"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Operation"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: The list of operations supported by Microsoft Support resource provider.
         :paramtype value: list[~azure.mgmt.support.models.Operation]
@@ -434,7 +438,7 @@ class ProblemClassification(_serialization.Model):
         "display_name": {"key": "properties.displayName", "type": "str"},
     }
 
-    def __init__(self, *, display_name: Optional[str] = None, **kwargs):
+    def __init__(self, *, display_name: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword display_name: Localized name of problem classification.
         :paramtype display_name: str
@@ -457,7 +461,7 @@ class ProblemClassificationsListResult(_serialization.Model):
         "value": {"key": "value", "type": "[ProblemClassification]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.ProblemClassification"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.ProblemClassification"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: List of ProblemClassification resources.
         :paramtype value: list[~azure.mgmt.support.models.ProblemClassification]
@@ -480,7 +484,7 @@ class QuotaChangeRequest(_serialization.Model):
         "payload": {"key": "payload", "type": "str"},
     }
 
-    def __init__(self, *, region: Optional[str] = None, payload: Optional[str] = None, **kwargs):
+    def __init__(self, *, region: Optional[str] = None, payload: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword region: Region for which the quota increase request is being made.
         :paramtype region: str
@@ -493,7 +497,9 @@ class QuotaChangeRequest(_serialization.Model):
 
 
 class QuotaTicketDetails(_serialization.Model):
-    """Additional set of information required for quota increase support ticket for certain quota types, e.g.: Virtual machine cores. Get complete details about Quota payload support request along with examples at `Support quota request <https://aka.ms/supportrpquotarequestpayload>`_.
+    """Additional set of information required for quota increase support ticket for certain quota
+    types, e.g.: Virtual machine cores. Get complete details about Quota payload support request
+    along with examples at `Support quota request <https://aka.ms/supportrpquotarequestpayload>`_.
 
     :ivar quota_change_request_sub_type: Required for certain quota types when there is a sub type,
      such as Batch, for which you are requesting a quota increase.
@@ -517,8 +523,8 @@ class QuotaTicketDetails(_serialization.Model):
         quota_change_request_sub_type: Optional[str] = None,
         quota_change_request_version: Optional[str] = None,
         quota_change_requests: Optional[List["_models.QuotaChangeRequest"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword quota_change_request_sub_type: Required for certain quota types when there is a sub
          type, such as Batch, for which you are requesting a quota increase.
@@ -566,7 +572,9 @@ class Service(_serialization.Model):
         "resource_types": {"key": "properties.resourceTypes", "type": "[str]"},
     }
 
-    def __init__(self, *, display_name: Optional[str] = None, resource_types: Optional[List[str]] = None, **kwargs):
+    def __init__(
+        self, *, display_name: Optional[str] = None, resource_types: Optional[List[str]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword display_name: Localized name of the Azure service.
         :paramtype display_name: str
@@ -608,8 +616,8 @@ class ServiceError(_serialization.Model):
     }
 
     def __init__(
-        self, *, code: Optional[str] = None, message: Optional[str] = None, target: Optional[str] = None, **kwargs
-    ):
+        self, *, code: Optional[str] = None, message: Optional[str] = None, target: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword code: The error code.
         :paramtype code: str
@@ -649,7 +657,7 @@ class ServiceErrorDetail(_serialization.Model):
         "target": {"key": "target", "type": "str"},
     }
 
-    def __init__(self, *, target: Optional[str] = None, **kwargs):
+    def __init__(self, *, target: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword target: The target of the error.
         :paramtype target: str
@@ -685,7 +693,7 @@ class ServiceLevelAgreement(_serialization.Model):
         "sla_minutes": {"key": "slaMinutes", "type": "int"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.start_time = None
@@ -704,7 +712,7 @@ class ServicesListResult(_serialization.Model):
         "value": {"key": "value", "type": "[Service]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Service"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Service"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: List of Service resources.
         :paramtype value: list[~azure.mgmt.support.models.Service]
@@ -731,7 +739,7 @@ class SupportEngineer(_serialization.Model):
         "email_address": {"key": "emailAddress", "type": "str"},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
         self.email_address = None
@@ -854,8 +862,8 @@ class SupportTicketDetails(_serialization.Model):  # pylint: disable=too-many-in
         service_id: Optional[str] = None,
         technical_ticket_details: Optional["_models.TechnicalTicketDetails"] = None,
         quota_ticket_details: Optional["_models.QuotaTicketDetails"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword support_ticket_id: System generated support ticket Id that is unique.
         :paramtype support_ticket_id: str
@@ -936,8 +944,12 @@ class SupportTicketsListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.SupportTicketDetails"]] = None, next_link: Optional[str] = None, **kwargs
-    ):
+        self,
+        *,
+        value: Optional[List["_models.SupportTicketDetails"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: List of SupportTicket resources.
         :paramtype value: list[~azure.mgmt.support.models.SupportTicketDetails]
@@ -961,7 +973,7 @@ class TechnicalTicketDetails(_serialization.Model):
         "resource_id": {"key": "resourceId", "type": "str"},
     }
 
-    def __init__(self, *, resource_id: Optional[str] = None, **kwargs):
+    def __init__(self, *, resource_id: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword resource_id: This is the resource Id of the Azure service resource (For example: A
          virtual machine resource or an HDInsight resource) for which the support ticket is created.
@@ -1027,8 +1039,8 @@ class UpdateContactProfile(_serialization.Model):
         preferred_time_zone: Optional[str] = None,
         country: Optional[str] = None,
         preferred_support_language: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword first_name: First name.
         :paramtype first_name: str
@@ -1095,8 +1107,8 @@ class UpdateSupportTicket(_serialization.Model):
         severity: Optional[Union[str, "_models.SeverityLevel"]] = None,
         status: Optional[Union[str, "_models.Status"]] = None,
         contact_details: Optional["_models.UpdateContactProfile"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword severity: Severity level. Known values are: "minimal", "moderate", "critical", and
          "highestcriticalimpact".
