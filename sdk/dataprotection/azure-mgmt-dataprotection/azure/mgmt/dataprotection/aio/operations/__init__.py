@@ -17,12 +17,14 @@ from ._data_protection_operations_operations import DataProtectionOperationsOper
 from ._backup_policies_operations import BackupPoliciesOperations
 from ._backup_instances_operations import BackupInstancesOperations
 from ._recovery_points_operations import RecoveryPointsOperations
+from ._data_protection_mgmt_client_operations import DataProtectionMgmtClientOperationsMixin
 from ._jobs_operations import JobsOperations
 from ._restorable_time_ranges_operations import RestorableTimeRangesOperations
 from ._export_jobs_operations import ExportJobsOperations
 from ._export_jobs_operation_result_operations import ExportJobsOperationResultOperations
 from ._deleted_backup_instances_operations import DeletedBackupInstancesOperations
 from ._resource_guards_operations import ResourceGuardsOperations
+from ._dpp_resource_guard_proxy_operations import DppResourceGuardProxyOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
@@ -40,12 +42,14 @@ __all__ = [
     "BackupPoliciesOperations",
     "BackupInstancesOperations",
     "RecoveryPointsOperations",
+    "DataProtectionMgmtClientOperationsMixin",
     "JobsOperations",
     "RestorableTimeRangesOperations",
     "ExportJobsOperations",
     "ExportJobsOperationResultOperations",
     "DeletedBackupInstancesOperations",
     "ResourceGuardsOperations",
+    "DppResourceGuardProxyOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

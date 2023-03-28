@@ -81,6 +81,14 @@ class DayOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     WEDNESDAY = "Wednesday"
 
 
+class EncryptionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """State of encryption."""
+
+    DISABLED = "Disabled"
+    ENABLED = "Enabled"
+    INCONSISTENT = "Inconsistent"
+
+
 class ExistingResourcePolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets or sets the Conflict Policy property. This property sets policy during conflict of
     resources during restore.
@@ -114,6 +122,23 @@ class ImmutabilityState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DISABLED = "Disabled"
     UNLOCKED = "Unlocked"
     LOCKED = "Locked"
+
+
+class InfrastructureEncryptionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """State of Infrastructure encryption."""
+
+    DISABLED = "Disabled"
+    ENABLED = "Enabled"
+
+
+class ManagedIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ManagedIdentityType."""
+
+    UNKNOWN = "Unknown"
+    SYSTEM_ASSIGNED = "SystemAssigned"
+    USER_ASSIGNED = "UserAssigned"
+    NONE = "None"
+    SYSTEM_ASSIGNED_AND_USER_ASSIGNED = "SystemAssignedAndUserAssigned"
 
 
 class Month(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -215,6 +240,16 @@ class SecretStoreType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     INVALID = "Invalid"
     AZURE_KEY_VAULT = "AzureKeyVault"
+
+
+class SecureScoreLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Secure Score of Backup Vault."""
+
+    NONE = "None"
+    MINIMUM = "Minimum"
+    ADEQUATE = "Adequate"
+    MAXIMUM = "Maximum"
+    NOT_SUPPORTED = "NotSupported"
 
 
 class SoftDeleteState(str, Enum, metaclass=CaseInsensitiveEnumMeta):

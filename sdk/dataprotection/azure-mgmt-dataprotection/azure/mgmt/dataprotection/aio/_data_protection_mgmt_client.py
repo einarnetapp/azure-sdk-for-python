@@ -20,9 +20,11 @@ from .operations import (
     BackupPoliciesOperations,
     BackupVaultOperationResultsOperations,
     BackupVaultsOperations,
+    DataProtectionMgmtClientOperationsMixin,
     DataProtectionOperations,
     DataProtectionOperationsOperations,
     DeletedBackupInstancesOperations,
+    DppResourceGuardProxyOperations,
     ExportJobsOperationResultOperations,
     ExportJobsOperations,
     JobsOperations,
@@ -40,7 +42,9 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class DataProtectionMgmtClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class DataProtectionMgmtClient(
+    DataProtectionMgmtClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """Open API 2.0 Specs for Azure Data Protection service.
 
     :ivar backup_vaults: BackupVaultsOperations operations
@@ -86,14 +90,17 @@ class DataProtectionMgmtClient:  # pylint: disable=client-accepts-api-version-ke
      azure.mgmt.dataprotection.aio.operations.DeletedBackupInstancesOperations
     :ivar resource_guards: ResourceGuardsOperations operations
     :vartype resource_guards: azure.mgmt.dataprotection.aio.operations.ResourceGuardsOperations
+    :ivar dpp_resource_guard_proxy: DppResourceGuardProxyOperations operations
+    :vartype dpp_resource_guard_proxy:
+     azure.mgmt.dataprotection.aio.operations.DppResourceGuardProxyOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2023-01-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2023-04-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -109,7 +116,7 @@ class DataProtectionMgmtClient:  # pylint: disable=client-accepts-api-version-ke
         self._config = DataProtectionMgmtClientConfiguration(
             credential=credential, subscription_id=subscription_id, **kwargs
         )
-        self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
+        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
@@ -152,6 +159,9 @@ class DataProtectionMgmtClient:  # pylint: disable=client-accepts-api-version-ke
             self._client, self._config, self._serialize, self._deserialize
         )
         self.resource_guards = ResourceGuardsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dpp_resource_guard_proxy = DppResourceGuardProxyOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> Awaitable[AsyncHttpResponse]:
         """Runs the network request through the client's chained policies.
