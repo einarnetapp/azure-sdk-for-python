@@ -766,6 +766,10 @@ class CopyProgress(_serialization.Model):  # pylint: disable=too-many-instance-a
     :ivar is_enumeration_in_progress: To indicate if enumeration of data is in progress.
      Until this is true, the TotalBytesToProcess may not be valid.
     :vartype is_enumeration_in_progress: bool
+    :ivar error: Error, if any, in the stage.
+    :vartype error: ~azure.mgmt.databox.v2022_12_01.models.CloudError
+    :ivar actions: Available actions on the job.
+    :vartype actions: list[str or ~azure.mgmt.databox.v2022_12_01.models.CustomerResolutionCode]
     """
 
     _validation = {
@@ -784,6 +788,8 @@ class CopyProgress(_serialization.Model):  # pylint: disable=too-many-instance-a
         "directories_errored_out": {"readonly": True},
         "invalid_directories_processed": {"readonly": True},
         "is_enumeration_in_progress": {"readonly": True},
+        "error": {"readonly": True},
+        "actions": {"readonly": True},
     }
 
     _attribute_map = {
@@ -802,6 +808,8 @@ class CopyProgress(_serialization.Model):  # pylint: disable=too-many-instance-a
         "directories_errored_out": {"key": "directoriesErroredOut", "type": "int"},
         "invalid_directories_processed": {"key": "invalidDirectoriesProcessed", "type": "int"},
         "is_enumeration_in_progress": {"key": "isEnumerationInProgress", "type": "bool"},
+        "error": {"key": "error", "type": "CloudError"},
+        "actions": {"key": "actions", "type": "[str]"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -822,6 +830,8 @@ class CopyProgress(_serialization.Model):  # pylint: disable=too-many-instance-a
         self.directories_errored_out = None
         self.invalid_directories_processed = None
         self.is_enumeration_in_progress = None
+        self.error = None
+        self.actions = None
 
 
 class ValidationRequest(_serialization.Model):
@@ -1283,6 +1293,10 @@ class DataBoxCustomerDiskCopyProgress(CopyProgress):  # pylint: disable=too-many
     :ivar is_enumeration_in_progress: To indicate if enumeration of data is in progress.
      Until this is true, the TotalBytesToProcess may not be valid.
     :vartype is_enumeration_in_progress: bool
+    :ivar error: Error, if any, in the stage.
+    :vartype error: ~azure.mgmt.databox.v2022_12_01.models.CloudError
+    :ivar actions: Available actions on the job.
+    :vartype actions: list[str or ~azure.mgmt.databox.v2022_12_01.models.CustomerResolutionCode]
     :ivar serial_number: Disk Serial Number.
     :vartype serial_number: str
     :ivar copy_status: The Status of the copy. Known values are: "NotStarted", "InProgress",
@@ -1309,6 +1323,8 @@ class DataBoxCustomerDiskCopyProgress(CopyProgress):  # pylint: disable=too-many
         "directories_errored_out": {"readonly": True},
         "invalid_directories_processed": {"readonly": True},
         "is_enumeration_in_progress": {"readonly": True},
+        "error": {"readonly": True},
+        "actions": {"readonly": True},
         "serial_number": {"readonly": True},
         "copy_status": {"readonly": True},
     }
@@ -1329,6 +1345,8 @@ class DataBoxCustomerDiskCopyProgress(CopyProgress):  # pylint: disable=too-many
         "directories_errored_out": {"key": "directoriesErroredOut", "type": "int"},
         "invalid_directories_processed": {"key": "invalidDirectoriesProcessed", "type": "int"},
         "is_enumeration_in_progress": {"key": "isEnumerationInProgress", "type": "bool"},
+        "error": {"key": "error", "type": "CloudError"},
+        "actions": {"key": "actions", "type": "[str]"},
         "serial_number": {"key": "serialNumber", "type": "str"},
         "copy_status": {"key": "copyStatus", "type": "str"},
     }
@@ -1764,6 +1782,10 @@ class DataBoxDiskCopyProgress(_serialization.Model):
      "DriveNotReceived", "UnsupportedDrive", "OtherServiceError", "OtherUserError",
      "DriveNotDetected", "DriveCorrupted", and "MetadataFilesModifiedOrRemoved".
     :vartype status: str or ~azure.mgmt.databox.v2022_12_01.models.CopyStatus
+    :ivar error: Error, if any, in the stage.
+    :vartype error: ~azure.mgmt.databox.v2022_12_01.models.CloudError
+    :ivar actions: Available actions on the job.
+    :vartype actions: list[str or ~azure.mgmt.databox.v2022_12_01.models.CustomerResolutionCode]
     """
 
     _validation = {
@@ -1771,6 +1793,8 @@ class DataBoxDiskCopyProgress(_serialization.Model):
         "bytes_copied": {"readonly": True},
         "percent_complete": {"readonly": True},
         "status": {"readonly": True},
+        "error": {"readonly": True},
+        "actions": {"readonly": True},
     }
 
     _attribute_map = {
@@ -1778,6 +1802,8 @@ class DataBoxDiskCopyProgress(_serialization.Model):
         "bytes_copied": {"key": "bytesCopied", "type": "int"},
         "percent_complete": {"key": "percentComplete", "type": "int"},
         "status": {"key": "status", "type": "str"},
+        "error": {"key": "error", "type": "CloudError"},
+        "actions": {"key": "actions", "type": "[str]"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -1787,6 +1813,8 @@ class DataBoxDiskCopyProgress(_serialization.Model):
         self.bytes_copied = None
         self.percent_complete = None
         self.status = None
+        self.error = None
+        self.actions = None
 
 
 class GranularCopyLogDetails(_serialization.Model):
@@ -1908,6 +1936,10 @@ class GranularCopyProgress(_serialization.Model):  # pylint: disable=too-many-in
     :ivar is_enumeration_in_progress: To indicate if enumeration of data is in progress.
      Until this is true, the TotalBytesToProcess may not be valid.
     :vartype is_enumeration_in_progress: bool
+    :ivar error: Error, if any, in the stage.
+    :vartype error: ~azure.mgmt.databox.v2022_12_01.models.CloudError
+    :ivar actions: Available actions on the job.
+    :vartype actions: list[str or ~azure.mgmt.databox.v2022_12_01.models.CustomerResolutionCode]
     """
 
     _validation = {
@@ -1926,6 +1958,8 @@ class GranularCopyProgress(_serialization.Model):  # pylint: disable=too-many-in
         "directories_errored_out": {"readonly": True},
         "invalid_directories_processed": {"readonly": True},
         "is_enumeration_in_progress": {"readonly": True},
+        "error": {"readonly": True},
+        "actions": {"readonly": True},
     }
 
     _attribute_map = {
@@ -1944,6 +1978,8 @@ class GranularCopyProgress(_serialization.Model):  # pylint: disable=too-many-in
         "directories_errored_out": {"key": "directoriesErroredOut", "type": "int"},
         "invalid_directories_processed": {"key": "invalidDirectoriesProcessed", "type": "int"},
         "is_enumeration_in_progress": {"key": "isEnumerationInProgress", "type": "bool"},
+        "error": {"key": "error", "type": "CloudError"},
+        "actions": {"key": "actions", "type": "[str]"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -1964,6 +2000,8 @@ class GranularCopyProgress(_serialization.Model):  # pylint: disable=too-many-in
         self.directories_errored_out = None
         self.invalid_directories_processed = None
         self.is_enumeration_in_progress = None
+        self.error = None
+        self.actions = None
 
 
 class DataBoxDiskGranularCopyProgress(GranularCopyProgress):  # pylint: disable=too-many-instance-attributes
@@ -2008,6 +2046,10 @@ class DataBoxDiskGranularCopyProgress(GranularCopyProgress):  # pylint: disable=
     :ivar is_enumeration_in_progress: To indicate if enumeration of data is in progress.
      Until this is true, the TotalBytesToProcess may not be valid.
     :vartype is_enumeration_in_progress: bool
+    :ivar error: Error, if any, in the stage.
+    :vartype error: ~azure.mgmt.databox.v2022_12_01.models.CloudError
+    :ivar actions: Available actions on the job.
+    :vartype actions: list[str or ~azure.mgmt.databox.v2022_12_01.models.CustomerResolutionCode]
     :ivar serial_number: Disk Serial Number.
     :vartype serial_number: str
     :ivar copy_status: The Status of the copy. Known values are: "NotStarted", "InProgress",
@@ -2034,6 +2076,8 @@ class DataBoxDiskGranularCopyProgress(GranularCopyProgress):  # pylint: disable=
         "directories_errored_out": {"readonly": True},
         "invalid_directories_processed": {"readonly": True},
         "is_enumeration_in_progress": {"readonly": True},
+        "error": {"readonly": True},
+        "actions": {"readonly": True},
         "serial_number": {"readonly": True},
         "copy_status": {"readonly": True},
     }
@@ -2054,6 +2098,8 @@ class DataBoxDiskGranularCopyProgress(GranularCopyProgress):  # pylint: disable=
         "directories_errored_out": {"key": "directoriesErroredOut", "type": "int"},
         "invalid_directories_processed": {"key": "invalidDirectoriesProcessed", "type": "int"},
         "is_enumeration_in_progress": {"key": "isEnumerationInProgress", "type": "bool"},
+        "error": {"key": "error", "type": "CloudError"},
+        "actions": {"key": "actions", "type": "[str]"},
         "serial_number": {"key": "serialNumber", "type": "str"},
         "copy_status": {"key": "copyStatus", "type": "str"},
     }
