@@ -41,7 +41,6 @@ from ._security_center_enums import RuleStatus
 from ._security_center_enums import RuleType
 from ._security_center_enums import ScanState
 from ._security_center_enums import ScanTriggerType
-from ._security_center_enums import ScopeName
 from ._security_center_enums import Source
 from ._security_center_enums import StatusName
 from ._patch import __all__ as _patch_all
@@ -83,7 +82,6 @@ __all__ = [
     "RuleType",
     "ScanState",
     "ScanTriggerType",
-    "ScopeName",
     "Source",
     "StatusName",
 ]

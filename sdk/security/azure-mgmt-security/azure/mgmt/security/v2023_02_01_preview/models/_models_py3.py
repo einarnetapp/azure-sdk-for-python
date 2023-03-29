@@ -326,9 +326,8 @@ class HealthDataClassification(_serialization.Model):
     :vartype component: str
     :ivar scenario: The scenario describes the health scenario issue of the component.
     :vartype scenario: str
-    :ivar scope: The resource scope of the health report. Known values are: "Connectors",
-     "Clusters", "VirtualMachines", and "Unknown".
-    :vartype scope: str or ~azure.mgmt.security.v2023_02_01_preview.models.ScopeName
+    :ivar scope: The resource scope of the health report.
+    :vartype scope: str
     """
 
     _attribute_map = {
@@ -342,7 +341,7 @@ class HealthDataClassification(_serialization.Model):
         *,
         component: Optional[str] = None,
         scenario: Optional[str] = None,
-        scope: Optional[Union[str, "_models.ScopeName"]] = None,
+        scope: Optional[str] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -350,9 +349,8 @@ class HealthDataClassification(_serialization.Model):
         :paramtype component: str
         :keyword scenario: The scenario describes the health scenario issue of the component.
         :paramtype scenario: str
-        :keyword scope: The resource scope of the health report. Known values are: "Connectors",
-         "Clusters", "VirtualMachines", and "Unknown".
-        :paramtype scope: str or ~azure.mgmt.security.v2023_02_01_preview.models.ScopeName
+        :keyword scope: The resource scope of the health report.
+        :paramtype scope: str
         """
         super().__init__(**kwargs)
         self.component = component

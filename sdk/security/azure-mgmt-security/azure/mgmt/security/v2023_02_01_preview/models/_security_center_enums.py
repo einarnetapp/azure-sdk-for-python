@@ -71,15 +71,6 @@ class ScanTriggerType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Recurring"""
 
 
-class ScopeName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The resource scope of the health report."""
-
-    CONNECTORS = "Connectors"
-    CLUSTERS = "Clusters"
-    VIRTUAL_MACHINES = "VirtualMachines"
-    UNKNOWN = "Unknown"
-
-
 class Source(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the health report."""
 
