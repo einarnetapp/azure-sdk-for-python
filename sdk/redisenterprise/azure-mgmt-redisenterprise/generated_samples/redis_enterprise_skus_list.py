@@ -14,7 +14,7 @@ from azure.mgmt.redisenterprise import RedisEnterpriseManagementClient
     pip install azure-identity
     pip install azure-mgmt-redisenterprise
 # USAGE
-    python redis_enterprise_update.py
+    python redis_enterprise_skus_list.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,18 +29,11 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.redis_enterprise.begin_update(
-        resource_group_name="rg1",
-        cluster_name="cache1",
-        parameters={
-            "properties": {"minimumTlsVersion": "1.2"},
-            "sku": {"capacity": 9, "name": "EnterpriseFlash_F300"},
-            "tags": {"tag1": "value1"},
-        },
-    ).result()
-    print(response)
+    response = client.skus.list_by_subscription()
+    for item in response:
+        print(item)
 
 
-# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/stable/2022-01-01/examples/RedisEnterpriseUpdate.json
+# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2023-03-01-preview/examples/RedisEnterpriseSkusList.json
 if __name__ == "__main__":
     main()

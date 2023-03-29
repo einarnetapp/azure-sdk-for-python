@@ -29,11 +29,11 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.redis_enterprise.list()
+    response = client.redis_enterprise.list_by_subscription()
     for item in response:
         print(item)
 
 
-# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/stable/2022-01-01/examples/RedisEnterpriseList.json
+# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2023-03-01-preview/examples/RedisEnterpriseList.json
 if __name__ == "__main__":
     main()

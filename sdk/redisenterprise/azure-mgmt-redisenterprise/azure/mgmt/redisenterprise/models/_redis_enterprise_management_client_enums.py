@@ -10,13 +10,6 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AccessKeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Which access key to regenerate."""
-
-    PRIMARY = "Primary"
-    SECONDARY = "Secondary"
-
-
 class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs."""
 
@@ -24,21 +17,30 @@ class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class AofFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Sets the frequency at which data is written to disk."""
+    """AofFrequency."""
 
-    ONE_S = "1s"
+    PER_SECOND = "1s"
     ALWAYS = "always"
 
 
-class ClusteringPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Clustering policy - default is OSSCluster. Specified at create time."""
+class ClientProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ClientProtocol."""
 
-    ENTERPRISE_CLUSTER = "EnterpriseCluster"
-    OSS_CLUSTER = "OSSCluster"
+    ENCRYPTED = "Encrypted"
+    PLAINTEXT = "Plaintext"
+
+
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of identity that created the resource."""
+
+    USER = "User"
+    APPLICATION = "Application"
+    MANAGED_IDENTITY = "ManagedIdentity"
+    KEY = "Key"
 
 
 class EvictionPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Redis eviction policy - default is VolatileLRU."""
+    """EvictionPolicy."""
 
     ALL_KEYS_LFU = "AllKeysLFU"
     ALL_KEYS_LRU = "AllKeysLRU"
@@ -50,14 +52,11 @@ class EvictionPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     NO_EVICTION = "NoEviction"
 
 
-class LinkState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """State of the link between the database resources."""
+class KeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """KeyType."""
 
-    LINKED = "Linked"
-    LINKING = "Linking"
-    UNLINKING = "Unlinking"
-    LINK_FAILED = "LinkFailed"
-    UNLINK_FAILED = "UnlinkFailed"
+    PRIMARY = "Primary"
+    SECONDARY = "Secondary"
 
 
 class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -74,49 +73,42 @@ class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsens
     """The current provisioning state."""
 
     SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
     CREATING = "Creating"
     DELETING = "Deleting"
-    FAILED = "Failed"
 
 
 class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The private endpoint connection status."""
 
-    PENDING = "Pending"
     APPROVED = "Approved"
+    PENDING = "Pending"
     REJECTED = "Rejected"
 
 
-class Protocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols.
-    Default is TLS-encrypted.
-    """
-
-    ENCRYPTED = "Encrypted"
-    PLAINTEXT = "Plaintext"
-
-
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Current provisioning status."""
+    """ProvisioningState."""
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
     CANCELED = "Canceled"
-    CREATING = "Creating"
+    PROVISIONING = "Provisioning"
     UPDATING = "Updating"
     DELETING = "Deleting"
+    ACCEPTED = "Accepted"
 
 
 class RdbFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Sets the frequency at which a snapshot of the database is created."""
+    """RdbFrequency."""
 
-    ONE_H = "1h"
-    SIX_H = "6h"
-    TWELVE_H = "12h"
+    PER_HOUR = "1h"
+    PER6_HOURS = "6h"
+    PER12_HOURS = "12h"
 
 
 class ResourceState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Current resource status."""
+    """ResourceState."""
 
     RUNNING = "Running"
     CREATING = "Creating"
@@ -133,9 +125,7 @@ class ResourceState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10,
-    EnterpriseFlash_F300 etc.).
-    """
+    """SkuName."""
 
     ENTERPRISE_E10 = "Enterprise_E10"
     ENTERPRISE_E20 = "Enterprise_E20"
@@ -147,8 +137,8 @@ class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class TlsVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The minimum TLS version for the cluster to support, e.g. '1.2'."""
+    """TlsVersion."""
 
-    ONE0 = "1.0"
-    ONE1 = "1.1"
-    ONE2 = "1.2"
+    ONE_POINT_ZERO = "1.0"
+    ONE_POINT_ONE = "1.1"
+    ONE_POINT_TWO = "1.2"

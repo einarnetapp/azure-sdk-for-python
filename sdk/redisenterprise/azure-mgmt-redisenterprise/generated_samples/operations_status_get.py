@@ -30,12 +30,13 @@ def main():
     )
 
     response = client.operations_status.get(
+        subscription_id="subid",
         location="West US",
         operation_id="testoperationid",
     )
     print(response)
 
 
-# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/stable/2022-01-01/examples/OperationsStatusGet.json
+# x-ms-original-file: specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2023-03-01-preview/examples/OperationsStatusGet.json
 if __name__ == "__main__":
     main()
