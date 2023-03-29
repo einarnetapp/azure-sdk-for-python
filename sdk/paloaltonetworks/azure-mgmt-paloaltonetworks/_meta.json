@@ -1,0 +1,11 @@
+{
+  "commit": "0f7cb051d05db783cfbaa50c864594a9d50e6f91",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
+  "autorest": "3.9.2",
+  "use": [
+    "@autorest/python@6.4.6",
+    "@autorest/modelerfour@4.24.3"
+  ],
+  "autorest_command": "autorest specification/paloaltonetworks/resource-manager/readme.md --generate-sample=True --include-x-ms-examples-original-file=True --python --python-sdks-folder=/mnt/vss/_work/1/s/azure-sdk-for-python/sdk --use=@autorest/python@6.4.6 --use=@autorest/modelerfour@4.24.3 --version=3.9.2 --version-tolerant=False",
+  "readme": "specification/paloaltonetworks/resource-manager/readme.md"
+}
