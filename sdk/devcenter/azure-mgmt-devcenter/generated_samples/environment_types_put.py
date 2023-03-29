@@ -14,7 +14,7 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
     pip install azure-identity
     pip install azure-mgmt-devcenter
 # USAGE
-    python pools_delete.py
+    python environment_types_put.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,15 @@ def main():
         subscription_id="0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     )
 
-    response = client.pools.begin_delete(
+    response = client.environment_types.create_or_update(
         resource_group_name="rg1",
-        project_name="DevProject",
-        pool_name="poolName",
-    ).result()
+        dev_center_name="Contoso",
+        environment_type_name="DevTest",
+        body={"tags": {"Owner": "superuser"}},
+    )
     print(response)
 
 
-# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2023-01-01-preview/examples/Pools_Delete.json
+# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2023-01-01-preview/examples/EnvironmentTypes_Put.json
 if __name__ == "__main__":
     main()
