@@ -31,12 +31,11 @@ class ApiType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class AuthenticationMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Which authentication method Cassandra should use to authenticate clients. 'None' turns off
     authentication, so should not be used except in emergencies. 'Cassandra' is the default
-    password based authentication. The default is 'Cassandra'. 'Ldap' is in preview.
+    password based authentication. The default is 'Cassandra'.
     """
 
     NONE = "None"
     CASSANDRA = "Cassandra"
-    LDAP = "Ldap"
 
 
 class BackupPolicyMigrationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -125,14 +124,6 @@ class DatabaseAccountKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PARSE = "Parse"
 
 
-class DataTransferComponent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """DataTransferComponent."""
-
-    COSMOS_DB_CASSANDRA = "CosmosDBCassandra"
-    COSMOS_DB_SQL = "CosmosDBSql"
-    AZURE_BLOB_STORAGE = "AzureBlobStorage"
-
-
 class DataType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The datatype for which the indexing behavior is applied to."""
 
@@ -152,14 +143,6 @@ class DefaultConsistencyLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     BOUNDED_STALENESS = "BoundedStaleness"
     STRONG = "Strong"
     CONSISTENT_PREFIX = "ConsistentPrefix"
-
-
-class EnableFullTextQuery(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Describe the level of detail with which queries are to be logged."""
-
-    NONE = "None"
-    TRUE = "True"
-    FALSE = "False"
 
 
 class IndexingMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -258,7 +241,6 @@ class OperationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CREATE = "Create"
     REPLACE = "Replace"
     DELETE = "Delete"
-    RECREATE = "Recreate"
     SYSTEM_OPERATION = "SystemOperation"
 
 
@@ -359,14 +341,6 @@ class SpatialType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     LINE_STRING = "LineString"
     POLYGON = "Polygon"
     MULTI_POLYGON = "MultiPolygon"
-
-
-class ThroughputPolicyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """ThroughputPolicy to apply for throughput redistribution."""
-
-    NONE = "none"
-    EQUAL = "equal"
-    CUSTOM = "custom"
 
 
 class TriggerOperation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
