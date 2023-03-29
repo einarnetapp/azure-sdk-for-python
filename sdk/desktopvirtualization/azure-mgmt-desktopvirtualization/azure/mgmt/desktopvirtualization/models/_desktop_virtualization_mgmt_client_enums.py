@@ -196,6 +196,14 @@ class ScalingScheduleDaysOfWeekItem(str, Enum, metaclass=CaseInsensitiveEnumMeta
     SATURDAY = "Saturday"
 
 
+class SessionHandlingOperation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Action to be taken after a user disconnect during the ramp up period."""
+
+    NONE = "None"
+    DEALLOCATE = "Deallocate"
+    HIBERNATE = "Hibernate"
+
+
 class SessionHostComponentUpdateType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of maintenance for session host components."""
 
@@ -241,6 +249,14 @@ class SSOSecretType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CERTIFICATE = "Certificate"
     SHARED_KEY_IN_KEY_VAULT = "SharedKeyInKeyVault"
     CERTIFICATE_IN_KEY_VAULT = "CertificateInKeyVault"
+
+
+class StartupBehavior(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The desired startup behavior during the ramp up period for personal vms in the hostpool."""
+
+    NONE = "None"
+    WITH_ASSIGNED_USER = "WithAssignedUser"
+    ALL = "All"
 
 
 class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
