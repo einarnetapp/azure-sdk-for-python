@@ -37,6 +37,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/preview/2022-04-01-preview/examples/AccessConnectorPatchUpdate.json
+# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/preview/2022-10-01-preview/examples/AccessConnectorPatchUpdate.json
 if __name__ == "__main__":
     main()

@@ -23,10 +23,10 @@ from ._models_py3 import ErrorInfo
 from ._models_py3 import ErrorResponse
 from ._models_py3 import GroupIdInformation
 from ._models_py3 import GroupIdInformationProperties
-from ._models_py3 import IdentityData
 from ._models_py3 import ManagedDiskEncryption
 from ._models_py3 import ManagedDiskEncryptionKeyVaultProperties
 from ._models_py3 import ManagedIdentityConfiguration
+from ._models_py3 import ManagedServiceIdentity
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
@@ -39,8 +39,10 @@ from ._models_py3 import PrivateLinkResourcesList
 from ._models_py3 import PrivateLinkServiceConnectionState
 from ._models_py3 import Resource
 from ._models_py3 import Sku
+from ._models_py3 import SystemAssignedOrUserAssignedServiceIdentity
 from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
+from ._models_py3 import UserAssignedIdentity
 from ._models_py3 import VirtualNetworkPeering
 from ._models_py3 import VirtualNetworkPeeringList
 from ._models_py3 import VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork
@@ -59,8 +61,8 @@ from ._models_py3 import WorkspaceUpdate
 from ._azure_databricks_management_client_enums import CreatedByType
 from ._azure_databricks_management_client_enums import CustomParameterType
 from ._azure_databricks_management_client_enums import EncryptionKeySource
-from ._azure_databricks_management_client_enums import IdentityType
 from ._azure_databricks_management_client_enums import KeySource
+from ._azure_databricks_management_client_enums import ManagedServiceIdentityType
 from ._azure_databricks_management_client_enums import PeeringProvisioningState
 from ._azure_databricks_management_client_enums import PeeringState
 from ._azure_databricks_management_client_enums import PrivateEndpointConnectionProvisioningState
@@ -68,6 +70,7 @@ from ._azure_databricks_management_client_enums import PrivateLinkServiceConnect
 from ._azure_databricks_management_client_enums import ProvisioningState
 from ._azure_databricks_management_client_enums import PublicNetworkAccess
 from ._azure_databricks_management_client_enums import RequiredNsgRules
+from ._azure_databricks_management_client_enums import SystemAssignedOrUserAssignedServiceIdentityType
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
@@ -90,10 +93,10 @@ __all__ = [
     "ErrorResponse",
     "GroupIdInformation",
     "GroupIdInformationProperties",
-    "IdentityData",
     "ManagedDiskEncryption",
     "ManagedDiskEncryptionKeyVaultProperties",
     "ManagedIdentityConfiguration",
+    "ManagedServiceIdentity",
     "Operation",
     "OperationDisplay",
     "OperationListResult",
@@ -106,8 +109,10 @@ __all__ = [
     "PrivateLinkServiceConnectionState",
     "Resource",
     "Sku",
+    "SystemAssignedOrUserAssignedServiceIdentity",
     "SystemData",
     "TrackedResource",
+    "UserAssignedIdentity",
     "VirtualNetworkPeering",
     "VirtualNetworkPeeringList",
     "VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork",
@@ -125,8 +130,8 @@ __all__ = [
     "CreatedByType",
     "CustomParameterType",
     "EncryptionKeySource",
-    "IdentityType",
     "KeySource",
+    "ManagedServiceIdentityType",
     "PeeringProvisioningState",
     "PeeringState",
     "PrivateEndpointConnectionProvisioningState",
@@ -134,6 +139,7 @@ __all__ = [
     "ProvisioningState",
     "PublicNetworkAccess",
     "RequiredNsgRules",
+    "SystemAssignedOrUserAssignedServiceIdentityType",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
