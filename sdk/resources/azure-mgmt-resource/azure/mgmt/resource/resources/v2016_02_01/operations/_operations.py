@@ -36,10 +36,6 @@ if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
-if sys.version_info >= (3, 8):
-    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
-else:
-    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
@@ -53,7 +49,7 @@ def build_deployments_delete_request(
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     # Construct URL
     _url = kwargs.pop(
         "template_url",
@@ -80,7 +76,7 @@ def build_deployments_check_existence_request(
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     # Construct URL
     _url = kwargs.pop(
         "template_url",
@@ -108,7 +104,7 @@ def build_deployments_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -144,7 +140,7 @@ def build_deployments_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -176,7 +172,7 @@ def build_deployments_cancel_request(
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     # Construct URL
     _url = kwargs.pop(
         "template_url",
@@ -204,7 +200,7 @@ def build_deployments_validate_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -240,7 +236,7 @@ def build_deployments_export_template_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -278,7 +274,7 @@ def build_deployments_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -312,7 +308,7 @@ def build_deployments_calculate_template_hash_request(*, json: JSON, **kwargs: A
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -336,7 +332,7 @@ def build_providers_unregister_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -365,7 +361,7 @@ def build_providers_register_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -392,7 +388,7 @@ def build_providers_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -422,7 +418,7 @@ def build_providers_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -457,7 +453,7 @@ def build_resource_groups_list_resources_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -491,7 +487,7 @@ def build_resource_groups_check_existence_request(
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
     path_format_arguments = {
@@ -515,7 +511,7 @@ def build_resource_groups_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -544,7 +540,7 @@ def build_resource_groups_create_or_update_request(
 def build_resource_groups_delete_request(resource_group_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
     path_format_arguments = {
@@ -566,7 +562,7 @@ def build_resource_groups_get_request(resource_group_name: str, subscription_id:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -593,7 +589,7 @@ def build_resource_groups_patch_request(resource_group_name: str, subscription_i
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -625,7 +621,7 @@ def build_resource_groups_export_template_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -659,7 +655,7 @@ def build_resource_groups_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -689,7 +685,7 @@ def build_resources_move_resources_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     # Construct URL
     _url = kwargs.pop(
@@ -730,7 +726,7 @@ def build_resources_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -968,7 +964,7 @@ def build_resources_get_request(
 def build_tags_delete_value_request(tag_name: str, tag_value: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/tagNames/{tagName}/tagValues/{tagValue}")
     path_format_arguments = {
@@ -991,7 +987,7 @@ def build_tags_create_or_update_value_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1017,7 +1013,7 @@ def build_tags_create_or_update_request(tag_name: str, subscription_id: str, **k
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1041,7 +1037,7 @@ def build_tags_create_or_update_request(tag_name: str, subscription_id: str, **k
 def build_tags_delete_request(tag_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/tagNames/{tagName}")
     path_format_arguments = {
@@ -1061,7 +1057,7 @@ def build_tags_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1087,7 +1083,7 @@ def build_deployment_operations_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1121,7 +1117,7 @@ def build_deployment_operations_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1183,7 +1179,7 @@ class DeploymentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_deployments_delete_request(
@@ -1240,7 +1236,7 @@ class DeploymentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -1305,7 +1301,7 @@ class DeploymentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_deployments_check_existence_request(
@@ -1353,7 +1349,7 @@ class DeploymentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DeploymentExtended] = kwargs.pop("cls", None)
 
@@ -1514,7 +1510,7 @@ class DeploymentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DeploymentExtended] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
@@ -1584,7 +1580,7 @@ class DeploymentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.DeploymentExtended] = kwargs.pop("cls", None)
 
         request = build_deployments_get_request(
@@ -1648,7 +1644,7 @@ class DeploymentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_deployments_cancel_request(
@@ -1769,7 +1765,7 @@ class DeploymentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DeploymentValidateResult] = kwargs.pop("cls", None)
 
@@ -1849,7 +1845,7 @@ class DeploymentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.DeploymentExportResult] = kwargs.pop("cls", None)
 
         request = build_deployments_export_template_request(
@@ -1908,7 +1904,7 @@ class DeploymentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.DeploymentListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -2003,7 +1999,7 @@ class DeploymentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
         cls: ClsType[_models.TemplateHashResult] = kwargs.pop("cls", None)
 
@@ -2082,7 +2078,7 @@ class ProvidersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.Provider] = kwargs.pop("cls", None)
 
         request = build_providers_unregister_request(
@@ -2138,7 +2134,7 @@ class ProvidersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.Provider] = kwargs.pop("cls", None)
 
         request = build_providers_register_request(
@@ -2192,7 +2188,7 @@ class ProvidersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.ProviderListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -2287,7 +2283,7 @@ class ProvidersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.Provider] = kwargs.pop("cls", None)
 
         request = build_providers_get_request(
@@ -2375,7 +2371,7 @@ class ResourceGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.ResourceListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -2470,7 +2466,7 @@ class ResourceGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_resource_groups_check_existence_request(
@@ -2576,7 +2572,7 @@ class ResourceGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ResourceGroup] = kwargs.pop("cls", None)
 
@@ -2640,7 +2636,7 @@ class ResourceGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_resource_groups_delete_request(
@@ -2692,7 +2688,7 @@ class ResourceGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -2752,7 +2748,7 @@ class ResourceGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.ResourceGroup] = kwargs.pop("cls", None)
 
         request = build_resource_groups_get_request(
@@ -2870,7 +2866,7 @@ class ResourceGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ResourceGroup] = kwargs.pop("cls", None)
 
@@ -2991,7 +2987,7 @@ class ResourceGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ResourceGroupExportResult] = kwargs.pop("cls", None)
 
@@ -3059,7 +3055,7 @@ class ResourceGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.ResourceGroupListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -3163,7 +3159,7 @@ class ResourcesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
@@ -3296,7 +3292,7 @@ class ResourcesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
@@ -3363,7 +3359,7 @@ class ResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.ResourceListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -4170,7 +4166,7 @@ class TagsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_tags_delete_value_request(
@@ -4225,7 +4221,7 @@ class TagsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.TagValue] = kwargs.pop("cls", None)
 
         request = build_tags_create_or_update_value_request(
@@ -4286,7 +4282,7 @@ class TagsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.TagDetails] = kwargs.pop("cls", None)
 
         request = build_tags_create_or_update_request(
@@ -4346,7 +4342,7 @@ class TagsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_tags_delete_request(
@@ -4389,7 +4385,7 @@ class TagsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.TagsListResult] = kwargs.pop("cls", None)
 
         error_map = {
@@ -4506,7 +4502,7 @@ class DeploymentOperationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.DeploymentOperation] = kwargs.pop("cls", None)
 
         request = build_deployment_operations_get_request(
@@ -4566,7 +4562,7 @@ class DeploymentOperationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2016-02-01"] = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2016-02-01"))
         cls: ClsType[_models.DeploymentOperationsListResult] = kwargs.pop("cls", None)
 
         error_map = {
