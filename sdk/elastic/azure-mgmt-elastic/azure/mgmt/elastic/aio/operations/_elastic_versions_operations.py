@@ -20,25 +20,24 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
-from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._traffic_filters_operations import build_delete_request
+from ...operations._elastic_versions_operations import build_get_request
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class TrafficFiltersOperations:
+class ElasticVersionsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.elastic.aio.MicrosoftElastic`'s
-        :attr:`traffic_filters` attribute.
+        :attr:`elastic_versions` attribute.
     """
 
     models = _models
@@ -51,23 +50,21 @@ class TrafficFiltersOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, monitor_name: str, ruleset_id: Optional[str] = None, **kwargs: Any
-    ) -> None:
-        """Delete traffic filter from the account.
+    async def get(
+        self, region: str, subscription_id: Optional[str] = None, **kwargs: Any
+    ) -> _models.ElasticVersionsListResponse:
+        """Get a list of available versions for a region.
 
-        Delete traffic filter from the account.
+        Get a list of available versions for a region.
 
-        :param resource_group_name: The name of the resource group to which the Elastic resource
-         belongs. Required.
-        :type resource_group_name: str
-        :param monitor_name: Monitor resource name. Required.
-        :type monitor_name: str
-        :param ruleset_id: Ruleset Id of the filter. Default value is None.
-        :type ruleset_id: str
+        :param region: Region where monitor resource deployment will took place. Required.
+        :type region: str
+        :param subscription_id: Subscription ID where monitor resource will be deployed. Default value
+         is None.
+        :type subscription_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
+        :return: ElasticVersionsListResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.elastic.models.ElasticVersionsListResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -79,18 +76,14 @@ class TrafficFiltersOperations:
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[_models.ElasticVersionsListResponse] = kwargs.pop("cls", None)
 
-        request = build_delete_request(
-            resource_group_name=resource_group_name,
-            monitor_name=monitor_name,
-            subscription_id=self._config.subscription_id,
-            ruleset_id=ruleset_id,
-            api_version=api_version,
-            template_url=self.delete.metadata["url"],
+        request = build_get_request(
+            region=region,
+            subscription_id=subscription_id,
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -111,9 +104,11 @@ class TrafficFiltersOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if cls:
-            return cls(pipeline_response, None, {})
+        deserialized = self._deserialize("ElasticVersionsListResponse", pipeline_response)
 
-    delete.metadata = {
-        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/deleteTrafficFilter"
-    }
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get.metadata = {"url": "/providers/Microsoft.Elastic/listElasticVersions"}
