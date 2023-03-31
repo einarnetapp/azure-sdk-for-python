@@ -1,0 +1,4 @@
+cleanup: false
+commit: 961e339b6d629adf316b0a3758473b8d1799a3b2
+directory: specification/contosowidgetmanager/Contoso.WidgetManager
+repo: test-repo-billy/azure-rest-api-specs
