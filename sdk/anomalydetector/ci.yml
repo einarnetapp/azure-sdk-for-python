@@ -33,3 +33,5 @@ extends:
     - name: azure-ai-anomalydetector
       safeName: azureaianomalydetector
 
+    - name: azure-ai-anomalydetector-lro-latest
+      safeName: azureaianomalydetectorlrolatest
