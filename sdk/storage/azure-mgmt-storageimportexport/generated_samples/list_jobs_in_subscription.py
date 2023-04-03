@@ -14,7 +14,7 @@ from azure.mgmt.storageimportexport import StorageImportExport
     pip install azure-identity
     pip install azure-mgmt-storageimportexport
 # USAGE
-    python list_bit_locker_keys_for_drives_in_a_job.py
+    python list_jobs_in_subscription.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,11 @@ def main():
         subscription_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     )
 
-    response = client.bit_locker_keys.list(
-        job_name="myJob",
-        resource_group_name="myResourceGroup",
-    )
+    response = client.jobs.list_by_subscription()
     for item in response:
         print(item)
 
 
-# x-ms-original-file: specification/storageimportexport/resource-manager/Microsoft.ImportExport/preview/2021-01-01/examples/ListBitLockerKeys.json
+# x-ms-original-file: specification/storageimportexport/resource-manager/Microsoft.ImportExport/preview/2021-01-01/examples/ListJobsInSubscription.json
 if __name__ == "__main__":
     main()

@@ -25,7 +25,8 @@ JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
 class DeliveryPackageInformation(_serialization.Model):
-    """Contains information about the delivery package being shipped by the customer to the Microsoft data center.
+    """Contains information about the delivery package being shipped by the customer to the Microsoft
+    data center.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -59,8 +60,8 @@ class DeliveryPackageInformation(_serialization.Model):
         tracking_number: str,
         drive_count: Optional[int] = None,
         ship_date: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword carrier_name: The name of the carrier that is used to ship the import or export
          drives. Required.
@@ -93,7 +94,7 @@ class DriveBitLockerKey(_serialization.Model):
         "drive_id": {"key": "driveId", "type": "str"},
     }
 
-    def __init__(self, *, bit_locker_key: Optional[str] = None, drive_id: Optional[str] = None, **kwargs):
+    def __init__(self, *, bit_locker_key: Optional[str] = None, drive_id: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword bit_locker_key: BitLocker recovery key or password.
         :paramtype bit_locker_key: str
@@ -168,8 +169,8 @@ class DriveStatus(_serialization.Model):  # pylint: disable=too-many-instance-at
         error_log_uri: Optional[str] = None,
         manifest_uri: Optional[str] = None,
         bytes_succeeded: Optional[int] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword drive_id: The drive's hardware serial number, without spaces.
         :paramtype drive_id: str
@@ -239,8 +240,8 @@ class EncryptionKeyDetails(_serialization.Model):
         kek_type: Union[str, "_models.EncryptionKekType"] = "MicrosoftManaged",
         kek_url: Optional[str] = None,
         kek_vault_resource_id: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword kek_type: The type of kek encryption key. Known values are: "MicrosoftManaged" and
          "CustomerManaged".
@@ -287,8 +288,8 @@ class ErrorResponse(_serialization.Model):
         target: Optional[str] = None,
         details: Optional[List["_models.ErrorResponseErrorDetailsItem"]] = None,
         innererror: Optional[JSON] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword code: Provides information about the error code.
         :paramtype code: str
@@ -327,8 +328,8 @@ class ErrorResponseErrorDetailsItem(_serialization.Model):
     }
 
     def __init__(
-        self, *, code: Optional[str] = None, target: Optional[str] = None, message: Optional[str] = None, **kwargs
-    ):
+        self, *, code: Optional[str] = None, target: Optional[str] = None, message: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword code: Provides information about the error code.
         :paramtype code: str
@@ -344,7 +345,8 @@ class ErrorResponseErrorDetailsItem(_serialization.Model):
 
 
 class Export(_serialization.Model):
-    """A property containing information about the blobs to be exported for an export job. This property is required for export jobs, but must not be specified for import jobs.
+    """A property containing information about the blobs to be exported for an export job. This
+    property is required for export jobs, but must not be specified for import jobs.
 
     :ivar blob_list_blob_path: The relative URI to the block blob that contains the list of blob
      paths or blob path prefixes as defined above, beginning with the container name. If the blob is
@@ -368,8 +370,8 @@ class Export(_serialization.Model):
         blob_list_blob_path: Optional[str] = None,
         blob_path: Optional[List[str]] = None,
         blob_path_prefix: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword blob_list_blob_path: The relative URI to the block blob that contains the list of blob
          paths or blob path prefixes as defined above, beginning with the container name. If the blob is
@@ -397,7 +399,7 @@ class GetBitLockerKeysResponse(_serialization.Model):
         "value": {"key": "value", "type": "[DriveBitLockerKey]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DriveBitLockerKey"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.DriveBitLockerKey"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: drive status.
         :paramtype value: list[~azure.mgmt.storageimportexport.models.DriveBitLockerKey]
@@ -431,7 +433,7 @@ class IdentityDetails(_serialization.Model):
         "tenant_id": {"key": "tenantId", "type": "str"},
     }
 
-    def __init__(self, *, type: Union[str, "_models.IdentityType"] = "None", **kwargs):
+    def __init__(self, *, type: Union[str, "_models.IdentityType"] = "None", **kwargs: Any) -> None:
         """
         :keyword type: The type of identity. Known values are: "None", "SystemAssigned", and
          "UserAssigned".
@@ -538,8 +540,8 @@ class JobDetails(_serialization.Model):  # pylint: disable=too-many-instance-att
         export: Optional["_models.Export"] = None,
         provisioning_state: Optional[str] = None,
         encryption_key: Optional["_models.EncryptionKeyDetails"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword storage_account_id: The resource identifier of the storage account where data will be
          imported to or exported from.
@@ -660,8 +662,8 @@ class JobResponse(_serialization.Model):
         tags: Optional[JSON] = None,
         properties: Optional["_models.JobDetails"] = None,
         identity: Optional["_models.IdentityDetails"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Specifies the Azure location where the job is created.
         :paramtype location: str
@@ -698,8 +700,8 @@ class ListJobsResponse(_serialization.Model):
     }
 
     def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.JobResponse"]] = None, **kwargs
-    ):
+        self, *, next_link: Optional[str] = None, value: Optional[List["_models.JobResponse"]] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword next_link: link to next batch of jobs.
         :paramtype next_link: str
@@ -722,7 +724,7 @@ class ListOperationsResponse(_serialization.Model):
         "value": {"key": "value", "type": "[Operation]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Operation"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Operation"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: operations.
         :paramtype value: list[~azure.mgmt.storageimportexport.models.Operation]
@@ -808,8 +810,8 @@ class Location(_serialization.Model):  # pylint: disable=too-many-instance-attri
         additional_shipping_information: Optional[str] = None,
         supported_carriers: Optional[List[str]] = None,
         alternate_locations: Optional[List[str]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword id: Specifies the resource identifier of the location.
         :paramtype id: str
@@ -878,7 +880,7 @@ class LocationsResponse(_serialization.Model):
         "value": {"key": "value", "type": "[Location]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Location"]] = None, **kwargs):
+    def __init__(self, *, value: Optional[List["_models.Location"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: locations.
         :paramtype value: list[~azure.mgmt.storageimportexport.models.Location]
@@ -924,8 +926,8 @@ class Operation(_serialization.Model):
         resource: Optional[str] = None,
         operation: Optional[str] = None,
         description: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword name: Name of the operation. Required.
         :paramtype name: str
@@ -947,7 +949,8 @@ class Operation(_serialization.Model):
 
 
 class PackageInformation(_serialization.Model):
-    """Contains information about the package being shipped by the customer to the Microsoft data center.
+    """Contains information about the package being shipped by the customer to the Microsoft data
+    center.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -976,7 +979,9 @@ class PackageInformation(_serialization.Model):
         "ship_date": {"key": "shipDate", "type": "str"},
     }
 
-    def __init__(self, *, carrier_name: str, tracking_number: str, drive_count: int, ship_date: str, **kwargs):
+    def __init__(
+        self, *, carrier_name: str, tracking_number: str, drive_count: int, ship_date: str, **kwargs: Any
+    ) -> None:
         """
         :keyword carrier_name: The name of the carrier that is used to ship the import or export
          drives. Required.
@@ -1018,8 +1023,8 @@ class PutJobParameters(_serialization.Model):
         location: Optional[str] = None,
         tags: Optional[JSON] = None,
         properties: Optional["_models.JobDetails"] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword location: Specifies the supported Azure location where the job should be created.
         :paramtype location: str
@@ -1095,8 +1100,8 @@ class ReturnAddress(_serialization.Model):
         email: str,
         street_address2: Optional[str] = None,
         state_or_province: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword recipient_name: The name of the recipient who will receive the hard drives when they
          are returned. Required.
@@ -1153,7 +1158,7 @@ class ReturnShipping(_serialization.Model):
         "carrier_account_number": {"key": "carrierAccountNumber", "type": "str"},
     }
 
-    def __init__(self, *, carrier_name: str, carrier_account_number: str, **kwargs):
+    def __init__(self, *, carrier_name: str, carrier_account_number: str, **kwargs: Any) -> None:
         """
         :keyword carrier_name: The carrier's name. Required.
         :paramtype carrier_name: str
@@ -1219,8 +1224,8 @@ class ShippingInformation(_serialization.Model):
         postal_code: Optional[str] = None,
         country_or_region: Optional[str] = None,
         phone: Optional[str] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword recipient_name: The name of the recipient who will receive the hard drives when they
          are returned.
@@ -1291,8 +1296,8 @@ class SystemData(_serialization.Model):
         last_modified_by: Optional[str] = None,
         last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
@@ -1371,8 +1376,8 @@ class UpdateJobParameters(_serialization.Model):
         log_level: Optional[str] = None,
         backup_drive_manifest: bool = False,
         drive_list: Optional[List["_models.DriveStatus"]] = None,
-        **kwargs
-    ):
+        **kwargs: Any
+    ) -> None:
         """
         :keyword tags: Specifies the tags that will be assigned to the job.
         :paramtype tags: JSON
