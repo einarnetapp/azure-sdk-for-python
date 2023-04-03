@@ -34,6 +34,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/graphservicesprod/resource-manager/Microsoft.GraphServices/preview/2022-09-22-preview/examples/Operations_List.json
+# x-ms-original-file: specification/graphservicesprod/resource-manager/Microsoft.GraphServices/stable/2022-09-22/examples/Operations_List.json
 if __name__ == "__main__":
     main()
