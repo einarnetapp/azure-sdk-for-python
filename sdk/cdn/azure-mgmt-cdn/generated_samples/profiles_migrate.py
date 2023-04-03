@@ -14,9 +14,9 @@ from azure.mgmt.cdn import CdnManagementClient
     pip install azure-identity
     pip install azure-mgmt-cdn
 # USAGE
-    python validate_secret.py
+    python profiles_migrate.py
 
-    Before run the sample, please set the values of the client ID, tenant ID and client secret 
+    Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
     AZURE_CLIENT_SECRET. For more info about how to get the value, please see:
     https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal
@@ -29,17 +29,19 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.validate.secret(
-        validate_secret_input={
-            "secretSource": {
-                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.KeyVault/vault/kvName/certificate/certName"
+    response = client.profiles.begin_migrate(
+        resource_group_name="RG",
+        migration_parameters={
+            "classicResourceReference": {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoors/frontdoorname"
             },
-            "secretType": "CustomerCertificate",
+            "profileName": "profile1",
+            "sku": {"name": "Standard_AzureFrontDoor"},
         },
-    )
+    ).result()
     print(response)
 
 
-# x-ms-original-file: specification/cdn/resource-manager/Microsoft.Cdn/stable/2021-06-01/examples/Validate_Secret.json
+# x-ms-original-file: specification/cdn/resource-manager/Microsoft.Cdn/preview/2023-02-01-preview/examples/Profiles_Migrate.json
 if __name__ == "__main__":
     main()

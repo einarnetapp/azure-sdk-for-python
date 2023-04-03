@@ -10,6 +10,7 @@ from ._models_py3 import AFDDomain
 from ._models_py3 import AFDDomainHttpsParameters
 from ._models_py3 import AFDDomainListResult
 from ._models_py3 import AFDDomainProperties
+from ._models_py3 import AFDDomainReferencedRoutePath
 from ._models_py3 import AFDDomainUpdateParameters
 from ._models_py3 import AFDDomainUpdatePropertiesParameters
 from ._models_py3 import AFDEndpoint
@@ -37,6 +38,8 @@ from ._models_py3 import AzureFirstPartyManagedCertificateParameters
 from ._models_py3 import CacheConfiguration
 from ._models_py3 import CacheExpirationActionParameters
 from ._models_py3 import CacheKeyQueryStringActionParameters
+from ._models_py3 import CanMigrateParameters
+from ._models_py3 import CanMigrateResult
 from ._models_py3 import CdnCertificateSourceParameters
 from ._models_py3 import CdnEndpoint
 from ._models_py3 import CdnManagedHttpsParameters
@@ -63,6 +66,7 @@ from ._models_py3 import CustomDomain
 from ._models_py3 import CustomDomainHttpsParameters
 from ._models_py3 import CustomDomainListResult
 from ._models_py3 import CustomDomainParameters
+from ._models_py3 import CustomErrorPageActionParameters
 from ._models_py3 import CustomRule
 from ._models_py3 import CustomRuleList
 from ._models_py3 import CustomerCertificate
@@ -77,9 +81,11 @@ from ._models_py3 import DeliveryRuleCacheKeyQueryStringAction
 from ._models_py3 import DeliveryRuleClientPortCondition
 from ._models_py3 import DeliveryRuleCondition
 from ._models_py3 import DeliveryRuleCookiesCondition
+from ._models_py3 import DeliveryRuleCustomErrorPageAction
 from ._models_py3 import DeliveryRuleHostNameCondition
 from ._models_py3 import DeliveryRuleHttpVersionCondition
 from ._models_py3 import DeliveryRuleIsDeviceCondition
+from ._models_py3 import DeliveryRuleOverrideResponseStatusCodeAction
 from ._models_py3 import DeliveryRulePostArgsCondition
 from ._models_py3 import DeliveryRuleQueryStringCondition
 from ._models_py3 import DeliveryRuleRemoteAddressCondition
@@ -90,6 +96,7 @@ from ._models_py3 import DeliveryRuleRequestMethodCondition
 from ._models_py3 import DeliveryRuleRequestSchemeCondition
 from ._models_py3 import DeliveryRuleRequestUriCondition
 from ._models_py3 import DeliveryRuleResponseHeaderAction
+from ._models_py3 import DeliveryRuleResponseStatusCodeCondition
 from ._models_py3 import DeliveryRuleRouteConfigurationOverrideAction
 from ._models_py3 import DeliveryRuleServerPortCondition
 from ._models_py3 import DeliveryRuleSocketAddrCondition
@@ -134,12 +141,17 @@ from ._models_py3 import ManagedRuleSet
 from ._models_py3 import ManagedRuleSetDefinition
 from ._models_py3 import ManagedRuleSetDefinitionList
 from ._models_py3 import ManagedRuleSetList
+from ._models_py3 import ManagedServiceIdentity
 from ._models_py3 import MatchCondition
 from ._models_py3 import MetricAvailability
 from ._models_py3 import MetricSpecification
 from ._models_py3 import MetricsResponse
 from ._models_py3 import MetricsResponseSeriesItem
 from ._models_py3 import MetricsResponseSeriesPropertiesItemsItem
+from ._models_py3 import MigrateResult
+from ._models_py3 import MigrationErrorType
+from ._models_py3 import MigrationParameters
+from ._models_py3 import MigrationWebApplicationFirewallMapping
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationsListResult
@@ -156,11 +168,14 @@ from ._models_py3 import OriginListResult
 from ._models_py3 import OriginProperties
 from ._models_py3 import OriginUpdateParameters
 from ._models_py3 import OriginUpdatePropertiesParameters
+from ._models_py3 import OverrideResponseStatusCodeActionParameters
 from ._models_py3 import PolicySettings
 from ._models_py3 import PostArgsMatchConditionParameters
 from ._models_py3 import Profile
+from ._models_py3 import ProfileChangeSkuWafMapping
 from ._models_py3 import ProfileListResult
 from ._models_py3 import ProfileUpdateParameters
+from ._models_py3 import ProfileUpgradeParameters
 from ._models_py3 import ProxyResource
 from ._models_py3 import PurgeParameters
 from ._models_py3 import QueryStringMatchConditionParameters
@@ -185,6 +200,7 @@ from ._models_py3 import ResourcesResponseCustomDomainsItem
 from ._models_py3 import ResourcesResponseEndpointsItem
 from ._models_py3 import ResourcesResponseEndpointsPropertiesItemsItem
 from ._models_py3 import ResponseBasedOriginErrorDetectionParameters
+from ._models_py3 import ResponseStatusCodeMatchConditionParameters
 from ._models_py3 import Route
 from ._models_py3 import RouteConfigurationOverrideActionParameters
 from ._models_py3 import RouteListResult
@@ -235,6 +251,7 @@ from ._models_py3 import UrlSigningParamIdentifier
 from ._models_py3 import Usage
 from ._models_py3 import UsageName
 from ._models_py3 import UsagesListResult
+from ._models_py3 import UserAssignedIdentity
 from ._models_py3 import UserManagedHttpsParameters
 from ._models_py3 import ValidateCustomDomainInput
 from ._models_py3 import ValidateCustomDomainOutput
@@ -261,6 +278,7 @@ from ._cdn_management_client_enums import CacheBehavior
 from ._cdn_management_client_enums import CacheExpirationActionParametersTypeName
 from ._cdn_management_client_enums import CacheKeyQueryStringActionParametersTypeName
 from ._cdn_management_client_enums import CacheType
+from ._cdn_management_client_enums import CanMigrateDefaultSku
 from ._cdn_management_client_enums import CdnCertificateSourceParametersTypeName
 from ._cdn_management_client_enums import CertificateSource
 from ._cdn_management_client_enums import CertificateType
@@ -274,6 +292,9 @@ from ._cdn_management_client_enums import CustomHttpsProvisioningSubstate
 from ._cdn_management_client_enums import CustomRuleEnabledState
 from ._cdn_management_client_enums import DeleteRule
 from ._cdn_management_client_enums import DeliveryRuleActionEnum
+from ._cdn_management_client_enums import DeliveryRuleCustomErrorPageActionParameters
+from ._cdn_management_client_enums import DeliveryRuleOverrideResponseStatusCodeActionParameters
+from ._cdn_management_client_enums import DeliveryRuleResponseStatusCodeConditionParameters
 from ._cdn_management_client_enums import DeploymentStatus
 from ._cdn_management_client_enums import DestinationProtocol
 from ._cdn_management_client_enums import DomainValidationState
@@ -303,10 +324,11 @@ from ._cdn_management_client_enums import LogMetricsGroupBy
 from ._cdn_management_client_enums import LogRanking
 from ._cdn_management_client_enums import LogRankingMetric
 from ._cdn_management_client_enums import ManagedRuleEnabledState
+from ._cdn_management_client_enums import ManagedServiceIdentityType
 from ._cdn_management_client_enums import MatchProcessingBehavior
 from ._cdn_management_client_enums import MatchVariable
-from ._cdn_management_client_enums import MetricsResponseGranularity
-from ._cdn_management_client_enums import MetricsResponseSeriesItemUnit
+from ._cdn_management_client_enums import MetricsGranularity
+from ._cdn_management_client_enums import MetricsSeriesUnit
 from ._cdn_management_client_enums import MinimumTlsVersion
 from ._cdn_management_client_enums import Operator
 from ._cdn_management_client_enums import OptimizationType
@@ -353,6 +375,7 @@ from ._cdn_management_client_enums import ResponseBasedDetectedErrorTypes
 from ._cdn_management_client_enums import RouteConfigurationOverrideActionParametersTypeName
 from ._cdn_management_client_enums import RuleCacheBehavior
 from ._cdn_management_client_enums import RuleIsCompressionEnabled
+from ._cdn_management_client_enums import RuleIsNegativeCachingEnabled
 from ._cdn_management_client_enums import RuleQueryStringCachingBehavior
 from ._cdn_management_client_enums import SecretType
 from ._cdn_management_client_enums import SecurityPolicyType
@@ -383,13 +406,13 @@ from ._cdn_management_client_enums import WafAction
 from ._cdn_management_client_enums import WafGranularity
 from ._cdn_management_client_enums import WafMatchVariable
 from ._cdn_management_client_enums import WafMetric
-from ._cdn_management_client_enums import WafMetricsResponseGranularity
-from ._cdn_management_client_enums import WafMetricsResponseSeriesItemUnit
+from ._cdn_management_client_enums import WafMetricsGranularity
+from ._cdn_management_client_enums import WafMetricsSeriesUnit
 from ._cdn_management_client_enums import WafRankingGroupBy
 from ._cdn_management_client_enums import WafRankingType
 from ._cdn_management_client_enums import WafRuleType
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -397,6 +420,7 @@ __all__ = [
     "AFDDomainHttpsParameters",
     "AFDDomainListResult",
     "AFDDomainProperties",
+    "AFDDomainReferencedRoutePath",
     "AFDDomainUpdateParameters",
     "AFDDomainUpdatePropertiesParameters",
     "AFDEndpoint",
@@ -424,6 +448,8 @@ __all__ = [
     "CacheConfiguration",
     "CacheExpirationActionParameters",
     "CacheKeyQueryStringActionParameters",
+    "CanMigrateParameters",
+    "CanMigrateResult",
     "CdnCertificateSourceParameters",
     "CdnEndpoint",
     "CdnManagedHttpsParameters",
@@ -450,6 +476,7 @@ __all__ = [
     "CustomDomainHttpsParameters",
     "CustomDomainListResult",
     "CustomDomainParameters",
+    "CustomErrorPageActionParameters",
     "CustomRule",
     "CustomRuleList",
     "CustomerCertificate",
@@ -464,9 +491,11 @@ __all__ = [
     "DeliveryRuleClientPortCondition",
     "DeliveryRuleCondition",
     "DeliveryRuleCookiesCondition",
+    "DeliveryRuleCustomErrorPageAction",
     "DeliveryRuleHostNameCondition",
     "DeliveryRuleHttpVersionCondition",
     "DeliveryRuleIsDeviceCondition",
+    "DeliveryRuleOverrideResponseStatusCodeAction",
     "DeliveryRulePostArgsCondition",
     "DeliveryRuleQueryStringCondition",
     "DeliveryRuleRemoteAddressCondition",
@@ -477,6 +506,7 @@ __all__ = [
     "DeliveryRuleRequestSchemeCondition",
     "DeliveryRuleRequestUriCondition",
     "DeliveryRuleResponseHeaderAction",
+    "DeliveryRuleResponseStatusCodeCondition",
     "DeliveryRuleRouteConfigurationOverrideAction",
     "DeliveryRuleServerPortCondition",
     "DeliveryRuleSocketAddrCondition",
@@ -521,12 +551,17 @@ __all__ = [
     "ManagedRuleSetDefinition",
     "ManagedRuleSetDefinitionList",
     "ManagedRuleSetList",
+    "ManagedServiceIdentity",
     "MatchCondition",
     "MetricAvailability",
     "MetricSpecification",
     "MetricsResponse",
     "MetricsResponseSeriesItem",
     "MetricsResponseSeriesPropertiesItemsItem",
+    "MigrateResult",
+    "MigrationErrorType",
+    "MigrationParameters",
+    "MigrationWebApplicationFirewallMapping",
     "Operation",
     "OperationDisplay",
     "OperationsListResult",
@@ -543,11 +578,14 @@ __all__ = [
     "OriginProperties",
     "OriginUpdateParameters",
     "OriginUpdatePropertiesParameters",
+    "OverrideResponseStatusCodeActionParameters",
     "PolicySettings",
     "PostArgsMatchConditionParameters",
     "Profile",
+    "ProfileChangeSkuWafMapping",
     "ProfileListResult",
     "ProfileUpdateParameters",
+    "ProfileUpgradeParameters",
     "ProxyResource",
     "PurgeParameters",
     "QueryStringMatchConditionParameters",
@@ -572,6 +610,7 @@ __all__ = [
     "ResourcesResponseEndpointsItem",
     "ResourcesResponseEndpointsPropertiesItemsItem",
     "ResponseBasedOriginErrorDetectionParameters",
+    "ResponseStatusCodeMatchConditionParameters",
     "Route",
     "RouteConfigurationOverrideActionParameters",
     "RouteListResult",
@@ -622,6 +661,7 @@ __all__ = [
     "Usage",
     "UsageName",
     "UsagesListResult",
+    "UserAssignedIdentity",
     "UserManagedHttpsParameters",
     "ValidateCustomDomainInput",
     "ValidateCustomDomainOutput",
@@ -647,6 +687,7 @@ __all__ = [
     "CacheExpirationActionParametersTypeName",
     "CacheKeyQueryStringActionParametersTypeName",
     "CacheType",
+    "CanMigrateDefaultSku",
     "CdnCertificateSourceParametersTypeName",
     "CertificateSource",
     "CertificateType",
@@ -660,6 +701,9 @@ __all__ = [
     "CustomRuleEnabledState",
     "DeleteRule",
     "DeliveryRuleActionEnum",
+    "DeliveryRuleCustomErrorPageActionParameters",
+    "DeliveryRuleOverrideResponseStatusCodeActionParameters",
+    "DeliveryRuleResponseStatusCodeConditionParameters",
     "DeploymentStatus",
     "DestinationProtocol",
     "DomainValidationState",
@@ -689,10 +733,11 @@ __all__ = [
     "LogRanking",
     "LogRankingMetric",
     "ManagedRuleEnabledState",
+    "ManagedServiceIdentityType",
     "MatchProcessingBehavior",
     "MatchVariable",
-    "MetricsResponseGranularity",
-    "MetricsResponseSeriesItemUnit",
+    "MetricsGranularity",
+    "MetricsSeriesUnit",
     "MinimumTlsVersion",
     "Operator",
     "OptimizationType",
@@ -739,6 +784,7 @@ __all__ = [
     "RouteConfigurationOverrideActionParametersTypeName",
     "RuleCacheBehavior",
     "RuleIsCompressionEnabled",
+    "RuleIsNegativeCachingEnabled",
     "RuleQueryStringCachingBehavior",
     "SecretType",
     "SecurityPolicyType",
@@ -769,8 +815,8 @@ __all__ = [
     "WafGranularity",
     "WafMatchVariable",
     "WafMetric",
-    "WafMetricsResponseGranularity",
-    "WafMetricsResponseSeriesItemUnit",
+    "WafMetricsGranularity",
+    "WafMetricsSeriesUnit",
     "WafRankingGroupBy",
     "WafRankingType",
     "WafRuleType",
