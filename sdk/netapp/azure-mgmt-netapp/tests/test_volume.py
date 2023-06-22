@@ -52,7 +52,6 @@ def create_volume(client, rg=TEST_RG, account_name=TEST_ACC_1, pool_name=TEST_PO
     print("\tdone")
     return volume
 
-
 def create_dp_volume(client, source_volume, rg=TEST_REPL_REMOTE_RG, account_name=TEST_ACC_2, pool_name=TEST_POOL_2,
                      volume_name=TEST_VOL_2, location=REMOTE_LOCATION, vnet=PERMA_REMOTE_VNET, volume_only=False):    
     if not volume_only:
